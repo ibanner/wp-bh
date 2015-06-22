@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="javascript1.2">
+
+function init()
+{
+var NS4 = (document.layers) ? true : false;
+var IE4 = (document.all) ? true : false;
+
+if(NS4){ document.writeln('<frameset cols="350,*" frameborder=0 border=0><frame src="leftframe.html" name="leftframe" scrolling="no"><frame src="rightframe.html" name="rightframe" scrolling="no">)</frameset><noframes></noframes>'); }
+else
+{ if(IE4) { document.writeln('<frameset cols="350,*" frameborder=0 border=0><frame src="leftframe.html" name="leftframe" scrolling="no"><frame src="rightframe.html" name="rightframe" scrolling="no"></frameset><noframes></noframes>'); }
+}}
+</script>
+
+</head>
+<body onload="init();">
+</body>
+
+</html>

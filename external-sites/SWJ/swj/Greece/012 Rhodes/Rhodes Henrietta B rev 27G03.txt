@@ -1,0 +1,181 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-8">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List
+href="./Rhodes%20Henrietta%20B%20rev%2027G03_files/filelist.xml">
+<title>&#8220;Little Jerusalem&#8221; &#8212;in Greece</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Benny</o:Author>
+  <o:LastAuthor>Benny</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>5</o:TotalTime>
+  <o:Created>2004-06-13T14:31:00Z</o:Created>
+  <o:LastSaved>2004-06-13T14:31:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>561</o:Words>
+  <o:Characters>3198</o:Characters>
+  <o:Company>Synagogue Art Research</o:Company>
+  <o:Lines>26</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3927</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>75</w:Zoom>
+  <w:DoNotOptimizeForBrowser/>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Monotype Corsiva";
+	panose-1:3 1 1 1 1 2 1 1 1 1;
+	mso-font-charset:0;
+	mso-generic-font-family:script;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin-top:0cm;
+	margin-right:-18.0pt;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-indent:36.0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:Verdana;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+@page Section1
+	{size:30.0cm 792.1pt;
+	margin:2.0cm 2.0cm 2.0cm 2.0cm;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US style='tab-interval:36.0pt'>
+
+<div class=Section1 dir=RTL>
+
+<p class=MsoBodyTextIndent dir=LTR style='text-indent:0cm'><b><span
+style='font-size:28.0pt;font-family:"Monotype Corsiva";color:#993366'>&#8220;Little
+Jerusalem&#8221; ---in Greece<o:p></o:p></span></b></p>
+
+<p class=MsoBodyTextIndent dir=LTR style='text-indent:0cm'><span
+style='font-size:28.0pt;font-family:"Monotype Corsiva"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent dir=LTR style='margin-bottom:12.0pt'>Rhodes was
+planned and built around 407 B.C.E. by Hippodamus, the foremost architect of
+his time. It became the most aesthetic city in the Mediterranean basin and a
+harbor for ships from the Mediterranean and Africa&#8217;s west coast. Jewish traders
+settled in Rhodes as early as the second century B.C.E. Rome tolerated the Jews
+scattered over the empire until Christianity spread in earnest in the third and
+fourth centuries.</p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>The crusaders ruled Rhodes during the 14<sup>th</sup> and 15<sup>th</sup>
+centuries. Jews lived peacefully under them, although they were confined to
+their own section of the city where they built their large synagogue in the 15<sup>th</sup>
+century. The Italian Jewish traveler, Meshoullam ben Menahem da Volterra
+described the Rhodians&#8217; struggles in 1480. Jewish men and women participated
+then in battles to repel a Turkish attack. Due to massive destruction and the
+earthquakes of 1481, many Jews left the island, leaving only 22 Jewish families
+in 1493. Despite their poverty, they led their lives with dignity. The <i>kehillah</i>
+followed the Romaniot Greek-language tradition, the liturgy of which differs
+from both Sephardic and Ashkenazic traditions. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>As the 16<sup>th</sup> century opened, Cardinal D&#8217;Aubusson initiated
+forced conversion of the Jews to Catholocism and other persecutions. His
+intended expulsions were rescinded only because he died suddenly. Soon after,
+Christian pirates captured more than 2000 Jews and forced them to work on
+fortifications. When the Turks, under Suleiman the Magnificent (1520-1566) besieged
+the island, the Jews sided with the invader who was victorious. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>The <i>kehillah</i> prospered under tolerant Ottoman rule for nearly
+400 years until 1912. Suleiman had encouraged exiles from Spain to settle in
+Rhodes and gave them favorable conditions, such as autonomy and religious
+freedom, housing and certain tax exemptions. Jews outnumbered the Turks and
+created in Rhodes a major Sephardic center that absorbed the earlier Romaniot <i>kehillah</i>
+and led them to adopt Sephardic customs and Ladino. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>Community life centered around the synagogue. There was the large
+Romaniot synagogue, Kahal Gadol dating from 1480 and the Sephardic synagogue
+Kahal Shalom built in 1577 which is the only one still standing. There were two
+other smaller synagogues and several houses of study. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>Reveling in the epithet &#8220;Little Jerusalem,&#8221; the <i>kehillah</i> was
+well organized and the Jewish quarter hummed with Jewish life. The upper
+echelons of Rhodian Jews were bankers, diplomats, doctors and international
+traders. The majority of the Jews, however, remained poor and worked as
+peddlers, tailors, blacksmiths and fisherman.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>After the Balkan wars in 1912, Rhodes and its 4500 Jews came under
+Italian rule. The last great chief rabbi Reuven Eliyaahu descended from a line
+of Rhodian rabbis, aimed to confer Jewish values on the younger generation. As
+twentieth century ideas and contact expanded, many of the young Jews went
+abroad to study and sometimes to settle in foreign lands. While some were
+leaving the island, newcomers arrived during the war for Turkish independence
+from allied occupation. In 1931, the new Fascist governor, Mario de Vecchi,
+introduced anti-Semitic laws and closed the yeshivah. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>Those Jews who could afford to escape, fled to Palestine, Tangiers, or
+Rhodesia. The Germans took control of the island in 1943. In 1944, the Gestapo
+entered and began mass deportation without any intervention by British forces.
+As the Nazis rounded up Jews, compassionate Muslim neighbors helped to hide
+Judaica and Liturgical articles. The objects were returned after the war and
+are now on display at the Jewish museum in Athens. Of the 1,641 Jews deported,
+only 179 survived. Few retuned to the island after the war. There were 40,000
+Jews in Rhodes before the war. Now, only 35 remain.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+direction:ltr;unicode-bidi:embed'><span style='font-size:8.0pt;font-family:
+Verdana'>Condensed by Henrietta Ben Ami from <i>Synagogues Without Jews.</i><o:p></o:p></span></p>
+
+</div>
+

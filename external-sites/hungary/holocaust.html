@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
+<title></title>
+<meta name="Author" content="Motti Gondabi">
+<script language="JavaScript">
+
+var ButtonPath = "images/";
+var ButtonOut = new Array("hl1.gif","hl2.gif","hl3.gif");
+var ButtonOver  = new Array("hl1a.gif","hl2a.gif","hl3a.gif");
+
+
+function LoadImages()
+        {
+        imageOff= new Array();
+        imageOn= new Array();
+        for (i=0; i<ButtonOut.length; i++)
+                {
+                imageOff[i] = new Image();
+                imageOff[i].src = ButtonPath + ButtonOut[i];
+                }       
+        for (i=0; i<ButtonOver.length; i++)
+                {
+                imageOn[i] = new Image();
+                imageOn[i].src = ButtonPath + ButtonOver[i];
+                }       
+        }
+
+function imgOver(index)
+        {
+           document['Button' + index].src = ButtonPath + ButtonOver[index];
+        }
+function imgOut(index)
+        {
+        document['Button' + index].src = ButtonPath + ButtonOut[index];
+        }
+function imgClicked(index)
+        {
+        document['Button' + index].src = ButtonPath + ButtonClicked[index];
+        }
+
+		
+</script>
+
+</head>
+<body bgcolor="#FFFFCC" onLoad="LoadImages()" leftmargin="0" topmargin="0" >
+
+<table cellpadding="0" cellspacing="3" align="left" border="0">
+
+<tr><TD><a href="links_content.html#L4" onmouseover="imgOver(0)" onMouseOut="imgOut(0)" target="Content" ><img name="Button0" src="images/hl1.gif" border="0" width="50" height="14"></a></td></tr>
+<tr><TD><a href="links_content.html#L5" onmouseover="imgOver(1)" onMouseOut="imgOut(1)" target="Content" ><img name="Button1" src="images/hl2.gif" border="0" width="84" height="14"></a></td></tr>
+<tr><TD><a href="links_content.html#L6" onmouseover="imgOver(2)" onMouseOut="imgOut(2)" target="Content" ><img name="Button2" src="images/hl3.gif" border="0" width="122" height="26"></a></td></tr>
+</table>
+
+</body>
+</html>

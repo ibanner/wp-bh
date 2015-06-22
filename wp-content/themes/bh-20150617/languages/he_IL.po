@@ -1,0 +1,578 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BH Website 1.0\n"
+"POT-Creation-Date: 2015-05-25 23:21+0200\n"
+"PO-Revision-Date: 2015-06-03 11:29+0200\n"
+"Last-Translator: \n"
+"Language-Team: BH online <nirg@bh.org.il>\n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-Basepath: ..\\\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: .git\n"
+"X-Poedit-SearchPathExcluded-1: css\n"
+"X-Poedit-SearchPathExcluded-2: js\n"
+"X-Poedit-SearchPathExcluded-3: scss\n"
+
+#: functions/menus.php:18
+msgid "Top Menu"
+msgstr ""
+
+#: functions/menus.php:19
+msgid "Main Menu"
+msgstr ""
+
+#: functions/menus.php:20
+msgid "Footer Menu"
+msgstr ""
+
+#: functions/menus.php:527 functions/utils.php:78
+#: functions/woocommerce/woocommerce-functions.php:122
+msgid "Home"
+msgstr "דף הבית"
+
+#: functions/pelecard/payment-result.php:134
+msgid "Thank you for your request!"
+msgstr "תודה רבה על פנייתכם!"
+
+#: functions/pelecard/payment-result.php:135
+msgid "An invoice for your payment will be sent to your email address shortly."
+msgstr "חשבונית תישלח בהקדם לכתובת המייל שציינתם."
+
+#: functions/pelecard/payment-result.php:140
+msgid "Payment failed"
+msgstr "התשלום נכשל"
+
+#: functions/pelecard/payment-result.php:146
+#: functions/pelecard/payment-result.php:154
+#: functions/pelecard/payment-result.php:161
+#: functions/pelecard/payment-result.php:168
+msgid "Error #"
+msgstr "שגיאה מספר "
+
+#: functions/pelecard/payment-result.php:146
+msgid "Wrong ID or CVV."
+msgstr "מספר ת.ז. או CVV שגוי."
+
+#: functions/pelecard/payment-result.php:147
+#: functions/pelecard/payment-result.php:155
+msgid "Please correct the errors and submit the request again."
+msgstr "אנא תקנו את השגיאות ושלחו שוב את הבקשה."
+
+#: functions/pelecard/payment-result.php:154
+msgid "Wrong credit card number."
+msgstr "מספר כרטיס אשראי שגוי."
+
+#: functions/pelecard/payment-result.php:161
+msgid "Unsupported credit card."
+msgstr "כרטיס אשראי לא נתמך."
+
+#: functions/pelecard/payment-result.php:162
+msgid "Please submit the request again using a different credit card."
+msgstr "אנא שלחו את הבקשה באמצעות כרטיס אשראי אחר."
+
+#: functions/pelecard/payment-result.php:168
+msgid "General Error."
+msgstr "שגיאה כללית."
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:232
+msgid "General error, please try again later"
+msgstr "שגיאה כללית, אנא נסו שוב מאוחר יותר"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:233
+msgid "Registration has been failed, please try again later"
+msgstr "הרישום נכשל, אנא נסו שנית מאוחר יותר"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:234
+msgid "Registration was successful, thank you!"
+msgstr "הרישום בוצע בהצלחה, תודה רבה!"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:273
+msgid "Email Address"
+msgstr "כתובת מייל"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:274
+msgid "Email address is missing or incorrect"
+msgstr "כתובת מייל שגויה או חסרה"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:282
+msgid "Please check at least one newsletter name"
+msgstr "יש לבחור לפחות שפה אחת"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:284
+msgid "Register"
+msgstr "הרשמה"
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:92
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:170
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:296
+msgid "Thumbnail"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:96
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:175
+msgid "Upload/Add image"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:97
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:176
+msgid "Remove image"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:120
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:195
+msgid "Choose an image"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:122
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:197
+msgid "Use image"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:251
+msgid ""
+"Product categories for your store can be managed here. To change the order "
+"of categories on the front-end you can drag and drop to sort them. To see "
+"more categories listed click the \"screen options\" link at the top of the "
+"page."
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:264
+msgid "Image"
+msgstr ""
+
+#: functions/woocommerce/widgets/woocommerce-recently-viewed.php:18
+msgid "RECENTLY<br />VIEWED"
+msgstr "נצפו<br />לאחרונה"
+
+#: functions/woocommerce/woocommerce-functions.php:234
+msgid "Learn more"
+msgstr "קראו עוד"
+
+#: functions/woocommerce/woocommerce-functions.php:670
+msgid "Most Popular"
+msgstr "הפופולרי ביותר"
+
+#: functions/woocommerce/woocommerce-functions.php:671
+msgid "Price: Low to High"
+msgstr "מחיר: נמוך לגבוה"
+
+#: functions/woocommerce/woocommerce-functions.php:672
+msgid "Price: High to Low"
+msgstr "מחיר: גבוה לנמוך"
+
+#: product-searchform.php:3
+msgid "Search for products"
+msgstr "חיפוש מוצרים"
+
+#: views/components/meta-single.php:2 views/woocommerce/product-item.php:23
+#: views/woocommerce/single-product/single-product-section1-title.php:22
+msgid "By "
+msgstr "על ידי "
+
+#: views/components/meta-single.php:10
+msgid "Comments"
+msgstr "תגובות"
+
+#: views/components/not-found.php:3
+msgid "No Records Found"
+msgstr "לא נמצאו תוצאות"
+
+#: views/components/not-found.php:4
+msgid "Return to"
+msgstr "חזרה"
+
+#: views/components/not-found.php:4
+msgid "homepage"
+msgstr "לדף הבית"
+
+#: views/components/search-form.php:1
+msgid "Search in site..."
+msgstr "חיפוש באתר..."
+
+#: views/event/events-filters.php:22
+msgid "All Categories"
+msgstr "כל הקטגוריות"
+
+#: views/event/events-filters.php:36
+msgid "Start from"
+msgstr "החל מתאריך"
+
+#: views/event/series.php:47
+msgid "Purchase"
+msgstr "לרכישה"
+
+#: views/header/header.php:77
+msgid "Newsletter"
+msgstr "ניוזלטר"
+
+#: views/main/slider/display-events-slider.php:22
+msgid "All events"
+msgstr "כל האירועים"
+
+#: views/microfilm/microfilm-view.php:9
+msgid "Select a microfilm"
+msgstr "בחירת מיקרופילם"
+
+#: views/microfilm/microfilm-view.php:10
+msgid "Click"
+msgstr "לחצו"
+
+#: views/microfilm/microfilm-view.php:10 views/microfilm/microfilm-view.php:34
+msgid "Add"
+msgstr "הוסף"
+
+#: views/microfilm/microfilm-view.php:10
+msgid "to add a microfilm to the list"
+msgstr "בכדי להוסיף מיקרופילם לרשימה"
+
+#: views/microfilm/microfilm-view.php:19 views/microfilm/microfilm-view.php:51
+msgid "Town"
+msgstr "עיר"
+
+#: views/microfilm/microfilm-view.php:20
+#: views/microfilm/microfilm-view.php:145
+msgid "Province"
+msgstr "פרובינציה"
+
+#: views/microfilm/microfilm-view.php:21 views/microfilm/microfilm-view.php:48
+msgid "Type"
+msgstr "סוג"
+
+#: views/microfilm/microfilm-view.php:22
+msgid "Years Covered"
+msgstr "שנים"
+
+#: views/microfilm/microfilm-view.php:23
+msgid "Microfilm"
+msgstr "מיקרופילם"
+
+#: views/microfilm/microfilm-view.php:35
+msgid "Remove"
+msgstr "הסר"
+
+#: views/microfilm/microfilm-view.php:47
+msgid "*Microflim"
+msgstr "*מיקרופילם"
+
+#: views/microfilm/microfilm-view.php:49
+msgid "Year"
+msgstr "שנה"
+
+#: views/microfilm/microfilm-view.php:50
+msgid "Act"
+msgstr ""
+
+#: views/microfilm/microfilm-view.php:52
+msgid "Family Name"
+msgstr "שם משפחה"
+
+#: views/microfilm/microfilm-view.php:53
+msgid "Given Name"
+msgstr "שם פרטי"
+
+#: views/microfilm/microfilm-view.php:61
+msgid "Please enter valid microfilm"
+msgstr "יש לבחור מיקרופילם הקיים ברשימה"
+
+#: views/microfilm/microfilm-view.php:65 views/microfilm/microfilm-view.php:69
+#: views/microfilm/microfilm-view.php:73 views/microfilm/microfilm-view.php:77
+#: views/microfilm/microfilm-view.php:81 views/microfilm/microfilm-view.php:85
+#: views/microfilm/microfilm-view.php:102
+#: views/microfilm/microfilm-view.php:114
+#: views/microfilm/microfilm-view.php:120
+#: views/microfilm/microfilm-view.php:128
+#: views/microfilm/microfilm-view.php:134
+#: views/microfilm/microfilm-view.php:142
+#: views/microfilm/microfilm-view.php:148
+#: views/microfilm/microfilm-view.php:157
+msgid "Required"
+msgstr "שדה חובה"
+
+#: views/microfilm/microfilm-view.php:90
+msgid "Add another microfilm"
+msgstr "הוסף מיקרופילם"
+
+#: views/microfilm/microfilm-view.php:94
+msgid "Your details"
+msgstr "פרטי המזמין"
+
+#: views/microfilm/microfilm-view.php:99
+msgid "Full Name"
+msgstr "שם מלא"
+
+#: views/microfilm/microfilm-view.php:105
+msgid "Institution (if applicable)"
+msgstr "מוסד (אם יש)"
+
+#: views/microfilm/microfilm-view.php:111
+msgid "Address"
+msgstr "כתובת"
+
+#: views/microfilm/microfilm-view.php:117
+msgid "City"
+msgstr "עיר"
+
+#: views/microfilm/microfilm-view.php:125
+msgid "Country"
+msgstr "מדינה"
+
+#: views/microfilm/microfilm-view.php:131
+msgid "Zip / Postal code"
+msgstr "מיקוד"
+
+#: views/microfilm/microfilm-view.php:139
+msgid "State"
+msgstr "מדינה (ארה\"ב)"
+
+#: views/microfilm/microfilm-view.php:153
+msgid "Phone"
+msgstr "טלפון"
+
+#: views/microfilm/microfilm-view.php:160
+msgid "Email"
+msgstr "דואר אלקטרוני"
+
+#: views/microfilm/microfilm-view.php:163
+msgid "Please enter a valid email"
+msgstr "יש להזין כתובת דוא\"ל תקנית"
+
+#: views/microfilm/microfilm-view.php:168
+msgid "Additional Phone"
+msgstr "טלפון נוסף"
+
+#: views/microfilm/microfilm-view.php:175
+msgid "Send"
+msgstr "שלח"
+
+#: views/microfilm/microfilm-view.php:178
+msgid "There were validation errors. Please check form fields."
+msgstr "שדות חובה לא מולאו. יש למלא את כל שדות החובה."
+
+#: views/microfilm/microfilm-view.php:179
+msgid "You have not picked any microfilms."
+msgstr "לא נבחרו מיקרופילמים."
+
+#: views/microfilm/microfilm-view.php:180
+msgid "You have picked invalid microfilms."
+msgstr "נבחרו מיקרופילמים שאינם קיימים."
+
+#: views/microfilm/microfilm-view.php:182
+msgid "We have expirienced a technical problem. Please try again later."
+msgstr "אירעה תקלה טכנית. אנא נסו שוב מאוחר יותר."
+
+#: views/microfilm/microfilm-view.php:184
+msgid "Form submited succesfuly. Thank you."
+msgstr "הטופס נשלח בהצלחה. תודה."
+
+#: views/page/404.php:20
+msgid "Back to Homepage"
+msgstr "לדף הבית"
+
+#: views/page/search.php:6
+#, php-format
+msgid "Search Results for: &#8216;%s&#8217;"
+msgstr "תוצאות חיפוש עבור הביטוי: &#8217;%s&#8216;"
+
+#: views/page/search.php:6
+msgid "Search Results"
+msgstr "תוצאות חיפוש"
+
+#: views/sidebar/sidebar-blog.php:91
+msgid "Categories"
+msgstr "קטגוריות"
+
+#: views/sidebar/sidebar-blog.php:103
+msgid "Recent Posts"
+msgstr "פוסטים אחרונים"
+
+#: views/sidebar/sidebar-blog.php:114
+msgid "Archives"
+msgstr "ארכיון"
+
+#: views/woocommerce/single-product/single-product-section1-meta.php:20
+msgid "More Details"
+msgstr "פרטים נוספים"
+
+#: views/woocommerce/single-product/single-product-section1-meta.php:30
+msgid "Weight"
+msgstr "משקל"
+
+#: views/woocommerce/single-product/single-product-section1-meta.php:37
+msgid "Dimensions"
+msgstr "מידות"
+
+#: views/woocommerce/single-product/single-product-section1-meta.php:37
+msgid "Length x Width x Height"
+msgstr "גובה x רוחב x אורך"
+
+#: views/woocommerce/single-product/single-product-section3-related.php:46
+msgid "You might also like"
+msgstr "מוצרים נוספים שיעניינו אותך"
+
+#: woocommerce/cart/mini-cart.php:44
+#, php-format
+msgid "Quantity: %s"
+msgstr "כמות: %s"
+
+#: woocommerce/cart/mini-cart.php:59
+msgid "No products in the cart."
+msgstr "לא נמצאו מוצרים בעגלה."
+
+#: woocommerce/cart/mini-cart.php:69
+msgid "Subtotal"
+msgstr "סכום ביניים"
+
+#: woocommerce/cart/mini-cart.php:79
+msgid "View Cart"
+msgstr "הצג סל קניות"
+
+#: woocommerce/cart/mini-cart.php:80
+msgid "Checkout"
+msgstr "לתשלום"
+
+#: woocommerce/checkout/payment.php:18
+msgid "Secured Billing: Please choose your preferred billing method"
+msgstr "אמצעי חיוב מאובטח: אנא בחרו את האמצעי המועדף עליכם"
+
+#: woocommerce/checkout/payment.php:31
+msgid "Please fill in your details above to see available payment methods."
+msgstr "אנא מלא את הפרטים שלך למעלה כדי לראות את אפשרויות התשלום הזמינות."
+
+#: woocommerce/checkout/payment.php:33
+msgid ""
+"Sorry, it seems that there are no available payment methods for your state. "
+"Please contact us if you require assistance or wish to make alternate "
+"arrangements."
+msgstr ""
+"סליחה, נראה כי אין אפשרויות משלוח הזמינות עבור המדינה שלך. אנא צור קשר אם "
+"אתה זקוק לסיוע או רוצה לעשות הזמנה חלופית."
+
+#: woocommerce/checkout/payment.php:44
+msgid ""
+"Since your browser does not support JavaScript, or it is disabled, please "
+"ensure you click the <em>Update Totals</em> button before placing your "
+"order. You may be charged more than the amount stated above if you fail to "
+"do so."
+msgstr ""
+"הדפדפן שלך לא תומך ב JavaScript, או שהוא מכובה, אנא ודא שאתה לוחץ על "
+"<em>עדכן סכום</em> לפני ביצוע ההזמנה. אתה עשוי להיות מחויב יותר מהסכום האמור "
+"לעיל, אם לא תצליח לעשות זאת."
+
+#: woocommerce/checkout/payment.php:44
+msgid "Update totals"
+msgstr "עדכן סכום"
+
+#: woocommerce/checkout/payment.php:54
+#, php-format
+msgid ""
+"I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; "
+"conditions</a>"
+msgstr "קראתי והנני מסכים/ה <a href=\"%s\" target=\"_blank\">לתנאי השימוש</a>"
+
+#: woocommerce/emails/customer-completed-order.php:53
+msgid ""
+"Your order was shipped. Your order details are shown below for your "
+"reference:"
+msgstr "הזמנתכם נשלחה. פרטי ההזמנה מופיעים להלן:"
+
+#: woocommerce/emails/customer-completed-order.php:57
+#: woocommerce/emails/customer-processing-order.php:57
+#, php-format
+msgid "Order #%s"
+msgstr "הזמנה מספר %s"
+
+#: woocommerce/emails/customer-completed-order.php:62
+#: woocommerce/emails/customer-processing-order.php:62
+msgid "Product"
+msgstr "מוצר"
+
+#: woocommerce/emails/customer-completed-order.php:63
+#: woocommerce/emails/customer-processing-order.php:63
+msgid "Quantity"
+msgstr "כמות"
+
+#: woocommerce/emails/customer-completed-order.php:64
+#: woocommerce/emails/customer-processing-order.php:64
+msgid "Price"
+msgstr "מחיר"
+
+#: woocommerce/emails/customer-completed-order.php:92
+#: woocommerce/emails/customer-processing-order.php:92
+msgid "For further questions or assistance please contact us:"
+msgstr "לשאלות או לסיוע נוסף אנא צרו עמנו קשר:"
+
+#: woocommerce/emails/customer-processing-order.php:53
+msgid ""
+"Your order has been received and is now being processed. Your order details "
+"are shown below for your reference:"
+msgstr "הזמנתכם התקבלה ומטופלת כעת. פרטי ההזמנה מופיעים להלן:"
+
+#: woocommerce/emails/email-addresses.php:20
+msgid "Billing address"
+msgstr "כתובת חיוב"
+
+#: woocommerce/emails/email-addresses.php:30
+msgid "Shipping address"
+msgstr "כתובת משלוח"
+
+#: woocommerce/global/breadcrumb.php:104
+msgid "Products tagged &ldquo;"
+msgstr "מוצרים המתויגים &ldquo;%s&rdquo;"
+
+#: woocommerce/global/breadcrumb.php:132 woocommerce/global/breadcrumb.php:231
+msgid "Search results for &ldquo;"
+msgstr "תוצאות חיפוש עבור &ldquo;%s&rdquo;"
+
+#: woocommerce/global/breadcrumb.php:183
+msgid "Error 404"
+msgstr "שגיאה העמוד לא נמצא 404"
+
+#: woocommerce/global/breadcrumb.php:235
+msgid "Posts tagged &ldquo;"
+msgstr "מוצרים המתויגים &ldquo;"
+
+#: woocommerce/global/breadcrumb.php:240
+msgid "Author:"
+msgstr "מחבר:"
+
+#: woocommerce/global/breadcrumb.php:245
+msgid "Page"
+msgstr "עמוד"
+
+#: woocommerce/loop/orderby.php:36
+msgid "Sort by"
+msgstr "מיון לפי"
+
+#~ msgid ""
+#~ "There was a problem with the payment total amount. Please contact us."
+#~ msgstr "קיימת שגיאה בסכום התשלום. אנא צור עמנו קשר."
+
+#~ msgid "Payment method"
+#~ msgstr "אמצעי תשלום"
+
+#~ msgid "Credit Card Number"
+#~ msgstr "מספר כרטיס אשראי"
+
+#~ msgid ""
+#~ "There was a problem with the credit card information. Pease make sure "
+#~ "credit card info is correct."
+#~ msgstr "העסקה לא אושרה. אנא בדקו את פרטי כרטיס האשראי."
+
+#~ msgid "CVV (3 digit code on back of card)"
+#~ msgstr "שלוש ספרות בגב הכרטיס"
+
+#~ msgid "Credit Card Holder ID Number"
+#~ msgstr "מספר זהות של מחזיק הכרטיס"
+
+#~ msgid "Expiration Month"
+#~ msgstr "חודש"
+
+#~ msgid "Expiration Year"
+#~ msgstr "שנה"

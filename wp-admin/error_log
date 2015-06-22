@@ -1,0 +1,20 @@
+[20-Jul-2014 13:11:20 UTC] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 72 bytes) in /home/bhorg/public_html/wp-includes/wp-db.php on line 1941
+[20-Jul-2014 13:11:46 UTC] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 128 bytes) in /home/bhorg/public_html/wp-includes/wp-db.php on line 1941
+[20-Jul-2014 13:13:07 UTC] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 85 bytes) in /home/bhorg/public_html/wp-includes/wp-db.php on line 1941
+[20-Jul-2014 13:18:47 UTC] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 81 bytes) in /home/bhorg/public_html/wp-includes/wp-db.php on line 1941
+[22-Jul-2014 12:48:18 UTC] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 32 bytes) in /home/bhorg/public_html/wp-includes/formatting.php on line 3655
+[19-Aug-2014 03:13:57 UTC] PHP Fatal error:  Call to undefined function wpcf7_add_shortcode() in /home/bhorg/public_html/wp-content/themes/bh/functions/forms/wpcf7-hooks.php on line 93
+[19-Aug-2014 03:14:44 UTC] PHP Fatal error:  Call to undefined function wpcf7_add_shortcode() in /home/bhorg/public_html/wp-content/themes/bh/functions/forms/wpcf7-hooks.php on line 93
+[19-Aug-2014 03:14:48 UTC] PHP Fatal error:  Call to undefined function wpcf7_add_shortcode() in /home/bhorg/public_html/wp-content/themes/bh/functions/forms/wpcf7-hooks.php on line 93
+[19-Aug-2014 03:16:27 UTC] PHP Fatal error:  Call to undefined function wpcf7_add_shortcode() in /home/bhorg/public_html/wp-content/themes/bh/functions/forms/wpcf7-hooks.php on line 145
+[19-Aug-2014 03:16:29 UTC] PHP Fatal error:  Call to undefined function wpcf7_add_shortcode() in /home/bhorg/public_html/wp-content/themes/bh/functions/forms/wpcf7-hooks.php on line 145
+[19-Aug-2014 03:16:54 UTC] PHP Fatal error:  Call to undefined function wpcf7_add_shortcode() in /home/bhorg/public_html/wp-content/themes/bh/functions/forms/wpcf7-hooks.php on line 205
+[19-Aug-2014 03:16:57 UTC] PHP Fatal error:  Call to undefined function wpcf7_add_shortcode() in /home/bhorg/public_html/wp-content/themes/bh/functions/forms/wpcf7-hooks.php on line 205
+[19-Aug-2014 05:10:40 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bhorg/public_html/wp-content/plugins/redirection/models/pager.php on line 88
+[19-Aug-2014 05:12:32 UTC] PHP Fatal error:  Cannot instantiate abstract class Red_FileIO in /home/bhorg/public_html/wp-content/plugins/redirection/redirection.php on line 294
+[19-Aug-2014 05:14:40 UTC] PHP Fatal error:  Cannot instantiate abstract class Red_FileIO in /home/bhorg/public_html/wp-content/plugins/redirection/redirection.php on line 294
+[19-Aug-2014 05:15:34 UTC] PHP Fatal error:  Cannot instantiate abstract class Red_FileIO in /home/bhorg/public_html/wp-content/plugins/redirection/redirection.php on line 294
+[19-Aug-2014 05:16:27 UTC] PHP Fatal error:  Cannot instantiate abstract class Red_FileIO in /home/bhorg/public_html/wp-content/plugins/redirection/redirection.php on line 294
+[19-Aug-2014 05:16:40 UTC] PHP Fatal error:  Cannot instantiate abstract class Red_FileIO in /home/bhorg/public_html/wp-content/plugins/redirection/redirection.php on line 294
+[19-Aug-2014 05:17:08 UTC] PHP Fatal error:  Cannot instantiate abstract class Red_FileIO in /home/bhorg/public_html/wp-content/plugins/redirection/redirection.php on line 294
+[19-Aug-2014 05:18:36 UTC] PHP Fatal error:  Cannot instantiate abstract class Red_FileIO in /home/bhorg/public_html/wp-content/plugins/redirection/redirection.php on line 294

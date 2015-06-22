@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="JavaScript">
+<!--
+function MM_swapImgRestore() { //v2.0
+  if (document.MM_swapImgData != null)
+    for (var i=0; i<(document.MM_swapImgData.length-1); i+=2)
+      document.MM_swapImgData[i].src = document.MM_swapImgData[i+1];
+}
+function MM_swapImage() { //v2.0
+  var i,j=0,objStr,obj,swapArray=new Array,oldArray=document.MM_swapImgData;
+  for (i=0; i < (MM_swapImage.arguments.length-2); i+=3) {
+    objStr = MM_swapImage.arguments[(navigator.appName == 'Netscape')?i:i+1];
+    if ((objStr.indexOf('document.layers[')==0 && document.layers==null) ||
+        (objStr.indexOf('document.all[')   ==0 && document.all   ==null))
+      objStr = 'document'+objStr.substring(objStr.lastIndexOf('.'),objStr.length);
+    obj = eval(objStr);
+    if (obj != null) {
+      swapArray[j++] = obj;
+      swapArray[j++] = (oldArray==null || oldArray[j-1]!=obj)?obj.src:oldArray[j];
+      obj.src = MM_swapImage.arguments[i+2];
+  } }
+  document.MM_swapImgData = swapArray; //used for restore
+}
+
+function MM_showHideLayers() { //v2.0
+  var i, visStr, args, theObj;
+  args = MM_showHideLayers.arguments;
+  for (i=0; i<(args.length-2); i+=3) { //with arg triples (objNS,objIE,visStr)
+    visStr   = args[i+2];
+    if (navigator.appName == 'Netscape' && document.layers != null) {
+      theObj = eval(args[i]);
+      if (theObj) theObj.visibility = visStr;
+    } else if (document.all != null) { //IE
+      if (visStr == 'show') visStr = 'visible'; //convert vals
+      if (visStr == 'hide') visStr = 'hidden';
+      theObj = eval(args[i+1]);
+      if (theObj) theObj.style.visibility = visStr;
+  } }
+}
+//-->
+</script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<div id="titlelayer" style="position:absolute; width:95px; height:14px; z-index:7; top: 64px; left: 42px"><img src="../../../Images/pages/titles/tit3.gif" width="133" height="15"></div>
+<div id="rollover1layer" style="position:absolute; width:105px; height:23px; z-index:1; left: 39px; top: 14px"><a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'rollover1layer\'].document.tb1','document.tb1','../../../Images/main/tb1_on.gif','#939138525950')" onClick="MM_showHideLayers('document.layers[\'toolbarlayer\']','document.all[\'toolbarlayer\']','show')"><img name="tb1" border="0" src="../../../Images/main/tb1_off.gif" width="104" height="27"></a></div>
+<div id="rollover2layer" style="position:absolute; width:106px; height:24px; z-index:2; left: 158px; top: 14px"><a href="mailto:bhmarkt@post.tau.ac.il" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'rollover2layer\'].document.tb2','document.tb2','../../../Images/main/tb2_on.gif','#939138551980')"><img name="tb2" border="0" src="../../../Images/main/tb2_off.gif" width="107" height="27"></a></div>
+<div id="rollover3" style="position:absolute; width:104px; height:25px; z-index:3; left: 277px; top: 14px"><a href="../../misc/acknowledge/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'rollover3\'].document.tb3','document.tb3','../../../Images/main/tb3_on.gif','#939138589940')" target="main"><img name="tb3" border="0" src="../../../Images/main/tb3_off.gif" width="104" height="28"></a></div>
+<div id="mapbglayer" style="position:absolute; width:336px; height:327px; z-index:4; background-image: url(../../../Images/pages/maps/img1.gif); layer-background-image: url(../../../Images/pages/maps/img1.gif); border: 1px none #000000; top: 53px; left: 45px"></div>
+<div id="moldaviamaplayer" style="position:absolute; width:76px; height:102px; z-index:10; left: 239px; top: 93px"><img src="../../../Images/focus_maps/focus_moldavia.gif" width="126" height="121"></div>
+<div id="Layer1" style="font-family: Arial, Helvetica, sans-serif; font-size: 9pt; font-style: normal;position:absolute; width:186px; height:86px; z-index:9; left: 43px; top: 94px">At 
+the beginning of the 16th century Jewish communities are documented in a number 
+of Moldavian towns. The Jewish population continued to increase constantly as 
+Jews were attracted by different privileges granted to them by the authorities. 
+When the modern Romanian state was</div>
+<div id="nextlayer" style="position:absolute; width:34px; height:24px; z-index:6; top: 389px; left: 347px"><a href="firstrightframe.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'nextlayer\'].document.next','document.next','../../../Images/pages/maps/main/next_on.gif','#939139769570')" target="rightframe"><img name="next" border="0" src="../../../Images/pages/maps/main/next.gif" width="34" height="26"></a></div>
+<div id="textlayer2" style="font-family: Arial, Helvetica, sans-serif; font-size: 9pt; font-style: normal;position:absolute; width:323px; height:72px; z-index:11; left: 43px; top: 228px"> 
+founded in the middle of the 19th century the larger part of its Jewish population 
+lived in Moldavia and comprised mainly Yiddish speakers, hasidic traditionalist 
+Jews, with only a small minority of intellectuals adopting Romanian language 
+and culture. </div>
+
+<div id="toolbarlayer" style="position:absolute; width:122px; height:234px; z-index:13; left: 39px; top: 53px; visibility: hidden"> 
+<table  border="0" cellspacing="0" cellpadding="0">
+<tr> 
+<td><a href="#" onClick="MM_showHideLayers('document.layers[\'toolbarlayer\']','document.all[\'toolbarlayer\']','hide')"><img src="../../../Images/toolbar/closetb1.gif" width="135" height="15" border="0"></a></td>
+</tr>
+<tr> 
+<td><a href="../../../main.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.start','document.start','../../../Images/toolbar/tb1_2.gif','#939221086880')" target="main"><img name="start" border="0" src="../../../Images/toolbar/tb1_1.gif" width="135" height="18"></a></td>    
+</tr> 
+<tr> 
+<td><a href="../../mapspages/inner_map_frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.regions','document.regions','../../../Images/toolbar/tb2_2.gif','#939221118350')" target="main"><img name="regions" border="0" src="../../../Images/toolbar/tb2_1.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/dictatorships/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.jewishlife','document.jewishlife','../../../Images/toolbar/tb3_2.gif','#939221141310')" target="main"><img name="jewishlife" border="0" src="../../../Images/toolbar/tb3_1.gif" width="135" height="36"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/holocaust/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.holocaust','document.holocaust','../../../Images/toolbar/tb4_2.gif','#939221473500')" target="main"><img name="holocaust" border="0" src="../../../Images/toolbar/tb4_1.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/emigration/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.emigration','document.emigration','../../../Images/toolbar/tb5_2.gif','#939221514310')" target="main"><img name="emigration" border="0" src="../../../Images/toolbar/tb5_1.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/traditions/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.tradition','document.tradition','../../../Images/toolbar/tb6_2.gif','#939221541000')" target="main"><img name="tradition" border="0" src="../../../Images/toolbar/tb6_1.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/family/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.family','document.family','../../../Images/toolbar/tb7_2.gif','#939221236270')" target="main"><img name="family" border="0" src="../../../Images/toolbar/tb7_1.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/community/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.commuinity','document.commuinity','../../../Images/toolbar/tb8_2.gif','#939221249950')" target="main"><img name="commuinity" border="0" src="../../../Images/toolbar/tb8_1.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/rabbis/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.rabbis','document.rabbis','../../../Images/toolbar/tb_rabbis_on.gif','#939723458130')" target="main"><img name="rabbis" border="0" src="../../../Images/toolbar/tb_rabbis_off.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/synagogues/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.synagogues','document.synagogues','../../../Images/toolbar/tb_synagogues_on.gif','#939723458130')" target="main"><img name="synagogues" border="0" src="../../../Images/toolbar/tb3_synagogues_off.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/literature/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.literature','document.literature','../../../Images/toolbar/tb10_2.gif','#939221625640')" target="main"><img name="literature" border="0" src="../../../Images/toolbar/tb10_1.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/theater/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.theater','document.theater','../../../Images/toolbar/tb11_2.gif','#939221301470')" target="main"><img name="theater" border="0" src="../../../Images/toolbar/tb11_1.gif" width="135" height="18"></a></td>
+</tr>
+<tr> 
+<td><a href="../../misc/information/frameset.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('document.layers[\'toolbarlayer\'].document.information','document.information','../../../Images/toolbar/tb12_2.gif','#939221317340')" target="main"><img name="information" border="0" src="../../../Images/toolbar/tb12_1.gif" width="135" height="19"></a></td>
+</tr>
+</table>
+</div>
+</body>
+</html>

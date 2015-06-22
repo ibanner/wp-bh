@@ -1,0 +1,79 @@
+onClipEvent (load) {
+	_root.posttitle = _root.title;
+	_root.manual = 0;
+	_root.go = 0;
+	_root.next = 0;
+	_root.main.st = 0;
+	var time = 0;
+	var stopfade = 1;
+	var fade = 4;
+	var finishtime = 50;
+	var e = 1;
+	loadMovie (_root.CustMovie[Number(_root.title)]+".swf", _parent.ChapterMovie);
+	tellTarget (_parent) {
+		call ("navigaton_movie");
+	}
+}
+onClipEvent (enterFrame) {
+	// Casting
+	if ((Number(_root.title)<7) && (_root.main.st == 0) && (_root.main.ChapterMovie.LoadM.MainPr.TextImage['punkt'+e].LoadMov == "")) {
+		_root.main.ChapterMovie.LoadM.MainPr.TextImage['punkt'+e]._x = 0;
+		_root.main.ChapterMovie.LoadM.MainPr.TextImage.gotoAndStop("sub"+e);
+		_root.main.ChapterMovie.LoadM.MainPr.gotoAndStop("main"+e);
+		if ((int(_root.main.ChapterMovie.LoadM.MainPr.TextImage._alpha)<=100) && (stopfade == 1)) {
+			_root.main.ChapterMovie.LoadM.MainPr.TextImage._alpha = Math.floor(_root.main.ChapterMovie.LoadM.MainPr.TextImage._alpha)+fade;
+		}
+		if ((time>finishtime)) {
+			var stopfade = 0;
+			_root.main.ChapterMovie.LoadM.MainPr.TextImage._alpha = Math.floor(_root.main.ChapterMovie.LoadM.MainPr.TextImage._alpha)-fade;
+		} else {
+			time++;
+		}
+		if ((Math.floor(_root.main.ChapterMovie.LoadM.MainPr.TextImage._alpha)<3) && (stopfade == 0)) {
+			e++;
+			if (e==_root.Custitem.length) {
+				_root.next = 1;
+			}
+			_root.main.ChapterMovie.LoadM.MainPr.TextImage['punkt'+(e-1)]._x = -800;
+			var stopfade = 1;
+			var time = 0;
+		}
+		_parent.TestA = _root.Custitem.length;
+	}
+	// //
+	if ( (_root.next == 1) && (_root.manual == 0) && (Number(_root.title)<7)) {
+		var time = 0;
+		var stopfade = 1;
+		var e = 1;
+		_root.go = 0;
+		_root.next = 0;
+		tellTarget (_parent) {
+			call ("title_navigaton");
+		}
+		_root.title = _root.title+1;
+		_root.posttitle = _root.title;
+		tellTarget (_parent) {
+			call ("navigaton_movie");
+		}
+		loadMovie (_root.CustMovie[Number(_root.title)]+".swf", _parent.ChapterMovie);
+		_parent.gotoAndStop("netralP");
+	}
+	if ((_root.manual == 1)) {
+		var time = 0;
+		var stopfade = 1;
+		var e = 1;
+		unloadMovie (_parent.ChapterMovie);
+		_root.go = 0;
+		_root.next = 0;
+		_root.manual = 0;
+		_parent.gotoAndStop("netralP");
+		loadMovie (_root.CustMovie[Number(_root.title)]+".swf", _parent.ChapterMovie);
+	}
+	// //
+	if (_root.go == 1) {
+		_root.go = 0;
+		tellTarget (_parent) {
+			gotoAndPlay ("StartM");
+		}
+	}
+}

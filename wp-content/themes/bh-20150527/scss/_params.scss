@@ -1,0 +1,148 @@
+/*************/
+/* variables */
+/*************/
+
+$images:	"../images/";
+$fonts:		"../fonts/";
+
+$default_fonts: Arial, Helvetica, Sans-serif;
+
+/*******************/
+/* admin variables */
+/*******************/
+
+$admin-images:	"../../images/admin/";
+$admin-ui:		"../../images/ui/";
+
+/**********/
+/* colors */
+/**********/
+
+$white:				#FFF;
+$white-opac:		rgba($white, 0.9);
+
+$black:				#000;
+
+$black-color1:		#333;
+$black-color2:		#666;
+$black-color3:		#d1d1d1;
+$black-color4:		#7a7975;
+$black-color5:		#e6e6e6;
+
+$red:				#c12b1a;
+
+$green:				#5f9573;
+
+$cyan-color1:		#41b8e3;
+$cyan-color2:		#c8edf2;
+
+$green-msg:			#009e4b;
+$red-msg:			#ed1c24;
+
+$events-list-bg:	#e1e1e9;
+$events-filter-bg:	#f3f2f9;
+
+$mobile-menu-color:	#181E22;
+$mobile-menu-close: #20272D;
+
+/***************/
+/* backgrounds */
+/***************/
+
+$bg-color:			$white;
+$content-bg:		$white;
+$footer-bg:			$white;
+
+/**************/
+/* typography */
+/**************/
+
+$font-color:			$black-color1;
+$font-invert-color:		$white;
+
+$link-color:			$red;
+$link-hover-color:		$red;
+
+$read-more-link:		$red;
+$read-more-link-hover:	$red;
+
+$font-normal:			400;
+$font-bold:				700;
+
+$border-color1:			$black-color3;
+$border-color2:			$black-color4;
+
+/*********/
+/* forms */
+/*********/
+
+$panel-border-color:	$black-color3;
+$panel-heading-color:	$black-color3;
+
+/***********/
+/* buttons */
+/***********/
+
+/*** red ***/
+
+$red-btn-color:			$white;
+$red-btn-bg-bormal:		#e5493a;
+$red-btn-bg-hover:		#ef2d23;
+$red-btn-bg-active:		#f85646;
+
+/*** cyan ***/
+
+$cyan-btn-color:		$font-color;
+$cyan-btn-bg-bormal:	#41b8e3;
+$cyan-btn-bg-hover:		#69c2e2;
+$cyan-btn-bg-active:	#21afe3;
+
+/*** white ***/
+
+$white-btn-color:		$font-color;
+$white-btn-bg-bormal:	$white;
+$white-btn-bg-hover:	#eceaea;
+$white-btn-bg-active:	#d5d5d5;
+
+/*** green ***/
+
+$green-btn-color:		$white;
+$green-btn-bg-bormal:	#81c28d;
+$green-btn-bg-hover:	#9bc0a2;
+$green-btn-bg-active:	#65c076;
+
+/**********/
+/* banner */
+/**********/
+
+// banner width values are for reference only. the actual css width is 100%.
+$banner-width-l: 				1140px;
+$banner-width-m: 				940px;
+$banner-width-s: 				720px;
+
+$banner-height-l: 				527px;
+$banner-height-m: 				434px;
+$banner-height-s: 				333px;
+
+$slides-initial-top-l: 			$banner-height-l * -1;
+$slides-initial-top-m: 			$banner-height-m * -1;
+$slides-initial-top-s: 			$banner-height-s * -1;
+
+$mini-gallery-padding-side-l: 	(10 / 1000) * $banner-width-l;
+$mini-gallery-padding-side-m: 	(10 / 1000) * $banner-width-m;
+$mini-gallery-padding-side-s: 	(10 / 1000) * $banner-width-s;
+
+$mini-gallery-margin-l: 		10px;
+$mini-gallery-margin-m: 		10px;
+$mini-gallery-margin-s: 		10px;
+
+$mini-gallery-img-count:		5;
+
+$mini-gallery-width-ratio:		0.185;		
+
+$mini-gallery-img-height-l:		($banner-height-l / $banner-width-l) * ($banner-width-l * $mini-gallery-width-ratio - 2 * $mini-gallery-padding-side-l);
+$mini-gallery-padding-top-l:	0.5 * ($banner-height-l - ($mini-gallery-img-count - 1) *  $mini-gallery-margin-l - $mini-gallery-img-count * $mini-gallery-img-height-l);
+$mini-gallery-img-height-m:		($banner-height-m / $banner-width-m) * ($banner-width-m * $mini-gallery-width-ratio - 2 * $mini-gallery-padding-side-m);
+$mini-gallery-padding-top-m:	0.5 * ($banner-height-m - ($mini-gallery-img-count - 1) *  $mini-gallery-margin-m - $mini-gallery-img-count * $mini-gallery-img-height-m);
+$mini-gallery-img-height-s:		($banner-height-s / $banner-width-s) * ($banner-width-s * $mini-gallery-width-ratio - 2 * $mini-gallery-padding-side-s);
+$mini-gallery-padding-top-s:	0.5 * ($banner-height-s - ($mini-gallery-img-count - 1) *  $mini-gallery-margin-s - $mini-gallery-img-count * $mini-gallery-img-height-s);

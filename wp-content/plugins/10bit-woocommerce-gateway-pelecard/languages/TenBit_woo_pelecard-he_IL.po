@@ -1,0 +1,267 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Woo Pelecard v1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-24 20:26+0200\n"
+"PO-Revision-Date: 2014-02-24 20:26+0200\n"
+"Last-Translator: Tzvi Rabinovitch <tzvi.ra@gmail.com>\n"
+"Language-Team: \n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:49
+msgid "Pelecard"
+msgstr "פלאכרד"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:50
+msgid "Allow payments using pelecard"
+msgstr "אפשר תשלום באמצעות פלאכרד"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:124
+msgid "Pelecard payment completed"
+msgstr "התשלום באמצאות פלאכרד הסתיים"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:134
+msgid "Paymnet failure please try again or contact the stoe admin"
+msgstr "התשלום נכשל , נא לנסות שנית או ליצור קשר עם מנהל האתר."
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:138
+msgid "Pelecard IPN Request Failure"
+msgstr "שגיאה בקבלת התשובה מפלאכרד"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:152
+msgid "Enable/Disable"
+msgstr "הפעל/בטל"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:154
+msgid "Enable pelecard Payment"
+msgstr "אפשר תשלום באמצעות פלאכרד"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:158
+msgid "License"
+msgstr "קוד רשיון"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:160
+msgid "Please enter your license key as received from http://www.10bit.co.il"
+msgstr "נא להזין את  הקוד שהתקבל מ http://www.10bit.co.il"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:165
+msgid "Title"
+msgstr "כותרת"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:167
+msgid "This controls the title which the user sees during checkout."
+msgstr "כותרת זו תוצג ללקוח בזמן התשלום"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:168
+msgid "Pelecard Gateway"
+msgstr "פלאכרד"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:171
+msgid "Description"
+msgstr "תאור"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:173
+msgid "This controls the description which the user sees during checkout."
+msgstr "התאור אותו יראה הלקוח בזמן התשלום"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:174
+#: ../woocommerce-gateway-pelecard.php:386
+msgid "Pay via Pelecard"
+msgstr "שלם באמצעות פלאכרד"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:177
+msgid "Terminal Number"
+msgstr "מספר מסוף סליקה"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:179
+msgid "Your terminal number as provided by Pelecard"
+msgstr "מספר המסוף שהתקבל מפלאכרד"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:183
+msgid "Username"
+msgstr "שם משתמש"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:185
+msgid "Terminal username as provided by pelecard"
+msgstr "שם המשתמש במסוף פלאכרד"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:189
+msgid "Password"
+msgstr "סיסמה"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:191
+msgid "Terminal password as provided by pelecard."
+msgstr "סיסמה במסוף פלאכרד"
+
+#: ../woocommerce-gateway-pelecard.php:195
+msgid "Max Payments"
+msgstr "מספר תשלומים מקסימלי"
+
+#: ../woocommerce-gateway-pelecard.php:197
+msgid "Set the maximum allowed payments."
+msgstr "קבע את מספר התשלומים המקסימלי"
+
+#: ../woocommerce-gateway-pelecard.php:202
+msgid "Logo"
+msgstr "לוגו"
+
+#: ../woocommerce-gateway-pelecard.php:204
+msgid "This will be the diaplyed logo on the redirect page"
+msgstr "הלוגו שיוצג בדף התשלום"
+
+#: ../woocommerce-gateway-pelecard.php:209
+msgid "smallLogo"
+msgstr "לוגו קטן"
+
+#: ../woocommerce-gateway-pelecard.php:211
+msgid "This will be the small logo on the redirect page"
+msgstr "הלוגו הקטן שיוצג בדף התשלום"
+
+#: ../woocommerce-gateway-pelecard.php:215
+msgid "PCI DSS LOGO"
+msgstr "לוגו PCI DSS"
+
+#: ../woocommerce-gateway-pelecard.php:217
+msgid "Hides the PCI DSS logo"
+msgstr "הסתר את הלוגו של PCI DSS"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:221
+msgid "Pelecard Logo"
+msgstr "לוגו פלאכארד"
+
+#: ../woocommerce-gateway-pelecard.php:223
+msgid "Hides the Pelecard logo"
+msgstr "הסתר את לוגו פלאכארד"
+
+#: ../woocommerce-gateway-pelecard.php:227
+msgid "Use Iframe"
+msgstr "להשתמש ב Iframe"
+
+#: ../woocommerce-gateway-pelecard.php:229
+msgid "Load the secured Pelecard page in an iframe"
+msgstr "טען את דף הסליקה המאובטח בתוך Iframe באתר"
+
+#: ../woocommerce-gateway-pelecard.php:233
+msgid " Iframe Width"
+msgstr "רוחב הIframe"
+
+#: ../woocommerce-gateway-pelecard.php:235
+msgid "Set the Iframe width in PX , leave blank for 100%"
+msgstr "קבע את רוחב הIframe ביחידות של PX , השאר ריק ל 100%"
+
+#: ../woocommerce-gateway-pelecard.php:240
+msgid " Iframe Height"
+msgstr "גובה הIframe"
+
+#: ../woocommerce-gateway-pelecard.php:242
+msgid "Set the Iframe height in PX "
+msgstr "קבע את גובה הIframe ביחידות של PX"
+
+#: ../woocommerce-gateway-pelecard.php:247
+msgid "Path to custom css file"
+msgstr "קישור לקובץ עיצוב חיצוני"
+
+#: ../woocommerce-gateway-pelecard.php:249
+msgid ""
+"The path to the custom css path , this file must be placed on a secured "
+"(HTTPS) domain"
+msgstr "קישור לקובץ עיצוב חיצוני , הקובץ חייב לשבת ברשת מאובטח (HTTPS)"
+
+#: ../woocommerce-gateway-pelecard.php:253
+msgid "Header Text"
+msgstr "כותרת"
+
+#: ../woocommerce-gateway-pelecard.php:255
+msgid "This text will appear above the payment form"
+msgstr "טקסט זה יופיע מעל לטופס התשלום"
+
+#: ../woocommerce-gateway-pelecard.php:259
+msgid "Bottom Text"
+msgstr "כיתוב בתחתית"
+
+#: ../woocommerce-gateway-pelecard.php:261
+msgid "This text will appear underneath the payment form"
+msgstr "טקסט זה יופיע מתחת לטופס התשלום"
+
+#: ../woocommerce-gateway-pelecard.php:265
+msgid "Background color"
+msgstr "צבע רקע"
+
+#: ../woocommerce-gateway-pelecard.php:267
+#, php-format
+msgid ""
+"use hexadecimal color without the # ex :%s for white use ffffff%s For "
+"transparent background send transparent"
+msgstr ""
+"בפורמט הקסדצימלי ללא # לדוגמא %s ללבן יש לרשום FFFFFF %s לשקוף יש לרשום "
+"transparent"
+
+#: ../woocommerce-gateway-pelecard.php:270
+msgid "Path to background image"
+msgstr "נתיב לתמונת רקע"
+
+#: ../woocommerce-gateway-pelecard.php:273
+#, php-format
+msgid "Please use the format: %s For example:%s Location options:%s"
+msgstr "בפורמט: %s לדוגמא:%s אפשרויות מיקום:%s"
+
+#: ../woocommerce-gateway-pelecard.php:283
+msgid "Top margin"
+msgstr "מרווח מהחלק העליון"
+
+#: ../woocommerce-gateway-pelecard.php:285
+msgid "Top margin in pixels"
+msgstr "מרחק מהחלק העליון של ה iframe בפיקסלים"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:302
+msgid ""
+"Thank you for your order, please click the button below to pay with Pelecard."
+msgstr ""
+"תודה על ההזמנה , במידה והמערכת לא העבירה אותך בצורה אוטומטית נא ללחוץ על "
+"הכפתור לסיום התשלום"
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:365
+msgid ""
+"Thank you for your order. We are now redirecting you to Payment Gateway to "
+"make payment."
+msgstr "תודה על ההזמנה , מייד תועברו לפלאכרד להמשך התשלום."
+
+# @ TenBit_woo_pelecard
+#: ../woocommerce-gateway-pelecard.php:386
+msgid "Cancel order &amp; restore cart"
+msgstr "בטל את ההזמנה"

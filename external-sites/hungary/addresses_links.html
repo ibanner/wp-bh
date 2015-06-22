@@ -1,0 +1,191 @@
+<html>
+<head>
+<meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
+<title></title>
+<meta name="Author" content="Motti Gondabi">
+<script LANGUAGE="Javascript">
+
+var sign0=0;
+var sign1=0;
+var sign2=0;
+var sign3=0;
+var sign4=0;
+var sign5=0;
+var sign6=0;
+var sign7=0;
+
+var ButtonPath = "images/";
+var ButtonOver = new Array("Addresses1.gif","Addresses2.gif","Addresses3.gif","Addresses4.gif","Addresses5.gif","Addresses6.gif","Addresses7.gif","Addresses8.gif");
+var ButtonOut  = new Array("Addresses1a.gif","Addresses2a.gif","Addresses3a.gif","Addresses4a.gif","Addresses5a.gif","Addresses6a.gif","Addresses7a.gif","Addresses8a.gif");
+
+
+function LoadImages()
+        {
+        imageOff= new Array();
+        imageOn= new Array();
+        for (i=0; i<ButtonOut.length; i++)
+                {
+                imageOff[i] = new Image();
+                imageOff[i].src = ButtonPath + ButtonOut[i];
+                }       
+        for (i=0; i<ButtonOver.length; i++)
+                {
+                imageOn[i] = new Image();
+                imageOn[i].src = ButtonPath + ButtonOver[i];
+                }       
+        }
+
+function imgOver(index)
+        {
+           document['Button' + index].src = ButtonPath + ButtonOver[index];
+        }
+function imgOut(index)
+        {
+        document['Button' + index].src = ButtonPath + ButtonOut[index];
+        }
+function imgClicked(index)
+        {
+        document['Button' + index].src = ButtonPath + ButtonClicked[index];
+        }
+
+		
+  function header(index,flag1,flag2)
+  { 
+    
+     if (index==0) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(0); imgOut(1); imgOut(2); imgOut(3); imgOut(4); imgOut(5); imgOut(6); imgOut(7);  
+				                               sign0=1; sign1=0; sign2=0; sign3=0; sign4=0; sign5=0; sign6=0; sign7=0;  }
+				   
+				     else { 
+				            if ( (sign0==0) && (flag1) && (!flag2) ) { imgOver(0); sign0=0;}
+				  	        if ( (sign0==0) && (!flag1) && (!flag2) ) { imgOut(0); sign0=0;} 
+				          } 
+                  }
+  
+     if (index==1) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(1); imgOut(0); imgOut(2); imgOut(3); imgOut(4); imgOut(5); imgOut(6); imgOut(7);  
+				                               sign0=0; sign1=1; sign2=0; sign3=0; sign4=0; sign5=0; sign6=0; sign7=0; }
+				   
+				     else { 
+				            if ( (sign1==0) && (flag1) && (!flag2) ) { imgOver(1); sign1=0;}
+				  	        if ( (sign1==0) && (!flag1) && (!flag2) ) { imgOut(1); sign1=0;} 
+				          } 
+                  }
+				  
+				       				  
+     if (index==2) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(2); imgOut(1); imgOut(0); imgOut(3); imgOut(4); imgOut(5); imgOut(6); imgOut(7);  
+				                               sign0=0; sign1=0; sign2=1; sign3=0; sign4=0; sign5=0; sign6=0; sign7=0;  }
+				   
+				     else { 
+				            if ( (sign2==0) && (flag1) && (!flag2) ) { imgOver(2); sign2=0;}
+				  	        if ( (sign2==0) && (!flag1) && (!flag2) ) { imgOut(2); sign2=0;} 
+				          } 
+                  }
+
+     if (index==3) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(3); imgOut(1); imgOut(2); imgOut(0); imgOut(4); imgOut(5); imgOut(6); imgOut(7);  
+				                               sign0=0; sign1=0; sign2=0; sign3=1; sign4=0; sign5=0; sign6=0; sign7=0;  }
+				   
+				     else { 
+				            if ( (sign3==0) && (flag1) && (!flag2) ) { imgOver(3); sign3=0;}
+				  	        if ( (sign3==0) && (!flag1) && (!flag2) ) { imgOut(3); sign3=0;} 
+				          } 
+                  }
+
+     if (index==4) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(4); imgOut(1); imgOut(2); imgOut(3); imgOut(0); imgOut(5); imgOut(6); imgOut(7); 
+				                               sign0=0; sign1=0; sign2=0; sign3=0; sign4=1; sign5=0; sign6=0; sign7=0;  }
+				   
+				     else { 
+				            if ( (sign4==0) && (flag1) && (!flag2) ) { imgOver(4); sign4=0;}
+				  	        if ( (sign4==0) && (!flag1) && (!flag2) ) { imgOut(4); sign4=0;} 
+				          } 
+                  }
+
+     if (index==5) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(5); imgOut(1); imgOut(2); imgOut(3); imgOut(4); imgOut(0); imgOut(6); imgOut(7);  
+				                               sign0=0; sign1=0; sign2=0; sign3=0; sign4=0; sign5=1; sign6=0; sign7=0;  }
+				   
+				     else { 
+				            if ( (sign5==0) && (flag1) && (!flag2) ) { imgOver(5); sign5=0;}
+				  	        if ( (sign5==0) && (!flag1) && (!flag2) ) { imgOut(5); sign5=0;} 
+				          } 
+                  }
+
+     if (index==6) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(6); imgOut(1); imgOut(2); imgOut(3); imgOut(4); imgOut(5); imgOut(0); imgOut(7);  
+				                               sign0=0; sign1=0; sign2=0; sign3=0; sign4=0; sign5=0; sign6=1; sign7=0;  }
+				   
+				     else { 
+				            if ( (sign6==0) && (flag1) && (!flag2) ) { imgOver(6); sign6=0;}
+				  	        if ( (sign6==0) && (!flag1) && (!flag2) ) { imgOut(6); sign6=0;} 
+				          } 
+                  }
+
+     if (index==7) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(7); imgOut(1); imgOut(2); imgOut(3); imgOut(4); imgOut(5); imgOut(6); imgOut(0); 
+				                               sign0=0; sign1=0; sign2=0; sign3=0; sign4=0; sign5=0; sign6=0; sign7=1; }
+				   
+				     else { 
+				            if ( (sign7==0) && (flag1) && (!flag2) ) { imgOver(7); sign7=0;}
+				  	        if ( (sign7==0) && (!flag1) && (!flag2) ) { imgOut(7); sign7=0;} 
+				          } 
+                  }
+
+
+}
+
+
+</script>
+
+
+</head>
+<body bgcolor="#FFFFCC" onLoad="LoadImages();header(0,true,true)" LEFTMARGIN=0 TOPMARGIN=20> 
+<table cellpadding="0" cellspacing="0" border="0">
+  <tr>
+     <td align="left" colspan="2"><img src="images/AddressesCot.gif" border="0" width="179" height="29"></td>
+  </tr>
+  <tr>
+    <td height="9" colspan="2"></td>
+  </tr>
+  <tr>
+    <td width="28">&nbsp;</td><td  height="25" valign="middle"><a href="address_content.html#G0" onClick="header(0,true,true)" onmouseover="header(0,true,false)" onMouseOut="header(0,false,false)" target="Content"><img name="Button0" src="images/Addresses1.gif" border="0" width="183" height="20"></a></td>
+  </tr>
+  <tr>
+    <td width="28">&nbsp;</td><td height="25" valign="middle"><a href="address_content.html#G1" onClick="header(1,true,true)" onmouseover="header(1,true,false)" onMouseOut="header(1,false,false)" target="Content"><img name="Button1" src="images/Addresses2.gif" border="0" width="163" height="20"></a></td>
+  </tr>
+  <tr>
+    <td width="28">&nbsp;</td><td height="25" valign="middle"><a href="address_content.html#G2" onClick="header(2,true,true)" onmouseover="header(2,true,false)" onMouseOut="header(2,false,false)" target="Content"><img name="Button2" src="images/Addresses3.gif" border="0" width="93" height="20"></a></td>
+  </tr>
+  <tr>
+    <td width="28">&nbsp;</td><td height="25" valign="middle"><a href="address_content.html#G3" onClick="header(3,true,true)" onmouseover="header(3,true,false)" onMouseOut="header(3,false,false)" target="Content"><img name="Button3" src="images/Addresses4.gif" border="0" width="93" height="20"></a></td>
+  </tr>
+  <tr>
+    <td width="28">&nbsp;</td><td height="25" valign="middle"><a href="address_content.html#G4" onClick="header(4,true,true)" onmouseover="header(4,true,false)" onMouseOut="header(4,false,false)" target="Content"><img name="Button4" src="images/Addresses5.gif" border="0" width="72" height="20"></a></td>
+  </tr>
+  <tr>
+    <td width="28">&nbsp;</td><td height="25" valign="middle"><a href="address_content.html#G5" onClick="header(5,true,true)" onmouseover="header(5,true,false)" onMouseOut="header(5,false,false)" target="Content"><img name="Button5" src="images/Addresses6.gif" border="0" width="85" height="20"></a></td>
+  </tr>
+  <tr>
+    <td width="28">&nbsp;</td><td height="25" valign="middle"><a href="address_content.html#G6" onClick="header(6,true,true)" onmouseover="header(6,true,false)" onMouseOut="header(6,false,false)" target="Content"><img name="Button6" src="images/Addresses7.gif" border="0" width="118" height="20"></a></td>
+  </tr>
+  <tr>
+    <td width="28">&nbsp;</td><td height="25" valign="middle"><a href="address_content.html#G7" onClick="header(7,true,true)" onmouseover="header(7,true,false)" onMouseOut="header(7,false,false)" target="Content"><img name="Button7" src="images/Addresses8.gif" border="0" width="86" height="20"></a></td>
+  </tr>
+  <tr>
+    <td></td>
+  </tr>
+</table>
+
+</body>
+</html>
