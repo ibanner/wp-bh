@@ -1,0 +1,120 @@
+<html>
+<head>
+<meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
+<title>Further Information Strip</title>
+
+<script LANGUAGE="JavaScript">
+
+var sign0=0;
+var sign1=0;
+var sign2=0;
+var sign3=0;
+var sign4=0;
+
+var ButtonPath = "images/";
+var ButtonOut = new Array("bibliograhpyBut.gif","linksBut.gif","addressesBut.gif","sourcesBut.gif","communitiesBut.gif");
+var ButtonOver  = new Array("bibliograhpyButA.gif","linksButA.gif","addressesButA.gif","sourcesButA.gif","communitiesButA.gif");
+
+function LoadImages()
+        {
+        imageOff= new Array();
+        imageOn= new Array();
+        for (i=0; i<ButtonOut.length; i++)
+                {
+                imageOff[i] = new Image();
+                imageOff[i].src = ButtonPath + ButtonOut[i];
+                }       
+        for (i=0; i<ButtonOver.length; i++)
+                {
+                imageOn[i] = new Image();
+                imageOn[i].src = ButtonPath + ButtonOver[i];
+                }       
+        }
+
+function imgOver(index)
+        {
+        document['Button' + index].src = ButtonPath + ButtonOver[index];
+        }
+function imgOut(index)
+        {
+        document['Button' + index].src = ButtonPath + ButtonOut[index];
+        }
+
+		  function header(index,flag1,flag2)
+  { 
+    
+     if (index==0) 
+                  {
+	                 if ( (flag1) && (flag2) ) { imgOver(0); imgOut(1); imgOut(2); imgOut(3); imgOut(4); sign0=1; sign1=0; sign2=0; sign3=0; sign4=0;}
+				   
+				     else { 
+				            if ( (sign0==0) && (flag1) && (!flag2) ) { imgOver(0); sign0=0;}
+				  	        if ( (sign0==0) && (!flag1) && (!flag2) ) { imgOut(0); sign0=0;} 
+				          } 
+                  }
+  
+   if (index==1) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(1); imgOut(0); imgOut(2); imgOut(3); imgOut(4); sign0=0; sign1=1; sign2=0;sign3=0; sign4=0;}
+				   
+				     else { 
+				            if ( (sign1==0) && (flag1) && (!flag2) ) { imgOver(1); sign1=0;}
+				  	        if ( (sign1==0) && (!flag1) && (!flag2) ) { imgOut(1); sign1=0;} 
+				          } 
+                  }
+				  
+   if (index==2) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(2); imgOut(0); imgOut(1); imgOut(3); imgOut(4); sign0=0; sign1=0; sign2=1; sign3=0; sign=4;}
+				   
+				     else { 
+				            if ( (sign2==0) && (flag1) && (!flag2) ) { imgOver(2); sign2=0;}
+				  	        if ( (sign2==0) && (!flag1) && (!flag2) ) { imgOut(2); sign2=0;} 
+				          } 
+                  }
+				  
+    if (index==3) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(3); imgOut(0); imgOut(1); imgOut(2); imgOut(4); sign0=0; sign1=0; sign2=0;sign3=1; sign4=0;}
+				   
+				     else { 
+				            if ( (sign3==0) && (flag1) && (!flag2) ) { imgOver(3);  sign3=0;}
+				  	        if ( (sign3==0) && (!flag1) && (!flag2) ) { imgOut(3);  sign3=0;} 
+				          } 
+                  }				  				  
+
+    if (index==4) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgOver(4); imgOut(0); imgOut(1); imgOut(2); imgOut(3); sign0=0; sign1=0; sign2=0;sign3=0; sign4=1;}
+				   
+				     else { 
+				            if ( (sign4==0) && (flag1) && (!flag2) ) { imgOver(4);  sign4=0;}
+				  	        if ( (sign4==0) && (!flag1) && (!flag2) ) { imgOut(4);  sign4=0;} 
+				          } 
+                  }				  				  
+
+}
+				  
+</script>
+
+</head>
+<BODY BGCOLOR="#FFFFFF" onLoad="header(0,true,true);document.all.access.value=0;LoadImages()" LEFTMARGIN=0 TOPMARGIN=0 > 
+<form>
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="FFFFCC">
+  <tr>
+    <td colspan="7"><img src="images/strip.jpg" name="Strip" border="0" width="791" height="60"></td>
+  </tr>
+  <tr>
+    <td><input type="hidden" id="access" value="0"><img src="images/furtherInfoCotUp.gif" border="0" width="244" height="20"></td>
+	<td><A HREF="bibliography.html" target="MIDDLE" onClick="header(0,true,true)" onmouseover="header(0,true,false)" onMouseOut="header(0,false,false)"><img name="Button0" src="images/bibliograhpyBut.gif" border="0" width="95" height="20"></A></td>
+	<td><A HREF="links.html" target="MIDDLE" onClick="header(1,true,true)" onmouseover="header(1,true,false)" onMouseOut="header(1,false,false)"><img name="Button1" src="images/linksBut.gif" border="0" width="48" height="20"></A></td>
+	<td><A HREF="addresses.html" target="MIDDLE" onClick="header(2,true,true)" onmouseover="header(2,true,false)" onMouseOut="header(2,false,false)"><img name="Button2" src="images/addressesBut.gif" border="0" width="122" height="20"></A></td>
+	<td><A HREF="sources.html" target="MIDDLE" onClick="header(3,true,true)" onmouseover="header(3,true,false)" onMouseOut="header(3,false,false)"><img name="Button3" src="images/sourcesBut.gif" border="0" width="114" height="20"></A></td>
+	<td><A HREF="jewish_communities.html" target="MIDDLE" onClick="header(4,true,true)" onmouseover="header(4,true,false)" onMouseOut="header(4,false,false)"><img name="Button4" src="images/communitiesBut.gif" border="0" width="147" height="20"></A></td>
+    <td><img src="images/e_up.gif" border="0" width="21" height="20"></td>
+  </tr>
+</table>
+</form>
+</BODY> 
+</html>

@@ -1,0 +1,247 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List
+href="./Bardjov%20by%20Bryna,%20rev%20BD%2011F03_files/filelist.xml">
+<title>Bardejov is a major city of the Saris region in northeastern Slovakia</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Microsoft Corporation</o:Author>
+  <o:LastAuthor>Benny</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>52</o:TotalTime>
+  <o:LastPrinted>2003-06-18T16:51:00Z</o:LastPrinted>
+  <o:Created>2003-09-11T16:04:00Z</o:Created>
+  <o:LastSaved>2004-06-06T10:14:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>552</o:Words>
+  <o:Characters>3147</o:Characters>
+  <o:Lines>26</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3864</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:RelyOnVML/>
+  <o:AllowPNG/>
+  <o:PixelsPerInch>72</o:PixelsPerInch>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>110</w:Zoom>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>0</w:DisplayVerticalDrawingGridEvery>
+  <w:UseMarginsForDrawingGridOrigin/>
+  <w:Compatibility>
+   <w:FootnoteLayoutLikeWW8/>
+   <w:ShapeLayoutLikeWW8/>
+   <w:AlignTablesRowByRow/>
+   <w:ForgetLastTabAlignment/>
+   <w:LayoutRawTableWidth/>
+   <w:LayoutTableRowsApart/>
+  </w:Compatibility>
+  <w:DoNotOptimizeForBrowser/>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+@font-face
+	{font-family:Miriam;
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:177;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:6145 0 0 0 32 0;}
+@font-face
+	{font-family:"Monotype Corsiva";
+	panose-1:3 1 1 1 1 2 1 1 1 1;
+	mso-font-charset:0;
+	mso-generic-font-family:script;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:Miriam;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:36.0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:Miriam;
+	mso-fareast-language:EN-US;}
+ /* Page Definitions */
+@page
+	{mso-endnote-numbering-style:alpha-lower;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:45.35pt 3.0cm 51.05pt 68.05pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US style='tab-interval:36.0pt'>
+
+<div class=Section1 dir=RTL>
+
+<p class=MsoBodyTextIndent dir=LTR style='text-indent:0cm'><span
+style='font-size:28.0pt;font-family:"Monotype Corsiva";color:#993366'>The
+Prophet Elijah<o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent dir=LTR><span style='font-size:28.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent dir=LTR><span style='font-size:11.0pt;font-family:
+Verdana'>Bardejov is a major city in the Saris region in northeastern Slovakia.
+It is close to the Polish border, just south of the Topka River and a stop on
+the trade route between the Baltic and Black Seas. By the 14<sup>th</sup>
+century, it was already a fortified town that had walls and towers protecting a
+settlement built around a large, rectangular market place.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'>Jews, however, did not have a place in
+Bardejov until the mid-18<sup>th</sup> century, since settlement in Slovak towns
+was forbidden to them unless they had special permission. A Jewish presence
+there is first documented in 1747, when Jews from Galicia moved in, settling
+northeast of the marketplace and working as farmers in nearby villages. Growing
+rapidly, the Bardejov <i>kehillah</i> and <i>hevrah kadisha</i> were
+established by 1806. The first synagogue, the Altschul, was built in 1830 and
+in just a few years, the growth of the community required the addition of two
+prayer rooms. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'>Sticking to their Galician roots, the
+Bardejov community remained largely Hasidic. Three of their rabbis, Moshe Leib
+Halberstam, Zalman Leib Halberstam, and Chaim Natan Halberstam, were
+descendants of the Hasidic dynasty founded by Rabbi Chaim Halberstam. As their
+community continued to expand, the Jews maintained their traditions in custom
+and dress, whether at home or in public. Over the years, the community built a
+Jewish civic complex near Bardejov’s historical core. Planned according to
+Talmudic regulation, it came to include the synagogue, a <i>beit midrash</i>, a
+mikveh, and a slaughterhouse.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'>Jews and Armenians were among the first to
+develop the hot springs close to Bardejov as a health resort and spa.
+Spaciously landscaped along a narrow park, the spa became one of the most
+renowned in Europe and patronized by royalty. Still functioning, though not in
+Jewish hands, it caters to visitors from Israel, among others. The well-dressed
+guests stroll leisurely along the shady lanes, sipping mineral waters from
+specially spouted ceramic cups.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'>By 1935 there were 2,264 Jews in Bardejov
+and the community constituted 40% of the city’s population. A booklet written
+at that time by the Bardejov municipality devoted some space to the Jews of the
+area. It described them as being, mostly, shopkeepers, with a few farmers,
+traders and scholars. The orthodoxy of the community was still evident, and
+they were said to “walk around in their long black <i>kapotes</i> and wear
+traditional <i>shtraymlekh</i>, fur trimmed hats.” The author also remarked on
+the importance of religious education for the Jews, and even went on to
+speculate that the health of the Jewish children was imperiled because they
+were cooped up for such long times, daily, in the <i>heder</i>. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'>When the deportation of the Jews began in
+May of 1942 the <i>kehillah</i> included 2,700 people, of whom 2,400 were sent
+away. After the war, Bardejov became a place for refugee rehabilitation and a
+center for staging “illegal” immigration to Palestine. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'>In 1991, Vaclav Havel, then President of
+Czechoslovakia, visited the Altschul Synagogue. He declared it and the rest of
+the Jewish complex to be a national monument. The buildings were to be
+preserved, to remember the once vital Jewish presence they contained.
+Nonetheless, they are still occupied as storage and workshops by a plumbing
+supply house.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;text-indent:36.0pt;
+direction:ltr;unicode-bidi:embed'><span style='font-size:11.0pt;font-family:
+Verdana;mso-fareast-language:EN-US'>Only one Jew still lives in Bardejov, Max
+Spira, who hid in the Polish forests during the war. The last representative of
+his <i>kehillah</i>, he works as a <i>shohet</i> and a <i>hazzan, </i>serving<i>
+</i>the few Jews of the surrounding areas. Still meticulously Orthodox, he often
+conducts services all by himself in his Bikur Holim synagogue, built in 1929.
+If friends should ask him with whom he prayed so audibly on a Friday evening,
+he replies, “Elijah, the Prophet, was with me.”<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><span style='font-size:11.0pt;font-family:Verdana;mso-fareast-language:
+EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><span style='font-size:8.0pt;font-family:Verdana;mso-fareast-language:
+EN-US'>Condensed by Bryna Rothenberg from <i>Synagogues Without Jews.<o:p></o:p></i></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><i><span style='font-size:12.0pt;font-family:Verdana;mso-fareast-language:
+EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+</div>
+

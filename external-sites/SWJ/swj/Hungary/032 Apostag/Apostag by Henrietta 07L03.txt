@@ -1,0 +1,199 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-8">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./Apostag%20by%20Henrietta%2007L03_files/filelist.xml">
+<title>Matzah for the Neighbors</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Yoni Benami</o:Author>
+  <o:LastAuthor>Benny</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>3</o:TotalTime>
+  <o:LastPrinted>2003-12-07T06:42:00Z</o:LastPrinted>
+  <o:Created>2004-06-13T14:34:00Z</o:Created>
+  <o:LastSaved>2004-06-13T14:34:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>649</o:Words>
+  <o:Characters>3704</o:Characters>
+  <o:Lines>30</o:Lines>
+  <o:Paragraphs>7</o:Paragraphs>
+  <o:CharactersWithSpaces>4548</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Normal</w:View>
+  <w:Zoom>75</w:Zoom>
+  <w:ActiveWritingStyle Lang="EN-US" VendorID="64" DLLVersion="131077"
+   NLCheck="1">1</w:ActiveWritingStyle>
+  <w:DoNotOptimizeForBrowser/>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Monotype Corsiva";
+	panose-1:3 1 1 1 1 2 1 1 1 1;
+	mso-font-charset:0;
+	mso-generic-font-family:script;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:16.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:36.0pt;
+	mso-pagination:widow-orphan;
+	font-size:16.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:30.0cm 792.1pt;
+	margin:2.0cm 2.0cm 2.0cm 2.0cm;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US style='tab-interval:36.0pt'>
+
+<div class=Section1 dir=RTL>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><b><span style='font-size:28.0pt;font-family:"Monotype Corsiva";
+color:#993366'>Matzah for the Neighbors<o:p></o:p></span></b></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;direction:ltr;unicode-bidi:
+embed'><span style='font-size:28.0pt;font-family:"Monotype Corsiva";color:#993366'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>Apostag, on the east side of the Danube some fifty miles south of
+Budapest and a current population of 2,660, still consists of one story houses
+among small farms and gardens on narrow streets. It is so inconsequential that
+it appears only on comprehensive maps.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>The <i>kehillah</i> of Apostag was one of the hundreds of village
+communities scattered throughout central Europe. The shaded cemetery bordering
+the synagogue courtyard contains gravestones from the beginning of the 17<sup>th</sup>
+century, which suggests that Jews may have lived there as early as 1630, the
+middle of the Turkish occupation. The land was under populated after the wars
+and 18<sup>th</sup> century nobles and landowners attracted immigrants to
+resettle the area. Jews from Austria, Bohemia and Moravia were among others who
+responded.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>The <i>kehillah,</i> at about 600 persons and a fifth of Apostag&#8217;s
+population, assumed responsibility as the religious center for Jews of still
+smaller villages in the region. Their first synagogue, built in 1768, burned in
+1820. It was replaced by the present one, in the transitional Classical,
+so-called <i>Zopf</i> style in 1821 on the same site and incorporated the
+unchanged masonry structure of the earlier building. In 1840, the kehillah
+numbered 783 people, but it dwindled to half within 40 years, as many were
+attracted to the metropolitan centers when it became permissible to live there.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>The first of Apostag&#8217;s rabbis from 1768 to 1818 was Rabbi Josef Moshe
+who set up the <i>hevra kadishah</i> and founded a yeshiva. The congregants
+loved his successor, Rabbi Basch, who opened a Jewish school in 1823. The <i>kehillah</i>
+opted for Neolog affiliation in 1878. The school functioned until the turn of
+the century, when it closed its doors as parental interest in a specifically
+Jewish education for the children dwindled. <o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent dir=LTR style='margin-bottom:12.0pt'><span
+style='font-size:12.0pt;font-family:Verdana'>There was hardly any Zionist
+fervor. The Jews tended to assimilation and integration into Hungarian society
+and some of them attained high government positions. They served in the
+Hungarian army in World War I, but that did not protect their shops from
+looting by demobilized soldiers.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>With no Jews remaining in Apostag after World War II, the community
+was officially disbanded in 1947 and the synagogue was transferred to the
+Organization of Hungarian Jews. Bought by the Apostag town council, the
+synagogue became a storage depot for agricultural products and fertilizer. By
+the mid 1980&#8217;s, it was on the agenda for demolition, but a perceptive village
+teacher who recognized the admirable architectural and artistic features of the
+synagogue fought tenaciously for restoration until he had council approval.<o:p></o:p></span></p>
+
+<p class=MsoBodyText dir=LTR style='margin-bottom:12.0pt;text-indent:36.0pt'><span
+style='font-size:12.0pt;font-family:Verdana'>Starting with village funds, the
+project won grants from regional, national and Jewish sources. Local people
+volunteered to work on construction and landscaping. The restoration was completed
+in less than two years and a festive dedication was held in October 1987. The
+building now contains a concert hall serving also as a wedding chapel, a small
+Jewish museum, an elegant library in the gallery and an exhibition that honors
+native son, the writer Lajos Nagy, in the entrance lobby. The Europa Nostra
+Federation, founded in 1963 to encourage preservation and restoration of
+historic sites in Europe, awarded a silver medal for the restoration of the
+Apostag synagogue.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>The Nazi transports of Operation Margaret in 1944, wrenched a hundred
+Jews away from Apostag. Only three of them returned after the war, but none
+remained. One of them was Chana Wittberg who came to live in Israel. She
+recounts her life in prewar Apostag, where she was one of few Jewish children.
+The Jews maintained cordial relations with their Christian neighbors; before
+Pesah, Chana&#8217;s mother used to send her to bring samples of matzah for the
+neighbors to taste. There were no Orthodox families in the village and no
+rabbi, but all the Jews went to the synagogue on the holidays and retained some
+aspects of Jewish life. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:36.0pt;direction:ltr;unicode-bidi:embed'><span style='font-family:
+Verdana'>Everything changed after 1942 when Jews no longer had business permits
+and the Jewish children were chased out of school. Soon after, the Jews were
+packed into cattle cars and sent to Auschwitz. After the war, Chana returned
+and found nobody from her family and only two others of the community. She
+walked the empty streets dazed, found houses ransacked and the synagogue in
+shambles, with the floor ripped up because the goyim had searched for
+valuables. The next day Chana ran away from Apostag.<o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+direction:ltr;unicode-bidi:embed'><span style='font-size:8.0pt;font-family:
+Verdana'>Condensed by Henrietta Benami from <i>Synagogues Without Jews.<o:p></o:p></i></span></p>
+
+</div>
+

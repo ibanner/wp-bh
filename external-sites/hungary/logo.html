@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
+<title>Welcome To The Land Of Hagar</title>
+<meta name="Keywords" content="">
+<meta name="Author" content="Motti Gondabi">
+<SCRIPT LANGUAGE="JavaScript">
+<!-- begin script
+var sign0=0;
+var sign1=0;
+var sign2=0;
+var sign3=0;
+
+var ButtonPath = "images/";
+var ButtonOut = new Array("u2.gif","u3.gif","u4.gif","u5.gif");
+var ButtonOver  = new Array("u2a.gif","u3a.gif","u4a.gif","u5a.gif");
+var ButtonClicked  = new Array("u2b.gif","u3b.gif","u4b.gif","u5b.gif");
+
+function LoadImages()
+        {
+        imageOff= new Array();
+        imageOn= new Array();
+        for (i=0; i<ButtonOut.length; i++)
+                {
+                imageOff[i] = new Image();
+                imageOff[i].src = ButtonPath + ButtonOut[i];
+                }       
+        for (i=0; i<ButtonOver.length; i++)
+                {
+                imageOn[i] = new Image();
+                imageOn[i].src = ButtonPath + ButtonOver[i];
+                }       
+        }
+
+function imgOver(index)
+        {
+           document['Button' + index].src = ButtonPath + ButtonOver[index];
+        }
+function imgOut(index)
+        {
+        document['Button' + index].src = ButtonPath + ButtonOut[index];
+        }
+function imgClicked(index)
+        {
+        document['Button' + index].src = ButtonPath + ButtonClicked[index];
+        }
+
+		
+  function header(index,flag1,flag2)
+  { 
+    
+     if (index==0) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgClicked(0); imgOut(1); imgOut(2); imgOut(3); sign0=1; sign1=0; sign2=0; sign3=0;}
+				   
+				     else { 
+				            if ( (sign0==0) && (flag1) && (!flag2) ) { imgOver(0); sign0=0;}
+				  	        if ( (sign0==0) && (!flag1) && (!flag2) ) { imgOut(0); sign0=0;} 
+				          } 
+                  }
+  
+   if (index==1) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgClicked(1); imgOut(0); imgOut(2); imgOut(3); sign0=0; sign1=1; sign2=0;sign3=0;}
+				   
+				     else { 
+				            if ( (sign1==0) && (flag1) && (!flag2) ) { imgOver(1); sign1=0;}
+				  	        if ( (sign1==0) && (!flag1) && (!flag2) ) { imgOut(1); sign1=0;} 
+				          } 
+                  }
+				  
+   if (index==2) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgClicked(2); imgOut(0); imgOut(1); imgOut(3); sign0=0; sign1=0; sign2=1; sign3=0;}
+				   
+				     else { 
+				            if ( (sign2==0) && (flag1) && (!flag2) ) { imgOver(2); sign2=0;}
+				  	        if ( (sign2==0) && (!flag1) && (!flag2) ) { imgOut(2); sign2=0;} 
+				          } 
+                  }
+				  
+    if (index==3) 
+                  {
+	               if ( (flag1) && (flag2) ) { imgClicked(3); imgOut(0); imgOut(1); imgOut(2); sign0=0; sign1=0; sign2=0;sign3=1;}
+				   
+				     else { 
+				            if ( (sign3==0) && (flag1) && (!flag2) ) { imgOver(3);  sign3=0;}
+				  	        if ( (sign3==0) && (!flag1) && (!flag2) ) { imgOut(3);  sign3=0;} 
+				          } 
+                  }				  				  
+
+}				  
+//  end script -->
+</SCRIPT>
+
+</head>
+<body scroll="NO" onLoad="LoadImages();header(0,true,true);" LEFTMARGIN=0 TOPMARGIN=0>
+
+<table cellpadding="0" cellspacing="0" border="0" bgcolor="FFFFCC" width="791"><!--Main TB-->
+<tr>
+    <td>
+ 		 <table cellpadding="0" cellspacing="0" border="0" bgcolor="FFFFCC" width="791"><!-- TB 1-->
+ 		 <tr>
+    		<td colspan="6"><img src="images/strip.jpg" name="Strip" border="0" width="791" height="60"></td>
+  		</tr>
+		</table>
+    </td>		
+</tr>
+
+<tr>
+    <td>
+		<table cellpadding="0" cellspacing="0" border="0" width="791"><!-- TB 2 -->
+  		<tr>
+      		<td><img src="images/u1.gif" name="img1" border="0" width="170" height="20"></td>
+	  		<td><A HREF="spot1.html" onClick="header(0,true,true)" onmouseover="header(0,true,false)" onMouseOut="header(0,false,false)" TARGET="MIDDLE">
+	      		<img NAME="Button0" src="images/u2.gif" border="0" width="112" height="20"></A></td>
+      		<td><A HREF="spot2.html" onClick="header(1,true,true)" onmouseover="header(1,true,false)" onMouseOut="header(1,false,false)" TARGET="MIDDLE">
+	      		<img NAME="Button1" src="images/u3.gif" border="0" width="113" height="20"></A></td>
+      		<td><A HREF="spot3.html" onClick="header(2,true,true)" onmouseover="header(2,true,false)" onMouseOut="header(2,false,false)" TARGET="MIDDLE">
+	     		<img NAME="Button2" src="images/u4.gif" border="0" width="112" height="20"></A></td>
+	  		<td><A HREF="spot4.html" onClick="header(3,true,true)" onmouseover="header(3,true,false)" onMouseOut="header(3,false,false)" TARGET="MIDDLE">
+	      		<img NAME="Button3" src="images/u5.gif" border="0" width="113" height="20"></A></td>
+      		<td><img src="images/u6.gif" name="img6" border="0" width="171" height="20"></td>	
+  		</tr>
+		</table>
+     </td>
+</tr>
+</table> <!-- Main TB -->
+
+</body>
+</html>

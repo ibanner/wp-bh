@@ -1,0 +1,241 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List
+href="./Koszeg%20by%20Sarah%20F%20rev%2011I03_files/filelist.xml">
+<title>The Parchment of Torah Scrolls</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Ben-Zion Dorfman</o:Author>
+  <o:LastAuthor>Benny</o:LastAuthor>
+  <o:Revision>6</o:Revision>
+  <o:TotalTime>22</o:TotalTime>
+  <o:Created>2003-09-11T13:59:00Z</o:Created>
+  <o:LastSaved>2004-06-06T10:05:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>536</o:Words>
+  <o:Characters>3056</o:Characters>
+  <o:Lines>25</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3752</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>75</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+@font-face
+	{font-family:"Monotype Corsiva";
+	panose-1:3 1 1 1 1 2 1 1 1 1;
+	mso-font-charset:0;
+	mso-generic-font-family:script;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:right;
+	mso-pagination:widow-orphan;
+	direction:rtl;
+	unicode-bidi:embed;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-layout-grid-align:none;
+	text-autospace:none;
+	font-size:28.0pt;
+	font-family:"Monotype Corsiva";
+	color:#993366;
+	mso-font-kerning:0pt;
+	mso-fareast-language:EN-US;
+	font-weight:normal;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	text-autospace:none;
+	font-size:8.0pt;
+	font-family:Verdana;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	mso-fareast-language:EN-US;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin-top:8.85pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:25.4pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	text-autospace:none;
+	mso-element:frame;
+	mso-element-frame-width:537.8pt;
+	mso-element-frame-height:762.95pt;
+	mso-element-frame-hspace:7.1pt;
+	mso-element-wrap:auto;
+	mso-element-anchor-vertical:page;
+	mso-element-anchor-horizontal:page;
+	mso-element-left:.05pt;
+	mso-element-top:.05pt;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-language:EN-US;}
+p.MsoBodyTextIndent2, li.MsoBodyTextIndent2, div.MsoBodyTextIndent2
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:12.0pt;
+	margin-left:0cm;
+	text-indent:24.0pt;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	text-autospace:none;
+	font-size:12.0pt;
+	font-family:Verdana;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	mso-fareast-language:EN-US;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;
+	mso-gutter-direction:rtl;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US style='tab-interval:36.0pt'>
+
+<div class=Section1 dir=RTL>
+
+<h1 dir=LTR>The Parchment of Torah Scrolls</h1>
+
+<p class=MsoNormal dir=LTR style='text-align:left;mso-layout-grid-align:none;
+text-autospace:none;direction:ltr;unicode-bidi:embed'><span style='font-size:
+28.0pt;font-family:"Monotype Corsiva";color:#993366;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent align=left dir=LTR style='margin-top:0cm;margin-right:
+0cm;margin-bottom:12.0pt;margin-left:0cm;text-align:left;text-indent:24.0pt;
+mso-element:frame;mso-element-frame-width:0cm;mso-element-frame-height:0cm;
+mso-element-frame-hspace:0cm;mso-element-wrap:auto;mso-element-anchor-vertical:
+margin;mso-element-anchor-horizontal:column;mso-element-left:left;mso-element-top:
+0cm'><span style='font-size:12.0pt;font-family:Verdana'>Koszeg has changed
+little since the Middle Ages, when its streets were designed in herringbone
+pattern, to retard invaders. Lying close to the Austrian border and the
+neighboring Jewish settlements in Austrian Burgenland, Koszeg was the home of a
+500 year-old Jewish community that had a cherished synagogue from the mid-19<sup>th</sup>
+century. <o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent align=left dir=LTR style='margin-top:0cm;margin-right:
+0cm;margin-bottom:12.0pt;margin-left:0cm;text-align:left;text-indent:24.0pt;
+mso-element:frame;mso-element-frame-width:0cm;mso-element-frame-height:0cm;
+mso-element-frame-hspace:0cm;mso-element-wrap:auto;mso-element-anchor-vertical:
+margin;mso-element-anchor-horizontal:column;mso-element-left:left;mso-element-top:
+0cm'><span style='font-size:12.0pt;font-family:Verdana'>In 1393, Jews from
+Bohemia and Germany were invited by the rulers of the Koszeg fortress to settle
+in the town. They were given religious freedom but were heavily taxed. In 1532
+a Hungarian army of 2500 defeated a Turkish force of 55,000. Jews participated
+bravely in that war and were rewarded for their valor with land and other
+benefits. Koszeg remained a battleground, internal as well as external; so in
+the seventeenth century Jews fled to safer localities. They left behind
+precious property, including Torah scrolls that were confiscated. Immigrants
+from Burgenland’s seven communities joined M. Schlesinger, the only Koszeg Jew
+in 1735, and the <i>kehillah</i> started to grow again. For a synagogue, the
+community used a small building on the land of Siesel Spitzer.<o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent2 dir=LTR>Jews became active in trade, industry and
+the professions. Phillip Schey of Koszeg, an influential leader, philanthropist
+and industrialist became the first Jew in Hungary to achieve noble rank. Baron
+Schey funded construction of the synagogue in Koszeg in 1859. He also funded an
+interfaith hospice and the first kindergarten in Hungary. The community
+flourished, to a maximum of 266 persons in 1910, but their numbers diminished
+as Jews moved to the major cities and young Zionists left for Palestine. The
+town archivist, Dr. Istvan Bariska found touching photos and documents that
+testify to the Jewish cultural life in Koszeg.</p>
+
+<p class=MsoNormal dir=LTR style='margin-top:7.55pt;margin-right:0cm;
+margin-bottom:12.0pt;margin-left:0cm;text-align:left;text-indent:24.0pt;
+mso-layout-grid-align:none;text-autospace:none;direction:ltr;unicode-bidi:embed'><span
+style='font-family:Verdana;mso-fareast-language:EN-US'>Starting in 1940 Germany
+conscripted male Jews in Hungary for forced labor, marching them to various
+deadly destinations. Toward the end of 1944, Nazi Germany was losing the war to
+the Russians, but their impending collapse only intensified the extermination
+policy they applied against the Jews. The 117 Jews of Koszeg were confined to a
+narrow crowded space, denied contact with the rest of the town and their kin in
+the labor Battalion III/4. On July 4 all were deported to Auschwitz. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-top:7.55pt;margin-right:0cm;
+margin-bottom:12.0pt;margin-left:0cm;text-align:left;text-indent:24.0pt;
+mso-layout-grid-align:none;text-autospace:none;direction:ltr;unicode-bidi:embed'><span
+style='font-family:Verdana;mso-fareast-language:EN-US'>Five thousand Jews conscripted
+to forced labor from all over Hungary were temporarily quartered in Koszeg.
+Hani Serene, a gentile woman who secretly baked bread for the men in forced
+labor, remembers their tragedy and their unspeakable misery. Forced to work in
+the Ukraine at sub zero temperatures while living on a daily ration of 17
+ounces of bread, they witnessed the trains that transported Jews from the east
+to the death camps. Forced westward again when the battle went against the
+Germans, they were marched in the snow for 20 days, passing through empty
+villages in Hungary that once thronged with active Jewish life. One of the few
+stopping points was the town of Koszeg. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:24.0pt;mso-layout-grid-align:none;text-autospace:none;direction:
+ltr;unicode-bidi:embed'><span style='font-family:Verdana;mso-fareast-language:
+EN-US'>The survivors of Battalion III/4 organized a reunion in November 1988. A
+group of 14 survivors gathered at the synagogue in Koszeg, where they affixed a
+bronze plaque on the outer wall. In Hebrew and Hungarian, it commemorates the
+Koszeg <i>kehillah</i> and the Jews in forced labor who perished there. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='margin-bottom:12.0pt;text-align:left;
+text-indent:24.0pt;mso-layout-grid-align:none;text-autospace:none;direction:
+ltr;unicode-bidi:embed'><span style='font-family:Verdana;mso-fareast-language:
+EN-US'>A local bank bought the synagogue building with vague intentions of
+conversion to an antiques shop. The Hungarian Jewish Culture Society has hopes
+for a fitting memorial and a Jewish museum; to teach and to remember. So far
+nothing has been done, and the synagogue that was the center of a rich culture
+life awaits restoration. Today the building is exposed to the elements and the
+structure is deteriorating. <o:p></o:p></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;mso-layout-grid-align:none;
+text-autospace:none;direction:ltr;unicode-bidi:embed'><span style='font-size:
+8.0pt;font-family:Verdana;mso-fareast-language:EN-US'>Condensed by Sarah Feiner
+from <i>Synagogues Without Jews.<o:p></o:p></i></span></p>
+
+<p class=MsoNormal dir=LTR style='text-align:left;mso-layout-grid-align:none;
+text-autospace:none;direction:ltr;unicode-bidi:embed'><i><span
+style='font-family:Verdana;mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></i></p>
+
+</div>
+
