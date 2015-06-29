@@ -61,16 +61,7 @@
 	 * @return	HTML string
 	 */
 	function BH_get_event_date($event_id, $locale = null) {
-		$icl_language_code = ICL_LANGUAGE_CODE;
-		
-		if ( ICL_LANGUAGE_CODE == '' && isset($_COOKIE['_icl_current_language']) && defined('ICL_SITEPRESS_VERSION') ) {
-			global $sitepress;
-			
-			$sitepress->switch_lang( $_COOKIE['_icl_current_language'] );
-			$icl_language_code = $_COOKIE['_icl_current_language'];
-		}
-		
-		$end_date_prepend	= get_field('acf-options_event_end_date_prepend_' . $icl_language_code, 'option');
+		$end_date_prepend	= get_field('acf-options_event_end_date_prepend', 'option');
 		
 		$event_categories	= wp_get_post_terms($event_id, 'event_category');
 		$next_event_title	= ($event_categories) ? get_field('acf-event_category_next_event',	'event_category_' . $event_categories[0]->term_id) : '';
@@ -170,16 +161,7 @@
 	 * output:	HTML string
 	 */
 	function BH_get_event_type($event_id) {
-		$icl_language_code = ICL_LANGUAGE_CODE;
-		
-		if ( ICL_LANGUAGE_CODE == '' && isset($_COOKIE['_icl_current_language']) && defined('ICL_SITEPRESS_VERSION') ) {
-			global $sitepress;
-			
-			$sitepress->switch_lang( $_COOKIE['_icl_current_language'] );
-			$icl_language_code = $_COOKIE['_icl_current_language'];
-		}
-		
-		$series_of_events_prepend	= get_field('acf-options_series_of_events_prepend_' . $icl_language_code, 'option');
+		$series_of_events_prepend	= get_field('acf-options_series_of_events_prepend', 'option');
 		$event_categories			= wp_get_post_terms($event_id, 'event_category');
 		$singular_name				= ($event_categories) ? get_field('acf-event_category_singular_name', 'event_category_' . $event_categories[0]->term_id) : '';
 		$series						= get_field('acf-event_series_of_events', $event_id);
@@ -213,15 +195,6 @@
 	 * output:	HTML string
 	 */
 	function BH_get_event_purchase_btn($event_id) {
-		$icl_language_code = ICL_LANGUAGE_CODE;
-		
-		if ( ICL_LANGUAGE_CODE == '' && isset($_COOKIE['_icl_current_language']) && defined('ICL_SITEPRESS_VERSION') ) {
-			global $sitepress;
-			
-			$sitepress->switch_lang( $_COOKIE['_icl_current_language'] );
-			$icl_language_code = $_COOKIE['_icl_current_language'];
-		}
-		
 		$landing					= get_field('acf-event_landing_mode',		$event_id);
 		$payed						= get_field('acf-event_payed_event',		$event_id);
 		$start_date					= get_field('acf-event_start_date',			$event_id);
@@ -230,13 +203,13 @@
 		$ticket_net_link			= get_field('acf-event_ticket_net_link',	$event_id);
 		$registration_form			= get_field('acf-event_registration_form',	$event_id);
 		
-		$order_tickets_btn			= get_field('acf-options_event_btn_order_tickets_'		. $icl_language_code, 'option');
-		$purchase_series_btn		= get_field('acf-options_event_btn_purchase_series_'	. $icl_language_code, 'option');
-		$reservation_btn			= get_field('acf-options_event_btn_reservation_'		. $icl_language_code, 'option');
-		$free_admittance_msg		= get_field('acf-options_event_btn_free_admittance_'	. $icl_language_code, 'option');
+		$order_tickets_btn			= get_field('acf-options_event_btn_order_tickets',		'option');
+		$purchase_series_btn		= get_field('acf-options_event_btn_purchase_series',	'option');
+		$reservation_btn			= get_field('acf-options_event_btn_reservation',		'option');
+		$free_admittance_msg		= get_field('acf-options_event_btn_free_admittance',	'option');
 		
-		$reservation_form_page		= get_field('acf-options_events_reservation_form_page',						'option');
-		$reservation_form_page_id	= icl_object_id($reservation_form_page->ID, 'page', false);
+		$reservation_form_page		= get_field('acf-options_events_reservation_form_page',	'option');
+		$reservation_form_page_id	= $reservation_form_page ? $reservation_form_page->ID : '';
 		
 		$today						= date_i18n('Ymd');
 		$btn						= '';

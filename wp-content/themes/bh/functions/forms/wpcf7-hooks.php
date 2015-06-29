@@ -434,7 +434,7 @@
 	function create_form_footer( $tag ) {
 		if ( !is_array( $tag ) ) return '';
 		
-		$form_footer = get_field('acf-options_form_footer_' . ICL_LANGUAGE_CODE, 'option');
+		$form_footer = get_field('acf-options_form_footer', 'option');
 		
 		return '<div class="form-footer">' . $form_footer . '</div>';
 	}

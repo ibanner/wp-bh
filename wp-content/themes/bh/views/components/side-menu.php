@@ -1,7 +1,7 @@
 <?php
 
 	$events_page = get_field('acf-options_events_page', 'option');
-	$events_page_id = icl_object_id($events_page->ID, 'page', false);
+	$events_page_id = $events_page ? $events_page->ID : '';
 	
 	if ( (is_tax('event_category') || is_singular('event')) && $events_page_id ) :
 		$object_id = $events_page_id;

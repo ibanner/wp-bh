@@ -2,7 +2,7 @@
 
 	<?php
 		
-		$read_more_btn = get_field('acf-options_event_btn_read_more_' . ICL_LANGUAGE_CODE, 'option');
+		$read_more_btn = get_field('acf-options_event_btn_read_more', 'option');
 		
 		// post categories
 		echo '<div class="post-categories">';

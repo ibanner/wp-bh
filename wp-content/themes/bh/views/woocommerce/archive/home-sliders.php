@@ -28,7 +28,7 @@ $slider_index = 1;
 
 	<?php foreach ($sliders as $slider) :
 	
-		$title				= strip_tags( $slider['title_' . ICL_LANGUAGE_CODE], '<a>' );
+		$title				= strip_tags( $slider['title'], '<a>' );
 		$slider_products	= $slider['products'];
 		
 		if ( count($slider_products) > 0 ) :

@@ -2,13 +2,6 @@
 
 	global $sorted_events, $sitepress;
 	
-	$icl_language_code = ICL_LANGUAGE_CODE;
-	
-	if ( ICL_LANGUAGE_CODE == '' && isset($_COOKIE['_icl_current_language']) && defined('ICL_SITEPRESS_VERSION') ) {
-		$sitepress->switch_lang( $_COOKIE['_icl_current_language'] );
-		$icl_language_code = $_COOKIE['_icl_current_language'];
-	}
-	
 	if ( is_page() && 'past-events.php' == basename( get_page_template() ) ) :
 	
 		if ( $sorted_events['past'] ) :
@@ -19,7 +12,7 @@
 		
 	else :
 	
-		$future_events_title = get_field('acf-options_future_events_list_title_' . $icl_language_code, 'option');
+		$future_events_title = get_field('acf-options_future_events_list_title', 'option');
 		
 		if ( $sorted_events['current'] ) :
 			echo '<div class="events-list current-events-list">';

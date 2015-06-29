@@ -22,13 +22,13 @@ echo '<div class="row">';
 		
 			foreach ($banners as $banner) :
 			
-				$image					= $banner['image_'					. ICL_LANGUAGE_CODE];
-				$link_type				= $banner['link_type_'				. ICL_LANGUAGE_CODE];
-				$page_product_link		= $banner['page_product_link_'		. ICL_LANGUAGE_CODE];
-				$product_category_link	= $banner['product_category_link_'	. ICL_LANGUAGE_CODE];
-				$product_occasion_link	= $banner['product_occasion_link_'	. ICL_LANGUAGE_CODE];
-				$product_artist_link	= $banner['product_artist_link_'	. ICL_LANGUAGE_CODE];
-				$ext_link				= $banner['external_link_'			. ICL_LANGUAGE_CODE];
+				$image					= $banner['image'];
+				$link_type				= $banner['link_type'];
+				$page_product_link		= $banner['page_product_link'];
+				$product_category_link	= $banner['product_category_link'];
+				$product_occasion_link	= $banner['product_occasion_link'];
+				$product_artist_link	= $banner['product_artist_link'];
+				$ext_link				= $banner['external_link'];
 				$link					= '';
 				$target					= '_self';
 				

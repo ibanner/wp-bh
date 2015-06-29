@@ -175,21 +175,21 @@ function BH_shop_footer_link_boxes() {
 	// collect link boxes data	
 	$links = array(
 		'returns_policy'	=> array(
-			'title'			=> get_field('acf-options_returns_policy_title_' . ICL_LANGUAGE_CODE, 'option'),
-			'text'			=> get_field('acf-options_returns_policy_text_' . ICL_LANGUAGE_CODE, 'option'),
-			'page'			=> get_field('acf-options_returns_policy_page', 'option')
+			'title'			=> get_field('acf-options_returns_policy_title',	'option'),
+			'text'			=> get_field('acf-options_returns_policy_text',		'option'),
+			'page'			=> get_field('acf-options_returns_policy_page',		'option')
 		),
 		
 		'shipment_policy'	=> array(
-			'title'			=> get_field('acf-options_shipment_policy_title_' . ICL_LANGUAGE_CODE, 'option'),
-			'text'			=> get_field('acf-options_shipment_policy_text_' . ICL_LANGUAGE_CODE, 'option'),
-			'page'			=> get_field('acf-options_shipment_policy_page', 'option')
+			'title'			=> get_field('acf-options_shipment_policy_title',	'option'),
+			'text'			=> get_field('acf-options_shipment_policy_text',	'option'),
+			'page'			=> get_field('acf-options_shipment_policy_page',	'option')
 		),
 		
 		'faqs'				=> array(
-			'title'			=> get_field('acf-options_faqs_title_' . ICL_LANGUAGE_CODE, 'option'),
-			'text'			=> get_field('acf-options_faqs_text_' . ICL_LANGUAGE_CODE, 'option'),
-			'page'			=> get_field('acf-options_faqs_page', 'option')
+			'title'			=> get_field('acf-options_faqs_title',				'option'),
+			'text'			=> get_field('acf-options_faqs_text',				'option'),
+			'page'			=> get_field('acf-options_faqs_page',				'option')
 		)
 	);
 	
@@ -197,11 +197,11 @@ function BH_shop_footer_link_boxes() {
 		echo '<div class="row shop-footer">';
 		
 			foreach ($links as $type => $val) {
-				$page_id = icl_object_id($val['page']->ID, 'page', false);
+				$page_link = $val['page'] ? get_permalink($val['page']->ID) : '';
 				
 				echo '<div class="col-sm-4 link-box-wrapper">';
 					echo '<div class="link-box">';
-						BH_shop_footer_link( $type, $val['title'], $val['text'], get_permalink($page_id) );
+						BH_shop_footer_link( $type, $val['title'], $val['text'], $page_link );
 					echo '</div>';
 				echo '</div>';
 			}

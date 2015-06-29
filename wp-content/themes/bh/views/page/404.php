@@ -1,8 +1,8 @@
 <?php
 
 	// get page content
-	$page_404_top_msg		= get_field('acf-options_404_top_message_' . ICL_LANGUAGE_CODE, 'option');
-	$page_404_bottom_msg	= get_field('acf-options_404_bottom_message_' . ICL_LANGUAGE_CODE, 'option');
+	$page_404_top_msg		= get_field('acf-options_404_top_message',		'option');
+	$page_404_bottom_msg	= get_field('acf-options_404_bottom_message',	'option');
 	
 ?>
 

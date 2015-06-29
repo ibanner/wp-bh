@@ -1,7 +1,5 @@
 <?php
 
-	$series_of_events_prepend	= get_field('acf-options_series_of_events_prepend_' . ICL_LANGUAGE_CODE, 'option');
-	
 	global $categories, $events, $is_categories_empty, $is_events_empty, $sitepress;
 
 	// get locale string

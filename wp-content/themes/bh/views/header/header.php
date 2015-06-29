@@ -3,7 +3,7 @@
 	// create global top menu
 	// used for both dektop and mobile menues
 	$blog_page		= get_field('acf-options_blog_page', 'option');
-	$blog_page_id	= ($blog_page) ? icl_object_id($blog_page->ID, 'page', false) : '';
+	$blog_page_id	= $blog_page ? $blog_page->ID : '';
 	$menu_walker	= new BH_main_walker_nav_menu;
 	
 	$args = array(
@@ -24,7 +24,7 @@
 	// create main menu
 	// used for both dektop and mobile menues
 	$events_page	= get_field('acf-options_events_page', 'option');
-	$events_page_id	= ($events_page) ? icl_object_id($events_page->ID, 'page', false) : '';
+	$events_page_id	= $events_page ? $events_page->ID : '';
 	
 	$args = array(
 		'theme_location'		=> 'main-menu',

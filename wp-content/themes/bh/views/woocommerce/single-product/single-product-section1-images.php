@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post, $product;
 
-$product_image_disclaimer = get_field( 'acf-options_product_image_disclaimer_' . ICL_LANGUAGE_CODE, 'option' );
+$product_image_disclaimer = get_field( 'acf-options_product_image_disclaimer', 'option' );
 
 $attachment_ids = array();
 $attachment_ids = $product->get_gallery_attachment_ids();

@@ -6,13 +6,13 @@
 	$hours				= get_field('acf-options_opening_hours', 'option');
 	
 	// get messages
-	$open_msg			= get_field('acf-options_open_message_' . ICL_LANGUAGE_CODE, 'option');
-	$close_msg			= get_field('acf-options_close_message_' . ICL_LANGUAGE_CODE, 'option');
-	$opening_today_msg	= get_field('acf-options_opening_today_message_' . ICL_LANGUAGE_CODE, 'option');
+	$open_msg			= get_field('acf-options_open_message', 'option');
+	$close_msg			= get_field('acf-options_close_message', 'option');
+	$opening_today_msg	= get_field('acf-options_opening_today_message', 'option');
 	
 	// get some strings related to above messages
-	$tommorow_str		= get_field('acf-options_tomorrow_str_' . ICL_LANGUAGE_CODE, 'option');
-	$on_day_str			= get_field('acf-options_on_day_str_' . ICL_LANGUAGE_CODE, 'option');
+	$tommorow_str		= get_field('acf-options_tomorrow_str', 'option');
+	$on_day_str			= get_field('acf-options_on_day_str', 'option');
 	
 	global $sm_row_status, $sm_col_status;
 	

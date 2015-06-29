@@ -25,7 +25,7 @@
 	function BH_excerpt_more_link($more) {
 		global $post;
 		
-		$read_more_btn = get_field('acf-options_event_btn_read_more_' . ICL_LANGUAGE_CODE, 'option');
+		$read_more_btn = get_field('acf-options_event_btn_read_more', 'option');
 		
 		//return '...<div class="read-more"><a class="btn inline-btn red-btn big" href="' . get_permalink($post->ID) . '">' . $read_more_btn . '</a></div>';
 		return ' [...]';

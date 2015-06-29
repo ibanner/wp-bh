@@ -1,8 +1,8 @@
 <?php
 
 	$type			= get_sub_field('type');
-	$title			= get_sub_field('title_' . ICL_LANGUAGE_CODE);
-	$content		= get_sub_field('content_' . ICL_LANGUAGE_CODE);
+	$title			= get_sub_field('title');
+	$content		= get_sub_field('content');
 	
 	global $sm_row_status, $sm_col_status;
 	

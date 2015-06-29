@@ -1,0 +1,223 @@
+/**************/
+/* BH sprites */
+/**************/
+
+@mixin sprites {
+	@include image("general/BH-sprites.png", $repeat: no-repeat);
+}
+
+@mixin logo-en-big {
+	background-position: 0 0;
+	width: 176px;
+	height: 81px;
+}
+
+@mixin logo-en-medium {
+	background-position: -178px 0;
+	width: 133px;
+	height: 62px;
+}
+
+@mixin logo-he-big {
+	background-position: 0 -83px;
+	width: 173px;
+	height: 81px;
+}
+
+@mixin logo-he-medium {
+	background-position: -178px -64px;
+	width: 130px;
+	height: 61px;
+}
+
+@mixin logo-small {
+	background-position: -313px 0 !important;
+	width: 45px !important;
+	height: 51px !important;
+}
+
+@mixin breadcrumb-delimiter-en {
+	background-position: 0 -166px;
+	width: 6px;
+	height: 11px;
+}
+
+@mixin breadcrumb-delimiter-he {
+	background-position: -7px -166px;
+	width: 6px;
+	height: 11px;
+}
+
+@mixin slider-controllers-prev {
+	background-position: 0 -202px;
+	width: 49px;
+	height: 97px;
+	
+	&:hover {
+		background-position: 0 -300px;
+	}
+	
+	&:active {
+		background-position: 0 -398px;
+	}
+}
+
+@mixin slider-controllers-next {
+	background-position: -51px -202px;
+	width: 49px;
+	height: 97px;
+	
+	&:hover {
+		background-position: -51px -300px;
+	}
+	
+	&:active {
+		background-position: -51px -398px;
+	}
+}
+
+@mixin up {
+	background-position: -36px -166px;
+	width: 17px;
+	height: 9px;
+}
+
+@mixin down {
+	background-position: -36px -177px;
+	width: 17px;
+	height: 9px;
+}
+
+@mixin menu-bg-rtl {
+	background-position: -102px -166px;
+	width: 73px;
+	height: 146px;
+}
+
+@mixin menu-bg {
+	background-position: -177px -166px;
+	width: 73px;
+	height: 146px;
+}
+
+@mixin mobile-menu-en {
+	background-position: -102px -314px;
+	width: 39px;
+	height: 44px;
+}
+
+@mixin mobile-menu-he {
+	background-position: -143px -314px;
+	width: 39px;
+	height: 44px;
+}
+
+@mixin nadav-logo {
+	background-position: -184px -314px;
+	width: 47px;
+	height: 49px;
+}
+
+@mixin open-close-en {
+	background-position: -102px -384px;
+	width: 56px;
+	height: 18px;
+	
+	&.active {
+		background-position: -102px -365px;
+	}
+}
+
+@mixin open-close-he {
+	background-position: -159px -384px;
+	width: 56px;
+	height: 18px;
+	
+	&.active {
+		background-position: -159px -365px;
+	}
+}
+
+@mixin search {
+	background-position: -102px -404px;
+	width: 24px;
+	height: 16px;
+}
+
+@mixin product-search {
+	background-position: -128px -404px;
+	width: 16px;
+	height: 16px;
+}
+
+@mixin phone {
+	background-position: 0 -179px;
+	width: 16px;
+	height: 16px;
+}
+
+@mixin email {
+	background-position: -18px -166px;
+	width: 16px;
+	height: 16px;
+}
+
+@mixin address {
+	background-position: -18px -184px;
+	width: 16px;
+	height: 16px;
+}
+
+@mixin calendar {
+	background-position: -55px -166px;
+	width: 20px;
+	height: 20px;
+}
+
+@mixin cart {
+	background-position: -175px -127px;
+	width: 28px;
+	height: 23px;
+}
+
+@mixin cart-white {
+	background-position: -205px -127px;
+	width: 28px;
+	height: 23px;
+}
+
+@mixin clock {
+	background-position: -77px -166px;
+	width: 16px;
+	height: 16px;
+}
+
+@mixin comments {
+	background-position: -77px -184px;
+	width: 16px;
+	height: 14px;
+}
+
+@mixin newsletter {
+	background-position: -235px -127px;
+	width: 32px;
+	height: 32px;
+}
+
+@mixin package {
+	background-position: -269px -127px;
+	width: 25px;
+	height: 24px;
+}
+
+@mixin shipping {
+	background-position: -296px -127px;
+	width: 30px;
+	height: 24px;
+}
+
+@mixin question {
+	background-position: -328px -127px;
+	width: 24px;
+	height: 24px;
+}

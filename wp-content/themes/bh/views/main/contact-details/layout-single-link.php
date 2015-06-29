@@ -2,7 +2,7 @@
 
 	$icon			= get_sub_field('icon');
 	$link			= get_sub_field('link');
-	$text			= get_sub_field('text_' . ICL_LANGUAGE_CODE);
+	$text			= get_sub_field('text');
 	$show_in_mobile	= get_sub_field('show_in_mobile');
 	
 	global $sm_row_status, $sm_col_status;

@@ -31,7 +31,7 @@
 				foreach ($links as $l) :
 				
 					$icon	= $l['icon'];
-					$link	= $l['link_' . ICL_LANGUAGE_CODE];
+					$link	= $l['link'];
 					$color	= $l['color'];
 					
 					if ($icon && $link) :

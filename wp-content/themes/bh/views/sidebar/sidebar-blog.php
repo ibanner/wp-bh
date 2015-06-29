@@ -2,7 +2,7 @@
 
 	// get blog page id
 	$blog_page = get_field('acf-options_blog_page', 'option');
-	$blog_page_id = icl_object_id($blog_page->ID, 'page', false);
+	$blog_page_id = $blog_page ? $blog_page->ID : '';
 	
 	// get current object id
 	$object_id = get_queried_object_id();

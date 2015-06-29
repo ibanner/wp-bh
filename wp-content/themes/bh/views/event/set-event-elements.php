@@ -11,8 +11,8 @@
 	
 	$locale = $wpdb->get_var("SELECT default_locale FROM {$wpdb->prefix}icl_languages WHERE code='{$icl_language_code}'");
 	
-	$series_of_events_prepend	= get_field('acf-options_series_of_events_prepend_' . $icl_language_code, 'option');
-	$read_more_btn				= get_field('acf-options_event_btn_read_more_' . $icl_language_code, 'option');
+	$series_of_events_prepend	= get_field('acf-options_series_of_events_prepend',	'option');
+	$read_more_btn				= get_field('acf-options_event_btn_read_more',		'option');
 	
 	$today			= date_i18n('Ymd');
 	$filtered_date	= (isset($_POST['event_date']) && $_POST['event_date']) ? date_create_from_format('d/m/Y', $_POST['event_date'])->format('Ymd') : '';
