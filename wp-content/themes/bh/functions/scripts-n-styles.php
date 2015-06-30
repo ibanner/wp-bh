@@ -35,11 +35,11 @@ function BH_wp_scripts_n_styles() {
 	wp_register_style( 'jquery-ui',					CSS_DIR . '/libs/jquery-ui.css',					array('bootstrap'),											VERSION );
 	wp_enqueue_style ( 'font-awesome',		 		CSS_DIR . '/libs/font-awesome.min.css',				array(),													VERSION );
 	
-	wp_enqueue_style ( 'general',					CSS_DIR . '/general.2.0.css',						array('bootstrap'),											VERSION );
+	wp_enqueue_style ( 'general',					CSS_DIR . '/general.css',							array('bootstrap'),											VERSION );
 	wp_register_style( 'main',						CSS_DIR . '/main.css',								array('bootstrap'),											VERSION );
-	wp_register_style( 'event',						CSS_DIR . '/event.1.2.css',							array('bootstrap'),											VERSION );
+	wp_register_style( 'event',						CSS_DIR . '/event.css',								array('bootstrap'),											VERSION );
 	wp_register_style( 'blog',						CSS_DIR . '/blog.css',								array('bootstrap'),											VERSION );
-	wp_register_style( 'rtl',						CSS_DIR . '/rtl.2.0.css',							array('bootstrap-rtl'),										VERSION );
+	wp_register_style( 'rtl',						CSS_DIR . '/rtl.css',								array('bootstrap-rtl'),										VERSION );
 	
 	if ( is_page() ) :
 		$page_template = basename( get_page_template() );
@@ -96,12 +96,12 @@ function BH_wp_scripts_n_styles() {
 	wp_register_script( 'ticketnet',				JS_DIR . '/libs/ticketnet.min.js',									array('jquery'),											VERSION,	true );
 	wp_register_script( 'elevateZoom',				JS_DIR . '/libs/jquery.elevateZoom-3.0.8.min.js',					array('jquery'),											VERSION,	true );
 	
-	wp_register_script( 'general',					JS_DIR . '/general.min.js',											array('jquery', 'bootstrap'),								VERSION,	true );
-	wp_register_script( 'main',						JS_DIR . '/main.min.js',											array('cycle2-carousel', 'cycle2-swipe', 'cycle2-ios6fix'),	VERSION,	true );
+	wp_register_script( 'general',					JS_DIR . '/min/general.min.js',										array('jquery', 'bootstrap'),								VERSION,	true );
+	wp_register_script( 'main',						JS_DIR . '/min/main.min.js',										array('cycle2-carousel', 'cycle2-swipe', 'cycle2-ios6fix'),	VERSION,	true );
 	wp_register_script( 'bh-analytics',				JS_DIR . '/bh-analytics.js',										array(),													VERSION,	false );
-	wp_register_script( 'banner',					JS_DIR . '/bh-slideshow.min.js',									array('jquery', 'bootstrap'),								VERSION,	true );
-	wp_register_script( 'event',					JS_DIR . '/event.min.js',											array('jquery', 'bootstrap'),								VERSION,	true );
-	wp_register_script( 'blog',						JS_DIR . '/blog.min.js',											array('jquery', 'bootstrap'),								VERSION,	true );
+	wp_register_script( 'banner',					JS_DIR . '/min/bh-slideshow.min.js',								array('jquery', 'bootstrap'),								VERSION,	true );
+	wp_register_script( 'event',					JS_DIR . '/min/event.min.js',										array('jquery', 'bootstrap'),								VERSION,	true );
+	wp_register_script( 'blog',						JS_DIR . '/min/blog.min.js',										array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'forms',					JS_DIR . '/forms/forms.js',											array('jquery'),						                    VERSION,	true );       
 	wp_register_script( 'microfilm',				JS_DIR . '/forms/microfilm.js',										array('jquery'),						                    VERSION,	true );       
 	wp_register_script( 'item-handler',				JS_DIR . '/forms/item-handler.js',									array('jquery'),						                    VERSION,	true );        

@@ -1,0 +1,314 @@
+@import "functions";
+@import "modules/sprites";
+
+@media (max-width: 1199px) {
+
+	/**********/
+	/* header */
+	/**********/
+	
+	header .navbar {
+		.navbar-header {
+			float: none;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	
+	/****************/
+	/* page content */
+	/****************/
+	
+	.page-content {
+		
+		/***********/
+		/* content */
+		/***********/
+		
+		.content-wrapper,
+		.content-wrapper-wide {
+			
+			/************/
+			/* excerpts */
+			/************/
+			
+			ul.excerpts {
+				li {
+					.content {
+						&.has-image {
+							margin-right: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/******************/
+	/* featured links */
+	/******************/
+	
+	.featured-links {
+		.link-content-wrapper {
+			.link-content {
+				margin-right: auto;
+			}
+		}
+	}
+	
+	/***************/
+	/* shop - cart */
+	/***************/
+	
+	table.cart {
+		td.actions {
+			.coupon {
+				float: none !important;
+				
+				.input-text {
+					width: 48% !important;
+				}
+				
+				input.button[name="apply_coupon"] {
+					float: left;
+				}
+			}
+			
+			input.button[name="update_cart"] {
+				margin-left: 0;
+			}
+		}
+	}
+}
+
+@media (max-width: 526px) {}
+
+@media (max-width: 480px) {
+	
+	/****************/
+	/* single event */
+	/****************/
+	
+	.series {
+		.panel-body {
+			.row {
+				.event-date {
+					left: auto;
+					right: 26.66666667%;
+					
+					&.aligned {
+						right: auto;
+					}
+				}
+				
+				.event-price {
+					left: 33.33333333%;
+					right: auto;
+				}
+			}
+		}
+	}
+	
+	/*******/
+	/* 404 */
+	/*******/
+	
+	.container-404 {
+		.quote {
+			.bottom-msg {
+				.bottom-msg-content {
+					margin-left: auto;
+					margin-right: 160px;
+					padding: 10px 0 0 10px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 446px) {
+	
+	/***************/
+	/* events list */
+	/***************/
+	
+	.events-list {
+		.row {
+			.event-type {
+				left: auto !important;
+				right: 40px !important;
+			}
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+
+	/****************/
+	/* page content */
+	/****************/
+	
+	.page-content {
+	
+		/****************/
+		/* widgets area */
+		/****************/
+		
+		.widgets-area-wrapper {
+			left: auto;
+			right: 632.5px;
+			
+			&.shop-page {
+				right: 877.5px;
+			}
+		}
+	}
+
+	/******************/
+	/* featured links */
+	/******************/
+	
+	.featured-links {
+		left: 350px;
+		right: auto;
+	}
+	
+	/*******************/
+	/* contact details */
+	/*******************/
+	
+	.contact-details {
+		left: auto;
+		right: 820px;
+	}
+}
+	
+@media (min-width: 992px) {}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+	/**********/
+	/* header */
+	/**********/
+	
+	header .navbar {
+		.navbar-header {
+			.navbar-brand {
+				@include logo-he-medium;
+			}
+		}
+	}
+	
+	/******************/
+	/* featured links */
+	/******************/
+	
+	.featured-links {
+		left: 350px;
+		right: auto;
+		
+		.link-content-wrapper {
+			.link-content {
+				margin-right: auto;
+			}
+		}
+	}	
+
+	/*******************/
+	/* contact details */
+	/*******************/
+	
+	.contact-details {
+		left: auto;
+		right: 620px;
+	}
+
+	/***************/
+	/* events list */
+	/***************/
+	
+	.events-list {
+		.row {
+			.event-type {
+				left: 705px;
+				right: auto;
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	
+	/*******************/
+	/* contact details */
+	/*******************/
+	
+	.contact-details {
+		.contact-details-wrapper {
+			padding: 15px 15px 0;
+			
+			.contact-details-layout {
+				padding: 0 0 10px 0 !important;
+
+				/*******/
+				/* map */
+				/*******/
+				
+				&.contact-details-layout-map {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+
+	/***************/
+	/* events list */
+	/***************/
+	
+	.events-list {
+		.row {
+			.event-type {
+				left: auto;
+				right: 248px;
+			}
+		}
+	}
+}
+
+@media (min-width: 481px) and (max-width: 991px) {}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	
+	/*******/
+	/* 404 */
+	/*******/
+	
+	.container-404 {
+		.quote {
+			.bottom-msg {
+				.bottom-msg-content {
+					h2 {
+						margin: 0 185px 24px 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 351px) and (max-width: 767px) {
+	
+	/***************/
+	/* events list */
+	/***************/
+	
+	.events-list {
+		.row {
+			.event-type {
+				left: 15px;
+				right: auto;
+			}
+		}
+	}
+}
