@@ -3,9 +3,11 @@ wp-snapshots/
 wp-config.php
 wp-content/themes/bh/.sass-cache/
 wp-content/themes/bh/scss/.sass-cache/
+wp-content/themes/bh/css/*.css
+wp-content/themes/bh/css/*.map
+wp-content/themes/bh/css/admin/
+wp-content/themes/bh/js/min/
 wp-content/themes/bh/node_modules/
 wp-content/themes/bh/test/
 wp-content/themes/bh/js/test/
-wp-content/themes/bh/Gruntfile.js
-wp-content/themes/bh/package.json
 wp-content/uploads/
