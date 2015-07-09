@@ -443,7 +443,7 @@ return array(
 	'browsercache.other.etag' => true,
 	'browsercache.other.w3tc' => true,
 	'browsercache.other.replace' => false,
-	'browsercache.timestamp' => '1435576254',
+	'browsercache.timestamp' => '1436197149',
 	'browsercache.replace.exceptions' => array(
 		0 => '',
 	),
