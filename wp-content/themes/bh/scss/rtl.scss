@@ -134,6 +134,12 @@ header .navbar {
 						}
 					}
 					
+					&.featured > a {
+						span {
+							border-left: 1px solid transparent;
+						}
+					}
+					
 					.sub-menu {
 						padding: 0 20px 0 28px;
 						left: auto;

@@ -392,6 +392,19 @@ header .navbar {
 							border-radius:			4px 4px 0 0;
 						}
 					}
+
+					&.featured > a {
+						padding: 6px 0 4px;
+						color: $font-invert-color;
+						@include image("general/shop-menu-item-bg.jpg");
+						-webkit-border-radius:	4px 4px 0 0;
+						-moz-border-radius:		4px 4px 0 0;
+						border-radius:			4px 4px 0 0;
+
+						span {
+							border-right: 1px solid transparent;
+						}
+					}
 					
 					.sub-menu {
 						position: absolute;
@@ -473,7 +486,7 @@ header .navbar {
 					&.current-menu-ancestor {
 						& > a {
 							color: $font-invert-color;
-							background-color: $red;
+							background: $red;
 							-webkit-border-radius:	4px 4px 0 0;
 							-moz-border-radius:		4px 4px 0 0;
 							border-radius:			4px 4px 0 0;
