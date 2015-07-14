@@ -3,7 +3,7 @@
  * Pelecard Payment Gateway
  * Plugin Name: woocommerce pelecard payment gateway
  * Description: Allows payment with pelecard.
- * Version: 1.0.0
+ * Version: 1.2.1
  * Author: 10Bit
  * Author URI: http://www.10bit.co.il
  */
