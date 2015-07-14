@@ -995,6 +995,24 @@
 					),
 				),
 			),
+			array (
+				'key' => 'field_55a4d8288fcb6',
+				'label' => 'Content Page Password Protected Content',
+				'name' => 'acf-content_page_password_protected_content',
+				'type' => 'wysiwyg',
+				'instructions' => 'Content to be displayed before password form',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array (
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'tabs' => 'all',
+				'toolbar' => 'full',
+				'media_upload' => 1,
+			),
 		),
 		'location' => array (
 			array (
