@@ -1053,6 +1053,30 @@ header .navbar {
 				}
 			}
 		}
+
+		/***************************/
+		/* password protected form */
+		/***************************/
+
+		.password-protected-form {
+			input {
+				width: 200px;
+				height: 25px;
+				border: 1px solid #666666;
+				border-radius: 3px;
+			}
+
+			input[type="submit"] {
+				margin: 0 10px;
+				width: 130px;
+				height: 27px;
+				font-weight: bold;
+				color: white;
+				background-color: #009dda;
+				border-radius: 3px;
+				border: none;
+			}
+		}
 	}
 	
 	/****************/
