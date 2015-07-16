@@ -13,7 +13,7 @@
  * Exclude Hebrew translated products
  * 
  * @param	boolean		$excluded		true/false
- * @param	id			$product_id		product ID
+ * @param	number		$product_id		product ID
  * @param	string		$feed_format	feed format
  * @return	boolean						true/false
  */
@@ -34,7 +34,7 @@ add_filter( 'woocommerce_gpf_exclude_product', 'BH_gpf_exclude_he_product', 10, 
  * Set Product Short Description as the feed item description
  * 
  * @param	string		$description	product description (originally taken from product content)
- * @param	id			$product_id		product ID
+ * @param	number		$product_id		product ID
  * @return	string						product excerpt
  */
 function BH_gpf_set_description($description, $product_id) {
@@ -43,7 +43,7 @@ function BH_gpf_set_description($description, $product_id) {
 	$save_post = $post;
 	$post = get_post( $product_id );
 	setup_postdata( $post );
-	$excerpt = get_the_excerpt();
+	$excerpt = strip_tags( get_the_excerpt(), '<p>' );
 	$post = $save_post;
 	
 	return $excerpt;
@@ -74,15 +74,14 @@ add_filter( 'woocommerce_gpf_store_info', 'BH_gpf_set_store_info', 10, 1 );
  * @return	array						modified feed item elements
  */
 function BH_gpf_set_brand($elements, $product_id) {
-	$artists		= wp_get_post_terms($product_id, 'artist');
-	$artists_items	= array();
+	$artists = wp_get_post_terms($product_id, 'artist');
 
-	if ( ! empty($artists) )
-		foreach ($artists as $artist)
-			$artists_items[] = $artist->name;
+	reset($artists);
+	$artist = current($artists);
 
-	if ( ! empty($artists_items) )
-		$elements['brand'] = $artists_items;
+	if ($artist) {
+		$elements['brand'] = array($artist->name);
+	}
 
 	return $elements;
 }
@@ -106,8 +105,71 @@ function BH_gpf_set_mpn_n_gtin($elements, $product_id) {
 	if ( empty($sku) )
 		return $elements;
 
-	$elements['mpn'] = $elements['gtin'] = array($sku);
+	$elements['mpn']	= array($sku);
+	$elements['gtin']	= array( gtin_12($sku) );
 
 	return $elements;
 }
 add_filter( 'woocommerce_gpf_elements', 'BH_gpf_set_mpn_n_gtin', 11, 2 );
+
+/**
+ * BH_gpf_set_shipping_dimensions
+ * 
+ * Set product shipping dimensions for empty values
+ * 
+ * @param	array		$elements		feed item elements
+ * @return	array						modified feed item elements
+ */
+function BH_gpf_set_shipping_dimensions($elements, $product_id) {
+	$elements['shipping_length']	= $elements['shipping_length']	? $elements['shipping_length']	: array('1 in');
+	$elements['shipping_width']		= $elements['shipping_width']	? $elements['shipping_width']	: array('1 in');
+	$elements['shipping_height']	= $elements['shipping_height']	? $elements['shipping_height']	: array('1 in');
+
+	return $elements;
+}
+add_filter( 'woocommerce_gpf_elements', 'BH_gpf_set_shipping_dimensions', 11, 2 );
+
+/**
+ * BH_gpf_set_shipping_weight
+ * 
+ * Set product shipping weight for empty value
+ * 
+ * @param	string		$product_weight		product weight
+ * @param	number		$product_id			product ID
+ * @return	string							product weight or '0 g' if empty
+ */
+function BH_gpf_set_shipping_weight($product_weight, $product_id) {
+	if ( $product_weight == '' )
+		$product_weight = '1';
+
+	return $product_weight;
+}
+add_filter( 'woocommerce_gpf_shipping_weight', 'BH_gpf_set_shipping_weight', 10, 2 );
+
+/**
+ * gtin_12
+ * 
+ * Generate GTIN-12 string according to GS1 (http://www.gs1us.org/resources/tools/check-digit-calculator)
+ * 
+ * @param	string		$str				string of digits
+ * @return	string							GTIN-12 format string or empty string in case of bad input
+ */
+function gtin_12($str) {
+	if ( strlen($str) > 10 || ! ctype_digit($str) )
+		return '';
+
+	$output = '0' . $str;	// set '0' as leading digit in order to define a price digit
+	$output = str_pad($output, 11, '0', STR_PAD_RIGHT);		// define zeros from the right in order to generate 11 digits length string
+
+	// calculate a check digit
+	$digits = str_split($output);
+	$sum = 0;
+
+	foreach ($digits as $key => $d) {
+		$sum += $d * ( $key % 2 ? 1 : 3 );
+	}
+
+	$roundSum = ceil($sum / 10) * 10;
+
+	return $output . strval($roundSum - $sum);
+}
