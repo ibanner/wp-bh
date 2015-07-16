@@ -60,6 +60,7 @@ require_once('functions/acf-field-groups.php');
 require_once('functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php');
 require_once('functions/woocommerce/woocommerce-functions.php');
 require_once('functions/woocommerce/woocommerce-hooks.php');
+require_once('functions/woocommerce/google-product-feed.php');
 
 // wpml
 require_once('functions/wpml.php');
