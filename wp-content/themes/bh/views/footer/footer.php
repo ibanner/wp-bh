@@ -24,9 +24,11 @@
 			
 		</div>
 		
-		<div class="monitoring" style="display: none;">
+		<?php /*
+		<div class="monitoring">
 			<?php echo get_num_queries() . ' queries in ' . timer_stop(0) . ' seconds. '; ?>
 		</div>
+		*/ ?>
 
 	</div>
 
