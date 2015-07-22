@@ -18,7 +18,7 @@ echo '<div class="title">';
 	echo '<h1 itemprop="name" class="product-title">' . get_the_title() . '</h1>';
 	
 	if ($artists) :
-		echo '<div itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization" class="artist-title">';
+		echo '<div itemprop="brand" itemscope itemtype="http://schema.org/Organization" class="artist-title">';
 			echo ( ICL_LANGUAGE_CODE == 'en' ) ? '<span>' . __('By ', 'BH') . '</span>' : '';
 			echo '<span itemprop="name">' . $artists . '</span>';
 		echo '</div>';

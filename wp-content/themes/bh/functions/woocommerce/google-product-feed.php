@@ -66,6 +66,24 @@ function BH_gpf_set_store_info($store_info) {
 add_filter( 'woocommerce_gpf_store_info', 'BH_gpf_set_store_info', 10, 1 );
 
 /**
+ * BH_gpf_set_availability
+ * 
+ * Set product availability
+ * 
+ * @param	array		$elements		feed item elements
+ * @return	array						modified feed item elements
+ */
+function BH_gpf_set_availability($elements, $product_id) {
+	$product		= get_product($product_id);
+	$availability	= $product->is_in_stock() ? 'in stock' : 'out of stock';
+
+	$elements['availability'] = array($availability);
+
+	return $elements;
+}
+add_filter( 'woocommerce_gpf_elements', 'BH_gpf_set_availability', 11, 2 );
+
+/**
  * BH_gpf_set_brand
  * 
  * Set product artists as the feed item brand

@@ -44,7 +44,8 @@
 		</div>
 		
 		<?php echo ($artists) ? '<div class="artist-title">' . ( (ICL_LANGUAGE_CODE == 'en') ? '<span>' . __('By ', 'BH') . '</span>' : '' ) . $artists . '</div>' : ''; ?>
-		<?php woocommerce_template_single_price(); ?>
+		
+		<p class="price"><?php echo $product->get_price_html(); ?></p>
 		
 	</div>
 

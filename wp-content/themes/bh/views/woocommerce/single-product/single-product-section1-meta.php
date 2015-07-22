@@ -40,6 +40,15 @@ echo '<div class="meta">';
 			endif;
 			
 		echo '</table>';
+
+		echo $product->length	? '<meta itemprop="depth"	value="' . $product->length . '"	unitCode="CMT" />'	: '';
+		echo $product->width	? '<meta itemprop="width"	value="' . $product->width . '"		unitCode="CMT" />'	: '';
+		echo $product->height	? '<meta itemprop="height"	value="' . $product->height . '"	unitCode="CMT" />'	: '';
+		echo $product->weight	? '<meta itemprop="weight"	value="' . $product->weight . '"	unitCode="GRM" />'	: '';
 	endif;
-	
+
+	echo '<meta itemprop="sku"		content="' . $product->sku . '" />';
+	echo '<meta itemprop="mpn"		content="' . $product->sku . '" />';
+	echo '<meta itemprop="gtin12"	content="' . gtin_12($product->sku) . '" />';
+
 echo '</div>';

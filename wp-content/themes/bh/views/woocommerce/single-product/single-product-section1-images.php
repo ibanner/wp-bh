@@ -41,7 +41,7 @@ if ($attachment_ids) :
 					'src'		=> $src,
 					'width'		=> $width,
 					'height'	=> $height,
-					'img'		=> '<img itemprop="contentUrl" src="' . $src . '" alt="' . $post->post_title . '-' . ($i+1) . '" width="' . $width . '" height="' . $height . '" />'
+					'img'		=> '<img ' . ($size == 'shop_single' ? 'itemprop="contentUrl"' : '') . ' src="' . $src . '" alt="' . $post->post_title . '-' . ($i+1) . '" width="' . $width . '" height="' . $height . '" />'
 				);
 			endif;
 		endforeach;

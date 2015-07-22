@@ -119,8 +119,10 @@ function BH_woocommerce_wrapper_end() {
  * WooCommerce breadcrumb manipulation
  */
 function BH_woocommerce_breadcrumb_defaults($defaults) {
-	$defaults['home']		= __('Home', 'BH');
-	$defaults['delimiter']	= '<span class="breadcrumb-delimiter bh-sprites"></span>';
+	$defaults['home']			= __('Home', 'BH');
+	$defaults['delimiter']		= '<span class="breadcrumb-delimiter bh-sprites"></span>';
+	$defaults['wrap_before']	= '<nav class="woocommerce-breadcrumb">';
+	$defaults['wrap_after']		= '</nav>';
 	
 	return $defaults;
 }
