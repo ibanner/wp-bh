@@ -66,6 +66,21 @@ function BH_gpf_set_store_info($store_info) {
 add_filter( 'woocommerce_gpf_store_info', 'BH_gpf_set_store_info', 10, 1 );
 
 /**
+ * BH_gpf_set_id
+ * 
+ * Set product ID
+ * 
+ * @param	array		$elements		feed item elements
+ * @return	array						modified feed item elements
+ */
+function BH_gpf_set_id($elements, $product_id) {
+	$elements['id'] = array($product_id);
+
+	return $elements;
+}
+add_filter( 'woocommerce_gpf_elements', 'BH_gpf_set_id', 11, 2 );
+
+/**
  * BH_gpf_set_availability
  * 
  * Set product availability
