@@ -238,7 +238,7 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 		echo "    <item>\n";
 		echo '      <title><![CDATA[' . $feed_item->title . "]]></title>\n";
 		echo '      <link>' . $feed_item->purchase_link . "</link>\n";
-		echo '      <guid>woocommerce_gpf_' . $feed_item->ID . "</guid>\n";
+//		echo '      <guid>woocommerce_gpf_' . $feed_item->ID . "</guid>\n";
 
 		// This is basically a hack since we're avoiding using the PHP DOM functions
 		// so we don't have to hold the whole doc in memory
