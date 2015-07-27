@@ -69,7 +69,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 							if ( ! $_product->is_visible() )
 								echo $thumbnail;
 							else { ?>
-								<a href="#" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', 'Cart', 'Product Image', '<?php echo $p_page; ?>'); return !ga.loaded;">
+								<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', 'Cart', 'Product Image', '<?php echo $p_page; ?>'); return ga.loaded;">
 									<?php echo $thumbnail; ?>
 								</a>
 							<?php }
@@ -81,7 +81,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 							if ( ! $_product->is_visible() )
 								echo apply_filters( 'woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key ) . '&nbsp;';
 							else { ?>
-								<a href="#" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', 'Cart', 'Product Title', '<?php echo $p_page; ?>'); return !ga.loaded;">
+								<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', 'Cart', 'Product Title', '<?php echo $p_page; ?>'); return ga.loaded;">
 									<?php echo $_product->get_title(); ?>
 								</a>
 							<?php }

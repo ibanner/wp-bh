@@ -18,7 +18,7 @@
 ?>
 
 <li>
-	<a data-postid="<?php echo $product->id; ?>" href="#" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Image', '<?php echo $p_page; ?>'); return !ga.loaded;">
+	<a data-postid="<?php echo $product->id; ?>" href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Image', '<?php echo $p_page; ?>'); return ga.loaded;">
 		<span class="glyphicon glyphicon-remove"></span>
 		<?php echo $product->get_image( 'shop_thumbnail', array( 'alt' => esc_attr( $product->get_title() ) ) ); ?>
 	</a>

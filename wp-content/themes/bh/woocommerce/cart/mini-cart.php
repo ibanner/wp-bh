@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					endif; ?>
 					
 					<li class="product_list_widget_item">
-						<a href="#" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', 'Mini Cart', 'Mini Cart Row', '<?php echo $p_page; ?>'); return !ga.loaded;">
+						<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', 'Mini Cart', 'Mini Cart Row', '<?php echo $p_page; ?>'); return ga.loaded;">
 						
 							<div class="col item-image">
 								<div class="item-image-wrapper">

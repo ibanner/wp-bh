@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					?>
 					<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 						<td class="product-name">
-							<a href="#" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', 'Checkout', 'Product Title', '<?php echo $p_page; ?>'); return !ga.loaded;"><?php echo $_product->get_title(); ?></a>&nbsp;
+							<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', 'Checkout', 'Product Title', '<?php echo $p_page; ?>'); return ga.loaded;"><?php echo $_product->get_title(); ?></a>&nbsp;
 							<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times; %s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ); ?>
 							<?php echo WC()->cart->get_item_data( $cart_item ); ?>
 						</td>
