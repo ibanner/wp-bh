@@ -169,4 +169,18 @@
 	}
 	add_action('wp_footer', 'BH_mejskin_enqueue_styles', 11);
 	
-?>
+	/**
+	 * BH_setpost_limits
+	 * 
+	 * Set post limits in case of feed display
+	 * 
+	 * @param	string	$s			maximum posts to display
+	 * @return	string				modified number of posts to display
+	 */
+	function BH_setpost_limits($s) {
+		if(is_feed() && !empty($_GET['nolimit']) )
+			return '';
+		else
+			return $s;
+	}
+	add_filter('post_limits','BH_setpost_limits');

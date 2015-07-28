@@ -30,7 +30,7 @@
 <div class="product-item">
 
 	<div class="product-item-image">
-		<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Image', '<?php echo $p_page; ?>'); return ga.loaded;">
+		<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Image', '<?php echo $p_page; ?>'); return !ga.loaded;">
             <?php echo $product->get_image( 'shop_catalog', array( 'alt' => esc_attr( $product->get_title() ) ) ); ?>
 		</a>
 	</div>
@@ -38,7 +38,7 @@
 	<div class="product-item-meta">
 	
 		<div class="title">
-			<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Title', '<?php echo $p_page; ?>'); return ga.loaded;">
+			<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Title', '<?php echo $p_page; ?>'); return !ga.loaded;">
                 <?php echo get_the_title($product->id); ?>
 			</a>
 		</div>
