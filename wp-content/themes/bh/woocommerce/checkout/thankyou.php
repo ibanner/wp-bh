@@ -98,7 +98,9 @@ if ( $order ) : ?>
 			// send order and cart data to Google Analytics
 			if ($transaction && $cart) { ?>
 				<script>
-					BH_EC_onTransaction(<?php echo json_encode($cart); ?>, <?php echo json_encode($transaction); ?>, '<?php echo get_woocommerce_currency(); ?>');
+					$(function() {
+						BH_EC_onTransaction(<?php echo json_encode($cart); ?>, <?php echo json_encode($transaction); ?>, '<?php echo get_woocommerce_currency(); ?>', true);
+					});
 				</script>
 			<?php }
 		?>

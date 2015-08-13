@@ -4,12 +4,34 @@
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-8676522-1', 'auto');
-ga('send', 'pageview');
 
 /*
- Enhanced Ecommerce
+ Google Analytics initiate
  */
-ga('require', 'ec');
+ec = ($('body').hasClass('woocommerce-page') && !$('body').hasClass('woocommerce-cart'));	// indicates whether we are in WooCommerce page or not (excluding cart page)
+currency_set = false;																		// indicates whether currency has been set
+
+if (ec) {
+	// woocommerce page - initiate ec plugin
+	ga('require', 'ec');
+} else {
+	// none woocommerce page - send pageview immediately
+	ga('send', 'pageview');
+}
+
+/*
+ BH_EC_set_currency
+
+ Sets Enhanced Ecommerce currency in case currency has not been set
+
+ @param		currency		String		price currency (USD/ILS)
+ */
+function BH_EC_set_currency(currency) {
+	if (!currency_set) {
+		ga('set', '&cu', currency);
+		currency_set = true;
+	}
+}
 
 /*
  BH_EC_onListView
@@ -25,6 +47,7 @@ ga('require', 'ec');
  
  @param		products		String		json represents an array of product data array
  @param		currency		String		price currency (USD/ILS)
+ @param		sendPageView	Boolean		whether to send pageview or not
  
  products array contains the following data for each product array: 
  @param		sku				String		product SKU
@@ -35,14 +58,16 @@ ga('require', 'ec');
  
  @uses		BH_EC_addImpression()
  */
-function BH_EC_onListView(products, currency) {
+function BH_EC_onListView(products, currency, sendPageView) {
 	products = Object.keys(products).map(function(k) { return products[k] });
 	
-	ga('set', '&cu', currency);
+	BH_EC_set_currency(currency);
 	
 	products.forEach(BH_EC_addImpression);
 	
-	ga('send', 'pageview');
+	if (sendPageView) {
+		ga('send', 'pageview');
+	}
 }
 
 /*
@@ -71,7 +96,7 @@ function BH_EC_onListView(products, currency) {
  @param		product_page	String		product page (reference URL)
  */
 function BH_EC_onProductClick(sku, name, category, price, currency, list, link_type, product_page) {
-	ga('set', '&cu', currency);
+	BH_EC_set_currency(currency);
 	
 	ga('ec:addProduct', {
 		'id'		: sku,
@@ -102,9 +127,10 @@ function BH_EC_onProductClick(sku, name, category, price, currency, list, link_t
  @param		category		String		product category which this product belongs to
  @param		price			String		product price
  @param		currency		String		price currency (USD/ILS)
+ @param		sendPageView	Boolean		whether to send pageview or not
  */
-function BH_EC_onProductDetail(sku, name, category, price, currency) {
-	ga('set', '&cu', currency);
+function BH_EC_onProductDetail(sku, name, category, price, currency, sendPageView) {
+	BH_EC_set_currency(currency);
 	
 	ga('ec:addProduct', {
 		'id'		: sku,
@@ -114,7 +140,9 @@ function BH_EC_onProductDetail(sku, name, category, price, currency) {
 	});
 	ga('ec:setAction', 'detail');
 	
-	ga('send', 'pageview');
+	if (sendPageView) {
+		ga('send', 'pageview');
+	}
 }
 
 /*
@@ -135,7 +163,7 @@ function BH_EC_onProductDetail(sku, name, category, price, currency) {
  @param		action			String		action type (add/remove)
  */
 function BH_EC_onUpdateCart(sku, name, category, price, currency, quantity, action) {
-	ga('set', '&cu', currency);
+	BH_EC_set_currency(currency);
 	
 	ga('ec:addProduct', {
 		'id'		: sku,
@@ -159,6 +187,7 @@ function BH_EC_onUpdateCart(sku, name, category, price, currency, quantity, acti
  
  @param		cart			String		json representing the user's shopping cart
  @param		currency		String		price currency (USD/ILS)
+ @param		sendPageView	Boolean		whether to send pageview or not
  
  cart array contains the following data for each product array:
  @param		sku				String		product SKU
@@ -169,16 +198,18 @@ function BH_EC_onUpdateCart(sku, name, category, price, currency, quantity, acti
  
  @uses		BH_EC_addProduct()
  */
-function BH_EC_onCheckout(cart, currency) {
+function BH_EC_onCheckout(cart, currency, sendPageView) {
 	cart = Object.keys(cart).map(function(k) { return cart[k] });
 	
-	ga('set', '&cu', currency);
+	BH_EC_set_currency(currency);
 	
 	cart.forEach(BH_EC_addProduct);
 	
 	ga('ec:setAction','checkout', {'step': 1});
 	
-	ga('send', 'pageview');
+	if (sendPageView) {
+		ga('send', 'pageview');
+	}
 }
 
 /*
@@ -193,6 +224,7 @@ function BH_EC_onCheckout(cart, currency) {
  @param		cart			String		json representing the user's shopping cart
  @param		transaction		String		json representing the transaction level information (order ID, revenue, tax, shipping)
  @param		currency		String		price currency (USD/ILS)
+ @param		sendPageView	Boolean		whether to send pageview or not
  
  cart array contains the following data for each product array:
  @param		sku				String		product SKU
@@ -209,11 +241,11 @@ function BH_EC_onCheckout(cart, currency) {
  
  @uses		BH_EC_addProduct()
  */
-function BH_EC_onTransaction(cart, transaction, currency) {
+function BH_EC_onTransaction(cart, transaction, currency, sendPageView) {
 	cart = Object.keys(cart).map(function(k) { return cart[k] });
 	transaction = Object.keys(transaction).map(function(k) { return transaction[k] });
 	
-	ga('set', '&cu', currency);
+	BH_EC_set_currency(currency);
 	
 	cart.forEach(BH_EC_addProduct);
 	
@@ -224,7 +256,9 @@ function BH_EC_onTransaction(cart, transaction, currency) {
 		'shipping'	: transaction[0].shipping
 	});
 	
-	ga('send', 'pageview');
+	if (sendPageView) {
+		ga('send', 'pageview');
+	}
 }
 
 /*

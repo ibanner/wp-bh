@@ -27,5 +27,7 @@ endif;
 ?>
 
 <script>
-	BH_EC_onProductDetail('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>');
+	$(function() {
+		BH_EC_onProductDetail('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', true);
+	});
 </script>

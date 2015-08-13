@@ -56,7 +56,9 @@ if ( count($slider_products) > 0 ) :
 	echo '</div>'; ?>
 	
 	<script>
-		BH_EC_onListView(<?php echo json_encode($ec_products); ?>, '<?php echo get_woocommerce_currency(); ?>');
+		$(function() {
+			BH_EC_onListView(<?php echo json_encode($ec_products); ?>, '<?php echo get_woocommerce_currency(); ?>', false);
+		});
 	</script>
 	
 <?php endif;

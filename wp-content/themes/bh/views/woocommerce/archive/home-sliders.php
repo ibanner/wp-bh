@@ -53,7 +53,9 @@ $slider_index = 1;
 	endforeach; ?>
 	
 	<script>
-		BH_EC_onListView(<?php echo json_encode($ec_products); ?>, '<?php echo get_woocommerce_currency(); ?>');
+		$(function() {
+			BH_EC_onListView(<?php echo json_encode($ec_products); ?>, '<?php echo get_woocommerce_currency(); ?>', true);
+		});
 	</script>
 	
 </div>

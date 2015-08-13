@@ -98,7 +98,7 @@ function BH_wp_scripts_n_styles() {
 	
 	wp_register_script( 'general',					JS_DIR . '/min/general.min.js',										array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'main',						JS_DIR . '/min/main.min.js',										array('cycle2-carousel', 'cycle2-swipe', 'cycle2-ios6fix'),	VERSION,	true );
-	wp_register_script( 'bh-analytics',				JS_DIR . '/bh-analytics.js',										array(),													VERSION,	false );
+	wp_register_script( 'bh-analytics',				JS_DIR . '/bh-analytics.js',										array('jquery'),											VERSION,	true );
 	wp_register_script( 'banner',					JS_DIR . '/min/bh-slideshow.min.js',								array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'event',					JS_DIR . '/min/event.min.js',										array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'blog',						JS_DIR . '/min/blog.min.js',										array('jquery', 'bootstrap'),								VERSION,	true );

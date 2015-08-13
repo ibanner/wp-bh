@@ -51,7 +51,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 					</div>
 					
 					<script>
-						BH_EC_onListView(<?php echo json_encode($ec_products); ?>, '<?php echo get_woocommerce_currency(); ?>');
+						$(function() {
+							BH_EC_onListView(<?php echo json_encode($ec_products); ?>, '<?php echo get_woocommerce_currency(); ?>', true);
+						});
 					</script>
 					
 				<?php else : ?>
