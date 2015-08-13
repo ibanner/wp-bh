@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/1.0-alpha-1000\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
 "Project-Id-Version: 4.2.x\n"
 
 #: wp-signup.php:716
@@ -442,7 +442,7 @@ msgstr "להתקנת וורדפרס בעברית, יש ליצור קובץ הג�
 msgid "Links for %s"
 msgstr "קישורים של %s"
 
-#: wp-includes/wp-db.php:2990
+#: wp-includes/wp-db.php:2979
 msgid "<strong>ERROR</strong>: WordPress %1$s requires MySQL %2$s or higher"
 msgstr "<strong>שגיאה</strong>: וורדפרס %1$s זקוקה ל-MySQL %2$s או גרסה חדשה יותר"
 
@@ -635,16 +635,16 @@ msgstr "(המערכת לא הצליחה להתחבר בצורה מאובטחת �
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"https://wordpress.org/support/\">support forums</a>."
 msgstr "קרתה תקלה לא צפויה. משהו כנראה נפגם ב WordPress.org או בהגדרות שרת האחסון שלך. אם הבעיות ממשיכות - נסה לפנות ל<a href=\"https://wordpress.org/support/\">פורום התמיכה</a> של וורדפרס."
 
-#: wp-includes/theme.php:1969
+#: wp-includes/theme.php:1948
 msgid "Customizer"
 msgstr "התאמה אישית"
 
 #. translators: 1: Theme support 2: hook name
-#: wp-includes/theme.php:1635
+#: wp-includes/theme.php:1614
 msgid "Theme support for %1$s should be registered before the %2$s hook."
 msgstr "יש לרשום את הרכיב התבנית %1$s לפני ההוק %2$s."
 
-#: wp-includes/theme.php:1504
+#: wp-includes/theme.php:1483
 msgid "You need to pass an array of types."
 msgstr "יש להעביר מערך של סוגים."
 
@@ -1567,33 +1567,33 @@ msgstr "ב-<code>%1$s</code>, יש להשתמש בפעולה <code>%2$s</code>, 
 msgid "Conditional query tags do not work before the query is run. Before then, they always return false."
 msgstr "תגי שאילתא מותנים אינם פועלים בטרם הרצת השאילתא.  לפני הרצת השאילתה הם תמיד יחזירו ערך \"לא-אמת\"(FALSE)"
 
-#: wp-includes/post.php:3891 wp-includes/script-loader.php:449
+#: wp-includes/post.php:3892 wp-includes/script-loader.php:449
 #: wp-includes/script-loader.php:510
 msgctxt "tag delimiter"
 msgid ","
 msgstr ","
 
-#: wp-includes/post.php:3459
+#: wp-includes/post.php:3460
 msgid "The page template is invalid."
 msgstr "תבנית העמוד לא תקינה."
 
-#: wp-includes/post.php:3395
+#: wp-includes/post.php:3396
 msgid "Could not insert post into the database"
 msgstr "לא ניתן להכניס את הפוסט לבסיס הנתונים"
 
-#: wp-includes/post.php:3380
+#: wp-includes/post.php:3381
 msgid "Could not update post in the database"
 msgstr "לא ניתן לעדכן את הפוסט בבסיס הנתונים"
 
-#: wp-includes/post.php:3236
+#: wp-includes/post.php:3237
 msgid "Whoops, the provided date is invalid."
 msgstr "התאריך לא תקני."
 
-#: wp-includes/post.php:3168
+#: wp-includes/post.php:3169
 msgid "Content, title, and excerpt are empty."
 msgstr "התוכן, הכותרת והתקציר ריקים."
 
-#: wp-includes/post.php:3011
+#: wp-includes/post.php:3012
 msgid "Passing an integer number of posts is deprecated. Pass an array of arguments instead."
 msgstr "Passing an integer number of posts is deprecated. Pass an array of arguments instead."
 
@@ -3636,12 +3636,12 @@ msgstr "עריכה"
 msgid "Comments Feed"
 msgstr "פיד תגובות"
 
-#: wp-includes/l10n.php:940
+#: wp-includes/l10n.php:944
 msgctxt "translations"
 msgid "Available"
 msgstr "זמין"
 
-#: wp-includes/l10n.php:922
+#: wp-includes/l10n.php:926
 msgctxt "translations"
 msgid "Installed"
 msgstr "מותקן"
@@ -4131,33 +4131,33 @@ msgid "ERROR: This is not a valid feed template."
 msgstr "שגיאה: תבנית הפיד אינה תקינה"
 
 #. translators: used to join items in a list with only 2 items
-#: wp-includes/formatting.php:3690
+#: wp-includes/formatting.php:3830
 msgid "%s and %s"
 msgstr "%s ו%s"
 
 #. translators: used to join last two items in a list with more than 2 times
-#: wp-includes/formatting.php:3688
+#: wp-includes/formatting.php:3828
 msgid "%s, and %s"
 msgstr "%s, ו%s"
 
 #. translators: used to join items in a list with more than 2 items
-#: wp-includes/formatting.php:3686
+#: wp-includes/formatting.php:3826
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: wp-includes/formatting.php:3487
+#: wp-includes/formatting.php:3612
 msgid "The timezone you have entered is not valid. Please select a valid timezone."
 msgstr "אזור הזמן שנבחר אינו קיים. יש לבחור אזור זמן תקין."
 
-#: wp-includes/formatting.php:3440
+#: wp-includes/formatting.php:3557
 msgid "The Site address you entered did not appear to be a valid URL. Please enter a valid URL."
 msgstr "כתובת האתר שהוזנה איננה כתובת תקינה. יש לנסות שנית."
 
-#: wp-includes/formatting.php:3429
+#: wp-includes/formatting.php:3544
 msgid "The WordPress address you entered did not appear to be a valid URL. Please enter a valid URL."
 msgstr "כתובת וורדפרס שהוזנה איננה כתובת תקינה. יש לנסות שנית."
 
-#: wp-includes/formatting.php:3339
+#: wp-includes/formatting.php:3444
 msgid "The email address entered did not appear to be a valid email address. Please enter a valid email address."
 msgstr "כתובת האימייל שהוזנה איננה כתובת אימייל תקינה. יש לנסות שנית."
 
@@ -4167,47 +4167,47 @@ msgstr "כתובת האימייל שהוזנה איננה כתובת אימיי�
 #. translators: If your word count is based on single characters (East Asian
 #. characters), 		   enter 'characters'. Otherwise, enter 'words'. Do not
 #. translate into your own language.
-#: wp-includes/formatting.php:2667 wp-includes/script-loader.php:379
+#: wp-includes/formatting.php:2770 wp-includes/script-loader.php:379
 msgctxt "word count: words or characters?"
 msgid "words"
 msgstr "words"
 
-#: wp-includes/formatting.php:2662 wp-includes/general-template.php:2721
+#: wp-includes/formatting.php:2765 wp-includes/general-template.php:2721
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/formatting.php:2575
+#: wp-includes/formatting.php:2678
 msgid "%s year"
 msgid_plural "%s years"
 msgstr[0] "שנה %s"
 msgstr[1] "%s שנים"
 
-#: wp-includes/formatting.php:2570
+#: wp-includes/formatting.php:2673
 msgid "%s month"
 msgid_plural "%s months"
 msgstr[0] "חודש %s"
 msgstr[1] "%s חודשים"
 
-#: wp-includes/formatting.php:2565
+#: wp-includes/formatting.php:2668
 msgid "%s week"
 msgid_plural "%s weeks"
 msgstr[0] "שבוע %s"
 msgstr[1] "%s שבועות"
 
-#: wp-includes/formatting.php:2560
+#: wp-includes/formatting.php:2663
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] "יום אחד"
 msgstr[1] "%s ימים"
 
-#: wp-includes/formatting.php:2555
+#: wp-includes/formatting.php:2658
 msgid "%s hour"
 msgid_plural "%s hours"
 msgstr[0] "שעה אחת"
 msgstr[1] "%s שעות"
 
 #. translators: min=minute
-#: wp-includes/formatting.php:2550
+#: wp-includes/formatting.php:2653
 msgid "%s min"
 msgid_plural "%s mins"
 msgstr[0] "דקה אחת"
@@ -4262,7 +4262,7 @@ msgid "&#8221;"
 msgstr "&quot;"
 
 #. translators: opening curly double quote
-#: wp-includes/formatting.php:62 wp-includes/formatting.php:3927
+#: wp-includes/formatting.php:62 wp-includes/formatting.php:4067
 msgctxt "opening curly double quote"
 msgid "&#8220;"
 msgstr "&quot;"
@@ -5357,8 +5357,8 @@ msgstr "אין לך הרשאות לערוך פוסט זה."
 #: wp-includes/class-wp-xmlrpc-server.php:4986
 #: wp-includes/class-wp-xmlrpc-server.php:5476
 #: wp-includes/class-wp-xmlrpc-server.php:5524
-#: wp-includes/class-wp-xmlrpc-server.php:5648 wp-includes/post.php:3124
-#: wp-includes/post.php:3582
+#: wp-includes/class-wp-xmlrpc-server.php:5648 wp-includes/post.php:3125
+#: wp-includes/post.php:3583
 msgid "Invalid post ID."
 msgstr "מספר פוסט לא תקני."
 
@@ -5750,7 +5750,7 @@ msgstr "הדפדפן אינו תומך בגישה ישירה ללוח הכתיב
 
 #: wp-includes/class-wp-editor.php:974 wp-includes/script-loader.php:395
 #: wp-includes/script-loader.php:474 wp-includes/script-loader.php:482
-#: wp-includes/script-loader.php:586 wp-includes/theme.php:1968
+#: wp-includes/script-loader.php:586 wp-includes/theme.php:1947
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "ניסית לעבור לעמוד אחר אבל עדיין לא שמרת את השינויים שעשית בעמוד הזה."
 
