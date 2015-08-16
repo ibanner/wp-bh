@@ -71,6 +71,7 @@ if ( $order ) : ?>
 			// cart data
 			$order_items	= $order->get_items();
 			$cart			= array();
+			$items_ids		= array();
 			$index			= 0;
 			
 			if ($order_items) {
@@ -85,7 +86,7 @@ if ( $order ) : ?>
 						$category	= esc_js( $single_cat->name );
 					endif;
 					
-					$cart[$index]['sku']		= $product->sku;
+					$cart[$index]['sku']		= $items_ids[] = $product->sku;
 					$cart[$index]['name']		= $product->get_title();
 					$cart[$index]['category']	= $category;
 					$cart[$index]['price']		= number_format((float)$product->price, 2, '.', '');
@@ -102,6 +103,24 @@ if ( $order ) : ?>
 						BH_EC_onTransaction(<?php echo json_encode($cart); ?>, <?php echo json_encode($transaction); ?>, '<?php echo get_woocommerce_currency(); ?>', true);
 					});
 				</script>
+
+				<!-- Facebook Pixel Code - Purchase event -->
+				<script>
+					fbq('track', 'Purchase', {
+						content_type: 'product',
+						content_ids: ['<?php echo implode("', '" , $items_ids); ?>'],
+						value: <?php echo $transaction[0]['total']; ?>,
+						currency: '<?php echo get_woocommerce_currency(); ?>'
+					});
+				</script>
+				<!-- End Facebook Pixel Code - Purchase event -->
+
+				<!-- Facebook Conversion Code -->
+				<script>
+					window._fbq.push(['track', '6025740659065', {'value':'<?php echo $transaction[0]['total']; ?>','currency':'<?php echo get_woocommerce_currency(); ?>'}]);
+				</script>
+				<!-- End Facebook Conversion Code -->
+
 			<?php }
 		?>
 

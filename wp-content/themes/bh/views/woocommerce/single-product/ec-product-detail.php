@@ -31,3 +31,16 @@ endif;
 		BH_EC_onProductDetail('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', true);
 	});
 </script>
+
+<!-- Facebook Pixel Code - ViewContent event -->
+<script>
+	fbq('track', 'ViewContent', {
+		content_type: 'product',
+		content_ids: ['<?php echo $p_sku; ?>'],
+		content_name: '<?php echo $p_name; ?>',
+		content_category: '<?php echo $category; ?>',
+		value: <?php echo $p_price; ?>,
+		currency: '<?php echo $p_currency; ?>'
+	});
+</script>
+<!-- End Facebook Pixel Code - ViewContent event -->
