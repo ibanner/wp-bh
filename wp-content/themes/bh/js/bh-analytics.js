@@ -3,19 +3,19 @@
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-8676522-1', 'auto');
-
 /*
  Google Analytics initiate
  */
+ga('create', _BH_GA_tid, 'auto');
+
 ec = ($('body').hasClass('woocommerce-page') && !$('body').hasClass('woocommerce-cart'));	// indicates whether we are in WooCommerce page or not (excluding cart page)
 currency_set = false;																		// indicates whether currency has been set
 
 if (ec) {
-	// woocommerce page - initiate ec plugin
+	// WooCommerce page - initiate ec plugin
 	ga('require', 'ec');
 } else {
-	// none woocommerce page - send pageview immediately
+	// None WooCommerce page - send pageview immediately
 	ga('send', 'pageview');
 }
 

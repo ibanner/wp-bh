@@ -17,3 +17,9 @@
 		printf ("<link href='%s' rel='stylesheet'>", $val);
 	endforeach; endif;
 ?>
+
+<!-- Google Analytics tracking code -->
+<script>
+	_BH_GA_tid	= '<?php the_field('acf-options_tracking_code', 'option'); ?>';
+</script>
+<!-- End Google Analytics tracking code -->

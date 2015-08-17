@@ -152,3 +152,10 @@ add_filter('woocommerce_catalog_orderby', 'BH_shop_catalog_orderby_options');
  * @see		BH_shop_order_invoice()
  */
 add_action('woocommerce_order_status_completed', 'BH_shop_order_invoice', 10, 1);
+
+/**
+ * Hook order refund for reporting Enhanced Ecommerce
+ * 
+ * @see		BH_shop_order_refund()
+ */
+add_action('woocommerce_refund_created', 'BH_shop_order_refund', 10, 2);

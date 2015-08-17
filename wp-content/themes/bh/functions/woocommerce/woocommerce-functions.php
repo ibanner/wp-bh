@@ -858,3 +858,71 @@ function BH_shop_order_invoice($order_id) {
 		
 	mail('nirg@bh.org.il', 'A new invoice for order#' . $order_id, $result, $headers); */
 }
+
+/**
+ * BH_shop_order_refund
+ * 
+ * Enhanced Ecommerce - Measuring Refunds
+ */
+function BH_shop_order_refund($refund_id, $args) {
+	if ( ! $args )
+		return;
+
+	include( THEME_ROOT . '/includes/UUID.php' );
+
+	$order_id		= $args['order_id'];
+	$refund_amount	= $args['amount'];
+	$line_items		= $args['line_items'];
+
+	$order			= new WC_Order($order_id);
+	$order_total	= number_format( (float)( $order->get_total() ), 2, '.', '' );
+	$order_items	= $order->get_items();
+
+	// Collect Measurement Protocol data
+	$url	= 'https://www.google-analytics.com/collect?v=1';
+	$data	=
+		'&tid=' . get_field('acf-options_tracking_code', 'option') .
+		'&cid=' . UUID::v4() .
+		'&t=event' .
+		'&ec=' . ( ($refund_amount == $order_total) ? 'OrderRefund' : 'OrderPartialRefund' ) .
+		'&ea=refund' .
+		'&ni=1' .
+		'&ti=' . $order_id .
+		'&pa=refund';
+
+	if ($refund_amount != $order_total) :
+		// Order partial refunded
+		// Collect items refunded
+		$items_refunded = array();
+
+		if ($line_items) :
+			foreach ($line_items as $key => $val) {
+				if ( $val['qty'] && $val['qty'] > 0 ) {
+					$items_refunded[$key]			= array();
+					$items_refunded[$key]['sku']	= wc_get_product( $order_items[$key]['product_id'] )->sku;
+					$items_refunded[$key]['qty']	= $val['qty'];
+				}
+			}
+		endif;
+
+		// add products to $data
+		if ($items_refunded) :
+			$i = 1;
+			foreach ($items_refunded as $item) {
+				$data .=
+					'&pr'.$i.'id=' . $item['sku'] .
+					'&pr'.$i.'qt=' . $item['qty'];
+				$i++;
+			}
+		endif;
+	endif;
+
+	// submit Refund event
+	BH_background_post($url . $data);
+
+/*	$headers = 'From: nirg@bh.org.il' . "\r\n" .
+		'Reply-To: webmaster@example.com' . "\r\n" .
+		'X-Mailer: PHP/' . phpversion();
+		
+	mail('nir@htmline.com', 'A new refund for order#' . $order_id, 'Refund hit: ' . $url . $data, $headers); */
+}

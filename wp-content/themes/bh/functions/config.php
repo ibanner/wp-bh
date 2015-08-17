@@ -20,8 +20,12 @@
 	define( 'VERSION', $theme_version );
 	
 	// other
+	$stylesheet = get_stylesheet();
+	$theme_root = get_theme_root( $stylesheet );
+
 	define( 'TEMPLATE',		get_bloginfo('template_directory') );
 	define( 'HOME',			home_url( '/' ) );
+	define( 'THEME_ROOT',	"$theme_root/$stylesheet" );
 	define( 'CSS_DIR',		TEMPLATE . '/css' );
 	define( 'JS_DIR',		TEMPLATE . '/js' );
 	define( 'EXR_API_KEY',	'8173E30F944972AB110F61D13501D61B' );	// Exchange Rate API key

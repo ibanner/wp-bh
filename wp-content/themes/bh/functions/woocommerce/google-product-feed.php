@@ -129,7 +129,7 @@ add_filter( 'woocommerce_gpf_elements', 'BH_gpf_set_brand', 11, 2 );
  * @return	array						modified feed item elements
  */
 function BH_gpf_set_mpn_n_gtin($elements, $product_id) {
-	$product = get_product($product_id);
+	$product = wc_get_product($product_id);
 
 	if ( ! $product )
 		return $elements;
