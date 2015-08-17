@@ -281,6 +281,8 @@
 		'hide_on_screen' => array (
 			0 => 'the_content',
 		),
+		'active' => 1,
+		'description' => '',
 	));
 
 	acf_add_local_field_group(array (
@@ -996,7 +998,7 @@
 				),
 			),
 			array (
-				'key' => 'field_55a4d8288fcb6',
+				'key' => 'field_55a4f3c001fe2',
 				'label' => 'Content Page Password Protected Content',
 				'name' => 'acf-content_page_password_protected_content',
 				'type' => 'wysiwyg',
@@ -1038,6 +1040,8 @@
 		'hide_on_screen' => array (
 			0 => 'the_content',
 		),
+		'active' => 1,
+		'description' => '',
 	));
 
 	acf_add_local_field_group(array (
@@ -1106,6 +1110,8 @@
 		'label_placement' => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen' => '',
+		'active' => 1,
+		'description' => '',
 	));
 
 	acf_add_local_field_group(array (
@@ -1166,6 +1172,8 @@
 		'label_placement' => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen' => '',
+		'active' => 1,
+		'description' => '',
 	));
 
 	acf_add_local_field_group(array (
@@ -1186,6 +1194,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_53380bf11cedd',
@@ -1296,6 +1305,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_533b083f1cdbf',
@@ -1369,6 +1379,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_53af3c943fc6b',
@@ -1558,6 +1569,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_53380ce21cee0',
@@ -1672,6 +1684,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_540409e8180a4',
@@ -1713,6 +1726,8 @@
 		'label_placement' => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen' => '',
+		'active' => 1,
+		'description' => '',
 	));
 
 	acf_add_local_field_group(array (
@@ -1779,6 +1794,8 @@
 		'label_placement' => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen' => '',
+		'active' => 1,
+		'description' => '',
 	));
 
 	acf_add_local_field_group(array (
@@ -1849,6 +1866,8 @@
 		'instruction_placement' => 'label',
 		'hide_on_screen' => array (
 		),
+		'active' => 1,
+		'description' => '',
 		'old_ID' => 6976,
 	));
 
@@ -1897,6 +1916,8 @@
 		'instruction_placement' => 'label',
 		'hide_on_screen' => array (
 		),
+		'active' => 1,
+		'description' => '',
 		'old_ID' => 6240,
 	));
 
@@ -2028,6 +2049,8 @@
 		'instruction_placement' => 'label',
 		'hide_on_screen' => array (
 		),
+		'active' => 1,
+		'description' => '',
 		'old_ID' => 6978,
 	));
 
@@ -2306,6 +2329,8 @@
 		'hide_on_screen' => array (
 			0 => 'the_content',
 		),
+		'active' => 1,
+		'description' => '',
 		'old_ID' => 6977,
 	));
 
@@ -2327,6 +2352,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_53564d254e01f',
@@ -2867,6 +2893,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_53567d6544fc8',
@@ -3157,6 +3184,8 @@
 		'label_placement' => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen' => '',
+		'active' => 1,
+		'description' => '',
 	));
 
 	acf_add_local_field_group(array (
@@ -3177,6 +3206,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_558fb8c71759f',
@@ -3255,6 +3285,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_558fb947175a3',
@@ -3398,6 +3429,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_5565d092febad',
@@ -3458,6 +3490,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_558fb9a0175a8',
@@ -3499,6 +3532,43 @@
 				'media_upload' => 0,
 			),
 			array (
+				'key' => 'field_55d20cb51c76c',
+				'label' => 'Google Analytics',
+				'name' => '',
+				'type' => 'tab',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array (
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'placement' => 'top',
+				'endpoint' => 0,
+			),
+			array (
+				'key' => 'field_55d20cd91c76d',
+				'label' => 'Tracking Code',
+				'name' => 'acf-options_tracking_code',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 1,
+				'conditional_logic' => 0,
+				'wrapper' => array (
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+				'readonly' => 0,
+				'disabled' => 0,
+			),
+			array (
 				'key' => 'field_53b39fc7566d5',
 				'label' => 'Misc',
 				'name' => '',
@@ -3512,6 +3582,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_53b03b1ebef28',
@@ -3616,6 +3687,8 @@
 		'label_placement' => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen' => '',
+		'active' => 1,
+		'description' => '',
 	));
 
 	acf_add_local_field_group(array (
@@ -3636,6 +3709,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_54b23b3e25fe3',
@@ -3885,6 +3959,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_54ae444447ed3',
@@ -3968,6 +4043,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_558fd77614fd0',
@@ -4030,6 +4106,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_5533a61404e06',
@@ -4093,6 +4170,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_558fd79014fd1',
@@ -4303,6 +4381,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_5565d2446c4dc',
@@ -4406,6 +4485,7 @@
 					'id' => '',
 				),
 				'placement' => 'top',
+				'endpoint' => 0,
 			),
 			array (
 				'key' => 'field_558fd81814fd7',
@@ -4444,6 +4524,8 @@
 		'label_placement' => 'top',
 		'instruction_placement' => 'label',
 		'hide_on_screen' => '',
+		'active' => 1,
+		'description' => '',
 	));
 
 	endif;
