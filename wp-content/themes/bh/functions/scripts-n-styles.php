@@ -31,7 +31,6 @@ function BH_wp_scripts_n_styles() {
 	 */
 	wp_enqueue_style ( 'bootstrap',					CSS_DIR . '/libs/bootstrap.min.css',				array(),													VERSION );
 	wp_register_style( 'bootstrap-rtl',				CSS_DIR . '/libs/bootstrap-rtl.min.css',			array('bootstrap'),											VERSION );
-	//wp_register_style( 'fancybox',				CSS_DIR . '/libs/fancybox.css',						array('bootstrap'),											VERSION );
 	wp_register_style( 'jquery-ui',					CSS_DIR . '/libs/jquery-ui.css',					array('bootstrap'),											VERSION );
 	wp_enqueue_style ( 'font-awesome',		 		CSS_DIR . '/libs/font-awesome.min.css',				array(),													VERSION );
 	
@@ -78,22 +77,18 @@ function BH_wp_scripts_n_styles() {
 	/**
 	 * scripts
 	 */
-//	wp_deregister_script('jquery');
-//	wp_enqueue_script ( 'jquery',					'http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js',	array(),													'2.1.3',	false );
 	wp_register_script( 'bootstrap',				JS_DIR . '/libs/bootstrap.min.js',									array('jquery'),											VERSION,	true );
 	wp_register_script( 'matchMedia',				JS_DIR . '/libs/matchMedia.js',										array('jquery'),											VERSION,	true );
 	wp_register_script( 'matchMediaListener',		JS_DIR . '/libs/matchMedia.addListener.js',							array('jquery'),											VERSION,	true );
-	//wp_register_script( 'fancybox',				JS_DIR . '/libs/fancybox.js',										array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'countdown',				JS_DIR . '/libs/jquery.responsive_countdown.min.js',				array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'cycle2',					JS_DIR . '/libs/jquery.cycle2.min.js',								array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'cycle2-carousel',			JS_DIR . '/libs/jquery.cycle2.carousel.min.js',						array('cycle2'),											VERSION,	true );
 	wp_register_script( 'cycle2-swipe',				JS_DIR . '/libs/jquery.cycle2.swipe.min.js',						array('cycle2'),											VERSION,	true );
 	wp_register_script( 'cycle2-ios6fix',			JS_DIR . '/libs/ios6fix.js',										array('cycle2'),											VERSION,	true );
 	wp_register_script( 'jquery-ui',				JS_DIR . '/libs/jquery-ui.min.js',									array('jquery', 'bootstrap'),								VERSION,	true );
-	//wp_register_script( 'jquery-ui-touch',		JS_DIR . '/libs/jquery.ui.touch-punch.min.js',						array('jquery-ui'),											VERSION,	true );
 	wp_register_script( 'angular',					JS_DIR . '/libs/angular.min.js',									array('jquery'),						                    VERSION,	true );
 	wp_register_script( 'rcSubmit',					JS_DIR . '/libs/rcSubmit.js',									    array('angular'),						                    VERSION,	true );
-	wp_register_script( 'ticketnet',				JS_DIR . '/libs/ticketnet.min.js',									array('jquery'),											VERSION,	true );
+	wp_register_script( 'ticketnet',				JS_DIR . '/libs/ticketnet.js',										array('jquery'),											VERSION,	true );
 	wp_register_script( 'elevateZoom',				JS_DIR . '/libs/jquery.elevateZoom-3.0.8.min.js',					array('jquery'),											VERSION,	true );
 	
 	wp_register_script( 'general',					JS_DIR . '/min/general.min.js',										array('jquery', 'bootstrap'),								VERSION,	true );

@@ -37,7 +37,7 @@ function openPopup(RESERVINT_URL) {
         url = linker.decorate(url);
     });
 
-    var x_sign = "x.png";
+    var x_sign = "/wp-content/themes/bh/images/general/x.png";
     var documentWidth = $(document).width();
     var documentHeight = $(document).height();
     var windowWidth = $(window).width();
