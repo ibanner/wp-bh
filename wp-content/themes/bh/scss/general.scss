@@ -393,19 +393,11 @@ header .navbar {
 						}
 					}
 
-					&.featured > a {
-						padding: 6px 0 4px;
-						color: $font-invert-color;
-						@include image("general/shop-menu-item-bg.jpg");
-						-webkit-border-radius:	4px 4px 0 0;
-						-moz-border-radius:		4px 4px 0 0;
-						border-radius:			4px 4px 0 0;
-
-						span {
-							border-right: 1px solid transparent;
-						}
+					&.featured {
+						background-position: 105px -498px;
+						background-repeat: no-repeat;
 					}
-					
+
 					.sub-menu {
 						position: absolute;
 						padding: 0 28px 0 20px;
@@ -493,6 +485,23 @@ header .navbar {
 							
 							span {
 								border-right: 1px solid transparent;
+							}
+						}
+					}
+
+					&.featured:hover,
+					&.featured.current-menu-item,
+					&.featured.current-menu-parent,
+					&.featured.current-menu-ancestor {
+						background-position: 105px -529px;
+
+						& > a {
+							color: $font-color !important;
+							background: transparent !important;
+
+							span {
+								border-left: 1px solid $border-color1 !important;
+								border-right: 1px solid $border-color1 !important;
 							}
 						}
 					}
