@@ -134,6 +134,14 @@ header .navbar {
 						}
 					}
 					
+					&.featured:first-child {
+						&:hover > a span,
+						&.current-menu-item > a span,
+						&.current-menu-parent > a span {
+							border-right: 1px solid $border-color1;
+						}
+					}
+
 					.sub-menu {
 						padding: 0 20px 0 28px;
 						left: auto;
@@ -175,6 +183,18 @@ header .navbar {
 						& > a {
 							span {
 								border-left: 1px solid transparent;
+								border-right: 0;
+							}
+						}
+					}
+
+					&.featured:hover,
+					&.featured.current-menu-item,
+					&.featured.current-menu-parent,
+					&.featured.current-menu-ancestor {
+						& > a {
+							span {
+								border-left: 1px solid $border-color1;
 								border-right: 0;
 							}
 						}

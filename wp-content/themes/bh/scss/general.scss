@@ -398,6 +398,14 @@ header .navbar {
 						background-repeat: no-repeat;
 					}
 
+					&.featured:first-child {
+						&:hover > a span,
+						&.current-menu-item > a span,
+						&.current-menu-parent > a span {
+							border-left: 1px solid $border-color1;
+						}
+					}
+
 					.sub-menu {
 						position: absolute;
 						padding: 0 28px 0 20px;
@@ -500,8 +508,7 @@ header .navbar {
 							background: transparent !important;
 
 							span {
-								border-left: 1px solid $border-color1 !important;
-								border-right: 1px solid $border-color1 !important;
+								border-right: 1px solid $border-color1;
 							}
 						}
 					}
