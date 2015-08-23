@@ -394,6 +394,7 @@ header .navbar {
 					}
 
 					&.featured {
+						@include image("general/BH-sprites.png");
 						background-position: 105px -498px;
 						background-repeat: no-repeat;
 					}

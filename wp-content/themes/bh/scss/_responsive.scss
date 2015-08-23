@@ -738,7 +738,7 @@
 	
 	.featured-links {
 		right: 350px;
-		width: 620px;
+		width: 620px !important;
 		
 		.link-image {
 			margin-bottom: 10px;
@@ -757,7 +757,7 @@
 	
 	.contact-details {
 		left: 620px;
-		width: 350px;
+		width: 350px !important;
 	}
 	
 	/***************/
