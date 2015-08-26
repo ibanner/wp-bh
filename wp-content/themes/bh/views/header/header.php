@@ -60,7 +60,13 @@ $args = array(
 	'add_events_list_under'	=> $events_page_id,
 	'echo'					=> 0
 );
-$menu = wp_nav_menu($args); ?>
+$menu = wp_nav_menu($args);
+
+// Set header components
+$languages_switcher	= BH_languages_switcher();
+$newsletter_widget	= BH_newsletter_widget();
+
+?>
 
 <header>
 
@@ -88,6 +94,17 @@ $menu = wp_nav_menu($args); ?>
 					</div>
 
 					<div class="header-top-elements">
+						<?php if ($languages_switcher) : ?>
+							<div class="header-top-elem languages-switcher">
+								<?php echo $languages_switcher; ?>
+							</div>
+						<?php endif; ?>
+
+						<?php if ($newsletter_widget) : ?>
+							<div class="header-top-elem newsletter-widget">
+								<?php echo $newsletter_widget; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

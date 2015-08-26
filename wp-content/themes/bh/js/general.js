@@ -102,22 +102,23 @@ var $ = jQuery,
 		
 		newsletter_top_menu : function() {
 			
-			newsletter_menu_item = $('.menu-item-newsletter a');
-			newsletter_widget = newsletter_menu_item.parent().find('.newsletter-widget');
-			newsletter_widget_close = newsletter_widget.find('.glyphicon-remove');
+			var newsletter_widget			= $('header .newsletter-widget'),
+				newsletter_widget_btn		= newsletter_widget.children('.newsletter-widget-btn'),
+				newsletter_widget_content	= newsletter_widget.children('.newsletter-widget-content'),
+				newsletter_widget_close 	= newsletter_widget_content.children('.glyphicon-remove');
 			
 			// bind click events
-			newsletter_menu_item.click(function() {
-				newsletter_widget.fadeToggle();
-				$(this).parent().toggleClass('current-menu-item');
+			newsletter_widget_btn.click(function() {
+				newsletter_widget_content.toggle();
+				$(this).children('button').toggleClass('active');
 				
 				// reset newsletter popup expiry
 				BH_general.newsletter_popup('set');
 			});
 			
 			newsletter_widget_close.click(function() {
-				newsletter_widget.fadeOut();
-				newsletter_menu_item.parent().removeClass('current-menu-item');
+				newsletter_widget_content.hide();
+				newsletter_widget_btn.children('button').removeClass('active');
 				
 				// reset newsletter popup expiry
 				BH_general.newsletter_popup('set');
@@ -130,9 +131,9 @@ var $ = jQuery,
 		
 		newsletter_popup : function(action) {
 			
-			newsletter_menu_item = $('.menu-item-newsletter a');
-			newsletter_widget = newsletter_menu_item.parent().find('.newsletter-widget');
-			newsletter_widget_close = newsletter_widget.find('.glyphicon-remove');
+			var newsletter_widget			= $('header .newsletter-widget'),
+				newsletter_widget_btn		= newsletter_widget.children('.newsletter-widget-btn'),
+				newsletter_widget_content	= newsletter_widget.children('.newsletter-widget-content');
 			
 			$.ajax({
 				
@@ -147,9 +148,9 @@ var $ = jQuery,
 				success: function(result) {
 					var r = JSON.parse(result);
 					if (r.status == 0) {
-						if (action == 'open' && r.operation == 'popup' && !newsletter_menu_item.parent().hasClass('current-menu-item')) {
-							newsletter_widget.fadeIn();
-							newsletter_menu_item.parent().addClass('current-menu-item');
+						if (action == 'open' && r.operation == 'popup' && !newsletter_widget_btn.children('button').hasClass('active')) {
+							newsletter_widget_content.show();
+							newsletter_widget_btn.children('button').addClass('active');
 						}
 						
 						return true;

@@ -2,7 +2,7 @@
 /* sprites */
 /***********/
 
-.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s{
+.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter{
 	background: url("../images/general/sprites.png") no-repeat;
 }
 
@@ -100,6 +100,12 @@
 	background-position: -664px -59px ;
 	width: 58px;
 	height: 43px;
+}
+
+.sprite-newsletter{
+	background-position: 0 -128px ;
+	width: 28px;
+	height: 28px;
 }
 
 /******************/
@@ -204,4 +210,10 @@
 	background-position: -664px -59px ;
 	width: 58px;
 	height: 43px;
+}
+
+@mixin sprite-newsletter{
+	background-position: 0 -128px ;
+	width: 28px;
+	height: 28px;
 }

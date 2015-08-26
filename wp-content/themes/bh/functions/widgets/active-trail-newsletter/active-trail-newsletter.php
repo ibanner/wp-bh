@@ -270,13 +270,18 @@ class Active_Trail_Newsletter extends WP_Widget
 				<form id="<?php echo $this->get_field_id('form'); ?>" action="<?php echo TEMPLATE; ?>/functions/widgets/active-trail-newsletter/newsletter-api.php" method="post">
 					<input id="<?php echo $this->get_field_id('mm_userid'); ?>" class="mm_userid" name="<?php echo $this->get_field_name('mm_userid'); ?>" type="hidden" value="<?php echo $instance['at_mm_userid']; ?>" />
 					
+					<small><?php _e('Your Email:', 'BH'); ?></small>
 					<input id="<?php echo $this->get_field_id('mm_newemail'); ?>" class="mm_newemail" name="<?php echo $this->get_field_name('mm_newemail'); ?>" type="text" placeholder="<?php _e('Email Address', 'BH'); ?>" value="" />
 					<div id="<?php echo $this->get_field_id('mailErr'); ?>" class="errph hide"><?php _e('Email address is missing or incorrect', 'BH'); ?></div>
 					
 					<div class="newsletter-groups">
+						<small><?php _e('Choose Language:', 'BH'); ?></small>
+						
 						<?php
-							foreach ($instance['groups'] as $group)
-								echo '<label><input type="checkbox" name="' . $this->get_field_name('mm_key') . '[]" id="' . $group['id'] . '" value="' . $group['id'] . '" />' . $group['name'] . '</label>';
+							foreach ($instance['groups'] as $group) {
+								echo '<input type="checkbox" name="' . $this->get_field_name('mm_key') . '[]" id="' . $group['id'] . '" value="' . $group['id'] . '" />';
+								echo '<label for="' . $group['id'] . '"><span>' . $group['name'] . '</span></label>';
+							}
 						?>
 					</div>
 					<div id="<?php echo $this->get_field_id('newsletterErr'); ?>" class="errph hide"><?php _e('Please check at least one newsletter name', 'BH'); ?></div>

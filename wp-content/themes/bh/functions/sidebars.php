@@ -4,12 +4,11 @@
  *
  * @author		Beit Hatfutsot
  * @package		bh/functions
- * @version		1.0
+ * @version		2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-add_action('widgets_init', 'BH_sidebars');
 function BH_sidebars() {
 	// newsletter top menu
 	register_sidebar(
@@ -88,4 +87,20 @@ function BH_sidebars() {
 			'after_title'	=> '</h2>'
 		)
 	);
+}
+add_action('widgets_init', 'BH_sidebars');
+
+/**
+ * BH_get_dynamic_sidebar
+ *
+ * @return		String		sidebar content
+ */
+function BH_get_dynamic_sidebar($index = 1) {
+	$sidebar_content = '';
+
+	ob_start();
+	dynamic_sidebar($index);
+	$sidebar_content = ob_get_clean();
+
+	return $sidebar_content;
 }
