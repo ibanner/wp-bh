@@ -2,6 +2,10 @@
 /* BH sprites */
 /**************/
 
+.bh-sprites {
+	@include image("general/BH-sprites.png");
+}
+
 @mixin sprites {
 	@include image("general/BH-sprites.png", $repeat: no-repeat);
 }

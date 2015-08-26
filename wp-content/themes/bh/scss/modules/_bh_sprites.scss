@@ -1,0 +1,207 @@
+/***********/
+/* sprites */
+/***********/
+
+.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s{
+	background: url("../images/general/sprites.png") no-repeat;
+}
+
+.sprite-logo-en-124x57{
+	background-position: 0 0;
+	width: 124px;
+	height: 57px;
+}
+
+.sprite-logo-en-104x48{
+	background-position: -126px 0;
+	width: 104px;
+	height: 48px;
+}
+
+.sprite-logo-en-89x41{
+	background-position: -232px 0;
+	width: 89px;
+	height: 41px;
+}
+
+.sprite-logo-he-127x57{
+	background-position: -323px 0;
+	width: 127px;
+	height: 57px;
+}
+
+.sprite-logo-he-106x48{
+	background-position: -452px 0;
+	width: 106px;
+	height: 48px;
+}
+
+.sprite-logo-he-91x41{
+	background-position: -560px 0;
+	width: 91px;
+	height: 41px;
+}
+
+.sprite-museum-en{
+	background-position: 0 -59px ;
+	width: 90px;
+	height: 67px;
+}
+
+.sprite-museum-en-s{
+	background-position: -92px -59px ;
+	width: 67px;
+	height: 50px;
+}
+
+.sprite-shop-en{
+	background-position: -161px -59px ;
+	width: 88px;
+	height: 41px;
+}
+
+.sprite-shop-en-s{
+	background-position: -251px -59px ;
+	width: 70px;
+	height: 33px;
+}
+
+.sprite-mjs-en-s{
+	background-position: -323px -59px ;
+	width: 65px;
+	height: 48px;
+}
+
+.sprite-museum-he{
+	background-position: -390px -59px ;
+	width: 64px;
+	height: 54px;
+}
+
+.sprite-museum-he-s{
+	background-position: -456px -59px ;
+	width: 51px;
+	height: 43px;
+}
+
+.sprite-shop-he{
+	background-position: -509px -59px ;
+	width: 88px;
+	height: 47px;
+}
+
+.sprite-shop-he-s{
+	background-position: -599px -59px ;
+	width: 63px;
+	height: 34px;
+}
+
+.sprite-mjs-he-s{
+	background-position: -664px -59px ;
+	width: 58px;
+	height: 43px;
+}
+
+/******************/
+/* sprites mixins */
+/******************/
+
+@mixin sprites {
+	@include image("general/sprites.png", $repeat: no-repeat);
+}
+
+@mixin sprite-logo-en-124x57{
+	background-position: 0 0;
+	width: 124px;
+	height: 57px;
+}
+
+@mixin sprite-logo-en-104x48{
+	background-position: -126px 0;
+	width: 104px;
+	height: 48px;
+}
+
+@mixin sprite-logo-en-89x41{
+	background-position: -232px 0;
+	width: 89px;
+	height: 41px;
+}
+
+@mixin sprite-logo-he-127x57{
+	background-position: -323px 0;
+	width: 127px;
+	height: 57px;
+}
+
+@mixin sprite-logo-he-106x48{
+	background-position: -452px 0;
+	width: 106px;
+	height: 48px;
+}
+
+@mixin sprite-logo-he-91x41{
+	background-position: -560px 0;
+	width: 91px;
+	height: 41px;
+}
+
+@mixin sprite-museum-en{
+	background-position: 0 -59px ;
+	width: 90px;
+	height: 67px;
+}
+
+@mixin sprite-museum-en-s{
+	background-position: -92px -59px ;
+	width: 67px;
+	height: 50px;
+}
+
+@mixin sprite-shop-en{
+	background-position: -161px -59px ;
+	width: 88px;
+	height: 41px;
+}
+
+@mixin sprite-shop-en-s{
+	background-position: -251px -59px ;
+	width: 70px;
+	height: 33px;
+}
+
+@mixin sprite-mjs-en-s{
+	background-position: -323px -59px ;
+	width: 65px;
+	height: 48px;
+}
+
+@mixin sprite-museum-he{
+	background-position: -390px -59px ;
+	width: 64px;
+	height: 54px;
+}
+
+@mixin sprite-museum-he-s{
+	background-position: -456px -59px ;
+	width: 51px;
+	height: 43px;
+}
+
+@mixin sprite-shop-he{
+	background-position: -509px -59px ;
+	width: 88px;
+	height: 47px;
+}
+
+@mixin sprite-shop-he-s{
+	background-position: -599px -59px ;
+	width: 63px;
+	height: 34px;
+}
+
+@mixin sprite-mjs-he-s{
+	background-position: -664px -59px ;
+	width: 58px;
+	height: 43px;
+}

@@ -5,7 +5,7 @@
 $images:	"../images/";
 $fonts:		"../fonts/";
 
-$default_fonts: Arial, Helvetica, Sans-serif;
+$default_fonts: 'Open Sans', 'Open Sans Hebrew', sans-serif;
 
 /*******************/
 /* admin variables */
@@ -17,6 +17,42 @@ $admin-ui:		"../../images/ui/";
 /**********/
 /* colors */
 /**********/
+
+$gray-color1:		#333;
+$gray-color2:		#444;
+$gray-color3:		#666;
+$gray-color4:		#999;
+$gray-color5:		#c2c2c2;
+$gray-color6:		#e6e6e6;
+$gray-color7:		#f4f4f4;
+
+$red-color1:		#90190b;
+$red-color2:		#bf311a;
+$red-color3:		#cb5947;
+$red-color4:		#d98376;
+$red-color5:		#efcdc7;
+$red-color6:		#f5e1dd;
+$red-color7:		#ffedeb;
+
+$orange-color1:		#c96e00;
+$orange-color2:		#ea8a0a;
+$orange-color3:		#fbb034;
+$orange-color4:		#fbbf61;
+$orange-color5:		#fdd085;
+$orange-color6:		#fee2b6;
+$orange-color7:		#fff8f0;
+
+$blue-color1:		#028293;
+$blue-color2:		#009db2;
+$blue-color3:		#47c3d3;
+$blue-color4:		#91dbe4;
+$blue-color5:		#a7e2ea;
+$blue-color6:		#daf3f6;
+$blue-color7:		#f0feff;
+
+/*********************/
+/* old design colors */
+/*********************/
 
 $white:				#FFF;
 $white-opac:		rgba($white, 0.9);
@@ -53,11 +89,19 @@ $bg-color:			$white;
 $content-bg:		$white;
 $footer-bg:			$white;
 
+/*******************/
+/* BH sites colors */
+/*******************/
+
+$main-color:		$blue-color3;
+$shop-color:		$orange-color3;
+$mjs-color:			$red-color3;
+
 /**************/
 /* typography */
 /**************/
 
-$font-color:			$black-color1;
+$font-color:			$gray-color3;
 $font-invert-color:		$white;
 
 $link-color:			$red;
@@ -67,6 +111,7 @@ $read-more-link:		$red;
 $read-more-link-hover:	$red;
 
 $font-normal:			400;
+$font-semi-bold:		600;
 $font-bold:				700;
 
 $border-color1:			$black-color3;

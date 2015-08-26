@@ -26,7 +26,7 @@ var $ = jQuery,
 			BH_general.newsletter_top_menu();
 			
 			// mobile menu
-			BH_general.mobile_menu();
+//			BH_general.mobile_menu();
 			
 			// faqs
 			$('.faqs li .question').click(function() {
@@ -83,6 +83,21 @@ var $ = jQuery,
 			// shop footer alignment
 			$('.shop-footer .link-box').setAllToMaxHeight();
 			
+		},
+
+		top_menu : function() {
+			$('nav.menu ul.nav > li').each(function() {
+				var li_width			= $(this).width(),
+					item_before			= $(this).children('.item-before'),
+					sub_menu			= $(this).children('.sub-menu'),
+					sub_menu_width		= sub_menu.width();
+
+				item_before.css('border-left-width', li_width/2);
+				item_before.css('border-right-width', li_width/2);
+				item_before.removeClass('disable');
+
+				sub_menu.css('left', (li_width-sub_menu_width)/2);
+			});
 		},
 		
 		newsletter_top_menu : function() {
@@ -557,6 +572,7 @@ var $ = jQuery,
 		alignments : function() {
 			
 			/* javascript media queries */
+			/*
 			if (matchMedia) {
 				var mq = window.matchMedia("(max-width: 1199px)");
 				mq.addListener(WidthChange);
@@ -590,6 +606,10 @@ var $ = jQuery,
 				// set mobile menu positioning
 				BH_general.mobile_menu_pos(BH_general.params.mobile_menu_level);
 			}
+			*/
+
+			// top menu
+			BH_general.top_menu();
 			
 		}
 		

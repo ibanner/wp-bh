@@ -8,7 +8,7 @@
  */
 ga('create', _BH_GA_tid, 'auto');
 
-ec = ($('body').hasClass('woocommerce-page') && !$('body').hasClass('woocommerce-cart'));	// indicates whether we are in WooCommerce page or not (excluding cart page)
+ec = (jQuery('body').hasClass('woocommerce-page') && !jQuery('body').hasClass('woocommerce-cart'));	// indicates whether we are in WooCommerce page or not (excluding cart page)
 currency_set = false;																		// indicates whether currency has been set
 
 if (ec) {

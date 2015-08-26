@@ -1,6 +1,7 @@
 @import "functions";
 @import "typography";
 @import "modules/sprites";
+@import "modules/bh_sprites";
 
 @charset "utf-8";
 
@@ -10,10 +11,6 @@
 
 * {
 	@include reset;
-}
-
-.bh-sprites {
-	@include image("general/BH-sprites.png");
 }
 
 html {
@@ -94,6 +91,366 @@ body {
 /* header */
 /**********/
 
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: $bg-color;
+	z-index: 1000;
+
+	/**************/
+	/* header top */
+	/**************/
+
+	.header-top {
+		height: 80px;
+		border-bottom-width: 10px;
+		border-bottom-style: solid;
+
+		&.main { border-bottom-color: $main-color; }
+		&.shop { border-bottom-color: $shop-color; }
+
+		/************/
+		/* BH sites */
+		/************/
+
+		.sites {
+			ul {
+				list-style: none;
+
+				li {
+					float: left;
+					margin: 30px 15px 0 0;
+
+					a {
+						width: 66px;
+						height: 40px;
+						text-align: center;
+						text-decoration: none;
+						display: block;
+
+						.title {
+							font-size: 15px;
+							font-weight: $font-semi-bold;
+							color: $font-invert-color;
+						}
+
+						.icon {
+							margin: 0 auto;
+							@include sprites;
+							display: none;
+						}
+
+						.title,
+						.icon {
+							@include vertical-align;
+						}
+					}
+
+					&:hover {
+						margin: 18px 4px 0 -11px;
+
+						a {
+							width: 88px;
+							height: 52px;
+						}
+					}
+
+					&.active {
+						margin: 0 15px 0 0;
+
+						a {
+							width: 120px;
+							height: 70px;
+						}
+					}
+
+					&:hover,
+					&.active {
+						a {
+							.title {
+								display: none;
+							}
+
+							.icon {
+								display: block;
+							}
+						}
+					}
+
+					&.main {
+						background-color: $main-color;
+
+						&:hover {
+							.icon {
+								@include sprite-museum-en-s;
+							}
+						}
+
+						&.active {
+							.icon {
+								@include sprite-museum-en;
+							}
+						}
+					}
+
+					&.shop {
+						background-color: $shop-color;
+
+						&:hover {
+							.icon {
+								@include sprite-shop-en-s;
+							}
+						}
+
+						&.active {
+							.icon {
+								@include sprite-shop-en;
+							}
+						}
+					}
+
+					&.mjs {
+						background-color: $mjs-color;
+
+						&:hover {
+							.icon {
+								@include sprite-mjs-en-s;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.logo {
+			float: right;
+			margin-left: 15px;
+			height: 70px;
+
+			a {
+				@include sprites;
+				@include sprite-logo-en-124x57;
+				@include vertical-align;
+				display: block;
+			}
+		}
+
+		/***********************/
+		/* header top elements */
+		/***********************/
+
+		.header-top-elements {
+			height: 70px;
+
+			.header-top-elem {
+				float: right;
+				margin-left: 15px;
+				@include vertical-align;
+			}
+		}
+	}
+
+	/*****************/
+	/* header bottom */
+	/*****************/
+	
+	.header-bottom {
+		height: 40px;
+		background-color: $gray-color6;
+
+		/********/
+		/* menu */
+		/********/
+
+		nav.menu {
+			ul.nav {
+				& > li {
+					float: left;
+
+					& > a {
+						padding: 0 25px;
+						line-height: 40px;
+						font-size: 21px;
+						color: $font-color;
+						text-decoration: none;
+
+						&:focus {
+							background-color: transparent;
+						}
+					}
+
+					& > .item-before {
+						position: absolute;
+						top: 40px;
+						left: 0;
+						width: 100%;
+						height: 0;
+						border-left: solid transparent;
+						border-right: solid transparent;
+						border-top: 10px solid;
+						z-index: 1;
+						display: none;
+
+						&.disable {
+							display: none !important;
+						}
+					}
+
+					.sub-menu {
+						position: absolute;
+						padding: 10px 0;
+						top: 45px;
+						left: 0;
+						list-style: none;
+						white-space: nowrap;
+						border:	1px solid $gray-color5;
+						@include border-radius(3px);
+						background-color: $gray-color6;
+						@include box-shadow(0, 0, rgba(0,0,0,0.2), 6px, 0);
+						display: none;
+						
+						& > li {
+							& > a {
+								padding: 5px 10px;
+								font-size: 19px;
+								color: $font-color;
+								text-decoration: none;
+								display: block;
+							}
+						}
+					}
+
+					&:hover {
+						&.menu-item-has-children > .item-before,
+						& > .sub-menu {
+							display: block;
+						}
+					}
+
+					&.current-menu-item,
+					&.current-menu-parent,
+					&.current-menu-ancestor {
+						& > .item-before {
+							display: block;
+						}
+					}
+
+					&:hover,
+					&.current-menu-item,
+					&.current-menu-parent,
+					&.current-menu-ancestor {
+						& > a {
+							color: $font-invert-color;
+							text-shadow: 0px 0.1px 0.1px rgba(255, 255, 255, 1);
+						}
+					}
+				}
+			}
+		}
+
+		&.main {
+			nav.menu {
+				ul.nav {
+					& > li {
+						& > .item-before {
+							border-top-color: $main-color;
+						}
+
+						.sub-menu {
+							& > li {
+								&:hover,
+								&.current-menu-item,
+								&.current-menu-parent,
+								&.current-menu-ancestor {
+									& > a {
+										background-color: $main-color;
+									}
+								}
+							}
+						}
+
+						&:hover,
+						&.current-menu-item,
+						&.current-menu-parent,
+						&.current-menu-ancestor {
+							& > a {
+								background-color: $main-color;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&.shop {
+			nav.menu {
+				ul.nav {
+					& > li {
+						& > .item-before {
+							border-top-color: $shop-color;
+						}
+
+						.sub-menu {
+							& > li {
+								&:hover,
+								&.current-menu-item,
+								&.current-menu-parent,
+								&.current-menu-ancestor {
+									& > a {
+										background-color: $shop-color;
+									}
+								}
+							}
+						}
+
+						&:hover,
+						&.current-menu-item,
+						&.current-menu-parent,
+						&.current-menu-ancestor {
+							& > a {
+								background-color: $shop-color;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/*****************/
+		/* featured page */
+		/*****************/
+
+		.featured-page {
+			float: right;
+			margin-top: -50px;
+
+			a {
+				line-height: 50px;
+				padding: 0 15px;
+				font-size: 21px;
+				font-weight: $font-bold;
+				color: $font-invert-color;
+				text-decoration: none;
+				display: block;
+			}
+		}
+
+		&.main {
+			.featured-page a {
+				background-color: $blue-color2;
+			}
+		}
+
+		&.shop {
+			.featured-page a {
+				background-color: $orange-color2;
+			}
+		}
+	}
+}
+/*
 header .navbar {
 	margin-bottom: 30px;
 	background-color: $content-bg;
@@ -171,7 +528,7 @@ header .navbar {
 					/************************/
 					/* newsletter menu item */
 					/************************/
-					
+/*					
 					&.menu-item-newsletter {
 						position: relative;
 						
@@ -337,7 +694,7 @@ header .navbar {
 					/*********************/
 					/* language selector */
 					/*********************/
-					
+/*					
 					.icl_lang_sel_translated {
 						display: none;
 					}
@@ -698,7 +1055,7 @@ header .navbar {
 		z-index: 300;
 	}
 }
-
+*/
 /****************/
 /* page content */
 /****************/

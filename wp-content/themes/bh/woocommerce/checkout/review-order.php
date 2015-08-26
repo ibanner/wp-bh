@@ -140,7 +140,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( ! is_ajax() && count($cart) > 0 ) { ?>
 	<script>
-		$(function() {
+		jQuery(function($) {
 			BH_EC_onCheckout(<?php echo json_encode($cart); ?>, '<?php echo get_woocommerce_currency(); ?>', true);
 		});
 	</script>

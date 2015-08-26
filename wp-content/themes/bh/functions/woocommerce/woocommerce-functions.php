@@ -30,9 +30,11 @@ function BH_woocommerce_manage_scripts_n_styles() {
 	if ( is_admin() || ! is_page() )
 		return;
 	
-	global $post;
-	$shop_page	= get_field('acf-shop_page', $post->ID) || 'shop-why-shop-with-us.php' == basename( get_page_template() ) || is_cart() || is_checkout() || is_account_page();		// is shop page (true/false)
-	
+	global	$post,
+			$shop_page;
+
+	$shop_page	= get_field('acf-shop_page', $post->ID) || 'shop-why-shop-with-us.php' == basename( get_page_template() ) || 'shop-about.php' == basename( get_page_template() ) || is_cart() || is_checkout() || is_account_page();		// is shop page (true/false)
+
 	if ( function_exists('is_woocommerce') ) {
 		//dequeue scripts and styles
 		if ( ! is_woocommerce() && ! $shop_page ) {
