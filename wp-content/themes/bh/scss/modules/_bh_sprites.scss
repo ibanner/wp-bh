@@ -2,7 +2,7 @@
 /* sprites */
 /***********/
 
-.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter{
+.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he, .sprite-cart{
 	background: url("../images/general/sprites.png") no-repeat;
 }
 
@@ -106,6 +106,36 @@
 	background-position: 0 -128px ;
 	width: 28px;
 	height: 28px;
+}
+
+.sprite-hall-rental-en{
+	background-position: -30px -128px ;
+	width: 42px;
+	height: 31px;
+}
+
+.sprite-hall-rental-hover-en{
+	background-position: -74px -128px ;
+	width: 42px;
+	height: 31px;
+}
+
+.sprite-hall-rental-he{
+	background-position: -118px -128px ;
+	width: 42px;
+	height: 31px;
+}
+
+.sprite-hall-rental-hover-he{
+	background-position: -162px -128px ;
+	width: 42px;
+	height: 31px;
+}
+
+.sprite-cart{
+	background-position: -206px -128px ;
+	width: 33px;
+	height: 30px;
 }
 
 /******************/
@@ -216,4 +246,34 @@
 	background-position: 0 -128px ;
 	width: 28px;
 	height: 28px;
+}
+
+@mixin sprite-hall-rental-en{
+	background-position: -30px -128px ;
+	width: 42px;
+	height: 31px;
+}
+
+@mixin sprite-hall-rental-hover-en{
+	background-position: -74px -128px ;
+	width: 42px;
+	height: 31px;
+}
+
+@mixin sprite-hall-rental-he{
+	background-position: -118px -128px ;
+	width: 42px;
+	height: 31px;
+}
+
+@mixin sprite-hall-rental-hover-he{
+	background-position: -162px -128px ;
+	width: 42px;
+	height: 31px;
+}
+
+@mixin sprite-cart{
+	background-position: -206px -128px ;
+	width: 33px;
+	height: 30px;
 }

@@ -102,38 +102,38 @@ var $ = jQuery,
 		
 		newsletter_top_menu : function() {
 			
-			var newsletter_widget			= $('header .newsletter-widget'),
-				newsletter_widget_btn		= newsletter_widget.children('.newsletter-widget-btn'),
-				newsletter_widget_content	= newsletter_widget.children('.newsletter-widget-content'),
-				newsletter_widget_close 	= newsletter_widget_content.children('.glyphicon-remove');
+			var newsletter_popup			= $('header .newsletter-popup'),
+				newsletter_popup_btn		= newsletter_popup.children('.newsletter-popup-btn'),
+				newsletter_popup_content	= newsletter_popup.children('.newsletter-popup-content'),
+				newsletter_popup_close		= newsletter_popup_content.children('.glyphicon-remove');
 			
 			// bind click events
-			newsletter_widget_btn.click(function() {
-				newsletter_widget_content.toggle();
+			newsletter_popup_btn.click(function() {
+				newsletter_popup_content.toggle();
 				$(this).children('button').toggleClass('active');
 				
 				// reset newsletter popup expiry
-				BH_general.newsletter_popup('set');
+				BH_general.set_newsletter_popup('set');
 			});
 			
-			newsletter_widget_close.click(function() {
-				newsletter_widget_content.hide();
-				newsletter_widget_btn.children('button').removeClass('active');
+			newsletter_popup_close.click(function() {
+				newsletter_popup_content.hide();
+				newsletter_popup_btn.children('button').removeClass('active');
 				
 				// reset newsletter popup expiry
-				BH_general.newsletter_popup('set');
+				BH_general.set_newsletter_popup('set');
 			});
 			
 			// popup newsletter
-			BH_general.newsletter_popup('open');
+			BH_general.set_newsletter_popup('open');
 			
 		},
 		
-		newsletter_popup : function(action) {
+		set_newsletter_popup : function(action) {
 			
-			var newsletter_widget			= $('header .newsletter-widget'),
-				newsletter_widget_btn		= newsletter_widget.children('.newsletter-widget-btn'),
-				newsletter_widget_content	= newsletter_widget.children('.newsletter-widget-content');
+			var newsletter_popup			= $('header .newsletter-popup'),
+				newsletter_popup_btn		= newsletter_popup.children('.newsletter-popup-btn'),
+				newsletter_popup_content	= newsletter_popup.children('.newsletter-popup-content');
 			
 			$.ajax({
 				
@@ -148,9 +148,9 @@ var $ = jQuery,
 				success: function(result) {
 					var r = JSON.parse(result);
 					if (r.status == 0) {
-						if (action == 'open' && r.operation == 'popup' && !newsletter_widget_btn.children('button').hasClass('active')) {
-							newsletter_widget_content.show();
-							newsletter_widget_btn.children('button').addClass('active');
+						if (action == 'open' && r.operation == 'popup' && !newsletter_popup_btn.children('button').hasClass('active')) {
+							newsletter_popup_content.show();
+							newsletter_popup_btn.children('button').addClass('active');
 						}
 						
 						return true;

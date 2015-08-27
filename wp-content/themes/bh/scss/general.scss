@@ -131,6 +131,7 @@ header {
 						display: block;
 
 						.title {
+							line-height: 15px;
 							font-size: 15px;
 							font-weight: $font-semi-bold;
 							color: $font-invert-color;
@@ -247,11 +248,15 @@ header {
 					color: $font-invert-color;
 					@include border-radius(0);
 					text-decoration: none;
-					display: block;
-
+	
 					&:hover {
-						background-color: $gray-color3;
+						background-color: $gray-color3 !important;
 					}
+				}
+
+				a,
+				button {
+					display: block;
 				}
 
 				/**********************/
@@ -259,8 +264,8 @@ header {
 				/**********************/
 
 				&.languages-switcher a {
-					width: 31px;
-					line-height: 31px;
+					width: 30px;
+					line-height: 30px;
 					font-size: 12px;
 					font-weight: 700;
 					color: #FFF;
@@ -275,28 +280,24 @@ header {
 					}
 				}
 
-				/*********************/
-				/* newsletter widget */
-				/*********************/
+				/********************/
+				/* newsletter popup */
+				/********************/
 
-				&.newsletter-widget {
+				&.newsletter-popup {
 					z-index: 100;
 
-					.newsletter-widget-btn {
+					.newsletter-popup-btn {
 						.label {
 							background-color: $orange-color3;
 
-							&:hover {
-								background-color: $gray-color3;
-							}
-
 							&.active {
-								background-color: $orange-color2;
+								background-color: $orange-color2 !important;
 							}
 						}
 					}
 
-					.newsletter-widget-content {
+					.newsletter-popup-content {
 						position: absolute;
 						top: 35px;
 						left: -144px;
@@ -1275,6 +1276,8 @@ header .navbar {
 /****************/
 
 .page-content {
+	margin-top: 120px;
+	padding-top: 30px;
 
 	/*************/
 	/* side menu */

@@ -64,7 +64,8 @@ $menu = wp_nav_menu($args);
 
 // Set header components
 $languages_switcher	= BH_languages_switcher();
-$newsletter_widget	= BH_newsletter_widget();
+$newsletter_popup	= BH_newsletter_popup();
+$links_n_icons		= BH_header_links_n_icons();
 
 ?>
 
@@ -100,9 +101,13 @@ $newsletter_widget	= BH_newsletter_widget();
 							</div>
 						<?php endif; ?>
 
-						<?php if ($newsletter_widget) : ?>
-							<div class="header-top-elem newsletter-widget">
-								<?php echo $newsletter_widget; ?>
+						<?php if ($links_n_icons) :
+							echo $links_n_icons;
+						endif; ?>
+
+						<?php if ($newsletter_popup) : ?>
+							<div class="header-top-elem newsletter-popup">
+								<?php echo $newsletter_popup; ?>
 							</div>
 						<?php endif; ?>
 					</div>
