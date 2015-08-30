@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * BH_newsletter_popup
  *
+ * Get Newsletter button and popup to be displayed as part of header elements
+ *
  * @return		String		newsletter button and popup
  */
 function BH_newsletter_popup() {
@@ -36,7 +38,7 @@ function BH_newsletter_popup() {
 /**
  * BH_header_links_n_icons
  * 
- * Display icons and links as part of header elements
+ * Get icons and links to be displayed as part of header elements
  * 
  * @return		String
  */
@@ -54,7 +56,7 @@ function BH_header_links_n_icons() {
 /**
  * BH_get_contact_details
  * 
- * get homepage contact details section
+ * Get homepage contact details section
  * 
  * @return		String
  */

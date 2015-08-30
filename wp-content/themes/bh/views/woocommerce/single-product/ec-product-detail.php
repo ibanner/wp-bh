@@ -1,6 +1,7 @@
 <?php
 /**
  * Enhanced Ecommerce - Measuring a Product Details View
+ * Facebook Pixel - ViewContent event
  *
  * @author 		Beit Hatfutsot
  * @package 	bh/views/woocommerce/single-product

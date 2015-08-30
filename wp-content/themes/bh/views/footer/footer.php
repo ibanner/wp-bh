@@ -4,18 +4,11 @@
 	
 		<div class="row">
 
-			<div class="col col-md-3">
-				<div class="nadav-logo bh-sprites"></div>
+			<div class="col col-sm-8">
+				<div class="copyrights">&copy; 1996 <?php bloginfo('name'); ?></div>
 			</div>
 	
-			<div class="col col-sm-8 col-md-6">
-				<?php
-					// footer menu
-					get_template_part('views/components/footer-menu');
-				?>
-			</div>
-	
-			<div class="col col-sm-4 col-md-3">
+			<div class="col col-sm-4">
 				<?php
 					// search form
 					get_template_part('views/components/search', 'form');

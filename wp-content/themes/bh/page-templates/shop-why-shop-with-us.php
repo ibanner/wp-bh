@@ -10,7 +10,6 @@
 	 * woocommerce_before_main_content hook
 	 *
 	 * @hooked	woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-	 * @hooked	BH_shop_header - 15
 	 */
 	do_action('woocommerce_before_main_content');
 	

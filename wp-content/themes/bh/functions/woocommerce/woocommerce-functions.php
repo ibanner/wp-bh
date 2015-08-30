@@ -130,45 +130,6 @@ function BH_woocommerce_breadcrumb_defaults($defaults) {
 }
 
 /**
- * BH_shop_header
- * 
- * @uses	BH_product_cat_menu
- */
-function BH_shop_header() {
-	$is_cart_checkout = is_cart() || is_checkout();
-	
-	echo '<div class="container">';
-		echo '<div class="row shop-header">';
-		
-			echo '<div class="' . ( $is_cart_checkout ? 'col-sm-12' : 'col-sm-11 shop-body-left' ) . '">';
-				echo '<div class="row">';
-				
-					// product category menu
-					echo '<div class="col-sm-7 product-cat-menu-wrapper"' . ( $is_cart_checkout ? ' style="width: 66.66666667%;"' : '' ) . '>';
-						BH_product_cat_menu();
-					echo '</div>';
-					
-					// product search
-					echo '<div class="col-sm-5 widget-product-search-wrapper"' . ( $is_cart_checkout ? ' style="right: auto; width: 33.33333333%;"' : '' ) . '>';
-						if ( is_active_sidebar('shop-header-search') )
-							dynamic_sidebar('shop-header-search');
-					echo '</div>';
-					
-				echo '</div>';
-			echo '</div>';
-			
-			if ( ! $is_cart_checkout ) :
-				echo '<div class="col-sm-1 shop-body-right">';
-					if ( is_active_sidebar('shop-header-cart') )
-						dynamic_sidebar('shop-header-cart');
-				echo '</div>';
-			endif;
-			
-		echo '</div>';
-	echo '</div>';
-}
-
-/**
  * BH_shop_footer_link_boxes
  * 
  * Display link boxes to common shop pages
@@ -544,48 +505,6 @@ function BH_shop_single_meta() {
 function BH_shop_single_badges() {
 	get_template_part('views/woocommerce/single-product/single-product-section1', 'badges');
 }
-
-/**
- * BH_shop_toggle_experience
- * 
- * deprecated
- * 
- * Single Product / Section 2
- * Show experience section toggle button
- */
-/*
-function BH_shop_toggle_experience() {
-	get_template_part('views/woocommerce/single-product/single-product-section2', 'toggle');
-}
-*/
-
-/**
- * BH_shop_show_random_image
- * 
- * deprecated
- * 
- * Single Product / Section 2
- * Show experience random image
- */
-/*
-function BH_shop_show_random_image() {
-	get_template_part('views/woocommerce/single-product/single-product-section2', 'image');
-}
-*/
-
-/**
- * BH_shop_show_experience_text
- * 
- * deprecated
- * 
- * Single Product / Section 2
- * Show experience text
- */
-/*
-function BH_shop_show_experience_text() {
-	get_template_part('views/woocommerce/single-product/single-product-section2', 'text');
-}
-*/
 
 /**
  * BH_shop_show_experience_banner

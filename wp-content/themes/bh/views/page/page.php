@@ -1,6 +1,7 @@
 <?php
 
-	$shop_page		= get_field('acf-shop_page') || is_cart() || is_checkout() || is_account_page();	// is shop page (true/false)
+	global $shop_page	// is shop page (true/false)
+	
 	$widgets_area	= get_field('acf-content_page_template_widgets_area');								// get page widgets area
 	
 ?>
@@ -12,7 +13,6 @@
 		 * woocommerce_before_main_content hook
 		 *
 		 * @hooked	woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-		 * @hooked	BH_shop_header - 15
 		 */
 		do_action('woocommerce_before_main_content');
 		

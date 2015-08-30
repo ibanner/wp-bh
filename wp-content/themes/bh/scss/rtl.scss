@@ -1274,15 +1274,6 @@ article.post {
 			}
 		}
 	}
-	
-/*	&.single-product-section2 {
-		#experience-toggle {
-			left: 15px;
-			right: auto;
-			@include open-close-he;
-		}
-	}
-*/
 }
 
 /***************/
@@ -1533,33 +1524,6 @@ ul.order_details {
 
 footer {
 	.col {
-		.navbar {
-			nav.footer-menu {
-				.navbar-nav {
-					& > li {			
-						padding-left: 14px;
-						padding-right: 0;
-
-						& > a {
-							border-left: 0;
-							border-right: 1px solid $border-color1;
-							padding: 0 15px 0 0;
-						}
-						
-						&:first-child > a {
-							border-right: 0;
-						}
-						
-						&.copyrights {
-							border-left: 0;
-							border-right: 1px solid #d1d1d1;
-							padding: 0 15px 0 0;
-						}
-					}
-				}
-			}
-		}
-		
 		.search-form {
 			.search-field {
 				left: auto;

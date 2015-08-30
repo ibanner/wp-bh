@@ -38,13 +38,6 @@ add_action('woocommerce_after_main_content', 'BH_woocommerce_wrapper_end', 10);
 add_filter('woocommerce_breadcrumb_defaults', 'BH_woocommerce_breadcrumb_defaults');
 
 /**
- * WooCommerce Header
- * 
- * @see		BH_shop_header()
- */
-add_action('woocommerce_before_main_content', 'BH_shop_header', 15);
-
-/**
  * WooCommerce Footer
  * 
  * @see		BH_shop_footer_link_boxes()
@@ -99,9 +92,7 @@ add_action('BH_shop_home', 'BH_shop_home_product_sliders', 20);
  * @see		woocommerce_template_single_add_to_cart()
  * @see		BH_shop_single_meta()
  * @see		BH_shop_single_badges()
- * @see		BH_shop_toggle_experience()
- * @see		BH_shop_show_random_image()
- * @see		BH_shop_show_experience_text()
+ * @see		BH_shop_show_experience_banner()
  * @see		BH_shop_show_related_products()
  * @see		BH_EC_product_detail()						// Enhanced Ecommerce - tracking product detail
  */
@@ -113,11 +104,6 @@ add_action('BH_shop_single_product_meta', 'BH_shop_single_excerpt', 20);
 add_action('BH_shop_single_product_meta', 'woocommerce_template_single_add_to_cart', 30);
 add_action('BH_shop_single_product_meta', 'BH_shop_single_meta', 40);
 add_action('BH_shop_single_product_meta', 'BH_shop_single_badges', 50);
-
-//add_action('BH_shop_before_experience', 'BH_shop_toggle_experience', 10);
-
-//add_action('BH_shop_experience', 'BH_shop_show_random_image', 10);
-//add_action('BH_shop_experience', 'BH_shop_show_experience_text', 20);
 
 add_action('BH_shop_experience', 'BH_shop_show_experience_banner', 10);
 

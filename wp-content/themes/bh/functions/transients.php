@@ -8,27 +8,21 @@
 	 * =========================================================================================================================================+
 	 * called:														set:		1. MC-category-<language code>-terms-updated
 	 * 1. after a category term is created
-	 * 																			2. MC-top-menu-updated
-	 * 																			3. MC-main-menu-updated
-	 * 																			4. MC-footer-menu-updated
+	 * 																			2. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_delete_category																														|
 	 * =========================================================================================================================================+
 	 * called:														set:		1. MC-category-<language code>-terms-updated
 	 * 1. after a category term is deleted
-	 * 																			2. MC-top-menu-updated
-	 * 																			3. MC-main-menu-updated
-	 * 																			4. MC-footer-menu-updated
+	 * 																			2. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_edit_category																															|
 	 * =========================================================================================================================================+
 	 * called:														set:		1. MC-category-<language code>-terms-updated
 	 * 1. after a category term is edited
-	 * 																			2. MC-top-menu-updated
-	 * 																			3. MC-main-menu-updated
-	 * 																			4. MC-footer-menu-updated
+	 * 																			2. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_create_event_category																													|
@@ -37,9 +31,7 @@
 	 * 1. after an event category term is created/edited
 	 * 																			2. MC-event_category-<language code>-terms-updated
 	 * 
-	 * 																			3. MC-top-menu-updated
-	 * 																			4. MC-main-menu-updated
-	 * 																			5. MC-footer-menu-updated
+	 * 																			3. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_delete_event_category																													|
@@ -48,9 +40,7 @@
 	 * 1. before an event category term is deleted
 	 * 																set:		1. MC-event_category-<language code>-terms-updated
 	 * 
-	 * 																			2. MC-top-menu-updated
-	 * 																			3. MC-main-menu-updated
-	 * 																			4. MC-footer-menu-updated
+	 * 																			2. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_edit_event_category																													|
@@ -70,9 +60,7 @@
 	 * 																			1. MC-category-<language code>-terms-updated
 	 * 
 	 * 																set for both event and post:
-	 * 																			1. MC-top-menu-updated
-	 * 																			2. MC-main-menu-updated
-	 * 																			3. MC-footer-menu-updated
+	 * 																			1. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_trashed_post																															|
@@ -86,9 +74,7 @@
 	 * 																			1. MC-category-<language code>-terms-updated
 	 * 
 	 * 																set for both event and post:
-	 * 																			1. MC-top-menu-updated
-	 * 																			2. MC-main-menu-updated
-	 * 																			3. MC-footer-menu-updated
+	 * 																			1. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_untrashed_post																														|
@@ -102,9 +88,7 @@
 	 * 																			1. MC-category-<language code>-terms-updated
 	 * 
 	 * 																set for both event and post:
-	 * 																			1. MC-top-menu-updated
-	 * 																			2. MC-main-menu-updated
-	 * 																			3. MC-footer-menu-updated
+	 * 																			1. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_pre_post_update																														|
@@ -118,9 +102,7 @@
 	 * 																			1. MC-category-<language code>-terms-updated
 	 * 
 	 * 																set for both event and post:
-	 * 																			1. MC-top-menu-updated
-	 * 																			2. MC-main-menu-updated
-	 * 																			3. MC-footer-menu-updated
+	 * 																			1. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_save_post																																|
@@ -134,9 +116,7 @@
 	 * 																			1. MC-category-<language code>-terms-updated
 	 * 
 	 * 																set for both event and post:
-	 * 																			1. MC-top-menu-updated
-	 * 																			2. MC-main-menu-updated
-	 * 																			3. MC-footer-menu-updated
+	 * 																			1. MC-main-menu-updated
 	 * 
 	 * =========================================================================================================================================+
 	 * BH_acf_save_options																														|
@@ -149,81 +129,6 @@
 	/***************************/
 	/* get transient functions */
 	/***************************/
-	
-	/**
-	 * BH_get_cached_desktop_menu
-	 * 
-	 * transient version for functions/menus.php -> BH_get_desktop_menu()
-	 * 
-	 * @param	array		$menu			array of LI string elements
-	 * @param	string		$menu_name		menu theme location - used to check validity against menu transient
-	 * @return	string						two levels HTML LIs structure
-	 */
-	function BH_get_cached_desktop_menu($menu, $menu_name) {
-		if (!$menu)
-			return;
-			
-		$desktop_menu	= '';
-		$locations		= get_nav_menu_locations();
-		
-		if ( isset($menu_name) && isset($locations[$menu_name]) ) :
-			$desktop_menu_key		= 'MC-' . md5( serialize('desktop') . serialize($locations[$menu_name]) . serialize(get_queried_object()) );
-			$desktop_menu_in_cache	= get_transient($desktop_menu_key);
-			$last_updated			= get_transient('MC-' . $menu_name . '-updated');
-			
-			if ( isset($desktop_menu_in_cache['data']) && isset($last_updated) && $last_updated < $desktop_menu_in_cache['time'] )
-				// return menu from cache
-				return $desktop_menu_in_cache['data'];
-				
-			// menu isn't valid or not exist in cache
-			if (!$last_updated)
-				set_transient('MC-' . $menu_name . '-updated', time());
-				
-			$desktop_menu = BH_get_desktop_menu($menu);
-			$data = array('time' => time(), 'data' => $desktop_menu);
-			set_transient($desktop_menu_key, $data);
-		endif;
-		
-		return $desktop_menu;
-	}
-	
-	/**
-	 * BH_get_cached_mobile_menu
-	 * 
-	 * transient version for functions/menus.php -> BH_get_mobile_menu()
-	 * 
-	 * @param	array		$menu			array of LI string elements
-	 * @param	string		$menu_name		menu theme location - used to check validity against menu transient
-	 * @return	string						mobile menu HTML LIs structure
-	 */
-	function BH_get_cached_mobile_menu($menu, $menu_name) {
-		if (!$menu)
-			return;
-			
-		$mobile_menu	= '';
-		$locations		= get_nav_menu_locations();
-		
-		if ( isset($menu_name) && isset($locations[$menu_name]) ) :
-			$mobile_menu_key		= 'MC-' . md5( serialize('mobile') . serialize($locations[$menu_name]) . serialize(get_queried_object()) );
-			$mobile_menu_in_cache	= get_transient($mobile_menu_key);
-			$last_updated			= get_transient('MC-' . $menu_name . '-updated');
-			
-			if ( isset($mobile_menu_in_cache['data']) && isset($last_updated) && $last_updated < $mobile_menu_in_cache['time'] )
-				// return menu from cache
-				return $mobile_menu_in_cache['data'];
-				
-			// menu isn't valid or not exist in cache
-			if (!$last_updated)
-				set_transient('MC-' . $menu_name . '-updated', time());
-				
-			// generate mobile menu
-			$mobile_menu = BH_get_mobile_menu($menu);
-			$data = array('time' => time(), 'data' => $mobile_menu);
-			set_transient($mobile_menu_key, $data);
-		endif;
-		
-		return $mobile_menu;
-	}
 	
 	/**
 	 * BH_get_cached_nav_menu_items

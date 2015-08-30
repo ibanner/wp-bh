@@ -35,6 +35,7 @@ if ( function_exists('acf_add_options_sub_page') ) {
  * @fieldgroup	Product Badge Attributes
  * @fieldgroup	Shop - About
  * @fieldgroup	Shop - Why Shop With Us
+ * @fieldgroup	Header/Footer Options
  * @fieldgroup	Contact Details Options
  * @fieldgroup	General Options
  * @fieldgroup	Shop Options

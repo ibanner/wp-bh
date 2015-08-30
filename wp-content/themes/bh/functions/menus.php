@@ -1,10 +1,10 @@
 <?php
 /**
- * BH theme menus
+ * Menus
  *
  * @author		Beit Hatfutsot
  * @package		bh/functions
- * @version		1.0
+ * @version		2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -15,9 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $menus;
 
 $menus = array(
-	'top-menu'		=> __('Top Menu'),
-	'main-menu'		=> __('Main Menu'),
-	'footer-menu'	=> __('Footer Menu'),
+	'main-menu'		=> __('Main Menu')
 );
 
 function BH_register_menus() {
@@ -166,9 +164,9 @@ function BH_get_event_categories_menu($current_object_id, $show_events) {
 	return $output;
 }
 
-/***************************/
-/* top/main menu functions */
-/***************************/
+/***********************/
+/* main menu functions */
+/***********************/
 
 /**
  * BH_add_event_categories_submenu
@@ -363,250 +361,4 @@ function BH_add_blog_categories_submenu($items, $args) {
 		array_splice($items, $parent_item_key, 0, $categories_list);
 		
 	return $items;
-}
-
-/**
- * BH_main_walker_nav_menu
- * 
- * main menu walker
- * transform the menu into list of HTML LIs containing menu item parent and depth level indicators for each
- */
-class BH_main_walker_nav_menu extends Walker_Nav_Menu {
-	// remove <ul> tags
-	function start_lvl( &$output, $depth = 0, $args = array() ) {
-		$output .= "";
-	}
-	
-	function end_lvl( &$output, $depth = 0, $args = array() ) {
-		$output .= "";
-	}
-	
-	// add menu item parent and depth level indicators to <li> tags
-	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-		global $wp_query;
-		
-		// depth dependent classes
-		$depth_class_name = 'menu-item-depth-' . $depth;
-		
-		// passed classes
-		$classes = empty($item->classes) ? array() : (array) $item->classes;
-		$classes[] = 'menu-item-' . $item->ID;
-		$class_names = esc_attr( implode( ' ', apply_filters('nav_menu_css_class', array_filter($classes), $item) ) );
-		
-		// build <li> html
-		$output .= '<li menu-item="'. $item->ID . '" menu-item-parent="' . $item->menu_item_parent . '" class="' . $depth_class_name . ' ' . $class_names . '">';
-		
-		// link attributes
-		$attributes  = ! empty($item->attr_title)	? ' title="'	. esc_attr($item->attr_title) . '"' : '';
-		$attributes .= ! empty($item->target    )	? ' target="'	. esc_attr($item->target    ) . '"' : '';
-		$attributes .= ! empty($item->xfn       )	? ' rel="'		. esc_attr($item->xfn       ) . '"' : '';
-		$attributes .= ! empty($item->url       )	? ' href="'		. esc_attr($item->url       ) . '"' : '';
-		$attributes .= ' item="' . esc_attr($item->ID) . '"';
-		
-		$item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s',
-			$args->before,
-			$attributes,
-			$args->link_before,
-			apply_filters( 'the_title', $item->title, $item->ID ),
-			$args->link_after,
-			$args->after
-		);
-		
-		// build <a> html
-		$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
-		
-		// close <li> html
-		$output .= "</li>";
-	}
-	
-	function end_el( &$output, $item, $depth = 0, $args = array() ) {
-		$output .= "";
-	}
-}
-
-/**
- * BH_get_desktop_menu
- * 
- * transform HTML LIs structured menu to desktop main menu
- * generally this function considers only two levels menu items
- * 
- * @param	array	$menu	array of LI string elements
- * @return	string			two levels HTML LIs structure
- */
-function BH_get_desktop_menu($menu) {
-	if (!$menu)
-		return;
-		
-	$output			= '';
-	$current_level	= 0;
-	
-	foreach ($menu as $li) :
-		$li_level = substr($li, strpos($li, 'class="menu-item-depth-') + 23, 1);
-		if ($li_level <= 1) :
-			if ($current_level < $li_level) :
-				// open a new <ul> tag
-				$output .= '<ul class="sub-menu">' . $li;
-				$current_level++;
-			elseif ($current_level > $li_level) :
-				// close current <ul> tag
-				$output .= '</li></ul></li>' . $li;
-				$current_level--;
-			else :
-				// we are at the same level
-				$output .= ($output) ? '</li>' . $li : $li;
-			endif;
-		endif;
-	endforeach;
-	
-	// close last <ul> / <li> tags
-	if ($output) :
-		$output .= ($current_level > 0) ? '</li></ul></li>' : '</li>';
-	endif;
-	
-	return $output;
-}
-
-/**
- * BH_get_mobile_menu
- * 
- * transform HTML LIs structured menu to mobile menu
- * 
- * @param	array	$menu			array of LI string elements
- * @param	bool	$is_top_menu	indicates whether $menu is the top menu or not (top menu is displayed at the first side menu level as well)
- * @return	string					mobile menu HTML LIs structure
- */
-function BH_get_mobile_menu($menu, $is_top_menu = false) {
-	if (!$menu)
-		return;
-		
-	$output		= '';
-	
-	// $side_menus is built as array of arrays, each represents a complete side menu level
-	// each $side_menus array key represents the menu item parent ID
-	// first item in each $side_menus array represents the menu item parent title
-	// second item in each $side_menus array represents the side menu level
-	$side_menus	= array();
-	
-	// $items used to store all item names in order to index all potential menu item parents names
-	// each $items key represents the menu item ID
-	// each $items value represents the menu item name
-	$items		= array();
-	
-	// $top_menu will be displayed as part of first level side menu
-	global $top_menu;
-	
-	// build $side_menus array
-	foreach ($menu as $li) :
-		// collect LI information
-		$menu_item_id_start_pos		= strpos($li, 'menu-item="') + 11;
-		$menu_item_id_end_pos		= strpos($li, 'menu-item-parent') - 2;
-		$menu_item_id				= substr($li, $menu_item_id_start_pos, ($menu_item_id_end_pos-$menu_item_id_start_pos));
-		
-		$menu_item_parent_start_pos	= strpos($li, 'menu-item-parent="') + 18;
-		$menu_item_parent_end_pos	= strpos($li, 'class="menu-item-depth') - 2;
-		$menu_item_parent			= substr($li, $menu_item_parent_start_pos, $menu_item_parent_end_pos-$menu_item_parent_start_pos);
-		
-		$menu_item_name_start_pos	= strpos($li, '<span>') + 6;
-		$menu_item_name_end_pos		= strpos($li, '</span>');
-		$menu_item_name				= substr($li, $menu_item_name_start_pos, $menu_item_name_end_pos-$menu_item_name_start_pos);
-		
-		$li_level					= substr($li, strpos($li, 'class="menu-item-depth-') + 23, 1);
-		
-		// store menu item id and name
-		if ( !array_key_exists($menu_item_id, $items) )
-			$items[$menu_item_id]	= $menu_item_name;
-			
-		// insert menu item into $side_menus accordingly
-		if ( !array_key_exists($menu_item_parent, $side_menus) ) :
-			// define a new $side_menus entry
-			$side_menus[$menu_item_parent]		= array();
-			$side_menus[$menu_item_parent][0]	= ( array_key_exists($menu_item_parent, $items) ) ? $items[$menu_item_parent] : '';
-			$side_menus[$menu_item_parent][1]	= $li_level;
-			
-			if ($menu_item_parent == '0' && !$is_top_menu)
-				$side_menus[0][2]				= '<li><a href="' . get_bloginfo('url') . '">' . __('Home', 'BH') . '</a>';		// </li> will be added later on
-		endif;
-		
-		$side_menus[$menu_item_parent][]		= $li;
-	endforeach;
-	
-	// build $output
-	foreach ($side_menus as $menu_item_parent => $side_menu) :
-		$output .= '<div class="' . ( (!($is_top_menu && $menu_item_parent == 0)) ? 'side-menu' : 'side-top-menu' ) . '" menu-level="' . ($side_menu[1] + 1) . '" menu-parent="' . $menu_item_parent . '">';
-		
-			// display menu title
-			if ( !($is_top_menu && $menu_item_parent == 0) ) :
-				$output .= '<div class="side-menu-top">';
-					$output .= '<div class="sub-menu-title">' . ( ($side_menu[0]) ? $side_menu[0] : languages_switcher() ) . '</div>';
-					$output .= '<span class="lines"></span>';
-				$output .= '</div>';
-			endif;
-			
-			// display menu content
-			$output .= '<nav class="menu-main-menu-container">';
-				$output .= '<ul>';
-					$i = 2;
-					while ( $i < count($side_menu) ) :
-						$output .= $side_menu[$i++] . '</li>';
-					endwhile;
-				$output .= '</ul>';
-				
-				// display $top_menu
-				if (!$is_top_menu && $menu_item_parent == 0 && $top_menu) :
-					$edited_top_menu = explode('</li>', $top_menu);
-					
-					// last element is empty - remove it
-					array_pop($edited_top_menu);
-					
-					$output .= BH_get_mobile_menu($edited_top_menu, true);
-				endif;
-			$output .= '</nav>';
-			
-		$output .= '</div>';
-	endforeach;
-	
-	return $output;
-}
-
-/***************************/
-/* product categories menu */
-/***************************/
-
-/**
- * BH_product_cat_menu
- */
-function BH_product_cat_menu() {
-	$args = array(
-		'orderby'			=> 'term_order',
-		'hide_empty'		=> 0,
-		'title_li'			=> '',
-		'show_option_none'	=> '',
-		'taxonomy'			=> 'product_cat',
-		'depth'				=> 1,
-		'echo'				=> 0
-	);
-	$menu = wp_list_categories($args);
-	
-	if ($menu) :
-		echo '<nav class="product-cat-menu"><ul class="nav navbar-nav">';
-			echo $menu;
-		echo '</ul></nav>';
-	endif;
-}
-
-add_filter('wp_list_categories', 'BH_list_current_product_cat');
-function BH_list_current_product_cat($content) {
-	if (is_singular('product')) {
-		global $post;
-		
-		$categories = wp_get_post_terms($post->ID, 'product_cat');
-		
-		foreach ($categories as $category)
-			$content = preg_replace(
-				"/class=\"(.*)\"><a ([^<>]*)>$category->name<\/a>/",
-				"class=\"$1 current-cat\"><a $2>$category->name</a>",
-				$content);
-	}
-	
-	return $content;
 }

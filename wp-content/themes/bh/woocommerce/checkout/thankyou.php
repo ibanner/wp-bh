@@ -96,7 +96,7 @@ if ( $order ) : ?>
 				}
 			}
 			
-			// send order and cart data to Google Analytics
+			// send order and cart data to Google Analytics and Facebook
 			if ($transaction && $cart) { ?>
 				<script>
 					jQuery(function($) {

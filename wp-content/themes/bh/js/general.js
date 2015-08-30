@@ -8,25 +8,12 @@ var $ = jQuery,
 			api						: js_globals.template_url + '/api/',
 			timeout					: 400,
 
-			// mobile menu
-			sideslider				: '',		// hamburger
-			sel						: '',		// side menu container
-			side_menu				: '',		// hamburger click event handler
-
-			mobile_menu_right		: '',		// for RTL will be considered as mobile_menu_left
-			mobile_menu_width		: '',
-			mobile_menu_level		: 1,
-			mobile_menu_ancestors	: []		// active side menus
-
 		},
 
 		init : function() {
 
 			// newsletter top menu
 			BH_general.newsletter_top_menu();
-			
-			// mobile menu
-//			BH_general.mobile_menu();
 			
 			// faqs
 			$('.faqs li .question').click(function() {
@@ -163,133 +150,6 @@ var $ = jQuery,
 			
 		},
 		
-		mobile_menu : function() {
-			
-			BH_general.params.sideslider = $('[data-toggle=collapse-side]');
-			BH_general.params.sel = BH_general.params.sideslider.attr('data-target');
-			
-			// sideslider click event
-			side_menu = function() {
-				// disable double click during side menu exposure
-				BH_general.params.sideslider.unbind('click', side_menu);
-				
-				// expose side menu
-				$(BH_general.params.sel).toggleClass('in');
-				$('.side-menu[menu-level="1"]').toggle();
-				
-				// expose side column
-				$('.side-column').css('width', BH_general.params.mobile_menu_right);
-				
-				// update menu ancestors
-				BH_general.params.mobile_menu_ancestors.push(0);
-			}
-			BH_general.params.sideslider.bind('click', side_menu);
-			
-			// set side-menu's "right" value
-			$('.side-menu').each(function() {
-				var level = $(this).attr('menu-level');
-				var right = (level-1)*100;
-				
-				if ($('body').hasClass('rtl'))
-					$(this).css('left', right + '%');
-				else
-					$(this).css('right', right + '%');
-			});
-			
-			// copy parent items with href attribute into their sub menu
-			$('.side-menu .menu-item-has-children').each(function() {
-				var li = $(this);
-				
-				if ( $(this).children('a').attr('href') ) {
-					var item = $(this).children('a').attr('item');
-					var sub_menu = $('.side-menu[menu-parent="' + item + '"]');
-					li.clone().prependTo(sub_menu.children('nav').children('ul'));
-					
-					// remove href attribute from original element
-					$(this).children('a').removeAttr('href');
-					
-					// remove class 'menu-item-has-children' from cloned element
-					sub_menu.find('li.menu-item-' + item).removeClass('menu-item-has-children');
-					
-					// add class 'cloned-menu-item' to cloned element
-					sub_menu.find('li.menu-item-' + item).addClass('cloned-menu-item');
-				}
-			});
-			
-			// open side-menu event
-			$('.side-menu .menu-item-has-children').click(function(event) {
-				var menu = $(this).parents('.side-menu');
-				var level = parseInt( menu.attr('menu-level') );
-				var item = $(this).children('a').attr('item');
-				
-				sub_menu = $('.side-menu[menu-parent="' + item + '"]');
-				
-				// expose sub menu
-				sub_menu.show();
-				
-				BH_general.params.mobile_menu_level = level+1;
-				BH_general.mobile_menu_pos(level+1);
-				
-				// update menu ancestors
-				BH_general.params.mobile_menu_ancestors.push(item);
-			});
-			
-			// close side-menu event
-			$('.side-menu-top span').click(function(event) {
-				var menu = $(this).parent().parent();
-				BH_general.hide_side_menu(menu);
-			});
-			
-			// close side-menu by click side column
-			$('.side-column').click(function() {
-				var menu = $('.side-menu[menu-parent="' + BH_general.params.mobile_menu_ancestors[BH_general.params.mobile_menu_ancestors.length-1] + '"]');
-				BH_general.hide_side_menu(menu);
-			});
-			
-		},
-		
-		hide_side_menu : function(menu) {
-			
-			if (BH_general.params.mobile_menu_level == 1) {
-				$(BH_general.params.sel).toggleClass('in');
-
-				setTimeout(function() {
-					// hide side menu
-					$('.side-menu[menu-level="1"]').toggle();
-					BH_general.params.sideslider.bind('click', side_menu);
-					
-					// hide side column
-					$('.side-column').css('width', 0);
-				}, BH_general.params.timeout);
-			}
-			else {
-				BH_general.params.mobile_menu_level--;
-				BH_general.mobile_menu_pos(BH_general.params.mobile_menu_level);
-				
-				setTimeout(function() {
-					// hide menu
-					menu.hide();
-				}, BH_general.params.timeout);
-			}
-			
-			// update menu ancestors
-			BH_general.params.mobile_menu_ancestors.pop();
-			
-		},
-
-		mobile_menu_pos : function(level) {
-			
-			var right = (-1) * (level-1) * $(window).width() + level * BH_general.params.mobile_menu_right;
-			
-			if ($('body').hasClass('rtl'))
-				$('.navbar .side-collapse').css({"left": right + "px"});
-			else
-				$('.navbar .side-collapse').css({"right": right + "px"});
-				
-			$('.navbar .side-collapse').css({"width": BH_general.params.mobile_menu_width + "px"});
-			
-		},
-		
 		shop_archive	: function() {
 			
 			// recently viewed products - show recently viewed
@@ -333,18 +193,6 @@ var $ = jQuery,
 				zoomWindowFadeOut	: 500,
 				easing				: true
 			});
-			
-			// shop experience
-			/*
-			toggle_experience = function() {
-				// disable double click during experience toggle
-				$('#experience-toggle').unbind('click', toggle_experience);
-				
-				var action = ($('#experience-toggle').hasClass('active')) ? 'close' : 'open';
-				BH_general.shop_experience(action);
-			};
-			BH_general.shop_experience('init');
-			*/
 			
 			// related products
 			BH_general.shop_related_products();
@@ -495,47 +343,6 @@ var $ = jQuery,
 			
 		},
 		
-		/*
-		shop_experience	: function(action) {
-			
-			var	toggle_btn = $('#experience-toggle'),
-				experience = $('#experience');
-			
-			$.ajax({
-				
-				url		: BH_general.params.api + 'shop-experience.php',
-				type	: 'POST',
-				data	: {
-					action		: action
-				},
-				error: function() {
-					return false;
-				},
-				success: function(result) {
-					var r = JSON.parse(result);
-					if (r.status == 0) {
-						if (!(action == 'init' && r.new_state == 'inactive')) {
-							toggle_btn.removeClass('active inactive');
-							toggle_btn.addClass(r.new_state);
-							
-							experience.slideToggle(BH_general.params.timeout);
-						}
-						
-						setTimeout(function() {
-							$('#experience-toggle').bind('click', toggle_experience);
-						}, BH_general.params.timeout);
-						
-						return true;
-					}
-					
-					return false;
-				}
-				
-			});
-			
-		},
-		*/
-		
 		shop_related_products	: function() {
 			
 			var slideshow = $('.related-slider');
@@ -572,43 +379,6 @@ var $ = jQuery,
 
 		alignments : function() {
 			
-			/* javascript media queries */
-			/*
-			if (matchMedia) {
-				var mq = window.matchMedia("(max-width: 1199px)");
-				mq.addListener(WidthChange);
-				WidthChange(mq);
-			}
-			
-			// media query change
-			function WidthChange(mq) {
-				var win_width,
-					site_width,
-					scrollbar_width;
-				
-				if (mq.matches) {
-					// fix mobile menu positioning according to body and site sizes
-					win_width = $(window).width();
-					site_width = $('.navbar .container').width();
-					
-					BH_general.params.mobile_menu_right = (win_width-site_width) / 2 + 54;
-					BH_general.params.mobile_menu_width = win_width - BH_general.params.mobile_menu_right;
-				}
-				else {
-					// reset mobile menu positioning
-					BH_general.params.mobile_menu_right = 0;
-					BH_general.params.mobile_menu_width = win_width;
-				}
-				
-				// set side column width (mask parent menu in order to prevent clicks)
-				if (BH_general.params.mobile_menu_ancestors.length)
-					$('.side-column').css('width', BH_general.params.mobile_menu_right);
-				
-				// set mobile menu positioning
-				BH_general.mobile_menu_pos(BH_general.params.mobile_menu_level);
-			}
-			*/
-
 			// top menu
 			BH_general.top_menu();
 			
