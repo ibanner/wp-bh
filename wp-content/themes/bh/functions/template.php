@@ -36,6 +36,34 @@ function BH_newsletter_popup() {
 }
 
 /**
+ * BH_shop_cart_popup
+ *
+ * Get Shop Mini Cart button and popup to be displayed as part of header elements
+ *
+ * @return		String		shop mini cart button and popup
+ */
+function BH_shop_cart_popup() {
+	$output = '';
+
+	if ( is_active_sidebar('shop-header-cart') ) :
+
+		$output .= '<div class="shop-cart-popup-btn">';
+			$output .= '<a class="sprite-cart" href="' . WC()->cart->get_cart_url() . '"></a>';
+
+			// Insert shopping cart indicator placeholder - code in woocommerce.js will update this on page load
+			$output .= '<div class="widget_shopping_cart_indicator"></div>';
+			
+			$output .= '<div class="shop-cart-popup-content">';
+				$output .= BH_get_dynamic_sidebar('shop-header-cart');
+			$output .= '</div>';
+		$output .= '</div>';
+
+	endif;
+
+	return $output;
+}
+
+/**
  * BH_header_links_n_icons
  * 
  * Get icons and links to be displayed as part of header elements

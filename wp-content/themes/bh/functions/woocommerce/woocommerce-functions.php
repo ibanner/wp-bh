@@ -204,20 +204,9 @@ function BH_shop_footer_link($type, $title, $text, $page_link) {
 /**
  * override_woocommerce_widgets
  * 
- * @overrides	WC_Widget_Cart
  * @overrides	WC_Widget_Recently_Viewed
- * @overrides	WC_Widget_Price_Filter
  */
 function override_woocommerce_widgets() {
-	// WC_Widget_Cart
-	if ( class_exists('WC_Widget_Cart') ) {
-		unregister_widget('WC_Widget_Cart');
-		
-		include_once('widgets/woocommerce-cart.php');
-		
-		register_widget('BH_WC_Widget_Cart');
-	}
-	
 	// WC_Widget_Recently_Viewed
 	if ( class_exists('WC_Widget_Recently_Viewed') ) {
 		unregister_widget('WC_Widget_Recently_Viewed');

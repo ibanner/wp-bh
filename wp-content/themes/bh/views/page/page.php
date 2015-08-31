@@ -1,29 +1,20 @@
 <?php
 
-	global $shop_page	// is shop page (true/false)
+	global $shop_page;	// is shop page (true/false)
 	
 	$widgets_area	= get_field('acf-content_page_template_widgets_area');								// get page widgets area
 	
 ?>
 
-<?php
-	if ($shop_page) :
-	
-		/**
-		 * woocommerce_before_main_content hook
-		 *
-		 * @hooked	woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-		 */
-		do_action('woocommerce_before_main_content');
-		
-		echo '<div class="container">';
-			woocommerce_breadcrumb();
-		echo '</div>';
-		
-	endif;
-?>
-
 <section class="page-content">
+
+	<?php
+		if ($shop_page) :
+			echo '<div class="container">';
+				woocommerce_breadcrumb();
+			echo '</div>';
+		endif;
+	?>
 
 	<div class="container">
 		<div class="row">
@@ -94,13 +85,5 @@
 		 * @hooked	BH_shop_footer_link_boxes - 10
 		 */
 		do_action('BH_shop_footer');
-		
-		/**
-		 * woocommerce_after_main_content hook
-		 *
-		 * @hooked	woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
-		 */
-		do_action('woocommerce_after_main_content');
-		
 	endif;
 ?>

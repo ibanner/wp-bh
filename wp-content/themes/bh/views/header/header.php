@@ -62,11 +62,11 @@ $args = array(
 );
 $menu = wp_nav_menu($args);
 
-// Set header components
+// Set header elements
 $languages_switcher	= BH_languages_switcher();
 $newsletter_popup	= BH_newsletter_popup();
 $links_n_icons		= BH_header_links_n_icons();
-//$shop_cart_popup	= BH_shop_cart_popup();
+$shop_cart_popup	= BH_shop_cart_popup();
 
 ?>
 
@@ -105,6 +105,12 @@ $links_n_icons		= BH_header_links_n_icons();
 						<?php if ($links_n_icons) :
 							echo $links_n_icons;
 						endif; ?>
+
+						<?php if ($current_site == 'shop' && $shop_cart_popup) : ?>
+							<div class="header-top-elem shop-cart-popup">
+								<?php echo $shop_cart_popup; ?>
+							</div>
+						<?php endif; ?>
 
 						<?php if ($newsletter_popup) : ?>
 							<div class="header-top-elem newsletter-popup">
