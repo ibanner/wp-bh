@@ -67,7 +67,8 @@ $languages_switcher				= BH_languages_switcher();
 $newsletter_header_top_popup	= BH_newsletter_popup('newsletter-header-top-menu');
 $newsletter_header_mid_popup	= BH_newsletter_popup('newsletter-header-mid-menu');
 $links_n_icons					= BH_header_links_n_icons();
-$shop_cart_popup				= BH_shop_cart_popup();
+$shop_cart_header_top_popup		= BH_shop_cart_popup('top');
+$shop_cart_header_mid_popup		= BH_shop_cart_popup('mid');
 $featured_page					= $bh_sites[$current_site]['featured_page'];
 
 ?>
@@ -112,9 +113,9 @@ $featured_page					= $bh_sites[$current_site]['featured_page'];
 						echo $links_n_icons;
 					endif; ?>
 
-					<?php if ($current_site == 'shop' && $shop_cart_popup) : ?>
-						<div class="header-element shop-cart-popup">
-							<?php echo $shop_cart_popup; ?>
+					<?php if ($current_site == 'shop' && $shop_cart_header_top_popup) : ?>
+						<div class="header-element shop-cart-popup shop-cart-header-top-popup">
+							<?php echo $shop_cart_header_top_popup; ?>
 						</div>
 					<?php endif; ?>
 
@@ -149,9 +150,9 @@ $featured_page					= $bh_sites[$current_site]['featured_page'];
 					echo $links_n_icons;
 				endif; ?>
 
-				<?php if ($current_site == 'shop' && $shop_cart_popup) : ?>
-					<div class="header-element shop-cart-popup">
-						<?php echo $shop_cart_popup; ?>
+				<?php if ($current_site == 'shop' && $shop_cart_header_mid_popup) : ?>
+					<div class="header-element shop-cart-popup shop-cart-header-mid-popup">
+						<?php echo $shop_cart_header_mid_popup; ?>
 					</div>
 				<?php endif; ?>
 

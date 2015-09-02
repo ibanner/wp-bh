@@ -102,4 +102,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 <?php endif; ?>
 
+<?php echo '<span class="glyphicon glyphicon-remove"></span>'; ?>
+
 <?php do_action( 'woocommerce_after_mini_cart' ); ?>

@@ -12,8 +12,11 @@ var $ = jQuery,
 
 		init : function() {
 
-			// newsletter top menu
-			BH_general.newsletter_top_menu();
+			// shop cart popup
+			BH_general.shop_cart_popup();
+			
+			// newsletter popup
+			BH_general.newsletter_popup();
 			
 			// faqs
 			$('.faqs li .question').click(function() {
@@ -87,11 +90,29 @@ var $ = jQuery,
 			});
 		},
 		
-		newsletter_top_menu : function() {
+		shop_cart_popup : function() {
 			
-			var newsletter_popup		= $('header .newsletter-popup'),
-				newsletter_popup_btn	= newsletter_popup.children('.newsletter-popup-btn'),
-				newsletter_popup_close	= newsletter_popup.find('.glyphicon-remove');
+			var shop_cart_popup_wrapper		= $('header .shop-cart-header-mid-popup'),
+				shop_cart_popup_btn			= shop_cart_popup_wrapper.children('.shop-cart-popup-btn'),
+				shop_cart_popup_content		= shop_cart_popup_wrapper.children('.shop-cart-popup-content'),
+				shop_cart_popup_close		= shop_cart_popup_wrapper.find('.glyphicon-remove');
+			
+			// bind click events
+			shop_cart_popup_btn.click(function() {
+				shop_cart_popup_content.toggle();
+			});
+			
+			shop_cart_popup_close.click(function() {
+				shop_cart_popup_content.hide();
+			});
+
+		},
+		
+		newsletter_popup : function() {
+			
+			var newsletter_popup_wrapper	= $('header .newsletter-popup'),
+				newsletter_popup_btn		= newsletter_popup_wrapper.children('.newsletter-popup-btn'),
+				newsletter_popup_close		= newsletter_popup_wrapper.find('.glyphicon-remove');
 			
 			// bind click events
 			newsletter_popup_btn.click(function() {
@@ -117,9 +138,9 @@ var $ = jQuery,
 		
 		set_newsletter_popup : function(action) {
 			
-			var newsletter_popup			= $('header .newsletter-popup'),
-				newsletter_popup_btn		= newsletter_popup.children('.newsletter-popup-btn'),
-				newsletter_popup_content	= newsletter_popup.children('.newsletter-popup-content');
+			var newsletter_popup_wrapper	= $('header .newsletter-popup'),
+				newsletter_popup_btn		= newsletter_popup_wrapper.children('.newsletter-popup-btn'),
+				newsletter_popup_content	= newsletter_popup_wrapper.children('.newsletter-popup-content');
 			
 			$.ajax({
 				
