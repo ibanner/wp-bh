@@ -37,7 +37,7 @@ if ($elements) :
 		endif;
 
 		// echo element html
-		echo '<div class="header-top-elem ' . $type . '">';
+		echo '<div class="header-element ' . $type . '">';
 			if ($type == 'link') :
 				echo '<a class="label" href="' . $link . '" style="background-color: ' . $btn_color . ';">' . $btn_text . '</a>';
 			else :

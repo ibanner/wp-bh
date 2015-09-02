@@ -1,22 +1,51 @@
 @import "functions";
 @import "modules/sprites";
+@import "modules/bh_sprites";
 
 @media (max-width: 1199px) {
 
 	/**********/
 	/* header */
 	/**********/
-	
-	header .navbar {
-		margin-bottom: 0;
+
+	header {
+
+		/*****************/
+		/* header bottom */
+		/*****************/
+		
+		.header-bottom {
+
+			/********/
+			/* menu */
+			/********/
+
+			nav.menu {
+				ul.nav {
+					& > li {
+						& > a {
+							padding: 0 20px;
+							font-size: 18px;
+						}
+
+						.sub-menu {
+							& > li {
+								& > a {
+									font-size: 16px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
-	
+
 	/**********/
 	/* banner */
 	/**********/
 
 	.main-layout-banner {
-		margin-top: 0;
 		height: $banner-height-m;
 	
 		.container {
@@ -88,23 +117,6 @@
 
 @media (max-width: 991px) {
 
-	/**********/
-	/* header */
-	/**********/
-	
-	header .navbar {
-		.navbar-header {
-			.navbar-brand {
-				margin: 5px 0;
-				@include logo-small;
-			}
-			
-			.navbar-toggle {
-				margin-top: 8.5px !important;
-			}
-		}
-	}
-	
 	/**********/
 	/* banner */
 	/**********/
@@ -202,9 +214,9 @@
 	/****************/
 	/* page content */
 	/****************/
-	
+
 	.page-content {
-		
+
 		/***********/
 		/* content */
 		/***********/
@@ -259,6 +271,14 @@
 				}
 			}
 		}
+	}
+
+	/***********************/
+	/* main general layout */
+	/***********************/
+
+	.main-wrapper {
+		margin-top: 116px;
 	}
 
 	/**********/
@@ -361,25 +381,124 @@
 	/**********/
 	/* header */
 	/**********/
-	
-	header .navbar {
-		.side-collapse {
-			.side-menu {
-				nav {
-					ul {
-						li {
-							a {
-								font-size: 16px;
+
+	header {
+
+		/**************/
+		/* header top */
+		/**************/
+
+		.header-top {
+			height: 46px;
+			border-bottom-width: 8px;
+
+			/************/
+			/* BH sites */
+			/************/
+
+			.sites {
+				ul {
+					li {
+						margin: 16px 10px 0 0;
+
+						a {
+							width: 38px;
+							height: 22px;
+
+							.title {
+								line-height: 10px;
+								font-size: 10px;
+								display: block !important;
 							}
-							
-							&.menu-item-has-children > a:after {
-								font-size: 28px;
+
+							.icon {
+								display: none !important;
+							}
+						}
+
+						&:hover {
+							margin: 16px 10px 0 0;
+
+							a {
+								width: 38px;
+								height: 22px;
+							}
+						}
+
+						&.active {
+							margin: 0 10px 0 0;
+
+							a {
+								width: 68px;
+								height: 38px;
+
+								.title {
+									line-height: 15px;
+									font-size: 15px;
+								}
 							}
 						}
 					}
 				}
 			}
+
+			/****************/
+			/* logo wrapper */
+			/****************/
+
+			.logo-wrapper {
+				.mobile-menu-btn {
+					height: 38px;
+				}
+				
+				.logo {
+					display: none;
+				}
+			}
 		}
+
+		/*******************/
+		/* header elements */
+		/*******************/
+
+		.header-elements {
+			&.header-mid-elements {
+				height: 56px;
+			}
+
+			.header-element {
+				&.link,
+				&.icon {
+					display: none;
+				}
+			}
+		}
+
+		/*****************/
+		/* featured page */
+		/*****************/
+
+		.header-mid {
+			.featured-page {
+				height: 56px;
+			}
+		}
+	}
+
+	/****************/
+	/* page content */
+	/****************/
+
+	.page-content {
+		margin-top: 102px;
+	}
+
+	/***********************/
+	/* main general layout */
+	/***********************/
+
+	.main-wrapper {
+		margin-top: 102px;
 	}
 
 	/****************/
@@ -719,19 +838,6 @@
 		width: 970px;
 	}
 	
-	/**********/
-	/* header */
-	/**********/
-	
-	header .navbar {
-		.navbar-header {
-			.navbar-brand {
-				margin: 5px 0;
-				@include logo-en-medium;
-			}
-		}
-	}
-	
 	/******************/
 	/* featured links */
 	/******************/
@@ -813,6 +919,46 @@
 		width: 750px;
 	}
 	
+	/**********/
+	/* header */
+	/**********/
+
+	header {
+
+		/**************/
+		/* header top */
+		/**************/
+
+		.header-top {
+
+			/****************/
+			/* logo wrapper */
+			/****************/
+
+			.logo-wrapper {
+				.logo a {
+					@include sprite-logo-en-104x48;
+				}
+			}
+		}
+	}
+
+	/****************/
+	/* page content */
+	/****************/
+
+	.page-content {
+		margin-top: 140px;
+	}
+
+	/***********************/
+	/* main general layout */
+	/***********************/
+
+	.main-wrapper {
+		margin-top: 140px;
+	}
+
 	/*******************/
 	/* contact details */
 	/*******************/
@@ -931,6 +1077,137 @@
 
 @media (min-width: 481px) and (max-width: 767px) {
 	
+	/**********/
+	/* header */
+	/**********/
+
+	header {
+
+		/**************/
+		/* header top */
+		/**************/
+
+		.header-top {
+			height: 60px;
+			border-bottom-width: 8px;
+
+			/************/
+			/* BH sites */
+			/************/
+
+			.sites {
+				ul {
+					li {
+						margin: 22px 12px 0 0;
+
+						a {
+							width: 50px;
+							height: 30px;
+
+							.title {
+								line-height: 12px;
+								font-size: 12px;
+							}
+						}
+
+						&:hover {
+							margin: 22px 12px 0 0;
+
+							a {
+								width: 50px;
+								height: 30px;
+							}
+						}
+
+						&.active {
+							margin: 0 12px 0 0;
+
+							a {
+								width: 90px;
+								height: 52px;
+							}
+						}
+
+						&:not(.active):hover {
+							a {
+								.title {
+									display: block;
+								}
+
+								.icon {
+									display: none;
+								}
+							}
+						}
+
+						&.main {
+							&.active .icon {
+								@include sprite-museum-en-s;
+							}
+						}
+
+						&.shop {
+							&.active .icon {
+								@include sprite-shop-en-s;
+							}
+						}
+					}
+				}
+			}
+
+			/****************/
+			/* logo wrapper */
+			/****************/
+
+			.logo-wrapper {
+				.mobile-menu-btn,
+				.logo {
+					height: 52px;
+				}
+				
+				.logo a {
+					@include sprite-logo-en-89x41;
+				}
+			}
+		}
+
+		/*******************/
+		/* header elements */
+		/*******************/
+
+		.header-elements {
+			&.header-mid-elements {
+				height: 56px;
+			}
+		}
+
+		/*****************/
+		/* featured page */
+		/*****************/
+
+		.header-mid {
+			.featured-page {
+				height: 56px;
+			}
+		}
+	}
+
+	/****************/
+	/* page content */
+	/****************/
+
+	.page-content {
+		margin-top: 116px;
+	}
+
+	/***********************/
+	/* main general layout */
+	/***********************/
+
+	.main-wrapper {
+		margin-top: 116px;
+	}
+
 	/*******/
 	/* 404 */
 	/*******/

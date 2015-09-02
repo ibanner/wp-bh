@@ -3,12 +3,17 @@
 
 @charset "utf-8";
 
-/******************/
-/* general layout */
-/******************/
+/***********************/
+/* main general layout */
+/***********************/
 
-.main-layout {
-	margin-bottom: 20px;
+.main-wrapper {
+	margin-top: 120px;
+	padding-top: 15px;
+
+	.main-layout {
+		margin-bottom: 20px;
+	}
 }
 
 /**********/
@@ -16,8 +21,6 @@
 /**********/
 
 .main-layout-banner {
-	margin-top: 120px;
-	padding-top: 15px;
 	@include not-selectable;
 	
 	.container {

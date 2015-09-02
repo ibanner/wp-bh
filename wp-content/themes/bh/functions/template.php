@@ -14,19 +14,23 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * Get Newsletter button and popup to be displayed as part of header elements
  *
- * @return		String		newsletter button and popup
+ * @param		String		$sidebar		sidebar name
+ * @return		String						newsletter button and popup or empty string in case of input failure
  */
-function BH_newsletter_popup() {
+function BH_newsletter_popup($sidebar) {
+	if ( ! $sidebar )
+		return '';
+
 	$output = '';
 
-	if ( is_active_sidebar('newsletter-top-menu') ) :
+	if ( is_active_sidebar($sidebar) ) :
 
 		$output .= '<div class="newsletter-popup-btn">';
 			$output .= '<button class="label">' . __('ENews', 'BH') . '</button>';
 		$output .= '</div>';
 
 		$output .= '<div class="newsletter-popup-content">';
-			$output .= BH_get_dynamic_sidebar('newsletter-top-menu');
+			$output .= BH_get_dynamic_sidebar($sidebar);
 			$output .= '<span class="glyphicon glyphicon-remove"></span>';
 		$output .= '</div>';
 

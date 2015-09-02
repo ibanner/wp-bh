@@ -2,7 +2,7 @@
 /* sprites */
 /***********/
 
-.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he, .sprite-cart{
+.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he, .sprite-cart, .sprite-mobile-menu-en, .sprite-mobile-menu-he{
 	background: url("../images/general/sprites.png") no-repeat;
 }
 
@@ -136,6 +136,18 @@
 	background-position: -206px -128px ;
 	width: 33px;
 	height: 30px;
+}
+
+.sprite-mobile-menu-en{
+	background-position: -241px -128px ;
+	width: 32px;
+	height: 32px;
+}
+
+.sprite-mobile-menu-he{
+	background-position: -275px -128px ;
+	width: 32px;
+	height: 32px;
 }
 
 /******************/
@@ -276,4 +288,16 @@
 	background-position: -206px -128px ;
 	width: 33px;
 	height: 30px;
+}
+
+@mixin sprite-mobile-menu-en{
+	background-position: -241px -128px ;
+	width: 32px;
+	height: 32px;
+}
+
+@mixin sprite-mobile-menu-he{
+	background-position: -275px -128px ;
+	width: 32px;
+	height: 32px;
 }

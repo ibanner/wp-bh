@@ -63,10 +63,12 @@ $args = array(
 $menu = wp_nav_menu($args);
 
 // Set header elements
-$languages_switcher	= BH_languages_switcher();
-$newsletter_popup	= BH_newsletter_popup();
-$links_n_icons		= BH_header_links_n_icons();
-$shop_cart_popup	= BH_shop_cart_popup();
+$languages_switcher				= BH_languages_switcher();
+$newsletter_header_top_popup	= BH_newsletter_popup('newsletter-header-top-menu');
+$newsletter_header_mid_popup	= BH_newsletter_popup('newsletter-header-mid-menu');
+$links_n_icons					= BH_header_links_n_icons();
+$shop_cart_popup				= BH_shop_cart_popup();
+$featured_page					= $bh_sites[$current_site]['featured_page'];
 
 ?>
 
@@ -74,56 +76,96 @@ $shop_cart_popup	= BH_shop_cart_popup();
 
 	<div class="header-top <?php echo $current_site; ?>">
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 sites">
-					<?php if ($bh_sites) : ?>
-						<ul>
-							<?php foreach ($bh_sites as $site_name => $site_info) : ?>
-								<li class="site-item <?php echo $site_name . ($site_name == $current_site ? ' active' : ''); ?>">
-									<a href="<?php echo $site_info['link']; ?>" target="<?php echo $site_name == 'mjs' ? '_blank' : '_self'; ?>">
-										<div class="title"><?php echo $site_info['header_title']; ?></div>
-										<div class="icon"></div>
-									</a>
-								</li>
-							<?php endforeach; ?>
-						</ul>
+
+			<div class="sites">
+				<?php if ($bh_sites) : ?>
+					<ul>
+						<?php foreach ($bh_sites as $site_name => $site_info) : ?>
+							<li class="site-item <?php echo $site_name . ($site_name == $current_site ? ' active' : ''); ?>">
+								<a href="<?php echo $site_info['link']; ?>" target="<?php echo $site_name == 'mjs' ? '_blank' : '_self'; ?>">
+									<div class="title"><?php echo $site_info['header_title']; ?></div>
+									<div class="icon"></div>
+								</a>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+			</div>
+
+			<div class="logo-wrapper">
+				<div class="mobile-menu-btn hidden-lg hidden-md">
+					<a href="#"></a>
+				</div>
+
+				<div class="logo">
+					<a href="<?php echo HOME; ?>" title="<?php echo esc_attr( get_bloginfo('name') ); ?>"></a>
+				</div>
+
+				<div class="header-elements header-top-elements visible-lg visible-md">
+					<?php if ($languages_switcher) : ?>
+						<div class="header-element languages-switcher">
+							<?php echo $languages_switcher; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php if ($links_n_icons) :
+						echo $links_n_icons;
+					endif; ?>
+
+					<?php if ($current_site == 'shop' && $shop_cart_popup) : ?>
+						<div class="header-element shop-cart-popup">
+							<?php echo $shop_cart_popup; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php if ($newsletter_header_top_popup) : ?>
+						<div class="header-element newsletter-popup">
+							<?php echo $newsletter_header_top_popup; ?>
+						</div>
 					<?php endif; ?>
 				</div>
-
-				<div class="col-sm-6">
-					<div class="logo">
-						<a href="<?php echo HOME; ?>" title="<?php echo esc_attr( get_bloginfo('name') ); ?>"></a>
-					</div>
-
-					<div class="header-top-elements">
-						<?php if ($languages_switcher) : ?>
-							<div class="header-top-elem languages-switcher">
-								<?php echo $languages_switcher; ?>
-							</div>
-						<?php endif; ?>
-
-						<?php if ($links_n_icons) :
-							echo $links_n_icons;
-						endif; ?>
-
-						<?php if ($current_site == 'shop' && $shop_cart_popup) : ?>
-							<div class="header-top-elem shop-cart-popup">
-								<?php echo $shop_cart_popup; ?>
-							</div>
-						<?php endif; ?>
-
-						<?php if ($newsletter_popup) : ?>
-							<div class="header-top-elem newsletter-popup">
-								<?php echo $newsletter_popup; ?>
-							</div>
-						<?php endif; ?>
-					</div>
-				</div>
 			</div>
+
 		</div>
 	</div>
 
-	<div class="header-bottom <?php echo $current_site; ?>">
+	<div class="header-mid <?php echo $current_site; ?> hidden-lg hidden-md">
+		<div class="container">
+
+			<?php if ($featured_page) : ?>
+				<div class="featured-page">
+					<a href="<?php echo get_permalink($featured_page->ID); ?>"><?php echo $featured_page->post_title; ?></a>
+				</div>
+			<?php endif; ?>
+
+			<div class="header-elements header-mid-elements hidden-lg hidden-md">
+				<?php if ($languages_switcher) : ?>
+					<div class="header-element languages-switcher">
+						<?php echo $languages_switcher; ?>
+					</div>
+				<?php endif; ?>
+
+				<?php if ($links_n_icons) :
+					echo $links_n_icons;
+				endif; ?>
+
+				<?php if ($current_site == 'shop' && $shop_cart_popup) : ?>
+					<div class="header-element shop-cart-popup">
+						<?php echo $shop_cart_popup; ?>
+					</div>
+				<?php endif; ?>
+
+				<?php if ($newsletter_header_mid_popup) : ?>
+					<div class="header-element newsletter-popup">
+						<?php echo $newsletter_header_mid_popup; ?>
+					</div>
+				<?php endif; ?>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="header-bottom <?php echo $current_site; ?> visible-lg visible-md">
 		<div class="container">
 
 			<!-- Menu -->
@@ -140,14 +182,11 @@ $shop_cart_popup	= BH_shop_cart_popup();
 			<?php endif; ?>
 			<!-- End menu -->
 
-			<?php
-				$featured_page = $bh_sites[$current_site]['featured_page'];
-				if ($featured_page) : ?>
-					<div class="featured-page">
-						<a href="<?php echo get_permalink($featured_page->ID); ?>"><?php echo $featured_page->post_title; ?></a>
-					</div>
-				<?php endif;
-			?>
+			<?php if ($featured_page) : ?>
+				<div class="featured-page">
+					<a href="<?php echo get_permalink($featured_page->ID); ?>"><?php echo $featured_page->post_title; ?></a>
+				</div>
+			<?php endif; ?>
 
 		</div>
 	</div>

@@ -10,12 +10,12 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 function BH_sidebars() {
-	// newsletter top menu
+	// Newsletter Header Top Menu
 	register_sidebar(
 		array(
-			'id'			=> 'newsletter-top-menu',
-			'name'			=> 'Newsletter Top Menu',
-			'description'	=> '',
+			'id'			=> 'newsletter-header-top-menu',
+			'name'			=> 'Newsletter Header Top Menu',
+			'description'	=> 'Drag here Active Trail Newsletter widget',
 			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
 			'after_widget'	=> '</div>',
 			'before_title'	=> '<h2 class="widgettitle">',
@@ -23,12 +23,25 @@ function BH_sidebars() {
 		)
 	);
 	
-	// newsletter side menu
+	// Newsletter Header Mid Menu
+	register_sidebar(
+		array(
+			'id'			=> 'newsletter-header-mid-menu',
+			'name'			=> 'Newsletter Header Mid Menu',
+			'description'	=> 'Drag here Active Trail Newsletter widget',
+			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
+			'after_widget'	=> '</div>',
+			'before_title'	=> '<h2 class="widgettitle">',
+			'after_title'	=> '</h2>'
+		)
+	);
+	
+	// Newsletter Side Menu
 	register_sidebar(
 		array(
 			'id'			=> 'newsletter-side-menu',
 			'name'			=> 'Newsletter Side Menu',
-			'description'	=> '',
+			'description'	=> 'Drag here Active Trail Newsletter widget',
 			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
 			'after_widget'	=> '</div>',
 			'before_title'	=> '<h2 class="widgettitle">',
@@ -36,7 +49,7 @@ function BH_sidebars() {
 		)
 	);
 	
-	// shop header search
+	// Shop Header Product Search
 	register_sidebar(
 		array(
 			'id'			=> 'shop-header-search',
@@ -49,7 +62,7 @@ function BH_sidebars() {
 		)
 	);
 	
-	// shop header cart
+	// Shop Header Cart
 	register_sidebar(
 		array(
 			'id'			=> 'shop-header-cart',
@@ -62,7 +75,7 @@ function BH_sidebars() {
 		)
 	);
 	
-	// shop sidebar recently viewed
+	// Shop Sidebar Recently Viewed
 	register_sidebar(
 		array(
 			'id'			=> 'shop-sidebar-recently-viewed',
@@ -75,7 +88,7 @@ function BH_sidebars() {
 		)
 	);
 	
-	// shop sidebar refine products
+	// Shop Sidebar Refine Products
 	register_sidebar(
 		array(
 			'id'			=> 'shop-sidebar-refine-products',

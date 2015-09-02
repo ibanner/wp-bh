@@ -4,6 +4,8 @@
  */?>
 <?php get_header(); ?>
 
+<div class="main-wrapper">
+
 <?php
 
 	while (has_sub_field('acf-main_template_layouts')) :
@@ -45,5 +47,7 @@
 	endwhile;
 
 ?>
+
+</div>
 
 <?php get_footer(); ?>

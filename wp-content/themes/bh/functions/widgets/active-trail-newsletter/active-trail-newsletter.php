@@ -279,8 +279,8 @@ class Active_Trail_Newsletter extends WP_Widget
 						
 						<?php
 							foreach ($instance['groups'] as $group) {
-								echo '<input type="checkbox" name="' . $this->get_field_name('mm_key') . '[]" id="' . $group['id'] . '" value="' . $group['id'] . '" />';
-								echo '<label for="' . $group['id'] . '"><span>' . $group['name'] . '</span></label>';
+								echo '<input type="checkbox" name="' . $this->get_field_name('mm_key') . '[]" id="' . $this->get_field_id('mm_key') . '[' . $group['id'] . ']" value="' . $group['id'] . '" />';
+								echo '<label for="' . $this->get_field_id('mm_key') . '[' . $group['id'] . ']"><span>' . $group['name'] . '</span></label>';
 							}
 						?>
 					</div>
