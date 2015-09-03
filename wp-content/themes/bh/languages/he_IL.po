@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-05-25 23:21+0200\n"
-"PO-Revision-Date: 2015-06-03 11:29+0200\n"
+"POT-Creation-Date: 2015-09-03 14:24+0300\n"
+"PO-Revision-Date: 2015-09-03 14:26+0300\n"
 "Last-Translator: \n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
-"X-Poedit-Basepath: ..\\\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -21,21 +21,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: scss\n"
 
 #: functions/menus.php:18
-msgid "Top Menu"
-msgstr ""
-
-#: functions/menus.php:19
 msgid "Main Menu"
 msgstr ""
-
-#: functions/menus.php:20
-msgid "Footer Menu"
-msgstr ""
-
-#: functions/menus.php:527 functions/utils.php:78
-#: functions/woocommerce/woocommerce-functions.php:122
-msgid "Home"
-msgstr "דף הבית"
 
 #: functions/pelecard/payment-result.php:134
 msgid "Thank you for your request!"
@@ -81,6 +68,10 @@ msgstr "אנא שלחו את הבקשה באמצעות כרטיס אשראי א�
 msgid "General Error."
 msgstr "שגיאה כללית."
 
+#: functions/template.php:67
+msgid "ENews"
+msgstr "ניוזלטר"
+
 #: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:232
 msgid "General error, please try again later"
 msgstr "שגיאה כללית, אנא נסו שוב מאוחר יותר"
@@ -94,18 +85,26 @@ msgid "Registration was successful, thank you!"
 msgstr "הרישום בוצע בהצלחה, תודה רבה!"
 
 #: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:273
+msgid "Your Email:"
+msgstr "כתובת מייל:"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:274
 msgid "Email Address"
 msgstr "כתובת מייל"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:274
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:275
 msgid "Email address is missing or incorrect"
 msgstr "כתובת מייל שגויה או חסרה"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:282
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:278
+msgid "Choose Language:"
+msgstr "בחר שפה:"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:287
 msgid "Please check at least one newsletter name"
 msgstr "יש לבחור לפחות שפה אחת"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:284
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:289
 msgid "Register"
 msgstr "הרשמה"
 
@@ -151,19 +150,23 @@ msgstr ""
 msgid "RECENTLY<br />VIEWED"
 msgstr "נצפו<br />לאחרונה"
 
-#: functions/woocommerce/woocommerce-functions.php:234
+#: functions/woocommerce/woocommerce-functions.php:124
+msgid "Home"
+msgstr "דף הבית"
+
+#: functions/woocommerce/woocommerce-functions.php:199
 msgid "Learn more"
 msgstr "קראו עוד"
 
-#: functions/woocommerce/woocommerce-functions.php:670
+#: functions/woocommerce/woocommerce-functions.php:591
 msgid "Most Popular"
 msgstr "הפופולרי ביותר"
 
-#: functions/woocommerce/woocommerce-functions.php:671
+#: functions/woocommerce/woocommerce-functions.php:592
 msgid "Price: Low to High"
 msgstr "מחיר: נמוך לגבוה"
 
-#: functions/woocommerce/woocommerce-functions.php:672
+#: functions/woocommerce/woocommerce-functions.php:593
 msgid "Price: High to Low"
 msgstr "מחיר: גבוה לנמוך"
 
@@ -171,7 +174,7 @@ msgstr "מחיר: גבוה לנמוך"
 msgid "Search for products"
 msgstr "חיפוש מוצרים"
 
-#: views/components/meta-single.php:2 views/woocommerce/product-item.php:23
+#: views/components/meta-single.php:2 views/woocommerce/product-item.php:46
 #: views/woocommerce/single-product/single-product-section1-title.php:22
 msgid "By "
 msgstr "על ידי "
@@ -208,10 +211,6 @@ msgstr "החל מתאריך"
 msgid "Purchase"
 msgstr "לרכישה"
 
-#: views/header/header.php:77
-msgid "Newsletter"
-msgstr "ניוזלטר"
-
 #: views/main/slider/display-events-slider.php:22
 msgid "All events"
 msgstr "כל האירועים"
@@ -236,8 +235,7 @@ msgstr "בכדי להוסיף מיקרופילם לרשימה"
 msgid "Town"
 msgstr "עיר"
 
-#: views/microfilm/microfilm-view.php:20
-#: views/microfilm/microfilm-view.php:145
+#: views/microfilm/microfilm-view.php:20 views/microfilm/microfilm-view.php:145
 msgid "Province"
 msgstr "פרובינציה"
 
@@ -375,6 +373,16 @@ msgstr "הטופס נשלח בהצלחה. תודה."
 msgid "Back to Homepage"
 msgstr "לדף הבית"
 
+#: views/page/page.php:33
+msgid "Password:"
+msgstr ""
+
+#: views/page/page.php:40
+msgid ""
+"This content is password protected. To view it please enter your password "
+"below:"
+msgstr ""
+
 #: views/page/search.php:6
 #, php-format
 msgid "Search Results for: &#8216;%s&#8217;"
@@ -412,28 +420,75 @@ msgstr "מידות"
 msgid "Length x Width x Height"
 msgstr "גובה x רוחב x אורך"
 
-#: views/woocommerce/single-product/single-product-section3-related.php:46
+#: views/woocommerce/single-product/single-product-section3-related.php:52
 msgid "You might also like"
 msgstr "מוצרים נוספים שיעניינו אותך"
 
-#: woocommerce/cart/mini-cart.php:44
+#: woocommerce/cart/cart.php:27 woocommerce/checkout/review-order.php:23
+#: woocommerce/emails/customer-completed-order.php:62
+#: woocommerce/emails/customer-processing-order.php:62
+msgid "Product"
+msgstr "מוצר"
+
+#: woocommerce/cart/cart.php:28
+#: woocommerce/emails/customer-completed-order.php:64
+#: woocommerce/emails/customer-processing-order.php:64
+msgid "Price"
+msgstr "מחיר"
+
+#: woocommerce/cart/cart.php:29
+#: woocommerce/emails/customer-completed-order.php:63
+#: woocommerce/emails/customer-processing-order.php:63
+msgid "Quantity"
+msgstr "כמות"
+
+#: woocommerce/cart/cart.php:30 woocommerce/checkout/review-order.php:24
+#: woocommerce/checkout/review-order.php:132
+msgid "Total"
+msgstr ""
+
+#: woocommerce/cart/cart.php:61
+msgid "Remove this item"
+msgstr ""
+
+#: woocommerce/cart/cart.php:94
+msgid "Available on backorder"
+msgstr ""
+
+#: woocommerce/cart/cart.php:139
+msgid "Coupon"
+msgstr ""
+
+#: woocommerce/cart/cart.php:139
+msgid "Coupon code"
+msgstr ""
+
+#: woocommerce/cart/cart.php:139
+msgid "Apply Coupon"
+msgstr ""
+
+#: woocommerce/cart/cart.php:146
+msgid "Update Cart"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:59
 #, php-format
 msgid "Quantity: %s"
 msgstr "כמות: %s"
 
-#: woocommerce/cart/mini-cart.php:59
+#: woocommerce/cart/mini-cart.php:79
 msgid "No products in the cart."
 msgstr "לא נמצאו מוצרים בעגלה."
 
-#: woocommerce/cart/mini-cart.php:69
+#: woocommerce/cart/mini-cart.php:89 woocommerce/checkout/review-order.php:85
 msgid "Subtotal"
 msgstr "סכום ביניים"
 
-#: woocommerce/cart/mini-cart.php:79
+#: woocommerce/cart/mini-cart.php:99
 msgid "View Cart"
 msgstr "הצג סל קניות"
 
-#: woocommerce/cart/mini-cart.php:80
+#: woocommerce/cart/mini-cart.php:100
 msgid "Checkout"
 msgstr "לתשלום"
 
@@ -476,6 +531,48 @@ msgid ""
 "conditions</a>"
 msgstr "קראתי והנני מסכים/ה <a href=\"%s\" target=\"_blank\">לתנאי השימוש</a>"
 
+#: woocommerce/checkout/thankyou.php:18
+msgid ""
+"Unfortunately your order cannot be processed as the originating bank/"
+"merchant has declined your transaction."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:22
+msgid "Please attempt your purchase again or go to your account page."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:24
+msgid "Please attempt your purchase again."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:28
+msgid "Pay"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:30
+msgid "My Account"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:36 woocommerce/checkout/thankyou.php:134
+msgid "Thank you. Your order has been received."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:40
+msgid "Order Number:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:44
+msgid "Date:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:48
+msgid "Total:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:53
+msgid "Payment Method:"
+msgstr ""
+
 #: woocommerce/emails/customer-completed-order.php:53
 msgid ""
 "Your order was shipped. Your order details are shown below for your "
@@ -487,21 +584,6 @@ msgstr "הזמנתכם נשלחה. פרטי ההזמנה מופיעים להלן
 #, php-format
 msgid "Order #%s"
 msgstr "הזמנה מספר %s"
-
-#: woocommerce/emails/customer-completed-order.php:62
-#: woocommerce/emails/customer-processing-order.php:62
-msgid "Product"
-msgstr "מוצר"
-
-#: woocommerce/emails/customer-completed-order.php:63
-#: woocommerce/emails/customer-processing-order.php:63
-msgid "Quantity"
-msgstr "כמות"
-
-#: woocommerce/emails/customer-completed-order.php:64
-#: woocommerce/emails/customer-processing-order.php:64
-msgid "Price"
-msgstr "מחיר"
 
 #: woocommerce/emails/customer-completed-order.php:92
 #: woocommerce/emails/customer-processing-order.php:92
@@ -522,33 +604,30 @@ msgstr "כתובת חיוב"
 msgid "Shipping address"
 msgstr "כתובת משלוח"
 
-#: woocommerce/global/breadcrumb.php:104
-msgid "Products tagged &ldquo;"
-msgstr "מוצרים המתויגים &ldquo;%s&rdquo;"
-
-#: woocommerce/global/breadcrumb.php:132 woocommerce/global/breadcrumb.php:231
-msgid "Search results for &ldquo;"
-msgstr "תוצאות חיפוש עבור &ldquo;%s&rdquo;"
-
-#: woocommerce/global/breadcrumb.php:183
-msgid "Error 404"
-msgstr "שגיאה העמוד לא נמצא 404"
-
-#: woocommerce/global/breadcrumb.php:235
-msgid "Posts tagged &ldquo;"
-msgstr "מוצרים המתויגים &ldquo;"
-
-#: woocommerce/global/breadcrumb.php:240
-msgid "Author:"
-msgstr "מחבר:"
-
-#: woocommerce/global/breadcrumb.php:245
-msgid "Page"
-msgstr "עמוד"
-
 #: woocommerce/loop/orderby.php:36
 msgid "Sort by"
 msgstr "מיון לפי"
+
+#~ msgid "Newsletter"
+#~ msgstr "ניוזלטר"
+
+#~ msgid "Products tagged &ldquo;"
+#~ msgstr "מוצרים המתויגים &ldquo;%s&rdquo;"
+
+#~ msgid "Search results for &ldquo;"
+#~ msgstr "תוצאות חיפוש עבור &ldquo;%s&rdquo;"
+
+#~ msgid "Error 404"
+#~ msgstr "שגיאה העמוד לא נמצא 404"
+
+#~ msgid "Posts tagged &ldquo;"
+#~ msgstr "מוצרים המתויגים &ldquo;"
+
+#~ msgid "Author:"
+#~ msgstr "מחבר:"
+
+#~ msgid "Page"
+#~ msgstr "עמוד"
 
 #~ msgid ""
 #~ "There was a problem with the payment total amount. Please contact us."
