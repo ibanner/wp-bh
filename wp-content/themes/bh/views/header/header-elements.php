@@ -19,8 +19,8 @@ if ($elements) :
 	foreach ($elements as $e) :
 		// collect element data
 		// check whether this element should be displayed according to current site
-		$main_header			= $e['display_in_main_header'];
-		$shop_header			= $e['display_in_shop_header'];
+		$main_header			= $e['main'];
+		$shop_header			= $e['shop'];
 		
 		if ( ! ($main_header && $current_site == 'main' || $shop_header && $current_site == 'shop') )
 			continue;

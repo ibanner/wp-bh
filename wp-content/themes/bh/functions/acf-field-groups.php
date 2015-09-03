@@ -2676,7 +2676,7 @@ acf_add_local_field_group(array (
 				array (
 					'key' => 'field_55dec01babb5d',
 					'label' => 'Display in Main Header',
-					'name' => 'display_in_main_header',
+					'name' => 'main',
 					'type' => 'true_false',
 					'instructions' => '',
 					'required' => 0,
@@ -2692,7 +2692,7 @@ acf_add_local_field_group(array (
 				array (
 					'key' => 'field_55dec042abb5e',
 					'label' => 'Display in Shop Header',
-					'name' => 'display_in_shop_header',
+					'name' => 'shop',
 					'type' => 'true_false',
 					'instructions' => '',
 					'required' => 0,

@@ -12,9 +12,6 @@ var $ = jQuery,
 
 		init : function() {
 
-			// shop cart popup
-			BH_general.shop_cart_popup();
-			
 			// newsletter popup
 			BH_general.newsletter_popup();
 			
@@ -94,9 +91,12 @@ var $ = jQuery,
 			
 			var shop_cart_popup_wrapper		= $('header .shop-cart-header-mid-popup'),
 				shop_cart_popup_btn			= shop_cart_popup_wrapper.children('.shop-cart-popup-btn'),
-				shop_cart_popup_content		= shop_cart_popup_wrapper.children('.shop-cart-popup-content'),
-				shop_cart_popup_close		= shop_cart_popup_wrapper.find('.glyphicon-remove');
+				shop_cart_popup_content		= shop_cart_popup_wrapper.children('.shop-cart-popup-content');
 			
+			// append 'glyphicon-remove' icon
+			shop_cart_popup_content.append('<span class="glyphicon glyphicon-remove"></span>');
+			var shop_cart_popup_close		= shop_cart_popup_content.children('.glyphicon-remove');
+
 			// bind click events
 			shop_cart_popup_btn.click(function() {
 				shop_cart_popup_content.toggle();
@@ -393,6 +393,9 @@ var $ = jQuery,
 		
 		loaded : function() {
 			
+			// shop cart popup
+			BH_general.shop_cart_popup();
+
 			$(window).resize(BH_general.alignments).resize();
 			
 		},
@@ -401,7 +404,7 @@ var $ = jQuery,
 			
 			// top menu
 			BH_general.top_menu();
-			
+
 		}
 		
 	};

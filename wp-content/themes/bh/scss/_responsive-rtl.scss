@@ -1,5 +1,6 @@
 @import "functions";
 @import "modules/sprites";
+@import "modules/bh_sprites";
 
 @media (max-width: 1199px) {
 
@@ -86,6 +87,68 @@
 
 @media (max-width: 480px) {
 	
+	/**********/
+	/* header */
+	/**********/
+
+	header {
+
+		/**************/
+		/* header top */
+		/**************/
+
+		.header-top {
+
+			/************/
+			/* BH sites */
+			/************/
+
+			.sites {
+				ul {
+					li {
+						margin: 16px 0 0 10px;
+
+						&:hover {
+							margin: 16px 0 0 10px;
+						}
+
+						&.active {
+							margin: 0 0 0 10px;
+						}
+					}
+				}
+			}
+		}
+
+		/*******************/
+		/* header elements */
+		/*******************/
+
+		.header-elements {
+			.header-element {
+
+				/********************/
+				/* newsletter popup */
+				/********************/
+
+				&.newsletter-popup {
+					.newsletter-popup-content {
+						.widgetcontent {
+							form {
+								.newsletter-groups {
+									label {
+										margin-left: 75px;
+										margin-right: auto;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	/****************/
 	/* single event */
 	/****************/
@@ -240,6 +303,30 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
 	
+	/**********/
+	/* header */
+	/**********/
+
+	header {
+
+		/**************/
+		/* header top */
+		/**************/
+
+		.header-top {
+
+			/****************/
+			/* logo wrapper */
+			/****************/
+
+			.logo-wrapper {
+				.logo a {
+					@include sprite-logo-he-106x48;
+				}
+			}
+		}
+	}
+
 	/*******************/
 	/* contact details */
 	/*******************/
@@ -280,6 +367,62 @@
 
 @media (min-width: 481px) and (max-width: 767px) {
 	
+	/**********/
+	/* header */
+	/**********/
+
+	header {
+
+		/**************/
+		/* header top */
+		/**************/
+
+		.header-top {
+
+			/************/
+			/* BH sites */
+			/************/
+
+			.sites {
+				ul {
+					li {
+						margin: 22px 0 0 12px;
+
+						&:hover {
+							margin: 22px 0 0 12px;
+						}
+
+						&.active {
+							margin: 0 0 0 12px;
+						}
+
+						&.main {
+							&.active .icon {
+								@include sprite-museum-he-s;
+							}
+						}
+
+						&.shop {
+							&.active .icon {
+								@include sprite-shop-he-s;
+							}
+						}
+					}
+				}
+			}
+
+			/****************/
+			/* logo wrapper */
+			/****************/
+
+			.logo-wrapper {
+				.logo a {
+					@include sprite-logo-he-91x41;
+				}
+			}
+		}
+	}
+
 	/*******/
 	/* 404 */
 	/*******/

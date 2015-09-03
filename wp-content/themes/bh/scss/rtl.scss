@@ -1,270 +1,285 @@
 @import "functions";
 @import "typography";
 @import "modules/sprites";
+@import "modules/bh_sprites";
 
 @charset "utf-8";
-
-/******************/
-/* general layout */
-/******************/
 
 /**********/
 /* header */
 /**********/
 
-header .navbar {
-	.navbar-header {
-		margin-left: -15px;
-		margin-right: 0;
-		
-		.navbar-brand {
-			@include logo-he-big;
-		}
-		
-		.navbar-toggle {
-			margin: 14px 0 0 15px;
-			@include mobile-menu-he;
-		}
-	}
-		
-	.navbar-collapse {
-		nav.top-menu {
-			.navbar-nav {
-				margin-left: 0;
-				
-				& > li {			
-					padding: 35px 0 0 14px;
-	
-					& > a {
-						border-left: 0;
-						border-right: 1px solid $border-color1;
-						padding: 0 15px 0 0;
-					}
-					
-					&:first-child > a {
-						border-right: 0;
-					}
-					
-					&.heart a {
-						span:after {
-							float: right;
-							margin-left: 8px;
-							margin-right: auto;
+header {
+
+	/**************/
+	/* header top */
+	/**************/
+
+	.header-top {
+
+		/************/
+		/* BH sites */
+		/************/
+
+		.sites {
+			ul {
+				li {
+					float: right;
+					margin: 30px 0 0 15px;
+
+					a {
+						.title {
+							font-weight: $font-bold;
 						}
 					}
-					
-					/************************/
-					/* newsletter menu item */
-					/************************/
-					
-					&.menu-item-newsletter {
-						.newsletter-widget {
-							left: auto;
-							right: -70px;
-							
-							.Active_Trail_Newsletter {
-								&:before {
-									left: auto;
-									right: 90px;
-								}
-								
-								&:after {
-									left: auto;
-									right: 92px;
-								}
-								
-								.widgettitle {
-									padding: 4px 40px 4px 0;
-									
-									&:before {
-										left: auto;
-										right: 0;
-										@include flipH;
-									}
-								}
-								
-								.widgetcontent {
-									form {
-										.newsletter-groups {
-											label {
-												padding-left: 0;
-												padding-right: 15px;
-											}
+
+					&:hover {
+						margin: 18px -11px 0 4px;
+					}
+
+					&.active {
+						margin: 0 0 0 15px;
+
+					}
+
+					&.main {
+						&:hover .icon {
+							@include sprite-museum-he-s;
+						}
+
+						&.active .icon {
+							@include sprite-museum-he;
+						}
+					}
+
+					&.shop {
+						&:hover .icon {
+							@include sprite-shop-he-s;
+						}
+
+						&.active .icon {
+							@include sprite-shop-he;
+						}
+					}
+
+					&.mjs {
+						&:hover .icon {
+							@include sprite-mjs-he-s;
+						}
+					}
+				}
+			}
+		}
+
+		/****************/
+		/* logo wrapper */
+		/****************/
+
+		.logo-wrapper {
+			.mobile-menu-btn,
+			.logo {
+				float: left;
+				margin-left: auto;
+				margin-right: 15px;
+			}
+
+			.mobile-menu-btn a {
+				@include sprite-mobile-menu-he;
+			}
+
+			.logo a {
+				@include sprite-logo-he-127x57;
+			}
+		}
+	}
+
+	/*****************/
+	/* header bottom */
+	/*****************/
+	
+	.header-bottom {
+
+		/********/
+		/* menu */
+		/********/
+
+		nav.menu {
+			ul.nav {
+				& > li {
+					float: right;
+				}
+			}
+		}
+	}
+
+	/*******************/
+	/* header elements */
+	/*******************/
+
+	.header-elements {
+		&.header-mid-elements {
+			float: left;
+		}
+
+		.header-element {
+			float: left;
+			margin-left: auto;
+			margin-right: 15px;
+
+			.label {
+				font-weight: $font-bold;
+			}
+
+			/*******************/
+			/* shop cart popup */
+			/*******************/
+
+			&.shop-cart-popup {
+				margin-left: 8px;
+
+				.shop-cart-popup-content {
+					ul.cart_list {
+						li.product_list_widget_item_wrapper {
+							.product_list_widget_item {
+								a {
+									.col1 {
+										float: right;
+
+										&:after {
+											left: auto;
+											right: 100%;
 										}
 									}
-									
-									.result-container {
-										.loader {
-											left: 10px;
-											right: auto;
+
+									.col2 {
+										float: left;
+									}
+
+									.col1,
+									.col2 {
+										.col {
+											float: right;
+											
+											&.item-data {
+												margin: 5px -10px 0 10px;
+											}
+
+											&.item-price {
+												text-align: left;
+											}
 										}
 									}
 								}
 							}
+						}
+					}
+						
+					.total {
+						.col {
+							float: right;
 							
-							.glyphicon-remove {
-								left: 10px;
+							&:first-child:after {
+								left: auto;
+								right: 100%;
+							}
+
+							&.sum {
+								.amount {
+									text-align: left;
+								}
+							}
+						}
+					}
+					
+					.buttons {
+						.view-cart-btn {
+							float: right;
+							padding-left: 0;
+							padding-right: 10px;
+						}
+					}
+					
+					.glyphicon-remove {
+						left: 10px;
+						right: auto;
+					}
+				}
+			}
+
+			/********************/
+			/* newsletter popup */
+			/********************/
+
+			&.newsletter-popup {
+				.newsletter-popup-content {
+					.widgettitle {
+						&:before {
+							left: auto;
+							right: 10px;
+						}
+					}
+					
+					.widgetcontent {
+						form {
+							.newsletter-groups {
+								label {
+									float: right;
+									margin-left: 80px;
+									margin-right: auto;
+
+									span {
+										left: auto;
+										right: 25px;
+									}
+
+									&:after {
+										left: auto;
+										right: 4px;
+									}
+								}
+							}
+
+							.newsletter-submit {
+								float: left;
+								font-weight: $font-bold;
+							}
+						}
+						
+						.result-container {
+							.loader {
+								left: 196px;
 								right: auto;
 							}
 						}
 					}
-				}
-			}
-		}
-		
-		nav.main-menu {
-			.nav-justified {
-				& > li {
-					&:first-child {
-						& > a span {
-							border-right: 1px solid $border-color1;
-						}
-						
-						&:hover > a span,
-						&.current-menu-item > a span,
-						&.current-menu-parent > a span {
-							border-right: 1px solid transparent;
-						}
-					}
 					
-					& > a {
-						span {
-							border-left: 1px solid $border-color1;
-							border-right: 0;
-						}
-					}
-					
-					&.featured:first-child {
-						&:hover > a span,
-						&.current-menu-item > a span,
-						&.current-menu-parent > a span {
-							border-right: 1px solid $border-color1;
-						}
-					}
-
-					.sub-menu {
-						padding: 0 20px 0 28px;
-						left: auto;
-						right: 0;
-						background-color: #fbfbfb;
-						
-						&:after {
-							bottom: 0;
-							left: 0;
-							right: auto;
-							@include menu-bg-rtl;
-						}
-						
-						& > li {
-							&.indent {
-								padding-left: 0;
-								padding-right: 15px;
-							}
-							
-							& > a {
-								padding: 8px 0 8px 35px;
-							}
-						}
-					}
-					
-					&:hover {
-						.sub-menu {
-							padding: 14px 20px 20px 28px;
-							-webkit-box-shadow:	inset 0px 0px 15px 3px rgba(50, 50, 50, 0.05), -7px 7px 5px 0 rgba(50,50,50,0.5);
-							-moz-box-shadow:	inset 0px 0px 15px 3px rgba(50, 50, 50, 0.05), -7px 7px 5px 0 rgba(50,50,50,0.5);
-							box-shadow:			inset 0px 0px 15px 3px rgba(50, 50, 50, 0.05), -7px 7px 5px 0 rgba(50,50,50,0.5);
-						}
-					}
-					
-					&:hover,
-					&.current-menu-item,
-					&.current-menu-parent,
-					&.current-menu-ancestor {
-						& > a {
-							span {
-								border-left: 1px solid transparent;
-								border-right: 0;
-							}
-						}
-					}
-
-					&.featured:hover,
-					&.featured.current-menu-item,
-					&.featured.current-menu-parent,
-					&.featured.current-menu-ancestor {
-						& > a {
-							span {
-								border-left: 1px solid $border-color1;
-								border-right: 0;
-							}
-						}
+					.glyphicon-remove {
+						left: 10px;
+						right: auto;
 					}
 				}
 			}
 		}
 	}
-	
-	.side-collapse {
-		left: 0;
-		right: auto;
-		@include transition(left, .4s);
 
-		&.in {
-			left: 100% !important;
-			right: auto !important;
-		}
-		
-		.side-menu {
-			left: 0;
-			right: auto;
-			
-			.side-menu-top {
-				.sub-menu-title {
-					margin-left: 0;
-					margin-right: 28px;
-				}
-				
-				.lines {
-					left: -69px;
-					right: auto;
-				}
-			}
-			
-			nav {
-				@include box-shadow(-4px, 0, rgba(0,0,0,0.3), 0, 0, true);
-				
-				ul {
-					li {
-						&.menu-item-has-children > a:after {
-							content: "\f0d9";
-							left: auto;
-							@include calc(right, "100% - 31px");
-						}
-					}
-				}
-				
-				.side-top-menu {
-					nav {
-						ul {
-							li {
-								&.heart a {
-									&:after {
-										float: right;
-										margin-left: 8px;
-										margin-right: 0;
-									}
-								}
-							}
-						}
-					}
-				}
+	/*****************/
+	/* featured page */
+	/*****************/
+
+	.header-mid {
+		.featured-page {
+			float: right;
+
+			a {
+				font-weight: $font-bold;
 			}
 		}
 	}
-	
-	.side-column {
-		left: 0;
-		right: auto;
+
+	.header-bottom {
+		.featured-page {
+			float: left;
+		}
 	}
 }
 
