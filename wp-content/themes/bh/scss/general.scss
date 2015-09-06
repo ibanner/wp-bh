@@ -916,6 +916,10 @@ header {
 								top: -28px;
 								right: 196px;
 								
+								&:before {
+									display: none;
+								}
+
 								img {
 									width: 20px;
 								}

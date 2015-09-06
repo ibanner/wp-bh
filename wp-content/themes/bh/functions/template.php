@@ -15,34 +15,32 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Get Shop Mini Cart button and popup to be displayed as part of header elements
  *
  * @param		String		$header_position		top/mid
- * @return		String								shop mini cart button and popup
+ * @param		String		$sidebar				sidebar HTML
+ * @return		String								shop mini cart button and popup or empty string in case of input failure
  */
-function BH_shop_cart_popup($header_position) {
-	$output = '';
+function BH_shop_cart_popup($header_position, $sidebar) {
+	if ( ! $header_position || ! $sidebar )
+		return '';
 
-	if ( is_active_sidebar('shop-header-cart') ) :
+	$output = '<div class="shop-cart-popup-btn">';
 
-		$output .= '<div class="shop-cart-popup-btn">';
+	if ($header_position == 'top')
+		$output .= '<a class="sprite-cart" href="' . WC()->cart->get_cart_url() . '"></a>';
+	else
+		$output .= '<button class="sprite-cart"></button>';
 
-		if ($header_position == 'top')
-			$output .= '<a class="sprite-cart" href="' . WC()->cart->get_cart_url() . '"></a>';
-		else
-			$output .= '<button class="sprite-cart"></button>';
+	// Insert shopping cart indicator placeholder - code in woocommerce.js will update this on page load
+	$output .= '<div class="widget_shopping_cart_indicator"></div>';
 
-		// Insert shopping cart indicator placeholder - code in woocommerce.js will update this on page load
-		$output .= '<div class="widget_shopping_cart_indicator"></div>';
-
-		if ($header_position == 'mid')
-			$output .= '</div>';
-
-		$output .= '<div class="shop-cart-popup-content">';
-			$output .= BH_get_dynamic_sidebar('shop-header-cart');
+	if ($header_position == 'mid')
 		$output .= '</div>';
 
-		if ($header_position == 'top')
-			$output .= '</div>';
+	$output .= '<div class="shop-cart-popup-content">';
+		$output .= $sidebar;
+	$output .= '</div>';
 
-	endif;
+	if ($header_position == 'top')
+		$output .= '</div>';
 
 	return $output;
 }
@@ -52,27 +50,26 @@ function BH_shop_cart_popup($header_position) {
  *
  * Get Newsletter button and popup to be displayed as part of header elements
  *
- * @param		String		$sidebar		sidebar name
- * @return		String						newsletter button and popup or empty string in case of input failure
+ * @param		String		$header_position		top/mid
+ * @param		String		$sidebar				sidebar HTML
+ * @return		String								newsletter button and popup or empty string in case of input failure
  */
-function BH_newsletter_popup($sidebar) {
-	if ( ! $sidebar )
+function BH_newsletter_popup($header_position, $sidebar) {
+	if ( ! $header_position || ! $sidebar )
 		return '';
 
-	$output = '';
+	// manipulate $sidebar to contain $header_position info
+	// used to make a distinguish between group checkboxes of different widget instances
+	$sidebar = preg_replace("/\"mm_key\[([a-z\-]+)\]\"/", "\"mm_key[$1-" . $header_position . "]\"", $sidebar);
 
-	if ( is_active_sidebar($sidebar) ) :
+	$output = '<div class="newsletter-popup-btn">';
+		$output .= '<button class="label">' . __('ENews', 'BH') . '</button>';
+	$output .= '</div>';
 
-		$output .= '<div class="newsletter-popup-btn">';
-			$output .= '<button class="label">' . __('ENews', 'BH') . '</button>';
-		$output .= '</div>';
-
-		$output .= '<div class="newsletter-popup-content">';
-			$output .= BH_get_dynamic_sidebar($sidebar);
-			$output .= '<span class="glyphicon glyphicon-remove"></span>';
-		$output .= '</div>';
-
-	endif;
+	$output .= '<div class="newsletter-popup-content">';
+		$output .= $sidebar;
+		$output .= '<span class="glyphicon glyphicon-remove"></span>';
+	$output .= '</div>';
 
 	return $output;
 }

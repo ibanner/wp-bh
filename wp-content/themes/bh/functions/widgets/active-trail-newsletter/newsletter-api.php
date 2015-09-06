@@ -6,18 +6,11 @@
 	
 	require_once('../../../../../../wp-load.php');
 	
-	// Setup variables
-	$data = (isset($_POST['widget-active_trail_newsletter']) && $_POST['widget-active_trail_newsletter']) ? $_POST['widget-active_trail_newsletter'] : '';
-	
 	// collect data
-	if ($data) :
-		foreach ($data as $value) :
-			$user_id	= (isset($value['mm_userid']) && $value['mm_userid']) ? $value['mm_userid'] : '';
-			$mail		= (isset($value['mm_newemail']) && $value['mm_newemail']) ? $value['mm_newemail'] : '';
-			$groups		= (isset($value['mm_key']) && $value['mm_key']) ? $value['mm_key'] : '';
-		endforeach;
-	endif;
-	
+	$user_id	= (isset($_POST['mm_userid']) && $_POST['mm_userid']) ? $_POST['mm_userid'] : '';
+	$mail		= (isset($_POST['mm_newemail']) && $_POST['mm_newemail']) ? $_POST['mm_newemail'] : '';
+	$groups		= (isset($_POST['mm_key']) && $_POST['mm_key']) ? $_POST['mm_key'] : '';
+
 	// registration requests
 	if (!$user_id || !$mail || !$groups) :
 		echo '999';	// error 999 => General Error

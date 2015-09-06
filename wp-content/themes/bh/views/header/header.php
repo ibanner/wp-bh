@@ -41,35 +41,48 @@ $bh_sites = array(
 	)
 );
 
-// Set specific page variables for menu manipulation
-$blog_page		= get_field('acf-options_blog_page', 'option');
-$blog_page_id	= $blog_page ? $blog_page->ID : '';
-$events_page	= get_field('acf-options_events_page', 'option');
-$events_page_id	= $events_page ? $events_page->ID : '';
-
 // Build menu
 $args = array(
-	'theme_location'		=> $bh_sites[$current_site]['menu'],
-	'container'				=> false,
-	'items_wrap'			=> '%3$s',
-	'before'				=> '<span class="item-before disable"></span>',
-	'link_before'			=> '<span>',
-	'link_after'			=> '</span>',
-	'depth'					=> 2,
-	'add_blog_list_under'	=> $blog_page_id,
-	'add_events_list_under'	=> $events_page_id,
-	'echo'					=> 0
+	'theme_location'	=> $bh_sites[$current_site]['menu'],
+	'container'			=> false,
+	'items_wrap'		=> '%3$s',
+	'before'			=> '<span class="item-before disable"></span>',
+	'link_before'		=> '<span>',
+	'link_after'		=> '</span>',
+	'depth'				=> 2,
+	'echo'				=> 0
 );
+
+// Set specific page variables for menu manipulation
+if ($current_site == 'main') :
+	$blog_page		= get_field('acf-options_blog_page', 'option');
+	$blog_page_id	= $blog_page ? $blog_page->ID : '';
+	$events_page	= get_field('acf-options_events_page', 'option');
+	$events_page_id	= $events_page ? $events_page->ID : '';
+
+	$args['add_blog_list_under']	= $blog_page_id;
+	$args['add_events_list_under']	= $events_page_id;
+endif;
+
 $menu = wp_nav_menu($args);
 
 // Set header elements
-$languages_switcher				= BH_languages_switcher();
-$newsletter_header_top_popup	= BH_newsletter_popup('newsletter-header-top-menu');
-$newsletter_header_mid_popup	= BH_newsletter_popup('newsletter-header-mid-menu');
-$links_n_icons					= BH_header_links_n_icons();
-$shop_cart_header_top_popup		= BH_shop_cart_popup('top');
-$shop_cart_header_mid_popup		= BH_shop_cart_popup('mid');
-$featured_page					= $bh_sites[$current_site]['featured_page'];
+$languages_switcher					= BH_languages_switcher();
+$links_n_icons						= BH_header_links_n_icons();
+
+if ( is_active_sidebar('shop-mini-cart') ) :
+	$shop_cart_sidebar				= BH_get_dynamic_sidebar('shop-mini-cart');
+	$shop_cart_header_top_popup		= BH_shop_cart_popup('top', $shop_cart_sidebar);
+	$shop_cart_header_mid_popup		= BH_shop_cart_popup('mid', $shop_cart_sidebar);
+endif;
+
+if ( is_active_sidebar('newsletter') ) :
+	$newsletter_sidebar				= BH_get_dynamic_sidebar('newsletter');
+	$newsletter_header_top_popup	= BH_newsletter_popup('top', $newsletter_sidebar);
+	$newsletter_header_mid_popup	= BH_newsletter_popup('mid', $newsletter_sidebar);
+endif;
+
+$featured_page						= $bh_sites[$current_site]['featured_page'];
 
 ?>
 

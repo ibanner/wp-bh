@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-09-03 14:24+0300\n"
-"PO-Revision-Date: 2015-09-03 14:26+0300\n"
+"POT-Creation-Date: 2015-09-06 21:47+0300\n"
+"PO-Revision-Date: 2015-09-06 21:47+0300\n"
 "Last-Translator: \n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -98,7 +98,7 @@ msgstr "כתובת מייל שגויה או חסרה"
 
 #: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:278
 msgid "Choose Language:"
-msgstr "בחר שפה:"
+msgstr "בחרו שפה:"
 
 #: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:287
 msgid "Please check at least one newsletter name"
@@ -422,7 +422,7 @@ msgstr "גובה x רוחב x אורך"
 
 #: views/woocommerce/single-product/single-product-section3-related.php:52
 msgid "You might also like"
-msgstr "מוצרים נוספים שיעניינו אותך"
+msgstr "מוצרים נוספים שיעניינו אתכם"
 
 #: woocommerce/cart/cart.php:27 woocommerce/checkout/review-order.php:23
 #: woocommerce/emails/customer-completed-order.php:62

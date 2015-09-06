@@ -1,10 +1,17 @@
 <?php
 /*
 Widget Name: Active_Trail_Newsletter
-Version: 1.0
+Version: 2.0
 
 Changes Log:
+1.0
+===
 1. Initiation
+
+2.0
+===
+1. Enqueu scripts instead of inline calls
+2. Form classes declarations instead of using IDs in order to enable several widget instances in a single page
 */
 
 class Active_Trail_Newsletter extends WP_Widget
@@ -154,111 +161,13 @@ class Active_Trail_Newsletter extends WP_Widget
 		
 		// widget content
 		if ( $instance['at_mm_userid'] && $instance['groups'] ) :
+			wp_enqueue_script('jquery-form',				TEMPLATE . '/functions/widgets/active-trail-newsletter/jquery.form.min.js',			array('jquery'),	VERSION,	true);
+			wp_enqueue_script('active-trail-newsletter',	TEMPLATE . '/functions/widgets/active-trail-newsletter/active-trail-newsletter.js',	array('jquery'),	VERSION,	true);
+
 			echo $before_widget;
-			
+
 			$title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title'], $instance);
-			
-			?>
-			
-				<script src="<?php echo TEMPLATE; ?>/functions/widgets/active-trail-newsletter/jquery.form.min.js"></script>
-				
-				<script>
-					var $ = jQuery.noConflict();
-					
-					// bind form and send data
-					$(document).ready(function() {
-						var options = {
-							beforeSubmit	: validateForm_<?php echo str_replace( '-', '_', $this->get_field_id('form') ); ?>,
-							success			: showResult_<?php echo str_replace( '-', '_', $this->get_field_id('form') ); ?>
-						};
-						
-						$('#<?php echo $this->get_field_id('form'); ?>').ajaxForm(options);
-					});
-					
-					function validateForm_<?php echo str_replace( '-', '_', $this->get_field_id('form') ); ?>(formData, jqForm, options) {
-						var result_container	= $('#<?php echo $this->get_field_id('result'); ?>');
-						result_container.attr('class', 'result-container hide');
-						
-						var mailErr				= $('#<?php echo $this->get_field_id('mailErr'); ?>');
-						var newsletterErr		= $('#<?php echo $this->get_field_id('newsletterErr'); ?>');
-						
-						var emailFilter			= /^.+@.+\..{2,3}$/;
-						var txtMail				= $('#<?php echo $this->get_field_id('mm_newemail'); ?>');
-						
-						var newsletterGroups	= $('[name="<?php echo $this->get_field_name('mm_key'); ?>[]"]');
-						
-						var res					= true;
-						
-						// mail validation
-						if ( txtMail == null || !(emailFilter.test(txtMail.val())) ) {
-							mailErr.removeClass('hide');
-							txtMail.focus();
-							res = false;
-						}
-						else {
-							mailErr.addClass('hide');
-						}
-						
-						// newsletter groups validation
-						var checked = false;
-						for (var i=0; i<newsletterGroups.length; i++) {
-							if (newsletterGroups[i].checked) {
-								checked = true;
-								break;
-							}
-						}
-						
-						if (!checked) {
-							newsletterErr.removeClass('hide');
-							res = false;
-						}
-						else {
-							newsletterErr.addClass('hide');
-						}
-						
-						if (!res)
-							return false;
-							
-						// prepare result container
-						result_container.find('.result').html('');
-						result_container.removeClass('hide');
-						result_container.find('.loader').removeClass('hide');
-						
-						return true;
-					}
-					
-					function showResult_<?php echo str_replace( '-', '_', $this->get_field_id('form') ); ?>(responseText, statusText, xhr, $form) {
-						var result_container	= $('#<?php echo $this->get_field_id('result'); ?>');
-						var msg_999				= '<?php _e('General error, please try again later', 'BH'); ?>';
-						var msg_1				= '<?php _e('Registration has been failed, please try again later', 'BH'); ?>';
-						var msg_0				= '<?php _e('Registration was successful, thank you!', 'BH'); ?>';
-						
-						if (statusText == 'success') {
-							if (responseText=='0') {
-								result_container.find('.result').addClass('success');
-								result_container.find('.result').html(msg_0);
-							}
-							else {
-								result_container.find('.result').addClass('error');
-								result_container.find('.result').html(msg_1);
-							}
-							
-							result_container.find('.loader').addClass('hide');
-							
-							return true;
-						}
-						else {
-							result_container.find('.result').addClass('error');
-							result_container.find('.result').html(msg_999);
-							result_container.find('.loader').addClass('hide');
-							
-							return false;
-						}
-					}
-				</script>
-			
-			<?php
-			
+
 			if (!empty($title))
 				echo $before_title . $title . $after_title;
 				
@@ -267,33 +176,37 @@ class Active_Trail_Newsletter extends WP_Widget
 				
 				?>
 				
-				<form id="<?php echo $this->get_field_id('form'); ?>" action="<?php echo TEMPLATE; ?>/functions/widgets/active-trail-newsletter/newsletter-api.php" method="post">
-					<input id="<?php echo $this->get_field_id('mm_userid'); ?>" class="mm_userid" name="<?php echo $this->get_field_name('mm_userid'); ?>" type="hidden" value="<?php echo $instance['at_mm_userid']; ?>" />
+				<form class="widget-active_trail_newsletter-form" action="<?php echo TEMPLATE; ?>/functions/widgets/active-trail-newsletter/newsletter-api.php" method="post">
+					<input class="mm_userid" name="mm_userid" type="hidden" value="<?php echo $instance['at_mm_userid']; ?>" />
 					
 					<small><?php _e('Your Email:', 'BH'); ?></small>
-					<input id="<?php echo $this->get_field_id('mm_newemail'); ?>" class="mm_newemail" name="<?php echo $this->get_field_name('mm_newemail'); ?>" type="text" placeholder="<?php _e('Email Address', 'BH'); ?>" value="" />
-					<div id="<?php echo $this->get_field_id('mailErr'); ?>" class="errph hide"><?php _e('Email address is missing or incorrect', 'BH'); ?></div>
+					<input class="mm_newemail" name="mm_newemail" type="text" placeholder="<?php _e('Email Address', 'BH'); ?>" value="" />
+					<div class="mailErr errph hide"><?php _e('Email address is missing or incorrect', 'BH'); ?></div>
 					
 					<div class="newsletter-groups">
 						<small><?php _e('Choose Language:', 'BH'); ?></small>
 						
 						<?php
 							foreach ($instance['groups'] as $group) {
-								echo '<input type="checkbox" name="' . $this->get_field_name('mm_key') . '[]" id="' . $this->get_field_id('mm_key') . '[' . $group['id'] . ']" value="' . $group['id'] . '" />';
-								echo '<label for="' . $this->get_field_id('mm_key') . '[' . $group['id'] . ']"><span>' . $group['name'] . '</span></label>';
+								echo '<input type="checkbox" name="mm_key[]" id="mm_key[' . $group['id'] . ']" value="' . $group['id'] . '" />';
+								echo '<label for="mm_key[' . $group['id'] . ']"><span>' . $group['name'] . '</span></label>';
 							}
 						?>
 					</div>
-					<div id="<?php echo $this->get_field_id('newsletterErr'); ?>" class="errph hide"><?php _e('Please check at least one newsletter name', 'BH'); ?></div>
+					<div class="newsletterErr errph hide"><?php _e('Please check at least one newsletter name', 'BH'); ?></div>
 					
 					<input class="newsletter-submit" type="submit" value="<?php _e('Register', 'BH'); ?>" />
 				</form>
 				
-				<div id="<?php echo $this->get_field_id('result'); ?>" class="result-container hide">
+				<div class="result-container">
 					<div class="loader hide">
 						<?php get_template_part('views/components/loader'); ?>
 					</div>
-					<div class="result"></div>
+					<div class="result">
+						<div class="msg msg-999 hide"><?php _e('General error, please try again later', 'BH'); ?></div> 
+						<div class="msg msg-1 hide"><?php _e('Registration has been failed, please try again later', 'BH'); ?></div> 
+						<div class="msg msg-0 hide"><?php _e('Registration was successful, thank you!', 'BH'); ?></div> 
+					</div>
 				</div>
 				
 				<?php
@@ -305,5 +218,3 @@ class Active_Trail_Newsletter extends WP_Widget
 	}
 }
 add_action( 'widgets_init', create_function('', 'return register_widget("Active_Trail_Newsletter");') );
-
-?>

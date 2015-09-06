@@ -10,39 +10,26 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 function BH_sidebars() {
-	// Newsletter Header Top Menu
+	// Newsletter
 	register_sidebar(
 		array(
-			'id'			=> 'newsletter-header-top-menu',
-			'name'			=> 'Newsletter Header Top Menu',
+			'id'			=> 'newsletter',
+			'name'			=> 'Newsletter',
 			'description'	=> 'Drag here Active Trail Newsletter widget',
-			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
+			'before_widget'	=> '<div class="widget %2$s">',
 			'after_widget'	=> '</div>',
 			'before_title'	=> '<h2 class="widgettitle">',
 			'after_title'	=> '</h2>'
 		)
 	);
 	
-	// Newsletter Header Mid Menu
+	// Shop Mini Cart
 	register_sidebar(
 		array(
-			'id'			=> 'newsletter-header-mid-menu',
-			'name'			=> 'Newsletter Header Mid Menu',
-			'description'	=> 'Drag here Active Trail Newsletter widget',
-			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
-			'after_widget'	=> '</div>',
-			'before_title'	=> '<h2 class="widgettitle">',
-			'after_title'	=> '</h2>'
-		)
-	);
-	
-	// Newsletter Side Menu
-	register_sidebar(
-		array(
-			'id'			=> 'newsletter-side-menu',
-			'name'			=> 'Newsletter Side Menu',
-			'description'	=> 'Drag here Active Trail Newsletter widget',
-			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
+			'id'			=> 'shop-mini-cart',
+			'name'			=> 'Shop Mini Cart',
+			'description'	=> 'Drag here Cart widget',
+			'before_widget'	=> '<div class="widget %2$s">',
 			'after_widget'	=> '</div>',
 			'before_title'	=> '<h2 class="widgettitle">',
 			'after_title'	=> '</h2>'
@@ -55,20 +42,7 @@ function BH_sidebars() {
 			'id'			=> 'shop-header-search',
 			'name'			=> 'Shop Header Product Search',
 			'description'	=> 'Drag here Product Search widget',
-			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
-			'after_widget'	=> '</div>',
-			'before_title'	=> '<h2 class="widgettitle">',
-			'after_title'	=> '</h2>'
-		)
-	);
-	
-	// Shop Header Cart
-	register_sidebar(
-		array(
-			'id'			=> 'shop-header-cart',
-			'name'			=> 'Shop Header Cart',
-			'description'	=> 'Drag here Cart widget',
-			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
+			'before_widget'	=> '<div class="widget %2$s">',
 			'after_widget'	=> '</div>',
 			'before_title'	=> '<h2 class="widgettitle">',
 			'after_title'	=> '</h2>'
