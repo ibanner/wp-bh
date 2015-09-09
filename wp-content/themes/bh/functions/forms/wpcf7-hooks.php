@@ -455,6 +455,8 @@
 		// update posted data with payment step as 'processing'
 		$additional_posted_data['paymentStep'] = 'processing';
 		
+		session_start();
+
 		// store custom payment issuer and customer Emails
 		if ( isset($custom_payment) ) {
 			$_SESSION['payment_data']['issuer-email']	= $custom_payment->data['issuerEmail'];
