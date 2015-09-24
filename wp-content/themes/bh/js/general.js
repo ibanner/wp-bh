@@ -4,7 +4,6 @@ var $ = jQuery,
 		params : {
 
 			// general
-			template 				: js_globals.template_url,
 			api						: js_globals.template_url + '/api/',
 			timeout					: 400,
 
@@ -66,10 +65,7 @@ var $ = jQuery,
 			if ( $('body').hasClass('page-template-shop-why-shop-with-us') ) {
 				BH_general.shop_wswu_banners();
 			}
-			
-			// shop footer alignment
-			$('.shop-footer .link-box').setAllToMaxHeight();
-			
+
 		},
 
 		top_menu : function() {
@@ -390,7 +386,14 @@ var $ = jQuery,
 			}
 			
 		},
-		
+
+		footer : function() {
+
+			// footer alignment
+			$('.footer-links .link-box .link').height('auto').setAllToMaxHeight();
+
+		},
+
 		loaded : function() {
 			
 			// shop cart popup
@@ -404,6 +407,9 @@ var $ = jQuery,
 			
 			// top menu
 			BH_general.top_menu();
+
+			// footer
+			BH_general.footer();
 
 		}
 		

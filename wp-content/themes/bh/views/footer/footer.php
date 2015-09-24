@@ -1,5 +1,7 @@
 <footer>
 
+	<?php echo get_template_part('views/footer/footer-links'); ?>
+
 	<div class="container">
 	
 		<div class="row">

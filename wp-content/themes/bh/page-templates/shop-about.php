@@ -46,13 +46,6 @@
 <?php
 
 	/**
-	 * BH_shop_footer hook
-	 * 
-	 * @hooked	BH_shop_footer_link_boxes - 10
-	 */
-	do_action('BH_shop_footer');
-	
-	/**
 	 * woocommerce_after_main_content hook
 	 *
 	 * @hooked	woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)

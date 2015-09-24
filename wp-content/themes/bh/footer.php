@@ -4,7 +4,7 @@
  *
  * @author 		Beit Hatfutsot
  * @package 	bh
- * @version     1.0
+ * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <script>
 
 	var js_globals = {};
-	js_globals.template_url = "<?php echo get_bloginfo('template_directory'); ?>";
+	js_globals.template_url = "<?php echo TEMPLATE; ?>";
 
 </script>
 

@@ -75,15 +75,3 @@
 	</div>
 	
 </section>
-
-<?php
-	if ($shop_page) :
-	
-		/**
-		 * BH_shop_footer hook
-		 * 
-		 * @hooked	BH_shop_footer_link_boxes - 10
-		 */
-		do_action('BH_shop_footer');
-	endif;
-?>

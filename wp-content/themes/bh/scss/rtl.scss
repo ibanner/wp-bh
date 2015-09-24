@@ -1538,6 +1538,26 @@ ul.order_details {
 /**********/
 
 footer {
+
+	/****************/
+	/* footer links */
+	/****************/
+
+	.footer-links {
+		.link-box {
+			a {
+				.link {
+					.title {
+						span {
+							left: auto;
+							right: -5px;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	.col {
 		.search-form {
 			.search-field {

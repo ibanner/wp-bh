@@ -38,13 +38,6 @@ add_action('woocommerce_after_main_content', 'BH_woocommerce_wrapper_end', 10);
 add_filter('woocommerce_breadcrumb_defaults', 'BH_woocommerce_breadcrumb_defaults');
 
 /**
- * WooCommerce Footer
- * 
- * @see		BH_shop_footer_link_boxes()
- */
-add_action('BH_shop_footer', 'BH_shop_footer_link_boxes', 10);
-
-/**
  * WooCommerce Widgets customization
  * 
  * @see		override_woocommerce_widgets()
