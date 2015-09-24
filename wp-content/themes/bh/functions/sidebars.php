@@ -36,19 +36,6 @@ function BH_sidebars() {
 		)
 	);
 	
-	// Shop Header Product Search
-	register_sidebar(
-		array(
-			'id'			=> 'shop-header-search',
-			'name'			=> 'Shop Header Product Search',
-			'description'	=> 'Drag here Product Search widget',
-			'before_widget'	=> '<div class="widget %2$s">',
-			'after_widget'	=> '</div>',
-			'before_title'	=> '<h2 class="widgettitle">',
-			'after_title'	=> '</h2>'
-		)
-	);
-	
 	// Shop Sidebar Recently Viewed
 	register_sidebar(
 		array(

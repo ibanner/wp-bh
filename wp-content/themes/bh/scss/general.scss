@@ -2280,54 +2280,6 @@ header {
 			}
 		}
 	}
-	
-	.widget-product-search-wrapper {
-		padding-right: 0;
-		width: 347px;
-		
-		.widget_product_search {
-			height: 36px;
-			border: 1px solid $black-color3;
-			@include border-radius(3px);
-			
-			form {
-				height: 100%;
-				
-				#searchsubmit {
-					float: left;
-					margin: 9.5px 14px 9.5px 9px;
-					@include product-search;
-				}
-				
-				#s {
-					float: left;
-					margin-top: 5px;
-					@include calc(width, "100% - 45px");
-					@include font;
-				}
-				
-				::-webkit-input-placeholder {
-					font-size: 12px;
-					color: #cccecc;
-				}
-				
-				:-moz-placeholder { /* Firefox 18- */
-					font-size: 12px;
-					color: #cccecc;
-				}
-				
-				::-moz-placeholder {  /* Firefox 19+ */
-					font-size: 12px;
-					color: #cccecc;
-				}
-				
-				:-ms-input-placeholder {
-					font-size: 12px;
-					color: #cccecc;
-				}
-			}
-		}
-	}
 }
 
 /*********************/
@@ -3648,7 +3600,6 @@ footer {
 	/****************/
 
 	.footer-links {
-		padding-bottom: 10px;
 		background-color: $gray-color5;
 
 		.link-box {
@@ -3728,50 +3679,76 @@ footer {
 		}
 	}
 
+	/***************/
+	/* search form */
+	/***************/
+
+	.search-form-wrapper {
+		padding: 12px 0;
+		background-color: $gray-color5;
+
+		form {
+			height: 35px;
+			border: 3px solid $gray-color4;
+			
+			.search-field {
+				float: left;
+				padding: 0 3px;
+				@include calc(width, "100% - 35px");
+				line-height: 29px;
+				@include font;
+			}
+			
+			.search-submit-wrapper {
+				float: left;
+				position: relative;
+				width: 35px;
+				background-color: $gray-color4;
+				
+				.magnifying-glass {
+					position: absolute;
+					top: 3px;
+					right: 5px;
+					width: 16px;
+					height: 16px;
+					border: 3px solid $white;
+					border-radius: 50%;
+
+					&:after {
+						content: "";
+						position: absolute;
+						bottom: -6px;
+						left: -11px;
+						width: 14px;
+						height: 3px;
+						border-width: 0;
+						background: $white;
+						@include transform(rotate(-45deg));
+						display: inline-block;
+					}
+				}
+
+				input {
+					position: relative;
+					width: 100%;
+					height: 29px;
+					background: transparent;
+					display: block;
+				}
+			}
+		}
+	}
+
 	/**********/
 	/* credit */
 	/**********/
 
-	.col {
-		margin: 10px 0;
-		height: 39px;
-		
-		.copyrights {
-			line-height: 39px;
-			font-size: 12px;
-			text-align: center;
-		}
-
-		.search-form {
-			position: relative;
-			margin: 0 auto;
-			width: 128px;
-			height: 18px;
-			border: 1px solid $border-color1;
-			box-sizing: content-box;
-			@include vertical-align;
-			
-			.search-field {
-				position: absolute;
-				padding: 0 2px;
-				top: 0;
-				left: 0;
-				width: 104px;
-				line-height: 18px;
-				font-size: 11px;
-				border: 0;
-			}
-			
-			.search-submit {
-				position: absolute;
-				top: 1px;
-				right: 0;
-				@include search;
-				cursor: pointer;
-			}
-		}
+	.copyrights {
+		line-height: 39px;
+		font-size: 12px;
+		text-align: center;
 	}
-	
+
 	.monitoring {
 		font-size: 11px;
 		direction: ltr;
