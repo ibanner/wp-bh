@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-09-06 21:47+0300\n"
-"PO-Revision-Date: 2015-09-06 21:47+0300\n"
+"POT-Creation-Date: 2015-09-24 15:24+0300\n"
+"PO-Revision-Date: 2015-09-24 15:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.5\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
@@ -68,45 +68,45 @@ msgstr "אנא שלחו את הבקשה באמצעות כרטיס אשראי א�
 msgid "General Error."
 msgstr "שגיאה כללית."
 
-#: functions/template.php:67
+#: functions/template.php:66
 msgid "ENews"
 msgstr "ניוזלטר"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:232
-msgid "General error, please try again later"
-msgstr "שגיאה כללית, אנא נסו שוב מאוחר יותר"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:233
-msgid "Registration has been failed, please try again later"
-msgstr "הרישום נכשל, אנא נסו שנית מאוחר יותר"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:234
-msgid "Registration was successful, thank you!"
-msgstr "הרישום בוצע בהצלחה, תודה רבה!"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:273
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:182
 msgid "Your Email:"
 msgstr "כתובת מייל:"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:274
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:183
 msgid "Email Address"
 msgstr "כתובת מייל"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:275
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:184
 msgid "Email address is missing or incorrect"
 msgstr "כתובת מייל שגויה או חסרה"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:278
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:187
 msgid "Choose Language:"
 msgstr "בחרו שפה:"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:287
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:196
 msgid "Please check at least one newsletter name"
 msgstr "יש לבחור לפחות שפה אחת"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:289
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:198
 msgid "Register"
 msgstr "הרשמה"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:206
+msgid "General error, please try again later"
+msgstr "שגיאה כללית, אנא נסו שוב מאוחר יותר"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:207
+msgid "Registration has been failed, please try again later"
+msgstr "הרישום נכשל, אנא נסו שנית מאוחר יותר"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:208
+msgid "Registration was successful, thank you!"
+msgstr "הרישום בוצע בהצלחה, תודה רבה!"
 
 #: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:92
 #: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:170
@@ -154,25 +154,25 @@ msgstr "נצפו<br />לאחרונה"
 msgid "Home"
 msgstr "דף הבית"
 
-#: functions/woocommerce/woocommerce-functions.php:199
-msgid "Learn more"
-msgstr "קראו עוד"
-
-#: functions/woocommerce/woocommerce-functions.php:591
+#: functions/woocommerce/woocommerce-functions.php:519
 msgid "Most Popular"
 msgstr "הפופולרי ביותר"
 
-#: functions/woocommerce/woocommerce-functions.php:592
+#: functions/woocommerce/woocommerce-functions.php:520
 msgid "Price: Low to High"
 msgstr "מחיר: נמוך לגבוה"
 
-#: functions/woocommerce/woocommerce-functions.php:593
+#: functions/woocommerce/woocommerce-functions.php:521
 msgid "Price: High to Low"
 msgstr "מחיר: גבוה לנמוך"
 
-#: product-searchform.php:3
-msgid "Search for products"
-msgstr "חיפוש מוצרים"
+#: searchform.php:13
+msgid "Search in shop..."
+msgstr "חיפוש בחנות..."
+
+#: searchform.php:13
+msgid "Search in site..."
+msgstr "חיפוש באתר..."
 
 #: views/components/meta-single.php:2 views/woocommerce/product-item.php:46
 #: views/woocommerce/single-product/single-product-section1-title.php:22
@@ -195,10 +195,6 @@ msgstr "חזרה"
 msgid "homepage"
 msgstr "לדף הבית"
 
-#: views/components/search-form.php:1
-msgid "Search in site..."
-msgstr "חיפוש באתר..."
-
 #: views/event/events-filters.php:22
 msgid "All Categories"
 msgstr "כל הקטגוריות"
@@ -210,6 +206,10 @@ msgstr "החל מתאריך"
 #: views/event/series.php:47
 msgid "Purchase"
 msgstr "לרכישה"
+
+#: views/footer/footer-links.php:43
+msgid "Learn more"
+msgstr "קראו עוד"
 
 #: views/main/slider/display-events-slider.php:22
 msgid "All events"
@@ -382,15 +382,6 @@ msgid ""
 "This content is password protected. To view it please enter your password "
 "below:"
 msgstr ""
-
-#: views/page/search.php:6
-#, php-format
-msgid "Search Results for: &#8216;%s&#8217;"
-msgstr "תוצאות חיפוש עבור הביטוי: &#8217;%s&#8216;"
-
-#: views/page/search.php:6
-msgid "Search Results"
-msgstr "תוצאות חיפוש"
 
 #: views/sidebar/sidebar-blog.php:91
 msgid "Categories"
@@ -607,6 +598,15 @@ msgstr "כתובת משלוח"
 #: woocommerce/loop/orderby.php:36
 msgid "Sort by"
 msgstr "מיון לפי"
+
+#~ msgid "Search for products"
+#~ msgstr "חיפוש מוצרים"
+
+#~ msgid "Search Results for: &#8216;%s&#8217;"
+#~ msgstr "תוצאות חיפוש עבור הביטוי: &#8217;%s&#8216;"
+
+#~ msgid "Search Results"
+#~ msgstr "תוצאות חיפוש"
 
 #~ msgid "Newsletter"
 #~ msgstr "ניוזלטר"
