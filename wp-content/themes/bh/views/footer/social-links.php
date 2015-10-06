@@ -1,6 +1,6 @@
 <?php
 /**
- * Soccial links
+ * Social links
  *
  * Display social links as part of footer
  *
@@ -11,7 +11,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $current_site;
+// Get global variables
+global $current_site;	// main / shop;
 
 $links = get_field('acf-options_social_icons_links', 'option');
 

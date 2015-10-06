@@ -1,3 +1,14 @@
+<?php
+/**
+ * Footer view
+ *
+ * @author 		Beit Hatfutsot
+ * @package 	bh/views/footer
+ * @version     2.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+
 <footer>
 
 	<?php // Footer links
@@ -16,6 +27,10 @@
 
 	<?php // Social links
 		get_template_part('views/footer/social-links');
+	?>
+
+	<?php // sites
+		get_template_part('views/footer/sites-links');
 	?>
 
 	<div class="copyrights">&copy; 1996 <?php bloginfo('name'); ?></div>

@@ -3788,6 +3788,65 @@ footer {
 		}
 	}
 
+	/***************/
+	/* sites links */
+	/***************/
+
+	.sites-links {
+		border-top: 10px solid;
+
+		&.main-sites-links {
+			border-color: $main-color;
+		}
+
+		&.shop-sites-links {
+			border-color: $shop-color;
+		}
+
+		.site-item {
+			a {
+				height: 45px;
+				text-align: center;
+				text-decoration: none;
+				display: block;
+
+				.title {
+					line-height: 22px;
+					font-size: 22px;
+					font-weight: $font-semi-bold;
+					color: $font-invert-color;
+					@include vertical-align;
+				}
+
+				&.main {
+					background-color: $main-color;
+				}
+
+				&.shop {
+					background-color: $shop-color;
+				}
+
+				&.mjs {
+					background-color: $mjs-color;
+				}
+
+				&:hover {
+					height: 60px;
+				}
+
+				&.active {
+					height: 75px;
+
+					.title {
+						line-height: 24px;
+						font-size: 24px;
+						font-weight: $font-bold;
+					}
+				}
+			}
+		}
+	}
+
 	/**********/
 	/* credit */
 	/**********/

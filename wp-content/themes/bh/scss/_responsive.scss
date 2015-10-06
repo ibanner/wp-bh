@@ -113,6 +113,36 @@
 	.event-filters-outer-wrapper {
 		margin-top: 0;
 	}
+
+	/**********/
+	/* footer */
+	/**********/
+
+	footer {
+
+		/***************/
+		/* sites links */
+		/***************/
+
+		.sites-links {
+			.site-item {
+				a {
+					.title {
+						line-height: 20px;
+						font-size: 20px;
+						font-weight: $font-normal;
+					}
+
+					&.active {
+						.title {
+							line-height: 22px;
+							font-size: 22px;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 @media (max-width: 991px) {
@@ -154,6 +184,14 @@
 		}
 	}
 
+	/****************/
+	/* page content */
+	/****************/
+
+	.page-content {
+		padding-top: 0;
+	}
+	
 	/**********/
 	/* banner */
 	/**********/
@@ -234,6 +272,34 @@
 	.contact-details {
 		.contact-details-wrapper {
 			margin-bottom: 30px;
+		}
+	}
+
+	/**********/
+	/* footer */
+	/**********/
+
+	footer {
+
+		/****************/
+		/* footer links */
+		/****************/
+
+		.footer-links {
+			.link-box {
+				a {
+					.link {
+						.title {
+							line-height: normal;
+							font-size: 12px;
+						}
+
+						.more {
+							font-size: 10px;
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -389,6 +455,46 @@
 		td.actions {
 			.input-text {
 				width: 48% !important;
+			}
+		}
+	}
+
+	/**********/
+	/* footer */
+	/**********/
+
+	footer {
+
+		/***************/
+		/* sites links */
+		/***************/
+
+		.sites-links {
+			border-top: 6px solid;
+
+			.site-item {
+				a {
+					height: 40px;
+
+					.title {
+						line-height: 13px;
+						font-size: 13px;
+						font-weight: $font-normal;
+					}
+
+					&:hover {
+						height: 50px;
+					}
+
+					&.active {
+						height: 60px;
+
+						.title {
+							line-height: 16px;
+							font-size: 16px;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -1023,6 +1129,29 @@
 				.bottom-msg-content {
 					h2 {
 						font-size: 29px;
+					}
+				}
+			}
+		}
+	}
+
+	/**********/
+	/* footer */
+	/**********/
+
+	footer {
+
+		/****************/
+		/* footer links */
+		/****************/
+
+		.footer-links {
+			.link-box {
+				a {
+					.link {
+						.title {
+							font-size: 14px;
+						}
 					}
 				}
 			}

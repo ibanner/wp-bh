@@ -11,7 +11,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $current_site;
+// Get global variables
+global $current_site;	// main / shop;
 
 $elements = get_field('acf-options_header_icons_links', 'option');
 
