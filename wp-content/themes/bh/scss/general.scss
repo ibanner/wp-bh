@@ -3704,6 +3704,10 @@ footer {
 				position: relative;
 				width: 35px;
 				background-color: $gray-color4;
+
+				&:hover {
+					background-color: $gray-color3;
+				}
 				
 				.magnifying-glass {
 					position: absolute;
@@ -3734,6 +3738,51 @@ footer {
 					height: 29px;
 					background: transparent;
 					display: block;
+				}
+			}
+		}
+	}
+
+	/****************/
+	/* social links */
+	/****************/
+
+	.social-links {
+		&.main-social-links {
+			background-color: $blue-color5;
+		}
+
+		&.shop-social-links {
+			background-color: $orange-color5;
+		}
+
+		ul {
+			margin: 0;
+			padding: 10px 0;
+			text-align: center;
+
+			li {
+				margin: 0 33px;
+				width: 40px;
+				height: 40px;
+				background-color: $white;
+				@include border-radius(50%);
+				display: inline-block;
+
+				a {
+					height: 100%;
+					font-size: 28px;
+					color: $gray-color5;
+					text-decoration: none;
+					display: block;
+
+					&:hover {
+						color: $gray-color3;
+					}
+
+					i {
+						@include vertical-align;
+					}
 				}
 			}
 		}

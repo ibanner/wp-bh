@@ -14,6 +14,10 @@
 		</div>
 	</div>
 
+	<?php // Social links
+		get_template_part('views/footer/social-links');
+	?>
+
 	<div class="copyrights">&copy; 1996 <?php bloginfo('name'); ?></div>
 
 	<?php /*

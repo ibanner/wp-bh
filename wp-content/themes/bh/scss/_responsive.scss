@@ -718,6 +718,25 @@
 			}
 		}
 	}
+
+	/**********/
+	/* footer */
+	/**********/
+
+	footer {
+
+		/****************/
+		/* social links */
+		/****************/
+
+		.social-links {
+			ul {
+				li {
+					margin: 0 20px;
+				}
+			}
+		}
+	}
 }
 
 @media (max-width: 446px) {
