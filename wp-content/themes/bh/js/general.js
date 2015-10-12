@@ -14,6 +14,9 @@ var $ = jQuery,
 			// newsletter popup
 			BH_general.newsletter_popup();
 			
+			// footer menu
+			BH_general.footer_menu();
+
 			// faqs
 			$('.faqs li .question').click(function() {
 				$(this).toggleClass('expanded');
@@ -69,6 +72,7 @@ var $ = jQuery,
 		},
 
 		top_menu : function() {
+
 			$('nav.menu ul.nav > li').each(function() {
 				var li_width			= $(this).width(),
 					item_before			= $(this).children('.item-before'),
@@ -81,8 +85,9 @@ var $ = jQuery,
 
 				sub_menu.css('left', (li_width-sub_menu_width)/2);
 			});
+
 		},
-		
+
 		shop_cart_popup : function() {
 			
 			var shop_cart_popup_wrapper		= $('header .shop-cart-header-mid-popup'),
@@ -387,10 +392,32 @@ var $ = jQuery,
 			
 		},
 
-		footer : function() {
+		footer_links : function() {
 
 			// footer alignment
 			$('.footer-links .link-box .link').height('auto').setAllToMaxHeight();
+
+		},
+
+		footer_menu : function() {
+
+			$('.footer-menu li.menu-item-has-children > .item-before').click(function() {
+				var current = $(this).parent(),
+					mobile = $('.footer-menu').hasClass('mobile') ? true : false,
+					active = current.hasClass('collapsed') ? true : false;
+
+				if (mobile || current.parent().hasClass('sub-menu')) {
+					// prevent closing top level footer sub menus for desktop resolution
+					current.parent().find('li.menu-item-has-children').removeClass('collapsed');
+				}
+
+				if (active) {
+					current.removeClass('collapsed').find('li.menu-item-has-children').removeClass('collapsed');
+				}
+				else {
+					current.addClass('collapsed');
+				}
+			});
 
 		},
 
@@ -408,11 +435,30 @@ var $ = jQuery,
 			// top menu
 			BH_general.top_menu();
 
-			// footer
-			BH_general.footer();
+			// footer links
+			BH_general.footer_links();
+
+			// close all footer sub menus
+			$('.footer-menu li.menu-item-has-children').removeClass('collapsed');
+
+			// javascript media queries
+			if (matchMedia) {
+				var mq = window.matchMedia("(max-width: 767px)");
+
+				if (mq.matches) {
+					// width <= 767
+					$('.footer-menu').addClass('mobile');
+				}
+				else {
+					// width > 767
+					$('.footer-menu').removeClass('mobile');
+					// collapse top level footer sub menus
+					$('.footer-menu > ul > li.menu-item-has-children').addClass('collapsed');
+				}
+			}
 
 		}
-		
+
 	};
 
 // make it safe to use console.log always

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global	$bh_sites,		// BH sites information
 		$shop_page,		// True / False	- Is shop page (set earlier in woocommerce-functions.php)
 		$current_site,	// main / shop
-		$menu;			// Menu theme location
+		$menu;			// Complete menu HTML structure
 
 $current_site = is_woocommerce() || $shop_page ? 'shop' : 'main';
 
@@ -49,7 +49,6 @@ $args = array(
 	'before'			=> '<span class="item-before disable"></span>',
 	'link_before'		=> '<span>',
 	'link_after'		=> '</span>',
-	'depth'				=> 2,
 	'echo'				=> 0
 );
 

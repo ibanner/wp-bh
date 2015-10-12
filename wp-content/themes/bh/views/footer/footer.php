@@ -29,6 +29,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 		get_template_part('views/footer/social-links');
 	?>
 
+	<?php // Menu
+		get_template_part('views/footer/footer-menu');
+	?>
+
 	<?php // sites
 		get_template_part('views/footer/sites-links');
 	?>
