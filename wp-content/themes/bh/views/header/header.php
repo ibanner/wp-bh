@@ -107,7 +107,7 @@ $featured_page						= $bh_sites[$current_site]['featured_page'];
 
 			<div class="logo-wrapper">
 				<div class="mobile-menu-btn hidden-lg hidden-md">
-					<a href="#"></a>
+					<a></a>
 				</div>
 
 				<div class="logo">

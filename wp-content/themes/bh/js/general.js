@@ -443,6 +443,12 @@ var $ = jQuery,
 			$('.footer-menu li.menu-item-has-children > .item-before').bind('click', BH_general.footer_sub_menu_toggle);
 			$('.footer-menu li.menu-item-has-children > a').bind('click', BH_general.footer_sub_menu_toggle);
 
+			// bind click event to mobile menu button
+			$('.mobile-menu-btn a').click(function() {
+				var header_height = $('header').height();
+				$('html, body').animate({scrollTop: $('.footer-menu').offset().top - header_height }, 'slow');
+			});
+
 		},
 
 		loaded : function() {

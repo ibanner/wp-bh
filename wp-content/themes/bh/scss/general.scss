@@ -236,6 +236,7 @@ header {
 
 			.mobile-menu-btn a {
 				@include sprite-mobile-menu-en;
+				cursor: pointer;
 			}
 
 			.logo a {
