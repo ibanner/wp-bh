@@ -46,3 +46,22 @@ function BH_languages_switcher() {
 
 	return $output;
 }
+
+/**
+ * BH_footer_menu_languages_list
+ *
+ * @return		String		languages list
+ */
+function BH_footer_menu_languages_list() {
+	$languages	= icl_get_languages('skip_missing=0&orderby=code');
+	$output		= '';
+	
+	if ( ! empty($languages) ) :
+
+		foreach ($languages as $l)
+			$output .= '<li><a ' . ( ! $l['active'] ? 'href="' . $l['url'] . '"' : 'style="cursor: default;"' ) . '><span>' . $l['native_name'] . '</span></a></li>';
+		
+	endif;
+
+	return $output;
+}

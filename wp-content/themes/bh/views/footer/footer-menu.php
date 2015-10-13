@@ -18,6 +18,13 @@ if ($menu) :
 	echo '<div class="container">';
 		echo '<nav class="row footer-menu">';
 			echo '<ul>';
+				// languages list
+				echo '<li class="menu-item-has-children"><span class="item-before"></span><a><span>' . __('Language/שפה', 'BH') . '</span></a>';
+					echo '<ul class="sub-menu">';
+						echo BH_footer_menu_languages_list();
+					echo '</ul>';
+				echo '</li>';
+
 				echo $menu;
 			echo '</ul>';
 		echo '</nav>';

@@ -1496,6 +1496,44 @@ footer {
 			}
 		}
 	}
+
+	/***************/
+	/* footer menu */
+	/***************/
+
+	.footer-menu {
+		li {
+			&.menu-item-has-children {
+				padding-left: 0;
+				padding-right: 40px;
+
+				& > .item-before {
+					left: auto;
+					right: 15px;
+					border-left: 0;
+					border-right: 13px solid $font-color;
+				}
+			}
+
+			ul.sub-menu {
+				li.menu-item-has-children {
+					padding-left: 0;
+					padding-right: 20px;
+
+					& > .item-before {
+						left: auto;
+						right: 0;
+					}
+				}
+			}
+		}
+
+		& > ul {
+			& > li {
+				float: right;
+			}
+		}
+	}
 }
 
 /**************/

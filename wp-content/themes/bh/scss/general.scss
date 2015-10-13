@@ -3838,6 +3838,7 @@ footer {
 				font-size: 17px;
 				color: $font-color;
 				text-decoration: none;
+				cursor: pointer;
 
 				&:hover {
 					color: $gray-color1;
@@ -3845,7 +3846,7 @@ footer {
 			}
 
 			ul.sub-menu {
-				margin-top: 15px;
+				margin: 15px 0;
 
 				li.menu-item-has-children {
 					padding-left: 20px;
@@ -3860,7 +3861,7 @@ footer {
 		& > ul {
 			& > li {
 				float: left;
-				margin-bottom: 40px;
+				margin-bottom: 25px;
 				padding: 0 15px;
 				width: 20%;
 

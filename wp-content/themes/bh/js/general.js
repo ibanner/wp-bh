@@ -399,25 +399,49 @@ var $ = jQuery,
 
 		},
 
+		footer_sub_menu_toggle : function(event) {
+			var current = event.currentTarget,
+				li = $(current).parent(),
+				mobile = $('.footer-menu').hasClass('mobile') ? true : false,
+				active = li.hasClass('collapsed') ? true : false;
+
+			if (mobile || li.parent().hasClass('sub-menu')) {
+				// prevent closing top level footer sub menus for desktop resolution
+				li.parent().find('li.menu-item-has-children').removeClass('collapsed');
+			}
+
+			if (active) {
+				li.removeClass('collapsed').find('li.menu-item-has-children').removeClass('collapsed');
+			}
+			else {
+				li.addClass('collapsed');
+			}
+		},
+
 		footer_menu : function() {
 
-			$('.footer-menu li.menu-item-has-children > .item-before').click(function() {
-				var current = $(this).parent(),
-					mobile = $('.footer-menu').hasClass('mobile') ? true : false,
-					active = current.hasClass('collapsed') ? true : false;
+			// copy parent items with href attribute into their sub menu
+			$('.footer-menu li.menu-item-has-children').each(function() {
+				if ($(this).children('a').attr('href') && $(this).children('.sub-menu').length) {
+					// create cloned element
+					var li = $(this).clone();
 
-				if (mobile || current.parent().hasClass('sub-menu')) {
-					// prevent closing top level footer sub menus for desktop resolution
-					current.parent().find('li.menu-item-has-children').removeClass('collapsed');
-				}
+					// remove id attribute, menu-item-has-children class and sub menu from cloned element
+					li.removeAttr('id');
+					li.removeClass('menu-item-has-children');
+					li.children('.sub-menu').remove();
 
-				if (active) {
-					current.removeClass('collapsed').find('li.menu-item-has-children').removeClass('collapsed');
-				}
-				else {
-					current.addClass('collapsed');
+					// append cloned element to original sub-menu
+					li.prependTo($(this).children('.sub-menu'));
+
+					// remove href attribute from original element
+					$(this).children('a').removeAttr('href');
 				}
 			});
+
+			// bind click event to footer menu elements
+			$('.footer-menu li.menu-item-has-children > .item-before').bind('click', BH_general.footer_sub_menu_toggle);
+			$('.footer-menu li.menu-item-has-children > a').bind('click', BH_general.footer_sub_menu_toggle);
 
 		},
 
