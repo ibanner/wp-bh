@@ -11,12 +11,19 @@
 	margin-bottom: 20px;
 }
 
+/*********/
+/* strip */
+/*********/
+
+.main-layout-strip {
+	margin-top: -20px;
+}
+
 /**********/
 /* banner */
 /**********/
 
 .main-layout-banner {
-	margin-top: -20px;
 	@include not-selectable;
 	
 	.container {

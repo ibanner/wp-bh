@@ -12,6 +12,16 @@
 		
 		switch ($layout) :
 		
+			case 'strip' :
+			
+				/*********/
+				/* strip */
+				/*********/
+				
+				get_template_part('views/main/layout', 'strip');
+				
+				break;
+				
 			case 'banner' :
 			
 				/**********/
