@@ -11,12 +11,19 @@
 		margin-bottom: 0;
 	}
 	
+	/***********************/
+	/* general main layout */
+	/***********************/
+
+	.main-layouts {
+		margin-top: 0;
+	}
+
 	/**********/
 	/* banner */
 	/**********/
 
 	.main-layout-banner {
-		margin-top: 0;
 		height: $banner-height-m;
 	
 		.container {

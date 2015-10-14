@@ -7,16 +7,12 @@
 /* general layout */
 /******************/
 
-.main-layout {
-	margin-bottom: 20px;
-}
-
-/*********/
-/* strip */
-/*********/
-
-.main-layout-strip {
+.main-layouts {
 	margin-top: -20px;
+
+	.main-layout {
+		margin-bottom: 20px;
+	}
 }
 
 /**********/

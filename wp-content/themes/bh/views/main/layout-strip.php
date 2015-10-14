@@ -6,7 +6,7 @@
 	if ( ! $image )
 		return;
 	
-	echo '<section class="main-layout main-layout-strip">';
+	echo '<section class="main-layout main-layout-strip visible-lg">';
 	
 		echo '<div class="container">';
 
