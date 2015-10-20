@@ -48,7 +48,7 @@
 		// display Pelecard iframe
 		?>
 			<script>
-				$(function() {
+				jQuery(function($) {
 					var payment_form =
 						'<script>' +
 							'$(document).ajaxSuccess(function(event, xhr, settings) {' +
