@@ -31,7 +31,7 @@ $bh_sites = array(
 		'header_title'	=> get_field('acf-options_shop_site_header_title', 'option'),
 		'footer_title'	=> get_field('acf-options_shop_site_footer_title', 'option'),
 		'featured_page'	=> get_field('acf-options_shop_site_featured_page', 'option'),
-		'menu'			=> /*'shop-menu'*/'main-menu'
+		'menu'			=> 'shop-menu'
 	),
 
 	'mjs'				=> array(

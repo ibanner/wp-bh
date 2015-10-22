@@ -1408,54 +1408,6 @@ ul.order_details {
 	}
 }
 
-/*****************/
-/* shop - footer */
-/*****************/
-
-.shop-footer {
-	.link-box-wrapper {
-		&:first-child {
-			padding-left: 8px;
-			padding-right: 15px;
-		}
-		
-		&:last-child {
-			padding-left: 15px;
-			padding-right: 8px;
-		}
-		
-		.link-box {
-			a {
-				.title {
-					&:before {
-						left: auto;
-						right: 0;
-					}
-					
-					&.returns_policy {
-						padding-left: 0;
-						padding-right: 35px;
-					}
-					
-					&.shipment_policy {
-						padding-left: 0;
-						padding-right: 40px;
-						
-						&:before {
-							@include flipH;
-						}
-					}
-					
-					&.faqs {
-						padding-left: 0;
-						padding-right: 34px;
-					}
-				}
-			}
-		}
-	}
-}
-
 /**********/
 /* footer */
 /**********/

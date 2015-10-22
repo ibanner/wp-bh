@@ -15,7 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $menus;
 
 $menus = array(
-	'main-menu'		=> __('Main Menu')
+	'main-menu'		=> __('Main Menu'),
+	'shop-menu'		=> __('Shop Menu')
 );
 
 function BH_register_menus() {

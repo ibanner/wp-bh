@@ -133,7 +133,9 @@ var $ = jQuery,
 			});
 			
 			// popup newsletter
-			BH_general.set_newsletter_popup('open');
+			setTimeout(function() {
+				BH_general.set_newsletter_popup('open');
+			}, 5000);
 			
 		},
 		

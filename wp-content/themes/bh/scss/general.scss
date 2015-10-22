@@ -268,6 +268,11 @@ header {
 						font-size: 21px;
 						color: $font-color;
 						text-decoration: none;
+						cursor: default;
+
+						&:link, &:visited {
+							cursor: pointer;
+						}
 
 						&:focus {
 							background-color: transparent;
@@ -3499,90 +3504,6 @@ ul.order_details {
 				
 				img {
 					@include vertical-align;
-				}
-			}
-		}
-	}
-}
-
-/*****************/
-/* shop - footer */
-/*****************/
-
-.shop-footer {
-	.link-box-wrapper {
-		padding: 0 8px;
-		
-		&:first-child {
-			padding-left: 15px;
-		}
-		
-		&:last-child {
-			padding-right: 15px;
-		}
-		
-		.link-box {
-			background-color: $black-color5;
-			
-			&:hover {
-				background-color: $cyan-color2;
-			}
-			
-			a {
-				padding: 20px;
-				color: $black-color2;
-				text-decoration: none;
-				display: block;
-				
-				.title {
-					position: relative;
-					margin-bottom: 15px;
-					line-height: 24px;
-					font-size: 20px;
-					
-					&:before {
-						content: "";
-						position: absolute;
-						top: 0;
-						left: 0;
-						@include sprites;
-					}
-					
-					&.returns_policy {
-						padding-left: 35px;
-						
-						&:before {
-							@include package;
-						}
-					}
-					
-					&.shipment_policy {
-						padding-left: 40px;
-						
-						&:before {
-							@include shipping;
-						}
-					}
-					
-					&.faqs {
-						padding-left: 34px;
-						
-						&:before {
-							@include question;
-						}
-					}
-				}
-				
-				.content {
-					margin-bottom: 10px;
-					font-size: 13px;
-				}
-				
-				.link {
-					text-align: center;
-					font-size: 13px;
-					color: $black-color2;
-					text-decoration: underline;
 				}
 			}
 		}
