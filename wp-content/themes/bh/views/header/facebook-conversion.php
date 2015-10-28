@@ -1,4 +1,4 @@
-<!-- Facebook Conversion Code for Checkouts - Beit Hatfutsot 1 -->
+<!-- Facebook Conversion Code for Checkouts -->
 <script>(function() {
 var _fbq = window._fbq || (window._fbq = []);
 if (!_fbq.loaded) {
@@ -11,7 +11,7 @@ _fbq.loaded = true;
 }
 })();
 window._fbq = window._fbq || [];
-//window._fbq.push(['track', '6025740659065', {'value':'0.00','currency':'USD'}]);	// push conversion value and currency in Checkout Thankyou endpoint
+//window._fbq.push(['track', '6030843605312', {'value':'0.00','currency':'ILS'}]);	// push conversion value and currency in Checkout Thankyou endpoint
 </script>
-<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6025740659065&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6030843605312&amp;cd[value]=0.00&amp;cd[currency]=ILS&amp;noscript=1" /></noscript>
 <!-- End Facebook Conversion Code -->
