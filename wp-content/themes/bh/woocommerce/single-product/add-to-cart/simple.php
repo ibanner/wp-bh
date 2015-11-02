@@ -49,7 +49,7 @@ if ( ! $product->is_purchasable() ) {
 		endif;
 	?>
 
-	<form class="cart" method="post" enctype='multipart/form-data' onsubmit="BH_EC_onUpdateCart('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', $(this).find('.quantity input[type=number]').val(), 'add'); BH_FB_onAddToCart('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>'); return true;">
+	<form class="cart" method="post" enctype='multipart/form-data' onsubmit="BH_EC_onUpdateCart('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', $(this).find('.quantity input[type=number]').val(), 'add'); BH_FB_onAddToCart('<?php echo $p_id; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>'); return true;">
 	 	<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 	 	<?php
