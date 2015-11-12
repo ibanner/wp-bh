@@ -1023,7 +1023,7 @@ header {
 
 .page-content {
 	margin-top: 120px;
-	padding-top: 30px;
+	padding-top: 15px;
 
 	/*************/
 	/* side menu */
@@ -2419,26 +2419,37 @@ header {
 /*******************/
 
 .shop-banners {
-	margin-bottom: 20px;
-	padding-bottom: 8px;
-	border-bottom: 1px solid $border-color1;
+	position: relative;
+	height: 633px;
 	overflow: hidden;
 	
 	.shop-banner {
-		margin-bottom: 12px;
-		float: left;
-		background: $white;
+		position: absolute;
+		top: 0;
+		height: 633px;
+		@include transform( skew(-28deg) );
 		@include opacity(1);
-		@include transition(opacity, .25s);
-		
-		&.shop-banner-1 { margin-right: 12px;	width: 704px;	height: 360px; }
-		&.shop-banner-2 { margin-right: 0;		width: 424px;	height: 360px; }
-		&.shop-banner-3 { margin-right: 12px;	width: 424px;	height: 360px; }
-		&.shop-banner-4 { margin-right: 0;		width: 704px;	height: 360px; }
+		@include transition(opacity);
+		-webkit-backface-visibility: hidden;
+		overflow: hidden;
+
+		&.shop-banner-1 { left: -168px; width: 493px; }
+		&.shop-banner-2 { left: 338px;  width: 290px; }
+		&.shop-banner-3 { left: 641px;  width: 290px; }
+		&.shop-banner-4 { left: 944px;  width: 399px; }
 		
 		&:hover {
 			@include opacity(0.7);
 		}
+
+		img {
+			position: absolute;
+			left: -168px;
+			max-width: none;
+			@include transform( skew(28deg) );
+		}
+
+		&.shop-banner-1 img { left: 168px; }
 	}
 }
 

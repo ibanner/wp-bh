@@ -1160,6 +1160,30 @@
 		}
 	}
 
+	/*******************/
+	/* shop - homepage */
+	/*******************/
+
+	.shop-banners {
+		height: 525px;
+		
+		.shop-banner {
+			height: 525px;
+
+			&.shop-banner-1 { left: -139px; width: 408px; }
+			&.shop-banner-2 { left: 282px;  width: 238px; }
+			&.shop-banner-3 { left: 533px;  width: 238px; }
+			&.shop-banner-4 { left: 784px;  width: 329px; }
+
+			img {
+				left: -139px;
+				height: 525px;
+			}
+
+			&.shop-banner-1 img { left: 139px; }
+		}
+	}
+
 	/**********/
 	/* footer */
 	/**********/
@@ -1366,17 +1390,6 @@
 		}
 	}
 	
-	/**************/
-	/* typography */
-	/**************/
-
-	h3 {
-		.main-layout-featured-links .contact-details & {
-			margin-bottom: 3px;
-			font-size: 14px;
-		}
-	}
-
 	/**********/
 	/* footer */
 	/**********/
@@ -1401,6 +1414,17 @@
 					}
 				}
 			}
+		}
+	}
+
+	/**************/
+	/* typography */
+	/**************/
+
+	h3 {
+		.main-layout-featured-links .contact-details & {
+			margin-bottom: 3px;
+			font-size: 14px;
 		}
 	}
 }

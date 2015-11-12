@@ -1036,17 +1036,6 @@ article.post {
 /* shop - homepage */
 /*******************/
 
-.shop-banners {
-	.shop-banner {
-		float: right;
-		
-		&.shop-banner-1 { margin-left: 12px;	margin-right: 0;	width: 704px;	height: 360px; }
-		&.shop-banner-2 { margin-left: 0;		margin-right: 0;	width: 424px;	height: 360px; }
-		&.shop-banner-3 { margin-left: 12px;	margin-right: 0;	width: 424px;	height: 360px; }
-		&.shop-banner-4 { margin-left: 0;		margin-right: 0;	width: 704px;	height: 360px; }
-	}
-}
-
 .shop-home-sliders {
 	.related-slider-placeholder {
 		direction: ltr;
