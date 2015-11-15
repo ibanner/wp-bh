@@ -2414,9 +2414,9 @@ header {
 	#recently-products-slider-next i { bottom: -5px; }
 }
 
-/*******************/
-/* shop - homepage */
-/*******************/
+/***************************/
+/* shop - homepage banners */
+/***************************/
 
 .shop-banners {
 	position: relative;
@@ -2450,6 +2450,89 @@ header {
 		}
 
 		&.shop-banner-1 img { left: 168px; }
+	}
+}
+
+/***********************************/
+/* shop - homepage categories menu */
+/***********************************/
+
+.shop-categories-menu-wrapper {
+	.category-item-wrapper {
+		float: left;
+		width: 50%;
+
+		&.odd { padding-right: 5px; }
+		&.even { padding-left: 5px; }
+
+		a {
+			line-height: 20px;
+			text-decoration: none;
+			display: block;
+		}
+
+		.category-item {
+			position: relative;
+			margin-bottom: 10px;
+			height: 53px;
+			overflow: hidden;
+
+			.title {
+				padding-left: 20px;
+				@include calc(width, "100% - 70px");
+				font-size: 18px;
+				font-weight: $font-bold;
+				color: $font-invert-color;
+				@include vertical-align;
+			}
+
+			.icon {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 70px;
+				height: 100%;
+				background-repeat: no-repeat;
+				background-position: 50% 50%;
+			}
+		}
+
+		&:nth-child(3n+1) { .category-item { background-color: $orange-color4; } }
+		&:nth-child(3n+2) { .category-item { background-color: $red-color3; } }
+		&:nth-child(3n+3) { .category-item { background-color: $blue-color3; } }
+
+		&.manual-item-wrapper {
+			.category-item {
+				background-color: $gray-color3;
+
+				.title {
+					width: 40%;
+				}
+
+				.subtext {
+					top: 0;
+					right: 10px;
+					width: 40%;
+					line-height: 14px;
+					font-size: 13px;
+					color: $font-invert-color;
+					text-align: right;
+					@include vertical-align;
+					position: absolute;
+				}
+
+				.icon {
+					left: 35%;
+					@include sprites;
+					@include sprite-ribbon-white;
+				}
+			}
+
+			&.single-line {
+				padding: 0;
+				width: 100%;
+			}
+		}
 	}
 }
 

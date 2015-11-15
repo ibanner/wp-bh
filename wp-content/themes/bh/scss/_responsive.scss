@@ -825,6 +825,42 @@
 		}
 	}
 
+	/***********************************/
+	/* shop - homepage categories menu */
+	/***********************************/
+
+	.shop-categories-menu-wrapper {
+		.category-item-wrapper {
+			float: none;
+			padding: 0 !important;
+			width: 100%;
+
+			.category-item {
+				.title {
+					padding-left: 10px;
+					font-size: 16px;
+				}
+			}
+
+			&.manual-item-wrapper {
+				.category-item {
+					.title {
+						width: 35%;
+					}
+
+					.subtext {
+						line-height: 12px;
+						font-size: 11px;
+					}
+
+					.icon {
+						left: 30%;
+					}
+				}
+			}
+		}
+	}
+
 	/**********/
 	/* footer */
 	/**********/
@@ -1160,9 +1196,9 @@
 		}
 	}
 
-	/*******************/
-	/* shop - homepage */
-	/*******************/
+	/***************************/
+	/* shop - homepage banners */
+	/***************************/
 
 	.shop-banners {
 		height: 525px;
@@ -1647,6 +1683,33 @@
 					h2 {
 						margin: 0 0 24px 185px;
 						font-size: 22px;
+					}
+				}
+			}
+		}
+	}
+
+	/***********************************/
+	/* shop - homepage categories menu */
+	/***********************************/
+
+	.shop-categories-menu-wrapper {
+		.category-item-wrapper {
+			&.manual-item-wrapper {
+				.category-item {
+					.title {
+						@include calc(width, "100% - 88px");
+					}
+
+					.subtext {
+						display: none;
+					}
+
+					.icon {
+						left: auto;
+						right: 0;
+						@include sprites;
+						@include sprite-ribbon-white;
 					}
 				}
 			}

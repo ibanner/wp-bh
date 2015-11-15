@@ -365,6 +365,15 @@ function BH_shop_home_banners() {
 }
 
 /**
+ * BH_shop_home_categories_menu
+ * 
+ * Shop Homepage / Show shop homepage categories menu
+ */
+function BH_shop_home_categories_menu() {
+	get_template_part('views/woocommerce/archive/home', 'categories-menu');
+}
+
+/**
  * BH_shop_home_product_sliders
  * 
  * Shop Homepage / Show shop homepage sliders

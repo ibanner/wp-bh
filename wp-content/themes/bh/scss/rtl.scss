@@ -1032,9 +1032,45 @@ article.post {
 	}
 }
 
-/*******************/
-/* shop - homepage */
-/*******************/
+/***********************************/
+/* shop - homepage categories menu */
+/***********************************/
+
+.shop-categories-menu-wrapper {
+	.category-item-wrapper {
+		float: right;
+
+		&.odd { padding-right: 0; padding-left: 5px; }
+		&.even { padding-left: 0; padding-right: 5px; }
+
+		.category-item {
+			.title {
+				padding-left: 0;
+				padding-right: 20px;
+			}
+
+			.icon {
+				left: 0;
+				right: auto;
+			}
+		}
+
+		&.manual-item-wrapper {
+			.category-item {
+				.subtext {
+					left: 10px;
+					right: auto;
+					text-align: left;
+				}
+
+				.icon {
+					left: auto;
+					right: 35%;
+				}
+			}
+		}
+	}
+}
 
 .shop-home-sliders {
 	.related-slider-placeholder {

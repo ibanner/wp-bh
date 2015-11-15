@@ -33,7 +33,7 @@ echo '<div class="shop-banners-wrapper visible-lg visible-md">';
 			
 			switch ($link_type) :
 			
-				case 'no' :															break;
+				case 'no' :																								break;
 				case 'page' :		$link = $page_product_link		? get_permalink($page_product_link->ID)	: '';		break;
 				case 'category' :	$link = $product_category_link	? get_term_link($product_category_link)	: '';		break;
 				case 'occasion' :	$link = $product_occasion_link	? get_term_link($product_occasion_link)	: '';		break;

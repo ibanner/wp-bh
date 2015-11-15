@@ -188,6 +188,30 @@
 			}
 		}
 	}
+
+	/***********************************/
+	/* shop - homepage categories menu */
+	/***********************************/
+
+	.shop-categories-menu-wrapper {
+		.category-item-wrapper {
+			.category-item {
+				.title {
+					padding-left: 0;
+					padding-right: 10px;
+				}
+			}
+
+			&.manual-item-wrapper {
+				.category-item {
+					.icon {
+						left: auto;
+						right: 30%;
+					}
+				}
+			}
+		}
+	}
 }
 
 @media (max-width: 446px) {
@@ -433,6 +457,23 @@
 				.bottom-msg-content {
 					h2 {
 						margin: 0 185px 24px 0;
+					}
+				}
+			}
+		}
+	}
+
+	/***********************************/
+	/* shop - homepage categories menu */
+	/***********************************/
+
+	.shop-categories-menu-wrapper {
+		.category-item-wrapper {
+			&.manual-item-wrapper {
+				.category-item {
+					.icon {
+						left: 0;
+						right: auto;
 					}
 				}
 			}
