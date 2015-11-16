@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-09-24 15:24+0300\n"
-"PO-Revision-Date: 2015-09-24 15:25+0300\n"
+"POT-Creation-Date: 2015-11-16 18:28+0200\n"
+"PO-Revision-Date: 2015-11-16 18:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.6\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
@@ -22,6 +22,10 @@ msgstr ""
 
 #: functions/menus.php:18
 msgid "Main Menu"
+msgstr ""
+
+#: functions/menus.php:19
+msgid "Shop Menu"
 msgstr ""
 
 #: functions/pelecard/payment-result.php:134
@@ -154,15 +158,15 @@ msgstr "נצפו<br />לאחרונה"
 msgid "Home"
 msgstr "דף הבית"
 
-#: functions/woocommerce/woocommerce-functions.php:519
+#: functions/woocommerce/woocommerce-functions.php:537
 msgid "Most Popular"
 msgstr "הפופולרי ביותר"
 
-#: functions/woocommerce/woocommerce-functions.php:520
+#: functions/woocommerce/woocommerce-functions.php:538
 msgid "Price: Low to High"
 msgstr "מחיר: נמוך לגבוה"
 
-#: functions/woocommerce/woocommerce-functions.php:521
+#: functions/woocommerce/woocommerce-functions.php:539
 msgid "Price: High to Low"
 msgstr "מחיר: גבוה לנמוך"
 
@@ -207,9 +211,13 @@ msgstr "החל מתאריך"
 msgid "Purchase"
 msgstr "לרכישה"
 
-#: views/footer/footer-links.php:43
+#: views/footer/footer-links.php:44
 msgid "Learn more"
 msgstr "קראו עוד"
+
+#: views/footer/footer-menu.php:22
+msgid "Language/שפה"
+msgstr ""
 
 #: views/main/slider/display-events-slider.php:22
 msgid "All events"
@@ -394,6 +402,10 @@ msgstr "פוסטים אחרונים"
 #: views/sidebar/sidebar-blog.php:114
 msgid "Archives"
 msgstr "ארכיון"
+
+#: views/woocommerce/featured-product-item.php:66
+msgid "Click for more details"
+msgstr "לחצו לפרטים נוספים"
 
 #: views/woocommerce/single-product/single-product-section1-meta.php:20
 msgid "More Details"
