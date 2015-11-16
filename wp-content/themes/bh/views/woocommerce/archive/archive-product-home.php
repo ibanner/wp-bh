@@ -15,7 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 	 *
 	 * @hooked	BH_shop_home_banners - 10
 	 * @hooked	BH_shop_home_categories_menu - 20
-	 * @hooked	BH_shop_home_product_sliders - 30
+	 * @hooked	BH_shop_home_featured - 30
+	 * @hooked	BH_shop_home_product_sliders - 40
 	 */
 	do_action('BH_shop_home');
 ?>

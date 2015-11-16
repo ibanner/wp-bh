@@ -71,11 +71,13 @@ remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
  * 
  * @see		BH_shop_home_banners()
  * @see		BH_shop_home_categories_menu()
+ * @see		BH_shop_home_featured()
  * @see		BH_shop_home_product_sliders()
  */
 add_action('BH_shop_home', 'BH_shop_home_banners', 10);
 add_action('BH_shop_home', 'BH_shop_home_categories_menu', 20);
-add_action('BH_shop_home', 'BH_shop_home_product_sliders', 30);
+add_action('BH_shop_home', 'BH_shop_home_featured', 30);
+add_action('BH_shop_home', 'BH_shop_home_product_sliders', 40);
 
 /**
  * Single Product

@@ -47,6 +47,10 @@ var $ = jQuery,
 			
 			// shop - homepage
 			if ( $('body').hasClass('archive') && $('body').hasClass('woocommerce') ) {
+				// Featured products
+				BH_general.shop_featured_products();
+
+				// Products sliders
 				BH_general.shop_related_products();
 			}
 			
@@ -173,7 +177,7 @@ var $ = jQuery,
 			
 		},
 		
-		shop_archive	: function() {
+		shop_archive : function() {
 			
 			// recently viewed products - show recently viewed
 			BH_general.show_recently_viewed();
@@ -292,7 +296,7 @@ var $ = jQuery,
 			
 		},
 		
-		remove_recently_viewed	: function(item) {
+		remove_recently_viewed : function(item) {
 			
 			var postid = item.attr('data-postid');
 			
@@ -336,7 +340,7 @@ var $ = jQuery,
 			
 		},
 		
-		recently_viewed_content	: function(content) {
+		recently_viewed_content : function(content) {
 			
 			var slideshow = $('.recently-products-slider');
 			
@@ -366,7 +370,33 @@ var $ = jQuery,
 			
 		},
 		
-		shop_related_products	: function() {
+		shop_featured_products : function() {
+
+			$('.featured-product-item').each(function() {
+				var item		= $(this),
+					image		= item.find('.product-item-image a .image'),
+					image_hover	= item.find('.product-item-image a .image-hover');
+
+				item.hover(function() {
+					if (image_hover.length > 0) {
+						image.hide();
+						image_hover.show();
+					}
+
+					item.addClass('active');
+				}, function() {
+					if (image_hover.length > 0) {
+						image.show();
+						image_hover.hide();
+					}
+
+					item.removeClass('active');
+				});
+			});
+
+		},
+
+		shop_related_products : function() {
 			
 			var slideshow = $('.related-slider');
 			
@@ -375,7 +405,7 @@ var $ = jQuery,
 			
 		},
 		
-		shop_wswu_banners	: function() {
+		shop_wswu_banners : function() {
 			
 			var banners		= $('.col-shop-wswu').length,
 				fadeSpeed	= 1000,		// fadeIn time

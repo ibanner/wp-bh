@@ -374,6 +374,15 @@ function BH_shop_home_categories_menu() {
 }
 
 /**
+ * BH_shop_home_featured
+ * 
+ * Shop Homepage / Show shop homepage featured products
+ */
+function BH_shop_home_featured() {
+	get_template_part('views/woocommerce/archive/home', 'featured');
+}
+
+/**
  * BH_shop_home_product_sliders
  * 
  * Shop Homepage / Show shop homepage sliders

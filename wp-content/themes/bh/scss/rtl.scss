@@ -1072,6 +1072,35 @@ article.post {
 	}
 }
 
+/*************************************/
+/* shop - homepage featured products */
+/*************************************/
+
+.shop-featured-wrapper {
+	.shop-featured {
+		.row {
+			.featured-product-item {
+				float: right;
+
+				.product-item-meta-wrapper {
+					.product-item-meta {
+						.price {
+							left: 10px;
+							right: auto;
+
+							ins {
+								float: left;
+								margin-left: 0;
+								margin-right: 10px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 .shop-home-sliders {
 	.related-slider-placeholder {
 		direction: ltr;
