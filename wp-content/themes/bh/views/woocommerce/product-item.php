@@ -1,13 +1,13 @@
 <?php
 	global $product, $list, $ec_products;
 	
-	$p_id		= $product->id;
-	$p_sku		= esc_js( $product->sku );
-	$p_name		= esc_js( $product->get_title() );
-	$p_price	= number_format((float)$product->price, 2, '.', '');
-	$p_currency	= get_woocommerce_currency();
-	$p_list		= esc_js( $list );
-	$p_page		= esc_url( get_permalink($p_id) );
+	$p_id			= $product->id;
+	$p_sku			= esc_js( $product->sku );
+	$p_name			= esc_js( $product->get_title() );
+	$p_price		= number_format((float)$product->price, 2, '.', '');
+	$p_currency		= get_woocommerce_currency();
+	$p_list			= esc_js( $list );
+	$p_page			= esc_url( get_permalink($p_id) );
 	
 	$category = '';
 	$product_cats = wp_get_post_terms($p_id, 'product_cat');
@@ -37,16 +37,33 @@
 	
 	<div class="product-item-meta">
 	
-		<div class="title">
-			<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Title', '<?php echo $p_page; ?>'); return !ga.loaded;">
-                <?php echo get_the_title($product->id); ?>
-			</a>
+		<div class="title-wrapper">
+			<div class="title">
+				<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Title', '<?php echo $p_page; ?>'); return !ga.loaded;">
+					<?php echo $product->get_title(); ?>
+				</a>
+			</div>
+
+			<?php echo ($artists) ? '<div class="artist">' . $artists . '</div>' : ''; ?>
 		</div>
-		
-		<?php echo ($artists) ? '<div class="artist-title">' . ( (ICL_LANGUAGE_CODE == 'en') ? '<span>' . __('By ', 'BH') . '</span>' : '' ) . $artists . '</div>' : ''; ?>
-		
-		<p class="price"><?php echo $product->get_price_html(); ?></p>
-		
+
+		<div class="add-to-cart-wrapper">
+			<div class="price"><?php echo $product->get_price_html(); ?></div>
+
+			<div class="add-to-cart">
+				<?php
+
+					/**
+					 * woocommerce_after_shop_loop_item hook
+					 *
+					 * @hooked woocommerce_template_loop_add_to_cart - 10
+					 */
+					do_action( 'woocommerce_after_shop_loop_item' );
+
+				?>
+			</div>
+		</div>
+
 	</div>
 
 </div>

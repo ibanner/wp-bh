@@ -275,6 +275,146 @@
 		}
 	}
 
+	/***************************/
+	/* shop - homepage sliders */
+	/***************************/
+
+	.shop-home-sliders {
+		.products-slider {
+			h2 {
+				padding: 12px 25px;
+				font-size: 16px;
+
+				&:after {
+					border-bottom-width: 41px;
+					border-right-width: 22px;
+				}
+			}
+		}
+	}
+
+	/**************************/
+	/* shop - products slider */
+	/**************************/
+
+	.products-slider {
+		.products-slider-wrapper {
+			padding: 0 22px;
+
+			.products-slider-placeholder {
+				.product-item-wrapper {
+					padding: 5px;
+					width: 169px;
+				}
+			}
+
+			.products-slider-prev,
+			.products-slider-next {
+				top: 199px;
+				border-top-width: 12.5px;
+				border-bottom-width: 12.5px;
+			}
+			
+			.products-slider-prev {
+				border-right-width: 20px;
+			}
+			
+			.products-slider-next {
+				border-left-width: 20px;
+			}
+		}
+	}
+
+	/***********************/
+	/* shop - product item */
+	/***********************/
+
+	.product-item {
+		.product-item-image {
+			width: 139px;
+			height: 139px;
+		}
+		
+		.product-item-meta {
+			.title-wrapper {
+				padding: 2.5px;
+				height: 70px;
+
+				.title {
+					height: 40px;
+
+					a {
+						line-height: normal;
+						font-size: 14px;
+					}
+				}
+				
+				.artist {
+					a {
+						font-size: 11px;
+					}
+				}
+			}
+
+			.add-to-cart-wrapper {
+				.price {
+					height: 45px;
+					font-size: 17px;
+
+					& > .amount {
+						margin-top: 20px;
+					}
+
+					del {
+						height: 20px;
+						font-size: 12px;
+					}
+				}
+
+				.add-to-cart {
+					width: 50px;
+					height: 40px;
+
+					&:before {
+						top: 40px;
+						border-left-width: 25px;
+						border-right-width: 25px;
+						border-top-width: 7.5px;
+					}
+
+					&:after {
+						top: 3.5px;
+						left: 4.5px;
+					}
+
+					a.button {
+						height: 47.5px;
+
+						&:after {
+							top: 7px;
+							right: 30.5px;
+						}
+
+						&.loading,
+						&.added {
+							&:after {
+								right: 29.5px;
+							}
+						}
+					}
+
+					a.added_to_cart {
+						padding: 0;
+						top: 47.5px;
+						right: 1px;
+						line-height: normal;
+						font-size: 11px;
+					}
+				}
+			}
+		}
+	}
+
 	/**********/
 	/* footer */
 	/**********/

@@ -59,7 +59,7 @@
 				</a>
 			</div>
 			
-			<p class="price"><?php echo $product->get_price_html(); ?></p>
+			<div class="price"><?php echo $product->get_price_html(); ?></div>
 			
 			<div class="more-info">
 				<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product More Info', '<?php echo $p_page; ?>'); return !ga.loaded;">

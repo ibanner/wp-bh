@@ -51,7 +51,7 @@ var $ = jQuery,
 				BH_general.shop_featured_products();
 
 				// Products sliders
-				BH_general.shop_related_products();
+				BH_general.shop_products_slider();
 			}
 			
 			// shop - archive
@@ -222,7 +222,7 @@ var $ = jQuery,
 			});
 			
 			// related products
-			BH_general.shop_related_products();
+			BH_general.shop_products_slider();
 			
 		},
 		
@@ -396,12 +396,12 @@ var $ = jQuery,
 
 		},
 
-		shop_related_products : function() {
+		shop_products_slider : function() {
 			
-			var slideshow = $('.related-slider');
+			var slideshow = $('.products-slider-carousel');
 			
 			slideshow.cycle();
-			$('.related-slider-placeholder').fadeIn(BH_general.params.timeout);
+			$('.products-slider').fadeIn(BH_general.params.timeout);
 			
 		},
 		
@@ -499,6 +499,9 @@ var $ = jQuery,
 
 			// footer links
 			BH_general.footer_links();
+
+			// reinit products slider
+			$('.products-slider-carousel').cycle('reinit');
 
 			// close all footer sub menus
 			$('.footer-menu li.menu-item-has-children').removeClass('collapsed');

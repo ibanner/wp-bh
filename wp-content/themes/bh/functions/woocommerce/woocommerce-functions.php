@@ -356,6 +356,24 @@ function BH_init_product_filter_values($taxonomy, $taxonomy_term_id, &$min_price
 }
 
 /**
+ * BH_loop_add_to_cart_link
+ * 
+ * Add to cart link customization
+ */
+function BH_loop_add_to_cart_link() {
+	global $product;
+
+	echo sprintf( '<a href="%s" rel="nofollow" data-product_id="%s" data-product_sku="%s" data-quantity="%s" class="button %s product_type_%s"></a>',
+		esc_url( $product->add_to_cart_url() ),
+		esc_attr( $product->id ),
+		esc_attr( $product->get_sku() ),
+		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+		$product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
+		esc_attr( $product->product_type )
+	);
+}
+
+/**
  * BH_shop_home_banners
  * 
  * Shop Homepage / Show shop homepage banners
@@ -505,7 +523,7 @@ function BH_shop_get_price_html($price, $product) {
 	if ( strpos($del, '<del>') === false || strpos($ins, '<ins>') === false )
 		return $price;
 		
-	return $ins . $del;
+	return $del . $ins;
 }
 
 /**
