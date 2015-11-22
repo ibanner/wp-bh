@@ -33,6 +33,7 @@ global $product;
 			data-cycle-allow-wrap=true
 			data-cycle-manual-trump=false
 			data-cycle-carousel-visible=<?php echo $no_of_slider_products >= 4 ? 4 : $no_of_slider_products; ?>
+			data-cycle-swipe=true
 			data-cycle-log=false
 			data-cycle-prev="#products-slider-prev-<?php echo $slider_index; ?>"
 			data-cycle-next="#products-slider-next-<?php echo $slider_index; ?>"

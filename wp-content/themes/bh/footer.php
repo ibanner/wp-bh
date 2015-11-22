@@ -21,8 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 	get_template_part('views/footer/footer');
 	
 	wp_enqueue_script('bootstrap');
-	wp_enqueue_script('matchMedia');
-	wp_enqueue_script('matchMediaListener');
 	wp_enqueue_script('countdown');
 	wp_enqueue_script('general');
 	wp_enqueue_script('ticketnet');
@@ -76,6 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 	if ( is_woocommerce() ) :
 		wp_enqueue_script('cycle2');
 		wp_enqueue_script('cycle2-carousel');
+		wp_enqueue_script('cycle2-swipe');
 		wp_enqueue_script('cycle2-ios6fix');
 	endif;
 	

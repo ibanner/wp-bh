@@ -2,6 +2,45 @@
 @import "modules/sprites";
 @import "modules/bh_sprites";
 
+/**
+ * These values will not show up in content, but can be 
+ * queried by JavaScript to know which breakpoint is active
+ */
+
+body:before {
+	display: none;
+}
+
+@media (min-width: 1200px) {
+	body:before {
+		content: "1200";
+	}
+}
+
+@media (max-width: 1199px) {
+	body:before {
+		content: "1199";
+	}
+}
+
+@media (max-width: 991px) {
+	body:before {
+		content: "991";
+	}
+}
+
+@media (max-width: 767px) {
+	body:before {
+		content: "767";
+	}
+}
+
+@media (max-width: 480px) {
+	body:before {
+		content: "480";
+	}
+}
+
 @media (max-width: 1199px) {
 
 	/**********/
@@ -299,7 +338,7 @@
 
 	.products-slider {
 		.products-slider-wrapper {
-			padding: 0 22px;
+			padding: 67px 22px 0;
 
 			.products-slider-placeholder {
 				.product-item-wrapper {
@@ -586,7 +625,22 @@
 			height: 90% !important;
 		}
 	}
-	
+
+	/**************************/
+	/* shop - products slider */
+	/**************************/
+
+	.products-slider {
+		.products-slider-wrapper {
+			padding: 67px 0 0;
+
+			.products-slider-prev,
+			.products-slider-next {
+				display: none;
+			}
+		}
+	}
+
 	/***************/
 	/* shop - cart */
 	/***************/
@@ -1357,6 +1411,16 @@
 			}
 
 			&.shop-banner-1 img { left: 139px; }
+		}
+	}
+
+	/**************************/
+	/* shop - products slider */
+	/**************************/
+
+	.products-slider {
+		.products-slider-wrapper {
+			padding: 67px 71px 0;
 		}
 	}
 

@@ -15,6 +15,41 @@
 	}
 }
 
+@media (max-width: 991px) {
+
+	/***************************/
+	/* shop - homepage sliders */
+	/***************************/
+
+	.shop-home-sliders {
+		.products-slider {
+			h2 {
+				&:after {
+					border-left-width: 22px;
+					border-right-width: 0;
+				}
+			}
+		}
+	}
+
+	/***********************/
+	/* shop - product item */
+	/***********************/
+
+	.product-item {
+		.product-item-meta {
+			.add-to-cart-wrapper {
+				.add-to-cart {
+					a.added_to_cart {
+						left: 0;
+						right: auto;
+					}
+				}
+			}
+		}
+	}
+}
+
 @media (max-width: 767px) {
 	
 	/****************/
