@@ -46,7 +46,6 @@
 			)
 		);
 		register_taxonomy('event_category', 'event', $args);
-		flush_rewrite_rules();
 	}
 	
 	// register taxonomy occasion
@@ -81,13 +80,11 @@
 			'hierarchical'					=> true,
 			'query_var'						=> true,
 			'rewrite'						=> array(
-					'slug'					=> 'occasion',
-					'with_front'			=> false,
-					'hierarchical'			=> false
+					'slug'					=> 'shop/occasion',
+					'with_front'			=> false
 			)
 		);
 		register_taxonomy('occasion', 'product', $args);
-		flush_rewrite_rules();
 	}
 	
 	// register taxonomy artist
@@ -122,13 +119,11 @@
 			'hierarchical'					=> true,
 			'query_var'						=> true,
 			'rewrite'						=> array(
-					'slug'					=> 'artist',
-					'with_front'			=> false,
-					'hierarchical'			=> false
+					'slug'					=> 'shop/artist',
+					'with_front'			=> false
 			)
 		);
 		register_taxonomy('artist', 'product', $args);
-		flush_rewrite_rules();
 	}
 	
 	// register taxonomy badge
@@ -163,13 +158,11 @@
 			'hierarchical'					=> true,
 			'query_var'						=> true,
 			'rewrite'						=> array(
-					'slug'					=> 'badge',
-					'with_front'			=> false,
-					'hierarchical'			=> false
+					'slug'					=> 'shop/badge',
+					'with_front'			=> false
 			)
 		);
 		register_taxonomy('badge', 'product', $args);
-		flush_rewrite_rules();
 	}
 	
 	// add filter option for admin columns

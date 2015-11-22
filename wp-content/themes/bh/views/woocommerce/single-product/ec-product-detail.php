@@ -37,7 +37,7 @@ endif;
 <script>
 	fbq('track', 'ViewContent', {
 		content_type: 'product',
-		content_ids: ['<?php echo $p_sku; ?>'],
+		content_ids: ['<?php echo $post->ID; ?>'],
 		content_name: '<?php echo $p_name; ?>',
 		content_category: '<?php echo $category; ?>',
 		value: <?php echo $p_price; ?>,
