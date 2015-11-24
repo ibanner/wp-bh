@@ -42,5 +42,6 @@ define( 'EXR_API_KEY',	'8173E30F944972AB110F61D13501D61B' );	// Exchange Rate AP
 // Google Fonts
 $google_fonts = array (
 	'Open Sans'			=> 'http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700',
-	'Open Sans Hebrew'	=> 'http://fonts.googleapis.com/earlyaccess/opensanshebrew.css'
+//	'Open Sans Hebrew'	=> 'http://fonts.googleapis.com/earlyaccess/opensanshebrew.css'
+	'Open Sans Hebrew'	=> TEMPLATE . '/fonts/opensanshebrew/stylesheet.css'
 );
