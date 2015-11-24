@@ -79,9 +79,9 @@ var $ = jQuery,
 
 		breakpoint_refreshValue : function () {
 
-			var new_breakpoint = parseInt( window.getComputedStyle(
+			var new_breakpoint = window.getComputedStyle(
 				document.querySelector('body'), ':before'
-			).getPropertyValue('content').replace(/\"/g, '') );
+			).getPropertyValue('content').replace(/\"/g, '').replace(/\'/g, '');
 
 			BH_general.params.prev_breakpoint = BH_general.params.breakpoint;
 			BH_general.params.breakpoint = new_breakpoint;

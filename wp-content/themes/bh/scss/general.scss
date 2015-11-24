@@ -26,6 +26,11 @@ body {
 	background-color: $content-bg;
 	@include box-shadow(0, 0, rgba(0,0,0,0.2), 6px, 0);
 	overflow-y: scroll;
+
+	&:before {
+		content: "1200";
+		display: none;
+	}
 	
 	&.collapse-side-out {
 		overflow-y: hidden;
@@ -3534,10 +3539,6 @@ ul.order_details {
 		width: 222px;
 		height: 222px;
 		text-align: center;
-		
-		img {
-			@include vertical-align;
-		}
 	}
 	
 	.product-item-meta {
@@ -3549,36 +3550,32 @@ ul.order_details {
 			background-color: $gray-color6;
 
 			.title {
-				height: 50px;
+				margin-bottom: 6px;
+				height: 44px;
+				line-height: normal;
+				font-size: 15px;
+				font-weight: $font-bold;
+				white-space: normal;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
 				overflow: hidden;
 
 				a {
-					font-size: 16px;
-					font-weight: $font-bold;
 					color: $font-color;
-					text-overflow: ellipsis;
-					display: -webkit-box;
-					-webkit-line-clamp: 2;
-					-webkit-box-orient: vertical;
-					overflow: hidden;
-					white-space: normal;
 					text-decoration: none;
 				}
 			}
 			
 			.artist {
 				height: 20px;
+				font-size: 12px;
+				text-overflow: ellipsis;
 				overflow: hidden;
 
 				a {
-					font-size: 12px;
 					color: $font-color;
-					text-overflow: ellipsis;
-					display: -webkit-box;
-					-webkit-line-clamp: 1;
-					-webkit-box-orient: vertical;
-					overflow: hidden;
-					white-space: normal;
 				}
 			}
 		}

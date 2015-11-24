@@ -44,7 +44,7 @@
 				</a>
 			</div>
 
-			<?php echo ($artists) ? '<div class="artist">' . $artists . '</div>' : ''; ?>
+			<div class="artist"><?php echo $artists ? $artists : '&nbsp;'; ?></div>
 		</div>
 
 		<div class="add-to-cart-wrapper">
