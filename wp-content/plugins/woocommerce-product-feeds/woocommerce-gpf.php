@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Google Product Feed
 Plugin URI: http://www.leewillis.co.uk/wordpress-plugins/?utm_source=wordpress&utm_medium=www&utm_campaign=woocommerce-gpf
 Description: Woocommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
 Author: Lee Willis
-Version: 4.0.3
+Version: 5.1
 Author URI: http://www.leewillis.co.uk/
 License: GPLv3
 */
@@ -23,8 +23,10 @@ woothemes_queue_update( plugin_basename( __FILE__ ), 'd55b4f852872025741312839f1
 
 
 if ( is_admin() ) {
-	require_once ( 'woocommerce-gpf-common.php' );
-	require_once ( 'woocommerce-gpf-admin.php' );
+	require_once( 'woocommerce-gpf-common.php' );
+	require_once( 'gamajo-template-loader.class.php' );
+	require_once( 'woocommerce-gpf-template-loader.class.php' );
+	require_once( 'woocommerce-gpf-admin.php' );
 }
 
 
