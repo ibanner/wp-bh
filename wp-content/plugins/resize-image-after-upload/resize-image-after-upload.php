@@ -4,7 +4,7 @@ Plugin Name: Resize Image After Upload
 Plugin URI: https://wordpress.org/plugins/resize-image-after-upload/
 Description: Simple plugin to automatically resize uploaded images to within specified maximum width and height. Also has option to force recompression of JPEGs. Configuration options found under <a href="options-general.php?page=resize-after-upload">Settings > Resize Image Upload</a>
 Author: iamphilrae
-Version: 1.7.1
+Version: 1.7.2
 Author URI: http://www.philr.ae/
 
 Copyright (C) 2015 iamphilrae
@@ -24,7 +24,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-$PLUGIN_VERSION = '1.7.1';
+$PLUGIN_VERSION = '1.7.2';
 $DEBUG_LOGGER = false;
 
 
@@ -84,9 +84,9 @@ function jr_uploadresize_options(){
     $max_height  = trim(esc_sql($_POST['maxheight']));
     $compression_level    = trim(esc_sql($_POST['quality']));
 
-    $convert_png_to_jpg = trim(esc_sql($_POST['convertpng']));
-    $convert_gif_to_jpg = trim(esc_sql($_POST['convertgif']));
-    $convert_bmp_to_jpg = trim(esc_sql($_POST['convertbmp']));
+    $convert_png_to_jpg = trim(esc_sql(isset($_POST['convertpng']) ? $_POST['convertpng'] : 'no'));
+    $convert_gif_to_jpg = trim(esc_sql(isset($_POST['convertgif']) ? $_POST['convertgif'] : 'no'));
+    $convert_bmp_to_jpg = trim(esc_sql(isset($_POST['convertbmp']) ? $_POST['convertbmp'] : 'no'));
 
 
     // If input is not an integer, use previous setting
@@ -287,7 +287,7 @@ function jr_uploadresize_options(){
 
 		</table>
 
-		<?php /* DEFINED HERE FOR FUTURE RELEASE
+		<?php /* DEFINED HERE FOR FUTURE RELEASE - does not do anything if uncommented
 		<hr style="margin-top:20px; margin-bottom:20px;">
 
 		<h3>Image conversion options</h3>

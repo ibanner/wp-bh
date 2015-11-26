@@ -454,6 +454,8 @@
 		
 		// update posted data with payment step as 'processing'
 		$additional_posted_data['paymentStep'] = 'processing';
+
+		session_start();
 		
 		session_start();
 

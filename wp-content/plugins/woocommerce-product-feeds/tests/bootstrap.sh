@@ -1,12 +1,11 @@
 #!/bin/bash
-set -x
 
 export PATH="../vendor/bin:$PATH"
 
 # Get the file path
-if [ "x$1" == "x" ] || [ "x$2" == "x" ] || [ "x$3" == "x" ] || [ "x$4" == "x" ] || [ "x$5" == "x" ]
+if [ "x$1" == "x" ] || [ "x$2" == "x" ] || [ "x$3" == "x" ] || [ "x$4" == "x" ] || [ "x$5" == "x" ] || [ "x$6" == "x" ]
 then
-    echo "Usage $0 site-install-dir site-url db_name db_username db_pass"
+    echo "Usage $0 site-install-dir site-url db_name db_username db_pass plugin_dir"
     exit 255
 else
     install_dir=$1
@@ -14,7 +13,10 @@ else
     db_name=$3
     db_user=$4
     db_pass=$5
+    plugin_dir=$6
 fi
+
+plugin_slug=`basename $plugin_dir`
 
 # Remove trailing slash on install path
 install_dir=`echo $install_dir | sed -e 's/\/$//g'`
@@ -45,5 +47,8 @@ wp plugin activate wordpress-importer
 wp import --authors="create" $install_dir/wp-content/plugins/woocommerce/dummy-data/dummy-data.xml
 
 # FIXME - auto-symlink current plugin
-pwd
+echo "ln -s $plugin_dir wp-content/plugins/"
+ln -s $plugin_dir wp-content/plugins/
+
+wp plugin activate woocommerce-product-feeds
 exit 0

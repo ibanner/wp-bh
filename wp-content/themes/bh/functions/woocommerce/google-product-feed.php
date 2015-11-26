@@ -43,10 +43,14 @@ function BH_gpf_set_description($description, $product_id) {
 	$save_post = $post;
 	$post = get_post( $product_id );
 	setup_postdata( $post );
-	$excerpt = strip_tags( get_the_excerpt(), '<p>' );
+	
+	$output = strip_tags( get_the_excerpt(), '<p>' );
+	$output .= '. ';
+	$output .= strip_tags( $post->post_content, '<p>' );
+	
 	$post = $save_post;
 	
-	return $excerpt;
+	return $output;
 }
 add_filter( 'woocommerce_gpf_description', 'BH_gpf_set_description', 10, 2 );
 

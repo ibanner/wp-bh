@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * WooCommerce countries
  *
@@ -250,6 +255,7 @@ class WC_Countries {
 		if ( 'eu_vat' === $type ) {
 			$countries[] = 'MC';
 			$countries[] = 'IM';
+			$countries[] = 'CH';
 		}
 
 		return $countries;

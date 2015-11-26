@@ -36,7 +36,7 @@ class WC_AJAX {
 	}
 
 	/**
-	 * Set AJAX defines.
+	 * Set WC AJAX constant and headers.
 	 */
 	public static function define_ajax() {
 		if ( ! empty( $_GET['wc-ajax'] ) ) {
@@ -50,6 +50,13 @@ class WC_AJAX {
 			if ( ! WP_DEBUG || ( WP_DEBUG && ! WP_DEBUG_DISPLAY ) ) {
 				@ini_set( 'display_errors', 0 );
 			}
+			$GLOBALS['wpdb']->hide_errors();
+			// Send headers like admin-ajax.php
+			send_origin_headers();
+			@header( 'Content-Type: text/html; charset=' . get_option( 'blog_charset' ) );
+			@header( 'X-Robots-Tag: noindex' );
+			send_nosniff_header();
+			nocache_headers();
 		}
 	}
 
@@ -688,8 +695,9 @@ class WC_AJAX {
 
 				} elseif ( isset( $attribute_values[ $i ] ) ) {
 
-					// Text based, separate by pipe
-					$values = implode( ' ' . WC_DELIMITER . ' ', array_map( 'wc_clean', explode( WC_DELIMITER, wp_unslash( $attribute_values[ $i ] ) ) ) );
+					// Text based, possibly separated by pipes (WC_DELIMITER). Preserve line breaks in non-variation attributes.
+					$values = $is_variation ? wc_clean( $attribute_values[ $i ] ) : implode( "\n", array_map( 'wc_clean', explode( "\n", $attribute_values[ $i ] ) ) );
+					$values = implode( ' ' . WC_DELIMITER . ' ', wc_get_text_attributes( $values ) );
 
 					// Custom attribute - Add attribute to array and set the values
 					$attributes[ sanitize_title( $attribute_names[ $i ] ) ] = array(
@@ -799,6 +807,7 @@ class WC_AJAX {
 			$variation_data['image']          = $variation_data['_thumbnail_id'] ? wp_get_attachment_thumb_url( $variation_data['_thumbnail_id'] ) : '';
 			$variation_data['shipping_class'] = $shipping_classes && ! is_wp_error( $shipping_classes ) ? current( $shipping_classes )->term_id : '';
 			$variation_data['menu_order']     = $variation->menu_order;
+			$variation_data['_stock']         = wc_stock_amount( $variation_data['_stock'] );
 
 			// Get tax classes
 			$tax_classes           = WC_Tax::get_tax_classes();
@@ -2361,7 +2370,7 @@ class WC_AJAX {
 			}
 
 			$key_id      = absint( $_POST['key_id'] );
-			$description = sanitize_text_field( $_POST['description'] );
+			$description = sanitize_text_field( wp_unslash( $_POST['description'] ) );
 			$permissions = ( in_array( $_POST['permissions'], array( 'read', 'write', 'read_write' ) ) ) ? sanitize_text_field( $_POST['permissions'] ) : 'read';
 			$user_id     = absint( $_POST['user'] );
 
@@ -2696,8 +2705,8 @@ class WC_AJAX {
 	private static function variation_bulk_action_toggle_manage_stock( $variations, $data ) {
 		foreach ( $variations as $variation_id ) {
 			$_manage_stock   = get_post_meta( $variation_id, '_manage_stock', true );
-			$is_manage_stock = 'no' === $_manage_stock ? 'yes' : 'no';
-			update_post_meta( $variation_id, '_manage_stock', wc_clean( $is_manage_stock ) );
+			$is_manage_stock = 'no' === $_manage_stock || '' === $_manage_stock ? 'yes' : 'no';
+			update_post_meta( $variation_id, '_manage_stock', $is_manage_stock );
 		}
 	}
 
@@ -2708,7 +2717,7 @@ class WC_AJAX {
 	 * @param  array $data
 	 */
 	private static function variation_bulk_action_variable_regular_price( $variations, $data ) {
-		if ( empty( $data['value'] ) ) {
+		if ( ! isset( $data['value'] ) ) {
 			return;
 		}
 
@@ -2734,7 +2743,7 @@ class WC_AJAX {
 	 * @param  array $data
 	 */
 	private static function variation_bulk_action_variable_sale_price( $variations, $data ) {
-		if ( empty( $data['value'] ) ) {
+		if ( ! isset( $data['value'] ) ) {
 			return;
 		}
 
@@ -2760,19 +2769,17 @@ class WC_AJAX {
 	 * @param  array $data
 	 */
 	private static function variation_bulk_action_variable_stock( $variations, $data ) {
-		if ( empty( $data['value'] ) ) {
+		if ( ! isset( $data['value'] ) ) {
 			return;
 		}
 
 		$value = wc_clean( $data['value'] );
 
-		if ( $value ) {
-			foreach ( $variations as $variation_id ) {
-				if ( 'yes' === get_post_meta( $variation_id, '_manage_stock', true ) ) {
-					wc_update_product_stock( $variation_id, wc_stock_amount( $value ) );
-				} else {
-					delete_post_meta( $variation_id, '_stock' );
-				}
+		foreach ( $variations as $variation_id ) {
+			if ( 'yes' === get_post_meta( $variation_id, '_manage_stock', true ) ) {
+				wc_update_product_stock( $variation_id, wc_stock_amount( $value ) );
+			} else {
+				delete_post_meta( $variation_id, '_stock' );
 			}
 		}
 	}

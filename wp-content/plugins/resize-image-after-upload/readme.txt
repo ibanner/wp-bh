@@ -3,8 +3,8 @@ Contributors: iamphilrae
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3W4M254AA3KZG
 Tags: image, processing, plugin, resize, upload, resizing, optimization, optimize, optimise, optimisation, downsize, imsanity, bulk resize
 Requires at least: 3.5
-Tested up to: 4.2.2
-Stable tag: 1.7.1
+Tested up to: 4.3.1
+Stable tag: 1.7.2
 
 Behind-the-scenes plugin to automatically resize images when uploaded, restricting size to within specified maximum h/w. Uses standard WP functions.
 
@@ -34,6 +34,12 @@ This plugin uses standard WordPress image resizing functions and will require a 
 1. Full preview of the settings screen.
 
 == Changelog ==
+
+= 1.7.2 =
+
+Release date: 18th September 2015
+
+* [Fixed] Undefined option notices when running WordPress in debug mode.
 
 = 1.7.1 =
 

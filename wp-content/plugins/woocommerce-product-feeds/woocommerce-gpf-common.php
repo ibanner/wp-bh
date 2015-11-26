@@ -45,27 +45,32 @@ class WoocommerceGpfCommon {
 			 ),
 
 			'brand' => array(
-				'desc'        => __( 'Brand', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Brand of the items', 'woocommerce_gpf' ),
-				'can_default' => true,
-				'feed_types'  => array( 'google', 'bing' ),
-				'google_len'  => 70,
+				'desc'            => __( 'Brand', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Brand of the items', 'woocommerce_gpf' ),
+				'can_default'     => true,
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google', 'bing' ),
+				'google_len'      => 70,
+				'max_values'      => 1,
 			),
 
 			'mpn' => array(
-				'desc'        => __( 'Manufacturer Part Number (MPN)', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'This code uniquely identifies the product to its manufacturer', 'woocommerce_gpf' ),
-				'feed_types'  => array( 'google', 'bing' ),
-				'google_len'  => 70,
+				'desc'            => __( 'Manufacturer Part Number (MPN)', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'This code uniquely identifies the product to its manufacturer', 'woocommerce_gpf' ),
+				'feed_types'      => array( 'google', 'bing' ),
+				'can_prepopulate' => true,
+				'google_len'      => 70,
+				'max_values'      => 1,
 			),
 
 			'product_type' => array(
-				'desc'        => __( 'Product Type', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Your category of the items', 'woocommerce_gpf' ),
-				'callback'    => 'render_product_type',
-				'can_default' => true,
-				'feed_types'  => array( 'google' ),
-				'google_len'  => 750,
+				'desc'            => __( 'Product Type', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Your category of the items', 'woocommerce_gpf' ),
+				'callback'        => 'render_product_type',
+				'can_default'     => true,
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google' ),
+				'google_len'      => 750,
 			),
 
 			'google_product_category' => array(
@@ -78,10 +83,11 @@ class WoocommerceGpfCommon {
 			),
 
 			'gtin' => array(
-				'desc'        => __( 'Global Trade Item Number (GTIN)', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Global Trade Item Numbers (GTINs) for your items. These identifiers include UPC (in North America), EAN (in Europe), JAN (in Japan), and ISBN (for books)', 'woocommerce_gpf' ),
-				'feed_types'  => array( 'google' ),
-				'google_len' => 50,
+				'desc'            => __( 'Global Trade Item Number (GTIN)', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Global Trade Item Numbers (GTINs) for your items. These identifiers include UPC (in North America), EAN (in Europe), JAN (in Japan), and ISBN (for books)', 'woocommerce_gpf' ),
+				'feed_types'      => array( 'google' ),
+				'can_prepopulate' => true,
+				'google_len'      => 50,
 			),
 
 			'gender' => array(
@@ -101,10 +107,11 @@ class WoocommerceGpfCommon {
 			),
 
 			'color' => array(
-				'desc'        => __( 'Colour', 'woocommerce_gpf' ),
-				'full_desc'   => __( "Item's Colour", 'woocommerce_gpf' ),
-				'feed_types'  => array( 'google' ),
-				'google_len'  => 100,
+				'desc'            => __( 'Colour', 'woocommerce_gpf' ),
+				'full_desc'       => __( "Item's Colour", 'woocommerce_gpf' ),
+				'feed_types'      => array( 'google' ),
+				'can_prepopulate' => true,
+				'google_len'      => 100,
 			),
 
 			'size' => array(
@@ -146,11 +153,12 @@ class WoocommerceGpfCommon {
 			),
 
 			'adwords_labels' => array(
-				'desc'        => __( 'Adwords labels', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Very similar to adwords_grouping, but it will only work on CPC. You can enter multiple values here, separating them with a comma (,). e.g. "widget,box".', 'woocommerce_gpf' ),
-				'can_default' => true,
-				'feed_types'  => array( 'google' ),
-				'multiple'    => true,
+				'desc'            => __( 'Adwords labels', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Very similar to adwords_grouping, but it will only work on CPC. You can enter multiple values here, separating them with a comma (,). e.g. "widget,box".', 'woocommerce_gpf' ),
+				'can_default'     => true,
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google' ),
+				'multiple'        => true,
 			),
 
 			'bing_category' => array(
@@ -162,15 +170,17 @@ class WoocommerceGpfCommon {
 			),
 
 			'upc' => array(
-				'desc'       => __( 'Universal Product Code', 'woocommerce_gpf' ),
-				'full_desc'  => __( 'Universal Product Code. Only 8 and 12 digit codes are supported.', 'woocommerce_gpf' ),
-				'feed_types' => array( 'bing' ),
+				'desc'            => __( 'Universal Product Code', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Universal Product Code. Only 8 and 12 digit codes are supported.', 'woocommerce_gpf' ),
+				'feed_types'      => array( 'bing' ),
+				'can_prepopulate' => true,
 			),
 
 			'isbn' => array(
-				'desc'       => __( 'International Standard Book Number', 'woocommerce_gpf' ),
-				'full_desc'  => __( "10 or 13 digit ISBNs. The ISBN is matched to other offers with the identical ISBN - significantly improving your customer's ability to locate your product. Use for books, CDs, DVD.", 'woocommerce_gpf' ),
-				'feed_types' => array( 'bing' ),
+				'desc'            => __( 'International Standard Book Number', 'woocommerce_gpf' ),
+				'full_desc'       => __( "10 or 13 digit ISBNs. The ISBN is matched to other offers with the identical ISBN - significantly improving your customer's ability to locate your product. Use for books, CDs, DVD.", 'woocommerce_gpf' ),
+				'feed_types'      => array( 'bing' ),
+				'can_prepopulate' => true,
 			),
 
 			'delivery_label' => array(
@@ -183,56 +193,67 @@ class WoocommerceGpfCommon {
 			),
 
 			'custom_label_0' => array(
-				'desc'        => __( 'Custom label 0', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
-				'can_default' => true,
-				'callback'    => 'render_textfield',
-				'feed_types'  => array( 'google' ),
-				'google_len'  => 100,
+				'desc'            => __( 'Custom label 0', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
+				'can_default'     => true,
+				'callback'        => 'render_textfield',
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google' ),
+				'google_len'      => 100,
+				'max_values'      => 1,
 			),
 
 			'custom_label_1' => array(
-				'desc'        => __( 'Custom label 1', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
-				'can_default' => true,
-				'callback'    => 'render_textfield',
-				'feed_types'  => array( 'google' ),
-				'google_len'  => 100,
+				'desc'            => __( 'Custom label 1', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
+				'can_default'     => true,
+				'callback'        => 'render_textfield',
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google' ),
+				'google_len'      => 100,
+				'max_values'      => 1,
 			),
 
 			'custom_label_2' => array(
-				'desc'        => __( 'Custom label 2', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
-				'can_default' => true,
-				'callback'    => 'render_textfield',
-				'feed_types'  => array( 'google' ),
-				'google_len'  => 100,
+				'desc'            => __( 'Custom label 2', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
+				'can_default'     => true,
+				'callback'        => 'render_textfield',
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google' ),
+				'google_len'      => 100,
+				'max_values'      => 1,
 			),
 
 			'custom_label_3' => array(
-				'desc'        => __( 'Custom label 3', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
-				'can_default' => true,
-				'callback'    => 'render_textfield',
-				'feed_types'  => array( 'google' ),
-				'google_len'  => 100,
+				'desc'            => __( 'Custom label 3', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
+				'can_default'     => true,
+				'callback'        => 'render_textfield',
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google' ),
+				'google_len'      => 100,
+				'max_values'      => 1,
 			),
 
 			'custom_label_4' => array(
-				'desc'        => __( 'Custom label 4', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
-				'can_default' => true,
-				'callback'    => 'render_textfield',
-				'feed_types'  => array( 'google' ),
-				'google_len'  => 100,
+				'desc'            => __( 'Custom label 4', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Can be used to segment your products when setting up shopping campaigns in Adwords.', 'woocommerce_gpf' ),
+				'can_default'     => true,
+				'callback'        => 'render_textfield',
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google' ),
+				'google_len'      => 100,
+				'max_values'      => 1,
 			),
 
 			'promotion_id' => array(
-				'desc'        => __( 'Promotion ID', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'The unique ID of a promotion.' ),
-				'can_default' => true,
-				'callback'    => 'render_textfield',
-				'feed_types'  => array( 'google' ),
+				'desc'            => __( 'Promotion ID', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'The unique ID of a promotion.' ),
+				'can_default'     => true,
+				'callback'        => 'render_textfield',
+				'can_prepopulate' => true,
+				'feed_types'      => array( 'google' ),
 			),
 
 		);
@@ -304,7 +325,7 @@ class WoocommerceGpfCommon {
 		}
 
 		// Get Store defaults
-		if ( ! isset($this->settings['product_defaults']) ) {
+		if ( ! isset( $this->settings['product_defaults'] ) ) {
 			$this->settings['product_defaults'] = array();
 		}
 		$settings = $this->remove_blanks( $this->settings['product_defaults'] );
@@ -327,7 +348,14 @@ class WoocommerceGpfCommon {
 			return $settings;
 		}
 
-		// Merge product settings
+		// Merge prepopulated data if required.
+		if ( ! empty( $this->settings['product_prepopulate'] ) ) {
+			$prepopulated_values = $this->get_values_to_prepopulate( $product_id );
+			$prepopulated_values = $this->remove_blanks( $prepopulated_values );
+			$settings            = array_merge( $settings, $prepopulated_values );
+		}
+
+		// Merge per-product settings.
 		$product_settings = get_post_meta( $product_id, '_woocommerce_gpf_data', true );
 		if ( $product_settings ) {
 			$product_settings = $this->remove_blanks( $product_settings );
@@ -337,11 +365,30 @@ class WoocommerceGpfCommon {
 		if ( 'all' != $feed_format ) {
 			$settings = $this->remove_other_feeds( $settings, $feed_format );
 		}
+		$settings = $this->limit_max_values( $settings );
 
 		return $settings;
 	}
 
 
+	/**
+	 * Make sure that each element does not contain more values than it should.
+	 *
+	 * @param   array   $data  The data for a product / category.
+	 * @return                 The modified data array.
+	 */
+	private function limit_max_values( $data ) {
+		foreach ( $this->product_fields as $key => $element_settings ) {
+			if ( empty( $element_settings['max_values'] ) ||
+				 empty( $data[ $key ] ) ||
+				 ! is_array( $data[ $key ] ) ) {
+				continue;
+			}
+			$limit = intval( $element_settings['max_values'] );
+			$data[ $key ] = array_slice( $data[ $key ], 0, $limit );
+		}
+		return $data;
+	}
 
 	/**
 	 * Retrieve category defaults for a specific category
@@ -363,6 +410,119 @@ class WoocommerceGpfCommon {
 
 	}
 
+	/**
+	 * Get all of the prepopulated values for a product.
+	 *
+	 * @param  int    $product_id  The product ID.
+	 *
+	 * @return array               Array of prepopulated values.
+	 */
+	private function get_values_to_prepopulate( $product_id = null ) {
+		$results = array();
+		foreach ( $this->settings['product_prepopulate'] as $gpf_key => $prepopulate ) {
+			if ( empty( $prepopulate ) ) {
+				continue;
+			}
+			$value = $this->get_prepopulate_value_for_product( $prepopulate, $product_id );
+			if ( ! empty( $value ) ) {
+				$results[ $gpf_key ] = $value;
+			}
+		}
+		return $results;
+	}
+
+	/**
+	 * Gets a specific prepopulated value for a product.
+	 *
+	 * @param  string  $prepopulate  The prepopulation value for a product.
+	 * @param  int     $product_id   The product ID being queried.
+	 *
+	 * @return string                The prepopulated value for this product.
+	 */
+	private function get_prepopulate_value_for_product( $prepopulate, $product_id ) {
+		$result = array();
+		list( $type, $value ) = explode( ':', $prepopulate );
+		switch ( $type ) {
+			case 'tax':
+				$terms = wp_get_object_terms( $product_id, array( $value ), array( 'fields' => 'names' ) );
+				if ( ! empty( $terms ) ) {
+					$result = $terms;
+				}
+				break;
+			case 'field':
+				$result = $this->get_field_prepopulate_value_for_product( $value, $product_id );
+				break;
+		}
+		return $result;
+	}
+
+	/**
+	 * Get a prepopulate value for a specific field for a product.
+	 *
+	 * @param  string  $field       Details of the field we want.
+	 * @param  int     $product_id  The product ID.
+	 *
+	 * @return array                The value for this field on this product.
+	 */
+	private function get_field_prepopulate_value_for_product( $field, $product_id ) {
+
+		global $woocommerce_gpf_frontend;
+
+		$product = $woocommerce_gpf_frontend->load_product( $product_id );
+		if ( ! $product ) {
+			return array();
+		}
+
+		if ( 'sku' == $field ) {
+			$sku = $product->get_sku();
+			if ( !empty( $sku ) ) {
+				return array( $sku );
+			}
+		}
+
+		return array();
+	}
+
+	/**
+	 * Generate a list of choices for the "prepopulate" options.
+	 *
+	 * @return array  An array of preopulate choices.
+	 */
+	public function get_prepopulate_options() {
+		$options = array();
+		$options = array_merge( $options, $this->get_available_taxonomies() );
+		$options = array_merge( $options, $this->get_prepopulate_fields() );
+		return $options;
+	}
+
+	/**
+	 * get a list of the available fields to use for prepopulation.
+	 *
+	 * @return array  Array of the available fields.
+	 */
+	private function get_prepopulate_fields() {
+		$fields = array(
+			'field:sku' => 'SKU',
+		);
+		asort( $fields );
+		return array_merge( array( 'disabled:fields' => __( '- Product fields -', 'woo_gpf' ) ), $fields );
+	}
+
+	/**
+	 * Get a list of the available taxonomies.
+	 *
+	 * @return array Array of available product taxonomies.
+	 */
+	private function get_available_taxonomies() {
+		$taxonomies = get_object_taxonomies( 'product' );
+		$taxes = array();
+		foreach ( $taxonomies as $taxonomy ) {
+			$tax_details = get_taxonomy( $taxonomy );
+			$taxes[ 'tax:' . $taxonomy ] = $tax_details->labels->name;
+		}
+		asort( $taxes );
+		return array_merge( array( 'disabled:taxes' => __( '- Taxonomies -', 'woo_gpf' ) ), $taxes );
+	}
 }
 
 global $woocommerce_gpf_common;

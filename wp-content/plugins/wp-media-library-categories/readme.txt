@@ -3,8 +3,8 @@ Contributors: jeffrey-wp
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SSNQMST6R28Q2
 Tags: category, categories, media, library, medialibrary, image, images, media category, media categories
 Requires at least: 3.1
-Tested up to: 4.2
-Stable tag: 1.5.1
+Tested up to: 4.3
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,10 @@ Maintaining a plugin and keeping it up to date is hard work. Please support me b
 3. Filter by category when inserting media [(premium version)](http://codecanyon.net/item/media-library-categories-premium/6691290?ref=jeffrey-wp)
 
 == Changelog ==
+
+= 1.5.2 =
+* Support for GlotPress (to translate WordPress plugins). You can help to translate on [https://translate.wordpress.org/projects/wp-plugins/wp-media-library-categories/](https://translate.wordpress.org/projects/wp-plugins/wp-media-library-categories/)
+* Fixed notice "Undefined index: ids" which in some rare cases would appear.
 
 = 1.5.1 =
 * Support for WordPress 4.2

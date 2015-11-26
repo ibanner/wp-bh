@@ -24,7 +24,7 @@
 				array(
 					'taxonomy'	=> 'event_category',
 					'field'		=> 'id',
-					'terms'		=> $cat_id
+					'terms'		=> (int)$cat_id
 				)
 			),
 			'meta_query'		=> array(

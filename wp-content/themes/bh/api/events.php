@@ -37,11 +37,12 @@
 	);
 	
 	if ($category) :
-		$args['tax_query'] = array(
+		$args['suppress_filters']	= true;
+		$args['tax_query']			= array(
 			array(
 				'taxonomy'	=> 'event_category',
 				'field'		=> 'id',
-				'terms'		=> $category
+				'terms'		=> (int)$category
 			)
 		);
 	endif;
