@@ -31,11 +31,12 @@ class WoocommerceGpfFrontend {
 
 		if ( ! empty( $this->feed ) ) {
 			add_action( 'woocommerce_gpf_elements', array( $this, 'general_elements' ), 10, 2 );
-			add_action( 'woocommerce_gpf_elements', array( $this, 'shipping_height_elements' ), 10, 2 );
-			add_action( 'woocommerce_gpf_elements', array( $this, 'shipping_width_elements' ), 10, 2 );
-			add_action( 'woocommerce_gpf_elements', array( $this, 'shipping_length_elements' ), 10, 2 );
+			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_height_elements' ), 10, 2 );
+			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_width_elements' ), 10, 2 );
+			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_length_elements' ), 10, 2 );
 			add_action( 'template_redirect', array( $this, 'render_product_feed' ), 15 );
 		}
+
 
 	}
 
@@ -219,22 +220,15 @@ class WoocommerceGpfFrontend {
 
 		global $wpdb;
 
-		// Don't cache feed under WP Super-Cache
+		// Don't cache feed under WP Super-Cache.
 		define( 'DONOTCACHEPAGE', true );
 
-		// Cater for large stores
+		// Cater for large stores.
 		$wpdb->hide_errors();
 		@set_time_limit( 0 );
 		while ( ob_get_level() ) {
 			@ob_end_clean();
 		}
-
-		// Suspend cache addition to stop WP trying to hold everything in memory.
-		// Note: wp_suspend_cache_addition is buggy prior to WP 3.4.
-		if ( version_compare( get_bloginfo( 'version' ), '3.4', '>=' ) ) {
-			wp_suspend_cache_addition( true );
-		}
-
 	}
 
 	/**
@@ -322,13 +316,13 @@ class WoocommerceGpfFrontend {
 	 */
 	public function render_product_feed() {
 
-		global $wp_query, $post;
+		global $wp_query, $post, $_wp_using_ext_object_cache;
 
 		$this->set_optimisations();
 		$this->feed->render_header();
 
 		// Query for the products
-		$chunk_size = apply_filters( 'woocommerce_gpf_chunk_size', 20 );
+		$chunk_size = apply_filters( 'woocommerce_gpf_chunk_size', 10 );
 
 		$args['post_type'] = 'product';
 		$args['numberposts'] = $chunk_size;
@@ -353,6 +347,7 @@ class WoocommerceGpfFrontend {
 
 				// Get main item information
 				$feed_item->ID = $post->ID;
+				$feed_item->guid = 'woocommerce_gpf_' . $post->ID;
 				$feed_item->title = apply_filters(
 					'woocommerce_gpf_title',
 					get_the_title( $feed_item->ID ),
@@ -397,6 +392,11 @@ class WoocommerceGpfFrontend {
 			}
 			$args['offset'] += $chunk_size;
 
+			// If we're using the built in object cache then flush it every chunk so
+			// that we don't keep churning through memory.
+			if ( ! $_wp_using_ext_object_cache ) {
+				wp_cache_flush();
+			}
 			$products = get_posts( $args );
 		}
 		$this->feed->render_footer();
@@ -422,7 +422,7 @@ class WoocommerceGpfFrontend {
 		if ( ! empty ( $product_values ) ) {
 			foreach ( $product_values as $key => $value ) {
 				// Deal with fields that can have multiple, comma separated values
-				if ( isset( $woocommerce_gpf_common->product_fields[ $key ]['multiple'] ) && $woocommerce_gpf_common->product_fields[ $key ]['multiple'] ) {
+				if ( isset( $woocommerce_gpf_common->product_fields[ $key ]['multiple'] ) && $woocommerce_gpf_common->product_fields[ $key ]['multiple'] && ! is_array( $value ) ) {
 					$value = explode( ',', $value );
 				}
 				$elements[ $key ] = (array) $value;
