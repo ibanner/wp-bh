@@ -1,5 +1,16 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2015.09.20 - version 5.1
+* Fix markup error in admin area
+* Increase feed generation performance
+
+2015.06.03 - version 5.0
+* Provides support for Product Inventory feeds for Google Merchant Centre.
+* Provides support for populating feed information product attributes without having to use code snippets.
+* Item GUIDs are now filterable via woocommerce_gpf_feed_item_ filters.
+* Fix Bing link in admin area to satisfy URL suffix validation.
+* Admin markup and accessibility fixes.
+
 2015.04.30 - version 4.0.3
 * Fix issue with size system not showing the currently selected value properly
 

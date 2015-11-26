@@ -97,7 +97,7 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 	 */
 	function render_item( $feed_item ) {
 
-		if ( empty ( $feed_item->price_inc_tax ) ) {
+		if ( empty( $feed_item->price_inc_tax ) ) {
 			return false;
 		}
 
