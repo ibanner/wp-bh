@@ -9,7 +9,20 @@
 	// Setup variables
 	$category	= (isset($_POST['event_category']) && $_POST['event_category']) ? $_POST['event_category'] : '';	// category term_id
 	$date		= (isset($_POST['event_date']) && $_POST['event_date']) ? $_POST['event_date'] : '';				// start date in 'd/m/Y' format
-	
+	$lang		= (isset($_POST['lang']) && $_POST['lang']) ? $_POST['lang'] : '';									// en/he
+
+	if ($lang) :
+		global $sitepress;
+
+		// changes language
+		$sitepress->switch_lang($lang);
+
+		add_filter('acf/settings/current_language',	function() {
+			global $lang;
+			return $lang;
+		});
+	endif;
+
 	if ($date) :
 		$date = date_create_from_format('d/m/Y', $date);
 		$date = $date->format('Ymd');

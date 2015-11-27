@@ -1,15 +1,8 @@
 <?php
 
-	global $events, $sorted_events, $sitepress, $wpdb;
-	
-	$icl_language_code = ICL_LANGUAGE_CODE;
-	
-	if ( ICL_LANGUAGE_CODE == '' && isset($_COOKIE['_icl_current_language']) && defined('ICL_SITEPRESS_VERSION') ) {
-		$sitepress->switch_lang( $_COOKIE['_icl_current_language'] );
-		$icl_language_code = $_COOKIE['_icl_current_language'];
-	}
-	
-	$locale = $wpdb->get_var("SELECT default_locale FROM {$wpdb->prefix}icl_languages WHERE code='{$icl_language_code}'");
+	global $events, $sorted_events, $lang;
+
+	$locale = $wpdb->get_var("SELECT default_locale FROM {$wpdb->prefix}icl_languages WHERE code='{$lang}'");
 	
 	$series_of_events_prepend	= get_field('acf-options_series_of_events_prepend',	'option');
 	$read_more_btn				= get_field('acf-options_event_btn_read_more',		'option');

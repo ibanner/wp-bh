@@ -51,7 +51,8 @@ var $ = jQuery,
 				type	: 'POST',
 				data	: {
 					event_category	: BH_event.params.category_id,
-					event_date		: BH_event.params.date
+					event_date		: BH_event.params.date,
+					lang			: $('.event-filter-lang').text()
 				},
 				error: function() {
 					$('.event-filters .loader').hide();
