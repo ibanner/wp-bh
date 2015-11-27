@@ -1,6 +1,6 @@
 <?php
 
-	global $sorted_events, $sitepress;
+	global $sorted_events;
 	
 	if ( is_page() && 'past-events.php' == basename( get_page_template() ) ) :
 	

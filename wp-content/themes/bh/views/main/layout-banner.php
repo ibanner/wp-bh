@@ -1,10 +1,5 @@
 <?php
 
-	global $sitepress;
-	
-	// get locale string
-	$locale = $sitepress->get_locale(ICL_LANGUAGE_CODE);
-	
 	$args = array(
 		'post_type'			=> 'event',
 		'posts_per_page'	=> 5,

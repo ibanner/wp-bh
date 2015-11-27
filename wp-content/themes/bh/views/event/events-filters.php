@@ -35,6 +35,8 @@
 				echo '<div class="event-filter-by-date">';
 					echo '<input class="datepicker" value="' . __('Start from', 'BH') . '" />';
 				echo '</div>';
+
+				echo '<div class="event-filter-lang hide">' . ICL_LANGUAGE_CODE . '</div>';
 				
 				echo '<div class="loader">';
 					get_template_part('views/components/loader');

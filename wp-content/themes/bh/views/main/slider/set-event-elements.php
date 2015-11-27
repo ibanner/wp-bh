@@ -1,9 +1,6 @@
 <?php
 
-	global $categories, $events, $is_categories_empty, $is_events_empty, $sitepress;
-
-	// get locale string
-	$locale = $sitepress->get_locale(ICL_LANGUAGE_CODE);
+	global $categories, $events, $is_categories_empty, $is_events_empty;
 
 	// set $categories - array of categories term_id
 	// this array will hold arrays of event DOM elements related to each category
