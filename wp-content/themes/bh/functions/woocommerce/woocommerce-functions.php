@@ -476,6 +476,24 @@ function BH_shop_get_artist_links($product_id) {
 }
 
 /**
+ * BH_change_default_checkout_country
+ * 
+ * Default checkout country to blank
+ */
+function BH_change_default_checkout_country() {
+	return '';
+}
+
+/**
+ * BH_change_default_checkout_state
+ * 
+ * Default checkout state to blank
+ */
+function BH_change_default_checkout_state() {
+	return '';
+}
+
+/**
  * BH_shop_get_price_html
  * 
  * Customize product price html

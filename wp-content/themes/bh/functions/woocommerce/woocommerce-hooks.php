@@ -105,6 +105,15 @@ add_action('BH_shop_related_products', 'BH_shop_show_related_products', 10);
 add_action('BH_after_single_product', 'BH_EC_product_detail', 10);
 
 /**
+ * Checkout page
+ * 
+ * @see		BH_change_default_checkout_country()
+ * @see		BH_change_default_checkout_state()
+ */
+add_filter('default_checkout_country', 'BH_change_default_checkout_country');
+add_filter('default_checkout_state', 'BH_change_default_checkout_state');
+
+/**
  * Product Price
  * 
  * @see		BH_shop_get_price_html()
