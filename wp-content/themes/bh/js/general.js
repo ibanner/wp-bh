@@ -6,6 +6,7 @@ var $ = jQuery,
 			// general
 			api						: js_globals.template_url + '/api/',
 			timeout					: 400,
+			window_width			: 0
 
 		},
 
@@ -458,8 +459,16 @@ var $ = jQuery,
 			// shop cart popup
 			BH_general.shop_cart_popup();
 
-			$(window).resize(BH_general.alignments).resize();
-			
+			BH_general.params.window_width = $(window).width();
+			$(window).resize(function() {
+				if ( BH_general.params.window_width != $(window).width() ) {
+					BH_general.alignments();
+					BH_general.params.window_width = $(window).width();
+				}
+			});
+
+			BH_general.alignments();
+
 		},
 
 		alignments : function() {

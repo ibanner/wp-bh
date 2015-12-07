@@ -465,6 +465,20 @@
 
 	footer {
 
+		/****************/
+		/* footer links */
+		/****************/
+
+		.footer-links {
+			.link-box-wrapper {
+				padding-left: 5px;
+				padding-right: 5px;
+
+				&:first-child { padding-left: 15px; padding-right: 5px; }
+				&:last-child { padding-left: 5px; padding-right: 15px; }
+			}
+		}
+
 		/***************/
 		/* sites links */
 		/***************/
@@ -473,6 +487,12 @@
 			border-top: 6px solid;
 
 			.site-item {
+				padding-left: 5px;
+				padding-right: 5px;
+
+				&:first-child { padding-left: 15px; padding-right: 5px; }
+				&:last-child { padding-left: 5px; padding-right: 15px; }
+
 				a {
 					height: 40px;
 
@@ -545,7 +565,7 @@
 						margin: 16px 10px 0 0;
 
 						a {
-							width: 38px;
+							width: 50px;
 							height: 22px;
 
 							.title {
@@ -563,7 +583,7 @@
 							margin: 16px 10px 0 0;
 
 							a {
-								width: 38px;
+								width: 50px;
 								height: 22px;
 							}
 						}
@@ -572,7 +592,7 @@
 							margin: 0 10px 0 0;
 
 							a {
-								width: 68px;
+								width: 75px;
 								height: 38px;
 
 								.title {
@@ -848,10 +868,9 @@
 		/***************/
 
 		.footer-menu {
-			padding-left: 60px;
-			padding-right: 60px;
-
 			li {
+				margin-bottom: 5px;
+
 				a {
 					font-size: 14px;
 				}
@@ -1461,7 +1480,7 @@
 						margin: 22px 12px 0 0;
 
 						a {
-							width: 50px;
+							width: 60px;
 							height: 30px;
 
 							.title {
@@ -1474,7 +1493,7 @@
 							margin: 22px 12px 0 0;
 
 							a {
-								width: 50px;
+								width: 60px;
 								height: 30px;
 							}
 						}

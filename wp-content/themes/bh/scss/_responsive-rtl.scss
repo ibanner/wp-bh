@@ -81,6 +81,35 @@
 			}
 		}
 	}
+
+	/**********/
+	/* footer */
+	/**********/
+
+	footer {
+
+		/****************/
+		/* footer links */
+		/****************/
+
+		.footer-links {
+			.link-box-wrapper {
+				&:first-child { padding-left: 5px; padding-right: 15px; }
+				&:last-child { padding-left: 15px; padding-right: 5px; }
+			}
+		}
+
+		/***************/
+		/* sites links */
+		/***************/
+
+		.sites-links {
+			.site-item {
+				&:first-child { padding-left: 5px; padding-right: 15px; }
+				&:last-child { padding-left: 15px; padding-right: 5px; }
+			}
+		}
+	}
 }
 
 @media (max-width: 526px) {}
