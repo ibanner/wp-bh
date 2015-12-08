@@ -34,34 +34,7 @@
 		
 		return $transactionID;
 	}
-	
-	/**
-	 * BH_get_cc_company
-	 * 
-	 * get credit card company name from pelecard result
-	 * 
-	 * @param	string		$pelecard_result		pelecard result
-	 * @return	string								credit card company name
-	 */
-	function BH_get_cc_company($pelecard_result) {
-		$cc_map = array (
-			'1' => 'Isracard',
-			'2' => 'Visa C.A.L',
-			'3' => 'Diners',
-			'4' => 'Amex',
-			'5' => 'JCB',
-			'6' => 'Leumicard'
-		);
-		
-		$cc_code = substr($pelecard_result, 59, 1);
-		$cc_name = '';
-		
-		if ( array_key_exists($cc_code, $cc_map) )
-			$cc_name = $cc_map[$cc_code];
-			
-		return $cc_name;
-	}
-	
+
 	/**
 	 * BH_build_message
 	 * 

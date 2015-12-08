@@ -203,11 +203,16 @@
 		$_SESSION['payment_data']['total']			= $price * 100;
 		$_SESSION['payment_data']['currency']		= '1';
 		$_SESSION['payment_data']['transactionID']	= $transactionID;
-	?>
-	
-	<div id="payment-form" ng-show="show_payment">
-		<iframe id="frame" name="pelecard_frame" frameborder="0" scrolling="no" src="<?php echo TEMPLATE; ?>/functions/pelecard/Pay<?php echo (ICL_LANGUAGE_CODE == 'he') ? '-he' : ''; ?>.php" style="height:480px; width:400px;"></iframe>
-	</div>
+
+		$pelecard_iframe = BH_pelecard_iframe(ICL_LANGUAGE_CODE);
+
+		if ($pelecard_iframe) : ?>
+
+			<div id="payment-form" ng-show="show_payment">
+				<iframe id="frame" name="pelecard_frame" frameborder="0" scrolling="no" src="<?php echo $pelecard_iframe; ?>" style="width:100%; height:694px;"></iframe>
+			</div>
+
+		<?php endif; ?>
 </div>
 
 <?php

@@ -44,9 +44,13 @@
 		$_SESSION['payment_data']['total']			= $price * 100;
 		$_SESSION['payment_data']['currency']		= '1';
 		$_SESSION['payment_data']['transactionID']	= $transactionID;
-		
-		// display Pelecard iframe
-		?>
+
+		$pelecard_iframe = BH_pelecard_iframe($lang);
+
+		if ($pelecard_iframe) :
+
+			// display Pelecard iframe
+			?>
 			<script>
 				jQuery(function($) {
 					var payment_form =
@@ -67,14 +71,15 @@
 						'</scr'+'ipt>' +
 						
 						'<div id="payment-form" style="display: none;">' +
-							'<iframe id="frame" name="pelecard_frame" frameborder="0" scrolling="no" src="' + '<?php echo TEMPLATE; ?>' + '/functions/pelecard/Pay' + '<?php echo ($lang == 'he') ? '-he' : ''; ?>' + '.php" style="height:480px; width:400px;"></iframe>' +
+							'<iframe id="frame" name="pelecard_frame" frameborder="0" scrolling="no" src="' + '<?php echo $pelecard_iframe; ?>' + '" style="width:100%; height:694px;"></iframe>' +
 						'</div>';
 						
 					// move payment form after contact form 7 form
 					$('.bh-form').after(payment_form);
 				});
 			</script>
-		<?php
+
+		<?php endif;
 	}
 	
 	add_filter( 'wpcf7_validate_payment', 'wpcf7_payment_validation_filter', 10, 2 );

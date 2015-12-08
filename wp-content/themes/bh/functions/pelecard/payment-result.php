@@ -1,10 +1,10 @@
 <?php
 /**
- * Pelecard iframe response
+ * Pelecard iframe 2 response
  *
  * @author 		Beit Hatfutsot
  * @package 	functions/pelecard
- * @version     1.0
+ * @version     2.0
  */
 
 require_once('../../../../../wp-load.php'); ?>
@@ -33,23 +33,32 @@ require_once('../../../../../wp-load.php'); ?>
 
 	session_start();
 	
-	if ( ! isset($_POST['result']) || ! isset($_SESSION['payment_data']) )
+	if ( ! isset($_POST['PelecardTransactionId']) || ! isset($_SESSION['payment_data']) )
 		return;
-		
+
+	// validate transaction
+	$ConfirmationKey	= $_POST['ConfirmationKey'];
+	$uniqueKey			= $_POST['UserKey'] ? $_POST['UserKey'] : $_POST['PelecardTransactionId'];
+	$total				= $_SESSION['payment_data']['total'];
+
+	if ( ! BH_pelecard_validate_transaction($ConfirmationKey, $uniqueKey, $total) )
+		return;
+
 	// collect data
-	$result			= $_POST['result'];
-	$resultCode		= substr($result, 0, 3);
-	
-	if ( $resultCode == '000' ) :
+	$transaction_result = BH_pelecard_payment_result( $_POST['PelecardTransactionId'] );
+
+	if ( ! $transaction_result )
+		return;
+
+	if ( $_POST['PelecardStatusCode'] == '000' ) :
 	
 		// success
-		
 		if ( isset($_SESSION['microfilm-post']) ) :
 		
 			// microfilm payment
 			
 			// add credit card company name
-			$_SESSION['payment_data']['cc_name']		= BH_get_cc_company($result);
+			$_SESSION['payment_data']['cc_name'] = $transaction_result['ResultData']['CardHebrewName'];
 			
 			require('microfilm-payment-result.php');
 			
@@ -124,9 +133,9 @@ require_once('../../../../../wp-load.php'); ?>
 		
 		// document the completed request
 		$cfdb_data = (object) array (
-			'title' => $cfdb_form_title,
-			'posted_data' => $posted_data,
-			'uploaded_files' => null
+			'title'				=> $cfdb_form_title,
+			'posted_data'		=> $posted_data,
+			'uploaded_files'	=> null
 		);
 		do_action_ref_array( 'cfdb_submit', array(&$cfdb_data) );
 		
@@ -139,7 +148,7 @@ require_once('../../../../../wp-load.php'); ?>
 		// error
 		echo '<h2>' . __('Payment failed', 'BH') . '</h2>';
 		
-		switch ( $resultCode ) :
+		switch ( $_POST['PelecardStatusCode'] ) :
 		
 			case '006' :
 				// wrong ID or CVV
@@ -165,7 +174,7 @@ require_once('../../../../../wp-load.php'); ?>
 				
 			default :
 				// general error
-				echo '<p><strong>' . __('Error #', 'BH') . $resultCode . ':</strong> ' . __('General Error.', 'BH') . '</p>';
+				echo '<p><strong>' . __('Error #', 'BH') . $_POST['PelecardStatusCode'] . ':</strong> ' . __('General Error.', 'BH') . '</p>';
 				
 		endswitch;
 	

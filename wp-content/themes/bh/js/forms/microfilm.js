@@ -8,8 +8,7 @@ var mfApp = angular.module('microfilmApp', [])
 
 mfApp.controller('mfController', function($scope, $http, MicrofilmManager, SortService, YearsService) {
     
-    var wp_template_url     = BH_general.params.template,
-        views_url           = wp_template_url + '/views/components/',
+    var views_url           = js_globals.template_url + '/views/components/',
         api_url             = BH_general.params.api;
         
 
