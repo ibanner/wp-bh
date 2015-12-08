@@ -85,7 +85,9 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 			return false;
 		}
 		$found  = false;
-		$locale = wp_cache_get( 'get_locale' . $code, '', false, $found );
+		$cache_key = 'get_locale' . $code;
+		$cache  = new WPML_WP_Cache( '' );
+		$locale = $cache->get( $cache_key, $found );
 		if ( $found ) {
 
 			return $locale;
@@ -102,7 +104,7 @@ class WPML_Locale extends WPML_WPDB_And_SP_User {
 				$locale = $this_locale_data->default_locale;
 			}
 		}
-		wp_cache_set( 'get_locale' . $code, $locale );
+		$cache->set( $cache_key, $locale );
 
 		return $locale;
 	}

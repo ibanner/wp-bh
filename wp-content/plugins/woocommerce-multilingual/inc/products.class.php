@@ -62,7 +62,9 @@ class WCML_Products{
 
             add_action( 'wp_ajax_woocommerce_feature_product' , array( $this, 'sync_feature_product_meta' ), 9 );
 
-            $this->tp_support = new WCML_TP_Support();
+            if ( defined( 'ICL_SITEPRESS_VERSION' ) && version_compare( ICL_SITEPRESS_VERSION, '3.2', '>=' ) ) {
+                $this->tp_support = new WCML_TP_Support();
+            }
 
         }else{
             add_filter('woocommerce_json_search_found_products', array($this, 'filter_found_products_by_language'));
@@ -912,12 +914,14 @@ class WCML_Products{
             $duplicated_ids = '';
             if ( !$translation->original ) {
                 foreach( $gallery_ids as $image_id ){
-                    $duplicated_id = apply_filters( 'translate_object_id', $image_id, 'attachment', false, $translation->language_code );
-                    if( is_null( $duplicated_id ) && $image_id ){
+                    if( get_post( $image_id ) ) {
+                        $duplicated_id = apply_filters( 'translate_object_id', $image_id, 'attachment', false, $translation->language_code );
+                        if ( is_null( $duplicated_id ) && $image_id ) {
 
-                        $duplicated_id = WPML_media::create_duplicate_attachment( $image_id, wp_get_post_parent_id( $image_id ), $translation->language_code );
+                            $duplicated_id = WPML_media::create_duplicate_attachment( $image_id, wp_get_post_parent_id( $image_id ), $translation->language_code );
+                        }
+                        $duplicated_ids .= $duplicated_id . ',';
                     }
-                    $duplicated_ids .= $duplicated_id.',';
                 }
                 $duplicated_ids = substr( $duplicated_ids, 0, strlen( $duplicated_ids )-1 );
                 update_post_meta( $translation->element_id, '_product_image_gallery', $duplicated_ids );
@@ -1709,7 +1713,8 @@ class WCML_Products{
             if( isset( $_POST[ '_wcml_custom_prices' ][ $post_id ] ) ) {
                 $wcml_custom_prices_option = $_POST[ '_wcml_custom_prices' ][ $post_id ];
             }else{
-                $wcml_custom_prices_option = $_POST[ '_wcml_custom_prices' ][ 0 ];
+                $current_option = get_post_meta( $post_id, '_wcml_custom_prices_status', true );
+                $wcml_custom_prices_option = $current_option ? $current_option : 0;
             }
 
             update_post_meta( $post_id, '_wcml_custom_prices_status', $wcml_custom_prices_option );

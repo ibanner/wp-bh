@@ -136,6 +136,8 @@ class WoocommerceGpfFrontend {
 		$feed_item->sale_price_inc_tax    = $prices->sale_price_inc_tax;
 		$feed_item->price_inc_tax         = $prices->price_inc_tax;
 		$feed_item->price_ex_tax          = $prices->price_ex_tax;
+		$feed_item->sale_price_start_date = $prices->sale_price_start_date;
+		$feed_item->sale_price_end_date   = $prices->sale_price_end_date;
 	}
 
 	/**
@@ -149,6 +151,8 @@ class WoocommerceGpfFrontend {
 		$prices->sale_price_inc_tax    = null;
 		$prices->regular_price_ex_tax  = null;
 		$prices->regular_price_inc_tax = null;
+		$prices->sale_price_start_date = null;
+		$prices->sale_price_end_date   = null;
 
 		// Grab the regular price of the base product.
 		$regular_price                 = $woocommerce_product->get_regular_price();
@@ -158,10 +162,12 @@ class WoocommerceGpfFrontend {
 		}
 
 		// Grab the sale price of the base product.
-		$sale_price                    = $woocommerce_product->get_sale_price();
+		$sale_price                        = $woocommerce_product->get_sale_price();
 		if ( $sale_price != '' ) {
-			$prices->sale_price_ex_tax  = $woocommerce_product->get_price_excluding_tax( 1, $sale_price );
-			$prices->sale_price_inc_tax = $woocommerce_product->get_price_including_tax( 1, $sale_price );
+			$prices->sale_price_ex_tax     = $woocommerce_product->get_price_excluding_tax( 1, $sale_price );
+			$prices->sale_price_inc_tax    = $woocommerce_product->get_price_including_tax( 1, $sale_price );
+			$prices->sale_price_start_date = $woocommerce_product->sale_price_dates_from;
+			$prices->sale_price_end_date   = $woocommerce_product->sale_price_dates_to;
 		}
 
 		// Populate a "price", using the sale price if there is one, the actual price if not.

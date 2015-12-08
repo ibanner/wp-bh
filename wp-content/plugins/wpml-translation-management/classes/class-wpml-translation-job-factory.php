@@ -40,7 +40,7 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 			$iclTranslationManagement->send_jobs( $dummy_basket_data );
 		}
 
-		return $iclTranslationManagement->get_translation_job_id( $trid, $target_language_code );
+		return $this->job_id_by_trid_and_lang( $trid, $target_language_code );
 	}
 
 	public function get_translation_jobs_filter( $jobs, $args ) {
@@ -49,19 +49,19 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 	}
 
 	public function get_translation_job_filter( $job_id, $include_non_translatable_elements = false, $revisions = 0 ) {
+
 		return $this->get_translation_job( $job_id, $include_non_translatable_elements, $revisions );
 	}
 
 	/**
-	 * @param  int $job_id
+	 * @param int  $job_id
 	 * @param bool $include_non_translatable_elements
-	 * @param int $revisions
+	 * @param int  $revisions
 	 * @param bool $as_job_instance returns WPML_Element_Translation_Job instead of plain object if true
 	 *
 	 * @return bool|stdClass|WPML_Element_Translation_Job
 	 */
 	public function get_translation_job( $job_id, $include_non_translatable_elements = false, $revisions = 0, $as_job_instance = false ) {
-
 		$job_data = false;
 		$job      = $this->retrieve_job_data( $job_id );
 		if ( (bool) $job !== false ) {
@@ -74,6 +74,33 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 		}
 
 		return $job_data;
+	}
+
+	/**
+	 * @param int $translation_id
+	 *
+	 * @return bool|stdClass|WPML_Element_Translation_Job
+	 */
+	public function job_by_translation_id( $translation_id ) {
+		$row = $this->wpdb->get_row(
+			$this->wpdb->prepare(
+				"SELECT trid, language_code
+				FROM {$this->wpdb->prefix}icl_translations
+				WHERE translation_id = %d
+				LIMIT 1",
+				$translation_id ) );
+
+		return $row
+			? $this->get_translation_job(
+				$this->job_id_by_trid_and_lang(
+					$row->trid, $row->language_code ), false, 0, true )
+			: 0;
+	}
+
+	public function job_id_by_trid_and_lang( $trid, $target_language_code ) {
+		global $iclTranslationManagement;
+
+		return $iclTranslationManagement->get_translation_job_id( $trid, $target_language_code );
 	}
 
 	public function get_translation_jobs( array $args = array(), $only_ids = false, $as_job_instances = false ) {
@@ -116,7 +143,7 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 
 			if ( $doc ) {
 				$element_language_details = $sitepress->get_element_language_details( $post_id,
-																					  $job->original_post_type );
+					$job->original_post_type );
 				$language_from_code       = $element_language_details->language_code;
 				$edit_url                 = get_edit_post_link( $doc->ID );
 
@@ -127,9 +154,9 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 				} else {
 					$post_title = $doc->post_title;
 					$edit_url   = apply_filters( 'wpml_document_edit_item_url',
-												 $edit_url,
-												 $job->original_post_type,
-												 $doc->ID );
+						$edit_url,
+						$job->original_post_type,
+						$doc->ID );
 				}
 				$ldf                                      = $sitepress->get_language_details( $language_from_code );
 				$jobs[ $job_index ]->original_doc_id      = $doc->ID;
@@ -201,7 +228,6 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 	}
 
 	public function get_translation_job_types_filter( $value, $args ) {
-
 		global $wpdb, $sitepress;
 
 		$where     = $this->build_where_clause( $args );
@@ -235,7 +261,7 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 			}
 
 			$output[ $job_type->element_type_prefix . '_' . $type ] = array_key_exists( $type, $post_types )
-					? $post_types[ $type ]->labels->singular_name : $name;
+				? $post_types[ $type ]->labels->singular_name : $name;
 		}
 
 		return $output;
@@ -302,7 +328,7 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 													  AND t.field_type = 'title'
 													  LIMIT 1
 													  ",
-														  $job_id ) );
+			$job_id ) );
 
 		$post_title = $title_and_name !== null ? base64_decode( $title_and_name->name ? $title_and_name->name : $title_and_name->title ) : '';
 		$post_title = apply_filters( 'wpml_tm_external_translation_job_title', $post_title, $post_id );

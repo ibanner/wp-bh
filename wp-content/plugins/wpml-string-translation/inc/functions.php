@@ -172,13 +172,6 @@ function icl_st_init(){
         exit(0);
     }
     
-    // handle string translation request
-    elseif ( isset( $_POST[ 'icl_st_action' ] ) && $_POST[ 'icl_st_action' ] == 'send_strings' ) {
-
-        add_action( 'init', 'icl_send_strings_action' );
-    }
-    
-    
     // hook into blog title and tag line    
     add_filter('option_blogname', 'icl_sw_filters_blogname');
     add_filter('option_blogdescription', 'icl_sw_filters_blogdescription');        
@@ -216,24 +209,6 @@ function icl_st_init(){
     add_filter('get_the_author_nickname', 'icl_st_author_nickname_filter', 10, 2);
     add_filter('get_the_author_description', 'icl_st_author_description_filter', 10, 2);
     add_filter('the_author', 'icl_st_author_displayname_filter', 10);
-    
-}
-
-function icl_send_strings_action( ) {
-    if ( wp_verify_nonce(
-        filter_input( INPUT_POST, 'iclnonce', FILTER_SANITIZE_STRING ),
-        'icl-string-translation'
-    ) ) {
-        $_POST        = stripslashes_deep( $_POST );
-        $string_ids   = explode( ',', $_POST[ 'strings' ] );
-        $translate_to = array();
-        foreach ( $_POST[ 'translate_to' ] as $lang_to => $one ) {
-            $translate_to[ $lang_to ] = $lang_to;
-        }
-        if ( ! empty( $translate_to ) ) {
-            TranslationProxy_Basket::add_strings_to_basket($string_ids, $_POST[ 'icl-tr-from' ], $translate_to);
-        }
-    }
     
 }
 

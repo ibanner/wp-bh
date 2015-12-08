@@ -115,10 +115,11 @@ class WoocommerceGpfCommon {
 			),
 
 			'size' => array(
-				'desc'       => __( 'Size', 'woocommerce_gpf' ),
-				'full_desc'  => __( 'Size of the items', 'woocommerce_gpf' ),
-				'feed_types' => array( 'google' ),
-				'google_len' => 100,
+				'desc'            => __( 'Size', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'Size of the items', 'woocommerce_gpf' ),
+				'feed_types'      => array( 'google' ),
+				'can_prepopulate' => true,
+				'google_len'      => 100,
 			),
 
 			'size_type' => array(
