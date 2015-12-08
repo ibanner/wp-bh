@@ -1,29 +1,16 @@
 <?php
 /**
- * Advanced Custom Fields configuration
+ * ACF Field Groups
  *
  * @author 		Beit Hatfutsot
- * @package 	bh/functions
+ * @package 	bh/functions/acf
  * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Create options sub pages
- */
-
-if ( function_exists('acf_add_options_sub_page') ) {
-
-	acf_add_options_sub_page('Header/Footer');
-	acf_add_options_sub_page('Contact Details');
-	acf_add_options_sub_page('General');
-	acf_add_options_sub_page('Shop');
-
-}
-
-/**
- * ACF register field groups - used for backup
+ * ACF register field groups
  * 
  * @fieldgroup	Main Template
  * @fieldgroup	Content Page Template
@@ -40,7 +27,6 @@ if ( function_exists('acf_add_options_sub_page') ) {
  * @fieldgroup	General Options
  * @fieldgroup	Shop Options
  */
-/*
 if( function_exists('acf_add_local_field_group') ):
 
 acf_add_local_field_group(array (
@@ -65,7 +51,62 @@ acf_add_local_field_group(array (
 			'max' => '',
 			'layouts' => array (
 				array (
-					'key' => '558fb00a1dc5c',
+					'key' => '561e5930bdc61',
+					'name' => 'strip',
+					'label' => 'Strip',
+					'display' => 'row',
+					'sub_fields' => array (
+						array (
+							'key' => 'field_561e5983bdc68',
+							'label' => 'Image',
+							'name' => 'image',
+							'type' => 'image',
+							'instructions' => 'Image dimensions: 1140x114px',
+							'required' => 1,
+							'conditional_logic' => 0,
+							'wrapper' => array (
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'return_format' => 'array',
+							'preview_size' => 'thumbnail',
+							'library' => 'all',
+							'min_width' => 1140,
+							'min_height' => 114,
+							'min_size' => '',
+							'max_width' => 1140,
+							'max_height' => 114,
+							'max_size' => '',
+							'mime_types' => '',
+						),
+						array (
+							'key' => 'field_561e5a38bdc69',
+							'label' => 'Link',
+							'name' => 'link',
+							'type' => 'text',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array (
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'default_value' => '',
+							'placeholder' => 'http://',
+							'prepend' => '',
+							'append' => '',
+							'maxlength' => '',
+							'readonly' => 0,
+							'disabled' => 0,
+						),
+					),
+					'min' => '',
+					'max' => '',
+				),
+				array (
+					'key' => '56675b47ef0ad',
 					'name' => 'banner',
 					'label' => 'Banner',
 					'display' => 'row',
@@ -75,13 +116,13 @@ acf_add_local_field_group(array (
 					'max' => 1,
 				),
 				array (
-					'key' => '558fb00a1e053',
+					'key' => '56675b40ef0aa',
 					'name' => 'slider',
 					'label' => 'Slider',
 					'display' => 'row',
 					'sub_fields' => array (
 						array (
-							'key' => 'field_533d36598e076',
+							'key' => 'field_56675b40ef0ab',
 							'label' => 'Layout Title',
 							'name' => 'layout_title',
 							'type' => 'text',
@@ -97,13 +138,12 @@ acf_add_local_field_group(array (
 							'placeholder' => '',
 							'prepend' => '',
 							'append' => '',
-							'formatting' => 'none',
 							'maxlength' => '',
 							'readonly' => 0,
 							'disabled' => 0,
 						),
 						array (
-							'key' => 'field_533d368b8e077',
+							'key' => 'field_56675b40ef0ac',
 							'label' => 'Sort Title',
 							'name' => 'sort_title',
 							'type' => 'text',
@@ -119,7 +159,6 @@ acf_add_local_field_group(array (
 							'placeholder' => '',
 							'prepend' => '',
 							'append' => '',
-							'formatting' => 'none',
 							'maxlength' => '',
 							'readonly' => 0,
 							'disabled' => 0,
@@ -129,13 +168,13 @@ acf_add_local_field_group(array (
 					'max' => 1,
 				),
 				array (
-					'key' => '558fb00a40e09',
+					'key' => '56675ac3ea0f0',
 					'name' => 'featured_links',
 					'label' => 'Featured Links',
 					'display' => 'row',
 					'sub_fields' => array (
 						array (
-							'key' => 'field_533d374f8e079',
+							'key' => 'field_56675c4befa6a',
 							'label' => 'Links',
 							'name' => 'links',
 							'type' => 'repeater',
@@ -147,15 +186,14 @@ acf_add_local_field_group(array (
 								'class' => '',
 								'id' => '',
 							),
-							'row_min' => '',
-							'row_limit' => '',
-							'layout' => 'row',
+							'collapsed' => '',
+							'min' => '',
+							'max' => '',
+							'layout' => 'table',
 							'button_label' => 'Add Featured Link',
-							'min' => 0,
-							'max' => 0,
 							'sub_fields' => array (
 								array (
-									'key' => 'field_533d37f98e07b',
+									'key' => 'field_56675c4cefa6c',
 									'label' => 'Title',
 									'name' => 'title',
 									'type' => 'text',
@@ -171,13 +209,12 @@ acf_add_local_field_group(array (
 									'placeholder' => '',
 									'prepend' => '',
 									'append' => '',
-									'formatting' => 'none',
 									'maxlength' => '',
 									'readonly' => 0,
 									'disabled' => 0,
 								),
 								array (
-									'key' => 'field_533d38128e07c',
+									'key' => 'field_56675c4cefa6e',
 									'label' => 'Description',
 									'name' => 'description',
 									'type' => 'textarea',
@@ -198,7 +235,7 @@ acf_add_local_field_group(array (
 									'disabled' => 0,
 								),
 								array (
-									'key' => 'field_533d389d8e07d',
+									'key' => 'field_56675c4cefa70',
 									'label' => 'Image',
 									'name' => 'image',
 									'type' => 'image',
@@ -210,19 +247,19 @@ acf_add_local_field_group(array (
 										'class' => '',
 										'id' => '',
 									),
+									'return_format' => 'array',
 									'preview_size' => 'thumbnail',
 									'library' => 'all',
-									'return_format' => 'array',
-									'min_width' => 0,
-									'min_height' => 0,
-									'min_size' => 0,
-									'max_width' => 0,
-									'max_height' => 0,
-									'max_size' => 0,
+									'min_width' => '',
+									'min_height' => '',
+									'min_size' => '',
+									'max_width' => '',
+									'max_height' => '',
+									'max_size' => '',
 									'mime_types' => '',
 								),
 								array (
-									'key' => 'field_533d39278e07e',
+									'key' => 'field_56675c4cefa72',
 									'label' => 'Internal Link',
 									'name' => 'internal_link',
 									'type' => 'page_link',
@@ -239,13 +276,13 @@ acf_add_local_field_group(array (
 										1 => 'page',
 										2 => 'event',
 									),
-									'allow_null' => 1,
-									'multiple' => 0,
 									'taxonomy' => array (
 									),
+									'allow_null' => 1,
+									'multiple' => 0,
 								),
 								array (
-									'key' => 'field_533d399a8e07f',
+									'key' => 'field_56675c4cefa74',
 									'label' => 'External Link',
 									'name' => 'external_link',
 									'type' => 'text',
@@ -261,7 +298,6 @@ acf_add_local_field_group(array (
 									'placeholder' => 'http://',
 									'prepend' => '',
 									'append' => '',
-									'formatting' => 'html',
 									'maxlength' => '',
 									'readonly' => 0,
 									'disabled' => 0,
@@ -414,6 +450,7 @@ acf_add_local_field_group(array (
 									'tabs' => 'all',
 								),
 							),
+							'collapsed' => '',
 						),
 					),
 					'min' => '',
@@ -486,6 +523,7 @@ acf_add_local_field_group(array (
 									'tabs' => 'all',
 								),
 							),
+							'collapsed' => '',
 						),
 					),
 					'min' => '',
@@ -582,6 +620,7 @@ acf_add_local_field_group(array (
 									'tabs' => 'all',
 								),
 							),
+							'collapsed' => '',
 						),
 					),
 					'min' => '',
@@ -719,6 +758,7 @@ acf_add_local_field_group(array (
 									'disabled' => 0,
 								),
 							),
+							'collapsed' => '',
 						),
 					),
 					'min' => '',
@@ -836,6 +876,7 @@ acf_add_local_field_group(array (
 									),
 								),
 							),
+							'collapsed' => '',
 						),
 					),
 					'min' => '',
@@ -1001,6 +1042,7 @@ acf_add_local_field_group(array (
 									'disabled' => 0,
 								),
 							),
+							'collapsed' => '',
 						),
 					),
 					'min' => '',
@@ -1565,6 +1607,7 @@ Image dimensions: 380x380px',
 					'disabled' => 0,
 				),
 			),
+			'collapsed' => '',
 		),
 		array (
 			'key' => 'field_533b07e11cdbe',
@@ -1814,6 +1857,54 @@ acf_add_local_field_group(array (
 	'title' => 'Product Category Attributes',
 	'fields' => array (
 		array (
+			'key' => 'field_564480553512d',
+			'label' => 'Menu Icon',
+			'name' => 'acf-product-category-menu_icon',
+			'type' => 'image',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'url',
+			'preview_size' => 'thumbnail',
+			'library' => 'all',
+			'min_width' => '',
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array (
+			'key' => 'field_5644809c3512e',
+			'label' => 'Shop Homepage Menu Icon',
+			'name' => 'acf-product-category-shop_homepage_menu_icon',
+			'type' => 'image',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'url',
+			'preview_size' => 'thumbnail',
+			'library' => 'all',
+			'min_width' => '',
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array (
 			'key' => 'field_549fc9e8ba260',
 			'label' => 'Banner Title',
 			'name' => 'acf-product-category-banner_title',
@@ -1875,11 +1966,9 @@ acf_add_local_field_group(array (
 	'style' => 'default',
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
-	'hide_on_screen' => array (
-	),
+	'hide_on_screen' => '',
 	'active' => 1,
 	'description' => '',
-	'old_ID' => 6976,
 ));
 
 acf_add_local_field_group(array (
@@ -2042,6 +2131,7 @@ acf_add_local_field_group(array (
 					'disabled' => 0,
 				),
 			),
+			'collapsed' => '',
 		),
 	),
 	'location' => array (
@@ -2187,6 +2277,7 @@ acf_add_local_field_group(array (
 									'disabled' => 0,
 								),
 							),
+							'collapsed' => '',
 						),
 					),
 					'min' => 0,
@@ -2283,6 +2374,7 @@ acf_add_local_field_group(array (
 									'tabs' => 'all',
 								),
 							),
+							'collapsed' => '',
 						),
 					),
 					'min' => 0,
@@ -2533,6 +2625,7 @@ acf_add_local_field_group(array (
 					'disabled' => 0,
 				),
 			),
+			'collapsed' => '',
 		),
 		array (
 			'key' => 'field_55dae39fe4355',
@@ -2718,6 +2811,7 @@ acf_add_local_field_group(array (
 					'disabled' => 0,
 				),
 			),
+			'collapsed' => '',
 		),
 		array (
 			'key' => 'field_55dae457e4359',
@@ -3024,6 +3118,7 @@ acf_add_local_field_group(array (
 					'disabled' => 0,
 				),
 			),
+			'collapsed' => '',
 		),
 		array (
 			'key' => 'field_5613733f33b56',
@@ -3102,6 +3197,7 @@ acf_add_local_field_group(array (
 					'disabled' => 0,
 				),
 			),
+			'collapsed' => '',
 		),
 	),
 	'location' => array (
@@ -3557,6 +3653,7 @@ acf_add_local_field_group(array (
 									'default_value' => '#000000',
 								),
 							),
+							'collapsed' => '',
 						),
 						array (
 							'key' => 'field_536885e46523a',
@@ -3851,6 +3948,7 @@ acf_add_local_field_group(array (
 					'readonly' => 0,
 				),
 			),
+			'collapsed' => '',
 		),
 		array (
 			'key' => 'field_558fb0e276d6a',
@@ -4497,7 +4595,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'placement' => 'top',
+			'placement' => 'left',
 			'endpoint' => 0,
 		),
 		array (
@@ -4507,10 +4605,10 @@ acf_add_local_field_group(array (
 			'type' => 'repeater',
 			'instructions' => '<p>Image dimensions:</p>
 
-<div>Image #01: 704x360px</div>
-<div>Image #02: 424x360px</div>
-<div>Image #03: 424x360px</div>
-<div>Image #04: 704x360px</div>',
+<div>Image #01: 493x633px</div>
+<div>Image #02: 627x633px</div>
+<div>Image #03: 627x633px</div>
+<div>Image #04: 399x633px</div>',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -4518,12 +4616,10 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'row_min' => 4,
-			'row_limit' => 4,
+			'min' => '',
+			'max' => '',
 			'layout' => 'row',
 			'button_label' => 'Add Banner',
-			'min' => 0,
-			'max' => 0,
 			'sub_fields' => array (
 				array (
 					'key' => 'field_558fd6c414fc8',
@@ -4733,6 +4829,187 @@ acf_add_local_field_group(array (
 					'disabled' => 0,
 				),
 			),
+			'collapsed' => '',
+		),
+		array (
+			'key' => 'field_56447e801dda7',
+			'label' => 'Homepage Categories Menu',
+			'name' => '',
+			'type' => 'tab',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'placement' => 'left',
+			'endpoint' => 0,
+		),
+		array (
+			'key' => 'field_56447eab1dda8',
+			'label' => 'Include Categories',
+			'name' => 'acf-options_shop_include_categories',
+			'type' => 'taxonomy',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'taxonomy' => 'product_cat',
+			'field_type' => 'checkbox',
+			'allow_null' => 0,
+			'add_term' => 0,
+			'save_terms' => 0,
+			'load_terms' => 0,
+			'return_format' => 'object',
+			'multiple' => 0,
+		),
+		array (
+			'key' => 'field_5644b659d9492',
+			'label' => 'Show Manual Item',
+			'name' => 'acf-options_shop_show_manual_item',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 1,
+		),
+		array (
+			'key' => 'field_5644b6eed9493',
+			'label' => 'Manual Item Title',
+			'name' => 'acf-options_shop_manual_item_title',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_5644b659d9492',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+			'readonly' => 0,
+			'disabled' => 0,
+		),
+		array (
+			'key' => 'field_5644b715d9494',
+			'label' => 'Manual Item Subtext',
+			'name' => 'acf-options_shop_manual_item_subtext',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_5644b659d9492',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+			'readonly' => 0,
+			'disabled' => 0,
+		),
+		array (
+			'key' => 'field_5644b767d9495',
+			'label' => 'Manual Item Link',
+			'name' => 'acf-options_shop_manual_item_link',
+			'type' => 'post_object',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => array (
+				array (
+					array (
+						'field' => 'field_5644b659d9492',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'post_type' => array (
+				0 => 'page',
+			),
+			'taxonomy' => array (
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'return_format' => 'id',
+			'ui' => 1,
+		),
+		array (
+			'key' => 'field_56487e0b19e07',
+			'label' => 'Homepage Featured Products',
+			'name' => '',
+			'type' => 'tab',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'placement' => 'left',
+			'endpoint' => 0,
+		),
+		array (
+			'key' => 'field_56487ef419e08',
+			'label' => 'Featured Products Title',
+			'name' => 'acf-options_shop_featured_products_title',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+			'readonly' => 0,
+			'disabled' => 0,
 		),
 		array (
 			'key' => 'field_54ae437133895',
@@ -4747,7 +5024,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'placement' => 'top',
+			'placement' => 'left',
 			'endpoint' => 0,
 		),
 		array (
@@ -4817,6 +5094,7 @@ acf_add_local_field_group(array (
 					),
 				),
 			),
+			'collapsed' => '',
 		),
 		array (
 			'key' => 'field_548d4f4a0945d',
@@ -4831,7 +5109,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'placement' => 'top',
+			'placement' => 'left',
 			'endpoint' => 0,
 		),
 		array (
@@ -4894,7 +5172,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'placement' => 'top',
+			'placement' => 'left',
 			'endpoint' => 0,
 		),
 		array (
@@ -4946,6 +5224,85 @@ acf_add_local_field_group(array (
 			'mime_types' => '',
 		),
 		array (
+			'key' => 'field_56667ef86eb5a',
+			'label' => 'Pelecard',
+			'name' => '',
+			'type' => 'tab',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'placement' => 'left',
+			'endpoint' => 0,
+		),
+		array (
+			'key' => 'field_56667f106eb5b',
+			'label' => 'User',
+			'name' => 'acf-options_pelecard_user',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+			'readonly' => 0,
+			'disabled' => 0,
+		),
+		array (
+			'key' => 'field_56667f4f6eb5c',
+			'label' => 'Password',
+			'name' => 'acf-options_pelecard_password',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+			'readonly' => 0,
+			'disabled' => 0,
+		),
+		array (
+			'key' => 'field_56667f846eb5d',
+			'label' => 'Terminal',
+			'name' => 'acf-options_pelecard_terminal',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+			'readonly' => 0,
+			'disabled' => 0,
+		),
+		array (
 			'key' => 'field_5565d2376c4db',
 			'label' => 'iCount',
 			'name' => '',
@@ -4958,7 +5315,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'placement' => 'top',
+			'placement' => 'left',
 			'endpoint' => 0,
 		),
 		array (
@@ -5062,7 +5419,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'placement' => 'top',
+			'placement' => 'left',
 			'endpoint' => 0,
 		),
 		array (
@@ -5107,57 +5464,3 @@ acf_add_local_field_group(array (
 ));
 
 endif;
-*/
-
-/**
- * Add custom admin columns
- */
-
-// add columns to post subpannel
-function event_subpannel_columns($columns) {
-	$event_columns = array(
-		'start_date'	=> 'Start Date',
-		'end_date'		=> 'End Date',
-		'banner_ind'	=> 'Homepage Banner',
-		'slider_ind'	=> 'Homepage Slider'
-	);
-	$columns = array_merge(
-		array_slice($columns, 0, -1),	// before
-		$event_columns,					// inserted
-		array_slice($columns, -1)		// after
-	);
-
-	return $columns;
-}
-add_filter('manage_event_posts_columns', 'event_subpannel_columns');
-
-// add columns values to post subpannel
-function event_subpannel_columns_values($columns, $post_id) {
-	global $post;
-	
-	if ($columns == 'start_date') {
-		$start_date = get_field('acf-event_start_date', $post->ID);
-		echo ($start_date) ? date( 'd/m/Y', strtotime($start_date) ) : '';
-	}
-	else if ($columns == 'end_date') {
-		$end_date = get_field('acf-event_end_date', $post->ID);
-		echo ($end_date) ? date( 'd/m/Y', strtotime($end_date) ) : '';
-	}
-	else if ($columns == 'banner_ind') {
-		$banner_ind = get_field('acf-event_homepage_banner_indicator', $post->ID);
-		echo ($banner_ind) ? 'Show' : '';
-	}
-	else if ($columns == 'slider_ind') {
-		$slider_ind = get_field('acf-event_homepage_slider_indicator', $post->ID);
-		echo ($slider_ind) ? 'Show' : '';
-	}
-}
-add_action('manage_event_posts_custom_column', 'event_subpannel_columns_values', 10, 2);
-
-/**********************************/
-/* transient support action hooks */
-/**********************************/
-
-if ( function_exists('BH_acf_save_options') ) {
-	add_action('acf/save_post', 'BH_acf_save_options', 20);
-}
