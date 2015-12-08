@@ -1,5 +1,14 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2015.12.02 - version 5.2.1
+* Add sale price effective dates to the Google Inventory feed.
+
+2015.12.01 - version 5.2
+* Support for sale price effective dates.
+* Fix issues with multibyte strings getting truncated mid-character
+* Allow size to be prepopulated from attributes (15 seconds ago) <Lee Willis>
+* Change to the base URL indicated in the feed.
+
 2015.09.20 - version 5.1
 * Fix markup error in admin area
 * Increase feed generation performance

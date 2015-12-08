@@ -5,7 +5,7 @@ Plugin URI: https://wpml.org/
 Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-3-3/">WPML 3.3 release notes</a>
 Author: OnTheGoSystems
 Author URI: http://www.onthegosystems.com/
-Version: 3.3
+Version: 3.3.1
 Plugin Slug: sitepress-multilingual-cms
 */
 
@@ -14,7 +14,7 @@ if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You 
 if ( defined( 'ICL_SITEPRESS_VERSION' ) || (bool) get_option( '_wpml_inactive' ) === true ) {
 	return;
 }
-define( 'ICL_SITEPRESS_VERSION', '3.3' );
+define( 'ICL_SITEPRESS_VERSION', '3.3.1' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -142,7 +142,9 @@ if ( ! wp_next_scheduled( 'update_wpml_config_index' ) ) {
 	wp_schedule_event( time(), 'daily', 'update_wpml_config_index' );
 }
 /** @var WPML_Post_Translation $wpml_post_translations */
-global $sitepress, $wpdb, $wpml_url_filters, $wpml_post_translations, $wpml_url_converter, $wpml_language_resolution, $wpml_slug_filter;
+global $sitepress, $wpdb, $wpml_url_filters, $wpml_post_translations,
+       $wpml_term_translations, $wpml_url_converter, $wpml_language_resolution,
+       $wpml_slug_filter;
 
 $sitepress        = new SitePress();
 

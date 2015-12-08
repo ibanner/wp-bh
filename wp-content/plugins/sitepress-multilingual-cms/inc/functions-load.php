@@ -388,3 +388,14 @@ function wpml_load_term_filters() {
 
 	return $wpml_term_filters_general;
 }
+
+function wpml_show_user_options() {
+	global $sitepress, $current_user;
+
+	$user_options_menu = new WPML_User_Options_Menu( $sitepress, $current_user );
+	echo $user_options_menu->render();
+}
+
+if ( is_admin() ) {
+	add_action( 'show_user_profile', 'wpml_show_user_options' );
+}

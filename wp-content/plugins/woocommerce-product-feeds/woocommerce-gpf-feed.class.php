@@ -23,7 +23,7 @@ abstract class WoocommerceGpfFeed {
 
 		$this->store_info = new stdClass();
 		$this->store_info->site_url = home_url( '/' );
-		$this->store_info->feed_url_base = home_url( '/index.php?action=woocommerce_gpf' );
+		$this->store_info->feed_url_base = home_url( '/' );
 		$this->store_info->blog_name = get_option( 'blogname' );
 		$this->store_info->currency = get_option( 'woocommerce_currency' );
 		$this->store_info->weight_units = get_option( 'woocommerce_weight_unit' );

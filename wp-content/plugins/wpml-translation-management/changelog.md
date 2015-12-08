@@ -1,3 +1,14 @@
+#2.1.1
+
+##Fixes
+* [wpmlst-668] Fix message in dashboard about missing slug translations
+* [wpmltm-970] Fix issue with message for missing php settings/extensions not hiding
+* [wpmltm-959] Escape html in Post titles under the Translation jobs page
+* [wpmltm-1008] Fixed an issue causing users that were translators but did not have administrator capabilities to not be able to access Translation Management functionality on sites that were set to only have hidden secondary languages.
+
+##Performances
+* [wpmltm-963] Calculation of words count is now done through multiple AJAX calls and with proper progress feedback
+
 #2.1
 
 #Features

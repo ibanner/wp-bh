@@ -1,3 +1,14 @@
+#2.3.2
+
+##Fixes
+* [wpmlst-668] Removed the wrongly shown "Products slugs are set to be translated, but they are missing their translation" message
+* [wpmlst-676] Resolved the "Fatal error: Class 'WPML_WPDB_User' not found" message when deactivating WPML-Core with WPML-ST still active
+* [wpmltm-959] Escape html in Post titles displayed in admin messages
+* [wpmlst-478] Fixed nested wildcards for setting admin options translatable were not working
+* [wpmlst-681] Fix warning in Layouts if there are no languages to translate to
+* [wpmltm-972] Improved the repairing of broken database states implemented for Translation Polling, to cover more cases
+* [wpmltm-992] Disabled admin notice about missing PHP required setting, when not in a WPML page, and if the `ICL_HIDE_TRANSLATION_SERVICES` constant is not set to true. Also added the ability to hide that notice.
+
 #2.3.1
 
 ##Performances

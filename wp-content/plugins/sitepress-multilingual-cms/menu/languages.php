@@ -206,11 +206,21 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                         <?php endif; ?>
                         <div id="icl_avail_languages_picker" class="<?php if( !empty( $setup_complete ) ) echo 'hidden'; ?>">
                             <ul class="available-languages">
-                            <?php foreach($languages as $lang): ?>
-                                <li><label><input type="checkbox" value="<?php echo $lang['code'] ?>" <?php if($lang['active']):?>checked="checked"<?php endif;?>
-                                <?php if($default_language ==$lang['code']):?>disabled="disabled"<?php endif;?>/>
-                                    <?php if($lang['major']):?><strong><?php endif;?><?php echo $lang['display_name'] ?><?php if($lang['major']):?></strong><?php endif;?></label></li>
-                            <?php endforeach ?>
+                                <?php
+                                foreach ( $languages as $lang ) {
+                                    $checked  = checked( '1', $lang['active'], false );
+                                    $disabled = disabled( $default_language, $lang['code'], false );
+                                    ?>
+                                    <li><label><input type="checkbox" value="<?php echo $lang['code'] ?>"
+                                                <?php echo $checked; ?>
+                                                <?php echo $disabled; ?>
+                                            />
+                                            <?php if ( $lang['major'] ): ?><strong><?php endif;
+                                                ?><?php echo $lang['display_name'] ?><?php if ( $lang['major'] ): ?></strong><?php endif;
+                                        ?></label></li>
+                                    <?php
+                                }
+                                ?>
                             </ul>
                             <?php if(!empty( $setup_complete )): ?>
                             <p class="buttons-wrap">

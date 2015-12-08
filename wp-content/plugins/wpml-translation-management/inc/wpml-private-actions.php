@@ -13,8 +13,10 @@ function wpml_tm_save_job_fields_from_post( $job_id ) {
 add_action( 'wpml_save_job_fields_from_post', 'wpml_tm_save_job_fields_from_post', 10, 1 );
 
 function wpml_tm_save_data( $data ) {
+	global $wpdb;
 
-	$save_data_action = new WPML_Save_Translation_Data_Action( $data );
+	$wpml_tm_records  = new WPML_TM_Records( $wpdb );
+	$save_data_action = new WPML_Save_Translation_Data_Action( $data, $wpml_tm_records );
 	$save_data_action->save_translation();
 	$redirect_target = $save_data_action->get_redirect_target();
 	if ( (bool) $redirect_target === true ) {
@@ -71,3 +73,24 @@ function wpml_tm_assign_translation_job( $job_id, $translator_id, $service = 'lo
 }
 
 add_action( 'wpml_tm_assign_translation_job', 'wpml_tm_assign_translation_job', 10, 4 );
+
+/**
+ * Potentially handles the request to add strings to the translation basket,
+ * triggered by String Translation.
+ */
+function wpml_tm_add_strings_to_basket() {
+	if ( isset( $_POST['icl_st_action'] )
+	     && $_POST['icl_st_action'] === 'send_strings'
+	     && wpml_is_action_authenticated( 'icl-string-translation' )
+	) {
+		global $wpdb;
+
+		$basket_instance    = new WPML_Translation_Basket( $wpdb );
+		$st_request_handler = new WPML_TM_String_Basket_Request( $basket_instance );
+		$st_request_handler->send_to_basket( $_POST );
+	}
+}
+
+if ( is_admin() ) {
+	add_action( 'init', 'wpml_tm_add_strings_to_basket' );
+}

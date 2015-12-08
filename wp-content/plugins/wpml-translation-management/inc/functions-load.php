@@ -101,6 +101,19 @@ function wpml_tm_load_tm_dashboard_ajax(){
 	return $wpml_tm_dashboard_ajax;
 }
 
+/**
+ * @return WPML_Translation_Job_Factory
+ */
+function wpml_tm_load_job_factory() {
+	global $wpml_translation_job_factory, $wpdb;
+
+	if ( ! isset( $wpml_translation_job_factory ) ) {
+		$wpml_translation_job_factory = new WPML_Translation_Job_Factory( $wpdb );
+	}
+
+	return $wpml_translation_job_factory;
+}
+
 if ( defined( 'DOING_AJAX' ) ) {
     $wpml_tm_dashboard_ajax = wpml_tm_load_tm_dashboard_ajax();
     add_action( 'init', array( $wpml_tm_dashboard_ajax, 'init_ajax_actions' ) );
@@ -112,33 +125,55 @@ if ( defined( 'DOING_AJAX' ) ) {
 }
 
 function tm_after_load() {
-	require WPML_TM_PATH . '/inc/actions/wpml-tm-action-helper.class.php';
-	require WPML_TM_PATH . '/inc/translation-jobs/collections/wpml-abstract-job-collection.class.php';
-	require WPML_TM_PATH . '/inc/translation-proxy/wpml-translation-basket.class.php';
-	require WPML_TM_PATH . '/inc/translation-jobs/wpml-translation-batch.class.php';
-	require WPML_TM_PATH . '/inc/translation-jobs/wpml-translation-job-factory.class.php';
-	require WPML_TM_PATH . '/inc/translation-proxy/translationproxy.class.php';
-	require WPML_TM_PATH . '/inc/ajax.php';
+	global $wpml_tm_translation_status;
 
-	global $wpml_translation_job_factory, $wpdb, $wpml_tm_translation_status;
-	$wpml_translation_job_factory = new WPML_Translation_Job_Factory( $wpdb );
-	wpml_tm_init_mail_notifications();
-	wpml_tm_load_element_translations();
-	$wpml_tm_translation_status = new WPML_TM_Translation_Status();
-	$wpml_tm_translation_status->init();
-	add_action( 'wpml_pre_status_icon_display', 'wpml_tm_load_status_display_filter' );
-	require WPML_TM_PATH . '/inc/wpml-private-actions.php';
+	if ( ! isset( $wpml_tm_translation_status ) ) {
+		require WPML_TM_PATH . '/inc/actions/wpml-tm-action-helper.class.php';
+		require WPML_TM_PATH . '/inc/translation-jobs/collections/wpml-abstract-job-collection.class.php';
+		require WPML_TM_PATH . '/inc/translation-proxy/wpml-translation-basket.class.php';
+		require WPML_TM_PATH . '/inc/translation-jobs/wpml-translation-batch.class.php';
+		require WPML_TM_PATH . '/inc/translation-proxy/translationproxy.class.php';
+		require WPML_TM_PATH . '/inc/ajax.php';
+		wpml_tm_load_job_factory();
+		wpml_tm_init_mail_notifications();
+		wpml_tm_load_element_translations();
+		$wpml_tm_translation_status = new WPML_TM_Translation_Status();
+		$wpml_tm_translation_status->init();
+		add_action( 'wpml_pre_status_icon_display', 'wpml_tm_load_status_display_filter' );
+		require WPML_TM_PATH . '/inc/wpml-private-actions.php';
+	}
 }
 
 function wpml_tm_load_dashboard_widget() {
 	if ( is_admin() ) {
 		global $pagenow;
 		if ( $pagenow === 'index.php' ) {
-			global $sitepress, $wpdb;
-			$widget = new WPML_TM_CPT_Dashboard_Widget( $wpdb, $sitepress );
+			global $sitepress, $wpdb, $wp_taxonomies;
+			$widget = new WPML_TM_CPT_Dashboard_Widget( $wpdb, $sitepress, $wp_taxonomies );
 			echo $widget->render();
 		}
 	}
 }
 
 add_action( 'icl_dashboard_widget_notices', 'wpml_tm_load_dashboard_widget' );
+
+/**
+ * @return WPML_TM_Xliff_Frontend
+ */
+function setup_xliff_frontend() {
+	global $sitepress;
+
+	$job_factory    = wpml_tm_load_job_factory();
+	$xliff_frontend = new WPML_TM_Xliff_Frontend( $job_factory, $sitepress );
+	add_action(
+		'init', array( $xliff_frontend, 'init' ),
+		( isset( $_POST['xliff_upload'] ) || ( isset( $_GET['wpml_xliff_action'] ) && $_GET['wpml_xliff_action'] === 'download' ) ) ? 1501 : 10 );
+
+	return $xliff_frontend;
+}
+
+if ( defined( 'WPML_ST_VERSION' ) ) {
+	add_action( 'wpml_st_below_menu', array( 'WPML_Remote_String_Translation', 'display_string_menu' ) );
+	//Todo: [WPML 3.3] this needs to be moved to ST plugin
+	add_action( 'wpml_tm_send_string_jobs', array( 'WPML_Remote_String_Translation', 'send_strings_jobs' ), 10, 5 );
+}
