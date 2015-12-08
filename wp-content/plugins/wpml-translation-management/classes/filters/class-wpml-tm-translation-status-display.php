@@ -87,9 +87,6 @@ class WPML_TM_Translation_Status_Display {
 			'lang_to'        => $lang,
 			'admin_override' => $this->is_current_user_admin(),
 		);
-
-//		$result = apply_filters( 'wpml_is_translator', false, $this->user_id, $args );
-
 		$result = apply_filters( 'wpml_is_translator', false, $this->get_user_id(), $args );
 
 		return $result;

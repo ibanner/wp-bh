@@ -3,10 +3,29 @@
 /**
  * Class WPML_TM_CMS_ID
  */
-class WPML_TM_CMS_ID {
+class WPML_TM_CMS_ID extends WPML_WPDB_User {
 
 	private $cms_id_parts_glue = '_';
 	private $cms_id_parts_fallback_glue = '|||';
+
+	/** @var  WPML_Translation_Job_Factory $tm_job_factory */
+	private $job_factory;
+
+	/** @var WPML_TM_Records $tm_records */
+	private $tm_records;
+
+	/**
+	 * WPML_TM_CMS_ID constructor.
+	 *
+	 * @param wpdb                         $wpdb
+	 * @param WPML_Translation_Job_Factory $job_factory
+	 * @param WPML_TM_Records              $tm_records
+	 */
+	public function __construct( &$wpdb, &$job_factory, &$tm_records ) {
+		parent::__construct( $wpdb );
+		$this->job_factory = &$job_factory;
+		$this->tm_records  = &$tm_records;
+	}
 
 	/**
 	 * @param int    $post_id
@@ -87,28 +106,58 @@ class WPML_TM_CMS_ID {
 		global $wpdb, $wpml_translation_job_factory;
 
 		list( $post_type, $element_id, , $target_lang ) = $this->parse_cms_id( $cms_id );
-		$translation_id = $wpdb->get_var( $wpdb->prepare( "	SELECT t.translation_id
+		$translation = $wpdb->get_row( $wpdb->prepare( "
+													SELECT t.translation_id, j.job_id, t.element_id
 													FROM {$wpdb->prefix}icl_translations t
 													JOIN {$wpdb->prefix}icl_translations o
 														ON o.trid = t.trid
 															AND o.element_type = t.element_type
+													LEFT JOIN {$wpdb->prefix}icl_translation_status st
+														ON st.translation_id = t.translation_id
+													LEFT JOIN {$wpdb->prefix}icl_translate_job j
+														ON j.rid = st.rid
 													WHERE o.element_id=%d
 														AND t.language_code=%s
 														AND o.element_type LIKE %s
 													LIMIT 1",
-				$element_id, $target_lang, '%_' . $post_type ) );
-		if ( ! $translation_id && $translation_service ) {
+			$element_id, $target_lang, '%_' . $post_type ) );
+		$translation_id = $this->maybe_cleanup_broken_row( $translation, $translation_service );
+		if ( $translation_service && ! isset( $translation_id ) && $translation_service ) {
 			$job_id         = $wpml_translation_job_factory->create_local_post_job( $element_id, $target_lang );
 			$job            = $wpml_translation_job_factory->get_translation_job( $job_id, false, false, true );
 			$translation_id = $job ? $job->get_translation_id() : 0;
 			if ( $translation_id ) {
-				$wpdb->update( $wpdb->prefix . 'icl_translation_status',
-					array( 'status' => ICL_TM_IN_PROGRESS, 'translation_service' => $translation_service->id ),
-						array( 'translation_id' => $translation_id ) );
+				$this->tm_records->icl_translation_status_by_translation_id( $translation_id )->update( array(
+					'status'              => ICL_TM_IN_PROGRESS,
+					'translation_service' => $translation_service->id
+				) );
 			}
 		}
 
 		return $translation_id;
+	}
+
+	private function maybe_cleanup_broken_row( $translation, $translation_service ) {
+		global $wpdb;
+
+		if ( $translation
+		     && ( $translation_id = $translation->translation_id )
+		     && ! $translation->element_id
+		     && $translation_service
+		     && ! $translation->job_id
+		) {
+			foreach (
+				array(
+					'icl_translations',
+					'icl_translation_status'
+				) as $table_to_clean
+			) {
+				$wpdb->delete( $wpdb->prefix . $table_to_clean, array( 'translation_id' => $translation_id ) );
+			}
+			$translation_id = null;
+		}
+
+		return isset( $translation_id ) ? $translation_id : null;
 	}
 
 	/**
