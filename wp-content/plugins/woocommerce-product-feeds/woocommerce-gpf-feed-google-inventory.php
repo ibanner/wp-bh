@@ -16,7 +16,7 @@ class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 	 */
 	function __construct() {
 		parent::__construct();
-		$this->store_info->feed_url = add_query_arg( 'feed_format', 'googleinventory', $this->store_info->feed_url_base );
+		$this->store_info->feed_url = add_query_arg( 'woocommerce_gpf', 'googleinventory', $this->store_info->feed_url_base );
 		if ( ! empty( $this->store_info->base_country ) && substr( 'US' == $this->store_info->base_country, 0, 2 ) ) {
 			$this->US_feed = true;
 		} else {
@@ -140,6 +140,18 @@ class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 		}
 		echo '      <g:sale_price>' . $sale_price . ' ' . $this->store_info->currency . "</g:sale_price>\n";
 
+		// Include start / end dates if provided.
+		if ( ! empty( $feed_item->sale_price_start_date ) &&
+			 ! empty( $feed_item->sale_price_end_date ) ) {
+			$offset = get_option( 'gmt_offset' );
+			$offset_string = sprintf( '%+03d', $offset );
+			$offset_string .= sprintf( '%02d', ( $offset - floor( $offset ) ) * 60 );
+
+			$effective_date = date( 'Y-m-d\TH:i', $feed_item->sale_price_start_date ) . $offset_string;
+			$effective_date .= '/';
+			$effective_date .= date( 'Y-m-d\TH:i', $feed_item->sale_price_end_date ) . $offset_string;
+			echo '      <g:sale_price_effective_date>' . $effective_date . '</g:sale_price_effective_date>';
+		}
 	}
 
 	/**

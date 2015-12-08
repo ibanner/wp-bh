@@ -1,24 +1,36 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-11-16 18:28+0200\n"
-"PO-Revision-Date: 2015-11-16 18:29+0200\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2015-12-07 18:48+0200\n"
+"PO-Revision-Date: 2015-12-07 18:49+0200\n"
+"Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: .git\n"
 "X-Poedit-SearchPathExcluded-1: css\n"
 "X-Poedit-SearchPathExcluded-2: js\n"
 "X-Poedit-SearchPathExcluded-3: scss\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: searchform.php:13
+msgid "Search in shop..."
+msgstr "חיפוש בחנות..."
+
+#: searchform.php:13
+msgid "Search in site..."
+msgstr "חיפוש באתר..."
+
+#: functions/template.php:66
+msgid "ENews"
+msgstr "ניוזלטר"
 
 #: functions/menus.php:18
 msgid "Main Menu"
@@ -27,6 +39,100 @@ msgstr ""
 #: functions/menus.php:19
 msgid "Shop Menu"
 msgstr ""
+
+#: functions/woocommerce/woocommerce-functions.php:124
+msgid "Home"
+msgstr "דף הבית"
+
+#: functions/woocommerce/woocommerce-functions.php:537
+msgid "Most Popular"
+msgstr "הפופולרי ביותר"
+
+#: functions/woocommerce/woocommerce-functions.php:538
+msgid "Price: Low to High"
+msgstr "מחיר: נמוך לגבוה"
+
+#: functions/woocommerce/woocommerce-functions.php:539
+msgid "Price: High to Low"
+msgstr "מחיר: גבוה לנמוך"
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:92
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:170
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:296
+msgid "Thumbnail"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:96
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:175
+msgid "Upload/Add image"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:97
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:176
+msgid "Remove image"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:120
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:195
+msgid "Choose an image"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:122
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:197
+msgid "Use image"
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:251
+msgid ""
+"Product categories for your store can be managed here. To change the order "
+"of categories on the front-end you can drag and drop to sort them. To see "
+"more categories listed click the \"screen options\" link at the top of the "
+"page."
+msgstr ""
+
+#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:264
+msgid "Image"
+msgstr ""
+
+#: functions/woocommerce/widgets/woocommerce-recently-viewed.php:18
+msgid "RECENTLY<br />VIEWED"
+msgstr "נצפו<br />לאחרונה"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:182
+msgid "Your Email:"
+msgstr "כתובת מייל:"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:183
+msgid "Email Address"
+msgstr "כתובת מייל"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:184
+msgid "Email address is missing or incorrect"
+msgstr "כתובת מייל שגויה או חסרה"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:187
+msgid "Choose Language:"
+msgstr "בחרו שפה:"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:196
+msgid "Please check at least one newsletter name"
+msgstr "יש לבחור לפחות שפה אחת"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:198
+msgid "Register"
+msgstr "הרשמה"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:206
+msgid "General error, please try again later"
+msgstr "שגיאה כללית, אנא נסו שוב מאוחר יותר"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:207
+msgid "Registration has been failed, please try again later"
+msgstr "הרישום נכשל, אנא נסו שנית מאוחר יותר"
+
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:208
+msgid "Registration was successful, thank you!"
+msgstr "הרישום בוצע בהצלחה, תודה רבה!"
 
 #: functions/pelecard/payment-result.php:134
 msgid "Thank you for your request!"
@@ -72,156 +178,193 @@ msgstr "אנא שלחו את הבקשה באמצעות כרטיס אשראי א�
 msgid "General Error."
 msgstr "שגיאה כללית."
 
-#: functions/template.php:66
-msgid "ENews"
-msgstr "ניוזלטר"
+#: functions/pelecard/pelecard-api.php:39
+msgid "Transaction ID"
+msgstr "מזהה עסקה"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:182
-msgid "Your Email:"
-msgstr "כתובת מייל:"
+#: woocommerce/loop/orderby.php:36
+msgid "Sort by"
+msgstr "מיון לפי"
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:183
-msgid "Email Address"
-msgstr "כתובת מייל"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:184
-msgid "Email address is missing or incorrect"
-msgstr "כתובת מייל שגויה או חסרה"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:187
-msgid "Choose Language:"
-msgstr "בחרו שפה:"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:196
-msgid "Please check at least one newsletter name"
-msgstr "יש לבחור לפחות שפה אחת"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:198
-msgid "Register"
-msgstr "הרשמה"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:206
-msgid "General error, please try again later"
-msgstr "שגיאה כללית, אנא נסו שוב מאוחר יותר"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:207
-msgid "Registration has been failed, please try again later"
-msgstr "הרישום נכשל, אנא נסו שנית מאוחר יותר"
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:208
-msgid "Registration was successful, thank you!"
-msgstr "הרישום בוצע בהצלחה, תודה רבה!"
-
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:92
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:170
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:296
-msgid "Thumbnail"
-msgstr ""
-
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:96
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:175
-msgid "Upload/Add image"
-msgstr ""
-
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:97
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:176
-msgid "Remove image"
-msgstr ""
-
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:120
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:195
-msgid "Choose an image"
-msgstr ""
-
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:122
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:197
-msgid "Use image"
-msgstr ""
-
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:251
+#: woocommerce/emails/customer-processing-order.php:53
 msgid ""
-"Product categories for your store can be managed here. To change the order "
-"of categories on the front-end you can drag and drop to sort them. To see "
-"more categories listed click the \"screen options\" link at the top of the "
-"page."
+"Your order has been received and is now being processed. Your order details "
+"are shown below for your reference:"
+msgstr "הזמנתכם התקבלה ומטופלת כעת. פרטי ההזמנה מופיעים להלן:"
+
+#: woocommerce/emails/customer-processing-order.php:57
+#: woocommerce/emails/customer-completed-order.php:57
+#, php-format
+msgid "Order #%s"
+msgstr "הזמנה מספר %s"
+
+#: woocommerce/emails/customer-processing-order.php:62
+#: woocommerce/emails/customer-completed-order.php:62
+#: woocommerce/cart/cart.php:27 woocommerce/checkout/review-order.php:23
+msgid "Product"
+msgstr "מוצר"
+
+#: woocommerce/emails/customer-processing-order.php:63
+#: woocommerce/emails/customer-completed-order.php:63
+#: woocommerce/cart/cart.php:29
+msgid "Quantity"
+msgstr "כמות"
+
+#: woocommerce/emails/customer-processing-order.php:64
+#: woocommerce/emails/customer-completed-order.php:64
+#: woocommerce/cart/cart.php:28
+msgid "Price"
+msgstr "מחיר"
+
+#: woocommerce/emails/customer-processing-order.php:92
+#: woocommerce/emails/customer-completed-order.php:92
+msgid "For further questions or assistance please contact us:"
+msgstr "לשאלות או לסיוע נוסף אנא צרו עמנו קשר:"
+
+#: woocommerce/emails/email-addresses.php:20
+msgid "Billing address"
+msgstr "כתובת חיוב"
+
+#: woocommerce/emails/email-addresses.php:30
+msgid "Shipping address"
+msgstr "כתובת משלוח"
+
+#: woocommerce/emails/customer-completed-order.php:53
+msgid ""
+"Your order was shipped. Your order details are shown below for your "
+"reference:"
+msgstr "הזמנתכם נשלחה. פרטי ההזמנה מופיעים להלן:"
+
+#: woocommerce/cart/cart.php:30 woocommerce/checkout/review-order.php:24
+#: woocommerce/checkout/review-order.php:132
+msgid "Total"
 msgstr ""
 
-#: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:264
-msgid "Image"
+#: woocommerce/cart/cart.php:61
+msgid "Remove this item"
 msgstr ""
 
-#: functions/woocommerce/widgets/woocommerce-recently-viewed.php:18
-msgid "RECENTLY<br />VIEWED"
-msgstr "נצפו<br />לאחרונה"
-
-#: functions/woocommerce/woocommerce-functions.php:124
-msgid "Home"
-msgstr "דף הבית"
-
-#: functions/woocommerce/woocommerce-functions.php:537
-msgid "Most Popular"
-msgstr "הפופולרי ביותר"
-
-#: functions/woocommerce/woocommerce-functions.php:538
-msgid "Price: Low to High"
-msgstr "מחיר: נמוך לגבוה"
-
-#: functions/woocommerce/woocommerce-functions.php:539
-msgid "Price: High to Low"
-msgstr "מחיר: גבוה לנמוך"
-
-#: searchform.php:13
-msgid "Search in shop..."
-msgstr "חיפוש בחנות..."
-
-#: searchform.php:13
-msgid "Search in site..."
-msgstr "חיפוש באתר..."
-
-#: views/components/meta-single.php:2 views/woocommerce/product-item.php:46
-#: views/woocommerce/single-product/single-product-section1-title.php:22
-msgid "By "
-msgstr "על ידי "
-
-#: views/components/meta-single.php:10
-msgid "Comments"
-msgstr "תגובות"
-
-#: views/components/not-found.php:3
-msgid "No Records Found"
-msgstr "לא נמצאו תוצאות"
-
-#: views/components/not-found.php:4
-msgid "Return to"
-msgstr "חזרה"
-
-#: views/components/not-found.php:4
-msgid "homepage"
-msgstr "לדף הבית"
-
-#: views/event/events-filters.php:22
-msgid "All Categories"
-msgstr "כל הקטגוריות"
-
-#: views/event/events-filters.php:36
-msgid "Start from"
-msgstr "החל מתאריך"
-
-#: views/event/series.php:47
-msgid "Purchase"
-msgstr "לרכישה"
-
-#: views/footer/footer-links.php:44
-msgid "Learn more"
-msgstr "קראו עוד"
-
-#: views/footer/footer-menu.php:22
-msgid "Language/שפה"
+#: woocommerce/cart/cart.php:94
+msgid "Available on backorder"
 msgstr ""
 
-#: views/main/slider/display-events-slider.php:22
-msgid "All events"
-msgstr "כל האירועים"
+#: woocommerce/cart/cart.php:139
+msgid "Coupon"
+msgstr ""
+
+#: woocommerce/cart/cart.php:139
+msgid "Coupon code"
+msgstr ""
+
+#: woocommerce/cart/cart.php:139
+msgid "Apply Coupon"
+msgstr ""
+
+#: woocommerce/cart/cart.php:146
+msgid "Update Cart"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:59
+#, php-format
+msgid "Quantity: %s"
+msgstr "כמות: %s"
+
+#: woocommerce/cart/mini-cart.php:79
+msgid "No products in the cart."
+msgstr "לא נמצאו מוצרים בעגלה."
+
+#: woocommerce/cart/mini-cart.php:89 woocommerce/checkout/review-order.php:85
+msgid "Subtotal"
+msgstr "סכום ביניים"
+
+#: woocommerce/cart/mini-cart.php:99
+msgid "View Cart"
+msgstr "הצג סל קניות"
+
+#: woocommerce/cart/mini-cart.php:100
+msgid "Checkout"
+msgstr "לתשלום"
+
+#: woocommerce/checkout/thankyou.php:18
+msgid ""
+"Unfortunately your order cannot be processed as the originating bank/"
+"merchant has declined your transaction."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:22
+msgid "Please attempt your purchase again or go to your account page."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:24
+msgid "Please attempt your purchase again."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:28
+msgid "Pay"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:30
+msgid "My Account"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:36 woocommerce/checkout/thankyou.php:134
+msgid "Thank you. Your order has been received."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:40
+msgid "Order Number:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:44
+msgid "Date:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:48
+msgid "Total:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:53
+msgid "Payment Method:"
+msgstr ""
+
+#: woocommerce/checkout/payment.php:18
+msgid "Secured Billing: Please choose your preferred billing method"
+msgstr "אמצעי חיוב מאובטח: אנא בחרו את האמצעי המועדף עליכם"
+
+#: woocommerce/checkout/payment.php:31
+msgid "Please fill in your details above to see available payment methods."
+msgstr "אנא מלא את הפרטים שלך למעלה כדי לראות את אפשרויות התשלום הזמינות."
+
+#: woocommerce/checkout/payment.php:33
+msgid ""
+"Sorry, it seems that there are no available payment methods for your state. "
+"Please contact us if you require assistance or wish to make alternate "
+"arrangements."
+msgstr ""
+"סליחה, נראה כי אין אפשרויות משלוח הזמינות עבור המדינה שלך. אנא צור קשר אם "
+"אתה זקוק לסיוע או רוצה לעשות הזמנה חלופית."
+
+#: woocommerce/checkout/payment.php:44
+msgid ""
+"Since your browser does not support JavaScript, or it is disabled, please "
+"ensure you click the <em>Update Totals</em> button before placing your "
+"order. You may be charged more than the amount stated above if you fail to "
+"do so."
+msgstr ""
+"הדפדפן שלך לא תומך ב JavaScript, או שהוא מכובה, אנא ודא שאתה לוחץ על "
+"<em>עדכן סכום</em> לפני ביצוע ההזמנה. אתה עשוי להיות מחויב יותר מהסכום האמור "
+"לעיל, אם לא תצליח לעשות זאת."
+
+#: woocommerce/checkout/payment.php:44
+msgid "Update totals"
+msgstr "עדכן סכום"
+
+#: woocommerce/checkout/payment.php:54
+#, php-format
+msgid ""
+"I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; "
+"conditions</a>"
+msgstr "קראתי והנני מסכים/ה <a href=\"%s\" target=\"_blank\">לתנאי השימוש</a>"
 
 #: views/microfilm/microfilm-view.php:9
 msgid "Select a microfilm"
@@ -243,7 +386,8 @@ msgstr "בכדי להוסיף מיקרופילם לרשימה"
 msgid "Town"
 msgstr "עיר"
 
-#: views/microfilm/microfilm-view.php:20 views/microfilm/microfilm-view.php:145
+#: views/microfilm/microfilm-view.php:20
+#: views/microfilm/microfilm-view.php:145
 msgid "Province"
 msgstr "פרובינציה"
 
@@ -377,9 +521,21 @@ msgstr "אירעה תקלה טכנית. אנא נסו שוב מאוחר יותר
 msgid "Form submited succesfuly. Thank you."
 msgstr "הטופס נשלח בהצלחה. תודה."
 
-#: views/page/404.php:20
-msgid "Back to Homepage"
-msgstr "לדף הבית"
+#: views/event/series.php:47
+msgid "Purchase"
+msgstr "לרכישה"
+
+#: views/event/events-filters.php:22
+msgid "All Categories"
+msgstr "כל הקטגוריות"
+
+#: views/event/events-filters.php:36
+msgid "Start from"
+msgstr "החל מתאריך"
+
+#: views/main/slider/display-events-slider.php:22
+msgid "All events"
+msgstr "כל האירועים"
 
 #: views/page/page.php:33
 msgid "Password:"
@@ -391,21 +547,30 @@ msgid ""
 "below:"
 msgstr ""
 
-#: views/sidebar/sidebar-blog.php:91
-msgid "Categories"
-msgstr "קטגוריות"
+#: views/page/404.php:20
+msgid "Back to Homepage"
+msgstr "לדף הבית"
 
-#: views/sidebar/sidebar-blog.php:103
-msgid "Recent Posts"
-msgstr "פוסטים אחרונים"
+#: views/components/meta-single.php:2 views/woocommerce/product-item.php:46
+#: views/woocommerce/single-product/single-product-section1-title.php:22
+msgid "By "
+msgstr "על ידי "
 
-#: views/sidebar/sidebar-blog.php:114
-msgid "Archives"
-msgstr "ארכיון"
+#: views/components/meta-single.php:10
+msgid "Comments"
+msgstr "תגובות"
 
-#: views/woocommerce/featured-product-item.php:66
-msgid "Click for more details"
-msgstr "לחצו לפרטים נוספים"
+#: views/components/not-found.php:3
+msgid "No Records Found"
+msgstr "לא נמצאו תוצאות"
+
+#: views/components/not-found.php:4
+msgid "Return to"
+msgstr "חזרה"
+
+#: views/components/not-found.php:4
+msgid "homepage"
+msgstr "לדף הבית"
 
 #: views/woocommerce/single-product/single-product-section1-meta.php:20
 msgid "More Details"
@@ -427,189 +592,25 @@ msgstr "גובה x רוחב x אורך"
 msgid "You might also like"
 msgstr "מוצרים נוספים שיעניינו אתכם"
 
-#: woocommerce/cart/cart.php:27 woocommerce/checkout/review-order.php:23
-#: woocommerce/emails/customer-completed-order.php:62
-#: woocommerce/emails/customer-processing-order.php:62
-msgid "Product"
-msgstr "מוצר"
+#: views/sidebar/sidebar-blog.php:91
+msgid "Categories"
+msgstr "קטגוריות"
 
-#: woocommerce/cart/cart.php:28
-#: woocommerce/emails/customer-completed-order.php:64
-#: woocommerce/emails/customer-processing-order.php:64
-msgid "Price"
-msgstr "מחיר"
+#: views/sidebar/sidebar-blog.php:103
+msgid "Recent Posts"
+msgstr "פוסטים אחרונים"
 
-#: woocommerce/cart/cart.php:29
-#: woocommerce/emails/customer-completed-order.php:63
-#: woocommerce/emails/customer-processing-order.php:63
-msgid "Quantity"
-msgstr "כמות"
+#: views/sidebar/sidebar-blog.php:114
+msgid "Archives"
+msgstr "ארכיון"
 
-#: woocommerce/cart/cart.php:30 woocommerce/checkout/review-order.php:24
-#: woocommerce/checkout/review-order.php:132
-msgid "Total"
+#: views/footer/footer-links.php:44
+msgid "Learn more"
+msgstr "קראו עוד"
+
+#: views/footer/footer-menu.php:22
+msgid "Language/שפה"
 msgstr ""
-
-#: woocommerce/cart/cart.php:61
-msgid "Remove this item"
-msgstr ""
-
-#: woocommerce/cart/cart.php:94
-msgid "Available on backorder"
-msgstr ""
-
-#: woocommerce/cart/cart.php:139
-msgid "Coupon"
-msgstr ""
-
-#: woocommerce/cart/cart.php:139
-msgid "Coupon code"
-msgstr ""
-
-#: woocommerce/cart/cart.php:139
-msgid "Apply Coupon"
-msgstr ""
-
-#: woocommerce/cart/cart.php:146
-msgid "Update Cart"
-msgstr ""
-
-#: woocommerce/cart/mini-cart.php:59
-#, php-format
-msgid "Quantity: %s"
-msgstr "כמות: %s"
-
-#: woocommerce/cart/mini-cart.php:79
-msgid "No products in the cart."
-msgstr "לא נמצאו מוצרים בעגלה."
-
-#: woocommerce/cart/mini-cart.php:89 woocommerce/checkout/review-order.php:85
-msgid "Subtotal"
-msgstr "סכום ביניים"
-
-#: woocommerce/cart/mini-cart.php:99
-msgid "View Cart"
-msgstr "הצג סל קניות"
-
-#: woocommerce/cart/mini-cart.php:100
-msgid "Checkout"
-msgstr "לתשלום"
-
-#: woocommerce/checkout/payment.php:18
-msgid "Secured Billing: Please choose your preferred billing method"
-msgstr "אמצעי חיוב מאובטח: אנא בחרו את האמצעי המועדף עליכם"
-
-#: woocommerce/checkout/payment.php:31
-msgid "Please fill in your details above to see available payment methods."
-msgstr "אנא מלא את הפרטים שלך למעלה כדי לראות את אפשרויות התשלום הזמינות."
-
-#: woocommerce/checkout/payment.php:33
-msgid ""
-"Sorry, it seems that there are no available payment methods for your state. "
-"Please contact us if you require assistance or wish to make alternate "
-"arrangements."
-msgstr ""
-"סליחה, נראה כי אין אפשרויות משלוח הזמינות עבור המדינה שלך. אנא צור קשר אם "
-"אתה זקוק לסיוע או רוצה לעשות הזמנה חלופית."
-
-#: woocommerce/checkout/payment.php:44
-msgid ""
-"Since your browser does not support JavaScript, or it is disabled, please "
-"ensure you click the <em>Update Totals</em> button before placing your "
-"order. You may be charged more than the amount stated above if you fail to "
-"do so."
-msgstr ""
-"הדפדפן שלך לא תומך ב JavaScript, או שהוא מכובה, אנא ודא שאתה לוחץ על "
-"<em>עדכן סכום</em> לפני ביצוע ההזמנה. אתה עשוי להיות מחויב יותר מהסכום האמור "
-"לעיל, אם לא תצליח לעשות זאת."
-
-#: woocommerce/checkout/payment.php:44
-msgid "Update totals"
-msgstr "עדכן סכום"
-
-#: woocommerce/checkout/payment.php:54
-#, php-format
-msgid ""
-"I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; "
-"conditions</a>"
-msgstr "קראתי והנני מסכים/ה <a href=\"%s\" target=\"_blank\">לתנאי השימוש</a>"
-
-#: woocommerce/checkout/thankyou.php:18
-msgid ""
-"Unfortunately your order cannot be processed as the originating bank/"
-"merchant has declined your transaction."
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:22
-msgid "Please attempt your purchase again or go to your account page."
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:24
-msgid "Please attempt your purchase again."
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:28
-msgid "Pay"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:30
-msgid "My Account"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:36 woocommerce/checkout/thankyou.php:134
-msgid "Thank you. Your order has been received."
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:40
-msgid "Order Number:"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:44
-msgid "Date:"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:48
-msgid "Total:"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:53
-msgid "Payment Method:"
-msgstr ""
-
-#: woocommerce/emails/customer-completed-order.php:53
-msgid ""
-"Your order was shipped. Your order details are shown below for your "
-"reference:"
-msgstr "הזמנתכם נשלחה. פרטי ההזמנה מופיעים להלן:"
-
-#: woocommerce/emails/customer-completed-order.php:57
-#: woocommerce/emails/customer-processing-order.php:57
-#, php-format
-msgid "Order #%s"
-msgstr "הזמנה מספר %s"
-
-#: woocommerce/emails/customer-completed-order.php:92
-#: woocommerce/emails/customer-processing-order.php:92
-msgid "For further questions or assistance please contact us:"
-msgstr "לשאלות או לסיוע נוסף אנא צרו עמנו קשר:"
-
-#: woocommerce/emails/customer-processing-order.php:53
-msgid ""
-"Your order has been received and is now being processed. Your order details "
-"are shown below for your reference:"
-msgstr "הזמנתכם התקבלה ומטופלת כעת. פרטי ההזמנה מופיעים להלן:"
-
-#: woocommerce/emails/email-addresses.php:20
-msgid "Billing address"
-msgstr "כתובת חיוב"
-
-#: woocommerce/emails/email-addresses.php:30
-msgid "Shipping address"
-msgstr "כתובת משלוח"
-
-#: woocommerce/loop/orderby.php:36
-msgid "Sort by"
-msgstr "מיון לפי"
 
 #~ msgid "Search for products"
 #~ msgstr "חיפוש מוצרים"

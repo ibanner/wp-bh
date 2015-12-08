@@ -71,6 +71,9 @@ require_once('functions/events.php');
 // Yoast breadcrumbs
 // require_once('functions/yoast-breadcrumbs.php');
 
+// Pelecard
+require_once('functions/pelecard/pelecard-api.php');
+
 // Forms
 require_once('functions/forms.php');
 
