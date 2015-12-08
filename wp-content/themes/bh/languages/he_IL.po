@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-12-07 18:48+0200\n"
-"PO-Revision-Date: 2015-12-07 18:49+0200\n"
+"POT-Creation-Date: 2015-12-08 13:17+0200\n"
+"PO-Revision-Date: 2015-12-08 13:17+0200\n"
 "Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -44,15 +44,15 @@ msgstr ""
 msgid "Home"
 msgstr "דף הבית"
 
-#: functions/woocommerce/woocommerce-functions.php:537
+#: functions/woocommerce/woocommerce-functions.php:588
 msgid "Most Popular"
 msgstr "הפופולרי ביותר"
 
-#: functions/woocommerce/woocommerce-functions.php:538
+#: functions/woocommerce/woocommerce-functions.php:589
 msgid "Price: Low to High"
 msgstr "מחיר: נמוך לגבוה"
 
-#: functions/woocommerce/woocommerce-functions.php:539
+#: functions/woocommerce/woocommerce-functions.php:590
 msgid "Price: High to Low"
 msgstr "מחיר: גבוה לנמוך"
 
@@ -134,51 +134,51 @@ msgstr "הרישום נכשל, אנא נסו שנית מאוחר יותר"
 msgid "Registration was successful, thank you!"
 msgstr "הרישום בוצע בהצלחה, תודה רבה!"
 
-#: functions/pelecard/payment-result.php:134
+#: functions/pelecard/payment-result.php:143
 msgid "Thank you for your request!"
 msgstr "תודה רבה על פנייתכם!"
 
-#: functions/pelecard/payment-result.php:135
+#: functions/pelecard/payment-result.php:144
 msgid "An invoice for your payment will be sent to your email address shortly."
 msgstr "חשבונית תישלח בהקדם לכתובת המייל שציינתם."
 
-#: functions/pelecard/payment-result.php:140
+#: functions/pelecard/payment-result.php:149
 msgid "Payment failed"
 msgstr "התשלום נכשל"
 
-#: functions/pelecard/payment-result.php:146
-#: functions/pelecard/payment-result.php:154
-#: functions/pelecard/payment-result.php:161
-#: functions/pelecard/payment-result.php:168
+#: functions/pelecard/payment-result.php:155
+#: functions/pelecard/payment-result.php:163
+#: functions/pelecard/payment-result.php:170
+#: functions/pelecard/payment-result.php:177
 msgid "Error #"
 msgstr "שגיאה מספר "
 
-#: functions/pelecard/payment-result.php:146
+#: functions/pelecard/payment-result.php:155
 msgid "Wrong ID or CVV."
 msgstr "מספר ת.ז. או CVV שגוי."
 
-#: functions/pelecard/payment-result.php:147
-#: functions/pelecard/payment-result.php:155
+#: functions/pelecard/payment-result.php:156
+#: functions/pelecard/payment-result.php:164
 msgid "Please correct the errors and submit the request again."
 msgstr "אנא תקנו את השגיאות ושלחו שוב את הבקשה."
 
-#: functions/pelecard/payment-result.php:154
+#: functions/pelecard/payment-result.php:163
 msgid "Wrong credit card number."
 msgstr "מספר כרטיס אשראי שגוי."
 
-#: functions/pelecard/payment-result.php:161
+#: functions/pelecard/payment-result.php:170
 msgid "Unsupported credit card."
 msgstr "כרטיס אשראי לא נתמך."
 
-#: functions/pelecard/payment-result.php:162
+#: functions/pelecard/payment-result.php:171
 msgid "Please submit the request again using a different credit card."
 msgstr "אנא שלחו את הבקשה באמצעות כרטיס אשראי אחר."
 
-#: functions/pelecard/payment-result.php:168
+#: functions/pelecard/payment-result.php:177
 msgid "General Error."
 msgstr "שגיאה כללית."
 
-#: functions/pelecard/pelecard-api.php:39
+#: functions/pelecard/pelecard-api.php:46
 msgid "Transaction ID"
 msgstr "מזהה עסקה"
 
@@ -551,7 +551,7 @@ msgstr ""
 msgid "Back to Homepage"
 msgstr "לדף הבית"
 
-#: views/components/meta-single.php:2 views/woocommerce/product-item.php:46
+#: views/components/meta-single.php:2
 #: views/woocommerce/single-product/single-product-section1-title.php:22
 msgid "By "
 msgstr "על ידי "
@@ -571,6 +571,10 @@ msgstr "חזרה"
 #: views/components/not-found.php:4
 msgid "homepage"
 msgstr "לדף הבית"
+
+#: views/woocommerce/featured-product-item.php:66
+msgid "Click for more details"
+msgstr "לחצו לפרטים נוספים"
 
 #: views/woocommerce/single-product/single-product-section1-meta.php:20
 msgid "More Details"
@@ -610,7 +614,7 @@ msgstr "קראו עוד"
 
 #: views/footer/footer-menu.php:22
 msgid "Language/שפה"
-msgstr ""
+msgstr "שפה/Language"
 
 #~ msgid "Search for products"
 #~ msgstr "חיפוש מוצרים"
