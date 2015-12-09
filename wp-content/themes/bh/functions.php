@@ -54,7 +54,11 @@ require_once('functions/utils.php');
 require_once('functions/shortcodes.php');
 
 // ACF field groups
-require_once('functions/acf-field-groups.php');
+require_once('functions/acf/acf-configuration.php');
+
+if ( ! defined( 'USE_LOCAL_ACF_CONFIGURATION' ) || ! USE_LOCAL_ACF_CONFIGURATION ) {
+	require_once('functions/acf/acf-field-groups.php');
+}
 
 // woocommerce
 require_once('functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php');
