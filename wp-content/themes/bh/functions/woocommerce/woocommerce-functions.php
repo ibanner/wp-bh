@@ -476,6 +476,20 @@ function BH_shop_get_artist_links($product_id) {
 }
 
 /**
+ * BH_shipping_options_disclaimer
+ *
+ * Add shipping options desclaimer
+ */
+function BH_shipping_options_disclaimer() {
+	echo
+		'<tr class="shipping-disclaimer">' .
+			'<td colspan="2">' .
+				__('<b>IMPORTANT NOTIFICATION:</b> Due to the Israeli postal office being unable to provide our customers up to date order tracking and delivery within guaranteed time range, until further notice we no longer offer regular shipping. We apologise for any inconvenience to our customers.', 'BH') .
+			'</td>' .
+		'</tr>';
+}
+
+/**
  * BH_change_default_checkout_country
  * 
  * Default checkout country to blank

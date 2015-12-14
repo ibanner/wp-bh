@@ -3027,15 +3027,26 @@ table.shop_table {
 	& > table {
 		width: 100%;
 		font-size: 15px;
-		
-		th,
-		td {
-			width: 50% !important;
-			
-			#shipping_method {
-				label {
-					display: inline;
+
+		tr {
+			&.shipping-disclaimer {
+				td {
+					padding-bottom: 15px !important;
+					line-height: normal !important;
+					border-top: 0 !important;
 					font-weight: $font-normal;
+				}
+			}
+
+			th,
+			td {
+				width: 50% !important;
+				
+				#shipping_method {
+					label {
+						display: inline;
+						font-weight: $font-normal;
+					}
 				}
 			}
 		}
@@ -3155,6 +3166,15 @@ table.shop_table {
 	
 	table.shop_table {
 		tr {
+			&.shipping-disclaimer {
+				td {
+					padding-bottom: 15px;
+					line-height: normal;
+					border-top: 0;
+					font-weight: $font-normal;
+				}
+			}
+
 			th {
 				width: 50%;
 			}

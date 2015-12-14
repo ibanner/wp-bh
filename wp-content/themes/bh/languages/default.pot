@@ -1,112 +1,67 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-09-24 15:26+0300\n"
-"PO-Revision-Date: 2015-05-22 15:35+0200\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2015-12-14 13:53+0200\n"
+"PO-Revision-Date: 2015-12-14 13:54+0200\n"
+"Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: .git\n"
 "X-Poedit-SearchPathExcluded-1: css\n"
 "X-Poedit-SearchPathExcluded-2: js\n"
 "X-Poedit-SearchPathExcluded-3: scss\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: functions/menus.php:18
-msgid "Main Menu"
+#: searchform.php:13
+msgid "Search in shop..."
 msgstr ""
 
-#: functions/pelecard/payment-result.php:134
-msgid "Thank you for your request!"
-msgstr ""
-
-#: functions/pelecard/payment-result.php:135
-msgid "An invoice for your payment will be sent to your email address shortly."
-msgstr ""
-
-#: functions/pelecard/payment-result.php:140
-msgid "Payment failed"
-msgstr ""
-
-#: functions/pelecard/payment-result.php:146
-#: functions/pelecard/payment-result.php:154
-#: functions/pelecard/payment-result.php:161
-#: functions/pelecard/payment-result.php:168
-msgid "Error #"
-msgstr ""
-
-#: functions/pelecard/payment-result.php:146
-msgid "Wrong ID or CVV."
-msgstr ""
-
-#: functions/pelecard/payment-result.php:147
-#: functions/pelecard/payment-result.php:155
-msgid "Please correct the errors and submit the request again."
-msgstr ""
-
-#: functions/pelecard/payment-result.php:154
-msgid "Wrong credit card number."
-msgstr ""
-
-#: functions/pelecard/payment-result.php:161
-msgid "Unsupported credit card."
-msgstr ""
-
-#: functions/pelecard/payment-result.php:162
-msgid "Please submit the request again using a different credit card."
-msgstr ""
-
-#: functions/pelecard/payment-result.php:168
-msgid "General Error."
+#: searchform.php:13
+msgid "Search in site..."
 msgstr ""
 
 #: functions/template.php:66
 msgid "ENews"
 msgstr ""
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:182
-msgid "Your Email:"
+#: functions/menus.php:18
+msgid "Main Menu"
 msgstr ""
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:183
-msgid "Email Address"
+#: functions/menus.php:19
+msgid "Shop Menu"
 msgstr ""
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:184
-msgid "Email address is missing or incorrect"
+#: functions/woocommerce/woocommerce-functions.php:124
+msgid "Home"
 msgstr ""
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:187
-msgid "Choose Language:"
+#: functions/woocommerce/woocommerce-functions.php:487
+msgid ""
+"<b>IMPORTANT NOTIFICATION:</b> Due to the Israeli postal office being unable "
+"to provide our customers up to date order tracking and delivery within "
+"guaranteed time range, until further notice we no longer offer regular "
+"shipping. We apologise for any inconvenience to our customers."
 msgstr ""
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:196
-msgid "Please check at least one newsletter name"
+#: functions/woocommerce/woocommerce-functions.php:551
+msgid "Most Popular"
 msgstr ""
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:198
-msgid "Register"
+#: functions/woocommerce/woocommerce-functions.php:552
+msgid "Price: Low to High"
 msgstr ""
 
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:206
-msgid "General error, please try again later"
-msgstr ""
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:207
-msgid "Registration has been failed, please try again later"
-msgstr ""
-
-#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:208
-msgid "Registration was successful, thank you!"
+#: functions/woocommerce/woocommerce-functions.php:553
+msgid "Price: High to Low"
 msgstr ""
 
 #: functions/woocommerce/classes/class-bh-wc-admin-taxonomies.php:92
@@ -151,69 +106,267 @@ msgstr ""
 msgid "RECENTLY<br />VIEWED"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:124
-msgid "Home"
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:182
+msgid "Your Email:"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:519
-msgid "Most Popular"
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:183
+msgid "Email Address"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:520
-msgid "Price: Low to High"
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:184
+msgid "Email address is missing or incorrect"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:521
-msgid "Price: High to Low"
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:187
+msgid "Choose Language:"
 msgstr ""
 
-#: searchform.php:13
-msgid "Search in shop..."
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:196
+msgid "Please check at least one newsletter name"
 msgstr ""
 
-#: searchform.php:13
-msgid "Search in site..."
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:198
+msgid "Register"
 msgstr ""
 
-#: views/components/meta-single.php:2 views/woocommerce/product-item.php:46
-#: views/woocommerce/single-product/single-product-section1-title.php:22
-msgid "By "
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:206
+msgid "General error, please try again later"
 msgstr ""
 
-#: views/components/meta-single.php:10
-msgid "Comments"
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:207
+msgid "Registration has been failed, please try again later"
 msgstr ""
 
-#: views/components/not-found.php:3
-msgid "No Records Found"
+#: functions/widgets/active-trail-newsletter/active-trail-newsletter.php:208
+msgid "Registration was successful, thank you!"
 msgstr ""
 
-#: views/components/not-found.php:4
-msgid "Return to"
+#: functions/pelecard/payment-result.php:143
+msgid "Thank you for your request!"
 msgstr ""
 
-#: views/components/not-found.php:4
-msgid "homepage"
+#: functions/pelecard/payment-result.php:144
+msgid "An invoice for your payment will be sent to your email address shortly."
 msgstr ""
 
-#: views/event/events-filters.php:22
-msgid "All Categories"
+#: functions/pelecard/payment-result.php:149
+msgid "Payment failed"
 msgstr ""
 
-#: views/event/events-filters.php:36
-msgid "Start from"
+#: functions/pelecard/payment-result.php:155
+#: functions/pelecard/payment-result.php:163
+#: functions/pelecard/payment-result.php:170
+#: functions/pelecard/payment-result.php:177
+msgid "Error #"
 msgstr ""
 
-#: views/event/series.php:47
-msgid "Purchase"
+#: functions/pelecard/payment-result.php:155
+msgid "Wrong ID or CVV."
 msgstr ""
 
-#: views/footer/footer-links.php:43
-msgid "Learn more"
+#: functions/pelecard/payment-result.php:156
+#: functions/pelecard/payment-result.php:164
+msgid "Please correct the errors and submit the request again."
 msgstr ""
 
-#: views/main/slider/display-events-slider.php:22
-msgid "All events"
+#: functions/pelecard/payment-result.php:163
+msgid "Wrong credit card number."
+msgstr ""
+
+#: functions/pelecard/payment-result.php:170
+msgid "Unsupported credit card."
+msgstr ""
+
+#: functions/pelecard/payment-result.php:171
+msgid "Please submit the request again using a different credit card."
+msgstr ""
+
+#: functions/pelecard/payment-result.php:177
+msgid "General Error."
+msgstr ""
+
+#: functions/pelecard/pelecard-api.php:46
+msgid "Transaction ID"
+msgstr ""
+
+#: woocommerce/loop/orderby.php:36
+msgid "Sort by"
+msgstr ""
+
+#: woocommerce/emails/customer-processing-order.php:53
+msgid ""
+"Your order has been received and is now being processed. Your order details "
+"are shown below for your reference:"
+msgstr ""
+
+#: woocommerce/emails/customer-processing-order.php:57
+#: woocommerce/emails/customer-completed-order.php:57
+#, php-format
+msgid "Order #%s"
+msgstr ""
+
+#: woocommerce/emails/customer-processing-order.php:62
+#: woocommerce/emails/customer-completed-order.php:62
+#: woocommerce/cart/cart.php:27 woocommerce/checkout/review-order.php:23
+msgid "Product"
+msgstr ""
+
+#: woocommerce/emails/customer-processing-order.php:63
+#: woocommerce/emails/customer-completed-order.php:63
+#: woocommerce/cart/cart.php:29
+msgid "Quantity"
+msgstr ""
+
+#: woocommerce/emails/customer-processing-order.php:64
+#: woocommerce/emails/customer-completed-order.php:64
+#: woocommerce/cart/cart.php:28
+msgid "Price"
+msgstr ""
+
+#: woocommerce/emails/customer-processing-order.php:92
+#: woocommerce/emails/customer-completed-order.php:92
+msgid "For further questions or assistance please contact us:"
+msgstr ""
+
+#: woocommerce/emails/email-addresses.php:20
+msgid "Billing address"
+msgstr ""
+
+#: woocommerce/emails/email-addresses.php:30
+msgid "Shipping address"
+msgstr ""
+
+#: woocommerce/emails/customer-completed-order.php:53
+msgid ""
+"Your order was shipped. Your order details are shown below for your "
+"reference:"
+msgstr ""
+
+#: woocommerce/cart/cart.php:30 woocommerce/checkout/review-order.php:24
+#: woocommerce/checkout/review-order.php:132
+msgid "Total"
+msgstr ""
+
+#: woocommerce/cart/cart.php:61
+msgid "Remove this item"
+msgstr ""
+
+#: woocommerce/cart/cart.php:94
+msgid "Available on backorder"
+msgstr ""
+
+#: woocommerce/cart/cart.php:139
+msgid "Coupon"
+msgstr ""
+
+#: woocommerce/cart/cart.php:139
+msgid "Coupon code"
+msgstr ""
+
+#: woocommerce/cart/cart.php:139
+msgid "Apply Coupon"
+msgstr ""
+
+#: woocommerce/cart/cart.php:146
+msgid "Update Cart"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:59
+#, php-format
+msgid "Quantity: %s"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:79
+msgid "No products in the cart."
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:89 woocommerce/checkout/review-order.php:85
+msgid "Subtotal"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:99
+msgid "View Cart"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:100
+msgid "Checkout"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:18
+msgid ""
+"Unfortunately your order cannot be processed as the originating bank/"
+"merchant has declined your transaction."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:22
+msgid "Please attempt your purchase again or go to your account page."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:24
+msgid "Please attempt your purchase again."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:28
+msgid "Pay"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:30
+msgid "My Account"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:36 woocommerce/checkout/thankyou.php:134
+msgid "Thank you. Your order has been received."
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:40
+msgid "Order Number:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:44
+msgid "Date:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:48
+msgid "Total:"
+msgstr ""
+
+#: woocommerce/checkout/thankyou.php:53
+msgid "Payment Method:"
+msgstr ""
+
+#: woocommerce/checkout/payment.php:18
+msgid "Secured Billing: Please choose your preferred billing method"
+msgstr ""
+
+#: woocommerce/checkout/payment.php:31
+msgid "Please fill in your details above to see available payment methods."
+msgstr ""
+
+#: woocommerce/checkout/payment.php:33
+msgid ""
+"Sorry, it seems that there are no available payment methods for your state. "
+"Please contact us if you require assistance or wish to make alternate "
+"arrangements."
+msgstr ""
+
+#: woocommerce/checkout/payment.php:44
+msgid ""
+"Since your browser does not support JavaScript, or it is disabled, please "
+"ensure you click the <em>Update Totals</em> button before placing your "
+"order. You may be charged more than the amount stated above if you fail to "
+"do so."
+msgstr ""
+
+#: woocommerce/checkout/payment.php:44
+msgid "Update totals"
+msgstr ""
+
+#: woocommerce/checkout/payment.php:54
+#, php-format
+msgid ""
+"I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; "
+"conditions</a>"
 msgstr ""
 
 #: views/microfilm/microfilm-view.php:9
@@ -236,7 +389,8 @@ msgstr ""
 msgid "Town"
 msgstr ""
 
-#: views/microfilm/microfilm-view.php:20 views/microfilm/microfilm-view.php:145
+#: views/microfilm/microfilm-view.php:20
+#: views/microfilm/microfilm-view.php:145
 msgid "Province"
 msgstr ""
 
@@ -370,8 +524,20 @@ msgstr ""
 msgid "Form submited succesfuly. Thank you."
 msgstr ""
 
-#: views/page/404.php:20
-msgid "Back to Homepage"
+#: views/event/series.php:47
+msgid "Purchase"
+msgstr ""
+
+#: views/event/events-filters.php:22
+msgid "All Categories"
+msgstr ""
+
+#: views/event/events-filters.php:36
+msgid "Start from"
+msgstr ""
+
+#: views/main/slider/display-events-slider.php:22
+msgid "All events"
 msgstr ""
 
 #: views/page/page.php:33
@@ -384,16 +550,29 @@ msgid ""
 "below:"
 msgstr ""
 
-#: views/sidebar/sidebar-blog.php:91
-msgid "Categories"
+#: views/page/404.php:20
+msgid "Back to Homepage"
 msgstr ""
 
-#: views/sidebar/sidebar-blog.php:103
-msgid "Recent Posts"
+#: views/components/meta-single.php:2 views/woocommerce/product-item.php:46
+#: views/woocommerce/single-product/single-product-section1-title.php:22
+msgid "By "
 msgstr ""
 
-#: views/sidebar/sidebar-blog.php:114
-msgid "Archives"
+#: views/components/meta-single.php:10
+msgid "Comments"
+msgstr ""
+
+#: views/components/not-found.php:3
+msgid "No Records Found"
+msgstr ""
+
+#: views/components/not-found.php:4
+msgid "Return to"
+msgstr ""
+
+#: views/components/not-found.php:4
+msgid "homepage"
 msgstr ""
 
 #: views/woocommerce/single-product/single-product-section1-meta.php:20
@@ -416,181 +595,22 @@ msgstr ""
 msgid "You might also like"
 msgstr ""
 
-#: woocommerce/cart/cart.php:27 woocommerce/checkout/review-order.php:23
-#: woocommerce/emails/customer-completed-order.php:62
-#: woocommerce/emails/customer-processing-order.php:62
-msgid "Product"
+#: views/sidebar/sidebar-blog.php:91
+msgid "Categories"
 msgstr ""
 
-#: woocommerce/cart/cart.php:28
-#: woocommerce/emails/customer-completed-order.php:64
-#: woocommerce/emails/customer-processing-order.php:64
-msgid "Price"
+#: views/sidebar/sidebar-blog.php:103
+msgid "Recent Posts"
 msgstr ""
 
-#: woocommerce/cart/cart.php:29
-#: woocommerce/emails/customer-completed-order.php:63
-#: woocommerce/emails/customer-processing-order.php:63
-msgid "Quantity"
+#: views/sidebar/sidebar-blog.php:114
+msgid "Archives"
 msgstr ""
 
-#: woocommerce/cart/cart.php:30 woocommerce/checkout/review-order.php:24
-#: woocommerce/checkout/review-order.php:132
-msgid "Total"
+#: views/footer/footer-links.php:44
+msgid "Learn more"
 msgstr ""
 
-#: woocommerce/cart/cart.php:61
-msgid "Remove this item"
-msgstr ""
-
-#: woocommerce/cart/cart.php:94
-msgid "Available on backorder"
-msgstr ""
-
-#: woocommerce/cart/cart.php:139
-msgid "Coupon"
-msgstr ""
-
-#: woocommerce/cart/cart.php:139
-msgid "Coupon code"
-msgstr ""
-
-#: woocommerce/cart/cart.php:139
-msgid "Apply Coupon"
-msgstr ""
-
-#: woocommerce/cart/cart.php:146
-msgid "Update Cart"
-msgstr ""
-
-#: woocommerce/cart/mini-cart.php:59
-#, php-format
-msgid "Quantity: %s"
-msgstr ""
-
-#: woocommerce/cart/mini-cart.php:79
-msgid "No products in the cart."
-msgstr ""
-
-#: woocommerce/cart/mini-cart.php:89 woocommerce/checkout/review-order.php:85
-msgid "Subtotal"
-msgstr ""
-
-#: woocommerce/cart/mini-cart.php:99
-msgid "View Cart"
-msgstr ""
-
-#: woocommerce/cart/mini-cart.php:100
-msgid "Checkout"
-msgstr ""
-
-#: woocommerce/checkout/payment.php:18
-msgid "Secured Billing: Please choose your preferred billing method"
-msgstr ""
-
-#: woocommerce/checkout/payment.php:31
-msgid "Please fill in your details above to see available payment methods."
-msgstr ""
-
-#: woocommerce/checkout/payment.php:33
-msgid ""
-"Sorry, it seems that there are no available payment methods for your state. "
-"Please contact us if you require assistance or wish to make alternate "
-"arrangements."
-msgstr ""
-
-#: woocommerce/checkout/payment.php:44
-msgid ""
-"Since your browser does not support JavaScript, or it is disabled, please "
-"ensure you click the <em>Update Totals</em> button before placing your "
-"order. You may be charged more than the amount stated above if you fail to "
-"do so."
-msgstr ""
-
-#: woocommerce/checkout/payment.php:44
-msgid "Update totals"
-msgstr ""
-
-#: woocommerce/checkout/payment.php:54
-#, php-format
-msgid ""
-"I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; "
-"conditions</a>"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:18
-msgid ""
-"Unfortunately your order cannot be processed as the originating bank/"
-"merchant has declined your transaction."
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:22
-msgid "Please attempt your purchase again or go to your account page."
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:24
-msgid "Please attempt your purchase again."
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:28
-msgid "Pay"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:30
-msgid "My Account"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:36 woocommerce/checkout/thankyou.php:134
-msgid "Thank you. Your order has been received."
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:40
-msgid "Order Number:"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:44
-msgid "Date:"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:48
-msgid "Total:"
-msgstr ""
-
-#: woocommerce/checkout/thankyou.php:53
-msgid "Payment Method:"
-msgstr ""
-
-#: woocommerce/emails/customer-completed-order.php:53
-msgid ""
-"Your order was shipped. Your order details are shown below for your "
-"reference:"
-msgstr ""
-
-#: woocommerce/emails/customer-completed-order.php:57
-#: woocommerce/emails/customer-processing-order.php:57
-#, php-format
-msgid "Order #%s"
-msgstr ""
-
-#: woocommerce/emails/customer-completed-order.php:92
-#: woocommerce/emails/customer-processing-order.php:92
-msgid "For further questions or assistance please contact us:"
-msgstr ""
-
-#: woocommerce/emails/customer-processing-order.php:53
-msgid ""
-"Your order has been received and is now being processed. Your order details "
-"are shown below for your reference:"
-msgstr ""
-
-#: woocommerce/emails/email-addresses.php:20
-msgid "Billing address"
-msgstr ""
-
-#: woocommerce/emails/email-addresses.php:30
-msgid "Shipping address"
-msgstr ""
-
-#: woocommerce/loop/orderby.php:36
-msgid "Sort by"
+#: views/footer/footer-menu.php:22
+msgid "Language/שפה"
 msgstr ""

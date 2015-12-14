@@ -1257,16 +1257,24 @@ table.shop_table {
 	float: right !important;
 	
 	& > table {
-		th {
-			padding: 6px 0 0 12px !important;
-		}
-		
-		td {
-			text-align: left;
-			
-			#shipping_method {
-				li {
-					padding: .25em 22px .25em 0;
+		tr {
+			&.shipping-disclaimer {
+				td {
+					text-align: right !important;
+				}
+			}
+
+			th {
+				padding: 6px 0 0 12px !important;
+			}
+
+			td {
+				text-align: left;
+				
+				#shipping_method {
+					li {
+						padding: .25em 22px .25em 0;
+					}
 				}
 			}
 		}
