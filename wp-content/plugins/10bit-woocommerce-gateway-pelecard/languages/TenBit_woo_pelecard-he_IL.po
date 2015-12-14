@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Pelecard v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-24 20:26+0200\n"
-"PO-Revision-Date: 2014-02-24 20:26+0200\n"
+"POT-Creation-Date: 2015-12-14 09:30+0200\n"
+"PO-Revision-Date: 2015-12-14 09:33+0200\n"
 "Last-Translator: Tzvi Rabinovitch <tzvi.ra@gmail.com>\n"
 "Language-Team: \n"
 "Language: he_IL\n"
@@ -20,248 +20,246 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:49
+#: ../WC_Gateway_Pelecard.php:22
 msgid "Pelecard"
 msgstr "פלאכרד"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:50
+#: ../WC_Gateway_Pelecard.php:23
 msgid "Allow payments using pelecard"
 msgstr "אפשר תשלום באמצעות פלאכרד"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:124
+#: ../WC_Gateway_Pelecard.php:142
 msgid "Pelecard payment completed"
 msgstr "התשלום באמצאות פלאכרד הסתיים"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:134
-msgid "Paymnet failure please try again or contact the stoe admin"
-msgstr "התשלום נכשל , נא לנסות שנית או ליצור קשר עם מנהל האתר."
-
-# @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:138
+#: ../WC_Gateway_Pelecard.php:176
 msgid "Pelecard IPN Request Failure"
 msgstr "שגיאה בקבלת התשובה מפלאכרד"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:152
+#: ../WC_Gateway_Pelecard.php:190
 msgid "Enable/Disable"
 msgstr "הפעל/בטל"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:154
+#: ../WC_Gateway_Pelecard.php:192
 msgid "Enable pelecard Payment"
 msgstr "אפשר תשלום באמצעות פלאכרד"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:158
+#: ../WC_Gateway_Pelecard.php:196
 msgid "License"
 msgstr "קוד רשיון"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:160
+#: ../WC_Gateway_Pelecard.php:198
 msgid "Please enter your license key as received from http://www.10bit.co.il"
 msgstr "נא להזין את  הקוד שהתקבל מ http://www.10bit.co.il"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:165
+#: ../WC_Gateway_Pelecard.php:203
 msgid "Title"
 msgstr "כותרת"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:167
+#: ../WC_Gateway_Pelecard.php:205
 msgid "This controls the title which the user sees during checkout."
 msgstr "כותרת זו תוצג ללקוח בזמן התשלום"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:168
+#: ../WC_Gateway_Pelecard.php:206
 msgid "Pelecard Gateway"
 msgstr "פלאכרד"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:171
+#: ../WC_Gateway_Pelecard.php:209
 msgid "Description"
 msgstr "תאור"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:173
+#: ../WC_Gateway_Pelecard.php:211
 msgid "This controls the description which the user sees during checkout."
 msgstr "התאור אותו יראה הלקוח בזמן התשלום"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:174
-#: ../woocommerce-gateway-pelecard.php:386
+#: ../WC_Gateway_Pelecard.php:212
 msgid "Pay via Pelecard"
 msgstr "שלם באמצעות פלאכרד"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:177
+#: ../WC_Gateway_Pelecard.php:215
 msgid "Terminal Number"
 msgstr "מספר מסוף סליקה"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:179
+#: ../WC_Gateway_Pelecard.php:217
 msgid "Your terminal number as provided by Pelecard"
 msgstr "מספר המסוף שהתקבל מפלאכרד"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:183
+#: ../WC_Gateway_Pelecard.php:221
 msgid "Username"
 msgstr "שם משתמש"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:185
+#: ../WC_Gateway_Pelecard.php:223
 msgid "Terminal username as provided by pelecard"
 msgstr "שם המשתמש במסוף פלאכרד"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:189
+#: ../WC_Gateway_Pelecard.php:227
 msgid "Password"
 msgstr "סיסמה"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:191
+#: ../WC_Gateway_Pelecard.php:229
 msgid "Terminal password as provided by pelecard."
 msgstr "סיסמה במסוף פלאכרד"
 
-#: ../woocommerce-gateway-pelecard.php:195
+#: ../WC_Gateway_Pelecard.php:233
 msgid "Max Payments"
 msgstr "מספר תשלומים מקסימלי"
 
-#: ../woocommerce-gateway-pelecard.php:197
+#: ../WC_Gateway_Pelecard.php:235
 msgid "Set the maximum allowed payments."
 msgstr "קבע את מספר התשלומים המקסימלי"
 
-#: ../woocommerce-gateway-pelecard.php:202
-msgid "Logo"
-msgstr "לוגו"
+#: ../WC_Gateway_Pelecard.php:239
+msgid "Tiered Payments"
+msgstr "מדרגות תשלום"
 
-#: ../woocommerce-gateway-pelecard.php:204
-msgid "This will be the diaplyed logo on the redirect page"
-msgstr "הלוגו שיוצג בדף התשלום"
-
-#: ../woocommerce-gateway-pelecard.php:209
-msgid "smallLogo"
-msgstr "לוגו קטן"
-
-#: ../woocommerce-gateway-pelecard.php:211
-msgid "This will be the small logo on the redirect page"
-msgstr "הלוגו הקטן שיוצג בדף התשלום"
-
-#: ../woocommerce-gateway-pelecard.php:215
-msgid "PCI DSS LOGO"
-msgstr "לוגו PCI DSS"
-
-#: ../woocommerce-gateway-pelecard.php:217
-msgid "Hides the PCI DSS logo"
-msgstr "הסתר את הלוגו של PCI DSS"
+#: ../WC_Gateway_Pelecard.php:241
+msgid ""
+"This Overrides the Max Payments setting !!! to use conditional payment "
+"simply enter a comma separated amounts e.g 200,400,600 -> this will set the "
+"payments to be 1 for lower than 200 , 2 for lower than 400 etc ..."
+msgstr ""
+"הגדרה זו דורסת את הגדרת התשלומים , יש להגדיר מדרגות תשלום בפורמט 200,400 -> "
+"המערכת תאפשר עד 200 תשלום אחד 200-399.99 שני תשלומים , מעל 400 3 תשלומים"
 
 # @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:221
+#: ../WC_Gateway_Pelecard.php:264
 msgid "Pelecard Logo"
 msgstr "לוגו פלאכארד"
 
-#: ../woocommerce-gateway-pelecard.php:223
+#: ../WC_Gateway_Pelecard.php:266
 msgid "Hides the Pelecard logo"
 msgstr "הסתר את לוגו פלאכארד"
 
-#: ../woocommerce-gateway-pelecard.php:227
+#: ../WC_Gateway_Pelecard.php:270
+msgid "Feedback"
+msgstr "משוב"
+
+#: ../WC_Gateway_Pelecard.php:272
+msgid "Show feedback in the payment screen"
+msgstr "הצג חיווי במסך התשלום"
+
+#: ../WC_Gateway_Pelecard.php:276
+msgid "Show card holder name"
+msgstr "הצג שם מחזיק הכרטיס"
+
+#: ../WC_Gateway_Pelecard.php:286
+msgid "Show customer id"
+msgstr "הצג ת.ז."
+
+#: ../WC_Gateway_Pelecard.php:296
+msgid "Cvv 2"
+msgstr "הצג CVV"
+
+#: ../WC_Gateway_Pelecard.php:306
+msgid "Email Field"
+msgstr "שדה אימייל"
+
+#: ../WC_Gateway_Pelecard.php:308
+msgid "Show email field"
+msgstr "הצג שדה אימייל"
+
+#: ../WC_Gateway_Pelecard.php:317
+msgid "Phone Field"
+msgstr "שדה טלפון"
+
+#: ../WC_Gateway_Pelecard.php:319
+msgid "Show phone field"
+msgstr "הצג שדה טלפון"
+
+#: ../WC_Gateway_Pelecard.php:328
 msgid "Use Iframe"
 msgstr "להשתמש ב Iframe"
 
-#: ../woocommerce-gateway-pelecard.php:229
+#: ../WC_Gateway_Pelecard.php:330
 msgid "Load the secured Pelecard page in an iframe"
 msgstr "טען את דף הסליקה המאובטח בתוך Iframe באתר"
 
-#: ../woocommerce-gateway-pelecard.php:233
+#: ../WC_Gateway_Pelecard.php:334
+msgid "Language"
+msgstr "שפה"
+
+#: ../WC_Gateway_Pelecard.php:336
+msgid "Select the language of the iframe"
+msgstr "בחר שפה"
+
+#: ../WC_Gateway_Pelecard.php:346
+msgid "Keep SSL"
+msgstr "שמור על SSL"
+
+#: ../WC_Gateway_Pelecard.php:348
+msgid "Return to secured url , check this box if your entire site is secured"
+msgstr "חזרה לאתר מאובטח, יש לסמן אם באתר מופעל SSL"
+
+#: ../WC_Gateway_Pelecard.php:354
 msgid " Iframe Width"
 msgstr "רוחב הIframe"
 
-#: ../woocommerce-gateway-pelecard.php:235
+#: ../WC_Gateway_Pelecard.php:356
 msgid "Set the Iframe width in PX , leave blank for 100%"
 msgstr "קבע את רוחב הIframe ביחידות של PX , השאר ריק ל 100%"
 
-#: ../woocommerce-gateway-pelecard.php:240
+#: ../WC_Gateway_Pelecard.php:361
 msgid " Iframe Height"
 msgstr "גובה הIframe"
 
-#: ../woocommerce-gateway-pelecard.php:242
+#: ../WC_Gateway_Pelecard.php:363
 msgid "Set the Iframe height in PX "
 msgstr "קבע את גובה הIframe ביחידות של PX"
 
-#: ../woocommerce-gateway-pelecard.php:247
+#: ../WC_Gateway_Pelecard.php:368
 msgid "Path to custom css file"
 msgstr "קישור לקובץ עיצוב חיצוני"
 
-#: ../woocommerce-gateway-pelecard.php:249
+#: ../WC_Gateway_Pelecard.php:370
 msgid ""
 "The path to the custom css path , this file must be placed on a secured "
 "(HTTPS) domain"
 msgstr "קישור לקובץ עיצוב חיצוני , הקובץ חייב לשבת ברשת מאובטח (HTTPS)"
 
-#: ../woocommerce-gateway-pelecard.php:253
+#: ../WC_Gateway_Pelecard.php:374
 msgid "Header Text"
 msgstr "כותרת"
 
-#: ../woocommerce-gateway-pelecard.php:255
+#: ../WC_Gateway_Pelecard.php:376
 msgid "This text will appear above the payment form"
 msgstr "טקסט זה יופיע מעל לטופס התשלום"
 
-#: ../woocommerce-gateway-pelecard.php:259
+#: ../WC_Gateway_Pelecard.php:380
 msgid "Bottom Text"
 msgstr "כיתוב בתחתית"
 
-#: ../woocommerce-gateway-pelecard.php:261
+#: ../WC_Gateway_Pelecard.php:382
 msgid "This text will appear underneath the payment form"
 msgstr "טקסט זה יופיע מתחת לטופס התשלום"
 
-#: ../woocommerce-gateway-pelecard.php:265
-msgid "Background color"
-msgstr "צבע רקע"
+#: ../WC_Gateway_Pelecard.php:411
+msgid "Debug"
+msgstr "מצב בדיקות"
 
-#: ../woocommerce-gateway-pelecard.php:267
-#, php-format
+#: ../WC_Gateway_Pelecard.php:413
 msgid ""
-"use hexadecimal color without the # ex :%s for white use ffffff%s For "
-"transparent background send transparent"
-msgstr ""
-"בפורמט הקסדצימלי ללא # לדוגמא %s ללבן יש לרשום FFFFFF %s לשקוף יש לרשום "
-"transparent"
+"write debug data to log , log will be stored at wp-content/uploads/wc-logs"
+msgstr "רשום לLOG , הלוג ישמר בתיקיית wp-content/uploads/wc-logs"
 
-#: ../woocommerce-gateway-pelecard.php:270
-msgid "Path to background image"
-msgstr "נתיב לתמונת רקע"
-
-#: ../woocommerce-gateway-pelecard.php:273
-#, php-format
-msgid "Please use the format: %s For example:%s Location options:%s"
-msgstr "בפורמט: %s לדוגמא:%s אפשרויות מיקום:%s"
-
-#: ../woocommerce-gateway-pelecard.php:283
-msgid "Top margin"
-msgstr "מרווח מהחלק העליון"
-
-#: ../woocommerce-gateway-pelecard.php:285
-msgid "Top margin in pixels"
-msgstr "מרחק מהחלק העליון של ה iframe בפיקסלים"
-
-# @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:302
-msgid ""
-"Thank you for your order, please click the button below to pay with Pelecard."
-msgstr ""
-"תודה על ההזמנה , במידה והמערכת לא העבירה אותך בצורה אוטומטית נא ללחוץ על "
-"הכפתור לסיום התשלום"
-
-# @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:365
-msgid ""
-"Thank you for your order. We are now redirecting you to Payment Gateway to "
-"make payment."
-msgstr "תודה על ההזמנה , מייד תועברו לפלאכרד להמשך התשלום."
-
-# @ TenBit_woo_pelecard
-#: ../woocommerce-gateway-pelecard.php:386
-msgid "Cancel order &amp; restore cart"
-msgstr "בטל את ההזמנה"
+#: ../woocommerce-gateway-pelecard.php:23
+msgid "Settings"
+msgstr "הגדרות"
