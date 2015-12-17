@@ -8,7 +8,7 @@
 	/* header */
 	/**********/
 	
-	header .navbar {
+	body > header .navbar {
 		.navbar-header {
 			float: none;
 		}
@@ -120,7 +120,7 @@
 	/* header */
 	/**********/
 
-	header {
+	body > header {
 
 		/**************/
 		/* header top */
@@ -284,7 +284,7 @@
 	/* header */
 	/**********/
 	
-	header .navbar {
+	body > header .navbar {
 		.navbar-header {
 			.navbar-brand {
 				@include logo-he-medium;
@@ -336,7 +336,7 @@
 	/* header */
 	/**********/
 
-	header {
+	body > header {
 
 		/**************/
 		/* header top */
@@ -400,7 +400,7 @@
 	/* header */
 	/**********/
 
-	header {
+	body > header {
 
 		/**************/
 		/* header top */
