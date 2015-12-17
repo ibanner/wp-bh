@@ -1,3 +1,16 @@
+#2.3.4
+
+##Fixes
+* Added backward compatibility for `__DIR__` magic constant not being supported before PHP 5.3.
+
+#2.3.3
+
+##Fixes
+* [wpmlga-96] WordPress 4.4 compatibility: pulled all html headings by one (e.g. h2 -> h1, he -> h2, etc.)
+
+##Performances
+* [wpmlst-584] Improved cache flushing in Packages Translations, solving the `PHP Fatal error: Call to undefined method WP_Object_Cache::__get()` message WPEngine users were getting
+
 #2.3.2
 
 ##Fixes

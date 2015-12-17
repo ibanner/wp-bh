@@ -64,4 +64,10 @@ class WPML_Lang_Domains_Converter extends WPML_URL_Converter {
 
 		return untrailingslashit( $converted_url );
 	}
+
+	public function get_admin_ajax_url( $url ) {
+		global $sitepress;
+
+		return $this->convert_url( $url, $sitepress->get_current_language() );
+	}
 }

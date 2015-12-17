@@ -161,6 +161,17 @@ class WPML_WP_API {
 		return get_post_type( $post );
 	}
 
+	/**
+	 * @param int|WP_User $user
+	 * @param string      $capability
+	 *
+	 * @return bool
+	 */
+	public function user_can( $user, $capability ) {
+
+		return user_can( $user, $capability );
+	}
+
 	public function get_tm_url( $tab = null, $hash = null ) {
 		$tm_url = menu_page_url(WPML_TM_FOLDER . '/menu/main.php', false);
 
@@ -228,7 +239,8 @@ class WPML_WP_API {
 	}
 
 	public function is_ajax() {
-		return defined( 'DOING_AJAX' ) && DOING_AJAX;
+
+		return ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || wpml_is_ajax();
 	}
 
 	public function is_cron_job() {
@@ -415,5 +427,30 @@ class WPML_WP_API {
 	public function wp_safe_redirect( $redir_target, $status = 302 ) {
 		wp_safe_redirect( $redir_target, $status );
 		exit;
+	}
+
+	/**
+	 * Wrapper around PHP constant lookup
+	 *
+	 * @param string $constant_name
+	 *
+	 * @return string|int
+	 */
+	public function constant( $constant_name ) {
+
+		return defined( $constant_name ) ? constant( $constant_name ) : null;
+	}
+
+	/**
+	 * Wrapper for \load_textdomain
+	 *
+	 * @param string $domain
+	 * @param string $mofile
+	 *
+	 * @return bool
+	 */
+	public function load_textdomain( $domain, $mofile ) {
+
+		return load_textdomain( $domain, $mofile );
 	}
 }

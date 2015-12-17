@@ -87,7 +87,7 @@ function icl_populate_translations_pickup_box() {
 		$project         = TranslationProxy::get_current_project();
 		$job_factory     = wpml_tm_load_job_factory();
 		$wpml_tm_records = new WPML_TM_Records( $wpdb );
-		$cms_id_helper   = new WPML_TM_CMS_ID( $wpdb, $job_factory, $wpml_tm_records );
+		$cms_id_helper   = new WPML_TM_CMS_ID( $wpml_tm_records, $job_factory );
 		$polling_status  = new WPML_TP_Polling_Status( $project, $sitepress, $cms_id_helper );
 		$result          = $polling_status->get_status_array();
 	}
@@ -102,7 +102,7 @@ function icl_pickup_translations() {
 	global $ICL_Pro_Translation, $wpdb;
 	$job_factory     = wpml_tm_load_job_factory();
 	$wpml_tm_records = new WPML_TM_Records( $wpdb );
-	$cms_id_helper   = new WPML_TM_CMS_ID( $wpdb, $job_factory, $wpml_tm_records );
+	$cms_id_helper   = new WPML_TM_CMS_ID( $wpml_tm_records, $job_factory );
 	$pickup          = new WPML_TP_Polling_Pickup( $ICL_Pro_Translation, $cms_id_helper );
 	wp_send_json_success( $pickup->poll_job( $_POST ) );
 }

@@ -27,6 +27,15 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 		add_filter( 'post_link', array( $this, 'permalink_filter' ), 1, 2 );
 		add_filter( 'post_type_link', array( $this, 'permalink_filter' ), 1, 2 );
 		add_filter( 'get_edit_post_link', array( $this, 'get_edit_post_link' ), 1, 3 );
+		add_filter( 'admin_url', array( $this, 'admin_url_filter' ), 1, 2 );
+	}
+
+	public function admin_url_filter( $url, $path ) {
+		if ( 'admin-ajax.php' === $path ) {
+			$url  = $this->url_converter->convert_url($url, $this->sitepress->get_current_language());
+		}
+
+		return $url;
 	}
 
 	/**
@@ -154,7 +163,7 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 	 */
 	private function get_permalink_filter_lang( $post_object ) {
 		if ( isset( $_POST['action'] ) && $_POST['action'] === 'sample-permalink' ) {
-			$code = filter_var( ( isset( $_GET['lang'] ) ? $_GET['lang'] : "" ), FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$code = $this->get_language_from_url();
 			$code = $code
 				? $code
 				: ( ! isset( $_SERVER['HTTP_REFERER'] )
@@ -176,5 +185,23 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 		}
 
 		return http_build_query( $query_parts );
+	}
+
+	private function get_language_from_url( $return_default_language_if_missing = false ) {
+		$query_string_argument = '';
+		$language              = '';
+		if ( $return_default_language_if_missing ) {
+			$language = $this->sitepress->get_current_language();
+		}
+		if ( array_key_exists( 'wpml_lang', $_GET ) ) {
+			$query_string_argument = 'wpml_lang';
+		} elseif ( array_key_exists( 'lang', $_GET ) ) {
+			$query_string_argument = 'lang';
+		}
+		if ( '' !== $query_string_argument ) {
+			$language = filter_var( $_GET[ $query_string_argument ], FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		}
+
+		return $language;
 	}
 }

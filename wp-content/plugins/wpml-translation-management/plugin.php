@@ -5,7 +5,7 @@ Plugin URI: https://wpml.org/
 Description: Add a complete translation process for WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-3-2/">WPML 3.2 release notes</a>
 Author: OnTheGoSystems
 Author URI: http://www.onthegosystems.com/
-Version: 2.1.1
+Version: 2.1.3
 Plugin Slug: wpml-translation-management
 */
 
@@ -13,8 +13,9 @@ if ( defined( 'WPML_TM_VERSION' ) ) {
 	return;
 }
 
+/** @var array $bundle */
 $bundle = json_decode( file_get_contents( dirname( __FILE__ ) . '/wpml-dependencies.json' ), true );
-if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+if ( defined( 'ICL_SITEPRESS_VERSION' ) && is_array( $bundle ) ) {
 	$sp_version_stripped = ICL_SITEPRESS_VERSION;
 	$dev_or_beta_pos = strpos( ICL_SITEPRESS_VERSION, '-' );
 	if ( $dev_or_beta_pos > 0 ) {
@@ -25,7 +26,7 @@ if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
 	}
 }
 
-define( 'WPML_TM_VERSION', '2.1.1' );
+define( 'WPML_TM_VERSION', '2.1.3' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -37,7 +38,9 @@ if ( ! defined( 'WPML_TM_WC_CHUNK' ) ) {
 	define( 'WPML_TM_WC_CHUNK', 1000 );
 }
 
-require_once "lib/wpml-tm-autoloader.class.php";
+require_once 'embedded/wpml/commons/autoloader.php';
+$wpml_auto_loader_instance = WPML_Auto_Loader::get_instance();
+$wpml_auto_loader_instance->register( WPML_TM_PATH . '/' );
 
 require WPML_TM_PATH . '/inc/wpml-dependencies-check/wpml-bundle-check.class.php';
 require WPML_TM_PATH . '/inc/constants.php';
@@ -69,7 +72,6 @@ function wpml_tm_word_count_init() {
 	global $sitepress, $wpdb;
 
 	$wpml_wp_api = $sitepress->get_wp_api();
-	new WPML_Twig();
 	$wpml_tm_words_count = new WPML_TM_Words_Count( $wpdb, $sitepress );
 	$wpml_tm_words_count->init();
 	new WPML_TM_Words_Count_Resources( $wpml_wp_api );

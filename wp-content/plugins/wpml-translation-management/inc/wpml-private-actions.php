@@ -51,8 +51,12 @@ function wpml_tm_save_post( $post_id, $post, $force_set_status ) {
 
 	require_once WPML_TM_PATH . '/inc/actions/wpml-tm-post-actions.class.php';
 	$action_helper    = new WPML_TM_Action_Helper();
-	$blog_translators = new WPML_TM_Blog_Translators($wpdb);
-	$save_post_action = new WPML_TM_Post_Actions( $action_helper, $blog_translators );
+	$blog_translators = wpml_tm_load_blog_translators();
+	$tm_records       = new WPML_TM_Records( $wpdb );
+	$save_post_action = new WPML_TM_Post_Actions( $action_helper, $blog_translators, $tm_records );
+	if ( $post->post_type == 'revision' || $post->post_status == 'auto-draft' || isset( $_POST['autosave'] ) ) {
+		return;
+	}
 	$save_post_action->save_post_actions( $post_id, $post, $force_set_status );
 }
 
