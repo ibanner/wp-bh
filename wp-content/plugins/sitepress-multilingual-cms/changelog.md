@@ -1,3 +1,16 @@
+#3.3.3
+
+##Fixes
+* Added backward compatibility for `__DIR__` magic constant not being supported before PHP 5.3.
+
+#3.3.2
+
+##Fixes
+* [wpmlga-96] WordPress 4.4 compatibility: pulled all html headings by one (e.g. h2 -> h1, he -> h2, etc.)
+* [wpmlcore-2318] Fixed some UI issues caused by changes in WordPress 4.4 styles
+* [wpmlcore-2089] AJAX calls when using languages in domain, now calls the correct AJAX url, rather than the url of the default language.
+* [wpmlcore-2060] Custom fields created by Types set as do nothing are now properly duplicated when duplicating a post
+
 #3.3.1
 
 ##Fixes
@@ -14,6 +27,7 @@
 * [wpmlcore-2384] Fixed loss of already active languages when activating/deactivating languages
 * [wpmlcore-2385] Fixed loss of languages order when activating/deactivating languages
 * [wpmlcore-2386] Fixed stylesheet and login urls being translated incorrectly when homeurl are siteurl different.
+* [wpmlcore-2361] Fixed post meta data set to be copied to translations, not being copied when editing the original post.
 
 ##Performance
 * [wpmlcore-2349] Cache get_source_language_by_trid to improve performance

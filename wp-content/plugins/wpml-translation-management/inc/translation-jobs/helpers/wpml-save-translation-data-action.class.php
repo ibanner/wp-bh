@@ -73,8 +73,8 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 					'status'       => ICL_TM_COMPLETE,
 					'needs_update' => 0
 				) );
-				list( $element_id, $trid ) = $wpdb->get_row( $wpdb->prepare( "SELECT element_id, trid FROM {$wpdb->prefix}icl_translations WHERE translation_id=%d", $translation_id ), ARRAY_N );
 				$job = $this->get_translation_job( $data['job_id'], true );
+				$element_id = $translation_status->element_id();
 
 				if ( $is_external ) {
 					$this->save_external( $element_type_prefix, $job );
@@ -135,7 +135,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 						$_POST['parent_id']   = $postarr['parent_id'] = $parent_id;
 					}
 
-					$_POST['trid']                   = $trid;
+					$_POST['trid']                   = $translation_status->trid();
 					$_POST['lang']                   = $job->language_code;
 					$_POST['skip_sitepress_actions'] = true;
 

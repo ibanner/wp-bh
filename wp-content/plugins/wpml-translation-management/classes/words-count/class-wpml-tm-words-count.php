@@ -63,7 +63,7 @@ class WPML_TM_Words_Count extends WPML_WPDB_And_SP_User {
 
 		foreach ( $posts as $post ) {
 			$post_type              = $post->post_type;
-			$wpml_post              = new WPML_Post( $post->ID, $this->sitepress, $this->wpdb );
+			$wpml_post              = new WPML_TM_Post( $post->ID, $this->sitepress, $this->wpdb );
 			$untranslated_languages = $active_languages_count - $post->translations;
 			if ( true == $this->sitepress->is_translated_post_type( $post_type ) ) {
 				if ( ! isset( $this->report[ $post_type ] ) ) {
@@ -103,7 +103,7 @@ class WPML_TM_Words_Count extends WPML_WPDB_And_SP_User {
 		$active_languages_count = $this->get_active_lang_count();
 
 		foreach ( $strings as $string ) {
-			$wpml_string = new WPML_String( $string->id, $this->sitepress, $this->wpdb );
+			$wpml_string = new WPML_TM_String( $string->id, $this->sitepress, $this->wpdb );
 			if ( ! isset( $this->report['strings'] ) ) {
 				$this->init_strings_report( $wpml_string );
 			}
@@ -136,7 +136,7 @@ class WPML_TM_Words_Count extends WPML_WPDB_And_SP_User {
 
 	/**
 	 * @param string    $post_type
-	 * @param WPML_Post $wpml_post
+	 * @param WPML_TM_Post $wpml_post
 	 */
 	private function init_post_type_report( $post_type, $wpml_post ) {
 		$this->report[ $post_type ] = array(
@@ -154,7 +154,7 @@ class WPML_TM_Words_Count extends WPML_WPDB_And_SP_User {
 	}
 
 	/**
-	 * @param WPML_String $wpml_string
+	 * @param WPML_TM_String $wpml_string
 	 */
 	private function init_strings_report( $wpml_string ) {
 		$this->report[ 'strings' ] = array(

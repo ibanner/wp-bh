@@ -29,6 +29,8 @@ class SitePress extends WPML_WPDB_User{
 	private $always_translatable_taxonomies;
 	/** @var  WPML_WP_API $wp_api */
 	private $wp_api;
+	/** @var WPML_Records $records */
+	private $records;
 	/** @var WPML_Post_Status_Display $post_status_display */
 	private $post_status_display;
 	/** @var  @var int $loaded_blog_id */
@@ -60,11 +62,11 @@ class SitePress extends WPML_WPDB_User{
 	function __construct() {
 		do_action('wpml_before_startup');
 
-		global $pagenow, $sitepress_settings, $wpdb, $wpml_post_translations, $wpml_term_translations;
+		global $pagenow, $sitepress_settings, $wpdb, $wpml_post_translations, $locale, $wpml_term_translations;
 		$this->wpml_helper = new WPML_Helper( $wpdb );
 
 		parent::__construct( $wpdb );
-		$this->locale_utils = new WPML_Locale( $wpdb, $this );
+		$this->locale_utils = new WPML_Locale( $wpdb, $this, $locale );
         $sitepress_settings = get_option('icl_sitepress_settings');
 		$this->settings = &$sitepress_settings;
 		$this->always_translatable_post_types = array( 'post', 'page' );
@@ -447,10 +449,6 @@ class SitePress extends WPML_WPDB_User{
 		if ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
 			add_action( 'xmlrpc_call', array( $this, 'xmlrpc_call_actions' ) );
 			add_filter( 'xmlrpc_methods', array( $this, 'xmlrpc_methods' ) );
-		}
-
-		if ( defined( 'WPML_TM_VERSION' ) && is_admin() ) {
-			require ICL_PLUGIN_PATH . '/inc/quote.php';
 		}
 
 		add_action( 'init', array( $this, 'set_up_language_selector' ) );
@@ -2915,6 +2913,24 @@ class SitePress extends WPML_WPDB_User{
 		$this->wp_api = $this->wp_api ? $this->wp_api : new WPML_WP_API();
 
 		return $this->wp_api;
+	}
+
+	/**
+	 * @return wpdb
+	 */
+	public function wpdb() {
+
+		return $this->wpdb;
+	}
+
+	/**
+	 * @return WPML_Records
+	 */
+	public function get_records() {
+		$this->records = $this->records
+			? $this->records : new WPML_Records( $this->wpdb );
+
+		return $this->records;
 	}
 
 	/**

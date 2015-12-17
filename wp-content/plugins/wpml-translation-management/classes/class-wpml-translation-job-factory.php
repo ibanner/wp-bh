@@ -2,14 +2,31 @@
 
 class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 
+	/** @var  WPML_TM_Records $tm_records */
+	private $tm_records;
+
 	/**
-	 * @param wpdb $wpdb
+	 * @param WPML_TM_Records $tm_records
 	 */
-	public function __construct( &$wpdb ) {
+	public function __construct( &$tm_records ) {
+		$wpdb = $tm_records->wpdb();
 		parent::__construct( $wpdb );
-		add_filter( 'wpml_translation_jobs', array( $this, 'get_translation_jobs_filter' ), 10, 2 );
-		add_filter( 'wpml_translation_job_types', array( $this, 'get_translation_job_types_filter' ), 10, 2 );
-		add_filter( 'wpml_get_translation_job', array( $this, 'get_translation_job_filter' ), 10, 3 );
+		$this->tm_records = &$tm_records;
+	}
+
+	public function init_hooks(){
+		add_filter( 'wpml_translation_jobs', array(
+			$this,
+			'get_translation_jobs_filter'
+		), 10, 2 );
+		add_filter( 'wpml_translation_job_types', array(
+			$this,
+			'get_translation_job_types_filter'
+		), 10, 2 );
+		add_filter( 'wpml_get_translation_job', array(
+			$this,
+			'get_translation_job_filter'
+		), 10, 3 );
 	}
 
 	/**
@@ -34,7 +51,7 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 			);
 
 			if ( null !== $translator_id ) {
-				$dummy_basket_data['selected_translators'] = array( $target_language_code => $translator_id );
+				$dummy_basket_data['translators'] = array( $target_language_code => $translator_id );
 			}
 
 			$iclTranslationManagement->send_jobs( $dummy_basket_data );
@@ -82,18 +99,12 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 	 * @return bool|stdClass|WPML_Element_Translation_Job
 	 */
 	public function job_by_translation_id( $translation_id ) {
-		$row = $this->wpdb->get_row(
-			$this->wpdb->prepare(
-				"SELECT trid, language_code
-				FROM {$this->wpdb->prefix}icl_translations
-				WHERE translation_id = %d
-				LIMIT 1",
-				$translation_id ) );
+		$row = $this->tm_records->icl_translations_by_translation_id( $translation_id );
 
 		return $row
 			? $this->get_translation_job(
 				$this->job_id_by_trid_and_lang(
-					$row->trid, $row->language_code ), false, 0, true )
+					$row->trid(), $row->language_code() ), false, 0, true )
 			: 0;
 	}
 

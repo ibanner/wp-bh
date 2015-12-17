@@ -1,6 +1,6 @@
 <?php
 
-class WPML_TM_CPT_Dashboard_Widget extends WPML_WPDB_And_SP_User {
+class WPML_TM_CPT_Dashboard_Widget extends WPML_SP_User {
 
 	/** @var array $wp_taxonomies */
 	private $wp_taxonomies;
@@ -8,12 +8,11 @@ class WPML_TM_CPT_Dashboard_Widget extends WPML_WPDB_And_SP_User {
 	/**
 	 * WPML_TM_CPT_Dashboard_Widget constructor.
 	 *
-	 * @param wpdb      $wpdb
 	 * @param SitePress $sitepress
 	 * @param array     $wp_taxonomies
 	 */
-	public function __construct( &$wpdb, &$sitepress, &$wp_taxonomies ) {
-		parent::__construct( $wpdb, $sitepress );
+	public function __construct( &$sitepress, &$wp_taxonomies ) {
+		parent::__construct( $sitepress );
 		$this->wp_taxonomies = &$wp_taxonomies;
 	}
 

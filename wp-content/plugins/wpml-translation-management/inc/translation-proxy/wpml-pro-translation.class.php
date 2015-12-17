@@ -27,7 +27,7 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 		$this->tmg                  =& $iclTranslationManagement;
 		$this->xliff_reader_factory = new WPML_TM_Xliff_Reader_Factory( $this->job_factory );
 		$wpml_tm_records            = new WPML_TM_Records( $wpdb );
-		$this->cms_id_helper        = new WPML_TM_CMS_ID( $wpdb, $job_factory, $wpml_tm_records );
+		$this->cms_id_helper        = new WPML_TM_CMS_ID( $wpml_tm_records, $job_factory );;
 		add_filter( 'xmlrpc_methods', array( $this, 'custom_xmlrpc_methods' ) );
 		add_action( 'post_submitbox_start', array(
 			$this,

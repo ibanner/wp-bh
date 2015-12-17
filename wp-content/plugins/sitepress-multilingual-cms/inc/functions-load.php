@@ -260,7 +260,6 @@ function wpml_get_post_status_helper() {
 	global $wpml_post_status, $wpdb;
 
 	if ( ! isset( $wpml_post_status ) ) {
-		require ICL_PLUGIN_PATH . '/inc/post-translation/wpml-post-status.class.php';
 		$wpml_post_status = new WPML_Post_Status( $wpdb );
 	}
 

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class WPML_User_Options_Menu
+ *
+ * Renders the WPML UI elements on the WordPress user profile edit screen
+ */
 class WPML_User_Options_Menu extends WPML_SP_User {
 
 	/** @var WP_User $this ->current_user */
@@ -16,19 +21,17 @@ class WPML_User_Options_Menu extends WPML_SP_User {
 		$this->current_user = &$current_user;
 	}
 
-
 	/**
 	 *
 	 * @return string the html for the user profile edit screen element WPML
 	 * adds to it
 	 */
 	public function render() {
-		$user_language       = $this->sitepress->get_wp_api()->get_user_meta( $this->current_user->ID, 'icl_admin_language', true );
-		$user_admin_def_lang = $this->sitepress->get_setting( 'admin_default_language' );
-		$all_languages       = $this->sitepress->get_languages( $user_language ? $user_language : $user_admin_def_lang );
-		if ( $user_admin_def_lang === '_default_' ) {
-			$user_admin_def_lang = $this->sitepress->get_default_language();
-		}
+		$wp_api                 = $this->sitepress->get_wp_api();
+		$user_language          = $wp_api->get_user_meta( $this->current_user->ID, 'icl_admin_language', true );
+		$user_admin_def_lang    = $this->sitepress->get_setting( 'admin_default_language' );
+		$all_languages          = $this->sitepress->get_languages( $user_language ? $user_language : $user_admin_def_lang );
+		$user_admin_def_lang    = $user_admin_def_lang === '_default_' ? $this->sitepress->get_default_language() : $user_admin_def_lang;
 		$lang_details           = $this->sitepress->get_language_details( $user_admin_def_lang );
 		$admin_default_language = $lang_details['display_name'];
 		ob_start();
@@ -78,12 +81,12 @@ class WPML_User_Options_Menu extends WPML_SP_User {
 					<br/>
 					<label><input type="checkbox"
 					              name="icl_admin_language_for_edit" value="1"
-					              <?php if ( $this->sitepress->get_wp_api()->get_user_meta( $this->current_user->ID, 'icl_admin_language_for_edit', true ) ): ?>checked="checked"<?php endif; ?> />&nbsp;<?php _e( 'Set admin language as editing language.', 'sitepress' ); ?>
+					              <?php if ( $wp_api->get_user_meta( $this->current_user->ID, 'icl_admin_language_for_edit', true ) ): ?>checked="checked"<?php endif; ?> />&nbsp;<?php _e( 'Set admin language as editing language.', 'sitepress' ); ?>
 					</label>
 				</td>
 			</tr>
 			<?php
-			if ( $this->sitepress->get_wp_api()->current_user_can( 'manage_options' ) ): ?>
+			if ( $wp_api->current_user_can( 'manage_options' ) ): ?>
 				<tr>
 					<th><?php _e( 'Hidden languages:', 'sitepress' ) ?></th>
 					<?php $hidden_language_setting = $this->sitepress->get_setting( 'hidden_languages' ); ?>
@@ -109,7 +112,7 @@ class WPML_User_Options_Menu extends WPML_SP_User {
 						<p>
 							<label><input name="icl_show_hidden_languages"
 							              type="checkbox" value="1" <?php
-							              if ( $this->sitepress->get_wp_api()->get_user_meta( $this->current_user->ID, 'icl_show_hidden_languages', true ) ): ?>checked="checked"<?php endif ?> />&nbsp;<?php
+							              if ( $wp_api->get_user_meta( $this->current_user->ID, 'icl_show_hidden_languages', true ) ): ?>checked="checked"<?php endif ?> />&nbsp;<?php
 								_e( 'Display hidden languages', 'sitepress' ) ?>
 							</label>
 						</p>
