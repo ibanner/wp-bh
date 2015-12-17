@@ -115,9 +115,17 @@ add_action('woocommerce_review_order_after_shipping', 'BH_shipping_options_discl
 /**
  * Checkout page
  * 
+ * @see		BH_checkout_title()
+ * @see		BH_checkout_order_pay_title()
+ * @see		BH_checkout_order_received_title()
+ * @see		BH_review_order_before_payment()
  * @see		BH_change_default_checkout_country()
  * @see		BH_change_default_checkout_state()
  */
+add_action('woocommerce_before_checkout_form', 'BH_checkout_title', 0, 1);
+add_action('before_woocommerce_pay', 'BH_checkout_order_pay_title');
+add_filter('woocommerce_thankyou_order_received_text', 'BH_checkout_order_received_title');
+add_action('woocommerce_review_order_before_payment', 'BH_review_order_before_payment');
 add_filter('default_checkout_country', 'BH_change_default_checkout_country');
 add_filter('default_checkout_state', 'BH_change_default_checkout_state');
 

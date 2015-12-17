@@ -490,6 +490,42 @@ function BH_shipping_options_disclaimer() {
 }
 
 /**
+ * BH_checkout_title
+ *
+ * Add title in checkout page
+ */
+function BH_checkout_title() {
+	echo '<h2 class="title">' . __('Checkout: Please fill your billing address and shipping address', 'BH') . '</h2><hr>';
+}
+
+/**
+ * BH_checkout_order_pay_title
+ *
+ * Add title in checkout order-pay endpoint
+ */
+function BH_checkout_order_pay_title() {
+	echo '<h2 class="title">' . __('Checkout: Please fill your payment details', 'BH') . '</h2><hr>';
+}
+
+/**
+ * BH_checkout_order_received_title
+ *
+ * Add title in checkout order-received endpoint
+ */
+function BH_checkout_order_received_title() {
+	return '<h2 class="title">' . __('Thank you. Your order has been received', 'BH') . '</h2><hr>';
+}
+
+/**
+ * BH_review_order_before_payment
+ *
+ * Add title before payment options
+ */
+function BH_review_order_before_payment() {
+	echo '<h3 id="payment_heading">' . __('Secured Billing: Please choose your preferred billing method', 'BH') . '</h3>';
+}
+
+/**
  * BH_change_default_checkout_country
  * 
  * Default checkout country to blank

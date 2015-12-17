@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-12-14 13:37+0200\n"
-"PO-Revision-Date: 2015-12-14 13:37+0200\n"
+"POT-Creation-Date: 2015-12-17 21:05+0200\n"
+"PO-Revision-Date: 2015-12-17 21:05+0200\n"
 "Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -55,15 +55,31 @@ msgstr ""
 "בטווח הזמן המובטח והקושי במעקב אחר חבילות וקבלת מענה לפניות, אנו נאלצים "
 "להפסיק להציע משלוח רשום רגיל. עם לקוחותינו הסליחה."
 
-#: functions/woocommerce/woocommerce-functions.php:551
+#: functions/woocommerce/woocommerce-functions.php:498
+msgid "Checkout: Please fill your billing address and shipping address"
+msgstr "קופה: אנא הזינו פרטים למשלוח חשבונית וכתובת למשלוח"
+
+#: functions/woocommerce/woocommerce-functions.php:507
+msgid "Checkout: Please fill your payment details"
+msgstr "קופה: אנא הזינו פרטי אמצעי תשלום"
+
+#: functions/woocommerce/woocommerce-functions.php:516
+msgid "Thank you. Your order has been received"
+msgstr "תודה רבה. הזמנתכם התקבלה בהצלחה"
+
+#: functions/woocommerce/woocommerce-functions.php:525
+msgid "Secured Billing: Please choose your preferred billing method"
+msgstr "אמצעי חיוב מאובטח: אנא בחרו את האמצעי המועדף עליכם"
+
+#: functions/woocommerce/woocommerce-functions.php:587
 msgid "Most Popular"
 msgstr "הפופולרי ביותר"
 
-#: functions/woocommerce/woocommerce-functions.php:552
+#: functions/woocommerce/woocommerce-functions.php:588
 msgid "Price: Low to High"
 msgstr "מחיר: נמוך לגבוה"
 
-#: functions/woocommerce/woocommerce-functions.php:553
+#: functions/woocommerce/woocommerce-functions.php:589
 msgid "Price: High to Low"
 msgstr "מחיר: גבוה לנמוך"
 
@@ -338,45 +354,6 @@ msgstr ""
 msgid "Payment Method:"
 msgstr ""
 
-#: woocommerce/checkout/payment.php:18
-msgid "Secured Billing: Please choose your preferred billing method"
-msgstr "אמצעי חיוב מאובטח: אנא בחרו את האמצעי המועדף עליכם"
-
-#: woocommerce/checkout/payment.php:31
-msgid "Please fill in your details above to see available payment methods."
-msgstr "אנא מלא את הפרטים שלך למעלה כדי לראות את אפשרויות התשלום הזמינות."
-
-#: woocommerce/checkout/payment.php:33
-msgid ""
-"Sorry, it seems that there are no available payment methods for your state. "
-"Please contact us if you require assistance or wish to make alternate "
-"arrangements."
-msgstr ""
-"סליחה, נראה כי אין אפשרויות משלוח הזמינות עבור המדינה שלך. אנא צור קשר אם "
-"אתה זקוק לסיוע או רוצה לעשות הזמנה חלופית."
-
-#: woocommerce/checkout/payment.php:44
-msgid ""
-"Since your browser does not support JavaScript, or it is disabled, please "
-"ensure you click the <em>Update Totals</em> button before placing your "
-"order. You may be charged more than the amount stated above if you fail to "
-"do so."
-msgstr ""
-"הדפדפן שלך לא תומך ב JavaScript, או שהוא מכובה, אנא ודא שאתה לוחץ על "
-"<em>עדכן סכום</em> לפני ביצוע ההזמנה. אתה עשוי להיות מחויב יותר מהסכום האמור "
-"לעיל, אם לא תצליח לעשות זאת."
-
-#: woocommerce/checkout/payment.php:44
-msgid "Update totals"
-msgstr "עדכן סכום"
-
-#: woocommerce/checkout/payment.php:54
-#, php-format
-msgid ""
-"I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; "
-"conditions</a>"
-msgstr "קראתי והנני מסכים/ה <a href=\"%s\" target=\"_blank\">לתנאי השימוש</a>"
-
 #: views/microfilm/microfilm-view.php:9
 msgid "Select a microfilm"
 msgstr "בחירת מיקרופילם"
@@ -622,6 +599,36 @@ msgstr "קראו עוד"
 #: views/footer/footer-menu.php:22
 msgid "Language/שפה"
 msgstr ""
+
+#~ msgid "Please fill in your details above to see available payment methods."
+#~ msgstr "אנא מלא את הפרטים שלך למעלה כדי לראות את אפשרויות התשלום הזמינות."
+
+#~ msgid ""
+#~ "Sorry, it seems that there are no available payment methods for your "
+#~ "state. Please contact us if you require assistance or wish to make "
+#~ "alternate arrangements."
+#~ msgstr ""
+#~ "סליחה, נראה כי אין אפשרויות משלוח הזמינות עבור המדינה שלך. אנא צור קשר אם "
+#~ "אתה זקוק לסיוע או רוצה לעשות הזמנה חלופית."
+
+#~ msgid ""
+#~ "Since your browser does not support JavaScript, or it is disabled, please "
+#~ "ensure you click the <em>Update Totals</em> button before placing your "
+#~ "order. You may be charged more than the amount stated above if you fail "
+#~ "to do so."
+#~ msgstr ""
+#~ "הדפדפן שלך לא תומך ב JavaScript, או שהוא מכובה, אנא ודא שאתה לוחץ על "
+#~ "<em>עדכן סכום</em> לפני ביצוע ההזמנה. אתה עשוי להיות מחויב יותר מהסכום "
+#~ "האמור לעיל, אם לא תצליח לעשות זאת."
+
+#~ msgid "Update totals"
+#~ msgstr "עדכן סכום"
+
+#~ msgid ""
+#~ "I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms "
+#~ "&amp; conditions</a>"
+#~ msgstr ""
+#~ "קראתי והנני מסכים/ה <a href=\"%s\" target=\"_blank\">לתנאי השימוש</a>"
 
 #~ msgid "Search for products"
 #~ msgstr "חיפוש מוצרים"

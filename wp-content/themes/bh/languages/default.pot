@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-12-14 13:53+0200\n"
-"PO-Revision-Date: 2015-12-14 13:54+0200\n"
+"POT-Creation-Date: 2015-12-17 20:51+0200\n"
+"PO-Revision-Date: 2015-12-17 20:52+0200\n"
 "Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -52,15 +52,31 @@ msgid ""
 "shipping. We apologise for any inconvenience to our customers."
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:551
+#: functions/woocommerce/woocommerce-functions.php:498
+msgid "Checkout: Please fill your billing address and shipping address"
+msgstr ""
+
+#: functions/woocommerce/woocommerce-functions.php:507
+msgid "Checkout: Please fill your payment details"
+msgstr ""
+
+#: functions/woocommerce/woocommerce-functions.php:516
+msgid "Thank you. Your order has been received"
+msgstr ""
+
+#: functions/woocommerce/woocommerce-functions.php:525
+msgid "Secured Billing: Please choose your preferred billing method"
+msgstr ""
+
+#: functions/woocommerce/woocommerce-functions.php:587
 msgid "Most Popular"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:552
+#: functions/woocommerce/woocommerce-functions.php:588
 msgid "Price: Low to High"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:553
+#: functions/woocommerce/woocommerce-functions.php:589
 msgid "Price: High to Low"
 msgstr ""
 
@@ -333,40 +349,6 @@ msgstr ""
 
 #: woocommerce/checkout/thankyou.php:53
 msgid "Payment Method:"
-msgstr ""
-
-#: woocommerce/checkout/payment.php:18
-msgid "Secured Billing: Please choose your preferred billing method"
-msgstr ""
-
-#: woocommerce/checkout/payment.php:31
-msgid "Please fill in your details above to see available payment methods."
-msgstr ""
-
-#: woocommerce/checkout/payment.php:33
-msgid ""
-"Sorry, it seems that there are no available payment methods for your state. "
-"Please contact us if you require assistance or wish to make alternate "
-"arrangements."
-msgstr ""
-
-#: woocommerce/checkout/payment.php:44
-msgid ""
-"Since your browser does not support JavaScript, or it is disabled, please "
-"ensure you click the <em>Update Totals</em> button before placing your "
-"order. You may be charged more than the amount stated above if you fail to "
-"do so."
-msgstr ""
-
-#: woocommerce/checkout/payment.php:44
-msgid "Update totals"
-msgstr ""
-
-#: woocommerce/checkout/payment.php:54
-#, php-format
-msgid ""
-"I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; "
-"conditions</a>"
 msgstr ""
 
 #: views/microfilm/microfilm-view.php:9
