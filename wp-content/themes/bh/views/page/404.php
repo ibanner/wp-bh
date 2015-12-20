@@ -17,7 +17,7 @@
 		
 			<div class="col-sm-7 col-sm-push-5 col-lg-6 col-lg-push-6">
 				<div class="top-msg-title">e<span class="small">rror</span>=<span class="big">404</span><span class="top">2</span></div>
-				<div class="top-msg-content"><?php echo $page_404_top_msg; ?><br /><a href="<?php echo HOME; ?>"><?php _e('Back to Homepage', 'BH'); ?></a></div>
+				<div class="top-msg-content"><?php echo $page_404_top_msg; ?></div>
 			</div>
 			
 		</div>
