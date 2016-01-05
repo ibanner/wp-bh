@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-12-17 20:51+0200\n"
-"PO-Revision-Date: 2015-12-17 20:52+0200\n"
+"POT-Creation-Date: 2016-01-05 16:15+0200\n"
+"PO-Revision-Date: 2016-01-05 16:15+0200\n"
 "Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -530,10 +530,6 @@ msgstr ""
 msgid ""
 "This content is password protected. To view it please enter your password "
 "below:"
-msgstr ""
-
-#: views/page/404.php:20
-msgid "Back to Homepage"
 msgstr ""
 
 #: views/components/meta-single.php:2 views/woocommerce/product-item.php:46

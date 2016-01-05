@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2015-12-17 21:05+0200\n"
-"PO-Revision-Date: 2015-12-17 21:05+0200\n"
+"POT-Creation-Date: 2016-01-05 16:15+0200\n"
+"PO-Revision-Date: 2016-01-05 16:15+0200\n"
 "Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -535,10 +535,6 @@ msgid ""
 "below:"
 msgstr ""
 
-#: views/page/404.php:20
-msgid "Back to Homepage"
-msgstr "לדף הבית"
-
 #: views/components/meta-single.php:2 views/woocommerce/product-item.php:46
 #: views/woocommerce/single-product/single-product-section1-title.php:22
 msgid "By "
@@ -599,6 +595,9 @@ msgstr "קראו עוד"
 #: views/footer/footer-menu.php:22
 msgid "Language/שפה"
 msgstr ""
+
+#~ msgid "Back to Homepage"
+#~ msgstr "לדף הבית"
 
 #~ msgid "Please fill in your details above to see available payment methods."
 #~ msgstr "אנא מלא את הפרטים שלך למעלה כדי לראות את אפשרויות התשלום הזמינות."
