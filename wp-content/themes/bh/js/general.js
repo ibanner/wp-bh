@@ -4,6 +4,8 @@ var $ = jQuery,
 		params : {
 
 			// general
+			breakpoint				: '',									// CSS media query breakpoint
+			prev_breakpoint			: '',									// Previous media query breakpoint
 			api						: js_globals.template_url + '/api/',
 			timeout					: 400,
 			window_width			: 0
@@ -48,7 +50,11 @@ var $ = jQuery,
 			
 			// shop - homepage
 			if ( $('body').hasClass('archive') && $('body').hasClass('woocommerce') ) {
-				BH_general.shop_related_products();
+				// Featured products
+				BH_general.shop_featured_products();
+
+				// Products sliders
+				BH_general.shop_products_slider();
 			}
 			
 			// shop - archive
@@ -69,6 +75,17 @@ var $ = jQuery,
 			if ( $('body').hasClass('page-template-shop-why-shop-with-us') ) {
 				BH_general.shop_wswu_banners();
 			}
+
+		},
+
+		breakpoint_refreshValue : function () {
+
+			var new_breakpoint = window.getComputedStyle(
+				document.querySelector('body'), ':before'
+			).getPropertyValue('content').replace(/\"/g, '').replace(/\'/g, '');
+
+			BH_general.params.prev_breakpoint = BH_general.params.breakpoint;
+			BH_general.params.breakpoint = new_breakpoint;
 
 		},
 
@@ -174,7 +191,7 @@ var $ = jQuery,
 			
 		},
 		
-		shop_archive	: function() {
+		shop_archive : function() {
 			
 			// recently viewed products - show recently viewed
 			BH_general.show_recently_viewed();
@@ -219,7 +236,7 @@ var $ = jQuery,
 			});
 			
 			// related products
-			BH_general.shop_related_products();
+			BH_general.shop_products_slider();
 			
 		},
 		
@@ -293,7 +310,7 @@ var $ = jQuery,
 			
 		},
 		
-		remove_recently_viewed	: function(item) {
+		remove_recently_viewed : function(item) {
 			
 			var postid = item.attr('data-postid');
 			
@@ -337,7 +354,7 @@ var $ = jQuery,
 			
 		},
 		
-		recently_viewed_content	: function(content) {
+		recently_viewed_content : function(content) {
 			
 			var slideshow = $('.recently-products-slider');
 			
@@ -367,16 +384,42 @@ var $ = jQuery,
 			
 		},
 		
-		shop_related_products	: function() {
+		shop_featured_products : function() {
+
+			$('.featured-product-item').each(function() {
+				var item		= $(this),
+					image		= item.find('.product-item-image a .image'),
+					image_hover	= item.find('.product-item-image a .image-hover');
+
+				item.hover(function() {
+					if (image_hover.length > 0) {
+						image.hide();
+						image_hover.show();
+					}
+
+					item.addClass('active');
+				}, function() {
+					if (image_hover.length > 0) {
+						image.show();
+						image_hover.hide();
+					}
+
+					item.removeClass('active');
+				});
+			});
+
+		},
+
+		shop_products_slider : function() {
 			
-			var slideshow = $('.related-slider');
+			var slideshow = $('.products-slider-carousel');
 			
 			slideshow.cycle();
-			$('.related-slider-placeholder').fadeIn(BH_general.params.timeout);
+			$('.products-slider').fadeIn(BH_general.params.timeout);
 			
 		},
 		
-		shop_wswu_banners	: function() {
+		shop_wswu_banners : function() {
 			
 			var banners		= $('.col-shop-wswu').length,
 				fadeSpeed	= 1000,		// fadeIn time
@@ -473,29 +516,32 @@ var $ = jQuery,
 
 		alignments : function() {
 			
+			// breakpoint refresh value
+			BH_general.breakpoint_refreshValue();
+
 			// top menu
 			BH_general.top_menu();
 
 			// footer links
 			BH_general.footer_links();
 
+			// reinit products slider
+			if (BH_general.params.prev_breakpoint && BH_general.params.prev_breakpoint <= 991 && BH_general.params.breakpoint >= 1199 || BH_general.params.prev_breakpoint >= 1199 && BH_general.params.breakpoint <= 991) {
+				$('.products-slider-carousel').cycle('reinit');
+			}
+
 			// close all footer sub menus
 			$('.footer-menu li.menu-item-has-children').removeClass('collapsed');
 
-			// javascript media queries
-			if (matchMedia) {
-				var mq = window.matchMedia("(max-width: 767px)");
-
-				if (mq.matches) {
-					// width <= 767
-					$('.footer-menu').addClass('mobile');
-				}
-				else {
-					// width > 767
-					$('.footer-menu').removeClass('mobile');
-					// collapse top level footer sub menus
-					$('.footer-menu > ul > li.menu-item-has-children').addClass('collapsed');
-				}
+			if (BH_general.params.breakpoint <= 767) {
+				// width <= 767
+				$('.footer-menu').addClass('mobile');
+			}
+			else {
+				// width > 767
+				$('.footer-menu').removeClass('mobile');
+				// collapse top level footer sub menus
+				$('.footer-menu > ul > li.menu-item-has-children').addClass('collapsed');
 			}
 
 		}

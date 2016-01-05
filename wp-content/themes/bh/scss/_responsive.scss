@@ -2,6 +2,35 @@
 @import "modules/sprites";
 @import "modules/bh_sprites";
 
+/**
+ * These values will not show up in content, but can be 
+ * queried by JavaScript to know which breakpoint is active
+ */
+
+@media (max-width: 1199px) {
+	body:before {
+		content: "1199";
+	}
+}
+
+@media (max-width: 991px) {
+	body:before {
+		content: "991";
+	}
+}
+
+@media (max-width: 767px) {
+	body:before {
+		content: "767";
+	}
+}
+
+@media (max-width: 480px) {
+	body:before {
+		content: "480";
+	}
+}
+
 @media (max-width: 1199px) {
 
 	/**********/
@@ -275,6 +304,141 @@
 		}
 	}
 
+	/***************************/
+	/* shop - homepage sliders */
+	/***************************/
+
+	.shop-home-sliders {
+		.products-slider {
+			h2 {
+				padding: 12px 25px;
+				font-size: 16px;
+
+				&:after {
+					border-bottom-width: 41px;
+					border-right-width: 22px;
+				}
+			}
+		}
+	}
+
+	/**************************/
+	/* shop - products slider */
+	/**************************/
+
+	.products-slider {
+		.products-slider-wrapper {
+			padding: 67px 22px 0;
+
+			.products-slider-placeholder {
+				.product-item-wrapper {
+					padding: 5px;
+					width: 169px;
+				}
+			}
+
+			.products-slider-prev,
+			.products-slider-next {
+				top: 199px;
+				border-top-width: 12.5px;
+				border-bottom-width: 12.5px;
+			}
+			
+			.products-slider-prev {
+				border-right-width: 20px;
+			}
+			
+			.products-slider-next {
+				border-left-width: 20px;
+			}
+		}
+	}
+
+	/***********************/
+	/* shop - product item */
+	/***********************/
+
+	.product-item {
+		.product-item-image {
+			width: 139px;
+			height: 139px;
+		}
+		
+		.product-item-meta {
+			.title-wrapper {
+				padding: 2.5px;
+				height: 70px;
+
+				.title {
+					margin-bottom: 0;
+					height: 42px;
+					font-size: 14px;
+				}
+				
+				.artist {
+					font-size: 11px;
+				}
+			}
+
+			.add-to-cart-wrapper {
+				.price {
+					height: 45px;
+					font-size: 17px;
+
+					& > .amount {
+						margin-top: 20px;
+					}
+
+					del {
+						height: 20px;
+						font-size: 12px;
+					}
+				}
+
+				.add-to-cart {
+					width: 50px;
+					height: 40px;
+
+					&:before {
+						top: 40px;
+						border-left-width: 25px;
+						border-right-width: 25px;
+						border-top-width: 7.5px;
+					}
+
+					&:after {
+						top: 3.5px;
+						left: 4.5px;
+					}
+
+					a.button {
+						height: 47.5px;
+
+						&:after {
+							top: 7px;
+							right: 30.5px;
+						}
+
+						&.loading,
+						&.added {
+							&:after {
+								right: 29.5px;
+							}
+						}
+					}
+
+					a.added_to_cart {
+						padding: 0;
+						top: 47.5px;
+						right: 1px;
+						line-height: normal;
+						font-size: 11px;
+					}
+				}
+			}
+		}
+	}
+
 	/**********/
 	/* footer */
 	/**********/
@@ -446,7 +610,26 @@
 			height: 90% !important;
 		}
 	}
-	
+
+	/***************************/
+	/* shop - homepage sliders */
+	/***************************/
+
+	.shop-home-sliders {
+		.products-slider {
+			h2 {
+				float: none !important;
+				margin: 0 0 20px !important;
+				padding: 12px 20px;
+
+				&:before,
+				&:after {
+					display: none;
+				}
+			}
+		}
+	}
+
 	/***************/
 	/* shop - cart */
 	/***************/
@@ -456,6 +639,35 @@
 			.input-text {
 				width: 48% !important;
 			}
+		}
+	}
+
+	/**************************/
+	/* shop - products slider */
+	/**************************/
+
+	.products-slider {
+		.products-slider-wrapper {
+			padding: 0;
+
+			.products-slider-prev,
+			.products-slider-next {
+				display: none;
+			}
+		}
+	}
+
+	/***********************/
+	/* shop - product item */
+	/***********************/
+
+	.product-item {
+		padding: 0;
+
+		&:hover {
+			-webkit-box-shadow:	none;
+			-moz-box-shadow:	none;
+			box-shadow:			none;
 		}
 	}
 
@@ -845,6 +1057,54 @@
 		}
 	}
 
+	/***********************************/
+	/* shop - homepage categories menu */
+	/***********************************/
+
+	.shop-categories-menu-wrapper {
+		.category-item-wrapper {
+			float: none;
+			padding: 0 !important;
+			width: 100%;
+
+			.category-item {
+				.title {
+					padding-left: 10px;
+					font-size: 16px;
+				}
+			}
+
+			&.manual-item-wrapper {
+				.category-item {
+					.title {
+						width: 35%;
+					}
+
+					.subtext {
+						line-height: 12px;
+						font-size: 11px;
+					}
+
+					.icon {
+						left: 30%;
+					}
+				}
+			}
+		}
+	}
+
+	/***************************/
+	/* shop - homepage sliders */
+	/***************************/
+
+	.shop-home-sliders {
+		.products-slider {
+			h2 {
+				padding: 12px 10px;
+			}
+		}
+	}
+
 	/**********/
 	/* footer */
 	/**********/
@@ -1179,6 +1439,40 @@
 		}
 	}
 
+	/***************************/
+	/* shop - homepage banners */
+	/***************************/
+
+	.shop-banners {
+		height: 525px;
+		
+		.shop-banner {
+			height: 525px;
+
+			&.shop-banner-1 { left: -139px; width: 408px; }
+			&.shop-banner-2 { left: 282px;  width: 238px; }
+			&.shop-banner-3 { left: 533px;  width: 238px; }
+			&.shop-banner-4 { left: 784px;  width: 329px; }
+
+			img {
+				left: -139px;
+				height: 525px;
+			}
+
+			&.shop-banner-1 img { left: 139px; }
+		}
+	}
+
+	/**************************/
+	/* shop - products slider */
+	/**************************/
+
+	.products-slider {
+		.products-slider-wrapper {
+			padding: 67px 71px 0;
+		}
+	}
+
 	/**********/
 	/* footer */
 	/**********/
@@ -1385,17 +1679,6 @@
 		}
 	}
 	
-	/**************/
-	/* typography */
-	/**************/
-
-	h3 {
-		.main-layout-featured-links .contact-details & {
-			margin-bottom: 3px;
-			font-size: 14px;
-		}
-	}
-
 	/**********/
 	/* footer */
 	/**********/
@@ -1420,6 +1703,17 @@
 					}
 				}
 			}
+		}
+	}
+
+	/**************/
+	/* typography */
+	/**************/
+
+	h3 {
+		.main-layout-featured-links .contact-details & {
+			margin-bottom: 3px;
+			font-size: 14px;
 		}
 	}
 }
@@ -1642,6 +1936,33 @@
 					h2 {
 						margin: 0 0 24px 185px;
 						font-size: 22px;
+					}
+				}
+			}
+		}
+	}
+
+	/***********************************/
+	/* shop - homepage categories menu */
+	/***********************************/
+
+	.shop-categories-menu-wrapper {
+		.category-item-wrapper {
+			&.manual-item-wrapper {
+				.category-item {
+					.title {
+						@include calc(width, "100% - 88px");
+					}
+
+					.subtext {
+						display: none;
+					}
+
+					.icon {
+						left: auto;
+						right: 0;
+						@include sprites;
+						@include sprite-ribbon-white;
 					}
 				}
 			}

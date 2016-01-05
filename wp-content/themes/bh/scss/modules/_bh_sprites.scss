@@ -1,7 +1,7 @@
 /***********/
 /* sprites */
 /***********/
-.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he, .sprite-cart, .sprite-mobile-menu-en, .sprite-mobile-menu-he, .sprite-package-big, .sprite-package-small, .sprite-question-big, .sprite-question-small, .sprite-delivery-en-big, .sprite-delivery-en-small, .sprite-delivery-he-big, .sprite-delivery-he-small, .sprite-heart{
+.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he, .sprite-cart, .sprite-mobile-menu-en, .sprite-mobile-menu-he, .sprite-package-big, .sprite-package-small, .sprite-question-big, .sprite-question-small, .sprite-delivery-en-big, .sprite-delivery-en-small, .sprite-delivery-he-big, .sprite-delivery-he-small, .sprite-heart, .sprite-ribbon-white, .sprite-add-to-cart{
 	background: url("../images/general/sprites.png") no-repeat;
 }
 
@@ -201,6 +201,18 @@
 	background-position: -523px -128px ;
 	width: 20px;
 	height: 19px;
+}
+
+.sprite-ribbon-white{
+	background-position: -545px -108px ;
+	width: 88px;
+	height: 53px;
+}
+
+.sprite-add-to-cart{
+	background-position: -635px -126px ;
+	width: 41px;
+	height: 35px;
 }
 
 /******************/
@@ -407,4 +419,16 @@
 	background-position: -523px -128px ;
 	width: 20px;
 	height: 19px;
+}
+
+@mixin sprite-ribbon-white{
+	background-position: -545px -108px ;
+	width: 88px;
+	height: 53px;
+}
+
+@mixin sprite-add-to-cart{
+	background-position: -635px -126px ;
+	width: 41px;
+	height: 35px;
 }

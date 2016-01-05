@@ -9,23 +9,14 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
-<div class="container">
-	<?php
-		/**
-		 * woocommerce_breadcrumb
-		 */
-		woocommerce_breadcrumb();
-	?>
-</div>
-
-<div class="container">
-	<?php
-		/**
-		 * BH_shop_home hook
-		 *
-		 * @hooked	BH_shop_home_banners - 10
-		 * @hooked	BH_shop_home_product_sliders - 20
-		 */
-		do_action('BH_shop_home');
-	?>
-</div>
+<?php
+	/**
+	 * BH_shop_home hook
+	 *
+	 * @hooked	BH_shop_home_banners - 10
+	 * @hooked	BH_shop_home_categories_menu - 20
+	 * @hooked	BH_shop_home_featured - 30
+	 * @hooked	BH_shop_home_product_sliders - 40
+	 */
+	do_action('BH_shop_home');
+?>

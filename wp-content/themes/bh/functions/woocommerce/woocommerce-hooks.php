@@ -67,13 +67,24 @@ remove_action('woocommerce_before_shop_loop', 'wc_print_notices', 10 );
 remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 
 /**
+ * Product item
+ *
+ * @see		BH_loop_add_to_cart_link()
+ */
+add_filter('woocommerce_loop_add_to_cart_link', 'BH_loop_add_to_cart_link');
+
+/**
  * Shop Homepage
  * 
  * @see		BH_shop_home_banners()
+ * @see		BH_shop_home_categories_menu()
+ * @see		BH_shop_home_featured()
  * @see		BH_shop_home_product_sliders()
  */
 add_action('BH_shop_home', 'BH_shop_home_banners', 10);
-add_action('BH_shop_home', 'BH_shop_home_product_sliders', 20);
+add_action('BH_shop_home', 'BH_shop_home_categories_menu', 20);
+add_action('BH_shop_home', 'BH_shop_home_featured', 30);
+add_action('BH_shop_home', 'BH_shop_home_product_sliders', 40);
 
 /**
  * Single Product
@@ -134,7 +145,7 @@ add_filter('default_checkout_state', 'BH_change_default_checkout_state');
  * 
  * @see		BH_shop_get_price_html()
  */
-add_filter('woocommerce_get_price_html', 'BH_shop_get_price_html', 10, 2);
+//add_filter('woocommerce_get_price_html', 'BH_shop_get_price_html', 10, 2);
 
 /**
  * Related products limit
