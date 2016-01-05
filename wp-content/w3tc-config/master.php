@@ -135,6 +135,12 @@ return array(
 	'pgcache.reject.uri' => array(
 		0 => 'wp-.*\\.php',
 		1 => 'index\\.php',
+		2 => '/databases/jewish-genealogy/jewish-genealogy-search-order/',
+		3 => '/databases/jewish-communities/communities-search-order/',
+		4 => '/databases/lds-form/',
+		5 => '/he/%D7%9E%D7%90%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%90%D7%95%D7%A1%D7%A4%D7%99%D7%9D/%D7%92%D7%A0%D7%90%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%99%D7%94%D7%95%D7%93%D7%99%D7%AA/%D7%98%D7%95%D7%A4%D7%A1-%D7%94%D7%96%D7%9E%D7%A0%D7%AA-%D7%97%D7%99%D7%A4%D7%95%D7%A9-%D7%91%D7%9E%D7%90%D7%92%D7%A8-%D7%94%D7%92%D7%A0%D7%99%D7%90%D7%9C%D7%95%D7%92%D7%99%D7%94/',
+		6 => '/he/%D7%9E%D7%90%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%90%D7%95%D7%A1%D7%A4%D7%99%D7%9D/%D7%A7%D7%94%D7%99%D7%9C%D7%95%D7%AA-%D7%99%D7%94%D7%95%D7%93%D7%99%D7%95%D7%AA/%D7%94%D7%96%D7%9E%D7%A0%D7%AA-%D7%97%D7%99%D7%A4%D7%95%D7%A9-%D7%A7%D7%94%D7%99%D7%9C%D7%95%D7%AA/',
+		7 => '/he/%D7%9E%D7%90%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%90%D7%95%D7%A1%D7%A4%D7%99%D7%9D/lds-form/',
 	),
 	'pgcache.reject.ua' => array(
 		0 => '',
@@ -391,8 +397,10 @@ return array(
 	'cdn.reject.admins' => false,
 	'cdn.reject.logged_roles' => false,
 	'cdn.reject.roles' => array(
+		0 => '',
 	),
 	'cdn.reject.ua' => array(
+		0 => '',
 	),
 	'cdn.reject.uri' => array(
 	),
@@ -426,12 +434,12 @@ return array(
 	'browsercache.cssjs.replace' => false,
 	'browsercache.html.compression' => true,
 	'browsercache.html.last_modified' => true,
-	'browsercache.html.expires' => true,
+	'browsercache.html.expires' => false,
 	'browsercache.html.lifetime' => 3600,
-	'browsercache.html.cache.control' => true,
+	'browsercache.html.cache.control' => false,
 	'browsercache.html.cache.policy' => 'cache_public_maxage',
-	'browsercache.html.etag' => true,
-	'browsercache.html.w3tc' => true,
+	'browsercache.html.etag' => false,
+	'browsercache.html.w3tc' => false,
 	'browsercache.html.replace' => false,
 	'browsercache.other.last_modified' => true,
 	'browsercache.other.compression' => true,
@@ -443,7 +451,7 @@ return array(
 	'browsercache.other.etag' => true,
 	'browsercache.other.w3tc' => true,
 	'browsercache.other.replace' => false,
-	'browsercache.timestamp' => '1439974173',
+	'browsercache.timestamp' => '1452005100',
 	'browsercache.replace.exceptions' => array(
 		0 => '',
 	),
@@ -643,7 +651,7 @@ return array(
 	'widget.pagespeed.enabled' => true,
 	'widget.pagespeed.key' => 'AIzaSyCDfwxpIrn5HiXNdNCcjtatqXIFHcAyOIc',
 	'notes.wp_content_changed_perms' => true,
-	'notes.wp_content_perms' => true,
+	'notes.wp_content_perms' => false,
 	'notes.theme_changed' => false,
 	'notes.wp_upgraded' => false,
 	'notes.plugins_updated' => false,
