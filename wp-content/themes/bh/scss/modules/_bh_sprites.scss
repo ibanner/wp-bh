@@ -1,7 +1,8 @@
 /***********/
 /* sprites */
 /***********/
-.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-museum-en, .sprite-museum-en-s, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he, .sprite-cart, .sprite-mobile-menu-en, .sprite-mobile-menu-he, .sprite-package-big, .sprite-package-small, .sprite-question-big, .sprite-question-small, .sprite-delivery-en-big, .sprite-delivery-en-small, .sprite-delivery-he-big, .sprite-delivery-he-small, .sprite-heart{
+
+.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-cart, .sprite-mobile-menu-en, .sprite-mobile-menu-he, .sprite-package-big, .sprite-package-small, .sprite-question-big, .sprite-question-small, .sprite-delivery-en-big, .sprite-delivery-en-small, .sprite-delivery-he-big, .sprite-delivery-he-small, .sprite-heart, .sprite-ribbon-white, .sprite-add-to-cart, .sprite-museum-en, .sprite-museum-en-s, .sprite-support-us-en, .sprite-support-us-hover-en, .sprite-support-us-he, .sprite-support-us-hover-he, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he{
 	background: url("../images/general/sprites.png") no-repeat;
 }
 
@@ -39,18 +40,6 @@
 	background-position: -560px 0;
 	width: 91px;
 	height: 41px;
-}
-
-.sprite-museum-en{
-	background-position: 0 -59px ;
-	width: 90px;
-	height: 67px;
-}
-
-.sprite-museum-en-s{
-	background-position: -92px -59px ;
-	width: 67px;
-	height: 50px;
 }
 
 .sprite-shop-en{
@@ -107,100 +96,148 @@
 	height: 28px;
 }
 
-.sprite-hall-rental-en{
-	background-position: -30px -128px ;
-	width: 42px;
-	height: 31px;
-}
-
-.sprite-hall-rental-hover-en{
-	background-position: -74px -128px ;
-	width: 42px;
-	height: 31px;
-}
-
-.sprite-hall-rental-he{
-	background-position: -118px -128px ;
-	width: 42px;
-	height: 31px;
-}
-
-.sprite-hall-rental-hover-he{
-	background-position: -162px -128px ;
-	width: 42px;
-	height: 31px;
-}
-
 .sprite-cart{
-	background-position: -206px -128px ;
+	background-position: -30px -128px ;
 	width: 33px;
 	height: 30px;
 }
 
 .sprite-mobile-menu-en{
-	background-position: -241px -128px ;
+	background-position: -65px -128px ;
 	width: 32px;
 	height: 32px;
 }
 
 .sprite-mobile-menu-he{
-	background-position: -275px -128px ;
+	background-position: -99px -128px ;
 	width: 32px;
 	height: 32px;
 }
 
 .sprite-package-big{
-	background-position: -309px -128px ;
+	background-position: -133px -128px ;
 	width: 23px;
 	height: 22px;
 }
 
 .sprite-package-small{
-	background-position: -334px -128px ;
+	background-position: -158px -128px ;
 	width: 17px;
 	height: 16px;
 }
 
 .sprite-question-big{
-	background-position: -353px -128px ;
+	background-position: -177px -128px ;
 	width: 26px;
 	height: 26px;
 }
 
 .sprite-question-small{
-	background-position: -381px -128px ;
+	background-position: -205px -128px ;
 	width: 19px;
 	height: 19px;
 }
 
 .sprite-delivery-en-big{
-	background-position: -402px -128px ;
+	background-position: -226px -128px ;
 	width: 33px;
 	height: 27px;
 }
 
 .sprite-delivery-en-small{
-	background-position: -437px -128px ;
+	background-position: -261px -128px ;
 	width: 24px;
 	height: 20px;
 }
 
 .sprite-delivery-he-big{
-	background-position: -463px -128px ;
+	background-position: -287px -128px ;
 	width: 32px;
 	height: 27px;
 }
 
 .sprite-delivery-he-small{
-	background-position: -497px -128px ;
+	background-position: -321px -128px ;
 	width: 24px;
 	height: 20px;
 }
 
 .sprite-heart{
-	background-position: -523px -128px ;
+	background-position: -347px -128px ;
 	width: 20px;
 	height: 19px;
+}
+
+.sprite-ribbon-white{
+	background-position: 0 -165px ;
+	width: 88px;
+	height: 53px;
+}
+
+.sprite-add-to-cart{
+	background-position: -369px -128px ;
+	width: 41px;
+	height: 35px;
+}
+
+.sprite-museum-en{
+	background-position: 0 -59px ;
+	width: 90px;
+	height: 67px;
+}
+
+.sprite-museum-en-s{
+	background-position: -92px -59px ;
+	width: 67px;
+	height: 50px;
+}
+
+.sprite-support-us-en{
+	background-position: -412px -128px ;
+	width: 47px;
+	height: 32px;
+}
+
+.sprite-support-us-hover-en{
+	background-position: -461px -128px ;
+	width: 47px;
+	height: 32px;
+}
+
+.sprite-support-us-he{
+	background-position: -510px -128px ;
+	width: 47px;
+	height: 32px;
+}
+
+.sprite-support-us-hover-he{
+	background-position: -559px -128px ;
+	width: 47px;
+	height: 32px;
+}
+
+.sprite-hall-rental-en{
+	background-position: -90px -165px ;
+	width: 63px;
+	height: 32px;
+}
+
+.sprite-hall-rental-hover-en{
+	background-position: -155px -165px ;
+	width: 63px;
+	height: 32px;
+}
+
+.sprite-hall-rental-he{
+	background-position: -220px -165px ;
+	width: 63px;
+	height: 32px;
+}
+
+.sprite-hall-rental-hover-he{
+	background-position: -285px -165px ;
+	width: 63px;
+	height: 32px;
 }
 
 /******************/
@@ -245,18 +282,6 @@
 	background-position: -560px 0;
 	width: 91px;
 	height: 41px;
-}
-
-@mixin sprite-museum-en{
-	background-position: 0 -59px ;
-	width: 90px;
-	height: 67px;
-}
-
-@mixin sprite-museum-en-s{
-	background-position: -92px -59px ;
-	width: 67px;
-	height: 50px;
 }
 
 @mixin sprite-shop-en{
@@ -313,98 +338,146 @@
 	height: 28px;
 }
 
-@mixin sprite-hall-rental-en{
-	background-position: -30px -128px ;
-	width: 42px;
-	height: 31px;
-}
-
-@mixin sprite-hall-rental-hover-en{
-	background-position: -74px -128px ;
-	width: 42px;
-	height: 31px;
-}
-
-@mixin sprite-hall-rental-he{
-	background-position: -118px -128px ;
-	width: 42px;
-	height: 31px;
-}
-
-@mixin sprite-hall-rental-hover-he{
-	background-position: -162px -128px ;
-	width: 42px;
-	height: 31px;
-}
-
 @mixin sprite-cart{
-	background-position: -206px -128px ;
+	background-position: -30px -128px ;
 	width: 33px;
 	height: 30px;
 }
 
 @mixin sprite-mobile-menu-en{
-	background-position: -241px -128px ;
+	background-position: -65px -128px ;
 	width: 32px;
 	height: 32px;
 }
 
 @mixin sprite-mobile-menu-he{
-	background-position: -275px -128px ;
+	background-position: -99px -128px ;
 	width: 32px;
 	height: 32px;
 }
 
 @mixin sprite-package-big{
-	background-position: -309px -128px ;
+	background-position: -133px -128px ;
 	width: 23px;
 	height: 22px;
 }
 
 @mixin sprite-package-small{
-	background-position: -334px -128px ;
+	background-position: -158px -128px ;
 	width: 17px;
 	height: 16px;
 }
 
 @mixin sprite-question-big{
-	background-position: -353px -128px ;
+	background-position: -177px -128px ;
 	width: 26px;
 	height: 26px;
 }
 
 @mixin sprite-question-small{
-	background-position: -381px -128px ;
+	background-position: -205px -128px ;
 	width: 19px;
 	height: 19px;
 }
 
 @mixin sprite-delivery-en-big{
-	background-position: -402px -128px ;
+	background-position: -226px -128px ;
 	width: 33px;
 	height: 27px;
 }
 
 @mixin sprite-delivery-en-small{
-	background-position: -437px -128px ;
+	background-position: -261px -128px ;
 	width: 24px;
 	height: 20px;
 }
 
 @mixin sprite-delivery-he-big{
-	background-position: -463px -128px ;
+	background-position: -287px -128px ;
 	width: 32px;
 	height: 27px;
 }
 
 @mixin sprite-delivery-he-small{
-	background-position: -497px -128px ;
+	background-position: -321px -128px ;
 	width: 24px;
 	height: 20px;
 }
 
 @mixin sprite-heart{
-	background-position: -523px -128px ;
+	background-position: -347px -128px ;
 	width: 20px;
 	height: 19px;
+}
+
+@mixin sprite-ribbon-white{
+	background-position: 0 -165px ;
+	width: 88px;
+	height: 53px;
+}
+
+@mixin sprite-add-to-cart{
+	background-position: -369px -128px ;
+	width: 41px;
+	height: 35px;
+}
+
+@mixin sprite-museum-en{
+	background-position: 0 -59px ;
+	width: 90px;
+	height: 67px;
+}
+
+@mixin sprite-museum-en-s{
+	background-position: -92px -59px ;
+	width: 67px;
+	height: 50px;
+}
+
+@mixin sprite-support-us-en{
+	background-position: -412px -128px ;
+	width: 47px;
+	height: 32px;
+}
+
+@mixin sprite-support-us-hover-en{
+	background-position: -461px -128px ;
+	width: 47px;
+	height: 32px;
+}
+
+@mixin sprite-support-us-he{
+	background-position: -510px -128px ;
+	width: 47px;
+	height: 32px;
+}
+
+@mixin sprite-support-us-hover-he{
+	background-position: -559px -128px ;
+	width: 47px;
+	height: 32px;
+}
+
+@mixin sprite-hall-rental-en{
+	background-position: -90px -165px ;
+	width: 63px;
+	height: 32px;
+}
+
+@mixin sprite-hall-rental-hover-en{
+	background-position: -155px -165px ;
+	width: 63px;
+	height: 32px;
+}
+
+@mixin sprite-hall-rental-he{
+	background-position: -220px -165px ;
+	width: 63px;
+	height: 32px;
+}
+
+@mixin sprite-hall-rental-hover-he{
+	background-position: -285px -165px ;
+	width: 63px;
+	height: 32px;
 }
