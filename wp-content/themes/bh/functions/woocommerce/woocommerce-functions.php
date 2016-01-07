@@ -11,6 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 add_theme_support('woocommerce');
 
+/****************************************************************************************************************************************************/
+/* WooCommerce optimization
+/****************************************************************************************************************************************************/
+
 /**
  * BH_remove_woocommerce_generator_tag
  * 
@@ -97,6 +101,10 @@ function BH_woocommerce_manage_scripts_n_styles() {
 	}
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce content wrapper customization
+/****************************************************************************************************************************************************/
+
 /**
  * BH_woocommerce_wrapper_start
  * 
@@ -115,6 +123,10 @@ function BH_woocommerce_wrapper_end() {
 	echo '</section>';
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce breadcrumb
+/****************************************************************************************************************************************************/
+
 /**
  * BH_woocommerce_breadcrumb_defaults
  * 
@@ -128,6 +140,10 @@ function BH_woocommerce_breadcrumb_defaults($defaults) {
 	
 	return $defaults;
 }
+
+/****************************************************************************************************************************************************/
+/* WooCommerce widgets
+/****************************************************************************************************************************************************/
 
 /**
  * override_woocommerce_widgets
@@ -148,7 +164,7 @@ function override_woocommerce_widgets() {
 /**
  * BH_woocommerce_shopping_cart_indicator_fragment
  * 
- * Ajaxify Shopping Cart Indicator widget
+ * Ajaxify shopping cart indicator widget
  * Ensure shopping cart indicator update when products are added to the cart via AJAX
  */
 function BH_woocommerce_shopping_cart_indicator_fragment($fragments) {
@@ -166,7 +182,7 @@ function BH_woocommerce_shopping_cart_indicator_fragment($fragments) {
 /**
  * BH_add_viewed_products
  * 
- * Add post ID and all tranlated post IDs to a given array
+ * Add post ID and all translated post IDs to a given array
  * Used to maintain the "woocommerce_recently_viewed" cookie
  * 
  * @param	int		$post_id			post ID
@@ -201,7 +217,7 @@ function BH_add_viewed_products($post_id, &$viewed_products) {
 /**
  * BH_remove_viewed_products
  * 
- * Remove post ID and all tranlated post IDs from a given array
+ * Remove post ID and all translated post IDs from a given array
  * Used to maintain the "woocommerce_recently_viewed" cookie
  * 
  * @param	int		$post_id			post ID
@@ -355,6 +371,10 @@ function BH_init_product_filter_values($taxonomy, $taxonomy_term_id, &$min_price
 	return $posts;
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce product item
+/****************************************************************************************************************************************************/
+
 /**
  * BH_loop_add_to_cart_link
  * 
@@ -388,10 +408,14 @@ function BH_loop_add_to_cart_link() {
 	);
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce shop homepage
+/****************************************************************************************************************************************************/
+
 /**
  * BH_shop_home_banners
  * 
- * Shop Homepage / Show shop homepage banners
+ * Show shop homepage banners
  */
 function BH_shop_home_banners() {
 	get_template_part('views/woocommerce/archive/home', 'banners');
@@ -400,7 +424,7 @@ function BH_shop_home_banners() {
 /**
  * BH_shop_home_categories_menu
  * 
- * Shop Homepage / Show shop homepage categories menu
+ * Show shop homepage categories menu
  */
 function BH_shop_home_categories_menu() {
 	get_template_part('views/woocommerce/archive/home', 'categories-menu');
@@ -409,7 +433,7 @@ function BH_shop_home_categories_menu() {
 /**
  * BH_shop_home_featured
  * 
- * Shop Homepage / Show shop homepage featured products
+ * Show shop homepage featured products
  */
 function BH_shop_home_featured() {
 	get_template_part('views/woocommerce/archive/home', 'featured');
@@ -418,16 +442,33 @@ function BH_shop_home_featured() {
 /**
  * BH_shop_home_product_sliders
  * 
- * Shop Homepage / Show shop homepage sliders
+ * Show shop homepage sliders
  */
 function BH_shop_home_product_sliders() {
 	get_template_part('views/woocommerce/archive/home', 'sliders');
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce shop category
+/****************************************************************************************************************************************************/
+
+/**
+ * BH_shop_product_cat_banner
+ * 
+ * Show product category banner
+ */
+function BH_shop_product_cat_banner() {
+	get_template_part('views/woocommerce/archive/category', 'banner');
+}
+
+/****************************************************************************************************************************************************/
+/* WooCommerce single product
+/****************************************************************************************************************************************************/
+
 /**
  * BH_shop_show_product_images
  * 
- * Single Product / Section 1
+ * Section 1
  * Show product gallery
  */
 function BH_shop_show_product_images() {
@@ -437,7 +478,7 @@ function BH_shop_show_product_images() {
 /**
  * BH_shop_single_title
  * 
- * Single Product / Section 1
+ * Section 1
  * Show product title and artist
  */
 function BH_shop_single_title() {
@@ -447,7 +488,7 @@ function BH_shop_single_title() {
 /**
  * BH_shop_single_excerpt
  * 
- * Single Product / Section 1
+ * Section 1
  * Show product excerpt
  */
 function BH_shop_single_excerpt() {
@@ -457,7 +498,7 @@ function BH_shop_single_excerpt() {
 /**
  * BH_shop_single_meta
  * 
- * Single Product / Section 1
+ * Section 1
  * Show product content and meta information like weight and dimensions
  */
 function BH_shop_single_meta() {
@@ -467,7 +508,7 @@ function BH_shop_single_meta() {
 /**
  * BH_shop_single_badges
  * 
- * Single Product / Section 1
+ * Section 1
  * Show product budges
  */
 function BH_shop_single_badges() {
@@ -477,7 +518,7 @@ function BH_shop_single_badges() {
 /**
  * BH_shop_show_experience_banner
  * 
- * Single Product / Section 2
+ * Section 2
  * Show experience banner
  */
 function BH_shop_show_experience_banner() {
@@ -487,10 +528,10 @@ function BH_shop_show_experience_banner() {
 /**
  * BH_shop_show_related_products
  * 
- * Single Product / Section 3
+ * Section 3
  * Show related products according to the following scenario:
  * First check whether there are manually related products defined, and show them
- * If no manually products defined - show all products (except the current one)from the same product category
+ * If no manually products defined - show all products (except the current one) from the same product category
  */
 function BH_shop_show_related_products() {
 	get_template_part('views/woocommerce/single-product/single-product-section3', 'related');
@@ -505,26 +546,9 @@ function BH_EC_product_detail() {
 	get_template_part('views/woocommerce/single-product/ec-product-detail');
 }
 
-/**
- * BH_shop_get_artist_links
- * 
- * @return	string	product artist links seperated by comma
- */
-function BH_shop_get_artist_links($product_id) {
-	$artists = wp_get_post_terms($product_id, 'artist');
-	
-	$artists_html = '';
-	
-	if ($artists) {
-		$count = 1;
-		foreach ($artists as $artist) {
-			$artists_html .= ($count++ > 1) ? ', ' : '';
-			$artists_html .= '<a href="' . get_term_link($artist) . '">' . $artist->name . '</a>';
-		}
-	}
-	
-	return $artists_html;
-}
+/****************************************************************************************************************************************************/
+/* WooCommerce cart
+/****************************************************************************************************************************************************/
 
 /**
  * BH_shipping_options_disclaimer
@@ -539,6 +563,10 @@ function BH_shipping_options_disclaimer() {
 			'</td>' .
 		'</tr>';
 }
+
+/****************************************************************************************************************************************************/
+/* WooCommerce checkout
+/****************************************************************************************************************************************************/
 
 /**
  * BH_checkout_title
@@ -594,62 +622,9 @@ function BH_change_default_checkout_state() {
 	return '';
 }
 
-/**
- * BH_shop_get_price_html
- * 
- * Customize product price html
- */
-function BH_shop_get_price_html($price, $product) {
-	$del = BH_strip_tags_content($price, '<ins>', true);
-	$ins = BH_strip_tags_content($price, '<del>', true);
-	
-	if ( strpos($del, '<del>') === false || strpos($ins, '<ins>') === false )
-		return $price;
-		
-	return $del . $ins;
-}
-
-/**
- * BH_shop_set_related_products_limit
- * 
- * Unlimit related products
- */
-function BH_shop_set_related_products_limit($query) {
-	$query['limits'] = -1;
-	
-	return $query;
-}
-
-/**
- * BH_shop_product_cat_banner
- * 
- * Show product category banner
- */
-function BH_shop_product_cat_banner() {
-	get_template_part('views/woocommerce/archive/category', 'banner');
-}
-
-/**
- * BH_shop_catalog_orderby_options
- * 
- * Reset products catalog ordering options
- */
-function BH_shop_catalog_orderby_options($options) {
-	$options['menu_order']	= __('Most Popular', 'BH');
-	$options['price']		= __('Price: Low to High', 'BH');
-	$options['price-desc']	= __('Price: High to Low', 'BH');
-	
-	if ( isset( $options['popularity'] ) )
-		unset( $options['popularity'] );
-		
-	if ( isset( $options['rating'] ) )
-		unset( $options['rating'] );
-		
-	if ( isset( $options['date'] ) )
-		unset( $options['date'] );
-		
-	return $options;
-}
+/****************************************************************************************************************************************************/
+/* WooCommerce orders
+/****************************************************************************************************************************************************/
 
 /**
  * BH_shop_order_invoice
@@ -882,4 +857,77 @@ function BH_shop_order_refund($refund_id, $args) {
 		'X-Mailer: PHP/' . phpversion();
 		
 	mail('nir@htmline.com', 'A new refund for order#' . $order_id, 'Refund hit: ' . $url . $data, $headers); */
+}
+
+/****************************************************************************************************************************************************/
+/* WooCommerce help functions
+/****************************************************************************************************************************************************/
+
+/**
+ * BH_shop_get_artist_links
+ * 
+ * @return	string	product artist links seperated by comma
+ */
+function BH_shop_get_artist_links($product_id) {
+	$artists = wp_get_post_terms($product_id, 'artist');
+	
+	$artists_html = '';
+	
+	if ($artists) {
+		$count = 1;
+		foreach ($artists as $artist) {
+			$artists_html .= ($count++ > 1) ? ', ' : '';
+			$artists_html .= '<a href="' . get_term_link($artist) . '">' . $artist->name . '</a>';
+		}
+	}
+	
+	return $artists_html;
+}
+
+/**
+ * BH_shop_get_price_html
+ * 
+ * Customize product price html
+ */
+function BH_shop_get_price_html($price, $product) {
+	$del = BH_strip_tags_content($price, '<ins>', true);
+	$ins = BH_strip_tags_content($price, '<del>', true);
+	
+	if ( strpos($del, '<del>') === false || strpos($ins, '<ins>') === false )
+		return $price;
+		
+	return $del . $ins;
+}
+
+/**
+ * BH_shop_set_related_products_limit
+ * 
+ * Unlimit related products
+ */
+function BH_shop_set_related_products_limit($query) {
+	$query['limits'] = -1;
+	
+	return $query;
+}
+
+/**
+ * BH_shop_catalog_orderby_options
+ * 
+ * Reset products catalog ordering options
+ */
+function BH_shop_catalog_orderby_options($options) {
+	$options['menu_order']	= __('Most Popular', 'BH');
+	$options['price']		= __('Price: Low to High', 'BH');
+	$options['price-desc']	= __('Price: High to Low', 'BH');
+	
+	if ( isset( $options['popularity'] ) )
+		unset( $options['popularity'] );
+		
+	if ( isset( $options['rating'] ) )
+		unset( $options['rating'] );
+		
+	if ( isset( $options['date'] ) )
+		unset( $options['date'] );
+		
+	return $options;
 }

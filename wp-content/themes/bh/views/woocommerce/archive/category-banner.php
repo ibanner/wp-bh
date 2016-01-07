@@ -4,7 +4,7 @@
  *
  * @author 		Beit Hatfutsot
  * @package 	bh/views/woocommerce/archive
- * @version     1.0
+ * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -19,22 +19,20 @@ if ( ! $tt )
 $term_id		= $tt->term_id;
 
 $thumbnail_id	= get_woocommerce_term_meta($term_id, 'thumbnail_id', true);
-$banner_image	= ($thumbnail_id) ? wp_get_attachment_url($thumbnail_id) : '';
+$term_image		= ($thumbnail_id) ? wp_get_attachment_url($thumbnail_id) : '';
 
-$banner_title	= get_field('acf-product-category-banner_title', $tt->taxonomy . '_' . $term_id);
-$banner_text	= get_field('acf-product-category-banner_text', $tt->taxonomy . '_' . $term_id);
+$term_desc		= $tt->description;
 
-if ($banner_image) { ?>
+if ($term_desc) { ?>
 
-	<figure class="category-banner">
-		<img src="<?php echo $banner_image; ?>" alt="<?php echo $tt->name; ?>" />
+	<div class="row term-banner">
+		<?php if ($term_image) { ?>
+			<img class="term-image" src="<?php echo $term_image; ?>" alt="<?php echo $tt->name; ?>" />
+		<?php } ?>
 		
-		<figcaption>
-			<?php
-				echo ($banner_title) ? '<h1>' . $banner_title . '</h1>' : '';
-				echo ($banner_text) ? '<div class="category-banner-caption">' . $banner_text . '</div>' : '';
-			?>
-		</figcaption>
-	</figure>
-	
+		<div class="term-description">
+			<?php echo $term_desc; ?>
+		</div>
+	</div>
+
 <?php }
