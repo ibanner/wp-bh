@@ -25,13 +25,15 @@ $term_desc		= $tt->description;
 
 if ($term_desc) { ?>
 
-	<div class="row term-banner">
-		<?php if ($term_image) { ?>
-			<img class="term-image" src="<?php echo $term_image; ?>" alt="<?php echo $tt->name; ?>" />
-		<?php } ?>
-		
-		<div class="term-description">
-			<?php echo $term_desc; ?>
+	<div class="term-banner-wrapper">
+		<div class="term-banner">
+			<?php if ($term_image) { ?>
+				<img class="term-image" src="<?php echo $term_image; ?>" alt="<?php echo $tt->name; ?>" />
+			<?php } ?>
+			
+			<div class="term-description">
+				<?php echo apply_filters('the_content', $term_desc); ?>
+			</div>
 		</div>
 	</div>
 

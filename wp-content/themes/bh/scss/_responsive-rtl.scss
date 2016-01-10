@@ -32,6 +32,38 @@
 		}
 	}
 
+	/******************/
+	/* shop - archive */
+	/******************/
+
+	.woocommerce.archive {
+
+		/***************/
+		/* term banner */
+		/***************/
+
+		.term-banner-wrapper {
+			&:before {
+				right: -32px;
+			}
+
+			.term-banner {
+				&:before,
+				&:after {
+					right: -32px;
+				}
+
+				&:before {
+					border-bottom-left-radius: 16px;
+				}
+
+				&:after {
+					border-top-left-radius: 16px;
+				}
+			}
+		}
+	}
+
 	/***********************/
 	/* shop - product item */
 	/***********************/
@@ -93,6 +125,37 @@
 		}
 	}
 	
+	/******************/
+	/* shop - archive */
+	/******************/
+
+	.woocommerce.archive {
+
+		/***************/
+		/* term banner */
+		/***************/
+
+		.term-banner-wrapper {
+			&:before {
+				right: 0;
+			}
+
+			.term-banner {
+				&:before {
+					left: 0;
+					right: auto;
+					border-bottom-left-radius: 0;
+					border-bottom-right-radius: 16px;
+				}
+
+				&:after {
+					right: 0;
+					border-top-left-radius: 0;
+				}
+			}
+		}
+	}
+
 	/***************/
 	/* shop - cart */
 	/***************/

@@ -1136,6 +1136,47 @@ article.post {
 /* shop - archive */
 /******************/
 
+.woocommerce.archive {
+
+	/***************/
+	/* term banner */
+	/***************/
+
+	.term-banner-wrapper {
+		&:before {
+			left: auto;
+			right: -50px;
+		}
+
+		.term-banner {
+			&:before,
+			&:after {
+				left: auto;
+				right: -50px;
+			}
+
+			&:before {
+				border-bottom-left-radius: 25px;
+				border-bottom-right-radius: 0;
+			}
+
+			&:after {
+				border-top-left-radius: 25px;
+				border-top-right-radius: 0;
+			}
+
+			.term-image {
+				float: right;
+				margin: 0 0 10px 10px;
+			}
+		}
+	}
+}
+
+/******************/
+/* shop - archive */
+/******************/
+
 .shop-archive-section {
 	.shop-body-left {
 		.refine-products {

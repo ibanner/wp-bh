@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 		</div>
 		
-		<div class="col-xs-9">
+		<div class="col-sm-9">
 
 			<?php
 				/**

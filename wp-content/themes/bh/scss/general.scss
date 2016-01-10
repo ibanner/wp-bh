@@ -2733,6 +2733,68 @@ body > header {
 /* shop - archive */
 /******************/
 
+.woocommerce.archive {
+
+	/***************/
+	/* term banner */
+	/***************/
+
+	.term-banner-wrapper {
+		position: relative;
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -50px;
+			width: 50px;
+			height: 94px;
+			background-color: $red-color7;
+		}
+
+		.term-banner {
+			position: relative;
+			margin-bottom: 10px;
+			padding: 10px;
+			min-height: 180px;
+			font-size: 18px;
+			background-color: $red-color7;
+			@include border-radius(14px);
+
+			&:before,
+			&:after {
+				content: "";
+				position: absolute;
+				left: -50px;
+				width: 50px;
+				height: 47px;
+				background-color: $white;
+			}
+
+			&:before {
+				top: 0;
+				border-bottom-right-radius: 25px;
+			}
+
+			&:after {
+				top: 47px;
+				border-top-right-radius: 25px;
+			}
+
+			.term-image {
+				float: left;
+				margin: 0 10px 10px 0;
+				max-width: 160px;
+				height: auto;
+			}
+		}
+	}
+}
+
+/******************/
+/* shop - archive */
+/******************/
+
 .category-banner {
 	position: relative;
 	margin-bottom: 15px;
