@@ -449,16 +449,16 @@ function BH_shop_home_product_sliders() {
 }
 
 /****************************************************************************************************************************************************/
-/* WooCommerce shop category
+/* WooCommerce shop archive
 /****************************************************************************************************************************************************/
 
 /**
- * BH_shop_product_cat_banner
+ * BH_shop_tt_banner
  * 
- * Show product category banner
+ * Show product taxonomy term banner
  */
-function BH_shop_product_cat_banner() {
-	get_template_part('views/woocommerce/archive/category', 'banner');
+function BH_shop_tt_banner() {
+	get_template_part('views/woocommerce/archive/taxonomy-term', 'banner');
 }
 
 /****************************************************************************************************************************************************/

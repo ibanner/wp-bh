@@ -357,6 +357,25 @@
 				}
 			}
 		}
+
+		/****************/
+		/* sort options */
+		/****************/
+
+		.sort-options {
+			.sort-title {
+				line-height: 19px;
+				font-size: 12px;
+			}
+
+			form {
+				height: 19px;
+
+				select {
+					font-size: 12px;
+				}
+			}
+		}
 	}
 
 	/**************************/

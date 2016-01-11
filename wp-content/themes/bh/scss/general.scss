@@ -2754,7 +2754,7 @@ body > header {
 
 		.term-banner {
 			position: relative;
-			margin-bottom: 10px;
+			margin-bottom: 15px;
 			padding: 10px;
 			min-height: 180px;
 			font-size: 18px;
@@ -2789,92 +2789,35 @@ body > header {
 			}
 		}
 	}
+
+	/****************/
+	/* sort options */
+	/****************/
+
+	.sort-options {
+		float: right;
+
+		.sort-title {
+			float: left;
+			margin-right: 10px;
+			line-height: 24px;
+			font-size: 16px;
+		}
+
+		form {
+			height: 24px;
+
+			select {
+				font-size: 16px;
+				background-color: $orange-color5;
+			}
+		}
+	}
 }
 
 /******************/
 /* shop - archive */
 /******************/
-
-.category-banner {
-	position: relative;
-	margin-bottom: 15px;
-	width: 1170px;
-	max-height: 277px;
-	background: #4e423f;
-	overflow: hidden;
-	
-	img {
-		width: 1170px;
-		height: 307px;
-		@include transform( translate3d(0,-30px,0) );
-		-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-		-moz-transition:    opacity 0.35s, -moz-transform 0.35s;
-		-ms-transition:     opacity 0.35s, -ms-transform 0.35s;
-		-o-transition:      opacity 0.35s, -o-transform 0.35s;
-		transition:         opacity 0.35s, transform 0.35s;
-	}
-	
-	figcaption {
-		position: absolute;
-		padding: 45px 110px 30px;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		-webkit-backface-visibility: hidden;
-		backface-visibility: hidden;
-		
-		h1 {
-			margin: 0;
-			font-size: 45px; 
-			font-weight: $font-normal;
-			color: $white;
-			text-align: center;
-			@include transform( translate3d(0,45px,0) );
-			-webkit-transition: -webkit-transform 0.35s;
-			-moz-transition:    -moz-transform 0.35s;
-			-ms-transition:     -ms-transform 0.35s;
-			-o-transition:      -o-transform 0.35s;
-			transition:         transform 0.35s;
-		}
-		
-		.category-banner-caption {
-			font-size: 20px;
-			color: $white;
-			@include opacity(0);
-			@include transform( translate3d(0,10px,0) );
-			-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-			-moz-transition:    opacity 0.35s, -moz-transform 0.35s;
-			-ms-transition:     opacity 0.35s, -ms-transform 0.35s;
-			-o-transition:      opacity 0.35s, -o-transform 0.35s;
-			transition:         opacity 0.35s, transform 0.35s;
-			
-			h3 {
-				font-size: 34px;
-				font-weight: $font-normal;
-			}
-		}
-	}
-	
-	&:hover {
-		img {
-			@include opacity(0.48);
-			@include transform( translate3d(0,0,0) );
-			-webkit-transition-delay: 0.15s;
-			transition-delay: 0.15s;
-		}
-		
-		figcaption {
-			h1,
-			.category-banner-caption {
-				@include opacity(1);
-				@include transform( translate3d(0,0,0) );
-				-webkit-transition-delay: 0.15s;
-				transition-delay: 0.15s;
-			}
-		}
-	}
-}
 
 .shop-archive-section {
 	margin-bottom: 20px;

@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <?php
 	global $wp_query, $list, $ec_products;
 	
-	$category = $wp_query->get_queried_object();
-	$cat_name = $category ? $category->name : '';
+	$tt = $wp_query->get_queried_object();
+	$tt_name = $tt ? $tt->name : '';
 ?>
 
 <div class="container">
@@ -29,9 +29,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 			<?php
 				/**
-				 * BH_shop_product_cat_banner
+				 * BH_shop_tt_banner
 				 */
-				BH_shop_product_cat_banner();
+				BH_shop_tt_banner();
 			?>
 
 			<?php if ( have_posts() ) : ?>
@@ -39,19 +39,27 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 				<div class="products-list">
 
 					<?php
-						/**
-						 * woocommerce_before_shop_loop hook
-						 *
-						 * @hooked woocommerce_catalog_ordering - 30
-						 */
-						do_action('woocommerce_before_shop_loop');
+						if ( 1 != $wp_query->found_posts && woocommerce_products_will_display() ) {
+							echo '<div class="sort-options">';
+
+								echo '<span class="sort-title">' . __('Sort by', 'BH') . ': </span>';
+
+								/**
+								 * woocommerce_before_shop_loop hook
+								 *
+								 * @hooked woocommerce_catalog_ordering - 30
+								 */
+								do_action('woocommerce_before_shop_loop');
+
+							echo '</div>';
+						}
 					?>
 
 					<?php woocommerce_product_loop_start(); ?>
 
 					<?php
 						// for Google Analytics Enhanced Ecommerce - define list name and products array
-						$list			= $cat_name ? 'Product Category: ' . $cat_name : 'Product Category';
+						$list			= $tt_name ? 'Product Archive: ' . $tt_name : 'Product Archive';
 						$ec_products	= array();
 					?>
 
