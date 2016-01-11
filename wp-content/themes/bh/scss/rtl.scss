@@ -1172,17 +1172,24 @@ article.post {
 		}
 	}
 
-	/****************/
-	/* sort options */
-	/****************/
+	/*****************/
+	/* products list */
+	/*****************/
 
-	.sort-options {
-		float: left;
+	.products-list {
 
-		.sort-title {
-			float: right;
-			margin-left: 10px;
-			margin-right: 0;
+		/****************/
+		/* sort options */
+		/****************/
+
+		.sort-options {
+			float: left;
+
+			.sort-title {
+				float: right;
+				margin-left: 10px;
+				margin-right: 0;
+			}
 		}
 	}
 }
@@ -1219,51 +1226,6 @@ article.post {
 								padding-left: 0;
 								padding-right: 15px;
 							}
-						}
-					}
-				}
-			}
-		}
-		
-		.products-list {
-			.shop-catalog-ordering {
-				.sort-title {
-					float: right;
-					margin-left: 30px;
-					margin-right: 0;
-				}
-				
-				ul {
-					float: right;
-					
-					li {			
-						float: right;
-						padding-left: 9px;
-						padding-right: 0;
-						
-						a {
-							border-left: 0;
-							border-right: 1px solid $border-color1;
-							padding-left: 0;
-							padding-right: 10px;
-						}
-						
-						&:first-child a {
-							border-right: 0;
-							padding-right: 0;
-						}
-					}
-				}
-			}
-			
-			ul.products {
-				li {
-					&.product {
-						float: right;
-						margin: 0 0 0 3.5%;
-						
-						&.last {
-							margin-left: 0;
 						}
 					}
 				}

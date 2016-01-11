@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 <?php
-	global $wp_query, $list, $ec_products;
+	global $wp_query, $list, $ec_products, $featured_product;
 	
 	$tt = $wp_query->get_queried_object();
 	$tt_name = $tt ? $tt->name : '';
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 	
 		<div class="col-sm-3">
 
-			<?php get_template_part('views/sidebar/sidebar-shop', 'refine-products'); ?>
+			<?php //get_template_part('views/sidebar/sidebar-shop', 'refine-products'); ?>
 
 		</div>
 		
@@ -35,6 +35,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 			?>
 
 			<?php if ( have_posts() ) : ?>
+
+				<?php
+					// check if fetured image should be displayed
+					$total_products		= $wp_query->found_posts;
+					$featured_product	= $total_products >= 3 ? true : false;
+				?>
 
 				<div class="products-list">
 
@@ -65,7 +71,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 					<?php while ( have_posts() ) : the_post(); ?>
 
-						<?php wc_get_template_part('content', 'product'); ?>
+						<?php
+							wc_get_template_part('content', 'product');
+							$featured_product = false;
+						?>
 
 					<?php endwhile; // end of the loop. ?>
 
@@ -91,5 +100,5 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 	</div>
 
-	<?php get_template_part('views/sidebar/sidebar-shop', 'recently-viewed'); ?>
+	<?php //get_template_part('views/sidebar/sidebar-shop', 'recently-viewed'); ?>
 </div>

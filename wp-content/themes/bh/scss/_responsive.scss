@@ -358,21 +358,28 @@
 			}
 		}
 
-		/****************/
-		/* sort options */
-		/****************/
+		/*****************/
+		/* products list */
+		/*****************/
 
-		.sort-options {
-			.sort-title {
-				line-height: 19px;
-				font-size: 12px;
-			}
+		.products-list {
 
-			form {
-				height: 19px;
+			/****************/
+			/* sort options */
+			/****************/
 
-				select {
+			.sort-options {
+				.sort-title {
+					line-height: 19px;
 					font-size: 12px;
+				}
+
+				form {
+					height: 19px;
+
+					select {
+						font-size: 12px;
+					}
 				}
 			}
 		}
@@ -439,7 +446,7 @@
 			.add-to-cart-wrapper {
 				.price {
 					height: 45px;
-					font-size: 17px;
+					font-size: 17px !important;
 
 					& > .amount {
 						margin-top: 20px;

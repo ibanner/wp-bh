@@ -1,5 +1,5 @@
 <?php
-	global $product, $list, $ec_products;
+	global $product, $list, $ec_products, $featured_product;
 	
 	$p_id			= $product->id;
 	$p_sku			= esc_js( $product->sku );
@@ -27,11 +27,14 @@
 	$artists = BH_shop_get_artist_links($p_id);
 ?>
 
-<div class="product-item">
+<div class="product-item <?php echo $featured_product ? 'featured-product-item' : ''; ?>">
 
 	<div class="product-item-image">
 		<a href="<?php echo $p_page; ?>" onclick="BH_EC_onProductClick('<?php echo $p_sku; ?>', '<?php echo $p_name; ?>', '<?php echo $category; ?>', '<?php echo $p_price; ?>', '<?php echo $p_currency; ?>', '<?php echo $p_list; ?>', 'Product Image', '<?php echo $p_page; ?>'); return !ga.loaded;">
-            <?php echo $product->get_image( 'shop_catalog', array( 'alt' => esc_attr( $product->get_title() ) ) ); ?>
+			<?php
+				$image_type = $featured_product ? 'shop_single' : 'shop_catalog';
+				echo $product->get_image( $image_type, array( 'alt' => esc_attr( $product->get_title() ) ) );
+			?>
 		</a>
 	</div>
 	
