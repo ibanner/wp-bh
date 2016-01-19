@@ -323,6 +323,23 @@
 	}
 
 	/******************/
+	/* shop - sidebar */
+	/******************/
+
+	.shop-sidebar {
+
+		/**************/
+		/* term title */
+		/**************/
+
+		.term-title {
+			.icon {
+				display: none;
+			}
+		}
+	}
+
+	/******************/
 	/* shop - archive */
 	/******************/
 
@@ -694,6 +711,32 @@
 	}
 
 	/******************/
+	/* shop - sidebar */
+	/******************/
+
+	.shop-sidebar {
+
+		/**************/
+		/* term title */
+		/**************/
+
+		.term-title {
+			position: relative;
+			margin-bottom: 20px;
+			min-height: 30px;
+
+			h1 {
+				margin: 0;
+				font-size: 18px;
+			}
+
+			&.has-icon {
+				min-height: 30px;
+			}
+		}
+	}
+
+	/******************/
 	/* shop - archive */
 	/******************/
 
@@ -708,15 +751,15 @@
 				top: -32px;
 				left: 0;
 				width: 100%;
-				height: 32px;
+				height: 32px !important;
 			}
 
 			.term-banner {
 				&:before,
 				&:after {
-					top: -32px;
+					top: -32px !important;
 					width: 50%;
-					height: 32px;
+					height: 32px !important;
 				}
 
 				&:before {
@@ -1607,6 +1650,23 @@
 		}
 	}
 
+	/******************/
+	/* shop - sidebar */
+	/******************/
+
+	.shop-sidebar {
+
+		/**************/
+		/* term title */
+		/**************/
+
+		.term-title {
+			h1 {
+				font-size: 30px;
+			}
+		}
+	}
+
 	/**************************/
 	/* shop - products slider */
 	/**************************/
@@ -1823,6 +1883,61 @@
 		}
 	}
 	
+	/******************/
+	/* shop - sidebar */
+	/******************/
+
+	.shop-sidebar {
+
+		/**************/
+		/* term title */
+		/**************/
+
+		.term-title {
+			min-height: 44px;
+
+			h1 {
+				font-size: 20px;
+			}
+
+			&.has-icon {
+				min-height: 44px;
+
+				h1 {
+					margin: 5px 0 0;
+				}
+			}
+		}
+	}
+
+	/******************/
+	/* shop - archive */
+	/******************/
+
+	.woocommerce.archive {
+
+		/***************/
+		/* term banner */
+		/***************/
+
+		.term-banner-wrapper {
+			&:before {
+				height: 44px !important;
+			}
+
+			.term-banner {
+				&:before,
+				&:after {
+					height: 22px !important;
+				}
+
+				&:after {
+					top: 22px !important;
+				}
+			}
+		}
+	}
+
 	/***********************/
 	/* shop - product item */
 	/***********************/

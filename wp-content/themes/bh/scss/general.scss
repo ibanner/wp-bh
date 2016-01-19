@@ -2730,6 +2730,52 @@ body > header {
 }
 
 /******************/
+/* shop - sidebar */
+/******************/
+
+.shop-sidebar {
+	position: relative;
+
+	/**************/
+	/* term title */
+	/**************/
+
+	.term-title {
+		position: absolute;
+		padding: 5px;
+		top: 0;
+		left: 0;
+		width: 100%;
+		min-height: 60px;
+		background-color: $orange-color4;
+		z-index: 1;
+
+		.icon {
+			width: 100%;
+			height: 55px;
+			background-position: 50% 50%;
+			background-repeat: no-repeat;
+		}
+
+		h1 {
+			margin: 5px 0 0;
+			font-size: 32px;
+			font-weight: $font-bold;
+			color: $white;
+			text-align: center;
+		}
+
+		&.has-icon {
+			min-height: 100px;
+
+			h1 {
+				margin: 0;
+			}
+		}
+	}
+}
+
+/******************/
 /* shop - archive */
 /******************/
 
@@ -2748,7 +2794,7 @@ body > header {
 			top: 0;
 			left: -50px;
 			width: 50px;
-			height: 94px;
+			height: 60px;
 			background-color: $red-color7;
 		}
 
@@ -2767,7 +2813,7 @@ body > header {
 				position: absolute;
 				left: -50px;
 				width: 50px;
-				height: 47px;
+				height: 30px;
 				background-color: $white;
 			}
 
@@ -2777,7 +2823,7 @@ body > header {
 			}
 
 			&:after {
-				top: 47px;
+				top: 30px;
 				border-top-right-radius: 25px;
 			}
 
@@ -2786,6 +2832,23 @@ body > header {
 				margin: 0 10px 10px 0;
 				max-width: 160px;
 				height: auto;
+			}
+		}
+
+		&.has-icon {
+			&:before {
+				height: 100px;
+			}
+
+			.term-banner {
+				&:before,
+				&:after {
+					height: 50px;
+				}
+
+				&:after {
+					top: 50px;
+				}
 			}
 		}
 	}
@@ -3566,10 +3629,12 @@ ul.order_details {
 				height: 20px;
 				font-size: 12px;
 				text-overflow: ellipsis;
+				white-space: nowrap;
 				overflow: hidden;
 
 				a {
 					color: $font-color;
+					text-decoration: underline;
 				}
 			}
 		}

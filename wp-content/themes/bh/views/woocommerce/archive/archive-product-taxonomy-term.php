@@ -21,7 +21,20 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 	
 		<div class="col-sm-3">
 
-			<?php //get_template_part('views/sidebar/sidebar-shop', 'refine-products'); ?>
+			<div class="shop-sidebar">
+
+				<?php
+					/**
+					 * BH_shop_sidebar hook
+					 *
+					 * @hooked BH_shop_refine_products	- 10
+					 * @hooked BH_shop_tt_title			- 20
+					 */
+					do_action('BH_shop_sidebar');
+				?>
+				<?php //get_template_part('views/sidebar/sidebar-shop', 'refine-products'); ?>
+
+			</div>
 
 		</div>
 		
