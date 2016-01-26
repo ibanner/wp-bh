@@ -458,7 +458,13 @@ function BH_shop_home_product_sliders() {
  * Show product taxonomy term title
  */
 function BH_shop_tt_title() {
-	get_template_part('views/woocommerce/archive/taxonomy-term', 'title');
+	ob_start();
+	
+	echo get_template_part('views/woocommerce/archive/taxonomy-term', 'title');
+	
+	$output = ob_get_clean();
+	
+	return $output;
 }
 
 /****************************************************************************************************************************************************/

@@ -110,10 +110,10 @@ add_action('BH_shop_home', 'BH_shop_home_product_sliders', 40);
 
 /**
  * @see		BH_shop_refine_products()
- * @see		BH_shop_tt_title()
+ * @see		BH_shop_wswu_banner()
  */
 add_action('BH_shop_sidebar', 'BH_shop_refine_products', 10);
-add_action('BH_shop_sidebar', 'BH_shop_tt_title', 20);
+add_action('BH_shop_sidebar', 'BH_shop_wswu_banner', 20);
 
 /****************************************************************************************************************************************************/
 /* WooCommerce single product

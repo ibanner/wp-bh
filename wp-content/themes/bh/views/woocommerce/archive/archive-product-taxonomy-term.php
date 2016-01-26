@@ -14,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 	
 	$tt = $wp_query->get_queried_object();
 	$tt_name = $tt ? $tt->name : '';
+
+	$tt_title = BH_shop_tt_title();
 ?>
 
 <div class="container">
@@ -23,15 +25,24 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 			<div class="shop-sidebar">
 
+				<div class="term-title-wrapper hidden-xs">
+					<?php echo $tt_title; ?>
+				</div>
+
 				<?php
 					/**
 					 * BH_shop_sidebar hook
 					 *
 					 * @hooked BH_shop_refine_products	- 10
-					 * @hooked BH_shop_tt_title			- 20
+					 * @hooked BH_shop_wswu_banner		- 20
 					 */
 					do_action('BH_shop_sidebar');
 				?>
+
+				<div class="term-title-wrapper visible-xs">
+					<?php echo $tt_title; ?>
+				</div>
+
 				<?php //get_template_part('views/sidebar/sidebar-shop', 'refine-products'); ?>
 
 			</div>

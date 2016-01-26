@@ -2741,11 +2741,8 @@ body > header {
 	/**************/
 
 	.term-title {
-		position: absolute;
+		position: relative;
 		padding: 5px;
-		top: 0;
-		left: 0;
-		width: 100%;
 		min-height: 60px;
 		background-color: $orange-color4;
 		z-index: 1;
