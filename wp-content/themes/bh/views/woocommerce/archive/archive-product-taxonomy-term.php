@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 					/**
 					 * BH_shop_sidebar hook
 					 *
-					 * @hooked BH_shop_refine_products	- 10
+					 * @hooked BH_shop_products_filter	- 10
 					 * @hooked BH_shop_wswu_banner		- 20
 					 */
 					do_action('BH_shop_sidebar');
@@ -42,8 +42,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 				<div class="term-title-wrapper visible-xs">
 					<?php echo $tt_title; ?>
 				</div>
-
-				<?php //get_template_part('views/sidebar/sidebar-shop', 'refine-products'); ?>
 
 			</div>
 

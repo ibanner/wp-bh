@@ -109,10 +109,10 @@ add_action('BH_shop_home', 'BH_shop_home_product_sliders', 40);
 /****************************************************************************************************************************************************/
 
 /**
- * @see		BH_shop_refine_products()
+ * @see		BH_shop_products_filter()
  * @see		BH_shop_wswu_banner()
  */
-add_action('BH_shop_sidebar', 'BH_shop_refine_products', 10);
+add_action('BH_shop_sidebar', 'BH_shop_products_filter', 10);
 add_action('BH_shop_sidebar', 'BH_shop_wswu_banner', 20);
 
 /****************************************************************************************************************************************************/

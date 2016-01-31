@@ -36,25 +36,25 @@ function BH_sidebars() {
 		)
 	);
 	
-	// Shop Sidebar Recently Viewed
+	// Shop Sidebar Products Filter
 	register_sidebar(
 		array(
-			'id'			=> 'shop-sidebar-recently-viewed',
-			'name'			=> 'Shop Sidebar Recently Viewed',
-			'description'	=> 'Drag here Recently Viewed widget',
+			'id'			=> 'shop-sidebar-products-filter',
+			'name'			=> 'Shop Sidebar Products Filter',
+			'description'	=> 'Drag here WooCommerce BH Products Filter widget',
 			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
 			'after_widget'	=> '</div>',
 			'before_title'	=> '<h2 class="widgettitle">',
 			'after_title'	=> '</h2>'
 		)
 	);
-	
-	// Shop Sidebar Refine Products
+
+	// Shop Sidebar Recently Viewed
 	register_sidebar(
 		array(
-			'id'			=> 'shop-sidebar-refine-products',
-			'name'			=> 'Shop Sidebar Refine Products',
-			'description'	=> 'Drag here Shop Refine Products widget',
+			'id'			=> 'shop-sidebar-recently-viewed',
+			'name'			=> 'Shop Sidebar Recently Viewed',
+			'description'	=> 'Drag here Recently Viewed widget',
 			'before_widget'	=> '<div id="%1$s" class="widget %2$s">',
 			'after_widget'	=> '</div>',
 			'before_title'	=> '<h2 class="widgettitle">',

@@ -1,0 +1,23 @@
+.widget-content .awpf-taxonomies {
+	margin-top: 10px;
+}
+.widget-content .awpf-taxonomies .tax {
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+.widget-content .awpf-taxonomies .tax .inline-tax {
+	float: left;
+	width: 42%;
+}
+.widget-content .awpf-taxonomies .tax .inline-left {
+	margin-right: 2%;
+}
+.widget-content .awpf-add-tax,
+.widget-content .awpf-taxonomies .tax .remove-tax {
+	color: #0000ff;
+	cursor: pointer;
+	display: inline-block;
+}
+.widget-content .awpf-taxonomies .tax .remove-tax {
+	margin: 23px 0 0 5px;
+}

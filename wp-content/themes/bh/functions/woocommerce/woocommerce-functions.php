@@ -242,135 +242,6 @@ function BH_remove_viewed_products($post_id, &$viewed_products) {
 	endif;
 }
 
-/**
- * BH_init_product_filter_values
- * 
- * Initiate product filter values according to current taxonomy (product_cat, occasion, artist), term ID, price range and taxonomy terms
- * 
- * $taxonomies structure:
- * $taxonomies[ {taxonomy name} ][0]					=> taxonomy filter title
- * $taxonomies[ {taxonomy name} ][1]					=> number of products associated with this taxonomy
- * $taxonomies[ {taxonomy name} ][2][ {term ID} ][0]	=> term name
- * $taxonomies[ {taxonomy name} ][2][ {term ID} ][1]	=> number of products associated with this term
- * $taxonomies[ {taxonomy name} ][2][ {term ID} ][2]	=> whether this term is checked in taxonomy filter [1 = true / 0 = false]
- * 
- * @param	string	$taxonomy			taxonomy (product_cat|occasion|artist)
- * @param	int		$taxonomy_term_id	term ID
- * @param	int		&$min_price			minimum filter price
- * @param	int		&$max_price			maximum filter price
- * @param	int		&$min_handle_price	minimum filter handle price
- * @param	int		&$max_handle_price	maximum filter handle price
- * @param	array	&$taxonomies		holds arrays of arrays of terms
- * @return	array						array of post IDs
- */
-function BH_init_product_filter_values($taxonomy, $taxonomy_term_id, &$min_price, &$max_price, &$min_handle_price, &$max_handle_price, &$taxonomies) {
-	global $woocommerce;
-	
-	$posts = array();
-	
-	if ( ! $taxonomy || ! $taxonomy_term_id || count($taxonomies) == 0 )
-		return;
-	
-	// reset $taxonomies counters
-	foreach ($taxonomies as $tax_name => $tax_data) {
-		$taxonomies[$tax_name][1] = 0;
-		foreach ($tax_data[2] as $term_id => $term_data) {
-			$taxonomies[$tax_name][2][$term_id][1] = 0;
-		}
-	}
-	
-	// get checked terms
-	$checked_terms = array();	// array of taxonomy arrays hold checked term IDs
-	
-	foreach ($taxonomies as $tax_name => $tax_data)
-		foreach ($tax_data[2] as $term_id => $term_data)
-			if ($term_data[2] == '1') {
-				if ( ! key_exists($tax_name, $checked_terms) )
-					$checked_terms[$tax_name] = array();
-					
-				$checked_terms[$tax_name][] = $term_id;
-			}
-			
-	// get category products
-	$meta_query = $woocommerce->query->get_meta_query();
-	
-	$args = array(
-		'post_type'			=> 'product',
-		'posts_per_page'	=> -1,
-		'no_found_rows'		=> true,
-		'tax_query'			=> array(
-			'relation'		=> 'AND',
-			array(
-				'taxonomy'	=> $taxonomy,
-				'field'		=> 'id',
-				'terms'		=> $taxonomy_term_id
-			)
-		),
-		'meta_query'	=> $meta_query
-	);
-	
-	// include checked terms in query, if exist any
-	if ( count($checked_terms) > 0 )
-		foreach ($checked_terms as $tax_name => $terms)
-			$args['tax_query'][] = array(
-				'taxonomy'	=> $tax_name,
-				'field'		=> 'id',
-				'terms'		=> $terms,
-				'operator'	=> 'AND'
-			);
-			
-	$query = new WP_Query($args);
-	
-	// fill in filter values according to products meta data
-	global $post;
-	
-	if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
-	
-		// get product price
-		$_product = wc_get_product($post->ID);
-		$price = round( $_product->get_price() );
-		
-		// update price filter
-		if ( is_null($min_price) || is_null($max_price) ) :
-			$min_price = $max_price = $price;
-		else :
-			$min_price = min($price, $min_price);
-			$max_price = max($price, $max_price);
-		endif;
-		
-		// exlude product if price is below or above minimum and maximum handle prices
-		if ( ! is_null($min_handle_price) && ! is_null($max_handle_price) && ( $price < $min_handle_price || $price > $max_handle_price ) )
-			continue;
-		
-		// update taxonomies filter
-		foreach ($taxonomies as $tax_name => &$tax_data) :
-			// update $taxonomies counters
-			$p_terms = wp_get_post_terms($post->ID, $tax_name);
-			
-			if ($p_terms)
-				foreach ($p_terms as $p_term) :
-					// increment number of products associated with this taxonomy
-					$tax_data[1]++;
-					
-					// increment number of products associated with this term
-					$tax_data[2][$p_term->term_id][1]++;
-				endforeach;
-		endforeach;
-		
-		// save post
-		$posts[] = $post->ID;
-		
-	endwhile; endif; wp_reset_postdata();
-	
-	// update price filter handles in first page load
-	if ( is_null($min_handle_price) || is_null($max_handle_price) ) :
-		$min_handle_price = $min_price;
-		$max_handle_price = $max_price;
-	endif;
-	
-	return $posts;
-}
-
 /****************************************************************************************************************************************************/
 /* WooCommerce product item
 /****************************************************************************************************************************************************/
@@ -465,6 +336,15 @@ function BH_shop_tt_title() {
 	$output = ob_get_clean();
 	
 	return $output;
+}
+
+/**
+ * BH_shop_products_filter
+ *
+ * Show products filter widget area
+ */
+function BH_shop_products_filter() {
+	get_template_part('views/sidebar/sidebar-shop', 'products-filter');
 }
 
 /****************************************************************************************************************************************************/

@@ -55,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 		wp_enqueue_script('blog');
 	endif;
 	
-	if ( is_post_type_archive('product') || is_tax( get_object_taxonomies('product') ) || is_tax('event_category') ) :
+	if ( is_tax('event_category') ) :
 		wp_enqueue_script('jquery-ui');
 	endif;
 	

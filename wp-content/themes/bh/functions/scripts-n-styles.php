@@ -61,7 +61,7 @@ function BH_wp_scripts_n_styles() {
 		wp_enqueue_style('blog');
 	endif;
 	
-	if ( is_post_type_archive('product') || is_tax( get_object_taxonomies('product') ) || is_tax('event_category') ) :
+	if ( is_tax('event_category') ) :
 		wp_enqueue_style('jquery-ui');
 	endif;
 	
