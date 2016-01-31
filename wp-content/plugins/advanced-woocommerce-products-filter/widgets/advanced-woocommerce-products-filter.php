@@ -239,6 +239,7 @@ class Advanced_WooCommerce_Products_Filter extends WP_Widget
 				_AWPF_products_filter_taxonomies		=  <?php echo json_encode($taxonomies); ?>;
 				_AWPF_products_filter_products			=  <?php echo json_encode($products); ?>;
 				_AWPF_products_filter_currency			= '<?php echo html_entity_decode( get_woocommerce_currency_symbol() ); ?>';
+				_AWPF_products_filter_show_price_filter	=  <?php echo ( $instance['show_price_filter'] ) ? 1 : 0; ?>;
 			</script>
 
 			<?php
@@ -266,12 +267,16 @@ class Advanced_WooCommerce_Products_Filter extends WP_Widget
 		echo '<div class="widgetcontent">';
 		
 			// Price filter
-			echo '<div class="awpf-price-filter">';
-				echo ( $instance['price_title'] ) ? '<div class="awpf-price-title">' . $instance['price_title'] . '</div>' : '';
-				
-				echo '<input type="text" id="awpf-price-filter-amount" readonly>';
-				echo '<div id="awpf-price-filter-slider"></div>';
-			echo '</div>';
+			if ( $instance['show_price_filter'] ) :
+
+				echo '<div class="awpf-price-filter">';
+					echo ( $instance['price_title'] ) ? '<div class="awpf-price-title">' . $instance['price_title'] . '</div>' : '';
+					
+					echo '<input type="text" id="awpf-price-filter-amount" readonly>';
+					echo '<div id="awpf-price-filter-slider"></div>';
+				echo '</div>';
+
+			endif;
 			
 			// Taxonomy filters
 			foreach ($taxonomies as $tax_name => $tax_data) :
