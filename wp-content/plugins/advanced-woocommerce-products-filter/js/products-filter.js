@@ -1,6 +1,7 @@
 jQuery( function($) {
 	// Price filter
-	awpf_init_price_slider(_AWPF_products_filter_min_price, _AWPF_products_filter_max_price, _AWPF_products_filter_min_handle_price, _AWPF_products_filter_max_handle_price);
+	if ( _AWPF_products_filter_show_price_filter )
+		awpf_init_price_slider(_AWPF_products_filter_min_price, _AWPF_products_filter_max_price, _AWPF_products_filter_min_handle_price, _AWPF_products_filter_max_handle_price);
 	
 	// Taxonomy filters
 	$('.awpf-tax-filter .tax-terms input').change(function() {
@@ -164,13 +165,15 @@ function awpf_update_products_filter() {
 	});
 
 	// Update price filter
-	// Use new temporary variables in order to save untouched price filter handles
-	min_handle_price = (min_price && _AWPF_products_filter_min_handle_price < min_price) ? min_price : _AWPF_products_filter_min_handle_price;
-	max_handle_price = (max_price && _AWPF_products_filter_max_handle_price > max_price) ? max_price : _AWPF_products_filter_max_handle_price;
+	if ( _AWPF_products_filter_show_price_filter ) {
+		// Use new temporary variables in order to save untouched price filter handles
+		min_handle_price = (min_price && _AWPF_products_filter_min_handle_price < min_price) ? min_price : _AWPF_products_filter_min_handle_price;
+		max_handle_price = (max_price && _AWPF_products_filter_max_handle_price > max_price) ? max_price : _AWPF_products_filter_max_handle_price;
 
-	// Reinit price slider
-	$('#awpf-price-filter-slider').slider('destroy');
-	awpf_init_price_slider(min_price, max_price, min_handle_price, max_handle_price);
+		// Reinit price slider
+		$('#awpf-price-filter-slider').slider('destroy');
+		awpf_init_price_slider(min_price, max_price, min_handle_price, max_handle_price);
+	}
 
 	// Update taxonomy filters
 	$.each( _AWPF_products_filter_taxonomies, function(tax_name, tax_data) {
