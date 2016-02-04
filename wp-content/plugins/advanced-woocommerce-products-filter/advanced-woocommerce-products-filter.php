@@ -1,119 +1,230 @@
 <?php
-/*
+/**
  * Plugin Name: Advanced WooCommerce Products Filter
  * Plugin URI: http://www.htmline.com/
  * Description: WooCommerce widget for products filter
  * Version: 1.0 
  * Author: Nir Goldberg 
  * Author URI: http://www.htmline.com/
- * Copyright: Nir Goldberg
+ * License: GPLv2+
  * Text Domain: awpf
  * Domain Path: /lang
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-/**
- * Check if WooCommerce is active
- */
+// check if WooCommerce is active
 if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option('active_plugins') ) ) )
 	return;
 
-define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_VERSION', '1.0' );
+if ( ! class_exists('awpf') ) :
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_BASENAME' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+class awpf {
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_NAME' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_NAME', trim( dirname( ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_BASENAME ), '/' ) );
+	var $settings;
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_DIR' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_DIR', untrailingslashit( dirname( __FILE__ ) ) );
+	/**
+	 * __construct
+	 *
+	 * A dummy constructor to ensure AWPF is only initialized once
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
+	 */
+	function __construct() {
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_INCLUDES_DIR' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_INCLUDES_DIR', ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_DIR . '/includes' );
+		/* Do nothing here */
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_WIDGETS_DIR' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_WIDGETS_DIR', ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_DIR . '/widgets' );
+	}
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_URL' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
+	/**
+	 * initialize
+	 *
+	 * The real constructor to initialize AWPF
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
+	 */
+	function initialize() {
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_IMAGES_DIR' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_IMAGES_DIR', ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_URL . '/images' );
+		$this->settings = array(
+			// basic
+			'name'			=> __('Advanced WooCommerce Products Filter', 'awpf'),
+			'version'		=> '1.0',
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_CSS_DIR' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_CSS_DIR', ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_URL . '/css' );
+			// urls
+			'basename'		=> plugin_basename( __FILE__ ),
+			'path'			=> plugin_dir_path( __FILE__ ),		// with trailing slash
+			'dir'			=> plugin_dir_url( __FILE__ ),		// with trailing slash
 
-if ( ! defined( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_JS_DIR' ) )
-	define( 'ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_JS_DIR', ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_URL . '/js' );
+			// options
+			'show_admin'	=> true,
+			'widget_style'	=> true,
+			'capability'	=> 'manage_options'
+		);
 
-/****************************************************************************************************************************************************/
-/* scripts & styles
-/****************************************************************************************************************************************************/
+		// include helpers
+		include_once('api/api-helpers.php');
 
-/**
- * awpf_plugin_backend_enqueue
- *
- * Register/enqueue backend scripts and styles
- *
- * @param	string		$hook		admin page
- */
-function awpf_plugin_backend_enqueue($hook) {
-	if( 'widgets.php' != $hook )
-		return;
-	
-	// CSS
-	wp_register_style( ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_NAME . '-admin-style',		ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_CSS_DIR . '/admin-style.css',	array(),			ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_VERSION );
-}
-add_action( 'admin_enqueue_scripts', 'awpf_plugin_backend_enqueue' );
+		// admin
+		if( is_admin() ) {
+			
+			awpf_include('admin/admin.php');
+			awpf_include('admin/dashboard.php');
+			awpf_include('admin/settings.php');
+			awpf_include('admin/widgets.php');
 
-/**
- * awpf_plugin_frontend_enqueue
- *
- * Register/enqueue frontend scripts and styles
- */
-function awpf_plugin_frontend_enqueue() {
-	if( is_admin() )
-		return;
-	
-	// CSS
-	wp_register_style( 'jquery-ui',																ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_CSS_DIR . '/jquery-ui.min.css',	array(),			ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_VERSION );
-
-	// JS
-	wp_register_script( 'jquery-ui',															ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_JS_DIR . '/jquery-ui.min.js',	array('jquery'),	ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_VERSION,	true );
-	wp_register_script( ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_NAME . '-products-filter',	ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_JS_DIR . '/products-filter.js',	array('jquery'),	ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_VERSION,	true );
-}
-add_action( 'wp_enqueue_scripts', 'awpf_plugin_frontend_enqueue' );
-
-/****************************************************************************************************************************************************/
-/* Styling widgets admin area
-/****************************************************************************************************************************************************/
-
-/**
- * awpf_widgets_style
- *
- * Modify widget appearance style
- */
-function awpf_widgets_style() {
-echo <<<EOF
-	<style type="text/css">
-		div.widget[id*=advanced_woocommerce_products_filter] .widget-title h3 {
-			color: #2191bf;
 		}
-	</style>
-EOF;
+
+		// functions
+		awpf_include('includes/awpf-hooks.php');
+		awpf_include('includes/awpf-functions.php');
+
+		// widgets
+		awpf_include('widgets/awpf-widget.php');
+
+		// actions
+		add_action( 'init',	array($this, 'init'), 5 );
+		add_action( 'init',	array($this, 'register_assets'), 5 );
+
+		// plugin activation / deactivation
+		register_activation_hook( __FILE__,		array( $this, 'awpf_install' ) );
+		register_deactivation_hook( __FILE__,	array( $this, 'awpf_uninstall' ) );
+
+	}
+
+	/**
+	 * init
+	 *
+	 * This function will run after all plugins and theme functions have been included
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
+	 */
+	function init() {
+
+		// exit if called too early
+		if ( ! did_action('plugins_loaded') )
+			return;
+
+		// exit if already init
+		if( awpf_get_setting('init') )
+			return;
+
+		// only run once
+		awpf_update_setting('init', true);
+
+		// redeclare dir - allow another plugin to modify dir
+		awpf_update_setting( 'dir', plugin_dir_url( __FILE__ ) );
+
+		// set text domain
+		load_textdomain( 'awpf', awpf_get_path( 'lang/awpf-' . get_locale() . '.mo' ) );
+
+		// action for 3rd party
+		do_action('awpf/init');
+
+	}
+
+	/**
+	 * register_assets
+	 *
+	 * This function will register scripts and styles
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
+	 */
+	function register_assets() {
+
+		// vars
+		$version	= awpf_get_setting('version');
+		$lang		= get_locale();
+		$scripts	= array();
+		$styles		= array();
+
+		// append scripts
+		$scripts['jquery-ui'] = array(
+			'src'	=> awpf_get_dir('js/jquery-ui.min.js'),
+			'deps'	=> array('jquery')
+		);
+
+		$scripts['awpf-products-filter'] = array(
+			'src'	=> awpf_get_dir('js/awpf-products-filter.js'),
+			'deps'	=> array('jquery')
+		);
+
+		// register scripts
+		foreach ( $scripts as $handle => $script ) {
+
+			wp_register_script( $handle, $script['src'], $script['deps'], $version );
+
+		}
+
+		// append styles
+		$styles['jquery-ui'] = array(
+			'src'	=> awpf_get_dir('css/jquery-ui.min.css'),
+			'deps'	=> false
+		);
+
+		$styles['awpf-admin-style'] = array(
+			'src'	=> awpf_get_dir('css/awpf-admin-style.css'),
+			'deps'	=> false
+		);
+
+		// register styles
+		foreach( $styles as $handle => $style ) {
+
+			wp_register_style( $handle, $style['src'], $style['deps'], $version );
+
+		}
+
+	}
+
+	/**
+	 * awpf_install
+	 *
+	 * Actions perform on activation of plugin
+	 */
+	function awpf_install() {}
+
+	/**
+	 * awpf_uninstall
+	 *
+	 * Actions perform on deactivation of plugin
+	 */
+	function awpf_uninstall() {}
+
 }
-add_action( 'admin_print_styles-widgets.php', 'awpf_widgets_style' );
 
-/****************************************************************************************************************************************************/
-/* Includes
-/****************************************************************************************************************************************************/
+/**
+ * awpf
+ *
+ * The main function responsible for returning the one true awpf Instance
+ *
+ * @since	1.0
+ * @param	N/A
+ * @return	(object)
+ */
+function awpf() {
 
-require_once ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_INCLUDES_DIR . '/functions.php';
+	global $awpf;
 
-/****************************************************************************************************************************************************/
-/* Include widgets
-/****************************************************************************************************************************************************/
+	if( ! isset($awpf) ) {
 
-require_once ADVANCED_WOOCOMMERCE_PRODUCTS_FILTER_PLUGIN_WIDGETS_DIR . '/advanced-woocommerce-products-filter.php';
+		$awpf = new awpf();
+
+		$awpf->initialize();
+
+	}
+
+	return $awpf;
+
+}
+
+// initialize
+awpf();
+
+endif; // class_exists check
