@@ -1,13 +1,64 @@
 jQuery( function($) {
+	// Categories menu
+	// toggle subcategories menu
+	$('.awpf-category-filter li.has-children > .item-before').bind('click', awpf_subcategories_menu_toggle);
+	$('.awpf-category-filter li.has-children > a').bind('click', awpf_subcategories_menu_toggle);
+
+	// change category selection
+	$('.awpf-category-filter input').bind('change', awpf_change_category_selection);
+
 	// Price filter
 	if ( _AWPF_products_filter_show_price_filter )
 		awpf_init_price_slider(_AWPF_products_filter_min_price, _AWPF_products_filter_max_price, _AWPF_products_filter_min_handle_price, _AWPF_products_filter_max_handle_price);
-	
+
 	// Taxonomy filters
 	$('.awpf-tax-filter .tax-terms input').change(function() {
 		awpf_map_taxonomy_terms();
 	});
 });
+
+/**
+ * awpf_subcategories_menu_toggle
+ */
+function awpf_subcategories_menu_toggle(event) {
+	var current = event.currentTarget,
+		li = $(current).parent(),
+		active = li.hasClass('collapsed') ? true : false;
+
+	if (active) {
+		li.removeClass('collapsed').find('li.has-children').removeClass('collapsed');
+	}
+	else {
+		li.addClass('collapsed');
+	}
+}
+
+/**
+ * awpf_change_category_selection
+ */
+function awpf_change_category_selection(event) {
+	var current = event.currentTarget,
+		id = $(current).attr('id').substring(12),
+		all = id.indexOf('all') != -1 ? true : false,
+		checked = $(current).is(':checked');
+}
+
+/**
+ * awpf_map_categories
+ */
+function awpf_map_categories() {
+	var items = $('.awpf-category-filter ul.categories > li.ancestor > ul.children li');
+	
+	items.each(function() {
+		// Set checked items
+		items.find('input').each(function() {
+			var category_id = $(this).attr('id');
+			_AWPF_products_filter_taxonomies[tax_name][2][term_id][1] = ($(this).is(':checked')) ? 1 : 0; 
+		});
+	});
+	
+	awpf_filter_products();
+}
 
 /**
  * awpf_init_price_slider
@@ -68,7 +119,7 @@ function awpf_map_taxonomy_terms() {
 		// Set checked terms
 		terms.find('input').each(function() {
 			var term_id = $(this).attr('id');
-			_AWPF_products_filter_taxonomies[tax_name][2][term_id][2] = ($(this).is(':checked')) ? 1 : 0; 
+			_AWPF_products_filter_taxonomies[tax_name][2][term_id][1] = ($(this).is(':checked')) ? 1 : 0; 
 		});
 	});
 	
@@ -81,7 +132,7 @@ function awpf_map_taxonomy_terms() {
  * Refresh products filter and products grid
  */
 function awpf_filter_products() {
-	var loader = $('.Advanced_WooCommerce_Products_Filter .loader');
+	var loader = $('.widget_awpf_widget .loader');
 	
 	// Expose loader
 	loader.show();
@@ -109,7 +160,7 @@ function awpf_update_products_filter() {
 	$.each( _AWPF_products_filter_taxonomies, function(tax_name, tax_data) {
 		tax_data[1] = 0;
 		$.each( tax_data[2], function(term_id, term_data) {
-			term_data[1] = 0;
+			term_data[0] = 0;
 		});
 	});
 
@@ -122,7 +173,7 @@ function awpf_update_products_filter() {
 		$.each(_AWPF_products_filter_taxonomies, function(tax_name, tax_data) {
 			$.each( tax_data[2], function(term_id, term_data) {
 				// Check if taxonomy term is checked and associated with this product 
-				if ( term_data[2] && $.inArray(parseInt(term_id), product_data[2][tax_name]) == -1 ) {
+				if ( term_data[1] && $.inArray(parseInt(term_id), product_data[2][tax_name]) == -1 ) {
 					product_data[1] = 0;
 					return false;
 				}
@@ -158,7 +209,7 @@ function awpf_update_products_filter() {
 
 				$.each(term_ids, function(i, term_id) {
 					// Add 1 in taxonomy term level
-					_AWPF_products_filter_taxonomies[tax_name][2][term_id][1]++;
+					_AWPF_products_filter_taxonomies[tax_name][2][term_id][0]++;
 				});
 			}
 		});
@@ -187,14 +238,14 @@ function awpf_update_products_filter() {
 			$('.awpf-tax-filter-' + tax_name).show();
 			
 			$.each( tax_data[2], function(term_id, term_data) {
-				if (term_data[1] == 0) {
+				if (term_data[0] == 0) {
 					// There are no filtered products associated with this term
 					// Hide taxonomy term
 					$('.awpf-tax-filter input#' + term_id).parent('label').hide();
 				} else {
 					// There are filtered products associated with this term
 					// Update term label and expose term
-					$('.awpf-tax-filter input#' + term_id).parent('label').find('span').html(term_data[0] + ' (' + term_data[1] + ')');
+					$('.awpf-tax-filter input#' + term_id).parent('label').find('span.count').html('(' + term_data[0] + ')');
 					$('.awpf-tax-filter input#' + term_id).parent('label').show();
 				}
 			});
