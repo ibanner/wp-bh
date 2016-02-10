@@ -83,7 +83,8 @@ class awpf {
 		awpf_include('includes/awpf-functions.php');
 
 		// widgets
-		awpf_include('widgets/awpf-widget.php');
+		awpf_include('widgets/awpf/awpf-widget.php');
+		awpf_include('widgets/awpf/awpf-widget-front.php');
 
 		// actions
 		add_action( 'init',	array($this, 'init'), 5 );

@@ -23,7 +23,7 @@ class awpf_admin {
 	function __construct() {
 
 		// actions
-		add_action( 'admin_menu',				array( $this, 'admin_menu' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
 	}
 

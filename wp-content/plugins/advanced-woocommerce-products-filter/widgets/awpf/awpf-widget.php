@@ -40,7 +40,7 @@ class AWPF_Widget extends WP_Widget {
 
 		);
 
-		// filter values
+		// form fields
 		$this->form_fields = array(
 			'title'					=> '',
 			'show_categories_menu'	=> '',
@@ -60,7 +60,7 @@ class AWPF_Widget extends WP_Widget {
 	 * Admin widget form
 	 *
 	 * @since		1.0
-	 * @param		N/A
+	 * @param		$instance (array) widget instance values
 	 * @return		N/A
 	 */
 	function form($instance) {
@@ -81,8 +81,9 @@ class AWPF_Widget extends WP_Widget {
 	 * Widget update
 	 *
 	 * @since		1.0
-	 * @param		N/A
-	 * @return		N/A
+	 * @param		$new_instance (array) widget instance new values
+	 * @param		$old_instance (array) widget instance old values
+	 * @return		$instance (array) widget instance updated values
 	 */
 	function update($new_instance, $old_instance) {
 
@@ -111,7 +112,8 @@ class AWPF_Widget extends WP_Widget {
 	 * Widget frontend
 	 *
 	 * @since		1.0
-	 * @param		N/A
+	 * @param		$args (array)
+	 * @param		$instance (array)
 	 * @return		N/A
 	 */
 	function widget($args, $instance) {
@@ -121,82 +123,12 @@ class AWPF_Widget extends WP_Widget {
 		// exit if declared out of product archive or product taxonomy
 		if ( ! is_post_type_archive('product') && ! is_tax( get_object_taxonomies('product') ) )
 			return;
-			
-		// filter values
-		$taxonomy			= get_query_var('taxonomy');		
-		$term_id			= get_queried_object_id();
-		$min_price			= null;
-		$max_price			= null;
-		$min_handle_price	= null;
-		$max_handle_price	= null;
-		$categories			= array();
-		$taxonomies			= array();
-		$products			= array();
 
-		// initiate $categories
-		if ( $instance['show_categories_menu'] ) {
-			awpf_init_categories( $categories );
-		}
+		// Widget content
+		echo $before_widget;
 
-		// initiate $taxonomies
-		if ( $instance['taxonomies'] ) {
-			awpf_init_taxonomies( $instance['taxonomies'], $taxonomies );
-		}
-
-		if ( ! $instance['show_price_filter'] && ( ! $instance['show_categories_menu'] || ! $categories ) && ! $taxonomies )
-			return;
-			
-		/**
-		 * 1. Initiate filter values
-		 * 2. Initiate $products as an array of arrays (products and terms associated with each product)
-		 */
-		awpf_init_products_filter_values( $taxonomy, $term_id, $min_price, $max_price, $min_handle_price, $max_handle_price, $taxonomies, $products );
-
-		if ( ! $products )
-			return;
-
-		?>
-		
-		<script>
-			_AWPF_products_filter_taxonomy				= '<?php echo $taxonomy; ?>';
-			_AWPF_products_filter_term_id				=  <?php echo $term_id; ?>;
-			_AWPF_products_filter_min_price				=  <?php echo $min_price; ?>;
-			_AWPF_products_filter_max_price				=  <?php echo $max_price; ?>;
-			_AWPF_products_filter_min_handle_price		=  <?php echo $min_handle_price; ?>;
-			_AWPF_products_filter_max_handle_price		=  <?php echo $max_handle_price; ?>;
-			_AWPF_products_filter_categories			=  <?php echo json_encode($categories); ?>;
-			_AWPF_products_filter_taxonomies			=  <?php echo json_encode($taxonomies); ?>;
-			_AWPF_products_filter_products				=  <?php echo json_encode($products); ?>;
-			_AWPF_products_filter_currency				= '<?php echo html_entity_decode( get_woocommerce_currency_symbol() ); ?>';
-			_AWPF_products_filter_show_price_filter		=  <?php echo ( $instance['show_price_filter'] ) ? 1 : 0; ?>;
-			_AWPF_products_filter_show_categories_menu	=  <?php echo ( $instance['show_categories_menu'] ) ? 1 : 0; ?>;
-		</script>
-
-		<?php
-			wp_enqueue_style( 'jquery-ui' );
-			wp_enqueue_script( 'jquery-ui' );
-			wp_enqueue_script( 'awpf-products-filter' );
-		?>
-
-		<?php
-			// Widget content
-			echo $before_widget;
-		?>
-
-		<?php
-			$title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title'], $instance);
-
-			/**
-			 * awpf_before_main_content hook
-			 *
-			 * @hooked awpf_output_widget_title - 10
-			 */
-			do_action( 'awpf_before_main_content', $title );
-		?>
-
-		<?php
-
-		if ( ! empty($title) )
+		$title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title'], $instance);
+		if ( ! empty($title) ) {
 			echo
 				$before_title .
 					$title .
@@ -204,92 +136,11 @@ class AWPF_Widget extends WP_Widget {
 						'<img src="' . awpf_get_dir('images/ajax-loader.gif') . '" width="16" height="16" />' .
 					'</div>' .
 				$after_title;
+		}
 
-		echo '<div class="widgetcontent">';
-		
-			// Categories menu
-			if ( $instance['show_categories_menu'] && $categories ) {
+		awpf_widget_front()->initialize( $instance['show_categories_menu'], $instance['show_price_filter'], $instance['price_title'], $instance['taxonomies'] );
 
-				echo '<div class="awpf-category-filter">';
-					echo '<div class="category-filter-title">';
-						echo apply_filters( 'awpf_product_categories_title', __('Product Categories', 'awpf') );
-					echo '</div>';
-
-					echo '<ul class="categories">';
-						foreach ( $categories[0] as $category ) {
-							if ( $category[4] ) {
-								awpf_product_categories_menu_item($categories, $category, 0);
-							} else {
-								echo '<li>';
-									echo '<span class="item-before"></span>';
-									echo '<a href="' . $category[1] . '"><span>' . get_cat_name( $category[0] ) . '</span> <span class="count">(' . $category[2] . ')</span></a>';
-								echo '</li>';
-							}
-						}
-					echo '</ul>';
-				echo '</div>';
-
-			}
-
-			// Price filter
-			if ( $instance['show_price_filter'] ) {
-
-				echo '<div class="awpf-price-filter">';
-					echo ( $instance['price_title'] ) ? '<div class="awpf-price-filter-title">' . $instance['price_title'] . '</div>' : '';
-					
-					echo '<input type="text" id="awpf-price-filter-amount" readonly>';
-					echo '<div id="awpf-price-filter-slider"></div>';
-				echo '</div>';
-
-			}
-			
-			// Taxonomy filters
-			if ($taxonomies) {
-
-				foreach ($taxonomies as $tax_name => $tax_data) {
-					// Display taxonomy filter if there are terms
-					if ( $tax_data[1] > 0 ) {
-						echo '<div class="awpf-tax-filter awpf-tax-filter-' . $tax_name . '">';
-							echo ( $tax_data[0] ) ? '<div class="tax-filter-title">' . $tax_data[0] . '</div>' : '';
-							
-							echo '<div class="tax-terms">';
-								foreach ($tax_data[2] as $term_id => $term_data) {
-									if ($term_data[0] > 0) {
-										$term_name = get_term_by('id', $term_id, $tax_name)->name;
-
-										echo '<label>';
-											echo '<input type="checkbox" name="' . $this->get_field_name($tax_name) . '[]" id="' . $term_id . '" value="' . $term_id . '" />' . $term_name . ' <span class="count">(' . $term_data[0] . ')</span>';
-										echo '</label>';
-									}
-								}
-							echo '</div>';
-						echo '</div>';
-					}
-				}
-
-			}
-			
-		echo '</div>';
-		
 		echo $after_widget;
-	}
-
-	/**
-	 * get_form_field
-	 *
-	 * This function will return a value from the form_fields array found in AWPF_Widget object
-	 *
-	 * @since		1.0
-	 * @param		$name (string) the form field name to return
-	 * @return		(mixed)
-	 */
-	function get_form_field( $name, $default = null ) {
-
-		$form_field = awpf_maybe_get( $this->form_fields, $name, $default );
-
-		// return
-		return $form_field;
-
 	}
 
 	/**
@@ -308,15 +159,33 @@ class AWPF_Widget extends WP_Widget {
 	}
 
 	/**
+	 * get_form_field
+	 *
+	 * This function will return a value from the form_fields array found in AWPF_Widget object
+	 *
+	 * @since		1.0
+	 * @param		$name (string) the form field name to return
+	 * @return		(mixed)
+	 */
+	private function get_form_field( $name, $default = null ) {
+
+		$form_field = awpf_maybe_get( $this->form_fields, $name, $default );
+
+		// return
+		return $form_field;
+
+	}
+
+	/**
 	 * generate_widget_form
 	 *
 	 * This function will generate the widget form
 	 *
 	 * @since		1.0
-	 * @param		$taxonomies (array) array of taxonomies input fields within widget form
+	 * @param		N/A
 	 * @return		N/A
 	 */
-	function generate_widget_form() {
+	private function generate_widget_form() {
 
 		$title					= $this->get_form_field( 'title' );
 		$show_categories_menu	= $this->get_form_field( 'show_categories_menu' );
@@ -402,7 +271,7 @@ class AWPF_Widget extends WP_Widget {
 	 * @param		$taxonomies_objects (array) array of product taxonomies
 	 * @return		(array)
 	 */
-	function generate_taxonomies_html( $taxonomies, $taxonomies_objects ) {
+	private function generate_taxonomies_html( $taxonomies, $taxonomies_objects ) {
 
 		$taxonomies_html	= array();
 		$taxonomies_counter	= 0;
