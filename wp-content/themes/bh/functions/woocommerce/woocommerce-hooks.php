@@ -187,10 +187,12 @@ add_action('woocommerce_refund_created',			'BH_shop_order_refund', 10, 2);
 /****************************************************************************************************************************************************/
 
 /**
- * @see		BH_shop_get_price_html()
+ * @see		BH_shop_price_html()
+ * @see		BH_shop_sale_price_html()
  * @see		BH_shop_set_related_products_limit()
  * @see		BH_shop_catalog_orderby_options()
  */
-//add_filter('woocommerce_get_price_html', 'BH_shop_get_price_html', 10, 2);
+add_filter('woocommerce_price_html', 'BH_shop_price_html', 10, 2);
+add_filter('woocommerce_sale_price_html', 'BH_shop_sale_price_html', 10, 2);
 add_filter('woocommerce_product_related_posts_query', 'BH_shop_set_related_products_limit');
 add_filter('woocommerce_catalog_orderby', 'BH_shop_catalog_orderby_options');

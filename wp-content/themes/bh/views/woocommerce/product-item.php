@@ -4,11 +4,20 @@
 	$p_id			= $product->id;
 	$p_sku			= esc_js( $product->sku );
 	$p_name			= esc_js( $product->get_title() );
-	$p_price		= number_format((float)$product->price, 2, '.', '');
 	$p_currency		= get_woocommerce_currency();
 	$p_list			= esc_js( $list );
 	$p_page			= esc_url( get_permalink($p_id) );
-	
+
+	if ( defined('DOING_AJAX') && DOING_AJAX && class_exists('woocommerce_wpml') ) {
+		// filter product price and currency
+		// used in case of an AJAX call and active woocommerce wpml
+		$p_price = number_format((float)apply_filters('wcml_raw_price_amount', $product->price), 2, '.', '');
+		$p_currency = apply_filters('wcml_price_currency', $p_currency);
+	}
+	else {
+		$p_price = number_format((float)$product->price, 2, '.', '');
+	}
+
 	$category = '';
 	$product_cats = wp_get_post_terms($p_id, 'product_cat');
 	if ( $product_cats && ! is_wp_error ($product_cats) ) :

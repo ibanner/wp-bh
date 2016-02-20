@@ -259,9 +259,18 @@ function BH_loop_add_to_cart_link() {
 	$p_id		= $product->id;
 	$p_sku		= esc_js( $product->sku );
 	$p_name		= esc_js( $product->get_title() );
-	$p_price	= number_format((float)$product->price, 2, '.', '');
 	$p_currency	= get_woocommerce_currency();
 	
+	if ( defined('DOING_AJAX') && DOING_AJAX && class_exists('woocommerce_wpml') ) {
+		// filter product price and currency
+		// used in case of an AJAX call and active woocommerce wpml
+		$p_price = number_format((float)apply_filters('wcml_raw_price_amount', $product->price), 2, '.', '');
+		$p_currency = apply_filters('wcml_price_currency', $p_currency);
+	}
+	else {
+		$p_price = number_format((float)$product->price, 2, '.', '');
+	}
+
 	$category = '';
 	$product_cats = wp_get_post_terms($p_id, 'product_cat');
 	if ( $product_cats && ! is_wp_error ($product_cats) ) :
@@ -784,18 +793,51 @@ function BH_shop_get_artist_links($product_id) {
 }
 
 /**
- * BH_shop_get_price_html
+ * BH_shop_price_html
  * 
- * Customize product price html
+ * Filter woocommerce_price_html
  */
-function BH_shop_get_price_html($price, $product) {
+function BH_shop_price_html($price, $product) {
+
+	if ( defined('DOING_AJAX') && DOING_AJAX && class_exists('woocommerce_wpml') ) {
+		// filter product price and currency
+		// used in case of an AJAX call and active woocommerce wpml
+		$args = array(
+			'currency' => apply_filters( 'wcml_price_currency', get_woocommerce_currency_symbol() ),
+		);
+
+		$price = '<span class="amount">' . wc_price( apply_filters('wcml_raw_price_amount', $product->price), $args ) . '</span>';
+	}
+
+	// return
+	return $price;
+
+}
+
+/**
+ * BH_shop_sale_price_html
+ * 
+ * Filter woocommerce_sale_price_html
+ */
+function BH_shop_sale_price_html($price, $product) {
+
 	$del = BH_strip_tags_content($price, '<ins>', true);
 	$ins = BH_strip_tags_content($price, '<del>', true);
-	
-	if ( strpos($del, '<del>') === false || strpos($ins, '<ins>') === false )
-		return $price;
-		
+
+	if ( defined('DOING_AJAX') && DOING_AJAX && class_exists('woocommerce_wpml') ) {
+		// filter product price and currency
+		// used in case of an AJAX call and active woocommerce wpml
+		$args = array(
+			'currency' => apply_filters( 'wcml_price_currency', get_woocommerce_currency_symbol() ),
+		);
+
+		$del = '<del><span class="amount">' . wc_price( apply_filters('wcml_raw_price_amount', $product->regular_price), $args ) . '</span></del>';
+		$ins = '<ins><span class="amount">' . wc_price( apply_filters('wcml_raw_price_amount', $product->price), $args ) . '</span></ins>';
+	}
+
+	// return
 	return $del . $ins;
+
 }
 
 /**

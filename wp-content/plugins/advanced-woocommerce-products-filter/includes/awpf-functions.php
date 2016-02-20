@@ -10,64 +10,123 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * awpf_product_categories_menu_item
+ * awpf_filter_products
  *
- * Recursive function handles display of a single category menu item.
- * The recursive part handles the children menu items (if there are any) of this parent category 
+ * This function rebuild the products filter and products grid as part of AJAX call after select change event in categories menu
  *
  * @since		1.0
- * @param		$categories (array) holds array of $category arrays
- * @param		$category (array) holds array of a single category data
- * @param		$depth (int) indicates current menu depth
+ * @param		$_POST
  * @return		N/A
  */
-function awpf_product_categories_menu_item( $categories, $category, $depth ) {
+function awpf_filter_products() {
 
-	$has_children = array_key_exists( $category[0], $categories );
-	$classes = array();
+	// get data
+	$taxonomy		= ( isset($_POST['taxonomy'])	&& $_POST['taxonomy'] )		? $_POST['taxonomy']	: '';
+	$term_ids		= ( isset($_POST['term_ids'])	&& $_POST['term_ids'] )		? $_POST['term_ids']	: '';
+	$wpml_lang		= ( isset($_POST['wpml_lang'])	&& $_POST['wpml_lang'] )	? $_POST['wpml_lang']	: '';
+	$tax_list		= ( isset($_POST['tax_list'])	&& $_POST['tax_list'] )		? $_POST['tax_list']	: '';
 
-	if ($has_children)
-		$classes[] = 'has-children';
+	if ( ! $taxonomy || ! $term_ids ) {
+		// die
+		die();
+	}
 
-	if ( $category[4] )
-		$classes[] = 'ancestor';
+	// set AWPF_Widget_Front attributes
+	awpf_widget_front()->set_attribute( 'taxonomy',		$taxonomy );
+	awpf_widget_front()->set_attribute( 'term_ids',		$term_ids );
+	awpf_widget_front()->set_attribute( 'wpml_lang',	$wpml_lang );
+	awpf_widget_front()->set_attribute( 'tax_list',		$tax_list );
 
-	echo '<li class="' . implode(' ', $classes) . '">';
+	// rebuild AWPF_Widget_Front
+	awpf_widget_front()->rebuild();
 
-		if ($has_children || $depth == 0) {
+}
 
-			// Top level item and/or a parent item
-			echo '<span class="item-before"></span>';
-			echo '<a><span>' . get_cat_name( $category[0] ) . '</span> <span class="count">(' . $category[2] . ')</span></a>';
+/**
+ * awpf_get_terms (for future use)
+ *
+ * Transient version for get_terms()
+ *
+ * @since		1.0
+ * @param		$taxonomy (string) the taxonomy to retrieve terms from
+ * @param		$args (array)
+ * @return		(array) array of term objects or an empty array if no terms were found
+ */
+function awpf_get_terms( $taxonomy, $args ) {
 
-		}
-		else {
+	// get attributes
+	$wpml_lang = awpf_widget_front()->get_attribute('wpml_lang');
 
-			// Low level item without children
-			echo '<label>';
-				echo '<input type="checkbox" name="product_cat-' . $category[0] . '" id="product_cat-' . $category[0] . '" value="product_cat-' . $category[0] . '" />' . get_cat_name( $category[0] ) . ' <span class="count">(' . $category[2] . ')</span>';
-			echo '</label>';
+	$output = array();
 
-		}
+	if ( ! isset($taxonomy) )
+		return $output;
 
-		if ($has_children) {
+	$transient_key		= 'AWPF-' . md5( serialize($taxonomy) . serialize($args) . ( $wpml_lang ? serialize($wpml_lang) : '' ) );
+	$transient			= get_transient( $transient_key );
 
-			// Start a subcategories menu
-			echo '<ul class="children children-depth-' . $depth . '">';
-				// Display an "All" item as a first item in the subcategories menu
-				echo '<li>';
-					echo '<label>';
-						echo '<input type="checkbox" name="product_cat-' . $category[0] . '-all' . '" id="product_cat-' . $category[0] . '-all' . '" value="product_cat-' . $category[0] . '-all' . '"' . ( $category[3] ? ' checked' : '' ) . ' />' . apply_filters( 'awpf_all_subcategories_title', __('All', 'awpf') ) . ' <span class="count">(' . $category[2] . ')</span>';
-					echo '</label>';
-				echo '</li>';
+	$last_updated_key	= 'AWPF-' . substr($taxonomy, 0, 32) . ( $wpml_lang ? '-' . $wpml_lang : '' ) . '-terms-updated';
+	$last_updated		= get_transient( $last_updated_key );
 
-				foreach ( $categories[$category[0]] as $subcategory ) {
-					awpf_product_categories_menu_item( $categories, $subcategory, $depth+1 );
-				}
-			echo '</ul>';
+	if ( isset($transient['data']) && isset($last_updated) && $last_updated < $transient['time'] )
+		// return data from transient
+		return $transient['data'];
 
-		}
+	// transient isn't valid or not exist
+	if (!$last_updated)
+		set_transient( $last_updated_key, time() );
+		
+	$output = get_terms($taxonomy, $args);
+	$data = array( 'time' => time(), 'data' => $output );
+	set_transient( $transient_key, $data );
 
-	echo '</li>';
+	// return
+	return $output;
+
+}
+
+/**
+ * awpf_wp_query (for future use)
+ *
+ * Transient version for WP_Query
+ *
+ * @since		1.0
+ * @param		$args (array) WP_Query arguments
+ * @param		$name (string) referenced transient - used to check validity against query transient
+ * @return		(array) array of post objects or an empty array if no posts were found
+ */
+function awpf_wp_query( $args, $name ) {
+
+	$output = array();
+
+	if ( ! isset($args) || ! isset($name) )
+		return $output;
+
+	$transient_key		= 'AWPF-' . md5( serialize($args) . serialize($name) );
+	$transient			= get_transient( $transient_key );
+	$last_updated_key	= 'AWPF-' . $name . '-wp-query-updated';
+	$last_updated		= get_transient( $last_updated_key );
+
+	if ( isset($transient['data']) && isset($last_updated) && $last_updated < $transient['time'] )
+		// return data from transient
+		return $transient['data'];
+
+	// transient isn't valid or not exist
+	if (!$last_updated)
+		set_transient( $last_updated_key, time() );
+
+	global $post;
+
+	$query = new WP_Query($args);
+
+	if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
+		$output[] = $post;
+	endwhile; endif; wp_reset_postdata();
+
+	$data = array( 'time' => time(), 'data' => $output );
+	set_transient( $transient_key, $data );
+
+	// return
+	return $output;
 
 }

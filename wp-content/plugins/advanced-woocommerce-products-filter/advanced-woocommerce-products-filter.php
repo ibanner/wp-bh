@@ -68,8 +68,13 @@ class awpf {
 		// include helpers
 		include_once('api/api-helpers.php');
 
+		// wpml fix
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			add_action( 'setup_theme', array($this, 'awpf_wpml_fix') );
+		}
+
 		// admin
-		if( is_admin() ) {
+		if ( is_admin() ) {
 			
 			awpf_include('admin/admin.php');
 			awpf_include('admin/dashboard.php');
@@ -185,6 +190,19 @@ class awpf {
 	}
 
 	/**
+	 * awpf_wpml_fix
+	 *
+	 * Fix WPML current language
+	 */
+	public static function awpf_wpml_fix() {
+		global $sitepress;
+
+		if ( method_exists( $sitepress, 'switch_lang' ) && isset( $_POST['wpml_lang'] ) ) {
+			$sitepress->switch_lang( $_POST['wpml_lang'], true );
+		}
+	}
+
+	/**
 	 * awpf_install
 	 *
 	 * Actions perform on activation of plugin
@@ -221,6 +239,7 @@ function awpf() {
 
 	}
 
+	// return
 	return $awpf;
 
 }
