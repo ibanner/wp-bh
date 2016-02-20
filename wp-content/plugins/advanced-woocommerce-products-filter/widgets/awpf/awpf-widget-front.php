@@ -39,7 +39,7 @@ class AWPF_Widget_Front {
 	 * @param		$show_categories_menu (bool) show (true) / hide (false) categories menu
 	 * @param		$show_price_filter (bool) show (true) / hide (false) price filter
 	 * @param		$price_title (string) price filter title
-	 * @param		$tax_list (array) taxonomy names
+	 * @param		$tax_list (array) array taxonomy filter titles and taxonomy names
 	 * @return		N/A
 	 */
 	function initialize( $show_categories_menu, $show_price_filter, $price_title, $tax_list ) {
@@ -48,7 +48,8 @@ class AWPF_Widget_Front {
 		$this->attributes = array(
 			// queried object
 			'taxonomy'				=> get_query_var('taxonomy'),
-			'term_id'				=> get_queried_object_id(),
+			'term_ids'				=> array( get_queried_object_id() ),
+			'wpml_lang'				=> function_exists('icl_object_id') ? ICL_LANGUAGE_CODE : '',
 
 			// filter settings
 			'show_categories_menu'	=> $show_categories_menu,
@@ -56,7 +57,7 @@ class AWPF_Widget_Front {
 			'price_title'			=> $price_title,
 			'tax_list'				=> $tax_list,
 
-			// filter attributes
+			// price filter attributes
 			'min_price'				=> null,
 			'max_price'				=> null,
 			'min_handle_price'		=> null,
@@ -83,10 +84,8 @@ class AWPF_Widget_Front {
 		if ( ! $show_price_filter && ( ! $show_categories_menu || ! $this->attributes['categories'] ) && ! $this->attributes['taxonomies'] )
 			return;
 			
-		/**
-		 * 1. initiate filter values
-		 * 2. initiate products attribute as an array of arrays (products and terms associated with each product)
-		 */
+		// 1. initiate filter values
+		// 2. initiate products attribute as an array of arrays (products and terms associated with each product)
 		$this->init_products_filter_values();
 
 		if ( ! $this->attributes['products'] )
@@ -94,6 +93,63 @@ class AWPF_Widget_Front {
 
 		// display products filter
 		$this->display_products_filter();
+
+	}
+
+	/**
+	 * rebuild
+	 *
+	 * Rebuild AWPF
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
+	 */
+	function rebuild() {
+
+		// get attributes
+		$tax_list = $this->get_attribute( 'tax_list' );
+
+		// set attributes
+		$this->set_attribute( 'min_price',			null );
+		$this->set_attribute( 'max_price',			null );
+		$this->set_attribute( 'min_handle_price',	null );
+		$this->set_attribute( 'max_handle_price',	null );
+		$this->set_attribute( 'taxonomies',			array() );
+		$this->set_attribute( 'products',			array() );
+
+		// initiate taxonomies attribute
+		if ( $tax_list ) {
+			$this->init_taxonomies();
+		}
+
+		// 1. initiate filter values
+		// 2. initiate products attribute as an array of arrays (products and terms associated with each product)
+		$this->init_products_filter_values();
+
+		if ( ! $this->attributes['products'] ) {
+			// die
+			die();
+		}
+
+		// retrieve products HTML to update later in products grid
+		$products_grid = $this->update_products_grid();
+
+		// return results to AJAX script
+		$results = array(
+			'min_price'			=> $this->get_attribute( 'min_price' ),
+			'max_price'			=> $this->get_attribute( 'max_price' ),
+			'min_handle_price'	=> $this->get_attribute( 'min_handle_price' ),
+			'max_handle_price'	=> $this->get_attribute( 'max_handle_price' ),
+			'taxonomies'		=> $this->get_attribute( 'taxonomies' ),
+			'products'			=> $this->get_attribute( 'products' ),
+			'products_grid'		=> $products_grid
+		);
+
+		echo json_encode( $results );
+
+		// die
+		die();
 
 	}
 
@@ -106,7 +162,7 @@ class AWPF_Widget_Front {
 	 * @param		$name (string) the attribute name to return
 	 * @return		(mixed)
 	 */
-	private function get_attribute( $name, $default = null ) {
+	function get_attribute( $name, $default = null ) {
 
 		$arrtibute = awpf_maybe_get( $this->attributes, $name, $default );
 
@@ -125,7 +181,7 @@ class AWPF_Widget_Front {
 	 * @param		$value (mixed) the attribute value to update
 	 * @return		N/A
 	 */
-	private function set_attribute( $name, $value ) {
+	function set_attribute( $name, $value ) {
 
 		$this->attributes[ $name ] = $value;
 
@@ -138,11 +194,10 @@ class AWPF_Widget_Front {
 	 *
 	 * categories structure:
 	 * =====================
-	 * $categories[ {category parent ID} ][][0]				=> category ID
-	 * $categories[ {category parent ID} ][][1]				=> category link
-	 * $categories[ {category parent ID} ][][2]				=> number of products associated with this category (including children)
-	 * $categories[ {category parent ID} ][][3]				=> whether this category is checked in subcategory filter [1 = true / 0 = false]
-	 * $categories[ {category parent ID} ][][4]				=> whether this category is an ancestor of the current category [true / false]
+	 * $categories[ {category parent ID} ][ {category ID} ][0]	=> category link
+	 * $categories[ {category parent ID} ][ {category ID} ][1]	=> number of products associated with this category (including children)
+	 * $categories[ {category parent ID} ][ {category ID} ][2]	=> whether this category is checked in subcategory filter [1 = true / 0 = false]
+	 * $categories[ {category parent ID} ][ {category ID} ][3]	=> whether this category is an ancestor of the current category [true / false]
 	 *
 	 * @since		1.0
 	 * @param		N/A
@@ -150,7 +205,10 @@ class AWPF_Widget_Front {
 	 */
 	private function init_categories() {
 
-		$show_categories_menu = $this->get_attribute( 'show_categories_menu' );
+		// get attributes
+		$taxonomy				= $this->get_attribute( 'taxonomy' );
+		$term_ids				= $this->get_attribute( 'term_ids' );
+		$show_categories_menu	= $this->get_attribute( 'show_categories_menu' );
 
 		if ( ! $show_categories_menu )
 			return;
@@ -169,12 +227,11 @@ class AWPF_Widget_Front {
 					$categories[$term->parent] = array();
 				}
 
-				$categories[$term->parent][] = array(
-					0 => $term->term_id,
-					1 => get_term_link($term),
-					2 => $term->count,
-					3 => $taxonomy == 'product_cat' && ( $term->term_id == $term_id ) ? 1 : 0,
-					4 => $taxonomy == 'product_cat' && ( $term->term_id == $term_id || cat_is_ancestor_of($term->term_id, $term_id) )
+				$categories[$term->parent][$term->term_id] = array(
+					0 => get_term_link($term),
+					1 => $term->count,
+					2 => $taxonomy == 'product_cat' && ( $term->term_id == $term_ids[0] ) ? 1 : 0,
+					3 => $taxonomy == 'product_cat' && ( $term->term_id == $term_ids[0] || cat_is_ancestor_of($term->term_id, $term_ids[0]) )
 				);
 			}
 
@@ -203,6 +260,7 @@ class AWPF_Widget_Front {
 	 */
 	private function init_taxonomies() {
 
+		// get attributes
 		$tax_list = $this->get_attribute( 'tax_list' );
 
 		if ( ! $tax_list )
@@ -270,38 +328,41 @@ class AWPF_Widget_Front {
 
 		// get attributes
 		$taxonomy			= $this->get_attribute( 'taxonomy' );
-		$taxonomy_term_id	= $this->get_attribute( 'term_id' );
+		$taxonomy_term_ids	= $this->get_attribute( 'term_ids' );
 
 		// get all products related to taxonomy term ID
 		$meta_query = $woocommerce->query->get_meta_query();
 		
 		$args = array(
 			'post_type'			=> 'product',
+			'post_status'		=> 'publish',
 			'posts_per_page'	=> -1,
 			'no_found_rows'		=> true,
+			'orderby'			=> 'menu_order',
+			'order'				=> 'ASC',
 			'meta_query'		=> $meta_query
 		);
 
-		if ($taxonomy && $taxonomy_term_id) {
+		if ($taxonomy && $taxonomy_term_ids) {
 			$args['tax_query']	= array(
 				array(
 					'taxonomy'	=> $taxonomy,
 					'field'		=> 'id',
-					'terms'		=> $taxonomy_term_id
+					'terms'		=> $taxonomy_term_ids
 				)
 			);
 		}
 		$query = new WP_Query($args);
-		
+
 		// fill in filter values and $products according to products meta data
 		global $post;
 		
 		if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
 
-			$this->update_filter_by_product( $post );
+			$this->update_filter_by_product( $post->ID );
 
 		endwhile; endif; wp_reset_postdata();
-		
+
 		// update price filter handles in first page load
 		$this->set_attribute( 'min_handle_price', $this->get_attribute( 'min_price' ) );
 		$this->set_attribute( 'max_handle_price', $this->get_attribute( 'max_price' ) );
@@ -314,23 +375,31 @@ class AWPF_Widget_Front {
 	 * Update products and taxonomies attributes by a single product meta data
 	 *
 	 * @since		1.0
-	 * @param		$post (object) product object
+	 * @param		$product_id (int) product ID
 	 * @return		N/A
 	 */
-	private function update_filter_by_product( $post ) {
+	private function update_filter_by_product( $product_id ) {
 
 		// get attributes
 		$min_price		= $this->get_attribute( 'min_price' );
 		$max_price		= $this->get_attribute( 'max_price' );
 		$taxonomies		= $this->get_attribute( 'taxonomies' );
 		$products		= $this->get_attribute( 'products' );
-		
+
 		// get product price
-		$_product = wc_get_product($post->ID);
-		$price = round( $_product->get_price() );
-		
+		$_product = wc_get_product($product_id);
+
+		if ( defined('DOING_AJAX') && DOING_AJAX && class_exists('woocommerce_wpml') ) {
+			// filter product price according to default currenct exchange rate
+			// used in case of an AJAX call and active woocommerce wpml
+			$price = round( apply_filters( 'wcml_raw_price_amount', $_product->get_price() ) );
+		}
+		else {
+			$price = round( $_product->get_price() );
+		}
+
 		// initiate $products and update product price and product visibility
-		$products[$post->ID] = array(
+		$products[$product_id] = array(
 			0 => $price,
 			1 => 1
 		);
@@ -344,7 +413,7 @@ class AWPF_Widget_Front {
 		}
 
 		// initiate $products before input taxonomies data
-		$products[$post->ID][2] = array();
+		$products[$product_id][2] = array();
 
 		// update $taxonomies filter and $products taxonomies
 		if ($taxonomies) {
@@ -352,10 +421,10 @@ class AWPF_Widget_Front {
 			foreach ($taxonomies as $tax_name => &$tax_data) {
 
 				// initiate $products before input a single taxonomy data
-				$products[$post->ID][2][$tax_name] = array();
+				$products[$product_id][2][$tax_name] = array();
 
 				// get all particular taxonomy terms associated with this product 
-				$p_terms = wp_get_post_terms($post->ID, $tax_name);
+				$p_terms = wp_get_post_terms($product_id, $tax_name);
 				
 				if ($p_terms) {
 
@@ -365,7 +434,7 @@ class AWPF_Widget_Front {
 					
 					foreach ($p_terms as $p_term) {
 						// store term ID in $products
-						$products[$post->ID][2][$tax_name][] = $p_term->term_id;
+						$products[$product_id][2][$tax_name][] = $p_term->term_id;
 
 						// update $taxonomies counters
 						// increment number of products associated with this term
@@ -398,11 +467,11 @@ class AWPF_Widget_Front {
 	private function display_products_filter() {
 
 		// get attributes
-		$taxonomy				= $this->get_attribute( 'taxonomy' );
-		$term_id				= $this->get_attribute( 'term_id' );
+		$wpml_lang				= $this->get_attribute( 'wpml_lang' );
 		$show_categories_menu	= $this->get_attribute( 'show_categories_menu' );
 		$show_price_filter		= $this->get_attribute( 'show_price_filter' );
 		$price_title			= $this->get_attribute( 'price_title' );
+		$tax_list				= $this->get_attribute( 'tax_list' );
 		$min_price				= $this->get_attribute( 'min_price' );
 		$max_price				= $this->get_attribute( 'max_price' );
 		$min_handle_price		= $this->get_attribute( 'min_handle_price' );
@@ -414,10 +483,11 @@ class AWPF_Widget_Front {
 		?>
 
 		<script>
-			_AWPF_products_filter_taxonomy				= '<?php echo $taxonomy; ?>';
-			_AWPF_products_filter_term_id				=  <?php echo $term_id; ?>;
+			_AWPF_products_filter_wpml_lang				= '<?php echo $wpml_lang; ?>';
 			_AWPF_products_filter_show_categories_menu	=  <?php echo ( $show_categories_menu ) ? 1 : 0; ?>;
 			_AWPF_products_filter_show_price_filter		=  <?php echo ( $show_price_filter ) ? 1 : 0; ?>;
+			_AWPF_products_filter_price_title			= '<?php echo $price_title; ?>';
+			_AWPF_products_filter_tax_list				=  <?php echo json_encode( $tax_list ); ?>;
 			_AWPF_products_filter_min_price				=  <?php echo $min_price; ?>;
 			_AWPF_products_filter_max_price				=  <?php echo $max_price; ?>;
 			_AWPF_products_filter_min_handle_price		=  <?php echo $min_handle_price; ?>;
@@ -426,6 +496,7 @@ class AWPF_Widget_Front {
 			_AWPF_products_filter_taxonomies			=  <?php echo json_encode( $taxonomies ); ?>;
 			_AWPF_products_filter_products				=  <?php echo json_encode( $products ); ?>;
 			_AWPF_products_filter_currency				= '<?php echo html_entity_decode( get_woocommerce_currency_symbol() ); ?>';
+			_AWPF_products_filter_ajaxurl				= '<?php echo ( $wpml_lang ) ? str_replace( "/$wpml_lang/", "/", admin_url( "admin-ajax.php" ) ) : admin_url( "admin-ajax.php" ); ?>';		// workaround for WPML bug
 		</script>
 
 		<?php
@@ -438,7 +509,7 @@ class AWPF_Widget_Front {
 
 		echo '<div class="widgetcontent">';
 		
-			// Categories menu
+			// categories menu
 			if ( $show_categories_menu && $categories ) {
 
 				echo '<div class="awpf-category-filter">';
@@ -447,23 +518,14 @@ class AWPF_Widget_Front {
 					echo '</div>';
 
 					echo '<ul class="categories">';
-						foreach ( $categories[0] as $category ) {
-							if ( $category[4] ) {
-								awpf_product_categories_menu_item($categories, $category, 0);
-							} else {
-								echo '<li>';
-									echo '<span class="item-before"></span>';
-									echo '<a href="' . $category[1] . '"><span>' . get_cat_name( $category[0] ) . '</span> <span class="count">(' . $category[2] . ')</span></a>';
-								echo '</li>';
-							}
-						}
+						$this->display_filter_categories();
 					echo '</ul>';
 				echo '</div>';
 
 			}
 
-			// Price filter
-			if ( $show_categories_menu ) {
+			// price filter
+			if ( $show_price_filter ) {
 
 				echo '<div class="awpf-price-filter">';
 					echo ( $price_title ) ? '<div class="awpf-price-filter-title">' . $price_title . '</div>' : '';
@@ -474,33 +536,179 @@ class AWPF_Widget_Front {
 
 			}
 			
-			// Taxonomy filters
-			if ($taxonomies) {
-
-				foreach ($taxonomies as $tax_name => $tax_data) {
-					// Display taxonomy filter if there are terms
-					if ( $tax_data[1] > 0 ) {
-						echo '<div class="awpf-tax-filter awpf-tax-filter-' . $tax_name . '">';
-							echo ( $tax_data[0] ) ? '<div class="tax-filter-title">' . $tax_data[0] . '</div>' : '';
-							
-							echo '<div class="tax-terms">';
-								foreach ($tax_data[2] as $term_id => $term_data) {
-									if ($term_data[0] > 0) {
-										$term_name = get_term_by('id', $term_id, $tax_name)->name;
-
-										echo '<label>';
-											echo '<input type="checkbox" name="' . $tax_name . '[]" id="' . $term_id . '" value="' . $term_id . '" />' . $term_name . ' <span class="count">(' . $term_data[0] . ')</span>';
-										echo '</label>';
-									}
-								}
-							echo '</div>';
-						echo '</div>';
-					}
-				}
-
-			}
+			// taxonomy filters
+			$this->display_filter_taxonomies();
 			
 		echo '</div>';
+
+	}
+
+	/**
+	 * display_filter_categories
+	 *
+	 * Display filter categories
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
+	 */
+	private function display_filter_categories() {
+
+		// get attributes
+		$categories = $this->get_attribute( 'categories' );
+
+		if ( ! $categories )
+			return;
+
+		foreach ( $categories[0] as $cat_id => $category ) {
+			if ( $category[3] ) {
+				$this->product_categories_menu_item( $cat_id, $category, 0 );
+			} else {
+				echo '<li class="cat-' . $cat_id . '">';
+					echo '<span class="item-before"></span>';
+					echo '<a href="' . $category[0] . '"><span>' . get_cat_name( $cat_id ) . '</span> <span class="count">(' . $category[1] . ')</span></a>';
+				echo '</li>';
+			}
+		}
+
+	}
+
+	/**
+	 * product_categories_menu_item
+	 *
+	 * Recursive function handles display of a single category menu item.
+	 * The recursive part handles the children menu items (if there are any) of this parent category 
+	 *
+	 * @since		1.0
+	 * @param		$cat_id (int) category ID
+	 * @param		$category (array) holds array of a single category data
+	 * @param		$depth (int) indicates current menu depth
+	 * @return		N/A
+	 */
+	private function product_categories_menu_item( $cat_id, $category, $depth ) {
+
+		// get attributes
+		$categories = $this->get_attribute( 'categories' );
+
+		$has_children = array_key_exists( $cat_id, $categories );
+		$classes = array('cat-' . $cat_id);
+
+		if ($has_children)
+			$classes[] = 'has-children';
+
+		if ( $category[3] )
+			$classes[] = 'ancestor';
+
+		echo '<li class="' . implode(' ', $classes) . '">';
+
+			if ($has_children || $depth == 0) {
+
+				// top level item and/or a parent item
+				echo '<span class="item-before"></span>';
+				echo '<a><span>' . get_cat_name( $cat_id ) . '</span> <span class="count">(' . $category[1] . ')</span></a>';
+
+			}
+			else {
+
+				// low level item without children
+				echo '<label>';
+					echo '<input type="checkbox" name="product_cat-' . $cat_id . '" id="product_cat-' . $cat_id . '" value="product_cat-' . $cat_id . '"' . ( $category[2] ? ' checked' : '' ) . ' />' . get_cat_name( $cat_id ) . ' <span class="count">(' . $category[1] . ')</span>';
+				echo '</label>';
+
+			}
+
+			if ($has_children) {
+
+				// start a subcategories menu
+				echo '<ul class="children children-depth-' . $depth . '">';
+					// display an "All" item as a first item in the subcategories menu
+					echo '<li class="cat-' . $cat_id . '-all">';
+						echo '<label>';
+							echo '<input type="checkbox" name="product_cat-' . $cat_id . '-all' . '" id="product_cat-' . $cat_id . '-all' . '" value="product_cat-' . $cat_id . '-all' . '"' . ( $category[2] ? ' checked' : '' ) . ' />' . apply_filters( 'awpf_all_subcategories_title', __('All', 'awpf') ) . ' <span class="count">(' . $category[1] . ')</span>';
+						echo '</label>';
+					echo '</li>';
+
+					foreach ( $categories[$cat_id] as $sub_cat_id => $subcategory ) {
+						$this->product_categories_menu_item( $sub_cat_id, $subcategory, $depth+1 );
+					}
+				echo '</ul>';
+
+			}
+
+		echo '</li>';
+
+	}
+
+	/**
+	 * display_filter_taxonomies
+	 *
+	 * Display filter taxonomies
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
+	 */
+	private function display_filter_taxonomies() {
+
+		// get attributes
+		$taxonomies = $this->get_attribute( 'taxonomies' );
+
+		if ( ! $taxonomies )
+			return;
+
+		foreach ($taxonomies as $tax_name => $tax_data) {
+			echo '<div class="awpf-tax-filter awpf-tax-filter-' . $tax_name . '"' . ( ! $tax_data[1] ? ' style="display: none;"' : '' ) . '>';
+				echo ( $tax_data[0] ) ? '<div class="tax-filter-title">' . $tax_data[0] . '</div>' : '';
+				
+				echo '<div class="tax-terms">';
+					foreach ($tax_data[2] as $term_id => $term_data) {
+						$term_name = get_term_by('id', $term_id, $tax_name)->name;
+
+						echo '<label' . ( ! $term_data[0] ? ' style="display: none;"' : '' ) . '>';
+							echo '<input type="checkbox" name="' . $tax_name . '[]" id="' . $term_id . '" value="' . $term_id . '" />' . $term_name . ' <span class="count">(' . $term_data[0] . ')</span>';
+						echo '</label>';
+					}
+				echo '</div>';
+			echo '</div>';
+		}
+
+	}
+
+	/**
+	 * update_products_grid
+	 *
+	 * Retrieve products HTML to update later in products grid
+	 * Called by rebuild function as part of AJAX call
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
+	 */
+	private function update_products_grid() {
+
+		// get attributes
+		$products = $this->get_attribute( 'products' );
+
+		ob_start();
+
+		if ( $products ) {
+
+			global $post, $product;
+
+			foreach ($products as $p_id => $p_data) {
+
+				$post = get_post($p_id);
+				$product = wc_get_product($p_id);
+
+				wc_get_template_part( 'content', 'product' );
+
+			}
+
+		}
+
+		// return
+		$products_grid = ob_get_clean();
+		return $products_grid;
 
 	}
 
@@ -525,6 +733,7 @@ function awpf_widget_front() {
 
 	}
 
+	// return
 	return $awpf_widget_front;
 
 }
