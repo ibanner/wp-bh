@@ -153,12 +153,12 @@ class awpf {
 
 		// append scripts
 		$scripts['jquery-ui'] = array(
-			'src'	=> awpf_get_dir('js/jquery-ui.min.js'),
+			'src'	=> awpf_get_dir('assets/js/jquery-ui.min.js'),
 			'deps'	=> array('jquery')
 		);
 
 		$scripts['awpf-products-filter'] = array(
-			'src'	=> awpf_get_dir('js/awpf-products-filter.js'),
+			'src'	=> awpf_get_dir('assets/js/awpf-products-filter.min.js'),
 			'deps'	=> array('jquery')
 		);
 
@@ -171,12 +171,12 @@ class awpf {
 
 		// append styles
 		$styles['jquery-ui'] = array(
-			'src'	=> awpf_get_dir('css/jquery-ui.min.css'),
+			'src'	=> awpf_get_dir('assets/css/jquery-ui.min.css'),
 			'deps'	=> false
 		);
 
 		$styles['awpf-admin-style'] = array(
-			'src'	=> awpf_get_dir('css/awpf-admin-style.css'),
+			'src'	=> awpf_get_dir('assets/css/awpf-admin-style.css'),
 			'deps'	=> false
 		);
 

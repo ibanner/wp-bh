@@ -47,7 +47,7 @@ class awpf_admin {
 		$capability		= awpf_get_setting('capability');
 
 		// add parent
-		add_menu_page( __('Products Filter', 'awpf'), __('Products Filter', 'awpf'), $capability, $slug, false, awpf_get_dir('images/awpf-logo.png'), '56.01.01' );
+		add_menu_page( __('Products Filter', 'awpf'), __('Products Filter', 'awpf'), $capability, $slug, false, awpf_get_dir('assets/images/awpf-logo.png'), '56.01.01' );
 
 	}
 
