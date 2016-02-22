@@ -500,6 +500,7 @@ class AWPF_Widget_Front {
 		</script>
 
 		<?php
+			awpf_enqueue_skin( awpf_get_setting('active_skin') );
 			wp_enqueue_style( 'jquery-ui' );
 			wp_enqueue_script( 'jquery-ui' );
 			wp_enqueue_script( 'awpf-products-filter' );
@@ -515,6 +516,7 @@ class AWPF_Widget_Front {
 				echo '<div class="awpf-category-filter">';
 					echo '<div class="category-filter-title">';
 						echo apply_filters( 'awpf_product_categories_title', __('Product Categories', 'awpf') );
+						awpf_get_template_part('loader');
 					echo '</div>';
 
 					echo '<ul class="categories">';

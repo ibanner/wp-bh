@@ -62,7 +62,9 @@ class awpf {
 			// options
 			'show_admin'	=> true,
 			'widget_style'	=> true,
-			'capability'	=> 'manage_options'
+			'capability'	=> 'manage_options',
+			'active_skin'	=> 'skin01',
+			'debug'			=> false
 		);
 
 		// include helpers
@@ -193,19 +195,59 @@ class awpf {
 	 * awpf_wpml_fix
 	 *
 	 * Fix WPML current language
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
 	 */
 	public static function awpf_wpml_fix() {
+
 		global $sitepress;
 
 		if ( method_exists( $sitepress, 'switch_lang' ) && isset( $_POST['wpml_lang'] ) ) {
 			$sitepress->switch_lang( $_POST['wpml_lang'], true );
 		}
+
+	}
+
+	/**
+	 * template_path
+	 *
+	 * Get the template path
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		string
+	 */
+	public function template_path() {
+
+		return apply_filters( 'awpf_template_path', 'awpf/templates/' );
+
+	}
+
+	/**
+	 * skin_path
+	 *
+	 * Get the skin path
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		string
+	 */
+	public function skin_path() {
+
+		return apply_filters( 'awpf_skin_path', 'awpf/skins/' );
+
 	}
 
 	/**
 	 * awpf_install
 	 *
 	 * Actions perform on activation of plugin
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
 	 */
 	function awpf_install() {}
 
@@ -213,6 +255,10 @@ class awpf {
 	 * awpf_uninstall
 	 *
 	 * Actions perform on deactivation of plugin
+	 *
+	 * @since		1.0
+	 * @param		N/A
+	 * @return		N/A
 	 */
 	function awpf_uninstall() {}
 

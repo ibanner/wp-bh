@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAUC,yBAAa,CACZ,MAAM,CAAE,MAAM",
+"sources": ["../scss/skin01.scss"],
+"names": [],
+"file": "skin01.css"
+}
