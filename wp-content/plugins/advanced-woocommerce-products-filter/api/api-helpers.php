@@ -148,3 +148,89 @@ function awpf_maybe_get( $array, $key, $default = null ) {
 	return $array[ $key ];
 
 }
+
+/**
+ * awpf_get_template_part
+ *
+ * Get template part
+ *
+ * @since		1.0
+ * @param		$slug (mixed)
+ * @param		$name (string)
+ * @return		N/A
+ */
+function awpf_get_template_part( $slug, $name = '' ) {
+
+	$template	= '';
+	$debug		= awpf_get_setting('debug');
+
+	// look in yourtheme/awpf/templates/slug-name.php
+	if ( $name && ! $debug ) {
+		$template = locate_template( awpf()->template_path() . "{$slug}-{$name}.php" );
+	}
+
+	// get default slug-name.php
+	if ( ! $template && $name && file_exists( awpf_get_path( "templates/{$slug}-{$name}.php" ) ) ) {
+		$template = awpf_get_path( "templates/{$slug}-{$name}.php" );
+	}
+
+	// if template file doesn't exist, look in yourtheme/awpf/templates/slug.php
+	if ( ! $template && ! $debug ) {
+		$template = locate_template( awpf()->template_path() . "{$slug}.php" );
+	}
+
+	// get default slug.php
+	if ( ! $template && file_exists( awpf_get_path( "templates/{$slug}.php" ) ) ) {
+		$template = awpf_get_path( "templates/{$slug}.php" );
+	}
+
+	// allow 3rd party plugin filter template file from their plugin
+	if ( ( ! $template && $debug ) || $template ) {
+		$template = apply_filters( 'awpf_get_template_part', $template, $slug, $name );
+	}
+
+	if ( $template ) {
+		load_template( $template, false );
+	}
+
+}
+
+/**
+ * awpf_enqueue_skin
+ *
+ * Enqueue AWPF skin style
+ *
+ * @since		1.0
+ * @param		$slug (string)
+ * @return		N/A
+ */
+function awpf_enqueue_skin( $slug ) {
+
+	if ( ! $slug )
+		return;
+
+	$style			= '';
+	$debug			= awpf_get_setting('debug');
+	$theme_path		= get_stylesheet_directory();
+	$theme_uri		= get_stylesheet_directory_uri();
+
+	// look in yourtheme/awpf/skins/slug.css
+	if ( ! $debug && file_exists( $theme_path . '/' . awpf()->skin_path() . "{$slug}.css" ) ) {
+		$style = $theme_uri . '/' . awpf()->skin_path() . "{$slug}.css";
+	}
+
+	// get default slug.css
+	if ( ! $style && file_exists( awpf_get_path( "skins/css/{$slug}.css" ) ) ) {
+		$style = awpf_get_dir( "skins/css/{$slug}.css" );
+	}
+
+	// allow 3rd party plugin filter template file from their plugin
+	if ( ( ! $style && $debug ) || $style ) {
+		$style = apply_filters( 'awpf_enqueue_skin', $style, $slug );
+	}
+
+	if ( $style ) {
+		wp_enqueue_style( $slug, $style, array(), awpf_get_setting('version') );
+	}
+
+}

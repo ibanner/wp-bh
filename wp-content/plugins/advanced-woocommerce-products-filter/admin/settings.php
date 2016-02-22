@@ -47,7 +47,7 @@ class awpf_settings {
 		$settings_slug	= 'awpf-settings';
 		$capability		= awpf_get_setting('capability');
 
-		// Dashboard
+		// Settings
 		add_submenu_page( $slug, __('Products Filter Settings', 'awpf'), __('Settings', 'awpf'), $capability, $settings_slug, array($this, 'html') );
 
 	}

@@ -24,19 +24,26 @@ module.exports = function(grunt) {
 				},
 
 				files: [{
-				    cwd: 'assets/scss',
-				    src: ['*.scss'],
-				    dest: 'assets/css/',
-				    expand: true,
-				    flatten: false, 
-				    ext: '.css',
+					cwd: 'assets/scss',
+					src: ['*.scss'],
+					dest: 'assets/css/',
+					expand: true,
+					flatten: false, 
+					ext: '.css',
+				}, {
+					cwd: 'skins/scss',
+					src: ['*.scss'],
+					dest: 'skins/css/',
+					expand: true,
+					flatten: false, 
+					ext: '.css',
 				}]
 			}
 		},
 
 		watch: {
 			css: {
-				files: 'assets/scss/*.scss',
+				files: ['assets/scss/*.scss', 'skins/scss/*.scss'],
 				tasks: ['sass']
 			},
 

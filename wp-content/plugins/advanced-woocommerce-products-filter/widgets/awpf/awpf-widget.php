@@ -30,15 +30,17 @@ class AWPF_Widget extends WP_Widget {
 	 */
 	function __construct() {
 
-		parent::__construct(
+		$this->widget_id			= 'AWPF_Widget';
+		$this->widget_name			= __( 'Advanced WooCommerce Products Filter', 'awpf' );
+		$this->widget_cssclass		= 'awpf awpf-widget';
+		$this->widget_description	= __( 'Add WooCommerce products filter, based on price and product custom taxonomies', 'awpf' );
 
-			'AWPF_Widget',
-			__('Advanced WooCommerce Products Filter', 'awpf'),
-			array(
-				'description' => __('Add WooCommerce products filter, based on price and product custom taxonomies', 'awpf' )
-			)
-
+		$widget_ops = array(
+			'classname'		=> $this->widget_cssclass,
+			'description'	=> $this->widget_description
 		);
+
+		parent::__construct( $this->widget_id, $this->widget_name, $widget_ops );
 
 		// form fields
 		$this->form_fields = array(
@@ -129,13 +131,7 @@ class AWPF_Widget extends WP_Widget {
 
 		$title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title'], $instance);
 		if ( ! empty($title) ) {
-			echo
-				$before_title .
-					$title .
-					'<div class="loader">' .
-						'<img src="' . awpf_get_dir('assets/images/ajax-loader.gif') . '" width="16" height="16" />' .
-					'</div>' .
-				$after_title;
+			echo $before_title . $title . $after_title;
 		}
 
 		awpf_widget_front()->initialize( $instance['show_categories_menu'], $instance['show_price_filter'], $instance['price_title'], $instance['taxonomies'] );
@@ -220,15 +216,15 @@ class AWPF_Widget extends WP_Widget {
 				$('.<?php echo $this->get_field_id('add-tax'); ?>').click(function() {
 					var tax =
 						'<div class="tax">' +
-							'<div class="inline-tax inline-left">Title: <label for="' + taxonomiesField + '[' + count + '][title]"><input class="widefat" id="' + taxonomiesField + '[' + count + '][title]" name="' + taxonomiesField + '[' + count + '][title]" type="text" value="" /></label></div>' +
-							'<div class="inline-tax">Taxonomy: ' +
+							'<div class="inline-tax inline-left"><?php _e( 'Title', 'awpf' ); ?>: <label for="' + taxonomiesField + '[' + count + '][title]"><input class="widefat" id="' + taxonomiesField + '[' + count + '][title]" name="' + taxonomiesField + '[' + count + '][title]" type="text" value="" /></label></div>' +
+							'<div class="inline-tax"><?php _e( 'Taxonomy', 'awpf' ); ?>: ' +
 								'<label for="' + taxonomiesField + '[' + count + '][name]">' +
 									'<select class="widefat" id="' + taxonomiesField + '[' + count + '][name]" name="' + taxonomiesField + '[' + count + '][name]">' +
 										options +
 									'</select>' +
 								'</label>' +
 							'</div>' +
-							'<span class="remove-tax">Remove</span>' +
+							'<span class="remove-tax"><?php _e( 'Remove', 'awpf' ); ?></span>' +
 						'</div>';
 					
 					$('#<?php echo $this->get_field_id('taxonomies'); ?>').append(tax);
@@ -243,18 +239,18 @@ class AWPF_Widget extends WP_Widget {
 			});
 		</script>
 			
-		<p><label for="<?php echo $this->get_field_id('title'); ?>">Title: <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr( $this->form_fields['title'] ); ?>" /></label></p>
-		<p><label for="<?php echo $this->get_field_id('show_categories_menu'); ?>"><input id="<?php echo $this->get_field_id('show_categories_menu'); ?>" name="<?php echo $this->get_field_name('show_categories_menu'); ?>" type="checkbox" <?php echo esc_attr($show_categories_menu) ? 'checked' : ''; ?> />Show Product Categories Menu</label></p>
-		<p><label for="<?php echo $this->get_field_id('show_price_filter'); ?>"><input id="<?php echo $this->get_field_id('show_price_filter'); ?>" name="<?php echo $this->get_field_name('show_price_filter'); ?>" type="checkbox" <?php echo esc_attr($show_price_filter) ? 'checked' : ''; ?> />Show Price Filter</label></p>
-		<p><label for="<?php echo $this->get_field_id('price_title'); ?>">Price Filter Title: <input class="widefat" id="<?php echo $this->get_field_id('price_title'); ?>" name="<?php echo $this->get_field_name('price_title'); ?>" type="text" value="<?php echo esc_attr($price_title); ?>" /></label></p>
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title', 'awpf' ); ?>: <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr( $this->form_fields['title'] ); ?>" /></label></p>
+		<p><label for="<?php echo $this->get_field_id('show_categories_menu'); ?>"><input id="<?php echo $this->get_field_id('show_categories_menu'); ?>" name="<?php echo $this->get_field_name('show_categories_menu'); ?>" type="checkbox" <?php echo esc_attr($show_categories_menu) ? 'checked' : ''; ?> /><?php _e( 'Show Product Categories Menu', 'awpf' ); ?></label></p>
+		<p><label for="<?php echo $this->get_field_id('show_price_filter'); ?>"><input id="<?php echo $this->get_field_id('show_price_filter'); ?>" name="<?php echo $this->get_field_name('show_price_filter'); ?>" type="checkbox" <?php echo esc_attr($show_price_filter) ? 'checked' : ''; ?> /><?php _e( 'Show Price Filter', 'awpf' ); ?></label></p>
+		<p><label for="<?php echo $this->get_field_id('price_title'); ?>"><?php _e( 'Price Filter Title', 'awpf' ); ?>: <input class="widefat" id="<?php echo $this->get_field_id('price_title'); ?>" name="<?php echo $this->get_field_name('price_title'); ?>" type="text" value="<?php echo esc_attr($price_title); ?>" /></label></p>
 		<div>
-			<label>Product Taxonomies:</label>
+			<label><?php _e( 'Product Taxonomies', 'awpf' ); ?>:</label>
 			
 			<div class="awpf-taxonomies" id="<?php echo $this->get_field_id('taxonomies'); ?>">
 				<?php echo implode('', $taxonomies_html); ?>
 			</div>
 			
-			<span class="awpf-add-tax <?php echo $this->get_field_id('add-tax'); ?>">+ Add Taxonomy</span>
+			<span class="awpf-add-tax <?php echo $this->get_field_id('add-tax'); ?>">+ <?php _e( 'Add Taxonomy', 'awpf' ); ?></span>
 		</div>
 
 		<?php
@@ -295,15 +291,15 @@ class AWPF_Widget extends WP_Widget {
 					// Store taxonomy HTML
 					$taxonomies_html[] = sprintf(
 						'<div class="tax">' .
-							'<div class="inline-tax inline-left">Title: <label for="%1$s[%2$s][title]"><input class="widefat" id="%1$s[%2$s][title]" name="%1$s[%2$s][title]" type="text" value="%3$s" /></label></div>' .
-							'<div class="inline-tax">Taxonomy: ' .
+							'<div class="inline-tax inline-left">' . __( 'Title', 'awpf' ) . ': <label for="%1$s[%2$s][title]"><input class="widefat" id="%1$s[%2$s][title]" name="%1$s[%2$s][title]" type="text" value="%3$s" /></label></div>' .
+							'<div class="inline-tax">' . __( 'Taxonomy', 'awpf' ) . ': ' .
 								'<label for="%1$s[%2$s][name]">' .
 									'<select class="widefat" id="%1$s[%2$s][name]" name="%1$s[%2$s][name]">' .
 										$options .
 									'</select>' .
 								'</label>' .
 							'</div>' .
-							'<span class="remove-tax">Remove</span>' .
+							'<span class="remove-tax">' . __( 'Remove', 'awpf' ) . '</span>' .
 						'</div>',
 						
 						$this->get_field_name('taxonomies'),

@@ -322,7 +322,7 @@ function awpf_filter_products_ajax(terms) {
 	if (typeof terms === "undefined" || terms === null)
 		return;
 
-	var loader = $('.widget_awpf_widget .loader');
+	var loader = $('.awpf-widget .awpf-loader');
 
 	// expose loader
 	loader.show();
@@ -475,20 +475,12 @@ function awpf_map_taxonomy_terms() {
  */
 function awpf_filter_products() {
 
-	var loader = $('.widget_awpf_widget .loader');
-	
-	// expose loader
-	loader.show();
-
 	// update products filter
 	awpf_update_products_filter();
 
 	// update products grid
 	awpf_update_products_grid();
-	
-	// hide loader
-	loader.hide();
-	
+
 	// return
 	return true;
 
