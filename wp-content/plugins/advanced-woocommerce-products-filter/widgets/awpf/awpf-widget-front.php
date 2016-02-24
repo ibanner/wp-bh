@@ -495,6 +495,7 @@ class AWPF_Widget_Front {
 			_AWPF_products_filter_products				=  <?php echo json_encode( $products ); ?>;
 			_AWPF_products_filter_currency				= '<?php echo html_entity_decode( get_woocommerce_currency_symbol() ); ?>';
 			_AWPF_products_filter_ajaxurl				= '<?php echo ( $wpml_lang ) ? str_replace( "/$wpml_lang/", "/", admin_url( "admin-ajax.php" ) ) : admin_url( "admin-ajax.php" ); ?>';		// workaround for WPML bug
+			_AWPF_products_filter_not_found				= '<?php echo "<p class=\"woocommerce-info\">" . __( "No products were found matching your selection.", "awpf" ) . "</p>"; ?>';
 		</script>
 
 		<?php

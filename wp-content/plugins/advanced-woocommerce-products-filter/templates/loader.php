@@ -4,6 +4,8 @@
  *
  * Display AWPF widget loader indication
  *
+ * Override this template by copying it to yourtheme/awpf/templates/loader.php
+ *
  * @author		Nir Goldberg
  * @package		templates
  * @version		1.0

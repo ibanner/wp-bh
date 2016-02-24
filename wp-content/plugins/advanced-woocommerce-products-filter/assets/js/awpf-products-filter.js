@@ -10,6 +10,13 @@ jQuery( function($) {
 	// general
 	$('.awpf-filter-title').bind('click', awpf_filter_content_toggle);
 
+	// collapse first filter
+	$('.awpf-filter').first().children('.awpf-filter-title').addClass('collapsed');
+
+	// append not found message
+	var msg = '<div class="awpf-not-found" style="display: none;">' + _AWPF_products_filter_not_found +  '</div>';
+	$('ul.products').after(msg);
+
 	// categories menu
 	if (_AWPF_products_filter_show_categories_menu) {
 		// toggle subcategories menu on click event
@@ -21,8 +28,12 @@ jQuery( function($) {
 	}
 
 	// price filter
-	if ( _AWPF_products_filter_show_price_filter ) {
+	if ( _AWPF_products_filter_show_price_filter && ( _AWPF_products_filter_min_price != _AWPF_products_filter_max_price ) ) {
 		awpf_init_price_slider(_AWPF_products_filter_min_price, _AWPF_products_filter_max_price, _AWPF_products_filter_min_handle_price, _AWPF_products_filter_max_handle_price);
+	}
+	else {
+		// hide price filter completely
+		$('.awpf-price-filter').hide();
 	}
 
 	// taxonomy filters
@@ -660,8 +671,8 @@ function awpf_update_products_grid() {
 
 	var displayed_products = 0;
 
-	// hide no posts found message
-	$('.not-found').hide();
+	// hide not found message
+	$('.awpf-not-found').hide();
 	
 	// hide all products
 	$('ul.products li').hide();
@@ -681,7 +692,7 @@ function awpf_update_products_grid() {
 
 	if ( ! displayed_products ) {
 		// expose no posts found message
-		$('.not-found').show();
+		$('.awpf-not-found').show();
 	}
 
 }
@@ -699,5 +710,8 @@ function awpf_update_products_grid() {
 function awpf_update_products_grid_ajax(products_grid) {
 
 	$('ul.products').html(products_grid);
+
+	// add 'product' custom post type to post class
+	$('ul.products > li').addClass('product');
 
 }

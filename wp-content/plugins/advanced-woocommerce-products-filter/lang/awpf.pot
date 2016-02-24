@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Advanced WooCommerce Products Filter 1.0\n"
-"POT-Creation-Date: 2016-02-22 12:35+0200\n"
-"PO-Revision-Date: 2016-02-22 12:43+0200\n"
+"POT-Creation-Date: 2016-02-24 10:56+0200\n"
+"PO-Revision-Date: 2016-02-24 10:56+0200\n"
 "Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: HTMLine <nir@htmline.com>\n"
 "Language: English\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../advanced-woocommerce-products-filter.php:54
-#: ../widgets/awpf/awpf-widget.php:36
+#: ../widgets/awpf/awpf-widget.php:43
 msgid "Advanced WooCommerce Products Filter"
 msgstr ""
 
@@ -61,13 +61,50 @@ msgstr ""
 msgid "Advanced WooCommerce Products Filter Settings"
 msgstr ""
 
-#: ../widgets/awpf/awpf-widget.php:38
+#: ../templates/awpf-widget/awpf-widget-categories-menu.php:23
+msgid "Product Categories"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget.php:45
 msgid ""
 "Add WooCommerce products filter, based on price and product custom taxonomies"
 msgstr ""
 
-#: ../widgets/awpf/awpf-widget-front.php:517
-msgid "Product Categories"
+#: ../widgets/awpf/awpf-widget.php:228 ../widgets/awpf/awpf-widget.php:251
+#: ../widgets/awpf/awpf-widget.php:303
+msgid "Title"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget.php:229 ../widgets/awpf/awpf-widget.php:304
+msgid "Taxonomy"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget.php:236 ../widgets/awpf/awpf-widget.php:311
+msgid "Remove"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget.php:252
+msgid "Show Product Categories Menu"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget.php:253
+msgid "Show Price Filter"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget.php:254
+msgid "Price Filter Title"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget.php:256
+msgid "Product Taxonomies"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget.php:262
+msgid "Add Taxonomy"
+msgstr ""
+
+#: ../widgets/awpf/awpf-widget-front.php:498
+msgid "No products were found matching your selection."
 msgstr ""
 
 #: ../widgets/awpf/awpf-widget-front.php:627

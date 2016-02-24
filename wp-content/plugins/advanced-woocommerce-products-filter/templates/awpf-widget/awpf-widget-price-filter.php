@@ -4,6 +4,8 @@
  *
  * Display AWPF widget price filter
  *
+ * Override this template by copying it to yourtheme/awpf/templates/awpf-widget-price-filter.php
+ *
  * @author		Nir Goldberg
  * @package		templates/awpf-widget
  * @version		1.0
@@ -29,8 +31,22 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<?php // filter content ?>
 	<div class="awpf-filter-content">
 
+		<?php
+			/**
+			 * awpf_before_price_filter hook
+			 */
+			do_action( 'awpf_before_price_filter' );
+		?>
+
 		<input type="text" id="awpf-price-filter-amount" readonly>
 		<div id="awpf-price-filter-slider"></div>
+
+		<?php
+			/**
+			 * awpf_after_price_filter hook
+			 */
+			do_action( 'awpf_after_price_filter' );
+		?>
 
 	</div>
 

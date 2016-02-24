@@ -17,6 +17,11 @@ add_action('widgets_init', function() {
 	// enqueue widget frontend style
 	awpf_enqueue_skin( awpf_get_setting('active_skin') );
 
+	// enqueue widget frontend style for RTL locale
+	if ( is_rtl() ) {
+		awpf_enqueue_skin( awpf_get_setting('active_skin') . '-rtl' );
+	}
+
 });
 
 class AWPF_Widget extends WP_Widget {
