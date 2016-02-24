@@ -3,7 +3,7 @@
  * Widget Name: AWPF Widget
  *
  * @author		Nir Goldberg
- * @package		widgets
+ * @package		widgets/awpf
  * @version		1.0
  */
 
@@ -11,7 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 add_action('widgets_init', function() {
 
+	// register widget
 	register_widget( 'AWPF_Widget' );
+
+	// enqueue widget frontend style
+	awpf_enqueue_skin( awpf_get_setting('active_skin') );
 
 });
 
