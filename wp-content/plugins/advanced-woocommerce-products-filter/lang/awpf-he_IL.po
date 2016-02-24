@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Advanced WooCommerce Products Filter 1.0\n"
-"POT-Creation-Date: 2016-02-22 15:24+0200\n"
-"PO-Revision-Date: 2016-02-22 15:24+0200\n"
+"POT-Creation-Date: 2016-02-24 10:56+0200\n"
+"PO-Revision-Date: 2016-02-24 10:56+0200\n"
 "Last-Translator: Nir Goldberg <nirg@bh.org.il>\n"
 "Language-Team: HTMLine <nir@htmline.com>\n"
 "Language: Hebrew\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../advanced-woocommerce-products-filter.php:54
-#: ../widgets/awpf/awpf-widget.php:34
+#: ../widgets/awpf/awpf-widget.php:43
 msgid "Advanced WooCommerce Products Filter"
 msgstr "סינון מוצרים"
 
@@ -61,48 +61,52 @@ msgstr "תודה רבה שהתקנתם את התוסף AWPF %s! אנו מקוו�
 msgid "Advanced WooCommerce Products Filter Settings"
 msgstr "הגדרות סינון מוצרים"
 
-#: ../widgets/awpf/awpf-widget.php:36
+#: ../templates/awpf-widget/awpf-widget-categories-menu.php:23
+msgid "Product Categories"
+msgstr "קטגוריות מוצרים"
+
+#: ../widgets/awpf/awpf-widget.php:45
 msgid ""
 "Add WooCommerce products filter, based on price and product custom taxonomies"
 msgstr "הטמעת מסנני מוצרים, המבוססים על מחיר ומאפייני מוצרים"
 
-#: ../widgets/awpf/awpf-widget.php:219 ../widgets/awpf/awpf-widget.php:242
-#: ../widgets/awpf/awpf-widget.php:294
+#: ../widgets/awpf/awpf-widget.php:228 ../widgets/awpf/awpf-widget.php:251
+#: ../widgets/awpf/awpf-widget.php:303
 msgid "Title"
 msgstr "כותרת"
 
-#: ../widgets/awpf/awpf-widget.php:220 ../widgets/awpf/awpf-widget.php:295
+#: ../widgets/awpf/awpf-widget.php:229 ../widgets/awpf/awpf-widget.php:304
 msgid "Taxonomy"
 msgstr "מאפיין"
 
-#: ../widgets/awpf/awpf-widget.php:227 ../widgets/awpf/awpf-widget.php:302
+#: ../widgets/awpf/awpf-widget.php:236 ../widgets/awpf/awpf-widget.php:311
 msgid "Remove"
 msgstr "הסר"
 
-#: ../widgets/awpf/awpf-widget.php:243
+#: ../widgets/awpf/awpf-widget.php:252
 msgid "Show Product Categories Menu"
 msgstr "הצג תפריט קטגוריות מוצרים"
 
-#: ../widgets/awpf/awpf-widget.php:244
+#: ../widgets/awpf/awpf-widget.php:253
 msgid "Show Price Filter"
 msgstr "הצג סינון על פי מחיר"
 
-#: ../widgets/awpf/awpf-widget.php:245
+#: ../widgets/awpf/awpf-widget.php:254
 msgid "Price Filter Title"
 msgstr "כותרת סינון על פי מחיר"
 
-#: ../widgets/awpf/awpf-widget.php:247
+#: ../widgets/awpf/awpf-widget.php:256
 msgid "Product Taxonomies"
 msgstr "מאפייני מוצר"
 
-#: ../widgets/awpf/awpf-widget.php:253
+#: ../widgets/awpf/awpf-widget.php:262
 msgid "Add Taxonomy"
 msgstr "הוסף מאפיין"
 
-#: ../widgets/awpf/awpf-widget-front.php:517
-msgid "Product Categories"
-msgstr "קטגוריות מוצרים"
+#: ../widgets/awpf/awpf-widget-front.php:498
+msgid "No products were found matching your selection."
+msgstr "לא נמצאו מוצרים התואמים את בחירתכם."
 
-#: ../widgets/awpf/awpf-widget-front.php:628
+#: ../widgets/awpf/awpf-widget-front.php:627
 msgid "All"
 msgstr "הכל"

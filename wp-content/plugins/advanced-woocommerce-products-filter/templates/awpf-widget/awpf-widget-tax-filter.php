@@ -4,6 +4,8 @@
  *
  * Display AWPF widget taxonomy filters
  *
+ * Override this template by copying it to yourtheme/awpf/templates/awpf-widget-tax-filter.php
+ *
  * @author		Nir Goldberg
  * @package		templates/awpf-widget
  * @version		1.0
@@ -33,9 +35,37 @@ foreach ($taxonomies as $tax_name => $tax_data) { ?>
 		<?php // filter content ?>
 		<div class="awpf-filter-content">
 
+			<?php
+				/**
+				 * awpf_before_taxonomy_filter/{$tax_name} hook
+				 */
+				do_action( "awpf_before_taxonomy_filter/{$tax_name}" );
+			?>
+
+			<?php
+				/**
+				 * awpf_before_taxonomy_filter hook
+				 */
+				do_action( "awpf_before_taxonomy_filter" );
+			?>
+
 			<ul class="tax-terms">
 				<?php apply_filters( 'awpf_widget_tax_terms', awpf_widget_front()->display_tax_terms( $tax_name, $tax_data[2] ) ); ?>
 			</ul>
+
+			<?php
+				/**
+				 * awpf_after_taxonomy_filter/{$tax_name} hook
+				 */
+				do_action( "awpf_after_taxonomy_filter/{$tax_name}" );
+			?>
+
+			<?php
+				/**
+				 * awpf_after_taxonomy_filter hook
+				 */
+				do_action( "awpf_after_taxonomy_filter" );
+			?>
 
 		</div>
 
