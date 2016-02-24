@@ -3,7 +3,7 @@
  * AWPF Widget frontend
  *
  * @author		Nir Goldberg
- * @package		admin
+ * @package		widgets/awpf
  * @version		1.0
  */
 
@@ -470,7 +470,6 @@ class AWPF_Widget_Front {
 		$wpml_lang				= $this->get_attribute( 'wpml_lang' );
 		$show_categories_menu	= $this->get_attribute( 'show_categories_menu' );
 		$show_price_filter		= $this->get_attribute( 'show_price_filter' );
-		$price_title			= $this->get_attribute( 'price_title' );
 		$tax_list				= $this->get_attribute( 'tax_list' );
 		$min_price				= $this->get_attribute( 'min_price' );
 		$max_price				= $this->get_attribute( 'max_price' );
@@ -486,7 +485,6 @@ class AWPF_Widget_Front {
 			_AWPF_products_filter_wpml_lang				= '<?php echo $wpml_lang; ?>';
 			_AWPF_products_filter_show_categories_menu	=  <?php echo ( $show_categories_menu ) ? 1 : 0; ?>;
 			_AWPF_products_filter_show_price_filter		=  <?php echo ( $show_price_filter ) ? 1 : 0; ?>;
-			_AWPF_products_filter_price_title			= '<?php echo $price_title; ?>';
 			_AWPF_products_filter_tax_list				=  <?php echo json_encode( $tax_list ); ?>;
 			_AWPF_products_filter_min_price				=  <?php echo $min_price; ?>;
 			_AWPF_products_filter_max_price				=  <?php echo $max_price; ?>;
@@ -500,7 +498,6 @@ class AWPF_Widget_Front {
 		</script>
 
 		<?php
-			awpf_enqueue_skin( awpf_get_setting('active_skin') );
 			wp_enqueue_style( 'jquery-ui' );
 			wp_enqueue_script( 'jquery-ui' );
 			wp_enqueue_script( 'awpf-products-filter' );
@@ -512,49 +509,31 @@ class AWPF_Widget_Front {
 		
 			// categories menu
 			if ( $show_categories_menu && $categories ) {
-
-				echo '<div class="awpf-category-filter">';
-					echo '<div class="category-filter-title">';
-						echo apply_filters( 'awpf_product_categories_title', __('Product Categories', 'awpf') );
-						awpf_get_template_part('loader');
-					echo '</div>';
-
-					echo '<ul class="categories">';
-						$this->display_filter_categories();
-					echo '</ul>';
-				echo '</div>';
-
+				awpf_get_template_part( 'awpf-widget/awpf-widget', 'categories-menu' );
 			}
 
 			// price filter
 			if ( $show_price_filter ) {
-
-				echo '<div class="awpf-price-filter">';
-					echo ( $price_title ) ? '<div class="awpf-price-filter-title">' . $price_title . '</div>' : '';
-					
-					echo '<input type="text" id="awpf-price-filter-amount" readonly>';
-					echo '<div id="awpf-price-filter-slider"></div>';
-				echo '</div>';
-
+				awpf_get_template_part( 'awpf-widget/awpf-widget', 'price-filter' );
 			}
 			
 			// taxonomy filters
-			$this->display_filter_taxonomies();
+			awpf_get_template_part( 'awpf-widget/awpf-widget', 'tax-filter' );
 			
 		echo '</div>';
 
 	}
 
 	/**
-	 * display_filter_categories
+	 * display_categories_menu_items
 	 *
-	 * Display filter categories
+	 * Display categories menu items
 	 *
 	 * @since		1.0
 	 * @param		N/A
 	 * @return		N/A
 	 */
-	private function display_filter_categories() {
+	function display_categories_menu_items() {
 
 		// get attributes
 		$categories = $this->get_attribute( 'categories' );
@@ -564,12 +543,19 @@ class AWPF_Widget_Front {
 
 		foreach ( $categories[0] as $cat_id => $category ) {
 			if ( $category[3] ) {
+
 				$this->product_categories_menu_item( $cat_id, $category, 0 );
+
 			} else {
-				echo '<li class="cat-' . $cat_id . '">';
-					echo '<span class="item-before"></span>';
-					echo '<a href="' . $category[0] . '"><span>' . get_cat_name( $cat_id ) . '</span> <span class="count">(' . $category[1] . ')</span></a>';
-				echo '</li>';
+
+				echo	'<li class="cat-' . $cat_id . '">' .
+							'<a href="' . $category[0] . '">' .
+								'<span class="item-before"></span>' .
+								'<span>' . get_cat_name( $cat_id ) . '</span> ' .
+								'<span class="count">(' . $category[1] . ')</span>' .
+							'</a>' .
+						'</li>';
+
 			}
 		}
 
@@ -587,7 +573,7 @@ class AWPF_Widget_Front {
 	 * @param		$depth (int) indicates current menu depth
 	 * @return		N/A
 	 */
-	private function product_categories_menu_item( $cat_id, $category, $depth ) {
+	function product_categories_menu_item( $cat_id, $category, $depth ) {
 
 		// get attributes
 		$categories = $this->get_attribute( 'categories' );
@@ -595,44 +581,59 @@ class AWPF_Widget_Front {
 		$has_children = array_key_exists( $cat_id, $categories );
 		$classes = array('cat-' . $cat_id);
 
-		if ($has_children)
+		if ( $has_children )
 			$classes[] = 'has-children';
 
 		if ( $category[3] )
 			$classes[] = 'ancestor';
 
+		if ( $has_children && $category[3] && $depth == 0 )
+			$classes[] = 'collapsed';
+
 		echo '<li class="' . implode(' ', $classes) . '">';
 
-			if ($has_children || $depth == 0) {
+			if ( $has_children || $depth == 0 ) {
 
 				// top level item and/or a parent item
-				echo '<span class="item-before"></span>';
-				echo '<a><span>' . get_cat_name( $cat_id ) . '</span> <span class="count">(' . $category[1] . ')</span></a>';
+				echo	'<a>' .
+							'<span class="item-before"></span>' .
+							'<span>' . get_cat_name( $cat_id ) . '</span> ' .
+							'<span class="count">(' . $category[1] . ')</span>' .
+						'</a>';
 
 			}
 			else {
 
 				// low level item without children
-				echo '<label>';
-					echo '<input type="checkbox" name="product_cat-' . $cat_id . '" id="product_cat-' . $cat_id . '" value="product_cat-' . $cat_id . '"' . ( $category[2] ? ' checked' : '' ) . ' />' . get_cat_name( $cat_id ) . ' <span class="count">(' . $category[1] . ')</span>';
-				echo '</label>';
+				echo	'<input type="checkbox" name="product_cat-' . $cat_id . '" id="product_cat-' . $cat_id . '" value="product_cat-' . $cat_id . '"' . ( $category[2] ? ' checked' : '' ) . ' />' .
+						'<label for="product_cat-' . $cat_id . '">' .
+							'<span>' . get_cat_name( $cat_id ) . ' ' .
+								'<span class="count">(' . $category[1] . ')</span>' .
+							'</span>' .
+						'</label>';
 
 			}
 
-			if ($has_children) {
+			if ( $has_children ) {
 
 				// start a subcategories menu
 				echo '<ul class="children children-depth-' . $depth . '">';
-					// display an "All" item as a first item in the subcategories menu
-					echo '<li class="cat-' . $cat_id . '-all">';
-						echo '<label>';
-							echo '<input type="checkbox" name="product_cat-' . $cat_id . '-all' . '" id="product_cat-' . $cat_id . '-all' . '" value="product_cat-' . $cat_id . '-all' . '"' . ( $category[2] ? ' checked' : '' ) . ' />' . apply_filters( 'awpf_all_subcategories_title', __('All', 'awpf') ) . ' <span class="count">(' . $category[1] . ')</span>';
-						echo '</label>';
-					echo '</li>';
 
+					// display an "All" item as a first item in the subcategories menu
+					echo	'<li class="cat-' . $cat_id . '-all">' .
+								'<input type="checkbox" name="product_cat-' . $cat_id . '-all' . '" id="product_cat-' . $cat_id . '-all' . '" value="product_cat-' . $cat_id . '-all' . '"' . ( $category[2] ? ' checked' : '' ) . ' />' .
+								'<label for="product_cat-' . $cat_id . '-all' . '">' .
+									'<span>' . apply_filters( 'awpf_all_subcategories_title', __('All', 'awpf') ) . ' ' .
+										'<span class="count">(' . $category[1] . ')</span>' .
+									'</span>' .
+								'</label>' .
+							'</li>';
+
+					// recursive call
 					foreach ( $categories[$cat_id] as $sub_cat_id => $subcategory ) {
 						$this->product_categories_menu_item( $sub_cat_id, $subcategory, $depth+1 );
 					}
+
 				echo '</ul>';
 
 			}
@@ -642,36 +643,31 @@ class AWPF_Widget_Front {
 	}
 
 	/**
-	 * display_filter_taxonomies
+	 * display_tax_terms
 	 *
-	 * Display filter taxonomies
+	 * Display taxonomies terms
 	 *
 	 * @since		1.0
-	 * @param		N/A
+	 * @param		$tax_name (string) taxonomy name
+	 * @param		$terms (array) array of taxonomy terms - view from $taxonomies attribute
 	 * @return		N/A
 	 */
-	private function display_filter_taxonomies() {
+	function display_tax_terms( $tax_name, $terms ) {
 
-		// get attributes
-		$taxonomies = $this->get_attribute( 'taxonomies' );
-
-		if ( ! $taxonomies )
+		if ( ! $tax_name || ! $terms )
 			return;
 
-		foreach ($taxonomies as $tax_name => $tax_data) {
-			echo '<div class="awpf-tax-filter awpf-tax-filter-' . $tax_name . '"' . ( ! $tax_data[1] ? ' style="display: none;"' : '' ) . '>';
-				echo ( $tax_data[0] ) ? '<div class="tax-filter-title">' . $tax_data[0] . '</div>' : '';
-				
-				echo '<div class="tax-terms">';
-					foreach ($tax_data[2] as $term_id => $term_data) {
-						$term_name = get_term_by('id', $term_id, $tax_name)->name;
+		foreach ( $terms as $term_id => $term_data ) {
+			$term_name = get_term_by('id', $term_id, $tax_name)->name;
 
-						echo '<label' . ( ! $term_data[0] ? ' style="display: none;"' : '' ) . '>';
-							echo '<input type="checkbox" name="' . $tax_name . '[]" id="' . $term_id . '" value="' . $term_id . '" />' . $term_name . ' <span class="count">(' . $term_data[0] . ')</span>';
-						echo '</label>';
-					}
-				echo '</div>';
-			echo '</div>';
+			echo	'<li ' . ( ! $term_data[0] ? 'style="display: none;"' : '' ) . '>' .
+						'<input type="checkbox" name="' . $term_id . '" id="' . $term_id . '" value="' . $term_id . '" />' .
+						'<label for="' . $term_id . '">' .
+							'<span>' . $term_name . ' </span>' .
+							'<span class="count">(' . $term_data[0] . ')</span>' .
+						'</label>' .
+					'</li>';
+
 		}
 
 	}

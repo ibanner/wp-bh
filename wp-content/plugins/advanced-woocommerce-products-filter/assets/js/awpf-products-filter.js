@@ -7,6 +7,9 @@
  */
 jQuery( function($) {
 
+	// general
+	$('.awpf-filter-title').bind('click', awpf_filter_content_toggle);
+
 	// categories menu
 	if (_AWPF_products_filter_show_categories_menu) {
 		// toggle subcategories menu on click event
@@ -23,11 +26,32 @@ jQuery( function($) {
 	}
 
 	// taxonomy filters
-	$('.awpf-tax-filter .tax-terms input').change(function() {
-		awpf_map_taxonomy_terms();
-	});
+	$('.awpf-tax-filter .tax-terms input').bind('change', awpf_map_taxonomy_terms);
 
 });
+
+/**
+ * awpf_filter_content_toggle
+ *
+ * Toggle filter content
+ *
+ * @since		1.0
+ * @param		event (object)
+ * @return		N/A
+ */
+function awpf_filter_content_toggle(event) {
+
+	var current = event.currentTarget,
+		active = $(current).hasClass('collapsed') ? true : false;
+
+	if (active) {
+		$(current).removeClass('collapsed');
+	}
+	else {
+		$(current).addClass('collapsed');
+	}
+
+}
 
 /**
  * awpf_subcategories_menu_toggle
@@ -195,7 +219,7 @@ function awpf_categories_menu_uncheck_input(cat_id) {
 	if (dom_category.length) {
 		if (dom_category.hasClass('has-children')) {
 			// parent category
-			var all_input = dom_category.find('li.cat-' + cat_id + '-all').children('label').children('input');
+			var all_input = dom_category.find('li.cat-' + cat_id + '-all').children('input');
 
 			if (all_input.length) {
 				all_input.prop('checked', false);
@@ -203,7 +227,7 @@ function awpf_categories_menu_uncheck_input(cat_id) {
 		}
 		else {
 			// child category
-			var input = dom_category.children('label').children('input');
+			var input = dom_category.children('input');
 
 			if (input.length) {
 				input.prop('checked', false);
@@ -443,7 +467,7 @@ function awpf_map_taxonomy_terms() {
 	
 	taxonomy_filters.each(function() {
 		var taxonomy_filter_class_list = $(this).attr('class').split(/\s+/),
-			terms = $(this).children('.tax-terms');
+			terms = $(this).find('.tax-terms');
 		
 		// get taxonomy name
 		tax_name = '';
@@ -601,13 +625,13 @@ function awpf_display_products_filter(init) {
 				if (term_data[0] == 0) {
 					// there are no filtered products associated with this term
 					// hide taxonomy term
-					$('.awpf-tax-filter input#' + term_id).parent('label').hide();
+					$('.awpf-tax-filter input#' + term_id).parent('li').hide();
 				} else {
 					// there are filtered products associated with this term
 					var input = $('.awpf-tax-filter input#' + term_id);
 
 					// update term label
-					input.parent('label').find('span.count').html('(' + term_data[0] + ')');
+					input.parent('li').find('span.count').html('(' + term_data[0] + ')');
 
 					if (init) {
 						// uncheck category input
@@ -615,7 +639,7 @@ function awpf_display_products_filter(init) {
 					}
 
 					// expose taxonomy term
-					input.parent('label').show();
+					input.parent('li').show();
 				}
 			});
 		}
