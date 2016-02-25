@@ -28,12 +28,20 @@ jQuery( function($) {
 	}
 
 	// price filter
-	if ( _AWPF_products_filter_show_price_filter && ( _AWPF_products_filter_min_price != _AWPF_products_filter_max_price ) ) {
-		awpf_init_price_slider(_AWPF_products_filter_min_price, _AWPF_products_filter_max_price, _AWPF_products_filter_min_handle_price, _AWPF_products_filter_max_handle_price);
-	}
-	else {
-		// hide price filter completely
-		$('.awpf-price-filter').hide();
+	if (_AWPF_products_filter_show_price_filter) {
+		// set price filter init status to false
+		_AWPF_products_filter_price_filter_init = false;
+
+		if (_AWPF_products_filter_min_price != _AWPF_products_filter_max_price) {
+			awpf_init_price_slider(_AWPF_products_filter_min_price, _AWPF_products_filter_max_price, _AWPF_products_filter_min_handle_price, _AWPF_products_filter_max_handle_price);
+
+			// set price filter init status to true
+			_AWPF_products_filter_price_filter_init = true;
+		}
+		else {
+			// hide price filter completely
+			$('.awpf-price-filter').hide();
+		}
 	}
 
 	// taxonomy filters
@@ -102,42 +110,41 @@ function awpf_map_categories_menu(event) {
 	var current = event.currentTarget,
 		id		= $(current).attr('id').substring(12),		// input ID
 		all		= id.indexOf('all') != -1 ? true : false,	// "all categories" input indication
+		item_id	= all ? id.substring(0, id.length-4) : id,	// actual category ID
 		checked	= $(current).is(':checked'),				// input new state
 		filter	= false;									// indication if products filter should be taken
 
-	if (all) {
-		// "all categories" input changed
-		if (checked) {
-			// set categories filter current input attribute and uncheck all other inputs
-			awpf_categories_menu_reset(id, true);
-			filter = true;
+	// locate item parent id 
+	var parent_id = awpf_categories_menu_get_item_parent(item_id);
+
+	if (checked) {
+		// item checked
+		// uncheck parents
+		awpf_categories_menu_uncheck_parents(item_id, parent_id);
+
+		if (all) {
+			// uncheck children
+			awpf_categories_menu_uncheck_children(item_id);
 		}
-		else {
-			// can't uncheck "all categories" input - recheck
-			$(current).prop('checked', true);
+
+		// set categories filter current input attribute
+		if (parent_id !== false) {
+			_AWPF_products_filter_categories[parent_id][item_id][1] = true;
+			filter = true;
 		}
 	}
 	else {
-		// subcategory input changed
-		if (checked) {
-			// set categories filter current input attribute and uncheck all other inputs excluding brothers
-			awpf_categories_menu_reset(id, false);
-			filter = true;
+		// item unchecked
+		// check if no other item input is checked
+		if ( awpf_categories_menu_is_single_checked_item(item_id) ) {
+			// can't uncheck a single checked input - recheck
+			$(current).prop('checked', true);
 		}
 		else {
-			// check if no other brother input is checked
-			if ( awpf_is_single_checked_subcategory(id) ) {
-				// can't uncheck a single checked input - recheck
-				$(current).prop('checked', true);
-			}
-			else {
-				// unset categories filter current input attribute
-				var p_id = awpf_get_subcategory_parent(id);
-
-				if (p_id) {
-					_AWPF_products_filter_categories[p_id][id][2] = 0;
-					filter = true;
-				}
+			// unset categories filter current input attribute
+			if (parent_id !== false) {
+				_AWPF_products_filter_categories[parent_id][item_id][1] = false;
+				filter = true;
 			}
 		}
 	}
@@ -152,119 +159,22 @@ function awpf_map_categories_menu(event) {
 }
 
 /**
- * awpf_categories_menu_reset
+ * awpf_categories_menu_get_item_parent
  *
- * Reset subcategories input checked values
- *
- * @since		1.0
- * @param		except (string) do not uncheck this input ID
- * @param		brothers (bool) true to uncheck brothers input, false if not (except must be defined)
- * @return		N/A
- */
-function awpf_categories_menu_reset(except, brothers) {
-
-	if (typeof except === "undefined" || except === null)
-		return;
-
-	if (brothers) {
-		// uncheck all inputs including brothers
-		$.each( _AWPF_products_filter_categories, function(parent_id, categories) {
-			$.each( categories, function(cat_id, cat_data) {
-				if (cat_id == except || (cat_id + '-all') == except) {
-					// excepted input found
-					// set categories filter excepted input attribute
-					cat_data[2] = 1
-
-					// continue
-					return true;
-				}
-
-				// modify categories filter attribute
-				cat_data[2] = 0;
-
-				// uncheck input
-				awpf_categories_menu_uncheck_input(cat_id);
-			});
-		});
-	}
-
-	else {
-		// uncheck all inputs excluding brothers
-		// first step: locate excepted input parent ID
-		var excepted_parent = awpf_get_subcategory_parent(except);
-
-		// second step: uncheck all inputs except this particular parent's inputs
-		$.each( _AWPF_products_filter_categories, function(parent_id, categories) {
-			if (parent_id != excepted_parent) {
-				$.each( categories, function(cat_id, cat_data) {
-					// modify categories filter attribute
-					cat_data[2] = 0;
-
-					// uncheck input
-					awpf_categories_menu_uncheck_input(cat_id);
-				});
-			}
-		});
-
-		// third step: set categories filter excepted input attribute
-		var current_id = except.replace('-all', '');
-
-		_AWPF_products_filter_categories[excepted_parent][current_id][2] = 1;
-	}
-
-}
-
-/**
- * awpf_categories_menu_uncheck_input
- *
- * Uncheck an input related to a specified category ID
+ * Get item parent ID
  *
  * @since		1.0
- * @param		cat_id (int) category ID
- * @return		N/A
+ * @param		item_id (int) item ID
+ * @return		(mixed) item parent ID or false if no item found
  */
-function awpf_categories_menu_uncheck_input(cat_id) {
+function awpf_categories_menu_get_item_parent(item_id) {
 
-	var dom_category = $('.awpf-category-filter .categories').find('li.cat-' + cat_id);
-
-	if (dom_category.length) {
-		if (dom_category.hasClass('has-children')) {
-			// parent category
-			var all_input = dom_category.find('li.cat-' + cat_id + '-all').children('input');
-
-			if (all_input.length) {
-				all_input.prop('checked', false);
-			}
-		}
-		else {
-			// child category
-			var input = dom_category.children('input');
-
-			if (input.length) {
-				input.prop('checked', false);
-			}
-		}
-	}
-
-}
-
-/**
- * awpf_get_subcategory_parent
- *
- * Get parent ID by for a given category ID
- *
- * @since		1.0
- * @param		c_id (int) category ID
- * @return		(mixed) category parent ID or empty string if no category/parent found
- */
-function awpf_get_subcategory_parent(c_id) {
-
-	var p_id = '';
+	var p_id = false;
 
 	$.each( _AWPF_products_filter_categories, function(parent_id, categories) {
 		$.each( categories, function(cat_id, cat_data) {
-			if (cat_id == c_id || (cat_id + '-all') == c_id) {
-				// category ID found - store parent ID and break
+			if (cat_id == item_id) {
+				// item ID found - store item parent ID and break
 				p_id = parent_id;
 				return false;
 			}
@@ -282,37 +192,143 @@ function awpf_get_subcategory_parent(c_id) {
 }
 
 /**
- * awpf_is_single_checked_subcategory
+ * awpf_categories_menu_uncheck_parents
  *
- * Check if a given subcategory input is the the only one checked input among its brothers
+ * Recursive function to uncheck all item's parents
  *
  * @since		1.0
- * @param		c_id (int) category ID
- * @return		(bool)
+ * @param		item_id (int) item ID
+ * @param		parent_id (int) parent item ID
+ * @return		N/A
  */
-function awpf_is_single_checked_subcategory(c_id) {
+function awpf_categories_menu_uncheck_parents(item_id, parent_id) {
 
-	var count = 0;	// number of checked inputs
+	if ( ! parent_id ) {
+		parent_id = awpf_categories_menu_get_item_parent(item_id);
+	}
 
-	// first step: locate subcategory parent ID
-	var p_id = awpf_get_subcategory_parent(c_id);
+	if (parent_id !== false) {
+		// uncheck parent item
+		awpf_categories_menu_uncheck_item(parent_id);
 
-	// second step: count all checked inputs related to found parent ID
+		// uncheck parent's parents
+		awpf_categories_menu_uncheck_parents(parent_id);
+	}
+
+}
+
+/**
+ * awpf_categories_menu_uncheck_children
+ *
+ * Recursive function to uncheck all item's children
+ *
+ * @since		1.0
+ * @param		item_id (int) item ID
+ * @return		N/A
+ */
+function awpf_categories_menu_uncheck_children(item_id) {
+
 	$.each( _AWPF_products_filter_categories, function(parent_id, categories) {
-		if (parent_id == p_id) {
+		if (parent_id == item_id) {
 			$.each( categories, function(cat_id, cat_data) {
-				if (cat_data[2]) {
-					count++;
-				}
+				// uncheck item
+				awpf_categories_menu_uncheck_item(cat_id, parent_id);
+
+				// uncheck item's children
+				awpf_categories_menu_uncheck_children(cat_id);
 			});
 		}
 	});
 
+}
+
+/**
+ * awpf_categories_menu_uncheck_item
+ *
+ * Uncheck an item
+ *
+ * @since		1.0
+ * @param		item_id (int) item ID
+ * @param		parent_id (int) parent item ID
+ * @return		N/A
+ */
+function awpf_categories_menu_uncheck_item(item_id, parent_id) {
+
+	if ( ! parent_id ) {
+		parent_id = awpf_categories_menu_get_item_parent(item_id);
+	}
+
+	if (parent_id !== false) {
+		// unset categories filter item attribute
+		_AWPF_products_filter_categories[parent_id][item_id][1] = false;
+	}
+
+	// uncheck item's input
+	awpf_categories_menu_uncheck_input(item_id);
+
+}
+
+/**
+ * awpf_categories_menu_uncheck_input
+ *
+ * Uncheck an input related to a specified item ID
+ *
+ * @since		1.0
+ * @param		item_id (int) item ID
+ * @return		N/A
+ */
+function awpf_categories_menu_uncheck_input(item_id) {
+
+	var dom_category = $('.awpf-category-filter .categories').find('li.cat-' + item_id);
+
+	if (dom_category.length) {
+		if (dom_category.hasClass('has-children')) {
+			// parent category
+			input = dom_category.find('li.cat-' + item_id + '-all').children('input');
+		}
+		else {
+			// child category
+			input = dom_category.children('input');
+		}
+
+		if (input.length) {
+			input.prop('checked', false);
+		}
+	}
+
+}
+
+/**
+ * awpf_categories_menu_is_single_checked_item
+ *
+ * Check if a given item is the only one checked
+ *
+ * @since		1.0
+ * @param		item_id (int) item ID
+ * @return		(bool)
+ */
+function awpf_categories_menu_is_single_checked_item(item_id) {
+
+	result = true;	// set true as default
+
+	$.each( _AWPF_products_filter_categories, function(parent_id, categories) {
+		$.each( categories, function(cat_id, cat_data) {
+			if (cat_data[1] && cat_id != item_id) {
+				result = false;
+				
+				// break
+				return false;
+			}
+		});
+
+		if ( ! result ) {
+			// break
+			return false;
+		}
+	});
+
 	// return
-	if (count <= 1)
-		return true;
-	else
-		return false;
+	return result;
 
 }
 
@@ -331,7 +347,7 @@ function awpf_get_checked_categories() {
 
 	$.each( _AWPF_products_filter_categories, function(parent_id, categories) {
 		$.each( categories, function(cat_id, cat_data) {
-			if (cat_data[2]) {
+			if (cat_data[1]) {
 				category_ids.push(cat_id);
 			}
 		});
@@ -616,9 +632,24 @@ function awpf_display_products_filter(init) {
 		min_handle_price = (_AWPF_products_filter_min_price && _AWPF_products_filter_min_handle_price < _AWPF_products_filter_min_price) ? _AWPF_products_filter_min_price : _AWPF_products_filter_min_handle_price;
 		max_handle_price = (_AWPF_products_filter_max_price && _AWPF_products_filter_max_handle_price > _AWPF_products_filter_max_price) ? _AWPF_products_filter_max_price : _AWPF_products_filter_max_handle_price;
 
-		// reinit price slider
-		$('#awpf-price-filter-slider').slider('destroy');
-		awpf_init_price_slider(_AWPF_products_filter_min_price, _AWPF_products_filter_max_price, min_handle_price, max_handle_price);
+		if (_AWPF_products_filter_price_filter_init || _AWPF_products_filter_min_price != _AWPF_products_filter_max_price) {
+			// reinit price slider
+			if ( _AWPF_products_filter_price_filter_init ) {
+				// price filter slider already initiated - destroy it before reinit
+				$('#awpf-price-filter-slider').slider('destroy');
+			}
+			else {
+				// price filter slider has not initiated yet
+				// expose price filter and update status
+				$('.awpf-price-filter').show();
+
+				// set price filter status for further treatment
+				_AWPF_products_filter_price_filter_init = true;
+			}
+
+			// init price slider
+			awpf_init_price_slider(_AWPF_products_filter_min_price, _AWPF_products_filter_max_price, min_handle_price, max_handle_price);
+		}
 	}
 
 	// update taxonomy filters

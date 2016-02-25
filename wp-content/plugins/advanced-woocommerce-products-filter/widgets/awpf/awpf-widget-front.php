@@ -194,10 +194,9 @@ class AWPF_Widget_Front {
 	 *
 	 * categories structure:
 	 * =====================
-	 * $categories[ {category parent ID} ][ {category ID} ][0]	=> category link
-	 * $categories[ {category parent ID} ][ {category ID} ][1]	=> number of products associated with this category (including children)
-	 * $categories[ {category parent ID} ][ {category ID} ][2]	=> whether this category is checked in subcategory filter [1 = true / 0 = false]
-	 * $categories[ {category parent ID} ][ {category ID} ][3]	=> whether this category is an ancestor of the current category [true / false]
+	 * $categories[ {category parent ID} ][ {category ID} ][0]	=> number of products associated with this category (including children)
+	 * $categories[ {category parent ID} ][ {category ID} ][1]	=> whether this category is checked in subcategory filter [true / false]
+	 * $categories[ {category parent ID} ][ {category ID} ][2]	=> whether this category is an ancestor of the current category [true / false]
 	 *
 	 * @since		1.0
 	 * @param		N/A
@@ -228,10 +227,9 @@ class AWPF_Widget_Front {
 				}
 
 				$categories[$term->parent][$term->term_id] = array(
-					0 => get_term_link($term),
-					1 => $term->count,
-					2 => $taxonomy == 'product_cat' && ( $term->term_id == $term_ids[0] ) ? 1 : 0,
-					3 => $taxonomy == 'product_cat' && ( $term->term_id == $term_ids[0] || cat_is_ancestor_of($term->term_id, $term_ids[0]) )
+					0 => $term->count,
+					1 => $taxonomy == 'product_cat' && ( $term->term_id == $term_ids[0] ),
+					2 => $taxonomy == 'product_cat' && ( $term->term_id == $term_ids[0] || cat_is_ancestor_of($term->term_id, $term_ids[0]) )
 				);
 			}
 
@@ -543,21 +541,9 @@ class AWPF_Widget_Front {
 			return;
 
 		foreach ( $categories[0] as $cat_id => $category ) {
-			if ( $category[3] ) {
 
-				$this->product_categories_menu_item( $cat_id, $category, 0 );
+			$this->product_categories_menu_item( $cat_id, $category, 0 );
 
-			} else {
-
-				echo	'<li class="cat-' . $cat_id . '">' .
-							'<a href="' . $category[0] . '">' .
-								'<span class="item-before"></span>' .
-								'<span>' . get_cat_name( $cat_id ) . '</span> ' .
-								'<span class="count">(' . $category[1] . ')</span>' .
-							'</a>' .
-						'</li>';
-
-			}
 		}
 
 	}
@@ -580,15 +566,17 @@ class AWPF_Widget_Front {
 		$categories = $this->get_attribute( 'categories' );
 
 		$has_children = array_key_exists( $cat_id, $categories );
+		
+		// set classes
 		$classes = array('cat-' . $cat_id);
 
-		if ( $has_children )
+		if ( $has_children || $depth == 0 )
 			$classes[] = 'has-children';
 
-		if ( $category[3] )
+		if ( $category[2] )
 			$classes[] = 'ancestor';
 
-		if ( $has_children && $category[3] && $depth == 0 )
+		if ( $category[2] && $depth == 0 )
 			$classes[] = 'collapsed';
 
 		echo '<li class="' . implode(' ', $classes) . '">';
@@ -599,40 +587,42 @@ class AWPF_Widget_Front {
 				echo	'<a>' .
 							'<span class="item-before"></span>' .
 							'<span>' . get_cat_name( $cat_id ) . '</span> ' .
-							'<span class="count">(' . $category[1] . ')</span>' .
+							'<span class="count">(' . $category[0] . ')</span>' .
 						'</a>';
 
 			}
 			else {
 
 				// low level item without children
-				echo	'<input type="checkbox" name="product_cat-' . $cat_id . '" id="product_cat-' . $cat_id . '" value="product_cat-' . $cat_id . '"' . ( $category[2] ? ' checked' : '' ) . ' />' .
+				echo	'<input type="checkbox" name="product_cat-' . $cat_id . '" id="product_cat-' . $cat_id . '" value="product_cat-' . $cat_id . '"' . ( $category[1] ? ' checked' : '' ) . ' />' .
 						'<label for="product_cat-' . $cat_id . '">' .
 							'<span>' . get_cat_name( $cat_id ) . ' ' .
-								'<span class="count">(' . $category[1] . ')</span>' .
+								'<span class="count">(' . $category[0] . ')</span>' .
 							'</span>' .
 						'</label>';
 
 			}
 
-			if ( $has_children ) {
+			if ( $has_children || $depth == 0 ) {
 
 				// start a subcategories menu
 				echo '<ul class="children children-depth-' . $depth . '">';
 
 					// display an "All" item as a first item in the subcategories menu
 					echo	'<li class="cat-' . $cat_id . '-all">' .
-								'<input type="checkbox" name="product_cat-' . $cat_id . '-all' . '" id="product_cat-' . $cat_id . '-all' . '" value="product_cat-' . $cat_id . '-all' . '"' . ( $category[2] ? ' checked' : '' ) . ' />' .
+								'<input type="checkbox" name="product_cat-' . $cat_id . '-all' . '" id="product_cat-' . $cat_id . '-all' . '" value="product_cat-' . $cat_id . '-all' . '"' . ( $category[1] ? ' checked' : '' ) . ' />' .
 								'<label for="product_cat-' . $cat_id . '-all' . '">' .
 									'<span>' . apply_filters( 'awpf_all_subcategories_title', __('All', 'awpf') ) . ' ' .
-										'<span class="count">(' . $category[1] . ')</span>' .
+										'<span class="count">(' . $category[0] . ')</span>' .
 									'</span>' .
 								'</label>' .
 							'</li>';
 
 					// recursive call
-					foreach ( $categories[$cat_id] as $sub_cat_id => $subcategory ) {
-						$this->product_categories_menu_item( $sub_cat_id, $subcategory, $depth+1 );
+					if ( $has_children ) {
+						foreach ( $categories[$cat_id] as $sub_cat_id => $subcategory ) {
+							$this->product_categories_menu_item( $sub_cat_id, $subcategory, $depth+1 );
+						}
 					}
 
 				echo '</ul>';
