@@ -356,6 +356,15 @@ function BH_shop_products_filter() {
 	get_template_part('views/sidebar/sidebar-shop', 'products-filter');
 }
 
+/**
+ * BH_shop_wswu_banner
+ *
+ * Show Why Shop With Us banner
+ */
+function BH_shop_wswu_banner() {
+	get_template_part('views/sidebar/sidebar-shop', 'wswu-banner');
+}
+
 /****************************************************************************************************************************************************/
 /* AWPF
 /****************************************************************************************************************************************************/

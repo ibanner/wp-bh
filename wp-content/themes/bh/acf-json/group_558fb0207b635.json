@@ -555,6 +555,48 @@
             "mime_types": ""
         },
         {
+            "key": "field_56d2cb8c7c10c",
+            "label": "Reasons",
+            "name": "acf-options_experience_reasons",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": "",
+            "max": "",
+            "layout": "table",
+            "button_label": "Add Reason",
+            "sub_fields": [
+                {
+                    "key": "field_56d2cc047c10d",
+                    "label": "Reason",
+                    "name": "reason",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                }
+            ]
+        },
+        {
             "key": "field_551bfb72256c3",
             "label": "Experience Page",
             "name": "acf-options_experience_page",
@@ -880,5 +922,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1456468107
+    "modified": 1456655808
 }

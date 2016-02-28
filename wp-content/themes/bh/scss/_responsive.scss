@@ -1664,6 +1664,19 @@
 				font-size: 30px;
 			}
 		}
+
+		/***************/
+		/* wswu banner */
+		/***************/
+
+		.wswu-banner {
+			.wswu-content {
+				&:after {
+					border-left-width: 106.25px;
+					border-right-width: 106.25px;
+				}
+			}
+		}
 	}
 
 	/**************************/
@@ -1907,6 +1920,19 @@
 				}
 			}
 		}
+
+		/***************/
+		/* wswu banner */
+		/***************/
+
+		.wswu-banner {
+			.wswu-content {
+				&:after {
+					border-left-width: 78.75px;
+					border-right-width: 78.75px;
+				}
+			}
+		}
 	}
 
 	/******************/
@@ -1985,6 +2011,31 @@
 		.main-layout-featured-links .contact-details & {
 			margin-bottom: 3px;
 			font-size: 14px;
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+	/******************/
+	/* shop - sidebar */
+	/******************/
+
+	.shop-sidebar {
+
+		/***************/
+		/* wswu banner */
+		/***************/
+
+		.wswu-banner {
+			.wswu-content {
+				font-size: 12px;
+
+				strong,
+				.reason {
+					font-size: 16px;
+				}
+			}
 		}
 	}
 }

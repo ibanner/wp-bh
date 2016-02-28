@@ -2893,7 +2893,8 @@ body > header {
 						content: "";
 						top: auto !important;
 						bottom: 32px !important;
-						left: 30px !important;;
+						left: 30px !important;
+						right: auto !important;
 						z-index: 1;
 					}
 				}
@@ -2919,6 +2920,58 @@ body > header {
 					}
 				}
 			}
+		}
+	}
+
+	/***************/
+	/* wswu banner */
+	/***************/
+
+	.wswu-banner {
+		.wswu-content {
+			position: relative;
+			padding: 10px 10px 20px;
+			font-size: 14px;
+			color: $font-invert-color;
+			background-color: $blue-color3;
+			text-align: center;
+
+			strong,
+			.reason {
+				font-size: 18px;
+				font-weight: $font-bold;
+			}
+
+			.suffix {
+				position: absolute;
+				bottom: -15px;
+				left: 0;
+				width: 100%;
+				z-index: 1;
+
+				a {
+					color: $font-invert-color;
+					text-decoration: underline;
+				}
+			}
+
+			&:after {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: 0;
+				width: 0;
+				height: 0;
+				border-left: 131.25px solid transparent;
+				border-right: 131.25px solid transparent;
+				border-top: 45px solid $blue-color3;
+			}
+		}
+
+		.wswu-logo {
+			margin: 50px auto 0;
+			@include sprites;
+			@include sprite-wswu-logo-big;
 		}
 	}
 }
