@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		?>
 
 		<ul class="categories">
-			<?php apply_filters( 'awpf_widget_categories_menu_items', awpf_widget_front()->display_categories_menu_items() ); ?>
+			<?php echo apply_filters( 'awpf_widget_categories_menu_items', awpf_widget_front()->display_categories_menu_items() ); ?>
 		</ul>
 
 		<?php
