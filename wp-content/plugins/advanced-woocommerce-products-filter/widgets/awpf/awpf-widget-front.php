@@ -498,7 +498,12 @@ class AWPF_Widget_Front {
 		<?php
 
 		echo '<div class="widgetcontent">';
-		
+
+			/**
+			 * awpf_before_filter_content hook
+			 */
+			do_action( 'awpf_before_filter_content' );
+
 			// categories menu
 			if ( $show_categories_menu && $categories ) {
 				awpf_get_template_part( 'awpf-widget/awpf-widget', 'categories-menu' );
@@ -511,7 +516,12 @@ class AWPF_Widget_Front {
 			
 			// taxonomy filters
 			awpf_get_template_part( 'awpf-widget/awpf-widget', 'tax-filter' );
-			
+
+			/**
+			 * awpf_after_filter_content hook
+			 */
+			do_action( 'awpf_after_filter_content' );
+
 		echo '</div>';
 
 	}
