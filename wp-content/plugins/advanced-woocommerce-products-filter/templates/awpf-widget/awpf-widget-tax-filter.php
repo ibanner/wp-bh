@@ -50,7 +50,7 @@ foreach ($taxonomies as $tax_name => $tax_data) { ?>
 			?>
 
 			<ul class="tax-terms">
-				<?php apply_filters( 'awpf_widget_tax_terms', awpf_widget_front()->display_tax_terms( $tax_name, $tax_data[2] ) ); ?>
+				<?php echo apply_filters( "awpf_widget_tax_terms/{$tax_name}", awpf_widget_front()->display_tax_terms( $tax_name, $tax_data[2] ), $tax_name, $tax_data[2] ); ?>
 			</ul>
 
 			<?php

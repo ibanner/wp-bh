@@ -1966,6 +1966,36 @@ acf_add_local_field_group(array (
 			'max_size' => 0,
 			'mime_types' => '',
 		),
+		array (
+			'key' => 'field_56cff1c48adec',
+			'label' => 'Badge Color',
+			'name' => 'acf-product-badge_color',
+			'type' => 'color_picker',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+		),
+		array (
+			'key' => 'field_56cff2e08aded',
+			'label' => 'Badge Checked Color',
+			'name' => 'acf-product-badge_checked_color',
+			'type' => 'color_picker',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+		),
 	),
 	'location' => array (
 		array (
@@ -1981,11 +2011,9 @@ acf_add_local_field_group(array (
 	'style' => 'default',
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
-	'hide_on_screen' => array (
-	),
+	'hide_on_screen' => '',
 	'active' => 1,
 	'description' => '',
-	'old_ID' => 6240,
 ));
 
 acf_add_local_field_group(array (
@@ -2115,11 +2143,9 @@ acf_add_local_field_group(array (
 	'style' => 'default',
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
-	'hide_on_screen' => array (
-	),
+	'hide_on_screen' => '',
 	'active' => 1,
 	'description' => '',
-	'old_ID' => 6978,
 ));
 
 acf_add_local_field_group(array (
@@ -2401,7 +2427,6 @@ acf_add_local_field_group(array (
 	),
 	'active' => 1,
 	'description' => '',
-	'old_ID' => 6977,
 ));
 
 acf_add_local_field_group(array (

@@ -673,7 +673,7 @@ function awpf_display_products_filter(init) {
 					var input = $('.awpf-tax-filter input#' + term_id);
 
 					// update term label
-					input.parent('li').find('span.count').html('(' + term_data[0] + ')');
+					input.parent('li').find('span.count').html(term_data[0]);
 
 					if (init) {
 						// uncheck category input

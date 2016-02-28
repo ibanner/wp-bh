@@ -303,13 +303,6 @@ class AWPF_Widget_Front {
 	 * 
 	 * Initiate products filter values according to current taxonomy, term ID, price range and taxonomy terms
 	 * 
-	 * taxonomies structure:
-	 * =====================
-	 * $taxonomies[ {taxonomy name} ][0]					=> taxonomy filter title
-	 * $taxonomies[ {taxonomy name} ][1]					=> number of products associated with this taxonomy
-	 * $taxonomies[ {taxonomy name} ][2][ {term ID} ][0]	=> number of products associated with this term
-	 * $taxonomies[ {taxonomy name} ][2][ {term ID} ][1]	=> whether this term is checked in taxonomy filter [1 = true / 0 = false]
-	 *
 	 * products structure:
 	 * ===================
 	 * $products[ {product ID} ][0]							=> product price
@@ -530,7 +523,7 @@ class AWPF_Widget_Front {
 	 *
 	 * @since		1.0
 	 * @param		N/A
-	 * @return		N/A
+	 * @return		(string)
 	 */
 	function display_categories_menu_items() {
 
@@ -540,11 +533,16 @@ class AWPF_Widget_Front {
 		if ( ! $categories )
 			return;
 
+		$output = '';
+
 		foreach ( $categories[0] as $cat_id => $category ) {
 
-			$this->product_categories_menu_item( $cat_id, $category, 0 );
+			$output .= $this->product_categories_menu_item( $cat_id, $category, 0 );
 
 		}
+
+		// return
+		return $output;
 
 	}
 
@@ -558,7 +556,7 @@ class AWPF_Widget_Front {
 	 * @param		$cat_id (int) category ID
 	 * @param		$category (array) holds array of a single category data
 	 * @param		$depth (int) indicates current menu depth
-	 * @return		N/A
+	 * @return		(string)
 	 */
 	function product_categories_menu_item( $cat_id, $category, $depth ) {
 
@@ -579,57 +577,60 @@ class AWPF_Widget_Front {
 		if ( $category[2] && $depth == 0 )
 			$classes[] = 'collapsed';
 
-		echo '<li class="' . implode(' ', $classes) . '">';
+		$output = '<li class="' . implode(' ', $classes) . '">';
 
 			if ( $has_children || $depth == 0 ) {
 
 				// top level item and/or a parent item
-				echo	'<a>' .
-							'<span class="item-before"></span>' .
-							'<span>' . get_cat_name( $cat_id ) . '</span> ' .
-							'<span class="count">(' . $category[0] . ')</span>' .
-						'</a>';
+				$output .=	'<a>' .
+								'<span class="item-before"></span>' .
+								'<span>' . get_cat_name( $cat_id ) . '</span> ' .
+								'(<span class="count">' . $category[0] . '</span>)' .
+							'</a>';
 
 			}
 			else {
 
 				// low level item without children
-				echo	'<input type="checkbox" name="product_cat-' . $cat_id . '" id="product_cat-' . $cat_id . '" value="product_cat-' . $cat_id . '"' . ( $category[1] ? ' checked' : '' ) . ' />' .
-						'<label for="product_cat-' . $cat_id . '">' .
-							'<span>' . get_cat_name( $cat_id ) . ' ' .
-								'<span class="count">(' . $category[0] . ')</span>' .
-							'</span>' .
-						'</label>';
+				$output .=	'<input type="checkbox" name="product_cat-' . $cat_id . '" id="product_cat-' . $cat_id . '" value="product_cat-' . $cat_id . '"' . ( $category[1] ? ' checked' : '' ) . ' />' .
+							'<label for="product_cat-' . $cat_id . '">' .
+								'<span>' . get_cat_name( $cat_id ) . ' ' .
+									'(<span class="count">' . $category[0] . '</span>)' .
+								'</span>' .
+							'</label>';
 
 			}
 
 			if ( $has_children || $depth == 0 ) {
 
 				// start a subcategories menu
-				echo '<ul class="children children-depth-' . $depth . '">';
+				$output .= '<ul class="children children-depth-' . $depth . '">';
 
 					// display an "All" item as a first item in the subcategories menu
-					echo	'<li class="cat-' . $cat_id . '-all">' .
-								'<input type="checkbox" name="product_cat-' . $cat_id . '-all' . '" id="product_cat-' . $cat_id . '-all' . '" value="product_cat-' . $cat_id . '-all' . '"' . ( $category[1] ? ' checked' : '' ) . ' />' .
-								'<label for="product_cat-' . $cat_id . '-all' . '">' .
-									'<span>' . apply_filters( 'awpf_all_subcategories_title', __('All', 'awpf') ) . ' ' .
-										'<span class="count">(' . $category[0] . ')</span>' .
-									'</span>' .
-								'</label>' .
-							'</li>';
+					$output .=	'<li class="cat-' . $cat_id . '-all">' .
+									'<input type="checkbox" name="product_cat-' . $cat_id . '-all' . '" id="product_cat-' . $cat_id . '-all' . '" value="product_cat-' . $cat_id . '-all' . '"' . ( $category[1] ? ' checked' : '' ) . ' />' .
+									'<label for="product_cat-' . $cat_id . '-all' . '">' .
+										'<span>' . apply_filters( 'awpf_all_subcategories_title', __('All', 'awpf') ) . ' ' .
+											'(<span class="count">' . $category[0] . '</span>)' .
+										'</span>' .
+									'</label>' .
+								'</li>';
 
 					// recursive call
 					if ( $has_children ) {
 						foreach ( $categories[$cat_id] as $sub_cat_id => $subcategory ) {
-							$this->product_categories_menu_item( $sub_cat_id, $subcategory, $depth+1 );
+							$output .= $this->product_categories_menu_item( $sub_cat_id, $subcategory, $depth+1 );
 						}
 					}
 
-				echo '</ul>';
+				$output .= '</ul>';
 
 			}
 
-		echo '</li>';
+		$output .= '</li>';
+
+		// return
+		return $output;
 
 	}
 
@@ -641,25 +642,30 @@ class AWPF_Widget_Front {
 	 * @since		1.0
 	 * @param		$tax_name (string) taxonomy name
 	 * @param		$terms (array) array of taxonomy terms - view from $taxonomies attribute
-	 * @return		N/A
+	 * @return		(string)
 	 */
 	function display_tax_terms( $tax_name, $terms ) {
 
 		if ( ! $tax_name || ! $terms )
 			return;
 
+		$output = '';
+
 		foreach ( $terms as $term_id => $term_data ) {
 			$term_name = get_term_by('id', $term_id, $tax_name)->name;
 
-			echo	'<li ' . ( ! $term_data[0] ? 'style="display: none;"' : '' ) . '>' .
-						'<input type="checkbox" name="' . $term_id . '" id="' . $term_id . '" value="' . $term_id . '" />' .
-						'<label for="' . $term_id . '">' .
-							'<span>' . $term_name . ' </span>' .
-							'<span class="count">(' . $term_data[0] . ')</span>' .
-						'</label>' .
-					'</li>';
+			$output .=	'<li ' . ( ! $term_data[0] ? 'style="display: none;"' : '' ) . '>' .
+							'<input type="checkbox" name="' . $term_id . '" id="' . $term_id . '" value="' . $term_id . '" />' .
+							'<label for="' . $term_id . '">' .
+								'<span>' . $term_name . ' </span>' .
+								'(<span class="count">' . $term_data[0] . '</span>)' .
+							'</label>' .
+						'</li>';
 
 		}
+
+		// return
+		return $output;
 
 	}
 

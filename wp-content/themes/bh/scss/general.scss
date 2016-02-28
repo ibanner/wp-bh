@@ -2770,6 +2770,157 @@ body > header {
 			}
 		}
 	}
+
+	/********/
+	/* AWPF */
+	/********/
+
+	.awpf-tax-filter-badge {
+		.tax-terms {
+			margin-top: 10px;
+			text-align: center;
+
+			li {
+				margin-bottom: 20px;
+				padding: 0 5px;
+				width: 84px;
+				display: inline-block;
+
+				label {
+					padding: 0 !important;
+
+					.budge-name-wrapper {
+						position: relative;
+
+						.budge-image {
+							padding-top: 5px;
+							height: 30px;
+						}
+
+						.budge-name {
+							padding: 0 2.5px 8px;
+							height: 56px;
+							line-height: 14px;							
+							font-size: 14px;
+							font-weight: bold;
+							color: white;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							display: block;
+						}
+
+						.item-checked-top {
+							position: absolute;
+							bottom: -6px;
+							left: 20px;
+							width: 0;
+							height: 0;
+							border-left: 17px solid transparent;
+							border-right: 17px solid transparent;
+							border-bottom-width: 14px;
+							border-bottom-style: solid;
+							display: none;
+							z-index: 1;
+						}
+
+						.item-checked-bottom {
+							position: relative;
+							top: 6px;
+							text-align: center;
+							padding: 0;
+							height: 6px;
+							width: 74px;
+							display: none;
+							z-index: 1;
+
+							&:before,
+							&:after {
+								content: "";
+								position: absolute;
+								top: 0;
+								width: 50%;
+								height: 100%;
+							}
+
+							&:before {
+								left: 0;
+								@include transform(skew(0deg, 18deg));
+							}
+
+							&:after {
+								right: 0;
+								@include transform(skew(0deg, -18deg));
+							}
+						}
+
+						.item-after {
+							position: absolute;
+							top: 100%;
+							left: 0;
+							width: 0;
+							height: 0;
+							border-left: 37px solid transparent;
+							border-right: 37px solid transparent;
+							border-top: 12px solid;
+						}
+					}
+
+					.budge-count {
+						padding-top: 14px;
+						font-size: 14px;
+
+						&:after {
+							content: "";
+							position: absolute;
+							top: 100%;
+							left: 0;
+							width: 0;
+							height: 0;
+							border-left: 37px solid transparent;
+							border-right: 37px solid transparent;
+							border-top: 12px solid #d6d6d6;
+							visibility: hidden;
+						}
+					}
+
+					&:hover {
+						.budge-count:after {
+							visibility: visible;
+						}
+					}
+
+					&:after {
+						content: "";
+						top: auto !important;
+						bottom: 32px !important;
+						left: 30px !important;;
+						z-index: 1;
+					}
+				}
+
+				input[type=checkbox] {
+					&:checked + label {
+						background-color: #d6d6d6;
+
+						.budge-name-wrapper {
+							.budge-name {
+								height: 50px;
+							}
+
+							.item-checked-top,
+							.item-checked-bottom {
+								display: block;
+							}
+						}
+
+						.budge-count:after {
+							visibility: visible;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 /******************/

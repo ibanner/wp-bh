@@ -357,6 +357,63 @@ function BH_shop_products_filter() {
 }
 
 /****************************************************************************************************************************************************/
+/* AWPF
+/****************************************************************************************************************************************************/
+
+/**
+ * BH_awpf_widget_tax_terms_badge
+ *
+ * Customize AWPF badge taxonomy filter
+ *
+ * @param	$output (string) modified value
+ * @param	$tax_name (string) taxonomy name
+ * @param	$terms (array) array of taxonomy terms - view from $taxonomies attribute
+ * @return	(string)
+ */
+function BH_awpf_widget_tax_terms_badge($output, $tax_name, $terms) {
+
+	if ( ! $tax_name || ! $terms )
+		return;
+
+	$output = '';
+
+	foreach ( $terms as $term_id => $term_data ) {
+		$name			= get_term_by( 'id', $term_id, $tax_name )->name;
+		$image			= get_field( 'acf-product-badge_image', $tax_name . '_' . $term_id );
+		$color			= get_field( 'acf-product-badge_color', $tax_name . '_' . $term_id );
+
+		$output .=	'<li class="term-' . $term_id . '"' . ( ! $term_data[0] ? ' style="display: none;"' : '' ) . '>' .
+						'<input type="checkbox" name="' . $term_id . '" id="' . $term_id . '" value="' . $term_id . '" />' .
+						'<label for="' . $term_id . '">' .
+							'<div class="budge-name-wrapper"' . ( $color ? ' style="background-color: ' . $color . '"' : '' ) . '>' .
+								( $image ? '<div class="budge-image"><img src="' . $image['url'] . '" width="' . $image['width'] . '" height="' . $image['height'] . '" alt="' . $name . '" /></div>' : '' ) .
+								'<div class="budge-name">' . $name . '</div>' .
+								'<div class="item-checked-top"></div>' .
+								'<div class="item-checked-bottom"></div>' .
+								'<div class="item-after"' . ( $color ? ' style="border-top-color: ' . $color . '"' : '' ) . '></div>' .
+							'</div>' .
+							'<div class="budge-count">(<span class="count">' . $term_data[0] . '</span>)</div>' .
+						'</label>' .
+					'</li>';
+	}
+
+	$output .= '<style>';
+
+	foreach ( $terms as $term_id => $term_data ) {
+		$checked_color	= get_field( 'acf-product-badge_checked_color', $tax_name . '_' . $term_id );
+
+		$output .=	'.awpf-tax-filter-badge li.term-' . $term_id . ' .budge-name-wrapper .item-checked-top {border-bottom-color: ' . $checked_color . ';}' .
+					'.awpf-tax-filter-badge li.term-' . $term_id . ' .budge-name-wrapper .item-checked-bottom:before,' .
+					'.awpf-tax-filter-badge li.term-' . $term_id . ' .budge-name-wrapper .item-checked-bottom:after {background-color: ' . $checked_color . ';}';
+	}
+
+	$output .= '</style>';
+
+	return $output;
+
+}
+
+/****************************************************************************************************************************************************/
 /* WooCommerce shop archive
 /****************************************************************************************************************************************************/
 

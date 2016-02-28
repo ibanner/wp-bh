@@ -1,0 +1,70 @@
+{
+    "key": "group_558fb01015e70",
+    "title": "Page Attributes",
+    "fields": [
+        {
+            "key": "field_53c1c4074a2f8",
+            "label": "HTTPS",
+            "name": "acf-https",
+            "type": "true_false",
+            "instructions": "Secure Post",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0
+        },
+        {
+            "key": "field_54b6b18685fc4",
+            "label": "Shop Page",
+            "name": "acf-shop_page",
+            "type": "true_false",
+            "instructions": "Check this field in order to  display shop header and full page width (without sidebar)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "event"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "default"
+            }
+        ]
+    ],
+    "menu_order": 3,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1456468043
+}
