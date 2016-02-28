@@ -65,7 +65,10 @@ var $ = jQuery,
 					break;
 				}
 			}
-			
+
+			// awpf
+			BH_general.awpf();
+
 			// shop - single product
 			if ( $('body').hasClass('single-product') ) {
 				BH_general.shop_single_product();
@@ -198,6 +201,28 @@ var $ = jQuery,
 			
 		},
 		
+		awpf : function() {
+
+			// product filters toggle
+			$('.awpf-filters-toggle').click(function() {
+				var active = $(this).hasClass('collapsed') ? true : false;
+
+				if (active) {
+					$(this).removeClass('collapsed');
+				}
+				else {
+					$(this).addClass('collapsed');
+				}
+			});
+
+			// internal link button
+			$('.awpf-filter .goto-products').click(function() {
+				var header_height = $('header').height();
+				$('html, body').animate({scrollTop: $('.products-list').offset().top - header_height }, 'slow');
+			});
+
+		},
+
 		shop_single_product	: function() {
 			
 			// recently viewed products - add product to recently viewed

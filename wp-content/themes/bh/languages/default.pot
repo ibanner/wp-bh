@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2016-02-28 15:17+0200\n"
-"PO-Revision-Date: 2016-02-28 15:17+0200\n"
+"POT-Creation-Date: 2016-02-29 01:12+0200\n"
+"PO-Revision-Date: 2016-02-29 01:13+0200\n"
 "Last-Translator: Nir Goldberg <nir@htmline.com>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -481,7 +481,19 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:536
+#: functions/woocommerce/woocommerce-functions.php:436
+msgid "Show product filters"
+msgstr ""
+
+#: functions/woocommerce/woocommerce-functions.php:436
+msgid "Hide product filters"
+msgstr ""
+
+#: functions/woocommerce/woocommerce-functions.php:467
+msgid "Filter products"
+msgstr ""
+
+#: functions/woocommerce/woocommerce-functions.php:582
 msgid ""
 "<b>IMPORTANT NOTIFICATION:</b> Due to the Israeli postal office being unable "
 "to provide our customers up to date order tracking and delivery within "
@@ -489,31 +501,31 @@ msgid ""
 "shipping. We apologise for any inconvenience to our customers."
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:551
+#: functions/woocommerce/woocommerce-functions.php:597
 msgid "Checkout: Please fill your billing address and shipping address"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:560
+#: functions/woocommerce/woocommerce-functions.php:606
 msgid "Checkout: Please fill your payment details"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:569
+#: functions/woocommerce/woocommerce-functions.php:615
 msgid "Thank you. Your order has been received"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:578
+#: functions/woocommerce/woocommerce-functions.php:624
 msgid "Secured Billing: Please choose your preferred billing method"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:926
+#: functions/woocommerce/woocommerce-functions.php:972
 msgid "Most Popular"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:927
+#: functions/woocommerce/woocommerce-functions.php:973
 msgid "Price: Low to High"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:928
+#: functions/woocommerce/woocommerce-functions.php:974
 msgid "Price: High to Low"
 msgstr ""
 

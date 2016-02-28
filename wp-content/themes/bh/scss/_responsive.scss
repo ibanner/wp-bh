@@ -143,6 +143,163 @@
 		margin-top: 0;
 	}
 
+	/******************/
+	/* shop - sidebar */
+	/******************/
+
+	.shop-sidebar {
+
+		/********/
+		/* AWPF */
+		/********/
+
+		.awpf-filter {
+
+			/****************/
+			/* filter title */
+			/****************/
+
+			.awpf-filter-title {
+				h3 {
+					font-size: 18px;
+				}
+
+				&:before {
+					top: 10px;
+				}
+
+				&.collapsed {
+					&:before {
+						top: 12px;
+					}
+				}
+			}
+
+			/*******************/
+			/* categories menu */
+			/*******************/
+
+			&.awpf-category-filter {
+				ul.categories {
+					li {
+						& > a {
+							font-size: 14px;
+						}
+
+						& > ul.children {
+							li {
+								& > a {
+									font-size: 14px;
+								}
+
+								label {
+									& > span {
+										font-size: 14px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			/****************/
+			/* price filter */
+			/****************/
+
+			&.awpf-price-filter {
+				#awpf-price-filter-amount {
+					font-size: 14px;
+				}
+			}
+
+			/*******************/
+			/* taxonomy filter */
+			/*******************/
+
+			&.awpf-tax-filter {
+				ul.tax-terms {
+					li {
+						label {
+							& > span {
+								font-size: 14px;
+							}
+						}
+					}
+				}
+
+				/****************/
+				/* badge filter */
+				/****************/
+
+				&.awpf-tax-filter-badge {
+					.tax-terms {
+						li {
+							width: 64px;
+
+							label {
+								.badge-name-wrapper {
+									.badge-name {
+										height: 36px;
+										line-height: 10px;							
+										font-size: 10px;
+									}
+
+									.item-checked-top {
+										bottom: -6px;
+										left: 14px;
+										border-left-width: 13px;
+										border-right-width: 13px;
+									}
+
+									.item-checked-bottom {
+										width: 54px;
+
+										&:before {
+											@include transform(skew(0deg, 24deg));
+										}
+
+										&:after {
+											@include transform(skew(0deg, -24deg));
+										}
+									}
+
+									.item-after {
+										border-left: 27px solid transparent;
+										border-right: 27px solid transparent;
+									}
+								}
+
+								.badge-count {
+									&:after {
+										border-left: 27px solid transparent;
+										border-right: 27px solid transparent;
+									}
+								}
+
+								&:after {
+									bottom: 32px !important;
+									left: 20px !important;
+									border-width: 2px;
+								}
+							}
+
+							input[type=checkbox] {
+								&:checked + label {
+									.badge-name-wrapper {
+										.badge-name {
+											height: 30px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	/**********/
 	/* footer */
 	/**********/
@@ -715,6 +872,110 @@
 	/******************/
 
 	.shop-sidebar {
+
+		/********/
+		/* AWPF */
+		/********/
+
+		.awpf-filters-toggle {
+			margin: 0 -15px 15px;
+			position: relative;
+			padding: 7px 0 7px 35px;
+			background-color: #c6e8ed;
+			cursor: pointer;
+
+			h3 {
+				margin: 0;
+				font-size: 16px;
+				font-weight: $font-bold;
+				color: $font-color;
+
+				.active { display: none; }
+				.inactive { display: block; }
+			}
+
+			&:before {
+				content: "";
+				position: absolute;
+				top: 8px;
+				left: 15px;
+				width: 0;
+				height: 0;
+				border-top: 7.5px solid transparent;
+				border-bottom: 7.5px solid transparent;
+				border-left: 13px solid $gray-color3;
+			}
+
+			& + .awpf-filters-wrapper {
+				display: none;
+			}
+
+			&:hover,
+			&.collapsed {
+				background-color: $blue-color4;
+			}
+
+			&.collapsed {
+				h3 {
+					.active { display: block; }
+					.inactive { display: none; }
+				}
+
+				&:before {
+					top: 9px;
+					border-top: 13px solid $gray-color3;
+					border-right: 7.5px solid transparent;
+					border-bottom: 0;
+					border-left: 7.5px solid transparent;
+				}
+
+				& + .awpf-filters-wrapper {
+					display: block;
+				}
+			}
+		}
+
+		.awpf-filter {
+
+			/**********************/
+			/* mobile link button */
+			/**********************/
+
+			.goto-products {
+				margin: 10px 10px 5px;
+				padding: 5px;
+				font-size: 16px;
+				font-weight: $font-bold;
+				color: $font-invert-color;
+				text-align: center;
+				background-color: $orange-color3;
+				cursor: pointer;
+			}
+
+			/****************/
+			/* filter title */
+			/****************/
+
+			.awpf-filter-title {
+				h3 {
+					font-size: 14px;
+				}
+
+				.awpf-loader {
+					top: 1px;
+				}
+
+				&:before {
+					top: 7px;
+				}
+
+				&.collapsed {
+					&:before {
+						top: 9px;
+					}
+				}
+			}
+		}
 
 		/**************/
 		/* term title */

@@ -394,14 +394,14 @@ function BH_awpf_widget_tax_terms_badge($output, $tax_name, $terms) {
 		$output .=	'<li class="term-' . $term_id . '"' . ( ! $term_data[0] ? ' style="display: none;"' : '' ) . '>' .
 						'<input type="checkbox" name="' . $term_id . '" id="' . $term_id . '" value="' . $term_id . '" />' .
 						'<label for="' . $term_id . '">' .
-							'<div class="budge-name-wrapper"' . ( $color ? ' style="background-color: ' . $color . '"' : '' ) . '>' .
-								( $image ? '<div class="budge-image"><img src="' . $image['url'] . '" width="' . $image['width'] . '" height="' . $image['height'] . '" alt="' . $name . '" /></div>' : '' ) .
-								'<div class="budge-name">' . $name . '</div>' .
+							'<div class="badge-name-wrapper"' . ( $color ? ' style="background-color: ' . $color . '"' : '' ) . '>' .
+								( $image ? '<div class="badge-image"><img src="' . $image['url'] . '" width="' . $image['width'] . '" height="' . $image['height'] . '" alt="' . $name . '" /></div>' : '' ) .
+								'<div class="badge-name">' . $name . '</div>' .
 								'<div class="item-checked-top"></div>' .
 								'<div class="item-checked-bottom"></div>' .
 								'<div class="item-after"' . ( $color ? ' style="border-top-color: ' . $color . '"' : '' ) . '></div>' .
 							'</div>' .
-							'<div class="budge-count">(<span class="count">' . $term_data[0] . '</span>)</div>' .
+							'<div class="badge-count">(<span class="count">' . $term_data[0] . '</span>)</div>' .
 						'</label>' .
 					'</li>';
 	}
@@ -411,14 +411,60 @@ function BH_awpf_widget_tax_terms_badge($output, $tax_name, $terms) {
 	foreach ( $terms as $term_id => $term_data ) {
 		$checked_color	= get_field( 'acf-product-badge_checked_color', $tax_name . '_' . $term_id );
 
-		$output .=	'.awpf-tax-filter-badge li.term-' . $term_id . ' .budge-name-wrapper .item-checked-top {border-bottom-color: ' . $checked_color . ';}' .
-					'.awpf-tax-filter-badge li.term-' . $term_id . ' .budge-name-wrapper .item-checked-bottom:before,' .
-					'.awpf-tax-filter-badge li.term-' . $term_id . ' .budge-name-wrapper .item-checked-bottom:after {background-color: ' . $checked_color . ';}';
+		$output .=	'.awpf-tax-filter-badge li.term-' . $term_id . ' .badge-name-wrapper .item-checked-top {border-bottom-color: ' . $checked_color . ';}' .
+					'.awpf-tax-filter-badge li.term-' . $term_id . ' .badge-name-wrapper .item-checked-bottom:before,' .
+					'.awpf-tax-filter-badge li.term-' . $term_id . ' .badge-name-wrapper .item-checked-bottom:after {background-color: ' . $checked_color . ';}';
 	}
 
 	$output .= '</style>';
 
 	return $output;
+
+}
+
+/**
+ * BH_awpf_before_filter_content
+ *
+ * Add a filter toggle button and open filters wrapper
+ * Presented in mobile resolution
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_awpf_before_filter_content() {
+
+	echo '<div class="awpf-filters-toggle visible-xs"><h3><span class="inactive">' . __('Show product filters', 'BH') . '</span><span class="active">' . __('Hide product filters', 'BH') . '</span></h3></div>';
+	echo '<div class="awpf-filters-wrapper">';
+
+}
+
+/**
+ * BH_awpf_after_filter_content
+ *
+ * Close filters wrapper
+ * Presented in mobile resolution
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_awpf_after_filter_content() {
+
+	echo '</div>';
+
+}
+
+/**
+ * BH_awpf_after_filter
+ *
+ * Add an internal link button after each filter type
+ * Presented in mobile resolution
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_awpf_after_filter() {
+
+	echo '<div class="goto-products visible-xs">' . __('Filter products', 'BH') . '</div>';
 
 }
 
@@ -483,7 +529,7 @@ function BH_shop_single_meta() {
  * BH_shop_single_badges
  * 
  * Section 1
- * Show product budges
+ * Show product badges
  */
 function BH_shop_single_badges() {
 	get_template_part('views/woocommerce/single-product/single-product-section1', 'badges');

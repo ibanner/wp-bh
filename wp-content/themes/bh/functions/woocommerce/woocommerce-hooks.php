@@ -120,9 +120,17 @@ add_action('BH_shop_sidebar', 'BH_shop_wswu_banner', 20);
 /****************************************************************************************************************************************************/
 
 /**
- * @see		BH_awpf_widget_tax_terms_badge
+ * @see		BH_awpf_widget_tax_terms_badge()
+ * @see		BH_awpf_before_filter_content()
+ * @see		BH_awpf_after_filter_content()
+ * @see		BH_awpf_after_filter()
  */
-add_filter('awpf_widget_tax_terms/badge', 'BH_awpf_widget_tax_terms_badge', 10, 3);
+add_filter('awpf_widget_tax_terms/badge',	'BH_awpf_widget_tax_terms_badge', 10, 3);
+add_action('awpf_before_filter_content',	'BH_awpf_before_filter_content');
+add_action('awpf_after_filter_content',		'BH_awpf_after_filter_content');
+add_action('awpf_after_category_filter',	'BH_awpf_after_filter');
+add_action('awpf_after_price_filter',		'BH_awpf_after_filter');
+add_action('awpf_after_taxonomy_filter',	'BH_awpf_after_filter');
 
 /****************************************************************************************************************************************************/
 /* WooCommerce single product

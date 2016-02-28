@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2016-02-28 15:15+0200\n"
-"PO-Revision-Date: 2016-02-28 15:16+0200\n"
+"POT-Creation-Date: 2016-02-29 01:13+0200\n"
+"PO-Revision-Date: 2016-02-29 01:13+0200\n"
 "Last-Translator: Nir Goldberg <nir@htmline.com>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -481,7 +481,19 @@ msgstr "הרישום בוצע בהצלחה, תודה רבה!"
 msgid "Home"
 msgstr "דף הבית"
 
-#: functions/woocommerce/woocommerce-functions.php:536
+#: functions/woocommerce/woocommerce-functions.php:436
+msgid "Show product filters"
+msgstr "הצג מסנני מוצרים"
+
+#: functions/woocommerce/woocommerce-functions.php:436
+msgid "Hide product filters"
+msgstr "הסתר מסנני מוצרים"
+
+#: functions/woocommerce/woocommerce-functions.php:467
+msgid "Filter products"
+msgstr "סנן מוצרים"
+
+#: functions/woocommerce/woocommerce-functions.php:582
 msgid ""
 "<b>IMPORTANT NOTIFICATION:</b> Due to the Israeli postal office being unable "
 "to provide our customers up to date order tracking and delivery within "
@@ -492,31 +504,31 @@ msgstr ""
 "בטווח הזמן המובטח והקושי במעקב אחר חבילות וקבלת מענה לפניות, אנו נאלצים "
 "להפסיק להציע משלוח רשום רגיל. עם לקוחותינו הסליחה."
 
-#: functions/woocommerce/woocommerce-functions.php:551
+#: functions/woocommerce/woocommerce-functions.php:597
 msgid "Checkout: Please fill your billing address and shipping address"
 msgstr "קופה: אנא הזינו פרטים למשלוח חשבונית וכתובת למשלוח"
 
-#: functions/woocommerce/woocommerce-functions.php:560
+#: functions/woocommerce/woocommerce-functions.php:606
 msgid "Checkout: Please fill your payment details"
 msgstr "קופה: אנא הזינו פרטי אמצעי תשלום"
 
-#: functions/woocommerce/woocommerce-functions.php:569
+#: functions/woocommerce/woocommerce-functions.php:615
 msgid "Thank you. Your order has been received"
 msgstr "תודה רבה. הזמנתכם התקבלה בהצלחה"
 
-#: functions/woocommerce/woocommerce-functions.php:578
+#: functions/woocommerce/woocommerce-functions.php:624
 msgid "Secured Billing: Please choose your preferred billing method"
 msgstr "אמצעי חיוב מאובטח: אנא בחרו את האמצעי המועדף עליכם"
 
-#: functions/woocommerce/woocommerce-functions.php:926
+#: functions/woocommerce/woocommerce-functions.php:972
 msgid "Most Popular"
 msgstr "הפופולרי ביותר"
 
-#: functions/woocommerce/woocommerce-functions.php:927
+#: functions/woocommerce/woocommerce-functions.php:973
 msgid "Price: Low to High"
 msgstr "מחיר: נמוך לגבוה"
 
-#: functions/woocommerce/woocommerce-functions.php:928
+#: functions/woocommerce/woocommerce-functions.php:974
 msgid "Price: High to Low"
 msgstr "מחיר: גבוה לנמוך"
 
@@ -646,9 +658,6 @@ msgstr "שגיאה כללית."
 #~ "&amp; conditions</a>"
 #~ msgstr ""
 #~ "קראתי והנני מסכים/ה <a href=\"%s\" target=\"_blank\">לתנאי השימוש</a>"
-
-#~ msgid "Search for products"
-#~ msgstr "חיפוש מוצרים"
 
 #~ msgid "Search Results for: &#8216;%s&#8217;"
 #~ msgstr "תוצאות חיפוש עבור הביטוי: &#8217;%s&#8216;"
