@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2016-02-29 01:13+0200\n"
-"PO-Revision-Date: 2016-02-29 01:13+0200\n"
+"POT-Creation-Date: 2016-03-01 01:48+0200\n"
+"PO-Revision-Date: 2016-03-01 01:49+0200\n"
 "Last-Translator: Nir Goldberg <nir@htmline.com>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -262,6 +262,10 @@ msgstr "לחצו לפרטים נוספים"
 #: views/woocommerce/archive/archive-product-taxonomy-term.php:73
 msgid "Sort by"
 msgstr "מיון לפי"
+
+#: views/woocommerce/archive/archive-title.php:35
+msgid "Search Results"
+msgstr "תוצאות חיפוש"
 
 #: views/woocommerce/single-product/single-product-section1-meta.php:20
 msgid "More Details"
@@ -661,9 +665,6 @@ msgstr "שגיאה כללית."
 
 #~ msgid "Search Results for: &#8216;%s&#8217;"
 #~ msgstr "תוצאות חיפוש עבור הביטוי: &#8217;%s&#8216;"
-
-#~ msgid "Search Results"
-#~ msgstr "תוצאות חיפוש"
 
 #~ msgid "Newsletter"
 #~ msgstr "ניוזלטר"

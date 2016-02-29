@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 	$tt = $wp_query->get_queried_object();
 	$tt_name = $tt ? $tt->name : '';
 
-	$tt_title = BH_shop_tt_title();
+	$tt_title = BH_shop_archive_title();
 ?>
 
 <div class="container">

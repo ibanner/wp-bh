@@ -489,9 +489,11 @@
 		/* term title */
 		/**************/
 
-		.term-title {
-			.icon {
-				display: none;
+		.term-title-wrapper {
+			.term-title {
+				.icon {
+					display: none;
+				}
 			}
 		}
 	}
@@ -873,6 +875,30 @@
 
 	.shop-sidebar {
 
+		/**************/
+		/* term title */
+		/**************/
+
+		.term-title-wrapper {
+			.term-title {
+				margin-bottom: 20px;
+				min-height: 30px;
+
+				h1 {
+					margin: 0;
+					font-size: 18px;
+
+					span {
+						font-size: 16px;
+					}
+				}
+
+				&.has-icon {
+					min-height: 30px;
+				}
+			}
+		}
+
 		/********/
 		/* AWPF */
 		/********/
@@ -974,24 +1000,6 @@
 						top: 9px;
 					}
 				}
-			}
-		}
-
-		/**************/
-		/* term title */
-		/**************/
-
-		.term-title {
-			margin-bottom: 20px;
-			min-height: 30px;
-
-			h1 {
-				margin: 0;
-				font-size: 18px;
-			}
-
-			&.has-icon {
-				min-height: 30px;
 			}
 		}
 	}
@@ -1920,9 +1928,15 @@
 		/* term title */
 		/**************/
 
-		.term-title {
-			h1 {
-				font-size: 30px;
+		.term-title-wrapper {
+			.term-title {
+				h1 {
+					font-size: 30px;
+
+					span {
+						font-size: 26px;
+					}
+				}
 			}
 		}
 
@@ -2166,18 +2180,24 @@
 		/* term title */
 		/**************/
 
-		.term-title {
-			min-height: 44px;
-
-			h1 {
-				font-size: 20px;
-			}
-
-			&.has-icon {
+		.term-title-wrapper {
+			.term-title {
 				min-height: 44px;
 
 				h1 {
-					margin: 5px 0;
+					font-size: 20px;
+
+					span {
+						font-size: 18px;
+					}
+				}
+
+				&.has-icon {
+					min-height: 44px;
+
+					h1 {
+						margin: 5px 0;
+					}
 				}
 			}
 		}

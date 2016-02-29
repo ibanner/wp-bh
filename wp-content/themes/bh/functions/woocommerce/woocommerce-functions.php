@@ -333,14 +333,14 @@ function BH_shop_home_product_sliders() {
 /****************************************************************************************************************************************************/
 
 /**
- * BH_shop_tt_title
+ * BH_shop_archive_title
  * 
- * Show product taxonomy term title
+ * Show archive title (product taxonomy term / search results query string)
  */
-function BH_shop_tt_title() {
+function BH_shop_archive_title() {
 	ob_start();
 	
-	echo get_template_part('views/woocommerce/archive/taxonomy-term', 'title');
+	echo get_template_part('views/woocommerce/archive/archive', 'title');
 	
 	$output = ob_get_clean();
 	
