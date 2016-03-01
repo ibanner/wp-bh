@@ -159,9 +159,14 @@ class awpf {
 			'deps'	=> array('jquery')
 		);
 
+		$scripts['jquery-ui-touch-punch'] = array(
+			'src'	=> awpf_get_dir('assets/js/jquery.ui.touch-punch.min.js'),
+			'deps'	=> array('jquery-ui')
+		);
+
 		$scripts['awpf-products-filter'] = array(
 			'src'	=> awpf_get_dir('assets/js/awpf-products-filter.min.js'),
-			'deps'	=> array('jquery')
+			'deps'	=> array('jquery-ui')
 		);
 
 		// register scripts

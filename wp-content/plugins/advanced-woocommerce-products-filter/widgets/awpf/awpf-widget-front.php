@@ -492,6 +492,7 @@ class AWPF_Widget_Front {
 		<?php
 			wp_enqueue_style( 'jquery-ui' );
 			wp_enqueue_script( 'jquery-ui' );
+			wp_enqueue_script( 'jquery-ui-touch-punch' );
 			wp_enqueue_script( 'awpf-products-filter' );
 		?>
 
