@@ -104,6 +104,15 @@
 		/*******************/
 
 		&.awpf-category-filter {
+			.awpf-category-filter-title {
+				background-color: $red-color2;
+
+				&:hover,
+				&.collapsed {
+					background-color: $red-color1;
+				}
+			}
+
 			ul.categories {
 				list-style: none;
 
