@@ -929,17 +929,6 @@ article.post {
 /* shop - general */
 /******************/
 
-.shop-body-left {
-	padding-left: 0;
-	padding-right: 15px;
-}
-
-.shop-body-right {
-	float: left;
-	padding-left: 15px;
-	padding-right: 0;
-}
-
 .woocommerce {
 	.woocommerce-message {
 		a.button {
@@ -962,31 +951,6 @@ article.post {
 		
 		&.form-row-last {
 			float: left;
-		}
-	}
-}
-
-/*****************/
-/* shop - header */
-/*****************/
-
-.shop-header {
-	.product-cat-menu-wrapper {
-		nav.product-cat-menu {
-			li {
-				padding: 8px 0 0 14px;
-				
-				& > a {
-					border-left: 0;
-					border-right: 1px solid $border-color1;
-					padding: 0 11px 0 0;
-				}
-				
-				&:last-child > a {
-					border-left: 1px solid $border-color1;
-					padding: 0 11px 0 10px;
-				}
-			}
 		}
 	}
 }
@@ -1199,62 +1163,6 @@ article.post {
 		.products {
 			li {
 				float: right;
-			}
-		}
-	}
-}
-
-/******************/
-/* shop - archive */
-/******************/
-
-.shop-archive-section {
-	.shop-body-left {
-		.refine-products {
-			padding-left: 0;
-			padding-right: 15px;
-			
-			.shop-sidebar-refine-products {
-				.widgettitle {
-					.loader {
-						left: 0;
-						right: auto;
-					}
-				}
-				
-				.widgetcontent {
-					.price-filter {
-						#price-filter-amount {
-							direction: ltr;
-							text-align: right;
-						}
-					}
-					
-					.tax-filter {
-						.tax-terms {
-							label {
-								padding-left: 0;
-								padding-right: 15px;
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		.search-results & {
-			.products-list {
-				ul.products {
-					li {
-						&.product {
-							margin: 0 0 0 24px;
-							
-							&.last {
-								margin-left: 0;
-							}
-						}
-					}
-				}
 			}
 		}
 	}
