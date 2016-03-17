@@ -138,25 +138,25 @@ add_action('awpf_after_taxonomy_filter',	'BH_awpf_after_filter');
 
 /**
  * @see		BH_shop_show_product_images()
- * @see		BH_shop_single_title()
  * @see		woocommerce_template_single_price()
  * @see		BH_shop_single_excerpt()
  * @see		woocommerce_template_single_add_to_cart()
+ * @see		BH_shop_single_gift()
  * @see		BH_shop_single_meta()
- * @see		BH_shop_single_badges()
- * @see		BH_shop_show_experience_banner()
- * @see		BH_shop_show_related_products()
+ * @see		BH_shop_single_shipping()
+ * @see		BH_shop_single_experience_banner()
+ * @see		BH_shop_single_related_products()
  * @see		BH_EC_product_detail()					// Enhanced Ecommerce - tracking product detail
  */
-add_action('BH_shop_before_single_product_meta',	'BH_shop_show_product_images', 10);
-add_action('BH_shop_single_product_meta',			'BH_shop_single_title', 5);
+add_action('BH_shop_before_single_product_meta',	'BH_shop_single_product_images', 10);
 add_action('BH_shop_single_product_meta',			'woocommerce_template_single_price', 10);
 add_action('BH_shop_single_product_meta',			'BH_shop_single_excerpt', 20);
 add_action('BH_shop_single_product_meta',			'woocommerce_template_single_add_to_cart', 30);
-add_action('BH_shop_single_product_meta',			'BH_shop_single_meta', 40);
-add_action('BH_shop_single_product_meta',			'BH_shop_single_badges', 50);
-add_action('BH_shop_experience',					'BH_shop_show_experience_banner', 10);
-add_action('BH_shop_related_products',				'BH_shop_show_related_products', 10);
+//add_action('BH_shop_single_product_meta',			'BH_shop_single_gift', 40);
+add_action('BH_shop_single_product_meta',			'BH_shop_single_meta', 50);
+//add_action('BH_shop_single_product_meta',			'BH_shop_single_shipping', 60);
+add_action('BH_shop_experience',					'BH_shop_single_experience_banner', 10);
+add_action('BH_shop_related_products',				'BH_shop_single_related_products', 10);
 add_action('BH_after_single_product',				'BH_EC_product_detail', 10);
 
 /****************************************************************************************************************************************************/

@@ -1173,51 +1173,36 @@ article.post {
 /*************************/
 
 .single-product-section {
+
+	/****************************/
+	/* single product section 1 */
+	/****************************/
+
 	&.single-product-section1 {
-		.shop-body-left {
-			.product-images {
-				#gallery-navigator {
-					li {
-						float: right;
-					}
-				}
-			}
-		}
-		
-		.product-meta {
-			padding-left: 59px;
-			padding-right: 15px;
-			
-			.cart {
-				@import "modules/quantity_button-rtl";
-				
-				.single_add_to_cart_button {
+
+		/******************/
+		/* product images */
+		/******************/
+
+		.product-images {
+
+			/*******************/
+			/* desktop gallery */
+			/*******************/
+
+			#gallery-navigator {
+				a {
 					float: right;
-					
-					&:before {
-						left: 70%;
-					}
 				}
 			}
-			
-			.meta {
-				.table {
-					th {
-						border-left: 1px solid $border-color1;
-						border-right: 0;
-					}
-					
-					td {
-						border-left: 0;
-						text-align: left;
-						direction: ltr;
-					}
-				}
-			}
-			
-			.badges {
-				li {
-					float: right;
+
+			/******************/
+			/* mobile gallery */
+			/******************/
+
+			.product-gallery-slider {
+				.product-gallery-slider-placeholder {
+					direction: ltr;
 				}
 			}
 		}

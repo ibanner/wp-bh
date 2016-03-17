@@ -3077,6 +3077,139 @@ body > header {
 /*************************/
 
 .single-product-section {
+	margin-bottom: 40px;
+
+	/****************************/
+	/* single product section 1 */
+	/****************************/
+
+	&.single-product-section1 {
+
+		/*****************/
+		/* product title */
+		/*****************/
+
+		.product-title {
+			margin-bottom: 15px;
+
+			h1 {
+				margin: 0 0 5px;
+				font-size: 32px;
+				font-weight: $font-bold;
+			}
+
+			.artist-title {
+				font-size: 18px;
+
+				a {
+					color: $font-color;
+				}
+			}
+		}
+			
+		/******************/
+		/* product images */
+		/******************/
+
+		.product-images {
+			height: 0;
+			overflow: hidden;
+
+			/*******************/
+			/* desktop gallery */
+			/*******************/
+
+			#gallery-main-item {
+				margin-bottom: 10px;
+				height: 100%;
+			}
+
+			#gallery-navigator {
+				margin-bottom: 10px;
+				list-style: none;
+				overflow: hidden;
+
+				a {
+					float: left;
+					padding: 1%;
+					width: 20%;
+					text-align: center;
+					display: block;
+				}
+			}
+
+			#disclaimer {
+				line-height: normal;
+				font-size: 75%;
+				color: $gray-color4;
+			}
+
+			/******************/
+			/* mobile gallery */
+			/******************/
+
+			.product-gallery-slider {
+				margin-bottom: 10px;
+
+				.product-gallery-slider-placeholder {
+					margin: 0 auto;
+					width: 610px;
+					@include not-selectable;
+					overflow: hidden;
+
+					.product-gallery-item {
+						width: 610px;
+						height: 610px;
+						overflow: hidden;
+					}
+				}
+
+				.product-gallery-slider-prev,
+				.product-gallery-slider-next {
+					position: absolute;
+					top: 290px;
+					width: 0;
+					height: 0;
+					border-top: 15px solid transparent;
+					border-bottom: 15px solid transparent;
+					cursor: pointer;
+				}
+				
+				.product-gallery-slider-prev {
+					left: 15px;
+					border-right: 26px solid $orange-color3;
+
+					&:hover {
+						border-right-color: $gray-color3;
+					}
+				}
+				
+				.product-gallery-slider-next {
+					right: 15px;
+					border-left: 26px solid $orange-color3;
+
+					&:hover {
+						border-left-color: $gray-color3;
+					}
+				}
+			}
+		}
+
+		/****************/
+		/* product meta */
+		/****************/
+
+		.product-meta {
+
+		}
+	}
+}
+
+/*************************/
+/* shop - single product */
+/*************************/
+/*
+.single-product-section {
 	&:after {
 		content: "";
 		margin: 0 15px 20px;

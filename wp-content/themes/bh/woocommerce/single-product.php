@@ -23,27 +23,14 @@ get_header(); ?>
 ?>
 
 <div class="container">
-	<?php
-		/**
-		 * woocommerce_before_single_product hook
-		 *
-		 * @hooked wc_print_notices - 10
-		 */
-		 do_action( 'woocommerce_before_single_product' );
-	
-		 if ( post_password_required() ) {
-		 	echo get_the_password_form();
-		 	return;
-		 }
-	?>
-	
+
 	<div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
 	
 		<?php
 			/**
 			 * Single product - section 1
-			 * 
-			 * @uses	woocommerce_breadcrumb
+			 *
+			 * product info
 			 */
 			get_template_part('views/woocommerce/single-product/single-product', 'section1');
 		?>
@@ -51,6 +38,8 @@ get_header(); ?>
 		<?php
 			/**
 			 * Single product - section 2
+			 *
+			 * wswu banner
 			 */
 			//get_template_part('views/woocommerce/single-product/single-product', 'section2');
 		?>
@@ -58,8 +47,19 @@ get_header(); ?>
 		<?php
 			/**
 			 * Single product - section 3
+			 *
+			 * related prodcts
 			 */
-			get_template_part('views/woocommerce/single-product/single-product', 'section3');
+			//get_template_part('views/woocommerce/single-product/single-product', 'section3');
+		?>
+		
+		<?php
+			/**
+			 * Single product - section 4
+			 *
+			 * recently viewed products
+			 */
+			//get_template_part('views/woocommerce/single-product/single-product', 'section4');
 		?>
 		
 		<meta itemprop="url" content="<?php the_permalink(); ?>" />
@@ -74,6 +74,7 @@ get_header(); ?>
 		 */
 		 do_action( 'BH_after_single_product' );
 	?>
+
 </div>
 
 <?php

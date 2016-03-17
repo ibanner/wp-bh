@@ -18,7 +18,7 @@ echo '<div class="row single-product-section single-product-section2">';
 		/**
 		 * BH_shop_experience hook
 		 *
-		 * @hooked	BH_shop_show_experience_banner - 10
+		 * @hooked	BH_shop_single_experience_banner - 10
 		 */
 		do_action('BH_shop_experience');
 		

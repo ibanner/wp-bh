@@ -4,58 +4,60 @@
  *
  * @author 		Beit Hatfutsot
  * @package 	bh/views/woocommerce/single-product
- * @version     1.0
+ * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post;
 
-echo '<div class="row single-product-section single-product-section1">';
+?>
 
-	// shop body
-	echo '<div class="col-sm-11 shop-body-left">';
-	
-		woocommerce_breadcrumb();
-		
-		echo '<div class="row">';
-		
-			echo '<div class="col-sm-7 product-images">';
-			
+<div class="single-product-section single-product-section1">
+
+	<div class="row">
+
+		<div class="col-md-6 col-md-push-6 product-title">
+
+			<?php get_template_part('views/woocommerce/single-product/single-product-section1', 'title'); ?>
+
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-6 product-images">
+
+			<?php
 				/**
 				 * BH_shop_before_single_product_meta hook
 				 *
-				 * @hooked	BH_shop_show_product_images - 10
+				 * @hooked	BH_shop_single_product_images - 10
 				 */
 				do_action('BH_shop_before_single_product_meta');
-				
-			echo '</div>';
-			
-			echo '<div class="col-sm-5 product-meta">';
-			
+			?>
+
+		</div>
+
+		<div class="col-md-6 product-meta">
+
+			<?php
 				/**
 				 * BH_shop_single_product_meta hook
 				 *
-				 * @hooked	BH_shop_single_title - 5
 				 * @hooked	woocommerce_template_single_price - 10
 				 * @hooked	BH_shop_single_excerpt - 20
 				 * @hooked	woocommerce_template_single_add_to_cart - 30
-				 * @hooked	BH_shop_single_meta - 40
-				 * @hooked	BH_shop_single_badges - 50
+				 * @hooked	BH_shop_single_gift - 40
+				 * @hooked	BH_shop_single_meta - 50
+				 * @hooked	BH_shop_single_shipping - 60
 				 */
 				do_action('BH_shop_single_product_meta');
-				
-			echo '</div>';
-			
-		echo '</div>';
-		
-	echo '</div>';
-	
-	// shop sidebar
-	echo '<div class="col-sm-1 shop-body-right">';
-	
-		get_template_part('views/sidebar/sidebar-shop', 'recently-viewed');
-			
-	echo '</div>';
-	
-echo '</div>';
+			?>
+
+		</div>
+
+	</div>
+
+</div>

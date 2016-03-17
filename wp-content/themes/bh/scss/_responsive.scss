@@ -561,6 +561,28 @@
 		}
 	}
 
+	/*************************/
+	/* shop - single product */
+	/*************************/
+
+	.single-product-section {
+
+		/****************************/
+		/* single product section 1 */
+		/****************************/
+
+		&.single-product-section1 {
+
+			/******************/
+			/* product images */
+			/******************/
+
+			.product-images {
+				margin-top: 0 !important;
+			}
+		}
+	}
+
 	/**************************/
 	/* shop - products slider */
 	/**************************/
@@ -1040,6 +1062,47 @@
 					right: 0;
 					border-top-right-radius: 0;
 					border-bottom-left-radius: 16px;
+				}
+			}
+		}
+	}
+
+	/*************************/
+	/* shop - single product */
+	/*************************/
+
+	.single-product-section {
+
+		/****************************/
+		/* single product section 1 */
+		/****************************/
+
+		&.single-product-section1 {
+
+			/******************/
+			/* product images */
+			/******************/
+
+			.product-images {
+
+				/******************/
+				/* mobile gallery */
+				/******************/
+
+				.product-gallery-slider {
+					.product-gallery-slider-prev,
+					.product-gallery-slider-next {
+						border-top-width: 10px;
+						border-bottom-width: 10px;
+					}
+
+					.product-gallery-slider-prev {
+						border-right-width: 18px;
+					}
+					
+					.product-gallery-slider-next {
+						border-left-width: 18px;
+					}
 				}
 			}
 		}
@@ -1548,6 +1611,61 @@
 		}
 	}
 
+	/*************************/
+	/* shop - single product */
+	/*************************/
+
+	.single-product-section {
+
+		/****************************/
+		/* single product section 1 */
+		/****************************/
+
+		&.single-product-section1 {
+
+			/*****************/
+			/* product title */
+			/*****************/
+
+			.product-title {
+				h1 {
+					font-size: 20px;
+				}
+
+				.artist-title {
+					font-size: 14px;
+				}
+			}
+
+			/******************/
+			/* product images */
+			/******************/
+
+			.product-images {
+
+				/******************/
+				/* mobile gallery */
+				/******************/
+
+				.product-gallery-slider {
+					.product-gallery-slider-placeholder {
+						width: 224px;
+
+						.product-gallery-item {
+							width: 224px;
+							height: 224px;
+						}
+					}
+
+					.product-gallery-slider-prev,
+					.product-gallery-slider-next {
+						top: 102px;
+					}
+				}
+			}
+		}
+	}
+
 	/***********************/
 	/* shop - product item */
 	/***********************/
@@ -1955,6 +2073,30 @@
 		}
 	}
 
+	/*************************/
+	/* shop - single product */
+	/*************************/
+
+	.single-product-section {
+
+		/****************************/
+		/* single product section 1 */
+		/****************************/
+
+		&.single-product-section1 {
+
+			/*****************/
+			/* product title */
+			/*****************/
+
+			.product-title {
+				h1 {
+					font-size: 30px;
+				}
+			}
+		}
+	}
+
 	/**************************/
 	/* shop - products slider */
 	/**************************/
@@ -2240,6 +2382,34 @@
 
 				&:after {
 					top: 22px !important;
+				}
+			}
+		}
+	}
+
+	/*************************/
+	/* shop - single product */
+	/*************************/
+
+	.single-product-section {
+
+		/****************************/
+		/* single product section 1 */
+		/****************************/
+
+		&.single-product-section1 {
+
+			/*****************/
+			/* product title */
+			/*****************/
+
+			.product-title {
+				h1 {
+					font-size: 28px;
+				}
+
+				.artist-title {
+					font-size: 16px;
 				}
 			}
 		}
@@ -2567,6 +2737,61 @@
 						right: 0;
 						@include sprites;
 						@include sprite-ribbon-white;
+					}
+				}
+			}
+		}
+	}
+
+	/*************************/
+	/* shop - single product */
+	/*************************/
+
+	.single-product-section {
+
+		/****************************/
+		/* single product section 1 */
+		/****************************/
+
+		&.single-product-section1 {
+
+			/*****************/
+			/* product title */
+			/*****************/
+
+			.product-title {
+				h1 {
+					font-size: 24px;
+				}
+
+				.artist-title {
+					font-size: 16px;
+				}
+			}
+
+			/******************/
+			/* product images */
+			/******************/
+
+			.product-images {
+
+				/******************/
+				/* mobile gallery */
+				/******************/
+
+				.product-gallery-slider {
+					.product-gallery-slider-placeholder {
+						width: 385px;
+
+						.product-gallery-item {
+							width: 385px;
+							height: 385px;
+						}
+					}
+
+					.product-gallery-slider-prev,
+					.product-gallery-slider-next {
+						top: 182px;
 					}
 				}
 			}
