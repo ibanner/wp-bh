@@ -151,7 +151,7 @@ add_action('awpf_after_taxonomy_filter',	'BH_awpf_after_filter');
 add_action('BH_shop_before_single_product_meta',	'BH_shop_single_product_images', 10);
 add_action('BH_shop_single_product_meta',			'woocommerce_template_single_price', 10);
 add_action('BH_shop_single_product_meta',			'BH_shop_single_excerpt', 20);
-add_action('BH_shop_single_product_meta',			'woocommerce_template_single_add_to_cart', 30);
+add_action('BH_shop_single_product_meta',			'BH_shop_single_add_to_cart', 30);
 //add_action('BH_shop_single_product_meta',			'BH_shop_single_gift', 40);
 add_action('BH_shop_single_product_meta',			'BH_shop_single_meta', 50);
 //add_action('BH_shop_single_product_meta',			'BH_shop_single_shipping', 60);

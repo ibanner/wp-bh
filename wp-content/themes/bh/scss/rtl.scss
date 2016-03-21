@@ -1206,6 +1206,75 @@ article.post {
 				}
 			}
 		}
+
+		/****************/
+		/* product meta */
+		/****************/
+
+		.product-meta {
+
+			/***************/
+			/* add to cart */
+			/***************/
+
+			#single-product-add-to-cart {
+
+				/**************/
+				/* qty select */
+				/**************/
+
+				#qty-select {
+					float: right;
+					margin-left: 15px;
+					margin-right: 0;
+
+					&:before {
+						left: 10px;
+						right: auto;
+					}
+
+					&:after {
+						left: 35px;
+						right: auto;
+					}
+				}
+
+				/**********************/
+				/* add to cart button */
+				/**********************/
+
+				.add-to-cart {
+					float: right;
+
+					&:after {
+						left: 115px;
+						right: auto;
+					}
+
+					a.button {
+						&:after {
+							left: 119.5px;
+							right: auto;
+						}
+
+						&.loading,
+						&.added {
+							&:after {
+								right: auto;
+							}
+						}
+
+						&.loading:after { left: 118px; }
+						&.added:after { left: 111px; }
+					}
+
+					a.added_to_cart {
+						left: 10px;
+						right: auto;
+					}
+				}
+			}
+		}
 	}
 }
 

@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 		wp_enqueue_script('elevateZoom');
 	endif;
 	
-	if ( is_singular('post') || is_product() ) :
+	if ( is_singular('post') ) :
 		get_template_part('views/blog/add-this');
 	endif;
 	

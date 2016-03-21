@@ -24,6 +24,11 @@ var $ = jQuery,
 		 */
 		init : function() {
 
+			// jQuery extentions
+			$.fn.setAllToMaxHeight = function() {
+				return this.height( Math.max.apply(this, $.map(this, function(e) { return $(e).height() })) );
+			}
+
 			// set page
 			BH_general.params.page = BH_general.get_page();
 
@@ -93,11 +98,6 @@ var $ = jQuery,
 
 			// footer menu
 			BH_general.footer_menu();
-
-			// jQuery extentions
-			$.fn.setAllToMaxHeight = function() {
-				return this.height( Math.max.apply(this, $.map(this, function(e) { return $(e).height() })) );
-			}
 
 		},
 
@@ -244,6 +244,9 @@ var $ = jQuery,
 			// expose products images
 			$('.product-images').css('height', 'auto');
 
+			// add to cart
+			BH_general.single_product_add_to_cart();
+
 		},
 
 		/**
@@ -260,6 +263,61 @@ var $ = jQuery,
 			var slideshow = $('.product-gallery-slider-carousel');
 
 			slideshow.cycle();
+
+		},
+
+		/**
+		 * single_product_add_to_cart
+		 *
+		 * Add to cart form
+		 * Called from shop_single_product
+		 *
+		 * @param	N/A
+		 * @return	N/A
+		 */
+		single_product_add_to_cart : function() {
+
+			var qty_select	= $('#qty-select'),
+				lis			= qty_select.find('li'),
+				button		= $('.add-to-cart a.button');
+
+			// quantity button toggle
+			qty_select.click(function() {
+				var collapsed = $(this).hasClass('collapsed') ? true : false;
+
+				if (collapsed) {
+					$(this).removeClass('collapsed');
+				}
+				else {
+					$(this).addClass('collapsed');
+				}
+			});
+
+			// quantity button select
+			lis.click(function() {
+				var current	= $(this).hasClass('current') ? true : false;
+
+				if (current)
+					return;
+
+				// remove current class from all select options
+				lis.removeClass('current');
+
+				// add current class
+				$(this).addClass('current');
+
+				// set current amount
+				qty_select.attr('data-content', $(this).text());
+
+				// modify add to cart button quantity
+				button.attr('data-quantity', $(this).text());
+				button.data('quantity', $(this).text());
+			});
+
+			// add to cart button
+			button.click(function() {
+				qty_select.removeClass('collapsed');
+			});
 
 		},
 

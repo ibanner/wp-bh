@@ -562,6 +562,19 @@ function BH_shop_single_excerpt() {
 }
 
 /**
+ * BH_shop_single_add_to_cart
+ * 
+ * Section 1
+ * Display Add to Cart form
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_single_add_to_cart() {
+	get_template_part('views/woocommerce/single-product/single-product-section1', 'add-to-cart');
+}
+
+/**
  * BH_shop_single_gift
  * 
  * Section 1

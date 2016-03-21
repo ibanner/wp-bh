@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2016-03-01 01:48+0200\n"
-"PO-Revision-Date: 2016-03-01 01:48+0200\n"
+"POT-Creation-Date: 2016-03-20 14:10+0200\n"
+"PO-Revision-Date: 2016-03-20 14:11+0200\n"
 "Last-Translator: Nir Goldberg <nir@htmline.com>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -267,6 +267,14 @@ msgstr ""
 msgid "Search Results"
 msgstr ""
 
+#: views/woocommerce/single-product/single-product-section1-add-to-cart.php:31
+msgid "QTY"
+msgstr ""
+
+#: views/woocommerce/single-product/single-product-section1-add-to-cart.php:45
+msgid "Add to cart"
+msgstr ""
+
 #: views/woocommerce/single-product/single-product-section1-meta.php:20
 msgid "More Details"
 msgstr ""
@@ -481,23 +489,23 @@ msgstr ""
 msgid "Registration was successful, thank you!"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:136
+#: functions/woocommerce/woocommerce-functions.php:151
 msgid "Home"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:436
+#: functions/woocommerce/woocommerce-functions.php:483
 msgid "Show product filters"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:436
+#: functions/woocommerce/woocommerce-functions.php:483
 msgid "Hide product filters"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:467
+#: functions/woocommerce/woocommerce-functions.php:514
 msgid "Filter products"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:582
+#: functions/woocommerce/woocommerce-functions.php:672
 msgid ""
 "<b>IMPORTANT NOTIFICATION:</b> Due to the Israeli postal office being unable "
 "to provide our customers up to date order tracking and delivery within "
@@ -505,31 +513,31 @@ msgid ""
 "shipping. We apologise for any inconvenience to our customers."
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:597
+#: functions/woocommerce/woocommerce-functions.php:690
 msgid "Checkout: Please fill your billing address and shipping address"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:606
+#: functions/woocommerce/woocommerce-functions.php:702
 msgid "Checkout: Please fill your payment details"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:615
+#: functions/woocommerce/woocommerce-functions.php:714
 msgid "Thank you. Your order has been received"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:624
+#: functions/woocommerce/woocommerce-functions.php:726
 msgid "Secured Billing: Please choose your preferred billing method"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:972
+#: functions/woocommerce/woocommerce-functions.php:1104
 msgid "Most Popular"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:973
+#: functions/woocommerce/woocommerce-functions.php:1105
 msgid "Price: Low to High"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:974
+#: functions/woocommerce/woocommerce-functions.php:1106
 msgid "Price: High to Low"
 msgstr ""
 
