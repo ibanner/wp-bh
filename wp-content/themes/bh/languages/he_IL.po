@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2016-03-22 15:21+0200\n"
-"PO-Revision-Date: 2016-03-22 15:21+0200\n"
+"POT-Creation-Date: 2016-03-22 16:07+0200\n"
+"PO-Revision-Date: 2016-03-22 16:09+0200\n"
 "Last-Translator: Nir Goldberg <nir@htmline.com>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -275,19 +275,19 @@ msgstr "כמות"
 msgid "Add to cart"
 msgstr "הוסיפו לסל"
 
-#: views/woocommerce/single-product/single-product-section1-meta.php:20
-msgid "More Details"
-msgstr "פרטים נוספים"
+#: views/woocommerce/single-product/single-product-section1-meta.php:25
+msgid "Technical Details"
+msgstr "פרטים טכניים"
 
-#: views/woocommerce/single-product/single-product-section1-meta.php:30
+#: views/woocommerce/single-product/single-product-section1-meta.php:31
 msgid "Weight"
 msgstr "משקל"
 
-#: views/woocommerce/single-product/single-product-section1-meta.php:37
+#: views/woocommerce/single-product/single-product-section1-meta.php:44
 msgid "Dimensions"
 msgstr "מידות"
 
-#: views/woocommerce/single-product/single-product-section1-meta.php:37
+#: views/woocommerce/single-product/single-product-section1-meta.php:44
 msgid "Length x Width x Height"
 msgstr "גובה x רוחב x אורך"
 
@@ -298,10 +298,10 @@ msgstr "פרטי משלוח"
 #: views/woocommerce/single-product/single-product-section1-shipping.php:20
 msgid ""
 "International shipment is available, shipping cost is based on shipping "
-"location and product dimensions"
+"location and product dimensions."
 msgstr ""
 "אנו מציעים משלוחים לכל העולם, עלות המשלוח מחושבת עפ\"י אופן המשלוח (מהיר/"
-"רגיל), יעד ומשקל"
+"רגיל), יעד ומשקל."
 
 #: views/woocommerce/single-product/single-product-section3-related.php:52
 msgid "You might also like"

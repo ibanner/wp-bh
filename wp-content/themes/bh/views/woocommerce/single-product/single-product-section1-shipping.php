@@ -17,6 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<div class="product-meta-section-title"><?php _e('Shipment info', 'BH'); ?></div>
 
 	<?php // content ?>
-	<div class="shipping-info"><?php _e('International shipment is available, shipping cost is based on shipping location and product dimensions', 'BH'); ?></div>
+	<div class="shipping-info"><?php _e('International shipment is available, shipping cost is based on shipping location and product dimensions.', 'BH'); ?></div>
 
 </div>

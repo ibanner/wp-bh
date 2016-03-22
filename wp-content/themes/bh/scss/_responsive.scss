@@ -1794,6 +1794,28 @@
 						}
 					}
 
+					/******************/
+					/* meta technical */
+					/******************/
+
+					&.single-product-meta-technical {
+						.tech-details {
+							.name {
+								font-size: 12px;
+
+								span {
+									line-height: normal;
+									font-size: 10px;
+									display: block;
+								}
+							}
+
+							.value {
+								font-size: 12px;
+							}
+						}
+					}
+
 					/*****************/
 					/* meta shipping */
 					/*****************/
@@ -2360,6 +2382,79 @@
 	}
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+
+	/******************/
+	/* shop - sidebar */
+	/******************/
+
+	.shop-sidebar {
+
+		/***************/
+		/* wswu banner */
+		/***************/
+
+		.wswu-banner {
+			.wswu-content {
+				font-size: 12px;
+
+				strong,
+				.reason {
+					font-size: 16px;
+				}
+			}
+		}
+	}
+
+	/*************************/
+	/* shop - single product */
+	/*************************/
+
+	.single-product-section {
+
+		/****************************/
+		/* single product section 1 */
+		/****************************/
+
+		&.single-product-section1 {
+
+			/****************/
+			/* product meta */
+			/****************/
+
+			.product-meta {
+
+				/****************/
+				/* meta section */
+				/****************/
+
+				.product-meta-section {
+
+					/******************/
+					/* meta technical */
+					/******************/
+
+					&.single-product-meta-technical {
+						.tech-details {
+							.name {
+								font-size: 16px;
+
+								span {
+									font-size: 12px;
+								}
+							}
+
+							.value {
+								font-size: 16px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
 	
 	/******************/
@@ -2719,31 +2814,6 @@
 		.main-layout-featured-links .contact-details & {
 			margin-bottom: 3px;
 			font-size: 14px;
-		}
-	}
-}
-
-@media (min-width: 768px) and (max-width: 1199px) {
-
-	/******************/
-	/* shop - sidebar */
-	/******************/
-
-	.shop-sidebar {
-
-		/***************/
-		/* wswu banner */
-		/***************/
-
-		.wswu-banner {
-			.wswu-content {
-				font-size: 12px;
-
-				strong,
-				.reason {
-					font-size: 16px;
-				}
-			}
 		}
 	}
 }
@@ -3203,6 +3273,26 @@
 					&.single-product-meta-description {
 						.excerpt {
 							font-size: 16px;
+						}
+					}
+
+					/******************/
+					/* meta technical */
+					/******************/
+
+					&.single-product-meta-technical {
+						.tech-details {
+							.name {
+								font-size: 14px;
+
+								span {
+									font-size: 12px;
+								}
+							}
+
+							.value {
+								font-size: 14px;
+							}
 						}
 					}
 				}
