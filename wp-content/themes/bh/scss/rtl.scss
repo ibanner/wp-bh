@@ -1274,6 +1274,31 @@ article.post {
 					}
 				}
 			}
+
+			/****************/
+			/* meta section */
+			/****************/
+
+			.product-meta-section {
+
+				/****************/
+				/* meta content */
+				/****************/
+
+				&.single-product-meta-content {
+
+					/**********/
+					/* badges */
+					/**********/
+
+					.badges {
+						li {
+							float: left;
+							margin: 0 0 20px 8px;
+						}
+					}
+				}
+			}
 		}
 	}
 }

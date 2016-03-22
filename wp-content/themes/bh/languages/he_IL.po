@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2016-03-20 14:10+0200\n"
-"PO-Revision-Date: 2016-03-20 14:10+0200\n"
+"POT-Creation-Date: 2016-03-22 15:21+0200\n"
+"PO-Revision-Date: 2016-03-22 15:21+0200\n"
 "Last-Translator: Nir Goldberg <nir@htmline.com>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -267,11 +267,11 @@ msgstr "מיון לפי"
 msgid "Search Results"
 msgstr "תוצאות חיפוש"
 
-#: views/woocommerce/single-product/single-product-section1-add-to-cart.php:31
+#: views/woocommerce/single-product/single-product-section1-add-to-cart.php:34
 msgid "QTY"
 msgstr "כמות"
 
-#: views/woocommerce/single-product/single-product-section1-add-to-cart.php:45
+#: views/woocommerce/single-product/single-product-section1-add-to-cart.php:51
 msgid "Add to cart"
 msgstr "הוסיפו לסל"
 
@@ -291,9 +291,25 @@ msgstr "מידות"
 msgid "Length x Width x Height"
 msgstr "גובה x רוחב x אורך"
 
+#: views/woocommerce/single-product/single-product-section1-shipping.php:17
+msgid "Shipment info"
+msgstr "פרטי משלוח"
+
+#: views/woocommerce/single-product/single-product-section1-shipping.php:20
+msgid ""
+"International shipment is available, shipping cost is based on shipping "
+"location and product dimensions"
+msgstr ""
+"אנו מציעים משלוחים לכל העולם, עלות המשלוח מחושבת עפ\"י אופן המשלוח (מהיר/"
+"רגיל), יעד ומשקל"
+
 #: views/woocommerce/single-product/single-product-section3-related.php:52
 msgid "You might also like"
 msgstr "מוצרים נוספים שיעניינו אתכם"
+
+#: views/woocommerce/single-product/single-product-section1-content.php:25
+msgid "Overview"
+msgstr "פרטים נוספים"
 
 #: views/main/slider/display-events-slider.php:22
 msgid "All events"
@@ -505,7 +521,7 @@ msgstr "הסתר מסנני מוצרים"
 msgid "Filter products"
 msgstr "סנן מוצרים"
 
-#: functions/woocommerce/woocommerce-functions.php:672
+#: functions/woocommerce/woocommerce-functions.php:685
 msgid ""
 "<b>IMPORTANT NOTIFICATION:</b> Due to the Israeli postal office being unable "
 "to provide our customers up to date order tracking and delivery within "
@@ -516,31 +532,31 @@ msgstr ""
 "בטווח הזמן המובטח והקושי במעקב אחר חבילות וקבלת מענה לפניות, אנו נאלצים "
 "להפסיק להציע משלוח רשום רגיל. עם לקוחותינו הסליחה."
 
-#: functions/woocommerce/woocommerce-functions.php:690
+#: functions/woocommerce/woocommerce-functions.php:703
 msgid "Checkout: Please fill your billing address and shipping address"
 msgstr "קופה: אנא הזינו פרטים למשלוח חשבונית וכתובת למשלוח"
 
-#: functions/woocommerce/woocommerce-functions.php:702
+#: functions/woocommerce/woocommerce-functions.php:715
 msgid "Checkout: Please fill your payment details"
 msgstr "קופה: אנא הזינו פרטי אמצעי תשלום"
 
-#: functions/woocommerce/woocommerce-functions.php:714
+#: functions/woocommerce/woocommerce-functions.php:727
 msgid "Thank you. Your order has been received"
 msgstr "תודה רבה. הזמנתכם התקבלה בהצלחה"
 
-#: functions/woocommerce/woocommerce-functions.php:726
+#: functions/woocommerce/woocommerce-functions.php:739
 msgid "Secured Billing: Please choose your preferred billing method"
 msgstr "אמצעי חיוב מאובטח: אנא בחרו את האמצעי המועדף עליכם"
 
-#: functions/woocommerce/woocommerce-functions.php:1104
+#: functions/woocommerce/woocommerce-functions.php:1117
 msgid "Most Popular"
 msgstr "הפופולרי ביותר"
 
-#: functions/woocommerce/woocommerce-functions.php:1105
+#: functions/woocommerce/woocommerce-functions.php:1118
 msgid "Price: Low to High"
 msgstr "מחיר: נמוך לגבוה"
 
-#: functions/woocommerce/woocommerce-functions.php:1106
+#: functions/woocommerce/woocommerce-functions.php:1119
 msgid "Price: High to Low"
 msgstr "מחיר: גבוה לנמוך"
 

@@ -1793,6 +1793,16 @@
 							font-size: 14px;
 						}
 					}
+
+					/*****************/
+					/* meta shipping */
+					/*****************/
+
+					&.single-product-meta-shipping {
+						.shipping-info {
+							font-size: 14px;
+						}
+					}
 				}
 			}
 		}
@@ -2775,6 +2785,16 @@
 						/***********/
 
 						.content {
+							font-size: 16px;
+						}
+					}
+
+					/*****************/
+					/* meta shipping */
+					/*****************/
+
+					&.single-product-meta-shipping {
+						.shipping-info {
 							font-size: 16px;
 						}
 					}

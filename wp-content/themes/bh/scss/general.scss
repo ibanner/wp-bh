@@ -3389,7 +3389,7 @@ body > header {
 				/**********************/
 
 				.product-meta-section-title {
-					margin-top: 30px;
+					margin: 30px 0 15px;
 					line-height: normal;
 					font-size: 20px;
 					font-weight: $font-bold;
@@ -3419,6 +3419,8 @@ body > header {
 					/**********/
 
 					.badges {
+						margin-top: -15px;
+
 						li {
 							float: right;
 							position: relative;
@@ -3461,6 +3463,16 @@ body > header {
 					/***********/
 
 					.content {
+						font-size: 18px;
+					}
+				}
+
+				/*****************/
+				/* meta shipping */
+				/*****************/
+
+				&.single-product-meta-shipping {
+					.shipping-info {
 						font-size: 18px;
 					}
 				}
