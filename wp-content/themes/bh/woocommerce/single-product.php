@@ -50,7 +50,7 @@ get_header(); ?>
 			 *
 			 * related prodcts
 			 */
-			//get_template_part('views/woocommerce/single-product/single-product', 'section3');
+			get_template_part('views/woocommerce/single-product/single-product', 'section3');
 		?>
 		
 		<?php

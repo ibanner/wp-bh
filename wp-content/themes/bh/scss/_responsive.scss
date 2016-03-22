@@ -461,24 +461,6 @@
 		}
 	}
 
-	/***************************/
-	/* shop - homepage sliders */
-	/***************************/
-
-	.shop-home-sliders {
-		.products-slider {
-			h2 {
-				padding: 12px 25px;
-				font-size: 16px;
-
-				&:after {
-					border-bottom-width: 41px;
-					border-right-width: 22px;
-				}
-			}
-		}
-	}
-
 	/******************/
 	/* shop - sidebar */
 	/******************/
@@ -588,6 +570,16 @@
 	/**************************/
 
 	.products-slider {
+		h2 {
+			padding: 12px 25px;
+			font-size: 16px;
+
+			&:after {
+				border-bottom-width: 41px;
+				border-right-width: 22px;
+			}
+		}
+
 		.products-slider-wrapper {
 			padding: 67px 22px 0;
 
@@ -872,25 +864,6 @@
 		}
 	}
 
-	/***************************/
-	/* shop - homepage sliders */
-	/***************************/
-
-	.shop-home-sliders {
-		.products-slider {
-			h2 {
-				float: none !important;
-				margin: 0 0 20px !important;
-				padding: 12px 20px;
-
-				&:before,
-				&:after {
-					display: none;
-				}
-			}
-		}
-	}
-
 	/******************/
 	/* shop - sidebar */
 	/******************/
@@ -1125,6 +1098,17 @@
 	/**************************/
 
 	.products-slider {
+		h2 {
+			float: none !important;
+			margin: 0 0 20px !important;
+			padding: 12px 20px;
+
+			&:before,
+			&:after {
+				display: none;
+			}
+		}
+
 		.products-slider-wrapper {
 			padding: 0;
 
@@ -1571,18 +1555,6 @@
 		}
 	}
 
-	/***************************/
-	/* shop - homepage sliders */
-	/***************************/
-
-	.shop-home-sliders {
-		.products-slider {
-			h2 {
-				padding: 12px 10px;
-			}
-		}
-	}
-
 	/******************/
 	/* shop - archive */
 	/******************/
@@ -1827,6 +1799,16 @@
 					}
 				}
 			}
+		}
+	}
+
+	/**************************/
+	/* shop - products slider */
+	/**************************/
+
+	.products-slider {
+		h2 {
+			padding: 12px 10px;
 		}
 	}
 

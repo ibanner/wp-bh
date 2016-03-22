@@ -17,21 +17,6 @@
 
 @media (max-width: 991px) {
 
-	/***************************/
-	/* shop - homepage sliders */
-	/***************************/
-
-	.shop-home-sliders {
-		.products-slider {
-			h2 {
-				&:after {
-					border-left-width: 22px;
-					border-right-width: 0;
-				}
-			}
-		}
-	}
-
 	/******************/
 	/* shop - archive */
 	/******************/
@@ -60,6 +45,19 @@
 				&:after {
 					border-top-left-radius: 16px;
 				}
+			}
+		}
+	}
+
+	/**************************/
+	/* shop - products slider */
+	/**************************/
+
+	.products-slider {
+		h2 {
+			&:after {
+				border-left-width: 22px;
+				border-right-width: 0;
 			}
 		}
 	}

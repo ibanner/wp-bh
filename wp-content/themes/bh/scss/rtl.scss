@@ -1069,33 +1069,6 @@ article.post {
 	}
 }
 
-/***************************/
-/* shop - homepage sliders */
-/***************************/
-
-.shop-home-sliders {
-	.products-slider {
-		h2 {
-			float: right;
-			margin: 0 -25px 20px 0;
-
-			&:before {
-				left: auto;
-				right: 0;
-				border-left-width: 0;
-				border-right: 10px solid transparent;
-			}
-
-			&:after {
-				left: auto;
-				right: 100%;
-				border-left: 28px solid transparent;
-				border-right-width: 0;
-			}
-		}
-	}
-}
-
 /******************/
 /* shop - archive */
 /******************/
@@ -1508,6 +1481,25 @@ ul.order_details {
 /**************************/
 
 .products-slider {
+	h2 {
+		float: right;
+		margin: 0 -25px 20px 0;
+
+		&:before {
+			left: auto;
+			right: 0;
+			border-left-width: 0;
+			border-right: 10px solid transparent;
+		}
+
+		&:after {
+			left: auto;
+			right: 100%;
+			border-left: 28px solid transparent;
+			border-right-width: 0;
+		}
+	}
+
 	.products-slider-wrapper {
 		.products-slider-placeholder {
 			direction: ltr;

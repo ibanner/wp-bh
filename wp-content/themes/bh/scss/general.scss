@@ -2634,46 +2634,6 @@ body > header {
 
 .shop-home-sliders {
 	margin-top: 20px;
-
-	.products-slider {
-		margin-bottom: 30px;
-
-		h2 {
-			float: left;
-			position: relative;
-			margin: 0 0 20px -25px;
-			padding: 14px 25px;
-			font-size: 18px;
-			font-weight: $font-normal;
-			background-color: $blue-color5;
-
-			a {
-				color: $font-color;
-			}
-
-			&:before {
-				content: "";
-				position: absolute;
-				top: 100%;
-				left: 0;
-				width: 0;
-				height: 0;
-				border-top: 10px solid $blue-color3;
-				border-left: 10px solid transparent;
-			}
-
-			&:after {
-				content: "";
-				position: absolute;
-				top: 0;
-				left: 100%;
-				width: 0;
-				height: 0;
-				border-bottom: 47px solid $blue-color5;
-				border-right: 28px solid transparent;
-			}
-		}
-	}
 }
 
 /******************/
@@ -3778,7 +3738,44 @@ ul.order_details {
 /**************************/
 
 .products-slider {
+	margin-bottom: 30px;
 	display: none;
+
+	h2 {
+		float: left;
+		position: relative;
+		margin: 0 0 20px -25px;
+		padding: 14px 25px;
+		font-size: 18px;
+		font-weight: $font-normal;
+		background-color: $blue-color5;
+
+		a {
+			color: $font-color;
+		}
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: 0;
+			height: 0;
+			border-top: 10px solid $blue-color3;
+			border-left: 10px solid transparent;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 100%;
+			width: 0;
+			height: 0;
+			border-bottom: 47px solid $blue-color5;
+			border-right: 28px solid transparent;
+		}
+	}
 
 	.products-slider-wrapper {
 		position: relative;
