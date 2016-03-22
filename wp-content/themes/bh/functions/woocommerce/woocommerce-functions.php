@@ -434,9 +434,9 @@ function BH_awpf_widget_tax_terms_badge($output, $tax_name, $terms) {
 	$output = '';
 
 	foreach ( $terms as $term_id => $term_data ) {
-		$name			= get_term_by( 'id', $term_id, $tax_name )->name;
-		$image			= get_field( 'acf-product-badge_image', $tax_name . '_' . $term_id );
-		$color			= get_field( 'acf-product-badge_color', $tax_name . '_' . $term_id );
+		$name	= get_term_by( 'id', $term_id, $tax_name )->name;
+		$image	= get_field( 'acf-product-badge_image', $tax_name . '_' . $term_id );
+		$color	= get_field( 'acf-product-badge_color', $tax_name . '_' . $term_id );
 
 		$output .=	'<li class="term-' . $term_id . '"' . ( ! $term_data[0] ? ' style="display: none;"' : '' ) . '>' .
 						'<input type="checkbox" name="' . $term_id . '" id="' . $term_id . '" value="' . $term_id . '" />' .
@@ -588,10 +588,23 @@ function BH_shop_single_gift() {
 }
 
 /**
+ * BH_shop_single_content
+ * 
+ * Section 1
+ * Display product content
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_single_content() {
+	get_template_part('views/woocommerce/single-product/single-product-section1', 'content');
+}
+
+/**
  * BH_shop_single_meta
  * 
  * Section 1
- * Display product content and meta information like weight and dimensions
+ * Display product meta information
  *
  * @param	N/A
  * @return	N/A

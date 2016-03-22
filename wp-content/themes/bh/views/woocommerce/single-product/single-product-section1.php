@@ -48,10 +48,11 @@ global $post;
 				 *
 				 * @hooked	woocommerce_template_single_price - 10
 				 * @hooked	BH_shop_single_excerpt - 20
-				 * @hooked	woocommerce_template_single_add_to_cart - 30
+				 * @hooked	BH_shop_single_add_to_cart - 30
 				 * @hooked	BH_shop_single_gift - 40
-				 * @hooked	BH_shop_single_meta - 50
-				 * @hooked	BH_shop_single_shipping - 60
+				 * @hooked	BH_shop_single_content - 50
+				 * @hooked	BH_shop_single_meta - 60
+				 * @hooked	BH_shop_single_shipping - 70
 				 */
 				do_action('BH_shop_single_product_meta');
 			?>

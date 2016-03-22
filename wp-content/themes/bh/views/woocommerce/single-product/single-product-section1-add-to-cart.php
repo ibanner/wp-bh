@@ -28,7 +28,7 @@ if ( $product_cats && ! is_wp_error ($product_cats) ) {
 
 ?>
 
-<div id="single-product-add-to-cart" class="clearfix">
+<div id="single-product-add-to-cart" class="product-meta-section clearfix">
 
 	<div id="qty-select" data-content="1">
 		<span><?php _e('QTY', 'BH'); ?></span>

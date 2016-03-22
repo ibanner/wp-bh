@@ -1687,14 +1687,6 @@
 					}
 				}
 
-				/*******************/
-				/* product excerpt */
-				/*******************/
-
-				.excerpt {
-					font-size: 14px;
-				}
-
 				/***************/
 				/* add to cart */
 				/***************/
@@ -1767,6 +1759,38 @@
 
 						a.added_to_cart {
 							line-height: 35px;
+						}
+					}
+				}
+
+				/****************/
+				/* meta section */
+				/****************/
+
+				.product-meta-section {
+
+					/********************/
+					/* meta description */
+					/********************/
+
+					&.single-product-meta-description {
+						.excerpt {
+							font-size: 14px;
+						}
+					}
+
+					/****************/
+					/* meta content */
+					/****************/
+
+					&.single-product-meta-content {
+
+						/***********/
+						/* content */
+						/***********/
+
+						.content {
+							font-size: 14px;
 						}
 					}
 				}
@@ -2714,6 +2738,52 @@
 	}
 }
 
+@media (min-width: 481px) and (max-width: 1199px) {
+
+	/*************************/
+	/* shop - single product */
+	/*************************/
+
+	.single-product-section {
+
+		/****************************/
+		/* single product section 1 */
+		/****************************/
+
+		&.single-product-section1 {
+
+			/****************/
+			/* product meta */
+			/****************/
+
+			.product-meta {
+
+				/****************/
+				/* meta section */
+				/****************/
+
+				.product-meta-section {
+
+					/****************/
+					/* meta content */
+					/****************/
+
+					&.single-product-meta-content {
+
+						/***********/
+						/* content */
+						/***********/
+
+						.content {
+							font-size: 16px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 @media (min-width: 481px) and (max-width: 991px) {
 
 	/**********/
@@ -3037,14 +3107,6 @@
 					font-size: 24px;
 				}
 
-				/*******************/
-				/* product excerpt */
-				/*******************/
-
-				.excerpt {
-					font-size: 16px;
-				}
-
 				/***************/
 				/* add to cart */
 				/***************/
@@ -3104,6 +3166,23 @@
 
 						a.added_to_cart {
 							line-height: 35px;
+						}
+					}
+				}
+
+				/****************/
+				/* meta section */
+				/****************/
+
+				.product-meta-section {
+
+					/********************/
+					/* meta description */
+					/********************/
+
+					&.single-product-meta-description {
+						.excerpt {
+							font-size: 16px;
 						}
 					}
 				}
