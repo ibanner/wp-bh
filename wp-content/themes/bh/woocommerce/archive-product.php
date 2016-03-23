@@ -33,7 +33,7 @@ get_header(); ?>
 		
 	else
 		// product category archive
-		get_template_part('views/woocommerce/archive/archive-product', 'category');
+		get_template_part('views/woocommerce/archive/archive-product', 'taxonomy-term');
 ?>
 
 <?php

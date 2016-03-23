@@ -11,10 +11,17 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 add_theme_support('woocommerce');
 
+/****************************************************************************************************************************************************/
+/* WooCommerce optimization
+/****************************************************************************************************************************************************/
+
 /**
  * BH_remove_woocommerce_generator_tag
  * 
  * Remove WooCommerce Generator tag
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_remove_woocommerce_generator_tag() {
 	remove_action('wp_head','wc_generator_tag');
@@ -25,6 +32,9 @@ function BH_remove_woocommerce_generator_tag() {
  * 
  * Optimize WooCommerce scripts and styles
  * Remove WooCommerce scripts and styles from non WooCommerce pages
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_woocommerce_manage_scripts_n_styles() {
 	if ( is_admin() || ! is_page() )
@@ -97,10 +107,17 @@ function BH_woocommerce_manage_scripts_n_styles() {
 	}
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce content wrapper customization
+/****************************************************************************************************************************************************/
+
 /**
  * BH_woocommerce_wrapper_start
  * 
  * WooCommerce Content Wrapper start
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_woocommerce_wrapper_start() {
 	echo '<section class="page-content">';
@@ -110,15 +127,25 @@ function BH_woocommerce_wrapper_start() {
  * BH_woocommerce_wrapper_end
  * 
  * WooCommerce Content Wrapper end
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_woocommerce_wrapper_end() {
 	echo '</section>';
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce breadcrumb
+/****************************************************************************************************************************************************/
+
 /**
  * BH_woocommerce_breadcrumb_defaults
  * 
  * WooCommerce breadcrumb manipulation
+ *
+ * @param	$defaults (array) WooCommerce breadcrumb default attributes
+ * @return	(array)
  */
 function BH_woocommerce_breadcrumb_defaults($defaults) {
 	$defaults['home']			= __('Home', 'BH');
@@ -129,10 +156,17 @@ function BH_woocommerce_breadcrumb_defaults($defaults) {
 	return $defaults;
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce widgets
+/****************************************************************************************************************************************************/
+
 /**
  * override_woocommerce_widgets
  * 
  * @overrides	WC_Widget_Recently_Viewed
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function override_woocommerce_widgets() {
 	// WC_Widget_Recently_Viewed
@@ -148,8 +182,11 @@ function override_woocommerce_widgets() {
 /**
  * BH_woocommerce_shopping_cart_indicator_fragment
  * 
- * Ajaxify Shopping Cart Indicator widget
+ * Ajaxify shopping cart indicator widget
  * Ensure shopping cart indicator update when products are added to the cart via AJAX
+ *
+ * @param	$fragments (array)
+ * @return	(array)
  */
 function BH_woocommerce_shopping_cart_indicator_fragment($fragments) {
 	global $woocommerce;
@@ -166,11 +203,12 @@ function BH_woocommerce_shopping_cart_indicator_fragment($fragments) {
 /**
  * BH_add_viewed_products
  * 
- * Add post ID and all tranlated post IDs to a given array
+ * Add post ID and all translated post IDs to a given array
  * Used to maintain the "woocommerce_recently_viewed" cookie
  * 
- * @param	int		$post_id			post ID
- * @param	&array	&$viewed_products	recently viewed products array
+ * @param	$post_id (int) post ID
+ * @param	&$viewed_products (&array) recently viewed products array
+ * @return	N/A
  */
 function BH_add_viewed_products($post_id, &$viewed_products) {
 	$languages = icl_get_languages('skip_missing=1');
@@ -201,11 +239,12 @@ function BH_add_viewed_products($post_id, &$viewed_products) {
 /**
  * BH_remove_viewed_products
  * 
- * Remove post ID and all tranlated post IDs from a given array
+ * Remove post ID and all translated post IDs from a given array
  * Used to maintain the "woocommerce_recently_viewed" cookie
  * 
- * @param	int		$post_id			post ID
- * @param	&array	&$viewed_products	recently viewed products array
+ * @param	$post_id (int) post ID
+ * @param	&$viewed_products (&array) recently viewed products array
+ * @return	N/A
  */
 function BH_remove_viewed_products($post_id, &$viewed_products) {
 	$languages = icl_get_languages('skip_missing=1');
@@ -226,222 +265,390 @@ function BH_remove_viewed_products($post_id, &$viewed_products) {
 	endif;
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce product item
+/****************************************************************************************************************************************************/
+
 /**
- * BH_init_product_filter_values
+ * BH_loop_add_to_cart_link
  * 
- * Initiate product filter values according to current taxonomy (product_cat, occasion, artist), term ID, price range and taxonomy terms
- * 
- * $taxonomies structure:
- * $taxonomies[ {taxonomy name} ][0]					=> taxonomy filter title
- * $taxonomies[ {taxonomy name} ][1]					=> number of products associated with this taxonomy
- * $taxonomies[ {taxonomy name} ][2][ {term ID} ][0]	=> term name
- * $taxonomies[ {taxonomy name} ][2][ {term ID} ][1]	=> number of products associated with this term
- * $taxonomies[ {taxonomy name} ][2][ {term ID} ][2]	=> whether this term is checked in taxonomy filter [1 = true / 0 = false]
- * 
- * @param	string	$taxonomy			taxonomy (product_cat|occasion|artist)
- * @param	int		$taxonomy_term_id	term ID
- * @param	int		&$min_price			minimum filter price
- * @param	int		&$max_price			maximum filter price
- * @param	int		&$min_handle_price	minimum filter handle price
- * @param	int		&$max_handle_price	maximum filter handle price
- * @param	array	&$taxonomies		holds arrays of arrays of terms
- * @return	array						array of post IDs
+ * Add to cart link customization
+ *
+ * @param	N/A
+ * @return	N/A
  */
-function BH_init_product_filter_values($taxonomy, $taxonomy_term_id, &$min_price, &$max_price, &$min_handle_price, &$max_handle_price, &$taxonomies) {
-	global $woocommerce;
+function BH_loop_add_to_cart_link() {
+	global $product;
+
+	// Enhanced Ecommerce - "add to cart" event tracking
+	// collect product info and submit it on form submission
+	$p_id		= $product->id;
+	$p_sku		= esc_js( $product->sku );
+	$p_name		= esc_js( $product->get_title() );
+	$p_currency	= get_woocommerce_currency();
 	
-	$posts = array();
-	
-	if ( ! $taxonomy || ! $taxonomy_term_id || count($taxonomies) == 0 )
-		return;
-	
-	// reset $taxonomies counters
-	foreach ($taxonomies as $tax_name => $tax_data) {
-		$taxonomies[$tax_name][1] = 0;
-		foreach ($tax_data[2] as $term_id => $term_data) {
-			$taxonomies[$tax_name][2][$term_id][1] = 0;
-		}
+	if ( defined('DOING_AJAX') && DOING_AJAX && class_exists('woocommerce_wpml') ) {
+		// filter product price and currency
+		// used in case of an AJAX call and active woocommerce wpml
+		$p_price = number_format((float)apply_filters('wcml_raw_price_amount', $product->price), 2, '.', '');
+		$p_currency = apply_filters('wcml_price_currency', $p_currency);
 	}
-	
-	// get checked terms
-	$checked_terms = array();	// array of taxonomy arrays hold checked term IDs
-	
-	foreach ($taxonomies as $tax_name => $tax_data)
-		foreach ($tax_data[2] as $term_id => $term_data)
-			if ($term_data[2] == '1') {
-				if ( ! key_exists($tax_name, $checked_terms) )
-					$checked_terms[$tax_name] = array();
-					
-				$checked_terms[$tax_name][] = $term_id;
-			}
-			
-	// get category products
-	$meta_query = $woocommerce->query->get_meta_query();
-	
-	$args = array(
-		'post_type'			=> 'product',
-		'posts_per_page'	=> -1,
-		'no_found_rows'		=> true,
-		'tax_query'			=> array(
-			'relation'		=> 'AND',
-			array(
-				'taxonomy'	=> $taxonomy,
-				'field'		=> 'id',
-				'terms'		=> $taxonomy_term_id
-			)
-		),
-		'meta_query'	=> $meta_query
-	);
-	
-	// include checked terms in query, if exist any
-	if ( count($checked_terms) > 0 )
-		foreach ($checked_terms as $tax_name => $terms)
-			$args['tax_query'][] = array(
-				'taxonomy'	=> $tax_name,
-				'field'		=> 'id',
-				'terms'		=> $terms,
-				'operator'	=> 'AND'
-			);
-			
-	$query = new WP_Query($args);
-	
-	// fill in filter values according to products meta data
-	global $post;
-	
-	if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
-	
-		// get product price
-		$_product = wc_get_product($post->ID);
-		$price = round( $_product->get_price() );
-		
-		// update price filter
-		if ( is_null($min_price) || is_null($max_price) ) :
-			$min_price = $max_price = $price;
-		else :
-			$min_price = min($price, $min_price);
-			$max_price = max($price, $max_price);
-		endif;
-		
-		// exlude product if price is below or above minimum and maximum handle prices
-		if ( ! is_null($min_handle_price) && ! is_null($max_handle_price) && ( $price < $min_handle_price || $price > $max_handle_price ) )
-			continue;
-		
-		// update taxonomies filter
-		foreach ($taxonomies as $tax_name => &$tax_data) :
-			// update $taxonomies counters
-			$p_terms = wp_get_post_terms($post->ID, $tax_name);
-			
-			if ($p_terms)
-				foreach ($p_terms as $p_term) :
-					// increment number of products associated with this taxonomy
-					$tax_data[1]++;
-					
-					// increment number of products associated with this term
-					$tax_data[2][$p_term->term_id][1]++;
-				endforeach;
-		endforeach;
-		
-		// save post
-		$posts[] = $post->ID;
-		
-	endwhile; endif; wp_reset_postdata();
-	
-	// update price filter handles in first page load
-	if ( is_null($min_handle_price) || is_null($max_handle_price) ) :
-		$min_handle_price = $min_price;
-		$max_handle_price = $max_price;
+	else {
+		$p_price = number_format((float)$product->price, 2, '.', '');
+	}
+
+	$category = '';
+	$product_cats = wp_get_post_terms($p_id, 'product_cat');
+	if ( $product_cats && ! is_wp_error ($product_cats) ) :
+		$single_cat	= array_shift($product_cats);
+		$category	= esc_js( $single_cat->name );
 	endif;
-	
-	return $posts;
+
+	echo sprintf( '<a href="%s" rel="nofollow" data-product_id="%s" data-product_sku="%s" data-quantity="%s" class="button %s product_type_%s" onclick="BH_EC_onUpdateCart(\'' . $p_sku . '\', \'' . $p_name . '\', \'' . $category . '\', \'' . $p_price . '\', \'' . $p_currency . '\', 1, \'add\'); BH_FB_onAddToCart(\'' . $p_sku . '\', \'' . $p_name . '\', \'' . $category . '\', \'' . $p_price . '\', \'' . $p_currency . '\'); return true;"></a>',
+		esc_url( $product->add_to_cart_url() ),
+		esc_attr( $product->id ),
+		esc_attr( $product->get_sku() ),
+		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+		$product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
+		esc_attr( $product->product_type )
+	);
 }
+
+/****************************************************************************************************************************************************/
+/* WooCommerce shop homepage
+/****************************************************************************************************************************************************/
 
 /**
  * BH_shop_home_banners
  * 
- * Shop Homepage / Show shop homepage banners
+ * Display shop homepage banners
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_shop_home_banners() {
 	get_template_part('views/woocommerce/archive/home', 'banners');
 }
 
 /**
+ * BH_shop_home_categories_menu
+ * 
+ * Display shop homepage categories menu
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_home_categories_menu() {
+	get_template_part('views/woocommerce/archive/home', 'categories-menu');
+}
+
+/**
+ * BH_shop_home_featured
+ * 
+ * Display shop homepage featured products
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_home_featured() {
+	get_template_part('views/woocommerce/archive/home', 'featured');
+}
+
+/**
  * BH_shop_home_product_sliders
  * 
- * Shop Homepage / Show shop homepage sliders
+ * Display shop homepage sliders
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_shop_home_product_sliders() {
 	get_template_part('views/woocommerce/archive/home', 'sliders');
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce shop sidebar
+/****************************************************************************************************************************************************/
+
 /**
- * BH_shop_show_product_images
+ * BH_shop_archive_title
  * 
- * Single Product / Section 1
- * Show product gallery
+ * Display archive title (product taxonomy term / search results query string)
+ *
+ * @param	N/A
+ * @return	(string)
  */
-function BH_shop_show_product_images() {
-	get_template_part('views/woocommerce/single-product/single-product-section1', 'images');
+function BH_shop_archive_title() {
+	ob_start();
+	
+	echo get_template_part('views/woocommerce/archive/archive', 'title');
+	
+	$output = ob_get_clean();
+	
+	return $output;
 }
 
 /**
- * BH_shop_single_title
- * 
- * Single Product / Section 1
- * Show product title and artist
+ * BH_shop_products_filter
+ *
+ * Display products filter widget area
+ *
+ * @param	N/A
+ * @return	N/A
  */
-function BH_shop_single_title() {
-	get_template_part('views/woocommerce/single-product/single-product-section1', 'title');
+function BH_shop_products_filter() {
+	get_template_part('views/sidebar/sidebar-shop', 'products-filter');
+}
+
+/**
+ * BH_shop_wswu_banner
+ *
+ * Display Why Shop With Us banner
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_wswu_banner() {
+	get_template_part('views/sidebar/sidebar-shop', 'wswu-banner');
+}
+
+/****************************************************************************************************************************************************/
+/* AWPF
+/****************************************************************************************************************************************************/
+
+/**
+ * BH_awpf_widget_tax_terms_badge
+ *
+ * Customize AWPF badge taxonomy filter
+ *
+ * @param	$output (string) modified value
+ * @param	$tax_name (string) taxonomy name
+ * @param	$terms (array) array of taxonomy terms - view from $taxonomies attribute
+ * @return	(string)
+ */
+function BH_awpf_widget_tax_terms_badge($output, $tax_name, $terms) {
+
+	if ( ! $tax_name || ! $terms )
+		return;
+
+	$output = '';
+
+	foreach ( $terms as $term_id => $term_data ) {
+		$name	= get_term_by( 'id', $term_id, $tax_name )->name;
+		$image	= get_field( 'acf-product-badge_image', $tax_name . '_' . $term_id );
+		$color	= get_field( 'acf-product-badge_color', $tax_name . '_' . $term_id );
+
+		$output .=	'<li class="term-' . $term_id . '"' . ( ! $term_data[0] ? ' style="display: none;"' : '' ) . '>' .
+						'<input type="checkbox" name="' . $term_id . '" id="' . $term_id . '" value="' . $term_id . '" />' .
+						'<label for="' . $term_id . '">' .
+							'<div class="badge-name-wrapper"' . ( $color ? ' style="background-color: ' . $color . '"' : '' ) . '>' .
+								( $image ? '<div class="badge-image"><img src="' . $image['url'] . '" width="' . $image['width'] . '" height="' . $image['height'] . '" alt="' . $name . '" /></div>' : '' ) .
+								'<div class="badge-name">' . $name . '</div>' .
+								'<div class="item-checked-top"></div>' .
+								'<div class="item-checked-bottom"></div>' .
+								'<div class="item-after"' . ( $color ? ' style="border-top-color: ' . $color . '"' : '' ) . '></div>' .
+							'</div>' .
+							'<div class="badge-count">(<span class="count">' . $term_data[0] . '</span>)</div>' .
+						'</label>' .
+					'</li>';
+	}
+
+	$output .= '<style>';
+
+	foreach ( $terms as $term_id => $term_data ) {
+		$checked_color	= get_field( 'acf-product-badge_checked_color', $tax_name . '_' . $term_id );
+
+		$output .=	'.awpf-tax-filter-badge li.term-' . $term_id . ' .badge-name-wrapper .item-checked-top {border-bottom-color: ' . $checked_color . ';}' .
+					'.awpf-tax-filter-badge li.term-' . $term_id . ' .badge-name-wrapper .item-checked-bottom:before,' .
+					'.awpf-tax-filter-badge li.term-' . $term_id . ' .badge-name-wrapper .item-checked-bottom:after {background-color: ' . $checked_color . ';}';
+	}
+
+	$output .= '</style>';
+
+	return $output;
+
+}
+
+/**
+ * BH_awpf_before_filter_content
+ *
+ * Add a filter toggle button and open filters wrapper
+ * Presented in mobile resolution
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_awpf_before_filter_content() {
+
+	echo '<div class="awpf-filters-toggle visible-xs"><h3><span class="inactive">' . __('Show product filters', 'BH') . '</span><span class="active">' . __('Hide product filters', 'BH') . '</span></h3></div>';
+	echo '<div class="awpf-filters-wrapper">';
+
+}
+
+/**
+ * BH_awpf_after_filter_content
+ *
+ * Close filters wrapper
+ * Presented in mobile resolution
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_awpf_after_filter_content() {
+
+	echo '</div>';
+
+}
+
+/**
+ * BH_awpf_after_filter
+ *
+ * Add an internal link button after each filter type
+ * Presented in mobile resolution
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_awpf_after_filter() {
+
+	echo '<div class="goto-products visible-xs">' . __('Filter products', 'BH') . '</div>';
+
+}
+
+/****************************************************************************************************************************************************/
+/* WooCommerce shop archive
+/****************************************************************************************************************************************************/
+
+/**
+ * BH_shop_tt_banner
+ * 
+ * Display product taxonomy term banner
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_tt_banner() {
+	get_template_part('views/woocommerce/archive/taxonomy-term', 'banner');
+}
+
+/****************************************************************************************************************************************************/
+/* WooCommerce single product
+/****************************************************************************************************************************************************/
+
+/**
+ * BH_shop_single_product_images
+ * 
+ * Section 1
+ * Display product gallery
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_single_product_images() {
+	get_template_part('views/woocommerce/single-product/single-product-section1', 'images');
 }
 
 /**
  * BH_shop_single_excerpt
  * 
- * Single Product / Section 1
- * Show product excerpt
+ * Section 1
+ * Display product excerpt
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_shop_single_excerpt() {
 	get_template_part('views/woocommerce/single-product/single-product-section1', 'excerpt');
 }
 
 /**
+ * BH_shop_single_add_to_cart
+ * 
+ * Section 1
+ * Display Add to Cart form
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_single_add_to_cart() {
+	get_template_part('views/woocommerce/single-product/single-product-section1', 'add-to-cart');
+}
+
+/**
+ * BH_shop_single_gift
+ * 
+ * Section 1
+ * Display product gift form
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_single_gift() {
+	get_template_part('views/woocommerce/single-product/single-product-section1', 'gift');
+}
+
+/**
+ * BH_shop_single_content
+ * 
+ * Section 1
+ * Display product content
+ *
+ * @param	N/A
+ * @return	N/A
+ */
+function BH_shop_single_content() {
+	get_template_part('views/woocommerce/single-product/single-product-section1', 'content');
+}
+
+/**
  * BH_shop_single_meta
  * 
- * Single Product / Section 1
- * Show product content and meta information like weight and dimensions
+ * Section 1
+ * Display product meta information
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_shop_single_meta() {
 	get_template_part('views/woocommerce/single-product/single-product-section1', 'meta');
 }
 
 /**
- * BH_shop_single_badges
+ * BH_shop_single_shipping
  * 
- * Single Product / Section 1
- * Show product budges
+ * Section 1
+ * Display product shipping info
+ *
+ * @param	N/A
+ * @return	N/A
  */
-function BH_shop_single_badges() {
-	get_template_part('views/woocommerce/single-product/single-product-section1', 'badges');
+function BH_shop_single_shipping() {
+	get_template_part('views/woocommerce/single-product/single-product-section1', 'shipping');
 }
 
 /**
- * BH_shop_show_experience_banner
+ * BH_shop_single_experience_banner
  * 
- * Single Product / Section 2
- * Show experience banner
+ * Section 2
+ * Display experience banner
+ *
+ * @param	N/A
+ * @return	N/A
  */
-function BH_shop_show_experience_banner() {
+function BH_shop_single_experience_banner() {
 	get_template_part('views/woocommerce/single-product/single-product-section2', 'banner');
 }
 
 /**
- * BH_shop_show_related_products
+ * BH_shop_single_related_products
  * 
- * Single Product / Section 3
- * Show related products according to the following scenario:
- * First check whether there are manually related products defined, and show them
- * If no manually products defined - show all products (except the current one)from the same product category
+ * Section 3
+ * Display related products
+ *
+ * @param	N/A
+ * @return	N/A
  */
-function BH_shop_show_related_products() {
+function BH_shop_single_related_products() {
 	get_template_part('views/woocommerce/single-product/single-product-section3', 'related');
 }
 
@@ -449,36 +656,25 @@ function BH_shop_show_related_products() {
  * BH_EC_product_detail
  * 
  * Enhanced Ecommerce - Measuring a Product Details View
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_EC_product_detail() {
 	get_template_part('views/woocommerce/single-product/ec-product-detail');
 }
 
-/**
- * BH_shop_get_artist_links
- * 
- * @return	string	product artist links seperated by comma
- */
-function BH_shop_get_artist_links($product_id) {
-	$artists = wp_get_post_terms($product_id, 'artist');
-	
-	$artists_html = '';
-	
-	if ($artists) {
-		$count = 1;
-		foreach ($artists as $artist) {
-			$artists_html .= ($count++ > 1) ? ', ' : '';
-			$artists_html .= '<a href="' . get_term_link($artist) . '">' . $artist->name . '</a>';
-		}
-	}
-	
-	return $artists_html;
-}
+/****************************************************************************************************************************************************/
+/* WooCommerce cart
+/****************************************************************************************************************************************************/
 
 /**
  * BH_shipping_options_disclaimer
  *
  * Add shipping options desclaimer
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_shipping_options_disclaimer() {
 	echo
@@ -489,10 +685,17 @@ function BH_shipping_options_disclaimer() {
 		'</tr>';
 }
 
+/****************************************************************************************************************************************************/
+/* WooCommerce checkout
+/****************************************************************************************************************************************************/
+
 /**
  * BH_checkout_title
  *
  * Add title in checkout page
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_checkout_title() {
 	echo '<h2 class="title">' . __('Checkout: Please fill your billing address and shipping address', 'BH') . '</h2><hr>';
@@ -502,6 +705,9 @@ function BH_checkout_title() {
  * BH_checkout_order_pay_title
  *
  * Add title in checkout order-pay endpoint
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_checkout_order_pay_title() {
 	echo '<h2 class="title">' . __('Checkout: Please fill your payment details', 'BH') . '</h2><hr>';
@@ -511,6 +717,9 @@ function BH_checkout_order_pay_title() {
  * BH_checkout_order_received_title
  *
  * Add title in checkout order-received endpoint
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_checkout_order_received_title() {
 	return '<h2 class="title">' . __('Thank you. Your order has been received', 'BH') . '</h2><hr>';
@@ -520,6 +729,9 @@ function BH_checkout_order_received_title() {
  * BH_review_order_before_payment
  *
  * Add title before payment options
+ *
+ * @param	N/A
+ * @return	N/A
  */
 function BH_review_order_before_payment() {
 	echo '<h3 id="payment_heading">' . __('Secured Billing: Please choose your preferred billing method', 'BH') . '</h3>';
@@ -529,6 +741,9 @@ function BH_review_order_before_payment() {
  * BH_change_default_checkout_country
  * 
  * Default checkout country to blank
+ *
+ * @param	N/A
+ * @return	(string)
  */
 function BH_change_default_checkout_country() {
 	return '';
@@ -538,73 +753,26 @@ function BH_change_default_checkout_country() {
  * BH_change_default_checkout_state
  * 
  * Default checkout state to blank
+ *
+ * @param	N/A
+ * @return	(string)
  */
 function BH_change_default_checkout_state() {
 	return '';
 }
 
-/**
- * BH_shop_get_price_html
- * 
- * Customize product price html
- */
-function BH_shop_get_price_html($price, $product) {
-	$del = BH_strip_tags_content($price, '<ins>', true);
-	$ins = BH_strip_tags_content($price, '<del>', true);
-	
-	if ( strpos($del, '<del>') === false || strpos($ins, '<ins>') === false )
-		return $price;
-		
-	return $ins . $del;
-}
-
-/**
- * BH_shop_set_related_products_limit
- * 
- * Unlimit related products
- */
-function BH_shop_set_related_products_limit($query) {
-	$query['limits'] = -1;
-	
-	return $query;
-}
-
-/**
- * BH_shop_product_cat_banner
- * 
- * Show product category banner
- */
-function BH_shop_product_cat_banner() {
-	get_template_part('views/woocommerce/archive/category', 'banner');
-}
-
-/**
- * BH_shop_catalog_orderby_options
- * 
- * Reset products catalog ordering options
- */
-function BH_shop_catalog_orderby_options($options) {
-	$options['menu_order']	= __('Most Popular', 'BH');
-	$options['price']		= __('Price: Low to High', 'BH');
-	$options['price-desc']	= __('Price: High to Low', 'BH');
-	
-	if ( isset( $options['popularity'] ) )
-		unset( $options['popularity'] );
-		
-	if ( isset( $options['rating'] ) )
-		unset( $options['rating'] );
-		
-	if ( isset( $options['date'] ) )
-		unset( $options['date'] );
-		
-	return $options;
-}
+/****************************************************************************************************************************************************/
+/* WooCommerce orders
+/****************************************************************************************************************************************************/
 
 /**
  * BH_shop_order_invoice
  * 
  * Generate an invoice for completed order
  * Use icount API
+ *
+ * @param	$order_id (int) order ID
+ * @return	N/A
  */
 function BH_shop_order_invoice($order_id) {
 	$order		= new WC_Order($order_id);
@@ -769,6 +937,10 @@ function BH_shop_order_invoice($order_id) {
  * BH_shop_order_refund
  * 
  * Enhanced Ecommerce - Measuring Refunds
+ *
+ * @param	$refund_id (int) refund ID
+ * @param	$args (array)
+ * @return	N/A
  */
 function BH_shop_order_refund($refund_id, $args) {
 	if ( ! $args )
@@ -831,4 +1003,127 @@ function BH_shop_order_refund($refund_id, $args) {
 		'X-Mailer: PHP/' . phpversion();
 		
 	mail('nir@htmline.com', 'A new refund for order#' . $order_id, 'Refund hit: ' . $url . $data, $headers); */
+}
+
+/****************************************************************************************************************************************************/
+/* WooCommerce help functions
+/****************************************************************************************************************************************************/
+
+/**
+ * BH_shop_get_artist_links
+ *
+ * Generates product artist links seperated by comma
+ *
+ * @param	$product_id (int) product ID
+ * @return	(string)
+ */
+function BH_shop_get_artist_links($product_id) {
+	$artists = wp_get_post_terms($product_id, 'artist');
+	
+	$artists_html = '';
+	
+	if ($artists) {
+		$count = 1;
+		foreach ($artists as $artist) {
+			$artists_html .= ($count++ > 1) ? ', ' : '';
+			$artists_html .= '<a href="' . get_term_link($artist) . '">' . $artist->name . '</a>';
+		}
+	}
+	
+	return $artists_html;
+}
+
+/**
+ * BH_shop_price_html
+ * 
+ * Filter woocommerce_price_html
+ *
+ * @param	$price (string) HTML representation price
+ * @param	$product (object)
+ * @return	(string)
+ */
+function BH_shop_price_html($price, $product) {
+
+	if ( defined('DOING_AJAX') && DOING_AJAX && class_exists('woocommerce_wpml') ) {
+		// filter product price and currency
+		// used in case of an AJAX call and active woocommerce wpml
+		$args = array(
+			'currency' => apply_filters( 'wcml_price_currency', get_woocommerce_currency_symbol() ),
+		);
+
+		$price = '<span class="amount">' . wc_price( apply_filters('wcml_raw_price_amount', $product->price), $args ) . '</span>';
+	}
+
+	// return
+	return $price;
+
+}
+
+/**
+ * BH_shop_sale_price_html
+ * 
+ * Filter woocommerce_sale_price_html
+ *
+ * @param	$price (string) HTML representation price
+ * @param	$product (object)
+ * @return	(string)
+ */
+function BH_shop_sale_price_html($price, $product) {
+
+	$del = BH_strip_tags_content($price, '<ins>', true);
+	$ins = BH_strip_tags_content($price, '<del>', true);
+
+	if ( defined('DOING_AJAX') && DOING_AJAX && class_exists('woocommerce_wpml') ) {
+		// filter product price and currency
+		// used in case of an AJAX call and active woocommerce wpml
+		$args = array(
+			'currency' => apply_filters( 'wcml_price_currency', get_woocommerce_currency_symbol() ),
+		);
+
+		$del = '<del><span class="amount">' . wc_price( apply_filters('wcml_raw_price_amount', $product->regular_price), $args ) . '</span></del>';
+		$ins = '<ins><span class="amount">' . wc_price( apply_filters('wcml_raw_price_amount', $product->price), $args ) . '</span></ins>';
+	}
+
+	// return
+	return $del . $ins;
+
+}
+
+/**
+ * BH_shop_set_related_products_limit
+ * 
+ * Unlimit related products
+ *
+ * @param	$query (array) related products query arguments
+ * @return	(array)
+ */
+function BH_shop_set_related_products_limit($query) {
+	$query['limits'] = -1;
+	
+	return $query;
+}
+
+/**
+ * BH_shop_catalog_orderby_options
+ * 
+ * Reset products catalog ordering options
+ *
+ * @param	$options (array) catlog order by default options
+ * @return	(array)
+ */
+function BH_shop_catalog_orderby_options($options) {
+	$options['menu_order']	= __('Most Popular', 'BH');
+	$options['price']		= __('Price: Low to High', 'BH');
+	$options['price-desc']	= __('Price: High to Low', 'BH');
+	
+	if ( isset( $options['popularity'] ) )
+		unset( $options['popularity'] );
+		
+	if ( isset( $options['rating'] ) )
+		unset( $options['rating'] );
+		
+	if ( isset( $options['date'] ) )
+		unset( $options['date'] );
+		
+	return $options;
 }

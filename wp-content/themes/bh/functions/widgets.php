@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // Register widgets
 require_once('widgets/active-trail-newsletter/active-trail-newsletter.php');
-require_once('widgets/shop-refine-products/shop-refine-products.php');
 
 // Categories widget - wrap categories post count
 function add_span_cat_count($links) {

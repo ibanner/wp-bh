@@ -1904,46 +1904,6 @@ acf_add_local_field_group(array (
 			'max_size' => '',
 			'mime_types' => '',
 		),
-		array (
-			'key' => 'field_549fc9e8ba260',
-			'label' => 'Banner Title',
-			'name' => 'acf-product-category-banner_title',
-			'type' => 'text',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'default_value' => '',
-			'placeholder' => '',
-			'prepend' => '',
-			'append' => '',
-			'formatting' => 'none',
-			'maxlength' => '',
-			'readonly' => 0,
-			'disabled' => 0,
-		),
-		array (
-			'key' => 'field_549fdda494064',
-			'label' => 'Banner Text',
-			'name' => 'acf-product-category-banner_text',
-			'type' => 'wysiwyg',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'default_value' => '',
-			'toolbar' => 'full',
-			'media_upload' => 0,
-			'tabs' => 'all',
-		),
 	),
 	'location' => array (
 		array (
@@ -1958,6 +1918,13 @@ acf_add_local_field_group(array (
 				'param' => 'taxonomy',
 				'operator' => '==',
 				'value' => 'occasion',
+			),
+		),
+		array (
+			array (
+				'param' => 'taxonomy',
+				'operator' => '==',
+				'value' => 'artist',
 			),
 		),
 	),
@@ -1999,6 +1966,36 @@ acf_add_local_field_group(array (
 			'max_size' => 0,
 			'mime_types' => '',
 		),
+		array (
+			'key' => 'field_56cff1c48adec',
+			'label' => 'Badge Color',
+			'name' => 'acf-product-badge_color',
+			'type' => 'color_picker',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+		),
+		array (
+			'key' => 'field_56cff2e08aded',
+			'label' => 'Badge Checked Color',
+			'name' => 'acf-product-badge_checked_color',
+			'type' => 'color_picker',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+		),
 	),
 	'location' => array (
 		array (
@@ -2014,11 +2011,9 @@ acf_add_local_field_group(array (
 	'style' => 'default',
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
-	'hide_on_screen' => array (
-	),
+	'hide_on_screen' => '',
 	'active' => 1,
 	'description' => '',
-	'old_ID' => 6240,
 ));
 
 acf_add_local_field_group(array (
@@ -2148,11 +2143,9 @@ acf_add_local_field_group(array (
 	'style' => 'default',
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
-	'hide_on_screen' => array (
-	),
+	'hide_on_screen' => '',
 	'active' => 1,
 	'description' => '',
-	'old_ID' => 6978,
 ));
 
 acf_add_local_field_group(array (
@@ -2434,7 +2427,6 @@ acf_add_local_field_group(array (
 	),
 	'active' => 1,
 	'description' => '',
-	'old_ID' => 6977,
 ));
 
 acf_add_local_field_group(array (
@@ -5137,6 +5129,48 @@ acf_add_local_field_group(array (
 			'mime_types' => '',
 		),
 		array (
+			'key' => 'field_56d2cb8c7c10c',
+			'label' => 'Reasons',
+			'name' => 'acf-options_experience_reasons',
+			'type' => 'repeater',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'collapsed' => '',
+			'min' => '',
+			'max' => '',
+			'layout' => 'table',
+			'button_label' => 'Add Reason',
+			'sub_fields' => array (
+				array (
+					'key' => 'field_56d2cc047c10d',
+					'label' => 'Reason',
+					'name' => 'reason',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+			),
+		),
+		array (
 			'key' => 'field_551bfb72256c3',
 			'label' => 'Experience Page',
 			'name' => 'acf-options_experience_page',
@@ -5426,7 +5460,7 @@ acf_add_local_field_group(array (
 			'key' => 'field_558fd81814fd7',
 			'label' => 'Product Image Disclaimer',
 			'name' => 'acf-options_product_image_disclaimer',
-			'type' => 'text',
+			'type' => 'wysiwyg',
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => 0,
@@ -5436,12 +5470,9 @@ acf_add_local_field_group(array (
 				'id' => '',
 			),
 			'default_value' => '',
-			'placeholder' => '',
-			'prepend' => '',
-			'append' => '',
-			'maxlength' => '',
-			'readonly' => 0,
-			'disabled' => 0,
+			'tabs' => 'all',
+			'toolbar' => 'full',
+			'media_upload' => 0,
 		),
 	),
 	'location' => array (

@@ -30,15 +30,20 @@ class BH_WC_Admin_Taxonomies {
 		// Add form
 		add_action( 'occasion_add_form_fields', array( $this, 'add_category_fields' ) );
 		add_action( 'occasion_edit_form_fields', array( $this, 'edit_category_fields' ), 10, 2 );
+		add_action( 'artist_add_form_fields', array( $this, 'add_category_fields' ) );
+		add_action( 'artist_edit_form_fields', array( $this, 'edit_category_fields' ), 10, 2 );
 		add_action( 'created_term', array( $this, 'save_category_fields' ), 10, 3 );
 		add_action( 'edit_term', array( $this, 'save_category_fields' ), 10, 3 );
 
 		// Add columns
 		add_filter( 'manage_edit-occasion_columns', array( $this, 'product_cat_columns' ) );
 		add_filter( 'manage_occasion_custom_column', array( $this, 'product_cat_column' ), 10, 3 );
+		add_filter( 'manage_edit-artist_columns', array( $this, 'product_cat_columns' ) );
+		add_filter( 'manage_artist_custom_column', array( $this, 'product_cat_column' ), 10, 3 );
 
 		// Taxonomy page descriptions
 		add_action( 'occasion_pre_add_form', array( $this, 'occasion_description' ) );
+		add_action( 'artist_pre_add_form', array( $this, 'artist_description' ) );
 
 		// Maintain hierarchy of terms
 		add_filter( 'wp_terms_checklist_args', array( $this, 'disable_checked_ontop' ) );
@@ -54,7 +59,7 @@ class BH_WC_Admin_Taxonomies {
 	 * @return void
 	 */
 	public function create_term( $term_id, $tt_id = '', $taxonomy = '' ) {
-		if ( $taxonomy != 'occasion' && ! taxonomy_is_product_attribute( $taxonomy ) )
+		if ( $taxonomy != 'occasion' && $taxonomy != 'artist' && ! taxonomy_is_product_attribute( $taxonomy ) )
 			return;
 
 		$meta_name = taxonomy_is_product_attribute( $taxonomy ) ? 'order_' . esc_attr( $taxonomy ) : 'order';
@@ -242,13 +247,23 @@ class BH_WC_Admin_Taxonomies {
 	}
 
 	/**
-	 * Description for occasion page to aid users.
+	 * Description for occasions page to aid users.
 	 *
 	 * @access public
 	 * @return void
 	 */
 	public function occasion_description() {
-		echo wpautop( __( 'Product categories for your store can be managed here. To change the order of categories on the front-end you can drag and drop to sort them. To see more categories listed click the "screen options" link at the top of the page.', 'woocommerce' ) );
+		echo wpautop( __( 'Product occasions for your store can be managed here. To see more occasions listed click the "screen options" link at the top of the page.', 'woocommerce' ) );
+	}
+
+	/**
+	 * Description for artists page to aid users.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function artist_description() {
+		echo wpautop( __( 'Product artists for your store can be managed here. To see more artists listed click the "screen options" link at the top of the page.', 'woocommerce' ) );
 	}
 
 	/**
@@ -306,7 +321,7 @@ class BH_WC_Admin_Taxonomies {
 	 * @return array
 	 */
 	public function disable_checked_ontop( $args ) {
-		if ( 'occasion' == $args['taxonomy'] ) {
+		if ( 'occasion' == $args['taxonomy'] || 'artist' == $args['taxonomy'] ) {
 			$args['checked_ontop'] = false;
 		}
 		return $args;

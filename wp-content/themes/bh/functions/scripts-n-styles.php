@@ -61,7 +61,7 @@ function BH_wp_scripts_n_styles() {
 		wp_enqueue_style('blog');
 	endif;
 	
-	if ( is_post_type_archive('product') || is_tax( get_object_taxonomies('product') ) || is_tax('event_category') ) :
+	if ( is_tax('event_category') ) :
 		wp_enqueue_style('jquery-ui');
 	endif;
 	
@@ -78,8 +78,6 @@ function BH_wp_scripts_n_styles() {
 	 * scripts
 	 */
 	wp_register_script( 'bootstrap',				JS_DIR . '/libs/bootstrap.min.js',									array('jquery'),											VERSION,	true );
-	wp_register_script( 'matchMedia',				JS_DIR . '/libs/matchMedia.js',										array('jquery'),											VERSION,	true );
-	wp_register_script( 'matchMediaListener',		JS_DIR . '/libs/matchMedia.addListener.js',							array('jquery'),											VERSION,	true );
 	wp_register_script( 'countdown',				JS_DIR . '/libs/jquery.responsive_countdown.min.js',				array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'cycle2',					JS_DIR . '/libs/jquery.cycle2.min.js',								array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'cycle2-carousel',			JS_DIR . '/libs/jquery.cycle2.carousel.min.js',						array('cycle2'),											VERSION,	true );

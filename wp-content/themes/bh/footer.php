@@ -21,8 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 	get_template_part('views/footer/footer');
 	
 	wp_enqueue_script('bootstrap');
-	wp_enqueue_script('matchMedia');
-	wp_enqueue_script('matchMediaListener');
 	wp_enqueue_script('countdown');
 	wp_enqueue_script('general');
 	wp_enqueue_script('ticketnet');
@@ -57,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 		wp_enqueue_script('blog');
 	endif;
 	
-	if ( is_post_type_archive('product') || is_tax( get_object_taxonomies('product') ) || is_tax('event_category') ) :
+	if ( is_tax('event_category') ) :
 		wp_enqueue_script('jquery-ui');
 	endif;
 	
@@ -69,13 +67,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 		wp_enqueue_script('elevateZoom');
 	endif;
 	
-	if ( is_singular('post') || is_product() ) :
+	if ( is_singular('post') ) :
 		get_template_part('views/blog/add-this');
 	endif;
 	
 	if ( is_woocommerce() ) :
 		wp_enqueue_script('cycle2');
 		wp_enqueue_script('cycle2-carousel');
+		wp_enqueue_script('cycle2-swipe');
 		wp_enqueue_script('cycle2-ios6fix');
 	endif;
 	

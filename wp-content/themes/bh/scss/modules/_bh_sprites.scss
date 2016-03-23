@@ -2,7 +2,7 @@
 /* sprites */
 /***********/
 
-.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-cart, .sprite-mobile-menu-en, .sprite-mobile-menu-he, .sprite-package-big, .sprite-package-small, .sprite-question-big, .sprite-question-small, .sprite-delivery-en-big, .sprite-delivery-en-small, .sprite-delivery-he-big, .sprite-delivery-he-small, .sprite-heart, .sprite-ribbon-white, .sprite-add-to-cart, .sprite-museum-en, .sprite-museum-en-s, .sprite-support-us-en, .sprite-support-us-hover-en, .sprite-support-us-he, .sprite-support-us-hover-he, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he{
+.sprite-logo-en-124x57, .sprite-logo-en-104x48, .sprite-logo-en-89x41, .sprite-logo-he-127x57, .sprite-logo-he-106x48, .sprite-logo-he-91x41, .sprite-shop-en, .sprite-shop-en-s, .sprite-mjs-en-s, .sprite-museum-he, .sprite-museum-he-s, .sprite-shop-he, .sprite-shop-he-s, .sprite-mjs-he-s, .sprite-newsletter, .sprite-cart, .sprite-mobile-menu-en, .sprite-mobile-menu-he, .sprite-package-big, .sprite-package-small, .sprite-question-big, .sprite-question-small, .sprite-delivery-en-big, .sprite-delivery-en-small, .sprite-delivery-he-big, .sprite-delivery-he-small, .sprite-heart, .sprite-ribbon-white, .sprite-add-to-cart, .sprite-museum-en, .sprite-museum-en-s, .sprite-support-us-en, .sprite-support-us-hover-en, .sprite-support-us-he, .sprite-support-us-hover-he, .sprite-hall-rental-en, .sprite-hall-rental-hover-en, .sprite-hall-rental-he, .sprite-hall-rental-hover-he, .sprite-wswu-logo-big, .sprite-wswu-logo-small{
 	background: url("../images/general/sprites.png") no-repeat;
 }
 
@@ -238,6 +238,18 @@
 	background-position: -285px -165px ;
 	width: 63px;
 	height: 32px;
+}
+
+.sprite-wswu-logo-big{
+	background-position: -350px -165px ;
+	width: 91px;
+	height: 100px;
+}
+
+.sprite-wswu-logo-small{
+	background-position: -443px -165px ;
+	width: 66px;
+	height: 74px;
 }
 
 /******************/
@@ -480,4 +492,16 @@
 	background-position: -285px -165px ;
 	width: 63px;
 	height: 32px;
+}
+
+@mixin sprite-wswu-logo-big{
+	background-position: -350px -165px ;
+	width: 91px;
+	height: 100px;
+}
+
+@mixin sprite-wswu-logo-small{
+	background-position: -443px -165px ;
+	width: 66px;
+	height: 74px;
 }

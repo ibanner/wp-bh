@@ -4,7 +4,7 @@
  *
  * @author 		Beit Hatfutsot
  * @package 	bh/views/woocommerce/archive
- * @version     1.0
+ * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -24,7 +24,7 @@ $slider_index = 1;
 
 ?>
 
-<div class="shop-home-sliders">
+<div class="container shop-home-sliders">
 
 	<?php foreach ($sliders as $slider) :
 	
@@ -32,22 +32,16 @@ $slider_index = 1;
 		$slider_products	= $slider['products'];
 		
 		if ( count($slider_products) > 0 ) :
-		
-			echo '<div class="row">';
-			
-				echo '<div class="col-sm-12 related-products-wrapper">';
-					echo '<div class="col-sm-12 related-products">';
-						echo '<h2>' . $title . '</h2>';
-						
-						// display products slider
-						include( locate_template('views/woocommerce/products-slider.php') );
-					echo '</div>';
-				echo '</div>';
-				
+
+			echo '<div class="products-slider">';
+				echo '<h2>' . $title . '</h2>';
+
+				// display products slider
+				include( locate_template('views/woocommerce/products-slider.php') );
 			echo '</div>';
-			
+
 			$slider_index++;
-			
+
 		endif;
 		
 	endforeach; ?>
