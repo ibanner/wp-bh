@@ -6,7 +6,7 @@
 class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 
 
-	private $US_feed = false;
+	private $tax_excluded = false;
 
 
 	/**
@@ -17,10 +17,14 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 	function __construct() {
 		parent::__construct();
 		$this->store_info->feed_url = add_query_arg( 'woocommerce_gpf', 'google', $this->store_info->feed_url_base );
-		if ( ! empty( $this->store_info->base_country ) && substr( 'US' == $this->store_info->base_country, 0, 2 ) ) {
-			$this->US_feed = true;
-		} else {
-			$this->US_feed = false;
+		if ( ! empty( $this->store_info->base_country ) ) {
+			if ( substr( 'US' == $this->store_info->base_country, 0, 2 ) ||
+			     substr( 'CA' == $this->store_info->base_country, 0, 2 ) ||
+			     substr( 'IN' == $this->store_info->base_country, 0, 2 ) ) {
+				$this->tax_excluded = true;
+			} else {
+				$this->tax_excluded = false;
+			}
 		}
 		add_filter( 'woocommerce_gpf_feed_item_google', array( $this, 'enforce_max_lengths' ) );
 	}
@@ -237,8 +241,8 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 		}
 		echo "    <item>\n";
 		echo '      <title><![CDATA[' . $feed_item->title . "]]></title>\n";
-		echo '      <link>' . $feed_item->purchase_link . "</link>\n";
-		echo '      <guid>' . $feed_item->guid . "</guid>\n";
+		echo '      <link>' . esc_url( $feed_item->purchase_link ) . "</link>\n";
+		echo '      <g:ID>' . $feed_item->guid . "</g:ID>\n";
 
 		// This is basically a hack since we're avoiding using the PHP DOM functions
 		// so we don't have to hold the whole doc in memory
@@ -249,7 +253,7 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 		echo '      <description><![CDATA[' . $product_description . "]]></description>\n";
 
 		if ( ! empty( $feed_item->image_link ) ) {
-			echo '      <g:image_link>' . $feed_item->image_link . "</g:image_link>\n";
+			echo '      <g:image_link><![CDATA[' . $feed_item->image_link . "]]></g:image_link>\n";
 		}
 
 		$this->render_prices( $feed_item );
@@ -299,6 +303,12 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 							$element_value .= 'T00:00:00' . sprintf( '%+03d', $tz_offset ) . '00';
 						}
 					}
+					if ( 'is_bundle' == $element_name ) {
+						if ( 'on' == $element_value ) {
+							echo ' <g:is_bundle>TRUE</g:is_bundle>';
+						}
+						continue;
+					}
 					echo '      <g:' . $element_name . '>';
 					echo '<![CDATA[' . $element_value . ']]>';
 					echo '</g:' . $element_name . ">\n";
@@ -342,8 +352,8 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 	private function render_prices( $feed_item ) {
 
 		// Regular price
-		if ( $this->US_feed ) {
-			// US prices have to be submitted excluding tax
+		if ( $this->tax_excluded ) {
+			// Some country's prices have to be submitted excluding tax.
 			$price = number_format( $feed_item->regular_price_ex_tax, 2, '.', '' );
 		} else {
 			// Non-US prices have to be submitted including tax
@@ -357,7 +367,7 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 		}
 
 		// Otherwise, include the sale_price tag.
-		if ( $this->US_feed ) {
+		if ( $this->tax_excluded ) {
 			// US prices have to be submitted excluding tax.
 			$sale_price = number_format( $feed_item->sale_price_ex_tax, 2, '.', '' );
 		} else {

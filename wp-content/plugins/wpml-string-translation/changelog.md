@@ -1,3 +1,26 @@
+#2.3.6.1
+
+##Fixes
+* Fix dependency check issue ("WPML Update is incomplete" notice)
+
+#2.3.6
+
+##Fixes
+* [wpmlst-695] Fix performance issue when checking fo sticky links plugin
+
+##Performances
+* [wpmlcore-2528] Cached calls to `glob()` function when auto loading classes
+
+##Cleanup
+* [wpmlcore-2541] Removal of "icon-32" usage
+
+#2.3.5
+
+##Fixes
+* [wpmlst-685] Fixed incorrect filtering of rewrite rules when permalink bases contains strings which are used in other permalink patterns
+* [wpmlst-694] Fixed an issue preventing widget strings and site titles from being registered as translatable strings on new installations
+* [wpmlst-349] Fixed encoding of special characters in the Search field
+
 #2.3.4
 
 ##Fixes

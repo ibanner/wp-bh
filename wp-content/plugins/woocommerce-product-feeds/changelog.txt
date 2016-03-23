@@ -1,5 +1,22 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2016.03.18 - version 6.3
+* Repackage to fix version inconsistency
+
+2016.03.17 - version 6.2
+* Extend the list of countries whose feeds should be supplied exclusive of taxes.
+
+2016.02.24 - version 6.1
+* Add support for is_bundle
+
+2015.01.25 - version 6.0
+* Experimental variation support
+* Fix undefined constant warning
+
+2016.01.07 - version 5.2.2
+* Use base country pricing / tax for feed ignoring geolocation. Requires WC 2.5
+* Support image links with query parameters
+
 2015.12.02 - version 5.2.1
 * Add sale price effective dates to the Google Inventory feed.
 

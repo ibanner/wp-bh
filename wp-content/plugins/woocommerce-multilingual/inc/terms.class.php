@@ -55,7 +55,8 @@ class WCML_Terms{
 
         add_filter( 'woocommerce_get_product_terms', array( $this, 'get_product_terms_filter' ), 10, 4 );
 
-        add_filter( 'pre_update_option_woocommerce_flat_rate_settings', array( $this, 'update_woocommerce_flat_rate_settings' ) );
+        add_filter( 'pre_update_option_woocommerce_flat_rate_settings', array( $this, 'update_woocommerce_shipping_settings_for_class_costs' ) );
+        add_filter( 'pre_update_option_woocommerce_international_delivery_settings', array( $this, 'update_woocommerce_shipping_settings_for_class_costs' ) );
     }
     
     function admin_menu_setup(){
@@ -80,7 +81,12 @@ class WCML_Terms{
 
             $settings = get_option( 'woocommerce_flat_rate_settings' );
             if( is_array( $settings ) ){
-                update_option( 'woocommerce_flat_rate_settings', $this->update_woocommerce_flat_rate_settings( $settings ) );
+                update_option( 'woocommerce_flat_rate_settings', $this->update_woocommerce_shipping_settings_for_class_costs( $settings ) );
+            }
+
+            $settings = get_option( 'woocommerce_international_delivery_settings' );
+            if( is_array( $settings ) ){
+                update_option( 'woocommerce_international_delivery_settings', $this->update_woocommerce_shipping_settings_for_class_costs( $settings ) );
             }
 
         }
@@ -333,17 +339,17 @@ class WCML_Terms{
 
         $not_translated_count = 0;
         foreach($active_languages as $language){
-                
+
                 $terms = $wpdb->get_results($wpdb->prepare("
-                    SELECT t1.element_id AS e1, t2.element_id AS e2 FROM {$wpdb->term_taxonomy} x 
-                    JOIN {$wpdb->prefix}icl_translations t1 ON x.term_taxonomy_id = t1.element_id AND t1.element_type = %s
-                    LEFT JOIN {$wpdb->prefix}icl_translations t2 ON t2.trid = t1.trid AND t2.language_code = %s
-                ", 'tax_' . $taxonomy, $language['code']));
+                        SELECT t1.element_id AS e1, t2.element_id AS e2 FROM {$wpdb->term_taxonomy} x
+                        JOIN {$wpdb->prefix}icl_translations t1 ON x.term_taxonomy_id = t1.element_id AND t1.element_type = %s AND t1.source_language_code IS NULL
+                        LEFT JOIN {$wpdb->prefix}icl_translations t2 ON t2.trid = t1.trid AND t2.language_code = %s
+                    ", 'tax_' . $taxonomy, $language['code']));
                 foreach($terms as $term){
-                    if(empty($term->e2)){
+                    if( empty( $term->e2 ) ){
                         $not_translated_count ++;
                     }
-                    
+
                 }
             }
         
@@ -797,12 +803,16 @@ class WCML_Terms{
     }
 
     function shipping_terms($terms, $post_id, $taxonomy){
-        global $pagenow;
+        global $pagenow, $woocommerce_wpml;
+
+        if( isset( $_POST['action'] ) && $_POST['action'] == 'woocommerce_load_variations' ){
+            return $terms;
+        }
 
         if( $pagenow != 'post.php' && ( get_post_type($post_id) == 'product' || get_post_type($post_id) == 'product_variation' ) && $taxonomy == 'product_shipping_class'){
             global $sitepress;
             remove_filter('get_the_terms',array($this,'shipping_terms'), 10, 3);
-            $terms = get_the_terms(apply_filters( 'translate_object_id',$post_id,get_post_type($post_id),true,$sitepress->get_default_language()),'product_shipping_class');
+            $terms = get_the_terms( apply_filters( 'translate_object_id', $post_id, get_post_type($post_id), true, $woocommerce_wpml->products->get_original_product_language( $post_id ) ),'product_shipping_class');
             add_filter('get_the_terms',array($this,'shipping_terms'), 10, 3);
             return $terms;
         }
@@ -880,13 +890,21 @@ class WCML_Terms{
 
             $trnsl_term_id = apply_filters( 'translate_object_id', $term_obj->term_id, $taxonomy, true, $language );
 
-            $filtered_terms[] = !$is_objects_array ? ( isset( $is_slug ) ? get_term( $trnsl_term_id, $taxonomy )->slug : strtolower( get_term( $trnsl_term_id, $taxonomy )->name ) ) : get_term( $trnsl_term_id, $taxonomy );
+            if( $is_objects_array ){
+                $filtered_terms[] = get_term( $trnsl_term_id, $taxonomy );
+            }else{
+                if( isset( $is_slug ) ){
+                    $filtered_terms[] = get_term( $trnsl_term_id, $taxonomy )->slug;
+                }else{
+                    $filtered_terms[] = ( is_ajax() && isset( $_POST['action'] ) && in_array( $_POST['action'], array( 'woocommerce_add_variation', 'woocommerce_link_all_variations') ) ) ? strtolower ( get_term( $trnsl_term_id, $taxonomy )->name ) : get_term( $trnsl_term_id, $taxonomy )->name;
+                }
+            }
         }
 
         return $filtered_terms;
     }
 
-    function update_woocommerce_flat_rate_settings( $settings ){
+    function update_woocommerce_shipping_settings_for_class_costs( $settings ){
 
         foreach( $settings as $setting_key => $value ){
 
@@ -894,7 +912,13 @@ class WCML_Terms{
 
                 global $sitepress;
 
-                $shipp_class = get_term_by( 'slug', substr($setting_key, 11 ), 'product_shipping_class' );
+                $shipp_class_key = substr($setting_key, 11 );
+
+                if( is_numeric( $shipp_class_key ) ){
+                    $shipp_class = get_term( $shipp_class_key, 'product_shipping_class' );
+                }else{
+                    $shipp_class = get_term_by( 'slug', $shipp_class_key, 'product_shipping_class' );
+                }
 
                 $trid = $sitepress->get_element_trid( $shipp_class->term_taxonomy_id, 'tax_product_shipping_class' );
 
@@ -906,7 +930,11 @@ class WCML_Terms{
 
                         $tr_shipp_class = get_term_by( 'term_taxonomy_id', $translation->element_id, 'product_shipping_class' );
 
-                        $settings[ 'class_cost_'.$tr_shipp_class->slug ] = $value;
+                        if( is_numeric( $shipp_class_key ) ){
+                            $settings[ 'class_cost_'.$tr_shipp_class->term_id ] = $value;
+                        }else{
+                            $settings[ 'class_cost_'.$tr_shipp_class->slug ] = $value;
+                        }
 
                     }
 

@@ -25,7 +25,6 @@ class WCML_Emails{
         //wrappers for email's body
         add_action('woocommerce_before_resend_order_emails', array($this, 'email_header'));
         add_action('woocommerce_after_resend_order_email', array($this, 'email_footer'));
-        add_action( 'woocommerce_email_before_order_table', array( $this, 'email_instructions' ), 9, 3 );
 
         //WPML job link
         add_filter('icl_job_edit_url',array($this,'icl_job_edit_url'),10 ,2);
@@ -37,6 +36,10 @@ class WCML_Emails{
         add_action('woocommerce_order_status_pending_to_processing_notification',array($this,'refresh_email_lang'),9);
         add_action('woocommerce_order_status_pending_to_on-hold_notification',array($this,'refresh_email_lang'),9);
         add_action('woocommerce_new_customer_note',array($this,'refresh_email_lang'),9);
+
+
+        add_action('woocommerce_order_partially_refunded_notification', array($this,'email_heading_refund'), 9);
+        add_action('woocommerce_order_partially_refunded_notification', array($this,'refresh_email_lang'), 9);
 
 
         //admin emails
@@ -51,6 +54,7 @@ class WCML_Emails{
 
         add_filter( 'plugin_locale', array( $this, 'set_locale_for_emails' ), 10, 2 );
     }
+
     function email_refresh_in_ajax(){
         if(isset($_GET['order_id'])){
             $this->refresh_email_lang($_GET['order_id']);
@@ -64,7 +68,7 @@ class WCML_Emails{
         $this->refresh_email_lang($order_id);
         $this->email_heading_completed($order_id,true);
 
-   }
+    }
 
     /**
      * Translate WooCommerce emails.
@@ -89,12 +93,12 @@ class WCML_Emails{
 
     function refresh_email_lang($order_id){
 
-        if(is_array($order_id)){
-           if(isset($order_id['order_id'])){
-               $order_id = $order_id['order_id'];
-           }else{
-           return;
-        }
+        if ( is_array( $order_id ) ) {
+            if ( isset($order_id['order_id']) ) {
+                $order_id = $order_id['order_id'];
+            } else {
+                return;
+            }
 
         }
 
@@ -154,7 +158,7 @@ class WCML_Emails{
     }
 
     function email_heading_note($args){
-        global $woocommerce,$sitepress;
+        global $woocommerce;
 
         if(class_exists('WC_Email_Customer_Note')){
 
@@ -166,6 +170,25 @@ class WCML_Emails{
             $woocommerce->mailer()->emails['WC_Email_Customer_Note']->enabled = false;
             $woocommerce->mailer()->emails['WC_Email_Customer_Note']->trigger($args);
             $woocommerce->mailer()->emails['WC_Email_Customer_Note']->enabled = $enabled;
+        }
+    }
+
+    function email_heading_refund( $order_id, $refund_id = null ){
+        global $woocommerce;
+        if(class_exists('WC_Email_Customer_Refunded_Order')){
+
+            $woocommerce->mailer()->emails['WC_Email_Customer_Refunded_Order']->heading =
+                $this->wcml_get_translated_email_string( 'admin_texts_woocommerce_customer_refunded_order_settings',
+                    '[woocommerce_customer_refunded_order_settings]heading_partial' );
+            $woocommerce->mailer()->emails['WC_Email_Customer_Refunded_Order']->subject =
+                $this->wcml_get_translated_email_string( 'admin_texts_woocommerce_customer_refunded_order_settings',
+                    '[woocommerce_customer_refunded_order_settings]subject_partial' );
+
+            $enabled = $woocommerce->mailer()->emails['WC_Email_Customer_Refunded_Order']->enabled;
+            $woocommerce->mailer()->emails['WC_Email_Customer_Refunded_Order']->enabled = false;
+            $woocommerce->mailer()->emails['WC_Email_Customer_Refunded_Order']->trigger($order_id, true, $refund_id);
+            $woocommerce->mailer()->emails['WC_Email_Customer_Refunded_Order']->enabled = $enabled;
+
         }
     }
 
@@ -207,6 +230,9 @@ class WCML_Emails{
         load_default_textdomain();
         global $wp_locale;
         $wp_locale = new WP_Locale();
+
+        unset ($woocommerce->countries );
+        $woocommerce->countries = new WC_Countries();
     }    
     
 
@@ -245,11 +271,6 @@ class WCML_Emails{
         return $link;
     }
 
-    function email_instructions($order, $sent_to_admin, $plain_text = false){
-        global $woocommerce_wpml;
-        $woocommerce_wpml->strings->translate_payment_instructions($order->payment_method);
-    }
-
     function admin_string_return_cached( $value, $option ){
         if( in_array( $option, array ( 'woocommerce_email_from_address', 'woocommerce_email_from_name' ) ) )
             return false;
@@ -284,19 +305,21 @@ class WCML_Emails{
             $order_id = filter_input( INPUT_GET, 'order_id', FILTER_SANITIZE_NUMBER_INT );
         }elseif(isset($_GET['action']) && $_GET['action'] == 'mark_completed' && $this->order_id){
             $order_id = $this->order_id;
+        }elseif(isset($_POST['action']) && $_POST['action'] == 'woocommerce_refund_line_items'){
+            $order_id = filter_input( INPUT_POST, 'order_id', FILTER_SANITIZE_NUMBER_INT );
         }
 
         if( $order_id ){
             $order_language = get_post_meta( $order_id, 'wpml_language', true );
             if( $order_language ){
-                return $order_language;
+                $current_language = $order_language;
             }else{
                 global $sitepress;
-                return $sitepress->get_current_language();
+                $current_language = $sitepress->get_current_language();
             }
         }
 
-        return $current_language;
+        return apply_filters( 'wcml_email_language', $current_language, $order_id );
     }
 
     // set correct locale code for emails

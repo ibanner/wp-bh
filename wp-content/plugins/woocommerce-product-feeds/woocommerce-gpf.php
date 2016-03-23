@@ -1,13 +1,15 @@
 <?php
-/*
-Plugin Name: WooCommerce Google Product Feed
-Plugin URI: http://www.leewillis.co.uk/wordpress-plugins/?utm_source=wordpress&utm_medium=www&utm_campaign=woocommerce-gpf
-Description: Woocommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
-Author: Lee Willis
-Version: 5.2.1
-Author URI: http://www.leewillis.co.uk/
-License: GPLv3
-*/
+/**
+ * Plugin Name: WooCommerce Google Product Feed
+ * Plugin URI: http://www.leewillis.co.uk/wordpress-plugins/?utm_source=wordpress&utm_medium=www&utm_campaign=woocommerce-gpf
+ * Description: Woocommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
+ * Author: Lee Willis
+ * Version: 6.3
+ * Author URI: http://www.leewillis.co.uk/
+ * License: GPLv3
+ *
+ * @package woocommerce-gpf
+ */
 
 /**
  * Required functions
@@ -55,9 +57,9 @@ function woocommerce_gpf_includes() {
 
 	global $wp_query;
 
-	// Parsing for legacy URLs
-	if ( isset ( $_REQUEST['action'] ) && 'woocommerce_gpf' == $_REQUEST['action'] ) {
-		if ( isset ( $_REQUEST['feed_format'] ) ) {
+	// Parsing for legacy URLs.
+	if ( isset( $_REQUEST['action'] ) && 'woocommerce_gpf' === $_REQUEST['action'] ) {
+		if ( isset( $_REQUEST['feed_format'] ) ) {
 			$wp_query->query_vars['woocommerce_gpf'] = $_REQUEST['feed_format'];
 		} else {
 			$wp_query->query_vars['woocommerce_gpf'] = 'google';
@@ -65,25 +67,40 @@ function woocommerce_gpf_includes() {
 	}
 
 	if ( isset( $wp_query->query_vars['woocommerce_gpf'] ) ) {
-		require_once ( 'woocommerce-gpf-common.php' );
-		require_once ( 'woocommerce-gpf-feed.class.php' );
-		if ( 'google' == $wp_query->query_vars['woocommerce_gpf'] ) {
+		require_once( 'woocommerce-gpf-common.php' );
+		require_once( 'woocommerce-gpf-feed.class.php' );
+		if ( 'google' === $wp_query->query_vars['woocommerce_gpf'] ) {
 			require_once 'woocommerce-gpf-feed-google.php';
-		} else if ( 'googleinventory' == $wp_query->query_vars['woocommerce_gpf'] ) {
+		} else if ( 'googleinventory' === $wp_query->query_vars['woocommerce_gpf'] ) {
 			require_once 'woocommerce-gpf-feed-google-inventory.php';
-		} else if ( 'bing' == $wp_query->query_vars['woocommerce_gpf'] ) {
+		} else if ( 'bing' === $wp_query->query_vars['woocommerce_gpf'] ) {
 			require_once 'woocommerce-gpf-feed-bing.php';
 		}
-		require_once ( 'woocommerce-gpf-frontend.php' );
+		require_once( 'woocommerce-gpf-frontend.php' );
 	}
 
 }
 add_action( 'template_redirect', 'woocommerce_gpf_includes' );
 
-
+/**
+ * Override the default customer address.
+ *
+ * Needs to happen before parse_query, so we have to manually check all sorts of query combinations.
+ */
+function woocommerce_gpf_set_customer_default_location($location) {
+	if ( ( isset( $_REQUEST['action'] ) && 'woocommerce_gpf' == $_REQUEST['action'] ) ||
+		 ( isset ( $_SERVER['REQUEST_URI'] ) && stripos( $_SERVER['REQUEST_URI'], '/woocommerce_gpf' ) === 0 ) ||
+		 isset( $_REQUEST['woocommerce_gpf'] )
+		  ) {
+		return wc_format_country_state_string( get_option( 'woocommerce_default_country' ) );
+	} else {
+		return $location;
+	}
+}
+add_filter( 'woocommerce_customer_default_location_array', 'woocommerce_gpf_set_customer_default_location' );
 
 /**
- * Create database tabe to cache the Google product taxonomy.
+ * Create database table to cache the Google product taxonomy.
  */
 function woocommerce_gpf_install() {
 
@@ -96,15 +113,39 @@ function woocommerce_gpf_install() {
 						 search_term text
 							 )";
 
-	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	dbDelta( $sql );
 	flush_rewrite_rules();
 
+	// Set default settings if there are none.
+	$settings = get_option( 'woocommerce_gpf_config' );
+	if ( false === $settings ) {
+		$settings = array(
+			'product_fields'     => array(
+				'availability'            => 'on',
+				'brand'                   => 'on',
+				'mpn'                     => 'on',
+				'product_type'            => 'on',
+				'google_product_category' => 'on',
+				'size_system'             => 'on',
+			),
+			'product_defaults' => array(
+				'availability' => 'in stock',
+			),
+		);
+		if ( version_compare( WOOCOMMERCE_VERSION, '2.4.0', '>' ) ) {
+			$settings['include_variations'] = 'on';
+		}
+		add_option( 'woocommerce_gpf_config', $settings, '', 'yes' );
+	}
 }
 
 register_activation_hook( __FILE__, 'woocommerce_gpf_install' );
 
 
+/**
+ * Disable attempts to GZIP the feed output to avoid memory issues.
+ */
 function woocommerce_gpf_block_wordpress_gzip_compression() {
 	if ( isset( $_GET['woocommerce_gpf'] ) ) {
 		remove_action( 'init', 'ezgz_buffer' );

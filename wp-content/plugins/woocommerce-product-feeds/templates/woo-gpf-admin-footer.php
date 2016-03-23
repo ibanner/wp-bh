@@ -1,4 +1,7 @@
 	</table>
+
+	{include_variations}
+
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
 			jQuery('.woocommerce_gpf_field_selector').change(function(){

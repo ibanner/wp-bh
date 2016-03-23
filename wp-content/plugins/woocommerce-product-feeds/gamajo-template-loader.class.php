@@ -30,7 +30,7 @@ if ( !class_exists( 'Gamajo_Template_Loader' ) )  {
 		 *
 		 * @type string
 		 */
-		protected $filter_prefix = 'your_plugin';
+		protected $filter_prefix = 'woocommerce_gpf';
 
 		/**
 		 * Directory name where custom templates for this plugin should be found in the theme.
@@ -39,7 +39,7 @@ if ( !class_exists( 'Gamajo_Template_Loader' ) )  {
 		 *
 		 * @type string
 		 */
-		protected $theme_template_directory = 'your-plugin'; // or 'your-plugin-templates' etc.
+		protected $theme_template_directory = 'woocommerce_gpf'; // or 'your-plugin-templates' etc.
 
 		/**
 		 * Reference to the root directory path of this plugin.
@@ -50,7 +50,7 @@ if ( !class_exists( 'Gamajo_Template_Loader' ) )  {
 		 *
 		 * @type string
 		 */
-		protected $plugin_directory = YOUR_PLUGIN_DIR; // or plugin_dir_path( dirname( __FILE__ ) ); etc.
+		protected $plugin_directory = '';
 
 		/**
 		 * Directory name where templates are found in this plugin.
@@ -62,6 +62,11 @@ if ( !class_exists( 'Gamajo_Template_Loader' ) )  {
 		 * @type string
 		 */
 		protected $plugin_template_directory = 'templates'; // or includes/templates, etc.
+
+
+		public function __construct() {
+			$this->plugin_directory = plugin_dir_path( dirname( __FILE__ ) );
+		}
 
 		/**
 		 * Retrieve a template part.

@@ -20,7 +20,10 @@ class WCML_TP_Support{
 
         $product = wc_get_product( $post->ID );
 
-        if( !empty($product) && $product->get_type() == 'variable' ){
+        //WC_Product::get_type() available from WooCommerce 2.4.0
+        $product_type = method_exists($product, 'get_type') ? $product->get_type() : $product->product_type;
+
+        if( !empty($product) && $product_type == 'variable' ){
 
             $attributes = $product->get_attributes();
 
@@ -61,7 +64,7 @@ class WCML_TP_Support{
 
         foreach( $data as $data_key => $value){
 
-            if( $value['finished'] && strpos( $value['field_type'], 'wc_attribute_' ) === 0 ){
+            if( $value['finished'] && isset( $value['field_type'] ) && strpos( $value['field_type'], 'wc_attribute_' ) === 0 ){
 
                 if( strpos( $value['field_type'], 'wc_attribute_name:' ) === 0 ){
 
@@ -116,7 +119,10 @@ class WCML_TP_Support{
 
         $product = wc_get_product( $post->ID );
 
-        if( !empty($product) && $product->get_type() == 'variable' ) {
+        //WC_Product::get_type() available from WooCommerce 2.4.0
+        $product_type = method_exists($product, 'get_type') ? $product->get_type() : $product->product_type;
+
+        if( !empty($product) && $product_type == 'variable' ) {
 
             $variations = $product->get_available_variations();
 
@@ -141,13 +147,13 @@ class WCML_TP_Support{
 
     }
 
-    function save_variation_descriptions_translations($post_id, $data, $job){
+    function save_variation_descriptions_translations( $post_id, $data, $job ){
 
         $language = $job->language_code;
 
         foreach( $data as $data_key => $value){
 
-            if( $value['finished'] && strpos( $value['field_type'], 'wc_variation_description:' ) === 0 ){
+            if( $value['finished'] && isset( $value['field_type'] ) && strpos( $value['field_type'], 'wc_variation_description:' ) === 0 ){
 
                 $variation_id = substr( $value['field_type'], strpos($value['field_type'], ':') + 1 );
 
