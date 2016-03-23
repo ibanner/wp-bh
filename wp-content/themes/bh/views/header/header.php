@@ -95,7 +95,7 @@ $featured_page						= $bh_sites[$current_site]['featured_page'];
 					<ul>
 						<?php foreach ($bh_sites as $site_name => $site_info) : ?>
 							<li class="site-item <?php echo $site_name . ($site_name == $current_site ? ' active' : ''); ?>">
-								<a href="<?php echo $site_info['link']; ?>" target="<?php echo $site_name == 'mjs' ? '_blank' : '_self'; ?>">
+								<a href="<?php echo $site_info['link']; ?>">
 									<div class="title"><?php echo $site_info['header_title']; ?></div>
 									<div class="icon"></div>
 								</a>

@@ -17,7 +17,7 @@ if ($reasons) {
 
 	$reasons = array_values($reasons); ?>
 
-	<div class="wswu-banner hidden-xs">
+	<div class="wswu-sidebar-banner hidden-xs">
 
 		<div class="wswu-content">
 
