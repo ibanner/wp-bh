@@ -29,6 +29,13 @@ class WoocommerceGpfCommon {
 				'feed_types'  => array( 'google', 'googleinventory', 'bing' ),
 			),
 
+			'is_bundle' => array(
+				'desc'        => __( 'Bundle indicator (is_bundle)', 'woocommerce_gpf' ),
+				'full_desc'   => __( 'Allows you to indicate whether a product is a "bundle" of products.', 'woocommerce_gpf' ),
+				'callback'    => 'render_is_bundle',
+				'feed_types'  => array( 'google' ),
+			),
+
 			'availability_date' => array(
 				'desc'        => __( 'Availability date', 'woocommerce_gpf' ),
 				'full_desc'   => __( 'If you are accepting orders for products that are available for preorder, use this attribute to indicate when the product becomes available for delivery.', 'woocommerce_gpf' ),
@@ -308,6 +315,35 @@ class WoocommerceGpfCommon {
 
 
 	/**
+	 * Retrieve the values that should be output for a particular variation.
+	 *
+	 * This function does *not* take into account defaults. You should merge the results of this
+	 * with the return value of get_values_for_product() for the parent product, thus picking
+	 * up defaults etc.
+	 *
+	 */
+	public function get_values_for_variation( $variation_id, $feed_format = 'all' ) {
+		$values = array();
+		// Grab prepopulated data if required.
+		if ( ! empty( $this->settings['product_prepopulate'] ) ) {
+			$prepopulated_values = $this->get_values_to_prepopulate( $variation_id );
+			$prepopulated_values = $this->remove_blanks( $prepopulated_values );
+			$values              = array_merge( $values, $prepopulated_values );
+		}
+		// Merge per-product settings.
+		$product_settings = get_post_meta( $variation_id, '_woocommerce_gpf_data', true );
+		if ( $product_settings ) {
+			$product_settings = $this->remove_blanks( $product_settings );
+			$values = array_merge( $values, $product_settings );
+		}
+		if ( 'all' != $feed_format ) {
+			$values = $this->remove_other_feeds( $values, $feed_format );
+		}
+		$values = $this->limit_max_values( $values );
+		return $values;
+	}
+
+	/**
 	 * Retrieve the values that should be output for a particular product
 	 * Takes into account store defaults, category defaults, and per-product
 	 * settings
@@ -441,18 +477,59 @@ class WoocommerceGpfCommon {
 	 * @return string                The prepopulated value for this product.
 	 */
 	private function get_prepopulate_value_for_product( $prepopulate, $product_id ) {
+
+		global $woocommerce_gpf_frontend;
+
 		$result = array();
 		list( $type, $value ) = explode( ':', $prepopulate );
 		switch ( $type ) {
 			case 'tax':
-				$terms = wp_get_object_terms( $product_id, array( $value ), array( 'fields' => 'names' ) );
-				if ( ! empty( $terms ) ) {
-					$result = $terms;
-				}
+				$result = $this->get_tax_prepopulate_value_for_product( $value, $product_id );
 				break;
 			case 'field':
 				$result = $this->get_field_prepopulate_value_for_product( $value, $product_id );
 				break;
+		}
+		return $result;
+	}
+
+	/**
+	 * Gets a taxonomy value for a product to prepopulate.
+	 *
+	 * @param  string $value      The taxonomy to grab values for.
+	 * @param  int    $product_id The product, or variation ID.
+	 * @return array              Array of values to use.
+	 */
+	private function get_tax_prepopulate_value_for_product( $value, $product_id ) {
+
+		global $woocommerce_gpf_frontend;
+
+		$result = array();
+		$product = $woocommerce_gpf_frontend->load_product( $product_id );
+		if ( $product->product_type == 'variation' ) {
+			// Get the attributes.
+			$attributes = $product->get_variation_attributes();
+			// If the requested taxonomy is used as an attribute, grab it's value for this variation.
+			if ( isset( $attributes[ 'attribute_' . $value ] ) ) {
+				$term = get_term_by( 'slug', $attributes[ 'attribute_' . $value ], $value );
+				if ( $term !== false ) {
+					$result = array( $term->name );
+				} else {
+					$result = array();
+				}
+			// Otherwise grab the values to use.
+			} else {
+				$terms = wp_get_object_terms( $product->parent->id, array( $value ), array( 'fields' => 'names' ) );
+				if ( ! empty( $terms ) ) {
+					$result = $terms;
+				}
+			}
+		} else {
+			// Get the term(s) tagged against the main product.
+			$terms = wp_get_object_terms( $product_id, array( $value ), array( 'fields' => 'names' ) );
+			if ( ! empty( $terms ) ) {
+				$result = $terms;
+			}
 		}
 		return $result;
 	}

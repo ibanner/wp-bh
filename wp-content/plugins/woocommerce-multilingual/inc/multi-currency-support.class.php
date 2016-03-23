@@ -66,7 +66,7 @@ class WCML_Multi_Currency_Support{
             }
         }
         
-        return $load;
+        return apply_filters('wcml_load_multi_currency', $load);
     }
     
     function init(){
@@ -76,7 +76,7 @@ class WCML_Multi_Currency_Support{
             add_filter('woocommerce_currency', array($this, 'currency_filter'));
             //add_filter('option_woocommerce_currency', array($this, 'currency_filter'));
             
-            add_filter('get_post_metadata', array($this, 'product_price_filter'), 10, 4);            
+            add_filter('get_post_metadata', array($this, 'product_price_filter'), 10, 4);
             add_filter('get_post_metadata', array($this, 'variation_prices_filter'), 12, 4); // second
 
             add_filter('woocommerce_package_rates', array($this, 'shipping_taxes_filter'));
@@ -105,7 +105,6 @@ class WCML_Multi_Currency_Support{
 
 
         add_filter('option_woocommerce_currency_pos', array($this, 'filter_currency_position_option'));
-        add_filter( 'woocommerce_get_formatted_order_total', array( $this, 'filter_get_formatted_order_total' ), 10, 2 );
         add_action( 'woocommerce_view_order', array( $this, 'filter_view_order' ), 9 );
 
         add_action('currency_switcher', array($this, 'currency_switcher'));        
@@ -214,6 +213,12 @@ class WCML_Multi_Currency_Support{
 
         if($save_to_db){
             $woocommerce_wpml->update_settings();                
+        }
+
+        // force disable multi-currency when the default currency is empty
+        $wc_currency    = get_option('woocommerce_currency');
+        if(empty($wc_currency)){
+            $woocommerce_wpml->settings['enable_multi_currency'] = WCML_MULTI_CURRENCIES_DISABLED;
         }
         
     }
@@ -605,17 +610,6 @@ class WCML_Multi_Currency_Support{
             $value = $this->currencies[$currency_code]['position'];
         }
         return $value;
-    }
-    
-    function filter_get_formatted_order_total($formatted_total, $object ){
-        $client_currency_buff = $this->client_currency;
-        $this->client_currency = $object->get_order_currency();
-
-        $formatted_total = wc_price( $object->order_total , array('currency' => $object->get_order_currency()));
-
-        $this->client_currency = $client_currency_buff;
-
-        return $formatted_total;
     }
     
     function filter_view_order( $order_id ){
@@ -1072,9 +1066,18 @@ class WCML_Multi_Currency_Support{
     }    
         
     function filter_coupon_data($coupon){
-        
-        if($coupon->type == 'fixed_cart' || $coupon->type == 'fixed_product'){
-            $coupon->amount = apply_filters('wcml_raw_price_amount', $coupon->amount);
+
+        // Alias compatibility
+        if( isset( $coupon->amount ) && !isset( $coupon->coupon_amount ) ){
+            $coupon->coupon_amount = $coupon->amount;
+        }
+        if( isset( $coupon->type ) && !isset( $coupon->discount_type ) ){
+            $coupon->discount_type = $coupon->type;
+        }
+        //
+
+        if($coupon->discount_type == 'fixed_cart' || $coupon->discount_type == 'fixed_product'){
+            $coupon->coupon_amount = apply_filters('wcml_raw_price_amount', $coupon->coupon_amount);
         }
 
         $coupon->minimum_amount = apply_filters('wcml_raw_price_amount',  $coupon->minimum_amount);

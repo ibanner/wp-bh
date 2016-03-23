@@ -21,7 +21,7 @@ class WoocommerceGpfAdmin {
 
 		global $woocommerce_gpf_common;
 
-		$this->settings = get_option( 'woocommerce_gpf_config' );
+		$this->settings = get_option( 'woocommerce_gpf_config', array() );
 		$this->product_fields = $woocommerce_gpf_common->product_fields;
 		$this->template_loader = new WoocommerceGpfTemplateLoader();
 
@@ -583,6 +583,27 @@ class WoocommerceGpfAdmin {
 
 
 	/**
+	 * Let people choose whether a product is_bundle.
+	 *
+	 * @access private
+	 * @param  string  $key          The key being processed
+	 * @param  string  $current_data The current value of this key
+	 *
+	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
+	 */
+	private function render_is_bundle( $key, $current_data = null, $placeholder = null ) {
+		$variables = $this->default_field_variables( $key );
+		$variables['value'] = checked( 'on', $current_data, false );
+		return $this->template_loader->get_template_with_variables(
+			'woo-gpf',
+			'field-row-default-is-bundle',
+			$variables
+		);
+	}
+
+
+
+	/**
 	 * Let people choose an availability date for a product.
 	 *
 	 * @access private
@@ -694,7 +715,7 @@ class WoocommerceGpfAdmin {
 
 		global $wpdb, $table_prefix;
 
-		// Retrieve from cache - avoid hitting Google.com too much because you know they might mind :)
+		// Retrieve from cache - avoid hitting Google.com too much because they might mind :)
 		$taxonomies_cached = get_transient( 'woocommerce_gpf_taxonomy' );
 		if ( $taxonomies_cached ) {
 			return true;
@@ -926,16 +947,16 @@ class WoocommerceGpfAdmin {
 
 		// Output the header.
 		$variables = array();
-		$variables['bing_url']            = esc_url(
+		$variables['inventory_text']              = __( 'product inventory feed also available.', 'woo_gpf' );
+		$variables['bing_url']                    = esc_url(
 			add_query_arg( array( 'woocommerce_gpf' => 'bing', 'f' => 'f.txt' ), get_home_url( null, '/' ) )
 		);
-		$variables['google_url']          = esc_url(
+		$variables['google_url']                  = esc_url(
 			add_query_arg( array( 'woocommerce_gpf' => 'google' ), get_home_url( null, '/' ) )
 		);
-		$variables['inventory_url']       = esc_url(
+		$variables['inventory_url']               = esc_url(
 			add_query_arg( array( 'woocommerce_gpf' => 'googleinventory' ), get_home_url( null, '/' ) )
 		);
-		$variables['inventory_text'] = __( 'product inventory feed also available.', 'woo_gpf' );
 		$this->template_loader->output_template_with_variables( 'woo-gpf', 'admin-intro', $variables );
 
 		// Output the fields.
@@ -988,7 +1009,22 @@ class WoocommerceGpfAdmin {
 				$row_vars
 			);
 		}
-		$this->template_loader->output_template_with_variables( 'woo-gpf', 'admin-footer', array() );
+		$variables = array();
+		$variables['include_variations_selected'] = checked(
+			'on',
+			isset($this->settings['include_variations']) ? $this->settings['include_variations'] : '',
+			false
+		);
+		if ( version_compare( WOOCOMMERCE_VERSION, '2.4.0', '>' ) ) {
+			$variables['include_variations'] = $this->template_loader->get_template_with_variables(
+				'woo-gpf',
+				'admin-include-variations',
+				$variables
+			);
+		} else {
+			$variables['include_variations'] = '';
+		}
+		$this->template_loader->output_template_with_variables( 'woo-gpf', 'admin-footer', $variables );
 	}
 
 	/**

@@ -1,3 +1,19 @@
+#2.1.5
+
+##Fix
+* [wpmltm-1154] Fixed issues in possible database inconsistencies when choosing to cancel all local translation jobs after activating a translation service
+
+##Performances
+* [wpmlcore-2528] Cached calls to `glob()` function when auto loading classes
+
+##Cleanup
+* [wpmlcore-2541] Removal of "icon-32" usage
+
+#2.1.4
+
+##Feature
+* [wpmlcore-538] Added an informative message to promote WCML when WooCoomerce is installed but WCML is not
+  
 #2.1.3
 
 ##Fixes

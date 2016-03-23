@@ -4,8 +4,8 @@ Donate link: http://wpml.org/documentation/related-projects/woocommerce-multilin
 Tags: CMS, woocommerce, commerce, ecommerce, e-commerce, products, WPML, multilingual, e-shop, shop
 License: GPLv2
 Requires at least: 3.0
-Tested up to: 4.4
-Stable tag: 3.7.6
+Tested up to: 4.4.2
+Stable tag: 3.7.10
 
 Allows running fully multilingual e-commerce sites using WooCommerce and WPML.
 
@@ -78,6 +78,46 @@ In order for the checkout and store pages to appear translated, you need to crea
 
 == Changelog ==
 
+= 3.7.10 =
+* Fixed a small issue with the product translations editor (additional toolbar showing)
+* Fixed a compatibility issue with Memcached on Siteground: product category archive pages were returning 404
+* Bug fix: the price widget was not using the correct values with multi-currency mode on
+* Bug fix: in some cases the costs for International Shipping were not calculated correctly in the secondary languages
+* Bug fix: When using comma for a decimal separator, for custom prices, the rounded values were not determined correctly
+* Bug fix: In some cases, translated product variations were displayed as 'out of stock' on the front end.
+* Fixed a fatal error occurring when selecting the WPML admin language to 'All languages' on the WooCommerce settings page
+* Compatibility with WooThemes Mix and Match Products
+* Fixed a bug preventing a shipping to be set to a variation when the default language of the product was not English
+* Fixed a bug that was sometimes preventing the 'incl. vat' suffix to be displayed on prices
+* Fixed a compatibility issue with Gravity Forms Product Add-Ons
+
+= 3.7.9 =
+* Fixed an issue prevent the correct plugin activation in some cases
+* Fixed an issue potentially causing  uncatched errors when using some specific payment gateways
+
+= 3.7.8 =
+* Updated the logic for downloading WooCommerce translations from translate.wordpress.org
+* Compatibility with WooCommerce Bookings 1.9 (and fixed othe small compatibility issues with older versions)
+* Fixed a compatibility issue with WooCommerce Subscriptions: the sign-up fee was not correct in the 2nd currency
+* Fixed a compatibility issue with WooCommerce Subscriptions: a fatal error was triggered during the checkout process in some circumstances
+* Fixed other compatibility issues with WooCommerce Subscriptions: endpoints, incorrect signup fee in secondary currency
+* Fixed a compatibility issue with WooCommerce Payment Gateways: some strings were registered/changed when on checkout
+* Fixed a compatibility issue with Gravity Forms Product Add-ons: some strings were not showing as translated on the product summary on the cart page
+* Fixed a compatibility issue with the Bishop theme
+* Bug fix: variations created with Any were not showing the user selected attribute when added to the cart
+* Bug fix: it was not possible to changeor or set the "Set prices in other currencies manually" option for a duplicate product
+* Fixed a compatibiilty issue with WooCommerce Bulk Stock Management (the 'out of stock' flag was not synced)
+* Bug fix: private products were visible to all users on grouped products
+* Bug fix: the tax label could register in the wrong language sometimes and then it was not possible to translate it correctly
+* Bug fix: partial the subject and heading for the refund emails were not translated when sent to users who had placed orders in secondary languages
+
+= 3.7.7 =
+* Fixed an issue that was causing a fatal error for sites using the Flatsome theme
+* Fixed an issue with translating standard tax rate name
+* Fixed an issue with product categories widget
+* Fixed issue with variable products in cart ( local attributes not translated after switching language )
+* Added filter for _load_filters function in multi-currency class
+* Set variations as translatable post type
 
 = 3.7.6 =
 * Fixed several problems with the permalinks when using the slash character in the bases

@@ -19,27 +19,15 @@ abstract class WPML_URL_Converter {
 	protected $absolute_home;
 	/** @var  string[] $cache */
 	protected $cache;
-	protected $hidden_languages;
 
 	/**
-	 * @param string   $default_language
-	 * @param string[] $hidden_languages
+	 * @param string $default_language
+	 * @param array  $active_languages
 	 */
-	public function __construct($default_language, $hidden_languages){
-		global $wpml_language_resolution;
-		add_filter( 'admin_url', array( $this, 'admin_url_filter' ), 1, 2 );
+	public function __construct( $default_language, $active_languages ) {
 		add_filter( 'term_link', array( $this, 'tax_permalink_filter' ), 1, 3 );
 		$this->default_language = $default_language;
-		$this->hidden_languages = (array)$hidden_languages;
-		$this->active_languages = $wpml_language_resolution->get_active_language_codes();
-	}
-
-	public function admin_url_filter( $url, $path ) {
-		if ( 'admin-ajax.php' === $path ) {
-			$url = $this->convert_url( $url );
-		}
-
-		return $url;
+		$this->active_languages = $active_languages;
 	}
 
 	/**
@@ -162,7 +150,7 @@ abstract class WPML_URL_Converter {
 			$language = $this->get_lang_from_url_string($url);
 		}
 
-		$lang                = $this->validate_language ( $language, $url );
+		$lang                = $this->validate_language( $language, $url );
 		$this->cache[ $url ] = $lang;
 
 		return $lang;

@@ -1,7 +1,42 @@
+#3.3.6
+
+##Fixes
+* [wpmlcore-2463, wpmlcore-2546, wcml-867]  Resolved issue that lead to database corruption and fatal error `InvalidArgumentException: element_id and type do not match`
+* [wpmlcore-1954] Added constant that disables automatic update of wpml-config.xml configurations: ICL_REMOTE_WPML_CONFIG_DISABLED
+* [wpmlcore-2505] Fixed URL handling when using Domains per languages in an installation under a sub-folder
+* [wpmlcore-2562] Resolved issue when re-activating WPML in sites having corrupted databases
+* [wpmlcore-2511] Inject "hreflang" arguments higher in the head.
+* [wpmlcore-2518] Show "Display hidden languages" option to admins and users users with "translate" capability
+* [wpmlcore-2536] Improve Yoast SEO compatibility by filtering out hidden language posts from sitemap
+* [wpmlcore-2571] Fix browser redirect so redirect only happens if the current page language is not one of the preferred browser languages
+* [wpmlcore-2351] Fixed different results produced in non default languages by queries with mixed post type and taxonomies in filter
+* [wpmlcore-1104] Improve TM notice handling in core.
+* [wpmlcore-2407] Fixed issue with post status when post date sync is enabled
+
+##Performances
+* [wpmlcore-2528] Cached calls to `glob()` function when auto loading classes
+
+##Cleanup
+* [wpmlcore-1616] Removed references to Font Awesome library and replaced usage with Dashicons
+* [wpmlcore-2541] Removal of "icon-32" usage
+
+##3.3.4
+
+##Fixes
+* [wpmlcore-2465] Fixed AJAX loading of Media in WP-Admin when domains per languages are used 
+* [wpmlcore-2433] Fixed compatibility issues with W3 Total Cache when Object caching is used
+* [wpmlcore-2420] Fix menu synchronization when menu item has quotes in its title
+* [wpmlcore-2445] Use of Fileinfo functions to read file mime type when uploading a custom flag, fall back to the now deprecated `mime_content_type` function, if the first set of cuntions is not available
+* [wpmlcore-2453] Fixed fatal error when setting a custom taxonomy as translatable (`Fatal error - Class WPML_Term_Language_Synchronization not found in sitepress.class.php`)
+* [wpmlcore-2448] Fixed `WordPress database error You have an error in your SQL syntax` message, caused by empty or corrupted languages order.
+* [wpmlcore-2452] Adding a comment to a translated post won't redirect user to the default language.
+* [wpmlcore-2136] Corrected "Slawisch" to "Slowakisch" in German language name for "Slovak"
+
 #3.3.3
 
 ##Fixes
 * Added backward compatibility for `__DIR__` magic constant not being supported before PHP 5.3.
+* [wpmlcore-2089] When not using languages in domains, the language information should be passed as url argument to the AJAX url
 
 #3.3.2
 
@@ -28,6 +63,9 @@
 * [wpmlcore-2385] Fixed loss of languages order when activating/deactivating languages
 * [wpmlcore-2386] Fixed stylesheet and login urls being translated incorrectly when homeurl are siteurl different.
 * [wpmlcore-2361] Fixed post meta data set to be copied to translations, not being copied when editing the original post.
+
+##Features
+* [wpmlcore-2388] Ability to upload svg files for custom flags
 
 ##Performance
 * [wpmlcore-2349] Cache get_source_language_by_trid to improve performance
@@ -99,7 +137,11 @@
 * [wpmlcore-2186] WPML now allows to load a taxonomy template by language, also for the default language
 
 ##API
-* [wpmlcore-2200] Added 'blog_translators' filter to programmatically change the list of translators
+
+###Filters
+* [wpmlcore-2200] Added `blog_translators` to programmatically change the list of translators
+* [wpmlcore-2138] Added `wpml_active_languages_access` to filter active languages
+* [wpmlcore-2138] fixed `wpml_icon_to_translation` to pass the post ID
 
 ##Performances
 * [wpmlcore-2055] Improved browser redirect performances
