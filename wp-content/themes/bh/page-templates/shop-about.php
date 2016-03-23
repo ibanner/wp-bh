@@ -38,7 +38,9 @@
 	/*********************/
 	
 	echo '<section class="shop-about-layout shop-about-layout-experience">';
-		get_template_part('views/woocommerce/single-product/single-product-section2-banner');
+		echo '<div class="container">';
+			get_template_part('views/woocommerce/single-product/single-product-section2-banner');
+		echo '</div>';
 	echo '</section>';
 	
 ?>

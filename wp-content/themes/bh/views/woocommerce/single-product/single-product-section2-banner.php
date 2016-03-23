@@ -4,20 +4,35 @@
  *
  * @author 		Beit Hatfutsot
  * @package 	bh/views/woocommerce/single-product
- * @version     1.0
+ * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$banner	= get_field('acf-options_experience_banner',	'option');
-$page	= get_field('acf-options_experience_page',		'option');
+// get fields
+$reasons	= get_field('acf-options_experience_reasons',	'option');
+$wswu_page	= get_field('acf-options_experience_page',		'option');
 
-if ($banner) :
+if ($reasons) {
 
-	echo '<div class="experience-banner">';
-		echo ($page) ? '<a href="' . get_permalink($page->ID) . '" target="_blank">' : '';
-			echo '<img src="' . $banner['url'] . '" width="' . $banner['width'] . '" height="' . $banner['height'] . '" alt="' . $banner['alt'] . '" />';
-		echo ($page) ? '</a>' : '';
-	echo '</div>';
-	
-endif;
+	$reasons = array_values($reasons); ?>
+
+	<div class="wswu-banner">
+
+		<div class="wswu-logo"></div>
+
+		<div class="item-after"></div>
+
+		<div class="wswu-content">
+
+			<span class="prefix"><?php _e('<strong>Why shop with us?</strong> There are lots of reasons. For instance, ', 'BH'); ?></span>
+			<span class="reason"><?php echo $reasons[ rand(0, count($reasons)-1) ]['reason']; ?></span>
+			<?php if ($wswu_page) { ?>
+				<div class="suffix"><a href="<?php echo get_permalink($wswu_page->ID); ?>"><?php _e('And there are more', 'BH'); ?></a></div>
+			<?php } ?>
+
+		</div>
+
+	</div>
+
+<?php }

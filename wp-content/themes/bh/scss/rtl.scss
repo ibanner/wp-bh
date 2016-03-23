@@ -1294,6 +1294,32 @@ article.post {
 }
 
 /***************/
+/* wswu banner */
+/***************/
+
+.wswu-banner {
+	.wswu-logo {
+		float: right;
+	}
+
+	.item-after {
+		left: auto;
+		right: 86px;
+		border-left: 30px solid $blue-color3;
+		border-right: 0;
+	}
+
+	.wswu-content {
+		margin-left: 0;
+		margin-right: 116px;
+
+		.suffix {
+			float: left;
+		}
+	}
+}
+
+/***************/
 /* shop - cart */
 /***************/
 

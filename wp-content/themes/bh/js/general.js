@@ -138,14 +138,7 @@ var $ = jQuery,
 					// woocommerce shop homepage
 					return 'woocommerce-shop-home';
 				}
-				else {
-					// other woocommerce page
-					return 'woocommerce';
-				}
-			}
-			else {
-				// other page
-				if ( $.inArray('page-template-shop-about', classes) >= 0 ) {
+				else if ( $.inArray('page-template-shop-about', classes) >= 0 ) {
 					// shop - about page
 					return 'shop-about';
 				}
@@ -153,7 +146,12 @@ var $ = jQuery,
 					// shop - why shop with us page
 					return 'shop-why-shop-with-us';
 				}
-
+				else {
+					// other woocommerce page
+					return 'woocommerce';
+				}
+			}
+			else {
 				return '';
 			}
 
@@ -612,6 +610,29 @@ var $ = jQuery,
 
 		},
 
+		/**
+		 * shop_single_wswu_banner
+		 *
+		 * Display Why Shop With Us banner
+		 * alled from loaded/alignments
+		 *
+		 * @param	N/A
+		 * @return	N/A
+		 */
+		shop_single_wswu_banner : function() {
+
+			var banner	= $('.wswu-banner'),
+				content	= banner.children('.wswu-content'),
+				height	= content.outerHeight();
+
+			banner.height(height);
+			banner.children('.item-after').css({'border-top-width': height/2, 'border-bottom-width': height/2});
+
+			// expose banner
+			banner.css('visibility', 'visible');
+
+		},
+
 		show_recently_viewed : function() {
 			
 			$('.recently-products-slider-placeholder').hide();
@@ -799,6 +820,12 @@ var $ = jQuery,
 
 			// close all footer sub menus
 			$('.footer-menu li.menu-item-has-children').removeClass('collapsed');
+
+			// woocommerce single product page / shop about
+			if (BH_general.params.page == 'woocommerce-single-product' || BH_general.params.page == 'shop-about') {
+				// wswu banner
+				BH_general.shop_single_wswu_banner();
+			}
 
 			if (BH_general.params.breakpoint <= 767) {
 				// width <= 767

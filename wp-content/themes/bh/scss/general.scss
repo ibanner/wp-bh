@@ -3468,6 +3468,55 @@ body > header {
 }
 
 /***************/
+/* wswu banner */
+/***************/
+
+.wswu-banner {
+	position: relative;
+	visibility: hidden;
+
+	.wswu-logo {
+		float: left;
+		@include sprites;
+		@include sprite-wswu-logo-small;
+		@include vertical-align;
+	}
+
+	.item-after {
+		position: absolute;
+		top: 0;
+		left: 86px;
+		border-top: solid transparent;
+		border-right: 30px solid $blue-color3;
+		border-bottom: solid transparent;
+	}
+
+	.wswu-content {
+		margin-left: 116px;
+		padding: 13px 10px;
+		font-size: 14px;
+		color: $font-invert-color;
+		background-color: $blue-color3;
+		overflow: hidden;
+
+		strong,
+		.reason {
+			font-size: 18px;
+			font-weight: $font-bold;
+		}
+
+		.suffix {
+			float: right;
+
+			a {
+				color: $font-invert-color;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+/***************/
 /* shop - cart */
 /***************/
 

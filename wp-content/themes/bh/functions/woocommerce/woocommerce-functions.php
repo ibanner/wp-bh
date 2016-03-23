@@ -643,9 +643,7 @@ function BH_shop_single_experience_banner() {
  * BH_shop_single_related_products
  * 
  * Section 3
- * Display related products according to the following scenario:
- * First check whether there are manually related products defined, and show them
- * If no manually products defined - show all products (except the current one) from the same product category
+ * Display related products
  *
  * @param	N/A
  * @return	N/A

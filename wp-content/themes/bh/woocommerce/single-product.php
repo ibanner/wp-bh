@@ -41,7 +41,7 @@ get_header(); ?>
 			 *
 			 * wswu banner
 			 */
-			//get_template_part('views/woocommerce/single-product/single-product', 'section2');
+			get_template_part('views/woocommerce/single-product/single-product', 'section2');
 		?>
 		
 		<?php

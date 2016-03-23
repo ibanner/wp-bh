@@ -1082,6 +1082,21 @@
 	}
 
 	/***************/
+	/* wswu banner */
+	/***************/
+
+	.wswu-banner {
+		.wswu-content {
+			font-size: 12px;
+
+			strong,
+			.reason {
+				font-size: 14px;
+			}
+		}
+	}
+
+	/***************/
 	/* shop - cart */
 	/***************/
 	
@@ -2744,6 +2759,19 @@
 						}
 					}
 				}
+			}
+		}
+	}
+
+	/***************/
+	/* wswu banner */
+	/***************/
+
+	.wswu-banner {
+		.wswu-content {
+			strong,
+			.reason {
+				font-size: 16px;
 			}
 		}
 	}
