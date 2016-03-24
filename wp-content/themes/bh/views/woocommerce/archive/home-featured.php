@@ -14,17 +14,20 @@ global $list, $ec_products;
 // Initiate $featured as an array of featured product IDs
 $featured = get_field('acf-options_shop_featured_products', 'option');
 
+if ( ! $featured )
+	return;
+
+$no_of_featured = count($featured);
+
+if ( $no_of_featured < 5 )
+	return;
+
 // rearrange #featured
 $featured = array_values($featured);
 foreach ($featured as &$f) {
 	$product_id = icl_object_id($f->ID, 'product', false);
 	$f = wc_get_product($product_id);
 }
-
-$no_of_featured = count($featured);
-
-if ( $no_of_featured < 5 )
-	return;
 
 // For Google Analytics Enhanced Ecommerce - define list name and products array
 $list = 'Featured Products';
