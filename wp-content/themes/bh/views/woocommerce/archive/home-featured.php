@@ -4,7 +4,7 @@
  *
  * @author 		Beit Hatfutsot
  * @package 	bh/views/woocommerce/archive
- * @version     1.0
+ * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -12,22 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $list, $ec_products;
 
 // Initiate $featured as an array of featured product IDs
-$featured = array();
+$featured = get_field('acf-options_shop_featured_products', 'option');
 
-$args = array(
-	'post_type'			=> 'product',
-	'meta_key'			=> '_featured',
-	'meta_value'		=> 'yes',
-	'posts_per_page'	=> 14
-);
-$featured_query = new WP_Query($args);
-
-if ( $featured_query->have_posts() ) : while ( $featured_query->have_posts() ) : $featured_query->the_post();
-	$product = wc_get_product( $featured_query->post->ID );
-
-	if ( get_post_thumbnail_id($post->ID) )
-		$featured[] = $product;
-endwhile; endif; wp_reset_query();
+// rearrange #featured
+$featured = array_values($featured);
+foreach ($featured as &$f) {
+	$product_id = icl_object_id($f->ID, 'product', false);
+	$f = wc_get_product($product_id);
+}
 
 $no_of_featured = count($featured);
 
@@ -57,7 +49,7 @@ switch ($no_of_featured) :
 
 endswitch;
 	
-$featured_title				= get_field('acf-options_shop_featured_products_title', 'option');
+$featured_title				= __('Monthly Recommended Products', 'BH');
 $featured_product_template	= locate_template('views/woocommerce/featured-product-item.php');
 
 echo '<div class="shop-featured-wrapper visible-lg">';

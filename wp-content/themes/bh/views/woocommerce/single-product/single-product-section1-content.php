@@ -25,7 +25,7 @@ if ( ! $badges && ! $content )
 	<div class="product-meta-section-title"><?php _e('Overview', 'BH'); ?></div>
 
 	<?php // badges ?>
-	<?php if ($badges) { ?>
+	<?php /* if ($badges) { ?>
 
 		<ul class="badges clearfix">
 
@@ -44,7 +44,7 @@ if ( ! $badges && ! $content )
 
 		</ul>
 
-	<?php } ?>
+	<?php } */ ?>
 
 	<?php // content ?>
 	<?php if ($content) { ?>

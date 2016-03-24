@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2016-03-22 16:09+0200\n"
-"PO-Revision-Date: 2016-03-22 16:09+0200\n"
+"POT-Creation-Date: 2016-03-24 14:45+0200\n"
+"PO-Revision-Date: 2016-03-24 14:46+0200\n"
 "Last-Translator: Nir Goldberg <nir@htmline.com>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -53,11 +53,13 @@ msgid "Archives"
 msgstr ""
 
 #: views/sidebar/sidebar-shop-wswu-banner.php:24
+#: views/woocommerce/single-product/single-product-section2-banner.php:28
 msgid ""
 "<strong>Why shop with us?</strong> There are lots of reasons. For instance, "
 msgstr ""
 
 #: views/sidebar/sidebar-shop-wswu-banner.php:27
+#: views/woocommerce/single-product/single-product-section2-banner.php:31
 msgid "And there are more"
 msgstr ""
 
@@ -267,6 +269,10 @@ msgstr ""
 msgid "Search Results"
 msgstr ""
 
+#: views/woocommerce/archive/home-featured.php:52
+msgid "Monthly Recommended Products"
+msgstr ""
+
 #: views/woocommerce/single-product/single-product-section1-add-to-cart.php:34
 msgid "QTY"
 msgstr ""
@@ -283,11 +289,11 @@ msgstr ""
 msgid "Weight"
 msgstr ""
 
-#: views/woocommerce/single-product/single-product-section1-meta.php:44
+#: views/woocommerce/single-product/single-product-section1-meta.php:45
 msgid "Dimensions"
 msgstr ""
 
-#: views/woocommerce/single-product/single-product-section1-meta.php:44
+#: views/woocommerce/single-product/single-product-section1-meta.php:45
 msgid "Length x Width x Height"
 msgstr ""
 
@@ -301,7 +307,7 @@ msgid ""
 "location and product dimensions."
 msgstr ""
 
-#: views/woocommerce/single-product/single-product-section3-related.php:52
+#: views/woocommerce/single-product/single-product-section3-related.php:56
 msgid "You might also like"
 msgstr ""
 
@@ -519,7 +525,7 @@ msgstr ""
 msgid "Filter products"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:685
+#: functions/woocommerce/woocommerce-functions.php:683
 msgid ""
 "<b>IMPORTANT NOTIFICATION:</b> Due to the Israeli postal office being unable "
 "to provide our customers up to date order tracking and delivery within "
@@ -527,31 +533,31 @@ msgid ""
 "shipping. We apologise for any inconvenience to our customers."
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:703
+#: functions/woocommerce/woocommerce-functions.php:701
 msgid "Checkout: Please fill your billing address and shipping address"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:715
+#: functions/woocommerce/woocommerce-functions.php:713
 msgid "Checkout: Please fill your payment details"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:727
+#: functions/woocommerce/woocommerce-functions.php:725
 msgid "Thank you. Your order has been received"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:739
+#: functions/woocommerce/woocommerce-functions.php:737
 msgid "Secured Billing: Please choose your preferred billing method"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:1117
+#: functions/woocommerce/woocommerce-functions.php:1115
 msgid "Most Popular"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:1118
+#: functions/woocommerce/woocommerce-functions.php:1116
 msgid "Price: Low to High"
 msgstr ""
 
-#: functions/woocommerce/woocommerce-functions.php:1119
+#: functions/woocommerce/woocommerce-functions.php:1117
 msgid "Price: High to Low"
 msgstr ""
 
