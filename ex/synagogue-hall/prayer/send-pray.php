@@ -10,12 +10,15 @@
  */
 
 // get POST variables
-$email_to	= (isset($_POST['mail'])	&& $_POST['mail'])	? $_POST['mail']	: 'nirg@bh.org.il';
-$pray_id	= (isset($_POST['id'])		&& $_POST['id'])	? $_POST['id']		: '10';
+$email_to	= (isset($_POST['mail'])	&& $_POST['mail'])	? $_POST['mail']	: '';
+$pray_id	= (isset($_POST['id'])		&& $_POST['id'])	? $_POST['id']		: '';
 
 if ( ! $email_to || ! $pray_id )
 	// die
 	die(999);
+
+// include functions
+require_once('functions.php');
 
 // build prayer page link
 $protocol	= ( empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off' ) ? 'http://' : 'https://';
@@ -24,16 +27,18 @@ $link		= $base_url . 'pray.php/?pray_id=' . $pray_id;
 
 // build email fields
 $email_from		= 'Beit Hatfutsot <do-not-reply@bh.org.il>';
-$email_subject	= 'Beit Hatfutsot - Synagogue Hall Prayers';
-$email_message	= 'Test...';
+$email_subject	= 'Beit Hatfutsot - Hallelujah! Assemble, Pray, Study - Synagogues Past and Present';
+$email_message	= email_message($link);
 
 // create email headers
-$headers	=	'From: ' . $email_from . "\r\n" .
-				'Reply-To: ' . $email_from . "\r\n" .
-				'X-Mailer: PHP/' . phpversion();
+$headers	 = "From: " . $email_from . "\r\n";
+$headers	.= "Reply-To: ". strip_tags($email_to) . "\r\n";
+$headers	.= "MIME-Version: 1.0\r\n";
+$headers	.= "Content-Type: text/html; charset=utf-8\r\n";
+$headers	.= "X-Mailer: PHP/" . phpversion();
 
 // send mail
-$result		= mail($email_to, $email_subject, $email_message, $headers);
+$result		= mail( $email_to, $email_subject, $email_message, $headers );
 $status		= $result ? 0 : 1;
 
 // die
