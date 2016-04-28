@@ -1,0 +1,3 @@
+[submodule "jewish-spotlight/austria"]
+        path = jewish-spotlight/austria
+        url = git@bitbucket.org:bhonline/wp-jca.git
