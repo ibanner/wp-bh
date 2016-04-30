@@ -4,14 +4,14 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: image, attachment, optimize, optimization, lossless, lossy, photo, picture, seo, compression, gmagick, jpegtran, gifsicle, optipng, pngout, pngquant, jpegmini, tinyjpg, tinypng, webp, wp-cli 
 Requires at least: 4.4
 Tested up to: 4.5
-Stable tag: 2.6.1
+Stable tag: 2.8.0
 License: GPLv3
 
 Reduce image sizes in WordPress including NextGEN, GRAND FlAGallery, FooGallery and more using lossless/lossy methods and image format conversion.
 
 == Description ==
 
-The EWWW Image Optimizer is a WordPress plugin that will automatically optimize your images as you upload them to your blog. It can optimize the images that you have already uploaded, convert your images automatically to the file format that will produce the smallest image size (make sure you read the WARNINGS), and optionally apply lossy reductions for PNG and JPG images.
+The EWWW Image Optimizer is a WordPress plugin that will automatically optimize your images as you upload them to your blog. It can optimize the images that you have already uploaded, convert your images automatically to the file format that will produce the smallest image size (make sure you read the WARNINGS), and optionally apply lossy compression to achieve huge savings for PNG and JPG images.
 
 **Why use EWWW Image Optimizer?**
 
@@ -114,15 +114,15 @@ If these steps do not work, more detailed instructions are available below the v
 At the bottom of this page, you will find a list of known working webhosts. If you have any contributions or corrections to these lists, please contact me via the form at https://ewww.io/contact-us/
 
 EWWW IO - Getting Started
-[youtube https://www.youtube.com/watch?v=DhqP1HpDLxs]
+[youtube https://www.youtube.com/watch?v=bwn53mhFdTs]
 EWWW IO - Advanced Settings
-[youtube https://www.youtube.com/watch?v=MJZMzjOOXiM]
+[youtube https://www.youtube.com/watch?v=kifGIs5Lx2U]
 EWWW IO - Converting Images
 [youtube https://www.youtube.com/watch?v=xAGtdv3vrYg]
 EWWW IO - WebP
 [youtube https://www.youtube.com/watch?v=OeYJgTy3D94]
 EWWW IO - Cloud API Walkthrough
-[youtube https://www.youtube.com/watch?v=ii57FjHnSpI]
+[youtube https://www.youtube.com/watch?v=PKFrPsNCcsA]
 Using EWWW IO:
 [youtube https://www.youtube.com/watch?v=uELM25v-qgU]
 
@@ -200,7 +200,7 @@ Yes, but only if the optimized version is smaller. The plugin should NEVER creat
 
 = Can I resize my images with this plugin? =
 
-No, we leave that to other plugins like Imsanity.
+Yes, you can, set it up on the Advanced tab.
 
 = Can I lower the compression setting for JPGs to save more space? =
 
@@ -245,6 +245,38 @@ Pngout, TinyJPG/TinyPNG, JPEGmini, and Pngquant were recommended by EWWW IO user
 
 * feature requests are sticky at the top of the support forums, vote for the ones you like: https://wordpress.org/support/plugin/ewww-image-optimizer
 * If you would like to help translate this plugin in your language, get started here: https://translate.wordpress.org/projects/wp-plugins/ewww-image-optimizer/
+
+= 2.8.0 =
+* added: resizing for uploaded images, set max width and height and optionally resize all existing images
+* added: retina derivative for resized original is generated if original was at least twice the size of the max dimensions (WP Retina 2x Pro only)
+* fixed: warnings for file_exists in Alt WebP function when open_basedir restriction is in effect
+* removed: disable automatic optimization, use deferred optimization instead
+* removed: disable optipng (it still functions, just seeing if anyone actually needs that option anymore)
+* changed: consolidated various settings into optimization levels for each file format, and removed Cloud tab
+
+= 2.7.2 =
+* fixed: retina images not obeying deferred and disabled auto-optimize options
+* fixed: fatal error for wp-cli when trying to optimize Media Library
+* fixed: pdf optimization was checking for gif option
+* fixed: pdf could not use bulk optimization or deferred optimization due to empty metadata
+
+= 2.7.1 =
+* fixed: Bulk Optimization not including PDF files
+* fixed: PDF files not being checked for prior optimization
+* fixed: notice for undefined index when running scheduled optimization
+* changed: Scan and Optimize changed from extension blacklist to smaller extension whitelist
+
+= 2.7.0 =
+* added: PDF Optimization, both lossless AND lossy
+
+= 2.6.2 =
+* fixed: url matching for Amazon S3 urls not working for region-specific protocol handlers
+* fixed: discrepancy between number of images actually queued for bulk and number of images listed as selected
+* fixed: S3 images not being fetched when doing local optimization and local images have been removed
+* removed: optimize again for media library after bulk optimize is complete
+* changed: fewer timeouts for long-running Bulk operations by re-issuing nonce values
+* changed: previously optimized CDN images show Re-optimize instead of Optimize Now
+* added: pre-emptive mime-type detection for Amazon S3 images since the AWS Stream Wrapper is not reliable
 
 = 2.6.1 =
 * fixed: disabled tools being tested during optimization
@@ -959,6 +991,13 @@ Pngout, TinyJPG/TinyPNG, JPEGmini, and Pngquant were recommended by EWWW IO user
 * First release (forked from CW Image Optimizer)
 
 == Upgrade Notice ==
+
+= 2.8.0 =
+* added: resizing for uploaded images, set max width and height and optionally resize all existing images
+* changed: settings have been revamped, please check to make sure your settings were migrated properly
+
+= 2.7.0 =
+* added: PDF Optimization, both lossless AND lossy
 
 = 2.6.0 =
 * jpegtran and cwebp binaries have been revamped, please check your plugin status to make sure they are still working (cwebp only if you have it enabled, of course)

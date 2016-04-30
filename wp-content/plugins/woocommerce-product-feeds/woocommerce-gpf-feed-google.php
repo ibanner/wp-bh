@@ -282,7 +282,8 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 						if ( 'available for order' == $element_value ) {
 							$element_value = 'in stock';
 						}
-						// Only send a value if the product is in stock
+						// Only send the value if the product is in stock, otherwise force to
+						// "out of stock".
 						if ( ! $feed_item->is_in_stock ) {
 							$element_value = 'out of stock';
 						}

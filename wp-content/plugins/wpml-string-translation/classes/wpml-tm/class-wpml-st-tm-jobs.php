@@ -92,7 +92,7 @@ class WPML_ST_TM_Jobs extends WPML_WPDB_User {
 		$where_args = array();
 
 		if ( true === (bool) $from ) {
-			$wheres .= 's.language = %s';
+			$wheres[]     = 's.language = %s';
 			$where_args[] = $from;
 		}
 		if ( true === (bool) $to ) {

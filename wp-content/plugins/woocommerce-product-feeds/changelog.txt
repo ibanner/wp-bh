@@ -1,5 +1,27 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2016.04.29 - version 6.7.1
+* Avoid warning generated when saving a product after editing variations.
+
+2016.04.26 - version 6.7
+* Allow entry of feed values against individual variations
+* Variations support is no-long "experimental"
+* Fix issue where prepopulation sometimes used the parent value, not the variation value
+* Use guid from feed_item, not raw ID when creating product ID for Bing feed
+* Product type taxonomy autocompletion now pulls relevant language version based on store base country, not always American (en-US).
+
+2016.04.20 - version 6.6
+* Improvements to Bing feed elements, remove unused items, and rename to match latest specification
+* Better availability reporting for out of stock products when a default availability value is set
+* Support for "material" in feed.
+
+2016.04.05 - version 6.5
+* Support for pattern attribute
+* Fixes to variation support
+
+2016.03.29 - version 6.4
+* Allow delivery label field to be prepopulated from other product fields.
+
 2016.03.18 - version 6.3
 * Repackage to fix version inconsistency
 

@@ -4,7 +4,7 @@
  * Plugin URI: http://www.leewillis.co.uk/wordpress-plugins/?utm_source=wordpress&utm_medium=www&utm_campaign=woocommerce-gpf
  * Description: Woocommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
  * Author: Lee Willis
- * Version: 6.3
+ * Version: 6.7.1
  * Author URI: http://www.leewillis.co.uk/
  * License: GPLv3
  *
@@ -106,16 +106,21 @@ function woocommerce_gpf_install() {
 
 	global $wpdb;
 
+	$charset_collate = $wpdb->get_charset_collate();
+
 	$table_name = $wpdb->prefix . 'woocommerce_gpf_google_taxonomy';
 
 	$sql = "CREATE TABLE $table_name (
-						 taxonomy_term text,
-						 search_term text
-							 )";
+	            taxonomy_term text,
+	            search_term text
+			) $charset_collate";
 
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	dbDelta( $sql );
 	flush_rewrite_rules();
+
+	// Upgrade old tables on plugin deactivation / activation.
+	$wpdb->query( "ALTER TABLE $table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci" );
 
 	// Set default settings if there are none.
 	$settings = get_option( 'woocommerce_gpf_config' );
@@ -139,7 +144,6 @@ function woocommerce_gpf_install() {
 		add_option( 'woocommerce_gpf_config', $settings, '', 'yes' );
 	}
 }
-
 register_activation_hook( __FILE__, 'woocommerce_gpf_install' );
 
 

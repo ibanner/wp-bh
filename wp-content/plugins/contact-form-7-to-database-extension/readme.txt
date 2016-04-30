@@ -5,8 +5,8 @@ Tags: contact form,database,contact form database,save contact form,form databas
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.2.1
-Tested up to: 4.4.1
-Stable tag: 2.10.3
+Tested up to: 4.5
+Stable tag: 2.10.8
 
 Saves submitted form data to the database. Export the data to a file or use short codes to display it.
 
@@ -27,6 +27,7 @@ By simply installing the plugin, it will automatically begin to capture form sub
 * <a href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms plugin (BETA)</a>
 * <a href="https://wordpress.org/plugins/caldera-forms/">Caldera Forms plugin (BETA)</a>
 * <a href="https://wordpress.org/plugins/cforms2/">CFormsII (BETA)</a>
+* <a href="http://codecanyon.net/item/formcraft-premium-wordpress-form-builder/5335056">FormCraft Premium (BETA)</a>
 * <a href="http://themeforest.net/item/enfold-responsive-multipurpose-theme/4519990">Enfold theme forms</a>
 
 Other form submissions can be saved with the addition of the <a href="http://cfdbplugin.com/?page_id=508">[cfdb-save-form-post]</a> short code on the target submission page.
@@ -85,6 +86,28 @@ You can always deactivate the plugin without loosing data.
 1. Admin Panel view of submitted form data
 
 == Changelog ==
+
+= 2.10.9 =
+* Bug Fix: Google Spreadsheet Live data: bug was introduced in 2.10.6 where data fetched by IMPORTDATA() could return with wrong delimiter (semicolon instead of comma) based on regional settings for CSV delimiter.
+This would cause Google Spreadsheet to be unable to parse data into columns
+
+= 2.10.8 =
+* Improvement: Links to exports and file downloads now redirect to login page when user is not logged in
+
+= 2.10.7 =
+* Bug Fix: Gravity Form integration was not capturing certain date fields
+
+= 2.10.6 =
+* Improvement: UTF8 CSV and Excel export now smarter about choosing "," or ";" for field and function delimiters respectively.
+* Improvement: Dashboard single-record view now has download links on files which was missing
+* Improvement: CFDB Option Error Output File - no longer need to specify full path. Just put in a file name and it will put in the top level WP install directory
+* Note: If you have CFDB Editor installed, you will need to update that to version 1.4.3 to work properly with this update
+
+= 2.10.5 =
+* New: Now captures form submission from FormCraft Premium (BETA)
+* Improvement: Excel & OpenDoc exports now formats Submitted datetime field in a format the spreadsheet recognizes
+* Improvement: Gives clear error message when can't do Excel file export due to PHP version less than 5.4
+* Improvement: Less queries to fetch options from DB
 
 = 2.10.4 =
 * Bug Fix: In some situations UFT-16-LE is not read correctly by Excel (issue related to output buffering)

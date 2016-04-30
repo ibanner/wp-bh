@@ -62,6 +62,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             'IntegrateWithCalderaForms' => array(__('Capture form submissions from Caldera Forms', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithEnfoldThemForms' => array(__('Capture form submissions from Enfold Theme', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithCFormsII' => array(__('Capture form submissions from CformsII', 'contact-form-7-to-database-extension'), 'true', 'false'),
+            'IntegrateWithFormCraft' => array(__('Capture form submissions from FormCraft Premium', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'CanSeeSubmitData' => array(__('Can See Submission data', 'contact-form-7-to-database-extension'),
                                         'Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber', 'Anyone'),
             'HideAdminPanelFromNonAdmins' => array(__('Allow only Administrators to see CFDB administration screens', 'contact-form-7-to-database-extension'), 'false', 'true'),
@@ -88,7 +89,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             'SaveCookieData' => array(__('Save Cookie Data with Form Submissions', 'contact-form-7-to-database-extension'), 'false', 'true'),
             'SaveCookieNames' => array(__('Save only cookies in DB named (comma-separated list, no spaces, and above option must be set to true)', 'contact-form-7-to-database-extension')),
             'ShowQuery' => array(__('Show the query used to display results', 'contact-form-7-to-database-extension'), 'false', 'true'),
-            'ErrorOutput' => array(__('Error output file (full path) or email address', 'contact-form-7-to-database-extension')),
+            'ErrorOutput' => array(__('Error output file or email address', 'contact-form-7-to-database-extension')),
             'DropOnUninstall' => array(__('Drop this plugin\'s Database table on uninstall', 'contact-form-7-to-database-extension'), 'false', 'true'),
             //'SubmitTableNameOverride' => array(__('Use this table to store submission data rather than the default (leave blank for default)', 'contact-form-7-to-database-extension'))
         );
@@ -361,17 +362,24 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             $integration->registerHooks();
         }
 
-        // Enfold theme forms
+        // Hook to work with Enfold theme forms
         if ($this->getOption('IntegrateWithEnfoldThemForms', 'true', true) == 'true') {
             require_once('CFDBIntegrationEnfoldTheme.php');
             $enfold = new CFDBIntegrationEnfoldTheme($this);
             $enfold->registerHooks();
         }
 
-        // CFormsII
+        // Hook to work with CFormsII
         if ($this->getOption('IntegrateWithCFormsII', 'true', true) == 'true') {
             require_once('CFDBIntegrationCFormsII.php');
             $enfold = new CFDBIntegrationCFormsII($this);
+            $enfold->registerHooks();
+        }
+
+        // Hook to work with FormCraft
+        if ($this->getOption('IntegrateWithFormCraft', 'true', true) == 'true') {
+            require_once('CFDBIntegrationFromCraft.php');
+            $enfold = new CFDBIntegrationFromCraft($this);
             $enfold->registerHooks();
         }
 
@@ -438,7 +446,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         $sc->register('cfdb-save-form-maker-post');
     }
 
-    public function ajaxLogin() {
+    public function getCredentialsFromAjaxCall() {
         // Login the user
         $key = 'kx82XcPjq8q8S!xafx%$&7p6';
         $creds = array();
@@ -471,15 +479,24 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             $password = !empty($_REQUEST['user_password']) ? $_REQUEST['user_password'] : null;
         }
 
-        $creds['user_login'] = $user;
-        $creds['user_password'] = $password;
-        $creds['remember'] = !empty($_REQUEST['rememberme']) ? $_REQUEST['rememberme'] : null;
-        $user = wp_signon($creds, false);
-        if (is_wp_error($user)) {
-            echo $user->get_error_message();
-            die;
+        if ($user && $password) {
+            $creds['user_login'] = $user;
+            $creds['user_password'] = $password;
+            $creds['remember'] = !empty($_REQUEST['rememberme']) ? $_REQUEST['rememberme'] : null;
         }
-        wp_set_current_user($user->ID);
+
+        return $creds;
+    }
+
+    public function ajaxLogin() {
+        if (! is_user_logged_in()) {
+            $creds = $this->getCredentialsFromAjaxCall();
+            $user = wp_signon($creds, false);
+            if (is_wp_error($user)) {
+                $this->ajaxRedirectToLogin();
+            }
+            wp_set_current_user($user->ID);
+        }
 
         // User is logged in. Now do the requested action
         if (!empty($_REQUEST['cfdb-action'])) {
@@ -499,13 +516,44 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         die;
     }
 
+    public function ajaxRedirectToLogin() {
+        $url = home_url();
+        $slashPos = strpos($url, '//');
+        $slashPos = strpos($url, '/', $slashPos + 2);
+        if ($slashPos !== false) {
+            $url = substr($url, 0, $slashPos);
+        }
+        $redirectUrl = "$url${_SERVER['REQUEST_URI']}";
+        $loginUrl = wp_login_url($redirectUrl);
+        header("Location: $loginUrl");
+        die();
+    }
+
+    public function ajaxCheckForLoginAndDoRedirect() {
+        if ('Anyone' != $this->getRoleOption('CanSeeSubmitData')) {
+            if (!is_user_logged_in()) {
+                $creds = $this->getCredentialsFromAjaxCall();
+                if (!empty($creds)) {
+                    $user = wp_signon($creds, false);
+                    if (is_wp_error($user)) {
+                        $this->ajaxRedirectToLogin();
+                    }
+                } else {
+                    $this->ajaxRedirectToLogin();
+                }
+            }
+        }
+    }
+
     public function ajaxExport() {
+        $this->ajaxCheckForLoginAndDoRedirect();
         require_once('CF7DBPluginExporter.php');
         CF7DBPluginExporter::doExportFromPost();
         die();
     }
 
     public function ajaxFile() {
+        $this->ajaxCheckForLoginAndDoRedirect();
         require_once('CFDBDie.php');
         if (!$this->canUserDoRoleOption('CanSeeSubmitData') &&
             !$this->canUserDoRoleOption('CanSeeSubmitDataViaShortcode')) {
@@ -1028,7 +1076,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
                 <button id="delete" name="cfdbdel" onclick="this.form.submit();"><?php echo htmlspecialchars(__('Delete', 'contact-form-7-to-database-extension')); ?></button>
             </form>
             <?php
-            $exp->export($form, array('submit_time' => $submitTime));
+            $exp->export($form, array('submit_time' => $submitTime, 'filelinks' => 'link'));
         } else {
             require_once('CFDBViewWhatsInDB.php');
             $view = new CFDBViewWhatsInDB;
@@ -1253,10 +1301,15 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         return $tableName;
     }
 
+    var $cacheIsTableDefined = false;
     public function isTableDefined($tableName) {
+        if ($this->cacheIsTableDefined) {
+            return true;
+        }
         global $wpdb;
         $rows = $wpdb->get_results("SHOW TABLES LIKE '$tableName'");
-        return !empty($rows);
+        $this->cacheIsTableDefined = !empty($rows);
+        return $this->cacheIsTableDefined;
     }
 
     /**
@@ -1368,7 +1421,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         if (!$this->isEditorActive()) {
             return;
         }
-        $requiredEditorVersion = '1.4.2';
+        $requiredEditorVersion = '1.4.3';
         $editorData = $this->getEditorPluginData();
         if (isset($editorData['Version'])) {
             if (version_compare($editorData['Version'], $requiredEditorVersion) == -1) {

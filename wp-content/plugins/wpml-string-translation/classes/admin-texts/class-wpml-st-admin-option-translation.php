@@ -66,12 +66,16 @@ class WPML_ST_Admin_Option_Translation extends WPML_SP_User {
 				} else {
 					$name = $option_name;
 				}
-				$string    = $this->st_instance->string_factory()->find_by_name( $name );
+				$string    = $this->st_instance->string_factory()->find_admin_by_name( $name );
 				$string_id = $string->string_id();
 				if ( $string_id ) {
-					$updated[] = $string->set_translation( $this->language,
-						$value, $status,
-						$translator_id );
+					if ( $this->language !== $string->get_language() ) {
+						$updated[] = $string->set_translation( $this->language,
+							$value, $status,
+							$translator_id );
+					} else {
+						$string->update_value( $value );
+					}
 				}
 			}
 		}

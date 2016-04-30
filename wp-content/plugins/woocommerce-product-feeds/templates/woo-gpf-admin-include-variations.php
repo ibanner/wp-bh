@@ -10,6 +10,6 @@
 <p>
 	<input type="checkbox" class="woocommerce_gpf_field_selector" name="woocommerce_gpf_config[include_variations]" id="woocommerce_gpf_config[include_variations]" {include_variations_selected}>
 	<label for="woocommerce_gpf_config[include_variations]"><?php
-	echo __( 'Include variations in your feed (<em>Experimental</em>. Please report any issues/feedback to <a href="https://www.woothemes.com/my-account/create-a-ticket/">support</a>.</em>)', 'woocommerce_gpf' ); // WPCS: XSS OK.
+	echo __( 'Include variations in your feed.)', 'woocommerce_gpf' ); // WPCS: XSS OK.
 	?></label>
 </p>

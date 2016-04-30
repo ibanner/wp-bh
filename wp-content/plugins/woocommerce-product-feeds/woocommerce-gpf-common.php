@@ -145,6 +145,22 @@ class WoocommerceGpfCommon {
 				'callback'    => 'render_size_system',
 			),
 
+			'material' => array(
+				'desc'            => __( 'Material', 'woocommerce_gpf' ),
+				'full_desc'       => __( "Item's material", 'woocommerce_gpf' ),
+				'feed_types'      => array( 'google' ),
+				'can_prepopulate' => true,
+				'google_len'      => 200,
+			),
+
+			'pattern' => array(
+				'desc'            => __( 'Pattern', 'woocommerce_gpf' ),
+				'full_desc'       => __( "Item's pattern", 'woocommerce_gpf' ),
+				'feed_types'      => array( 'google' ),
+				'can_prepopulate' => true,
+				'google_len'      => 100,
+			),
+
 			'identifier_exists' => array(
 				'desc'        => __( 'Identifier exists flag', 'woocommerce_gpf' ),
 				'full_desc'   => __( "Whether to include 'Identifier exists - false' when products don't have the relevant identifiers", 'woocommerce_gpf' ),
@@ -177,27 +193,14 @@ class WoocommerceGpfCommon {
 				'feed_types'  => array( 'bing' ),
 			),
 
-			'upc' => array(
-				'desc'            => __( 'Universal Product Code', 'woocommerce_gpf' ),
-				'full_desc'       => __( 'Universal Product Code. Only 8 and 12 digit codes are supported.', 'woocommerce_gpf' ),
-				'feed_types'      => array( 'bing' ),
-				'can_prepopulate' => true,
-			),
-
-			'isbn' => array(
-				'desc'            => __( 'International Standard Book Number', 'woocommerce_gpf' ),
-				'full_desc'       => __( "10 or 13 digit ISBNs. The ISBN is matched to other offers with the identical ISBN - significantly improving your customer's ability to locate your product. Use for books, CDs, DVD.", 'woocommerce_gpf' ),
-				'feed_types'      => array( 'bing' ),
-				'can_prepopulate' => true,
-			),
-
 			'delivery_label' => array(
-				'desc'        => __( 'Delivery label', 'woocommerce_gpf' ),
-				'full_desc'   => __( 'You can use this to control which shipping rules from your Merchant Centre account are applied to this product.', 'woocommerce_gpf' ),
-				'can_default' => true,
-				'callback'    => 'render_textfield',
-				'feed_types'  => array( 'google' ),
-				'google_len'  => 100,
+				'desc'            => __( 'Delivery label', 'woocommerce_gpf' ),
+				'full_desc'       => __( 'You can use this to control which shipping rules from your Merchant Centre account are applied to this product.', 'woocommerce_gpf' ),
+				'can_default'     => true,
+				'can_prepopulate' => true,
+				'callback'        => 'render_textfield',
+				'feed_types'      => array( 'google' ),
+				'google_len'      => 100,
 			),
 
 			'custom_label_0' => array(
@@ -367,6 +370,7 @@ class WoocommerceGpfCommon {
 		}
 		$settings = $this->remove_blanks( $this->settings['product_defaults'] );
 
+
 		// Merge category settings
 		$categories = wp_get_object_terms( $product_id, 'product_cat', array( 'fields' => 'ids' ) );
 
@@ -385,7 +389,7 @@ class WoocommerceGpfCommon {
 			return $settings;
 		}
 
-		// Merge prepopulated data if required.
+		// Merge pre-populated data if required.
 		if ( ! empty( $this->settings['product_prepopulate'] ) ) {
 			$prepopulated_values = $this->get_values_to_prepopulate( $product_id );
 			$prepopulated_values = $this->remove_blanks( $prepopulated_values );
@@ -517,11 +521,17 @@ class WoocommerceGpfCommon {
 				} else {
 					$result = array();
 				}
-			// Otherwise grab the values to use.
+			// Otherwise grab the values to use direct from the term relationships.
 			} else {
-				$terms = wp_get_object_terms( $product->parent->id, array( $value ), array( 'fields' => 'names' ) );
+				$terms = wp_get_object_terms( $product_id, array( $value ), array( 'fields' => 'names' ) );
 				if ( ! empty( $terms ) ) {
 					$result = $terms;
+				} elseif ( !empty( $product->parent->id ) ) {
+					// Couldn't find it against the variation - grab the parent product value.
+					$terms = wp_get_object_terms( $product->parent->id, array( $value ), array( 'fields' => 'names' ) );
+					if ( ! empty( $terms ) ) {
+						$result = $terms;
+					}
 				}
 			}
 		} else {
