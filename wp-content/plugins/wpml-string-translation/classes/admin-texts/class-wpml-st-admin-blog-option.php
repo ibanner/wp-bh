@@ -42,7 +42,7 @@ class WPML_ST_Admin_Blog_Option extends WPML_SP_User {
 		}
 		WPML_Config::load_config_run();
 
-		return $this->admin_option->update_option( '', '',
+		return $this->admin_option->update_option( '',
 			$new_value, ICL_TM_COMPLETE ) ? $old_value : $new_value;
 	}
 }

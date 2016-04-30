@@ -13,118 +13,28 @@ msgstr ""
 "Language:en\n"
 "MIME-Version: 1.0\n"
 
-msgid "Translation complete"
+msgid "Convert to multilingual widget"
 msgstr ""
 
-msgid "Partial translation"
+msgid "Multilingual arbitrary text or HTML"
 msgstr ""
 
-msgid "Translation needs update"
+msgid "Multilingual Text"
 msgstr ""
 
-msgid "Not translated"
+msgid "This widget is converted to multilingual"
 msgstr ""
 
-msgid "Waiting for translator"
+msgid "Converting to multilingual widget failed. No sidebar specified."
 msgstr ""
 
-msgid "WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first."
+msgid "Widget is already converted"
 msgstr ""
 
-msgid "Please activate WPML Multilingual CMS to have WPML String Translation working."
+msgid "Title:"
 msgstr ""
 
-msgid "%s slugs are set to be translated, but they are missing their translation"
-msgstr ""
-
-msgid "Use different slugs in different languages for %s."
-msgstr ""
-
-msgid "Not marked as 'complete'. Press 'Save' to enable."
-msgstr ""
-
-msgid "(original)"
-msgstr ""
-
-msgid "Language of domains"
-msgstr ""
-
-msgid "Apply"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Select for which domain to set the language: "
-msgstr ""
-
-msgid "-- Please select --"
-msgstr ""
-
-msgid "This domain currently has the following strings:"
-msgstr ""
-
-msgid "Current source language"
-msgstr ""
-
-msgid "Number of strings"
-msgstr ""
-
-msgid "Set the source language of these strings to:"
-msgstr ""
-
-msgid "Use this language as the default language for new strings in this domain"
-msgstr ""
-
-msgid "Change the language of selected strings"
-msgstr ""
-
-msgid "The selected strings are currently in %LANG%"
-msgstr ""
-
-msgid "Change the language to: "
-msgstr ""
-
-msgid "No strings found"
-msgstr ""
-
-msgid "Domain"
-msgstr ""
-
-msgid "Context"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "View"
-msgstr ""
-
-msgid "String"
-msgstr ""
-
-msgid "Status"
-msgstr ""
-
-msgid "translations"
-msgstr ""
-
-msgid "Translation is complete"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "You can't translate this string because it hasn't been sent for translation in this language"
-msgstr ""
-
-msgid "You can't translate this string because it's assigned to another translator"
-msgstr ""
-
-msgid "view in source"
-msgstr ""
-
-msgid "view in page"
+msgid "Automatically add paragraphs"
 msgstr ""
 
 msgid "Updated %s translation is available"
@@ -148,22 +58,172 @@ msgstr ""
 msgid "Error getting the translation file. Please go back and try again."
 msgstr ""
 
-msgid "File upload error"
+msgid "WPML String Translation is enabled but not effective. Please finish the installation of WPML first."
 msgstr ""
 
-msgid "You have been assigned to a new translation job from %s to %s.\r\n\r\nStart editing: %s\r\n\r\nYou can view your other translation jobs here: %s\r\n\r\n This message was automatically sent by Translation Management running on WPML. To stop receiving these notifications contact the system administrator at %s.\r\n\r\n This email is not monitored for replies.\r\n\r\n - The WPML team\r\n"
+msgid "No strings selected"
 msgstr ""
 
-msgid "You have been assigned to a new translation job on %s."
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
 msgstr ""
 
-msgid "No records found"
+msgid "Error: no strings selected"
 msgstr ""
 
-msgid "Strings translations updated"
+msgid "String Translation"
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+msgid "String translation allows you to enter translation for texts such as the site's title, tagline, widgets and other text not contained in posts and pages."
+msgstr ""
+
+msgid "There is <a href=\"%s\"><b>1</b> string</a> that needs to be updated or translated. "
+msgstr ""
+
+msgid "There are <a href=\"%s\"><b>%s</b> strings</a> that need to be updated or translated. "
+msgstr ""
+
+msgid "All strings are up to date."
+msgstr ""
+
+msgid "Translate strings"
+msgstr ""
+
+msgid "Blog Title"
+msgstr ""
+
+msgid "Tagline"
+msgstr ""
+
+msgid "String translation"
+msgstr ""
+
+msgid "WPML Update is Incomplete"
+msgstr ""
+
+msgid "You are running updated %s, but the following component is not updated:"
+msgstr ""
+
+msgid "You are running updated %s and %s, but the following components are not updated:"
+msgstr ""
+
+msgid "The following components are not updated:"
+msgstr ""
+
+msgid "WPML.org account"
+msgstr ""
+
+msgid "Your site will not work as it should in this configuration"
+msgstr ""
+
+msgid "Please update all components which you are using."
+msgstr ""
+
+msgid "For WPML components you can receive updates from your %s or automatically, after you register WPML."
+msgstr ""
+
+msgid "WPML Translation"
+msgstr ""
+
+msgid "Send to translation"
+msgstr ""
+
+msgid "Translation status:"
+msgstr ""
+
+msgid "Language of this %s is %s"
+msgstr ""
+
+msgid "There is nothing to translate."
+msgstr ""
+
+msgid "Waiting for translator"
+msgstr ""
+
+msgid "In progress"
+msgstr ""
+
+msgid "Complete"
+msgstr ""
+
+msgid "Not translated"
+msgstr ""
+
+msgid "Needs update"
+msgstr ""
+
+msgid "In translation basket"
+msgstr ""
+
+msgid "You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!\n\t\t\t\t\tEither submit the current basket and then add the post or delete the posts of differing language in the current basket"
+msgstr ""
+
+msgid "Please select at least one language to translate into."
+msgstr ""
+
+msgid "Please select at least one document to translate."
+msgstr ""
+
+msgid "Post \"%s\" will be ignored for %s, because translation is already in progress."
+msgstr ""
+
+msgid "Post \"%s\" will be ignored for %s, because translation is already waiting for translator."
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "WPML Package Translation is enabled but not effective. It requires <a href=\"%s\">WPML</a>, String Translation and Translation Management in order to work."
+msgstr ""
+
+msgid "Packages"
+msgstr ""
+
+msgid "Package Management"
+msgstr ""
+
+msgid "Display packages for this kind:"
+msgstr ""
+
+msgid "Delete Selected Packages"
+msgstr ""
+
+msgid "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too."
+msgstr ""
+
+msgid "Kind"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "Contains %s strings"
+msgstr ""
+
+msgid "Translation is in progress"
+msgstr ""
+
+msgid "Default package language"
+msgstr ""
+
+msgid "No packages found"
+msgstr ""
+
+msgid "Select All"
+msgstr ""
+
+msgid "Some of the strings selected belong to packages. You can only change the language of these strings if all strings in the packages are selected."
 msgstr ""
 
 msgid "Scanned files from %s:"
+msgstr ""
+
+msgid "Invalid file: %s"
 msgstr ""
 
 msgid "Done scanning files"
@@ -184,9 +244,6 @@ msgstr ""
 msgid "Skipping file: %s"
 msgstr ""
 
-msgid "No string found"
-msgstr ""
-
 msgid "Auto-download WordPress translations"
 msgstr ""
 
@@ -197,6 +254,9 @@ msgid "Check other languages"
 msgstr ""
 
 msgid "Updated translations (%d)"
+msgstr ""
+
+msgid "String"
 msgstr ""
 
 msgid "Existing translation"
@@ -212,6 +272,9 @@ msgid "Translation"
 msgstr ""
 
 msgid "Add the new translations."
+msgstr ""
+
+msgid "Cancel"
 msgstr ""
 
 msgid "bottom of this page"
@@ -256,184 +319,130 @@ msgstr ""
 msgid "More details"
 msgstr ""
 
-msgid "Some of the strings selected belong to packages. You can only change the language of these strings if all strings in the packages are selected."
+msgid "No string found"
 msgstr ""
 
-msgid "Package Management"
+msgid "File upload error"
 msgstr ""
 
-msgid "Display packages for this kind:"
+msgid "You have been assigned to a new translation job from %s to %s.\n\nStart editing: %s\n\nYou can view your other translation jobs here: %s\n\n This message was automatically sent by Translation Management running on WPML. To stop receiving these notifications contact the system administrator at %s.\n\n This email is not monitored for replies.\n\n - The WPML team\n"
 msgstr ""
 
-msgid "Delete Selected Packages"
+msgid "You have been assigned to a new translation job on %s."
 msgstr ""
 
-msgid "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too."
+msgid "No records found"
 msgstr ""
 
-msgid "Kind"
+msgid "Strings translations updated"
 msgstr ""
 
-msgid "Info"
+msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button."
 msgstr ""
 
-msgid "Contains %s strings"
+msgid "Proceed"
 msgstr ""
 
-msgid "Translation is in progress"
+msgid "Internationalization: You’re probably doing it wrong"
 msgstr ""
 
-msgid "Default package language"
+msgid "Note: It is not safe to use variables, constants or functions in gettext calls. Read \"%s\" for a detailed explanation."
 msgstr ""
 
-msgid "No packages found"
+msgid "Domain"
 msgstr ""
 
-msgid "Select All"
+msgid "Translation status"
 msgstr ""
 
-msgid "WPML Translation"
+msgid "Count"
 msgstr ""
 
-msgid "Send to translation"
+msgid "n/a"
 msgstr ""
 
-msgid "Translate strings"
+msgid "no domain"
 msgstr ""
 
-msgid "Translation status:"
+msgid "Fully translated"
 msgstr ""
 
-msgid "Language of this %s is %s"
+msgid "View all the theme's texts"
 msgstr ""
 
-msgid "There is nothing to translate."
+msgid "View strings that need translation"
 msgstr ""
 
-msgid "In progress"
+msgid "Not translated or needs update"
 msgstr ""
 
-msgid "Complete"
+msgid "Total"
 msgstr ""
 
-msgid "Needs update"
+msgid "To translate your theme's texts, click on the button below. WPML will scan your theme for texts and let you enter translations."
 msgstr ""
 
-msgid "In translation basket"
+msgid "Scan the theme for strings"
 msgstr ""
 
-msgid "You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!\r\n\t\t\t\t\tEither submit the current basket and then add the post or delete the posts of differing language in the current basket"
+msgid "Plugin"
 msgstr ""
 
-msgid "Please select at least one language to translate into."
+msgid "Yes"
 msgstr ""
 
-msgid "Please select at least one document to translate."
+msgid "Network"
 msgstr ""
 
-msgid "Post \"%s\" will be ignored for %s, because translation is already in progress."
+msgid "MU"
 msgstr ""
 
-msgid "Post \"%s\" will be ignored for %s, because translation is already waiting for translator."
+msgid "No"
 msgstr ""
 
-msgid "Packages"
+msgid "View all the plugin's texts"
 msgstr ""
 
-msgid "Active"
+msgid "Scan the selected plugins for strings"
 msgstr ""
 
-msgid "WPML Package Translation is enabled but not effective. It requires <a href=\"%s\">WPML</a>, String Translation and Translation Management in order to work."
+msgid "Automatically use theme or plugin text domains, when gettext calls does not use a string literal."
 msgstr ""
 
-msgid "Convert to multilingual widget"
+msgid "If your theme or plugins falls in this case, enabling this option, WPML will try to retrieve this from the plugin or theme \"Text Domain\" header, if set."
 msgstr ""
 
-msgid "Multilingual arbitrary text or HTML"
+msgid "Strings in the theme"
 msgstr ""
 
-msgid "Multilingual Text"
+msgid "Re-scanning the plugins or the themes will reset the strings tracked in the code or the HTML source"
 msgstr ""
 
-msgid "This widget is converted to multilingual"
+msgid "The following strings were found in your theme."
 msgstr ""
 
-msgid "Converting to multilingual widget failed. No sidebar specified."
+msgid "Update required - please rescan this theme"
 msgstr ""
 
-msgid "Widget is already converted"
+msgid "Load translations if found in the .mo files. (it will not override existing translations)"
 msgstr ""
 
-msgid "Title:"
+msgid "Strings in the plugins"
 msgstr ""
 
-msgid "Automatically add paragraphs"
+msgid "Update required - please rescan this plugin"
 msgstr ""
 
-msgid "WPML Update is Incomplete"
+msgid "create PO file"
 msgstr ""
 
-msgid "You are running updated %s, but the following component is not updated:"
+msgid "Custom posts slug translation options"
 msgstr ""
 
-msgid "You are running updated %s and %s, but the following components are not updated:"
+msgid "Translate custom posts slugs (via WPML String Translation)."
 msgstr ""
 
-msgid "The following components are not updated:"
-msgstr ""
-
-msgid "WPML.org account"
-msgstr ""
-
-msgid "Your site will not work as it should in this configuration"
-msgstr ""
-
-msgid "Please update all components which you are using."
-msgstr ""
-
-msgid "For WPML components you can receive updates from your %s or automatically, after you register WPML."
-msgstr ""
-
-msgid "WPML String Translation is enabled but not effective. Please finish the installation of WPML first."
-msgstr ""
-
-msgid "No strings selected"
-msgstr ""
-
-msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
-msgstr ""
-
-msgid "Error: no strings selected"
-msgstr ""
-
-msgid "String Translation"
-msgstr ""
-
-msgid "Configure"
-msgstr ""
-
-msgid "String translation allows you to enter translation for texts such as the site's title, tagline, widgets and other text not contained in posts and pages."
-msgstr ""
-
-msgid "There is <a href=\"%s\"><b>1</b> string</a> that needs to be updated or translated. "
-msgstr ""
-
-msgid "There are <a href=\"%s\"><b>%s</b> strings</a> that need to be updated or translated. "
-msgstr ""
-
-msgid "All strings are up to date."
-msgstr ""
-
-msgid "Unable to add \"%s\" string in tables"
-msgstr ""
-
-msgid "Blog Title"
-msgstr ""
-
-msgid "Tagline"
-msgstr ""
-
-msgid "String translation"
+msgid "Save"
 msgstr ""
 
 msgid "Select how to get translations for WordPress core"
@@ -443,36 +452,6 @@ msgid "WPML will automatically download translations for WordPress"
 msgstr ""
 
 msgid "I will download translations for WordPress and save .mo files in wp-content/languages"
-msgstr ""
-
-msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button."
-msgstr ""
-
-msgid "Proceed"
-msgstr ""
-
-msgid "The fields with <span%s>red</span> background are text fields and the fields with <span%s>cyan</span> background are numeric."
-msgstr ""
-
-msgid "Choose the fields you'd like to translate and click on the 'Apply' button. Then, use WPML's <a%s>String translation</a> to translate them."
-msgstr ""
-
-msgid "The selected strings can now be translated using the <a%s>string translation</a> screen"
-msgstr ""
-
-msgid "This table shows all the admin texts that WPML  found."
-msgstr ""
-
-msgid "Export selected strings as a WPML config file that can be added to themes or plugins"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "You have removed some of the texts that are translated already. The translations will be lost."
-msgstr ""
-
-msgid "No options found. Make sure you saved your theme options at least once. <br />Some themes only add these to the wp_options table after the user explicitly saves over the theme defaults"
 msgstr ""
 
 msgid "These are the strings that we found in your .po file. Please carefully review them. Then, click on the 'add' or 'cancel' buttons at the %sbottom of this screen%s. You can exclude individual strings by clearing the check boxes next to them."
@@ -565,6 +544,9 @@ msgstr ""
 msgid "Auto-registration takes server resources. Read the %susage instructions%s to learn how to use it correctly while you are developing the site."
 msgstr ""
 
+msgid "Apply"
+msgstr ""
+
 msgid "Import / export .po"
 msgstr ""
 
@@ -637,98 +619,116 @@ msgstr ""
 msgid "Translate texts in admin screens &raquo;"
 msgstr ""
 
-msgid "Internationalization: You’re probably doing it wrong"
+msgid "The fields with <span%s>red</span> background are text fields and the fields with <span%s>cyan</span> background are numeric."
 msgstr ""
 
-msgid "Note: It is not safe to use variables, constants or functions in gettext calls. Read \"%s\" for a detailed explanation."
+msgid "Choose the fields you'd like to translate and click on the 'Apply' button. Then, use WPML's <a%s>String translation</a> to translate them."
 msgstr ""
 
-msgid "Translation status"
+msgid "The selected strings can now be translated using the <a%s>string translation</a> screen"
 msgstr ""
 
-msgid "Count"
+msgid "This table shows all the admin texts that WPML  found."
 msgstr ""
 
-msgid "n/a"
+msgid "Export selected strings as a WPML config file that can be added to themes or plugins"
 msgstr ""
 
-msgid "no domain"
+msgid "Close"
 msgstr ""
 
-msgid "Fully translated"
+msgid "You have removed some of the texts that are translated already. The translations will be lost."
 msgstr ""
 
-msgid "View all the theme's texts"
+msgid "No options found. Make sure you saved your theme options at least once. <br />Some themes only add these to the wp_options table after the user explicitly saves over the theme defaults"
 msgstr ""
 
-msgid "View strings that need translation"
+msgid "WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first."
 msgstr ""
 
-msgid "Not translated or needs update"
+msgid "Please activate WPML Multilingual CMS to have WPML String Translation working."
 msgstr ""
 
-msgid "Total"
+msgid "Change the language of selected strings"
 msgstr ""
 
-msgid "To translate your theme's texts, click on the button below. WPML will scan your theme for texts and let you enter translations."
+msgid "The selected strings are currently in %LANG%"
 msgstr ""
 
-msgid "Scan the theme for strings"
+msgid "Change the language to: "
 msgstr ""
 
-msgid "Plugin"
+msgid "No strings found"
 msgstr ""
 
-msgid "Yes"
+msgid "Context"
 msgstr ""
 
-msgid "Network"
+msgid "View"
 msgstr ""
 
-msgid "MU"
+msgid "Status"
 msgstr ""
 
-msgid "No"
+msgid "translations"
 msgstr ""
 
-msgid "View all the plugin's texts"
+msgid "Translation is complete"
 msgstr ""
 
-msgid "Scan the selected plugins for strings"
+msgid "You can't translate this string because it hasn't been sent for translation in this language"
 msgstr ""
 
-msgid "Automatically use theme or plugin text domains, when gettext calls does not use a string literal."
+msgid "You can't translate this string because it's assigned to another translator"
 msgstr ""
 
-msgid "If your theme or plugins falls in this case, enabling this option, WPML will try to retrieve this from the plugin or theme \"Text Domain\" header, if set."
+msgid "view in source"
 msgstr ""
 
-msgid "Strings in the theme"
+msgid "view in page"
 msgstr ""
 
-msgid "Re-scanning the plugins or the themes will reset the strings tracked in the code or the HTML source"
+msgid "Language of domains"
 msgstr ""
 
-msgid "The following strings were found in your theme."
+msgid "Select for which domain to set the language: "
 msgstr ""
 
-msgid "Update required - please rescan this theme"
+msgid "-- Please select --"
 msgstr ""
 
-msgid "Load translations if found in the .mo files. (it will not override existing translations)"
+msgid "This domain currently has the following strings:"
 msgstr ""
 
-msgid "Strings in the plugins"
+msgid "Current source language"
 msgstr ""
 
-msgid "Update required - please rescan this plugin"
+msgid "Number of strings"
 msgstr ""
 
-msgid "create PO file"
+msgid "Set the source language of these strings to:"
 msgstr ""
 
-msgid "Custom posts slug translation options"
+msgid "Use this language as the default language for new strings in this domain"
 msgstr ""
 
-msgid "Translate custom posts slugs (via WPML String Translation)."
+msgid "%s slugs are set to be translated, but they are missing their translation"
+msgstr ""
+
+msgid "Use different slugs in different languages for %s."
+msgstr ""
+
+msgid "Not marked as 'complete'. Press 'Save' to enable."
+msgstr ""
+
+msgid "(original)"
+msgstr ""
+
+msgid "Translation complete"
+msgstr ""
+
+msgid "Partial translation"
+msgstr ""
+
+msgid "Translation needs update"
 msgstr ""

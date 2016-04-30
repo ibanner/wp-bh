@@ -46,8 +46,9 @@ class WPML_Displayed_String_Filter extends WPML_WPDB_And_SP_User {
 	 */
 	public function translate_by_name_and_context( $untranslated_text, $name, $context = "", &$has_translation = null ) {
 		$res = $this->string_from_registered( $name, $context );
+		$untranslated_text_has_content = !is_array($untranslated_text) && strlen( $untranslated_text ) !== 0 ? true : false;
 		if ( $res === false
-		     && (bool) $untranslated_text === true
+		     && $untranslated_text_has_content === true
 		     && $this->use_original_cache && substr( $name, 0, 10 ) !== 'URL slug: '
 			 && ! ( $context === 'default' || $context === 'Wordpess' )
 		) {
@@ -58,7 +59,7 @@ class WPML_Displayed_String_Filter extends WPML_WPDB_And_SP_User {
 		}
 		list( , , $key ) = $this->key_by_name_and_context( $name, $context );
 		$has_translation = $res !== false && ! isset( $this->untranslated_cache[ $key ] ) ? true : null;
-		$res             = $res === false && (bool) $untranslated_text === true ? $untranslated_text : $res;
+		$res             = $res === false && $untranslated_text_has_content === true ? $untranslated_text : $res;
 		$res             = $res === false ? $this->get_original_value( $name, $context ) : $res;
 
 		return $res;

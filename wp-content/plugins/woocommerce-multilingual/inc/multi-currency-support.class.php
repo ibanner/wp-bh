@@ -55,10 +55,8 @@ class WCML_Multi_Currency_Support{
         }else{
             if(is_ajax() && $this->get_client_currency() != get_option('woocommerce_currency')){
 
-                $ajax_actions = apply_filters('wcml_multi_currency_is_ajax', array('woocommerce_get_refreshed_fragments', 'woocommerce_update_order_review', 'woocommerce-checkout', 'woocommerce_checkout', 'woocommerce_add_to_cart'));
-                if(version_compare($GLOBALS['woocommerce']->version, '2.1', '>=')){
-                    $ajax_actions[] = 'woocommerce_update_shipping_method';
-                }
+                $ajax_actions = apply_filters('wcml_multi_currency_is_ajax', array('woocommerce_get_refreshed_fragments', 'woocommerce_update_order_review', 'woocommerce-checkout', 'woocommerce_checkout', 'woocommerce_add_to_cart', 'woocommerce_update_shipping_method'));
+
                 if( ( isset( $_POST['action'] ) && in_array( $_POST['action'], $ajax_actions ) ) || (  isset( $_GET['action'] ) && in_array( $_GET['action'], $ajax_actions ) ) ){
                     $load = true;
                 }
@@ -1453,11 +1451,14 @@ class WCML_Multi_Currency_Support{
             $woocommerce_wpml->settings['display_custom_prices'] ){
 
             foreach( $children as $key => $child ){
-                if( !get_post_meta( $child, '_wcml_custom_prices_status', true ) ){
+
+                $orig_lang = $woocommerce_wpml->products->get_original_product_language( $child );
+                $orig_child_id = apply_filters( 'translate_object_id', $child, get_post_type( $child ), true, $orig_lang );
+
+                if( !get_post_meta( $orig_child_id, '_wcml_custom_prices_status', true ) ){
                     unset( $children[ $key ] );
                 }
             }
-
 
         }
 

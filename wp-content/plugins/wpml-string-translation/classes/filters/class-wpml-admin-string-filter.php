@@ -161,7 +161,7 @@ class WPML_Admin_String_Filter extends WPML_Displayed_String_Filter {
 	
 
 	private function save_string( $value, $allow_empty_value, $language, $domain, $context, $name ) {
-		if ( $allow_empty_value || $value ) {
+		if ( $allow_empty_value || 0 !== strlen( $value ) ) {
 			$this->wpdb->insert( $this->wpdb->prefix . 'icl_strings', array(
 				'language'                => $language,
 				'context'                 => $domain,

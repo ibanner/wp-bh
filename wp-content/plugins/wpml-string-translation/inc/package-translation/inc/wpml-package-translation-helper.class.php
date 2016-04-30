@@ -138,14 +138,16 @@ class WPML_Package_Helper {
 	}
 
 	final function translate_string( $string_value, $string_name, $package ) {
-		$package = new WPML_Package( $package );
-
 		$result = $string_value;
 
-		if ( $package ) {
-			$sanitized_string_name = $package->sanitize_string_name( $string_name );
-
-			$result = $package->translate_string( $string_value, $sanitized_string_name );
+		if ( is_string( $string_value ) ) {
+			$package = new WPML_Package( $package );
+	
+			if ( $package ) {
+				$sanitized_string_name = $package->sanitize_string_name( $string_name );
+	
+				$result = $package->translate_string( $string_value, $sanitized_string_name );
+			}
 		}
 
 		return $result;

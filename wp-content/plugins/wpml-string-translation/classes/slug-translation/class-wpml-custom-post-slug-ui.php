@@ -28,7 +28,7 @@ class WPML_Custom_Post_Slug_UI extends WPML_WPDB_And_SP_User {
 			list( $string_id, $_slug_translations ) = WPML_Slug_Translation::get_translations( $post_type );
 			
 			if($this->settings->is_on( ) && $_translate && !$string_id) {
-				$message = sprintf( __( "%s slugs are set to be translated, but they are missing their translation", 'sitepress'), $custom_post->labels->name);
+				$message = sprintf( __( "%s slugs are set to be translated, but they are missing their translation", 'wpml-string-translation'), $custom_post->labels->name);
 				ICL_AdminNotifier::displayInstantMessage( $message, 'error', 'below-h2', false );
 			}
 		} else {
@@ -40,7 +40,7 @@ class WPML_Custom_Post_Slug_UI extends WPML_WPDB_And_SP_User {
 				<p>
 					<label>
 						<input name="translate_slugs[<?php echo $post_type ?>][on]" type="checkbox" value="1" <?php checked(1, $_translate, true) ?> />
-						<?php printf(__('Use different slugs in different languages for %s.', 'sitepress'), $custom_post->labels->name); ?>
+						<?php printf(__('Use different slugs in different languages for %s.', 'wpml-string-translation'), $custom_post->labels->name); ?>
 					</label>
 				</p>
 
@@ -85,7 +85,7 @@ class WPML_Custom_Post_Slug_UI extends WPML_WPDB_And_SP_User {
 								<?php
 								if ( isset( $_slug_translations[ $language[ 'code' ] ] ) && $_slug_translations[ $language[ 'code' ] ][ 'status' ] != ICL_TM_COMPLETE ) {
 									?>
-									<em class="icl_st_slug_tr_warn"><?php _e( "Not marked as 'complete'. Press 'Save' to enable.", 'sitepress' ) ?></em>
+									<em class="icl_st_slug_tr_warn"><?php _e( "Not marked as 'complete'. Press 'Save' to enable.", 'wpml-string-translation' ) ?></em>
 								<?php
 								}
 								?>
@@ -108,7 +108,7 @@ class WPML_Custom_Post_Slug_UI extends WPML_WPDB_And_SP_User {
 																	)
 															  );
 									?>
-									<label for="translate_slugs[<?php echo $post_type ?>][langs][<?php echo $language[ 'code' ] ?>]"> <em><?php _e( "(original)", 'sitepress' ) ?></em></label>
+									<label for="translate_slugs[<?php echo $post_type ?>][langs][<?php echo $language[ 'code' ] ?>]"> <em><?php _e( "(original)", 'wpml-string-translation' ) ?></em></label>
 								</td>
 								<td><input disabled="disabled" class="disabled" id="translate_slugs[<?php echo $post_type ?>][langs][<?php echo $language[ 'code' ] ?>]" name="translate_slugs[<?php echo $post_type ?>][langs][<?php echo $language[ 'code' ] ?>]" type="text"
 																 value="<?php echo $original_slug; ?>"/>
