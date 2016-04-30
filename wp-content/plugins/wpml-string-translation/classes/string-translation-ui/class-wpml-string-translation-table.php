@@ -100,7 +100,6 @@ class WPML_String_Translation_Table {
 								$tr_complete_checked = 'checked="checked"';
 							}else{
 								if(icl_st_is_translator()){
-									get_currentuserinfo();
 									$user_lang_pairs = get_user_meta(get_current_user_id(), $wpdb->prefix.'language_pairs', true);
 									if(empty($user_lang_pairs[$this->string_settings['strings_language']][$lang['code']])){
 										continue;

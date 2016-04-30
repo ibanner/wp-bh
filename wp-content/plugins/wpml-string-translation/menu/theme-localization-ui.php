@@ -37,7 +37,7 @@ function show_automatic_text_domain_checkbox( ) {
 		<?php $use_header_text_domains_when_missing_checked = checked( true, ! empty( $sitepress_settings[ 'st' ][ 'use_header_text_domains_when_missing' ] ), false ); ?>
 		<input type="checkbox" name="wpml_st_theme_localization_type_wpml_td" value="1" <?php echo $use_header_text_domains_when_missing_checked; ?>/>
 		<label for="wpml_st_theme_localization_type_wpml_td">
-			<?php _e( "Automatically use theme or plugin text domains, when gettext calls does not use a string literal.", 'wpml-string-translation' ) ?>
+			<?php _e( 'Automatically use theme or plugin text domains when gettext calls do not use a string literal.', 'wpml-string-translation' ) ?>
 		</label>
 		<?php
 		$doing_it_wrong_url = 'http://ottopress.com/2012/internationalization-youre-probably-doing-it-wrong/';

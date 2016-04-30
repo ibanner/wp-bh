@@ -30,7 +30,7 @@ if ( !class_exists( 'Gamajo_Template_Loader' ) )  {
 		 *
 		 * @type string
 		 */
-		protected $filter_prefix = 'woocommerce_gpf';
+		protected $filter_prefix = '';
 
 		/**
 		 * Directory name where custom templates for this plugin should be found in the theme.
@@ -39,7 +39,7 @@ if ( !class_exists( 'Gamajo_Template_Loader' ) )  {
 		 *
 		 * @type string
 		 */
-		protected $theme_template_directory = 'woocommerce_gpf'; // or 'your-plugin-templates' etc.
+		protected $theme_template_directory = ''; // or 'your-plugin-templates' etc.
 
 		/**
 		 * Reference to the root directory path of this plugin.

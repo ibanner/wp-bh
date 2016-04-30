@@ -8,6 +8,7 @@ class WoocommerceGpfFrontend {
 
 	protected $feed = null;
 	protected $feed_format = '';
+	protected $settings = array();
 
 	/**
 	 * Constructor. Grab the settings, and add filters if we have stuff to do
@@ -28,16 +29,16 @@ class WoocommerceGpfFrontend {
 			$this->feed = new WoocommerceGpfFeedBing();
 			$this->feed_format = 'bing';
 		}
-
+		$this->settings = get_option( 'woocommerce_gpf_config', array() );
 		if ( ! empty( $this->feed ) ) {
-			add_action( 'woocommerce_gpf_elements', array( $this, 'general_elements' ), 10, 2 );
-			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_height_elements' ), 10, 2 );
-			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_width_elements' ), 10, 2 );
-			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_length_elements' ), 10, 2 );
+			add_action( 'woocommerce_gpf_elements', array( $this, 'general_elements' ), 10, 3 );
+			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_height_elements' ), 10, 3 );
+			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_width_elements' ), 10, 3 );
+			add_action( 'woocommerce_gpf_elements_google', array( $this, 'shipping_length_elements' ), 10, 3 );
+			add_action( 'woocommerce_gpf_elements_google', array( $this, 'all_or_nothing_shipping_elements' ), 11, 3 );
+			add_action( 'woocommerce_gpf_feed_item', array( $this, 'general_feed_item' ), 10, 1 );
 			add_action( 'template_redirect', array( $this, 'render_product_feed' ), 15 );
 		}
-
-
 	}
 
 	/**
@@ -134,8 +135,8 @@ class WoocommerceGpfFrontend {
 		$feed_item->regular_price_inc_tax = $prices->regular_price_inc_tax;
 		$feed_item->sale_price_ex_tax     = $prices->sale_price_ex_tax;
 		$feed_item->sale_price_inc_tax    = $prices->sale_price_inc_tax;
-		$feed_item->price_inc_tax         = $prices->price_inc_tax;
 		$feed_item->price_ex_tax          = $prices->price_ex_tax;
+		$feed_item->price_inc_tax         = $prices->price_inc_tax;
 		$feed_item->sale_price_start_date = $prices->sale_price_start_date;
 		$feed_item->sale_price_end_date   = $prices->sale_price_end_date;
 	}
@@ -244,14 +245,11 @@ class WoocommerceGpfFrontend {
 	 * @return bool                         True if the product should be excluded. False otherwise.
 	 */
 	private function product_is_excluded( $woocommerce_product ) {
-
 		$excluded = false;
-
 		// Check to see if the product is set as Hidden within WooCommerce.
 		if ( 'hidden' == $woocommerce_product->visibility ) {
 			$excluded = true;
 		}
-
 		// Check to see if the product has been excluded in the feed config.
 		if ( $tmp_product_data = $this->get_product_meta( $woocommerce_product, 'woocommerce_gpf_data' ) ) {
 			$tmp_product_data = maybe_unserialize( $tmp_product_data );
@@ -261,9 +259,7 @@ class WoocommerceGpfFrontend {
 		if ( isset ( $tmp_product_data['exclude_product'] ) ) {
 			$excluded = true;
 		}
-
 		return apply_filters( 'woocommerce_gpf_exclude_product', $excluded, $woocommerce_product->id, $this->feed_format );
-
 	}
 
 	/**
@@ -330,64 +326,23 @@ class WoocommerceGpfFrontend {
 		// Query for the products
 		$chunk_size = apply_filters( 'woocommerce_gpf_chunk_size', 10 );
 
-		$args['post_type'] = 'product';
+		$args['post_type']   = 'product';
 		$args['numberposts'] = $chunk_size;
-		$args['offset'] = isset( $wp_query->query_vars['gpf_start'] ) ? (int) $wp_query->query_vars['gpf_start'] : 0;
-		$gpf_limit = isset( $wp_query->query_vars['gpf_limit'] ) ? (int) $wp_query->query_vars['gpf_limit'] : false;
+		$args['offset']      = isset( $wp_query->query_vars['gpf_start'] ) ?
+		                       (int) $wp_query->query_vars['gpf_start'] :
+		                       0;
+		$gpf_limit           = isset( $wp_query->query_vars['gpf_limit'] ) ?
+		                       (int) $wp_query->query_vars['gpf_limit'] :
+		                       false;
 
 		$output_count = 0;
-		$products = get_posts( $args );
+		$products     = get_posts( $args );
 
 		while ( count( $products ) ) {
 			foreach ( $products as $post ) {
-				setup_postdata( $post );
-
-				$woocommerce_product = $this->load_product( $post );
-
-				if ( $this->product_is_excluded( $woocommerce_product ) ) {
-					continue;
-				}
-
-				$feed_item = new stdClass();
-				$this->get_product_prices( $feed_item, $woocommerce_product );
-
-				// Get main item information
-				$feed_item->ID = $post->ID;
-				$feed_item->guid = 'woocommerce_gpf_' . $post->ID;
-				$feed_item->title = apply_filters(
-					'woocommerce_gpf_title',
-					get_the_title( $feed_item->ID ),
-					$feed_item->ID
-				);
-				$feed_item->description = apply_filters(
-					'woocommerce_gpf_description',
-					apply_filters(
-						'the_content',
-						get_the_content()
-					),
-					$feed_item->ID
-				);
-				$feed_item->image_link = $this->get_the_post_thumbnail_src( $feed_item->ID, 'shop_large' );
-				$feed_item->purchase_link = get_permalink( $feed_item->ID );
-				$feed_item->shipping_weight = apply_filters( 'woocommerce_gpf_shipping_weight', $woocommerce_product->get_weight(), $feed_item->ID );
-				$feed_item->is_in_stock = $woocommerce_product->is_in_stock();
-				$feed_item->sku = $woocommerce_product->get_sku();
-				$feed_item->categories = wp_get_object_terms( $feed_item->ID, 'product_cat' );
-
-				// General, or feed-specific items
-				$feed_item->additional_elements = apply_filters( 'woocommerce_gpf_elements', array(), $feed_item->ID );
-				$feed_item->additional_elements = apply_filters( 'woocommerce_gpf_elements_'.$this->feed_format, $feed_item->additional_elements, $feed_item->ID );
-
-				$this->get_additional_images( $feed_item );
-
-				// Allow other plugins to modify the item before its rendered to the feed
-				$feed_item = apply_filters( 'woocommerce_gpf_feed_item', $feed_item );
-				$feed_item = apply_filters( 'woocommerce_gpf_feed_item_' . $this->feed_format, $feed_item );
-
-				if ( $this->feed->render_item( $feed_item ) ) {
+				if ( $this->process_product( $post ) ) {
 					$output_count++;
 				}
-
 				// Quit if we've done all of the products
 				if ( $gpf_limit && $output_count == $gpf_limit ) {
 					break;
@@ -409,21 +364,206 @@ class WoocommerceGpfFrontend {
 	}
 
 
+	/**
+	 * Process a product, outputting its information.
+	 *
+	 * Uses process_simple_product() to process simple products, or all products if variation
+	 * support is disabled. Uses process_variable_product() to process variable products.
+	 *
+	 * @param  object  $post  WordPress post object.
+	 * @return bool           True if one or more products were output, false otherwise.
+	 */
+	private function process_product($post) {
+		setup_postdata( $post );
+		$woocommerce_product = $this->load_product( $post );
+		if ( $this->product_is_excluded( $woocommerce_product ) ) {
+			return false;
+		}
+		if ( empty( $this->settings['include_variations'] ) ||
+		     $woocommerce_product->is_type( 'simple' ) ) {
+			return $this->process_simple_product( $post, $woocommerce_product );
+		} elseif ( $woocommerce_product->is_type( 'variable' ) ) {
+			return $this->process_variable_product( $post, $woocommerce_product );
+		}
+	}
+
+	/**
+	 * Process a simple product, and output its elements.
+	 *
+	 * @param  object  $post                 WordPress post object
+	 * @param  object  $woocommerce_product  WooCommerce Product Object (May not be Simple)
+	 * @return bool                          True if one or more products were output, false
+	 *                                       otherwise.
+	 */
+	private function process_simple_product( $post, $woocommerce_product ) {
+		$feed_item = new stdClass();
+		$this->get_product_prices( $feed_item, $woocommerce_product );
+
+		// Get main item information
+		$feed_item->ID = $post->ID;
+		$feed_item->guid = 'woocommerce_gpf_' . $post->ID;
+		$feed_item->title = apply_filters(
+			'woocommerce_gpf_title',
+			get_the_title( $feed_item->ID ),
+			$feed_item->ID
+		);
+		$feed_item->description = apply_filters(
+			'woocommerce_gpf_description',
+			apply_filters(
+				'the_content',
+				get_the_content()
+			),
+			$feed_item->ID,
+			null
+		);
+		$feed_item->image_link          = $this->get_the_post_thumbnail_src( $feed_item->ID, 'shop_large' );
+		$feed_item->purchase_link       = get_permalink( $feed_item->ID );
+		$feed_item->shipping_weight     = apply_filters( 'woocommerce_gpf_shipping_weight', $woocommerce_product->get_weight(), $feed_item->ID );
+		$feed_item->is_in_stock         = $woocommerce_product->is_in_stock();
+		$feed_item->sku                 = $woocommerce_product->get_sku();
+		$feed_item->categories          = wp_get_object_terms( $feed_item->ID, 'product_cat' );
+
+		// General, or feed-specific items
+		$feed_item->additional_elements = apply_filters( 'woocommerce_gpf_elements', array(), $feed_item->ID, null );
+		$feed_item->additional_elements = apply_filters( 'woocommerce_gpf_elements_' . $this->feed_format, $feed_item->additional_elements, $feed_item->ID, null );
+
+		$this->get_additional_images( $feed_item );
+
+		// Allow other plugins to modify the item before its rendered to the feed
+		$feed_item = apply_filters( 'woocommerce_gpf_feed_item', $feed_item );
+		$feed_item = apply_filters( 'woocommerce_gpf_feed_item_' . $this->feed_format, $feed_item );
+
+		return $this->feed->render_item( $feed_item );
+	}
+
+	/**
+	 * Add query args to a URL to select a specific variation.
+	 */
+	private function add_variation_query_args( $feed_item, $variation_product ) {
+		$attribute_terms = $variation_product->get_variation_attributes();
+		if (empty($attribute_terms)) {
+			return $feed_item->purchase_link;
+		}
+		return add_query_arg(
+			$attribute_terms,
+			$feed_item->purchase_link
+		);
+	}
+
+	private function generate_attribute_suffix( $variation_product ) {
+		$excluded_attributes = apply_filters(
+			'woocommerce_gpf_attributes_excluded_from_variation_title',
+			array()
+		);
+		$attribute_terms = $variation_product->get_variation_attributes();
+		$descriptions = array();
+		foreach ( $attribute_terms as $taxonomy => $slug ) {
+			if ( empty( $slug ) || in_array( $taxonomy, $excluded_attributes ) ) {
+				continue;
+			}
+			// See if it's a taxonomy based attribute.
+			$taxonomy = str_replace( 'attribute_', '', $taxonomy );
+			$term     = get_term_by( 'slug', $slug, $taxonomy );
+			if ( $term !== false ) {
+				$descriptions[] = $term->name;
+			} else {
+				$descriptions[] = $slug;
+			}
+		}
+		return ' (' . implode( ', ', $descriptions ) . ')';
+	}
+
+	/**
+	 * Process a variable product, and output its elements.
+	 *
+	 * @param  object  $post                 WordPress post object
+	 * @param  object  $woocommerce_product  WooCommerce Product Object
+	 * @return bool                          True if one or more products were output, false
+	 *                                       otherwise.
+	 */
+	private function process_variable_product( $post, $woocommerce_product ) {
+		$success    = false;
+		$variations = $woocommerce_product->get_available_variations();
+		$factory    = new WC_Product_Factory();
+		foreach ( $variations as $variation ) {
+			$feed_item         = new stdClass();
+			$variation_id      = $variation['variation_id'];
+			$variation_product = $factory->get_product( $variation_id );
+			if ( $this->product_is_excluded( $variation_product ) ) {
+				continue;
+			}
+			$this->get_product_prices( $feed_item, $variation_product );
+			// Get main item information
+			$feed_item->ID    = $variation_id;
+			$feed_item->guid  = 'woocommerce_gpf_' . $variation_id;
+			$feed_item->title = get_the_title( $post->ID ) . $this->generate_attribute_suffix( $variation_product );
+			$feed_item->title = apply_filters(
+				'woocommerce_gpf_title',
+				$feed_item->title,
+				$variation_id
+			);
+			// Use the variation description if possible, main product description if not.
+			$feed_item->description = $variation_product->get_variation_description();
+			if ( empty( $feed_item->description ) ) {
+				$feed_item->description = get_the_content();
+			}
+			$feed_item->description = apply_filters(
+				'woocommerce_gpf_description',
+				apply_filters(
+					'the_content',
+					$feed_item->description
+				),
+				$feed_item->ID,
+				$variation_id
+			);
+			// Try and get the image from the variation.
+			$feed_item->image_link          = $this->get_the_post_thumbnail_src( $variation_id, 'shop_large' );
+			if ( empty( $feed_item->image_link ) ) {
+				$feed_item->image_link = $this->get_the_post_thumbnail_src( $post->ID, 'shop_large' );
+			}
+			$feed_item->purchase_link       = get_permalink( $post->ID );
+			$feed_item->purchase_link       = $this->add_variation_query_args( $feed_item, $variation_product );
+			$feed_item->shipping_weight     = apply_filters( 'woocommerce_gpf_shipping_weight', $variation_product->get_weight(), $variation_id );
+			$feed_item->is_in_stock         = $variation_product->is_in_stock();
+			$feed_item->sku                 = $variation_product->get_sku();
+			$feed_item->categories          = wp_get_object_terms( $post->ID, 'product_cat' );
+
+			// General, or feed-specific items
+			$feed_item->additional_elements = apply_filters( 'woocommerce_gpf_elements', array(), $post->ID, $variation_id );
+			$feed_item->additional_elements = apply_filters( 'woocommerce_gpf_elements_' . $this->feed_format, $feed_item->additional_elements, $post->ID, $variation_id );
+
+			$feed_item->additional_images   = array();
+			// Allow other plugins to modify the item before its rendered to the feed
+			$feed_item = apply_filters( 'woocommerce_gpf_feed_item', $feed_item );
+			$feed_item = apply_filters( 'woocommerce_gpf_feed_item_' . $this->feed_format, $feed_item );
+
+			$success |= $this->feed->render_item( $feed_item );
+		}
+		return $success;
+	}
+
 
 	/**
 	 * Add the "advanced" information to the field based on either the per-product settings, category settings, or store defaults
 	 *
 	 * @access public
-	 * @param array $elements The current elements for the product
-	 * @param int $product_id The product ID to retrieve information for
-	 * @return array The data for the product
+	 * @param array $elements    The current elements for the product.
+	 * @param int $product_id    The product ID to retrieve information for.
+	 * @param int $variation_id  The product variation ID to retrieve information for.
+	 * @return array             The data for the product.
 	 */
-	public function general_elements( $elements, $product_id ) {
+	public function general_elements( $elements, $product_id, $variation_id = null ) {
 
 		global $woocommerce_gpf_common;
 
 		// Retrieve the info set against the product by this plugin.
-		$product_values = $woocommerce_gpf_common->get_values_for_product( $product_id, $this->feed_format );
+		$product_values   = $woocommerce_gpf_common->get_values_for_product( $product_id, $this->feed_format );
+
+		// Merge variation values over the top if this is a variation.
+		if ( $variation_id !== null ) {
+			$variation_values = $woocommerce_gpf_common->get_values_for_variation( $variation_id, $this->feed_format );
+			$product_values = array_merge( $product_values, $variation_values );
+		}
 
 		if ( ! empty ( $product_values ) ) {
 			foreach ( $product_values as $key => $value ) {
@@ -434,7 +574,39 @@ class WoocommerceGpfFrontend {
 				$elements[ $key ] = (array) $value;
 			}
 		}
+	}
+
+	/**
+	 * Send all shipping measurements, or none.
+	 *
+	 * Make sure that *if* we have length, width or height, that we send all three. If we're
+	 * missing any then we send none of them.
+	 *
+	 * @param  array  $elements   The current feed item elements.
+	 * @param  int    $product_id The product to get the length of.
+	 * @return array              The modified feed item elements.
+	 */
+	public function all_or_nothing_shipping_elements( $elements, $product_id, $variation_id = null ) {
+
+		if ( !empty( $elements['shipping_width'] ) ||
+			 !empty( $elements['shipping_length'] ) ||
+			 !empty( $elements['shipping_height'] ) ) {
+			if ( empty( $elements['shipping_width'] ) ||
+			     empty( $elements['shipping_length'] ) ||
+			     empty( $elements['shipping_height'] ) ) {
+				unset( $elements['shipping_length'] );
+			    unset( $elements['shipping_width'] );
+			    unset( $elements['shipping_height'] );
+			}
+		}
 		return $elements;
+	}
+
+	public function general_feed_item( $feed_item ) {
+		if ( ! $feed_item->is_in_stock && empty( $feed_item->additional_elements['availability'] ) ) {
+			$feed_item->additional_elements['availability'] = array( 'out of stock' );
+		}
+		return $feed_item;
 	}
 
 	/**
@@ -469,11 +641,16 @@ class WoocommerceGpfFrontend {
 	 * @param  int    $product_id The product to get the length of.
 	 * @return array              The modified feed item elements.
 	 */
-	public function shipping_length_elements( $elements, $product_id ){
-		$length = $this->get_shipping_dimension( $product_id, 'length' );
+	public function shipping_length_elements( $elements, $product_id, $variation_id = null ) {
+		if ( $variation_id !== null ) {
+			$length = $this->get_shipping_dimension( $variation_id, 'length' );
+		} else {
+			$length = $this->get_shipping_dimension( $product_id, 'length' );
+		}
 		if ( empty( $length ) ) {
 			return $elements;
 		}
+
 		$elements['shipping_length'] = array( "$length in" );
 		return $elements;
 	}
@@ -485,8 +662,12 @@ class WoocommerceGpfFrontend {
 	 * @param  int    $product_id The product to get the width of.
 	 * @return array              The modified feed item elements.
 	 */
-	public function shipping_width_elements( $elements, $product_id ){
-		$width = $this->get_shipping_dimension( $product_id, 'width' );
+	public function shipping_width_elements( $elements, $product_id, $variation_id = null ) {
+		if ( $variation_id !== null ) {
+			$width = $this->get_shipping_dimension( $variation_id, 'width' );
+		} else {
+			$width = $this->get_shipping_dimension( $product_id, 'width' );
+		}
 		if ( empty( $width ) ) {
 			return $elements;
 		}
@@ -501,8 +682,12 @@ class WoocommerceGpfFrontend {
 	 * @param  int    $product_id The product to get the height of.
 	 * @return array              The modified feed item elements.
 	 */
-	public function shipping_height_elements( $elements, $product_id ){
-		$height = $this->get_shipping_dimension( $product_id, 'height' );
+	public function shipping_height_elements( $elements, $product_id, $variation_id = null ) {
+		if ( $variation_id !== null ) {
+			$height = $this->get_shipping_dimension( $variation_id, 'height' );
+		} else {
+			$height = $this->get_shipping_dimension( $product_id, 'height' );
+		}
 		if ( empty( $height ) ) {
 			return $elements;
 		}

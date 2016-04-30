@@ -57,7 +57,7 @@ class WPML_Plugin_String_Scanner extends WPML_String_Scanner {
 				$plugin_path               = $plugin;
 			}
 
-			if ( validate_file( $plugin_path ) <= 0 && validate_file( $this->current_plugin_file ) <= 0 ) {
+			if ( wpml_st_file_path_is_valid( $plugin_path ) && wpml_st_file_path_is_valid( $this->current_plugin_file ) ) {
 				$this->current_path = $plugin_path;
 
 				$text_domain = $this->get_plugin_text_domain();
@@ -115,7 +115,7 @@ class WPML_Plugin_String_Scanner extends WPML_String_Scanner {
 			$dir_or_file = $this->current_path;
 		}
 
-		if ( validate_file( $dir_or_file ) <= 0 ) {
+		if ( wpml_st_file_path_is_valid( $dir_or_file ) ) {
 			if ( ! $recursion ) {
 				$icl_st_p_scan_plugin_id = str_replace( WP_PLUGIN_DIR . '/', '', $dir_or_file );
 				$icl_st_p_scan_plugin_id = str_replace( WPMU_PLUGIN_DIR . '/', '', $icl_st_p_scan_plugin_id );

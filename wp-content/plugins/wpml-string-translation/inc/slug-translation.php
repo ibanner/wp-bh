@@ -57,10 +57,13 @@ class WPML_Slug_Translation {
 
 	static function rewrite_rules_filter( $value ) {
 		global $wpdb, $sitepress;
-
-		$rewrite_rule_filter = new WPML_Rewrite_Rule_Filter( $wpdb, $sitepress );
-
-		return $rewrite_rule_filter->rewrite_rules_filter( $value );
+		
+		if ( empty( $value ) ) {
+			return $value;
+		} else {
+			$rewrite_rule_filter = new WPML_Rewrite_Rule_Filter( $wpdb, $sitepress );
+			return $rewrite_rule_filter->rewrite_rules_filter( $value );
+		}
 	}
 
 	/**

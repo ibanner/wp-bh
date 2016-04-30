@@ -137,7 +137,7 @@ function _potx_process_file($file_path,
   global $_potx_tokens, $_potx_lookup;
 
   // Always grab the CVS version number from the code
-	if ( validate_file( $file_path ) > 0 ) {
+	if ( !wpml_st_file_path_is_valid( $file_path ) ) {
 		return;
 	}
   $code = file_get_contents($file_path);
