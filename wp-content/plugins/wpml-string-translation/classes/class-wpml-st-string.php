@@ -202,7 +202,11 @@ class WPML_ST_String extends WPML_WPDB_User {
 		return $st_id;
 	}
 
-	private function set_property( $property, $value ) {
+	/**
+	 * @param string $property
+	 * @param mixed  $value
+	 */
+	protected function set_property( $property, $value ) {
 		$this->wpdb->update( $this->wpdb->prefix . 'icl_strings', array( $property => $value ), array( 'id' => $this->string_id ) );
 	}
 
@@ -211,7 +215,7 @@ class WPML_ST_String extends WPML_WPDB_User {
 	 *
 	 * @return string
 	 */
-	private function from_where_snippet( $translations = false ) {
+	protected function from_where_snippet( $translations = false ) {
 
 		if ( $translations ) {
 			$id_column = 'string_id';

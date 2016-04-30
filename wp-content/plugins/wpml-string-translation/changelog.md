@@ -1,3 +1,22 @@
+#2.3.7
+
+##Fixes
+* [wpmlst-696] Fixed issue when blog title or tagline was empty
+* [gfml-64] Fixed empty string check in `WPML_Displayed_String_Filter::translate_by_name_and_context` function
+* [wpmlst-724] Fixed issue with theme scanned on each access to WPML > Plugin and theme localization
+* [wpmlst-744] Fixed error when scanning themes/plugins for strings on localhost on Windows
+* [wpmlst-751] Fixed filtering rewrite rules for WP 4.5 when the rules are cleared
+* [wpmlst-759] Fixed filtering of translation jobs when selecting a from language
+* [wpmlst-756] Fixed wpml_translate_string filter to not filter arrays if they are passed as the string value
+* [wpmlst-762] Fixed a fatal error that could occur on reactivation of the plugins after a reset
+
+##Features
+* [wpmlst-706] Author biographical info is now translatable in string translation
+
+##API
+###Filters
+* [wpmlcore-2676] Added a new hook "wpml_translatable_user_meta_fields"
+
 #2.3.6.1
 
 ##Fixes

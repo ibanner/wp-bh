@@ -30,11 +30,15 @@ class WoocommerceGpfAdmin {
 		add_action( 'admin_print_styles', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_print_scripts', array( $this, 'enqueue_scripts' ) );
 
-		// Extend Category Admin Page
+		// Extend category admin page.
 		add_action( 'product_cat_add_form_fields', array( $this, 'category_meta_box' ), 99, 2 ); // After left-col
 		add_action( 'product_cat_edit_form_fields', array( $this, 'category_meta_box' ), 99, 2 ); // After left-col
 		add_action( 'created_product_cat', array( $this, 'save_category' ), 15 , 2 ); //After created
 		add_action( 'edited_product_cat', array( $this, 'save_category' ), 15 , 2 ); //After saved
+
+		// Variation form input.
+		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variation_input_fields'), 90, 3 );
+		add_action( 'woocommerce_save_product_variation', array( $this, 'save_variation' ), 10, 2 );
 
 		add_filter( 'woocommerce_settings_tabs_array', array( $this, 'add_woocommerce_settings_tab' ), 99 );
 		add_action( 'woocommerce_settings_tabs_gpf', array( $this, 'config_page' ) );
@@ -45,7 +49,7 @@ class WoocommerceGpfAdmin {
 
 
 	/**
-	 * Handle ajax callbacks for Google andd bing category lookups
+	 * Handle ajax callbacks for Google and bing category lookups
 	 * Set up localisation
 	 *
 	 * @access public
@@ -105,21 +109,15 @@ class WoocommerceGpfAdmin {
 	 * @return json
 	 */
 	function ajax_handler( $query ) {
-
 		global $wpdb, $table_prefix;
-
 		// Make sure the taxonomy is up to date
 		$this->refresh_google_taxonomy();
-
 		$sql = "SELECT taxonomy_term FROM ${table_prefix}woocommerce_gpf_google_taxonomy WHERE search_term LIKE %s";
 		$results = $wpdb->get_results( $wpdb->prepare( $sql, '%' . strtolower( $query ) . '%' ) );
-
 		$suggestions = array();
-
 		foreach ( $results as $match ) {
 			$suggestions[] = $match->taxonomy_term;
 		}
-
 		$results = array( 'query' => $query, 'suggestions' => $suggestions, 'data' => $suggestions );
 		echo json_encode( $results );
 		exit();
@@ -230,7 +228,7 @@ class WoocommerceGpfAdmin {
 		} else {
 			$current_data = array();
 		}
-		$this->template_loader->output_template_with_variables( 'woo-gpf', 'meta-edit-intro', array() );
+		$this->template_loader->output_template_with_variables( 'woo-gpf', 'meta-edit-intro', array( 'loop_idx' => '' ) );
 
 		foreach ( $this->product_fields as $key => $fieldinfo ) {
 
@@ -262,7 +260,7 @@ class WoocommerceGpfAdmin {
 			);
 
 			$current_value = ! empty( $current_data[ $key ] ) ? $current_data[ $key ] : '';
-			$def_vars['defaultinput'] = $this->render_field_default_input( $key, $current_value, $placeholder );
+			$def_vars['defaultinput'] = $this->render_field_default_input( $key, $current_value, $placeholder, null );
 			$def_vars['key']          = $key;
 			$variables['defaults']    = $this->template_loader->get_template_with_variables(
 				'woo-gpf',
@@ -303,6 +301,89 @@ class WoocommerceGpfAdmin {
 	}
 
 
+	public function variation_input_fields( $loop_idx, $variation_data, $variation ) {
+
+		global $woocommerce_gpf_common;
+
+		echo '<h4>' . __( 'Product Feed Information', 'woocommerce_gpf' ) . '</h4>';
+		echo '<p>' . __( 'Set values here if you want to override the information for this specific variation. If information should apply to all variations, then set it against the main product.', 'woocommerce_gpf' ) . '</p>';
+		$current_data     = get_post_meta( $variation->ID, '_woocommerce_gpf_data', true );
+		$product_defaults = $woocommerce_gpf_common->get_values_for_product( $variation->ID, 'all', true );
+
+		$this->render_exclude_product(
+			'exclude_product',
+			! empty( $current_data['exclude_product'] ) ? true : false,
+			null,
+			$loop_idx
+		);
+
+		$this->template_loader->output_template_with_variables(
+			'woo-gpf',
+			'product-meta-edit-intro',
+			array( 'loop_idx' => $loop_idx)
+		);
+		foreach ( $this->product_fields as $key => $fieldinfo ) {
+			if ( ! isset( $this->settings['product_fields'][ $key ] ) ) {
+				continue;
+			}
+			$variables                      = $this->default_field_variables( $key, $loop_idx );
+			$variables['field_description'] = esc_html( $fieldinfo['desc'] );
+			$variables['field_defaults']    = '<br>';
+			$placeholder                    = '';
+			if ( isset( $fieldinfo['can_prepopulate'] ) && ! empty( $this->settings['product_prepopulate'][ $key ] ) ) {
+				$prepopulate_vars             = array();
+				$prepopulate_vars['label']    = $this->get_prepopulate_label( $this->settings['product_prepopulate'][ $key ] );
+				$variables['field_defaults'] .= $this->template_loader->get_template_with_variables(
+					'woo-gpf',
+					'product-meta-prepopulate-text',
+					$prepopulate_vars
+				);
+			}
+			if ( isset ( $fieldinfo['can_default'] ) && ! empty( $product_defaults[ $key ] ) ) {
+				$variables['field_defaults'] .= $this->template_loader->get_template_with_variables(
+					'woo-gpf',
+					'variation-meta-default-text',
+					array(
+						'default' => sprintf(
+							'Defaults to value from main product, or &quot;%s&quot;.',
+							esc_html( $product_defaults[ $key ] )
+						),
+					)
+				);
+				$placeholder = __( 'Use default', 'woo_gpf' );
+			}
+			if ( ! isset ( $fieldinfo['callback'] ) || ! is_callable( array( &$this, $fieldinfo['callback'] ) ) ) {
+				$current_value = ! empty ( $current_data[ $key ] ) ? $current_data[ $key ] : '';
+				$variables['field_input'] = $this->render_field_default_input(
+					$key,
+					$current_value,
+					$placeholder,
+					$loop_idx
+				);
+			} else {
+				if ( isset ( $current_data[ $key ] ) ) {
+					$variables['field_input'] = call_user_func(
+						array( $this, $fieldinfo['callback'] ),
+						$key,
+						$current_data[ $key ],
+						$placeholder,
+						$loop_idx
+					);
+				} else {
+					$variables['field_input'] = call_user_func(
+						array( $this, $fieldinfo['callback'] ),
+						$key,
+						null,
+						$placeholder,
+						$loop_idx
+					);
+				}
+			}
+			$this->template_loader->output_template_with_variables( 'woo-gpf', 'product-meta-field-row', $variables );
+		}
+		$this->template_loader->output_template_with_variables( 'woo-gpf', 'product-meta-edit-footer', array() );
+
+	}
 
 	/**
 	 * Meta box on product pages for setting per-product information
@@ -321,7 +402,7 @@ class WoocommerceGpfAdmin {
 			! empty( $current_data['exclude_product'] ) ? true : false
 		);
 
-		$this->template_loader->output_template_with_variables( 'woo-gpf', 'product-meta-edit-intro', array() );
+		$this->template_loader->output_template_with_variables( 'woo-gpf', 'product-meta-edit-intro', array( 'loop_idx' => '' ) );
 		foreach ( $this->product_fields as $key => $fieldinfo ) {
 			if ( ! isset( $this->settings['product_fields'][ $key ] ) ) {
 				continue;
@@ -355,7 +436,8 @@ class WoocommerceGpfAdmin {
 				$variables['field_input'] = $this->render_field_default_input(
 					$key,
 					$current_value,
-					$placeholder
+					$placeholder,
+					null
 				);
 			} else {
 				if ( isset ( $current_data[ $key ] ) ) {
@@ -363,14 +445,16 @@ class WoocommerceGpfAdmin {
 						array( $this, $fieldinfo['callback'] ),
 						$key,
 						$current_data[ $key ],
-						$placeholder
+						$placeholder,
+						null
 					);
 				} else {
 					$variables['field_input'] = call_user_func(
 						array( $this, $fieldinfo['callback'] ),
 						$key,
 						null,
-						$placeholder
+						$placeholder,
+						null
 					);
 				}
 			}
@@ -407,6 +491,10 @@ class WoocommerceGpfAdmin {
 
 		// Remove entries that are blanked out
 		foreach ( $_POST['_woocommerce_gpf_data'] as $key => $value ) {
+			if ( is_numeric( $key ) ) {
+				// This is the variation data, we can ignore it here.
+				continue;
+			}
 			if ( empty ( $value ) ) {
 				unset ( $_POST['_woocommerce_gpf_data'][ $key ] );
 				if ( isset ( $current_data[ $key ] ) ) {
@@ -427,6 +515,36 @@ class WoocommerceGpfAdmin {
 
 	}
 
+	/**
+	 * Store GPF data set specifically against the variation.
+	 */
+	function save_variation( $product_id, $idx ) {
+
+		if ( empty ( $_POST['_woocommerce_gpf_data'][ $idx ] ) ) {
+			return;
+		}
+		$current_data = get_post_meta( $product_id, '_woocommerce_gpf_data', true );
+		if ( ! $current_data ) {
+			$current_data = array();
+		}
+		// Remove entries that are blanked out
+		foreach ( $_POST['_woocommerce_gpf_data'][ $idx ] as $key => $value ) {
+			if ( empty ( $value ) ) {
+				unset ( $_POST['_woocommerce_gpf_data'][ $idx ][ $key ] );
+				if ( isset ( $current_data[ $key ] ) ) {
+					unset ( $current_data[ $key ] );
+				}
+			} else {
+				$_POST['_woocommerce_gpf_data'][ $idx ][ $key ] = stripslashes( $value );
+			}
+		}
+		// Including missing checkboxes
+		if ( ! isset ( $_POST['_woocommerce_gpf_data'][ $idx ]['exclude_product'] ) ) {
+			unset ( $current_data['exclude_product'] );
+		}
+		$current_data = array_merge( $current_data, $_POST['_woocommerce_gpf_data'][ $idx ] );
+		update_post_meta( $product_id, '_woocommerce_gpf_data', $current_data );
+	}
 
 	/**
 	 * Produce a default variables array for passing to a field's default template.
@@ -435,10 +553,15 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @return array        The default variables array.
 	 */
-	private function default_field_variables($key) {
+	private function default_field_variables($key, $loop_idx = null) {
 		$variables = array();
-		$variables['key'] = esc_attr( $key );
-		if ( isset( $_REQUEST['post'] ) || isset( $_REQUEST['taxonomy'] ) ) {
+		$variables['raw_key'] = esc_attr( $key );
+		if ( $loop_idx === null ) {
+			$variables['key'] = esc_attr( $key );
+		} else {
+			$variables['key'] = $loop_idx . '][' . esc_attr( $key );
+		}
+		if ( isset( $_REQUEST['post'] ) || isset( $_REQUEST['taxonomy'] ) || $loop_idx !== null) {
 			$variables['emptytext'] = __( 'Use default', 'woocommerce_gpf' );
 		} else {
 			$variables['emptytext'] = __( 'No default', 'woocommerce_gpf' );
@@ -476,14 +599,25 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_exclude_product( $key, $current_data = false ) {
+	private function render_exclude_product( $key, $current_data = false, $placeholder = null, $loop_idx = null ) {
 		$variables = $this->default_field_variables( $key );
 		$variables['checked'] = '';
 		if ( $current_data ) {
 			$variables['checked'] = ' checked="checked"';
 		}
 		$variables['hide_product_text'] = __( 'Hide this product from the feed', 'woocommerce_gpf' );
-		$this->template_loader->output_template_with_variables( 'woo-gpf', 'meta-exclude-product', $variables );
+		if ( $loop_idx !== null ) {
+			$variables['loop_idx'] = '[' . $loop_idx . ']';
+			$variables['loop_num'] = $loop_idx;
+		} else {
+			$variables['loop_idx'] = '';
+			$variables['loop_num'] = '';
+		}
+		$this->template_loader->output_template_with_variables(
+			'woo-gpf',
+			'meta-exclude-product',
+			$variables
+		);
 	}
 
 	/**
@@ -495,8 +629,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_i_exists( $key, $current_data = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_i_exists( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables = $this->default_selected_choices(
 			array( 'included', 'no-included' ),
 			$current_data,
@@ -518,8 +652,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_gender( $key, $current_data = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_gender( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables = $this->default_selected_choices(
 			array( 'male', 'female', 'unisex' ),
 			$current_data,
@@ -541,8 +675,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_condition( $key, $current_data = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_condition( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables = $this->default_selected_choices(
 			array( 'new', 'refurbished', 'used' ),
 			$current_data,
@@ -566,8 +700,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_availability( $key, $current_data = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_availability( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables = $this->default_selected_choices(
 			array( 'in stock', 'available for order', 'preorder', 'out of stock' ),
 			$current_data,
@@ -591,8 +725,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_is_bundle( $key, $current_data = null, $placeholder = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_is_bundle( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables['value'] = checked( 'on', $current_data, false );
 		return $this->template_loader->get_template_with_variables(
 			'woo-gpf',
@@ -612,8 +746,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_availability_date( $key, $current_data = null, $placeholder = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_availability_date( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables['value'] = esc_attr( $current_data );
 		if ( ! empty( $placeholder ) ) {
 			$variables['placeholder'] = ' placeholder="' . esc_attr( $placeholder ) . '"';
@@ -638,8 +772,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_age_group( $key, $current_data = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_age_group( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables = $this->default_selected_choices(
 			array( 'newborn', 'infant', 'toddler', 'kids', 'adult' ),
 			$current_data,
@@ -663,8 +797,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_size_type( $key, $current_data = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_size_type( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables = $this->default_selected_choices(
 			array( 'regular', 'petite', 'plus', 'big and tall', 'maternity' ),
 			$current_data,
@@ -688,8 +822,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_size_system( $key, $current_data = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_size_system( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables = $this->default_selected_choices(
 			array( 'US', 'UK', 'EU', 'AU', 'BR', 'CN', 'FR', 'DE', 'IT', 'JP', 'MEX' ),
 			$current_data,
@@ -703,6 +837,34 @@ class WoocommerceGpfAdmin {
 	}
 
 
+	private function get_google_taxonomy_locale() {
+		global $woocommerce;
+		$available_locales = array(
+			'DK' => 'da-DK',
+			'DE' => 'de-DE',
+			'US' => 'en-US',
+			'GB' => 'en-GB',
+			'ES' => 'es-ES',
+			'FR' => 'fr-FR',
+			'IT' => 'it-IT',
+			'NL' => 'nl-NL',
+			'NO' => 'no-NO',
+			'PL' => 'pl-PL',
+			'BR' => 'pt-BR',
+			'SE' => 'sv-SE',
+			'TR' => 'tr-TR',
+			'CZ' => 'cs-CZ',
+			'RU' => 'ru-RU',
+			'CN' => 'zh-CN',
+			'JP' => 'ja-JP',
+		);
+		$base_country = $woocommerce->countries->get_base_country();
+		if ( isset( $available_locales[ $base_country ] ) ) {
+			return $available_locales[ $base_country ];
+		} else {
+			return 'en-US';
+		}
+	}
 	/**
 	 * Retrieve the Google taxonomy list to allow users to choose from it
 	 *
@@ -715,19 +877,19 @@ class WoocommerceGpfAdmin {
 
 		global $wpdb, $table_prefix;
 
+		$locale = $this->get_google_taxonomy_locale();
+		$cache_key = 'woocommerce_gpf_tax_' . $locale;
+
 		// Retrieve from cache - avoid hitting Google.com too much because they might mind :)
-		$taxonomies_cached = get_transient( 'woocommerce_gpf_taxonomy' );
+		$taxonomies_cached = get_transient( $cache_key );
 		if ( $taxonomies_cached ) {
 			return true;
 		}
-		set_transient( 'woocommerce_gpf_taxonomy', true, time() + ( 60 * 60 * 24 * 14 ) );
-
-		$request = wp_remote_get( 'http://www.google.com/basepages/producttype/taxonomy.en-US.txt' );
-
+		set_transient( $cache_key, true, time() + ( 60 * 60 * 24 * 14 ) );
+		$request = wp_remote_get( 'http://www.google.com/basepages/producttype/taxonomy.' . $locale . '.txt' );
 		if ( is_wp_error( $request ) || ! isset( $request['response']['code'] ) || '200' != $request['response']['code'] ) {
 			return array();
 		}
-
 		$taxonomies = explode( "\n", $request['body'] );
 		// Strip the comment at the top
 		array_shift( $taxonomies );
@@ -770,9 +932,9 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_product_type( $key, $current_data = null, $placeholder = '' ) {
+	private function render_product_type( $key, $current_data = null, $placeholder = '', $loop_idx = null ) {
 		$this->refresh_google_taxonomy();
-		$variables = $this->default_field_variables( $key );
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		if ( ! empty( $placeholder ) ) {
 			$variables['placeholder'] = ' placeholder="' . esc_attr( $placeholder ) . '"';
 		} else {
@@ -798,8 +960,8 @@ class WoocommerceGpfAdmin {
 	 *
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod)
 	 */
-	private function render_b_category( $key, $current_data = null, $placeholder = null ) {
-		$variables = $this->default_field_variables( $key );
+	private function render_b_category( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
+		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables['current_data'] = esc_attr( $current_data );
 		if ( ! empty( $placeholder ) ) {
 			$variables['placeholder'] = ' placeholder="' . esc_attr( $placeholder ) . '"';
@@ -1035,9 +1197,13 @@ class WoocommerceGpfAdmin {
 	 *                              from the store wide settings.
 	 * @param string $placeholder    Placeholder text to use, leave blank for no placeholder.
 	 */
-	private function render_field_default_input( $key, $current_data = false, $placeholder = '' ) {
+	private function render_field_default_input( $key, $current_data = false, $placeholder = '', $loop_idx = null ) {
 		$variables = array();
-		$variables['key'] = $key;
+		if ( $loop_idx === null ) {
+			$variables['key'] = $key;
+		} else {
+			$variables['key'] = $loop_idx . '][' . $key;
+		}
 		if ( ! empty( $placeholder ) ) {
 			$variables['placeholder'] = ' placeholder="' . esc_attr( $placeholder ) . '"';
 		} else {
@@ -1062,7 +1228,8 @@ class WoocommerceGpfAdmin {
 				),
 				$key,
 				$current_data,
-				$placeholder
+				$placeholder,
+				$loop_idx
 			);
 		}
 	}
