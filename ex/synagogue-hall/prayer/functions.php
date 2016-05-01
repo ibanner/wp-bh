@@ -109,15 +109,16 @@ function get_pray($url, $pray_id) {
 		return false;
 
 	// parse xml
-	$xml = simplexml_load_file($url);
-
-	if ( ! $xml || ! $xml->item[$pray_id-1] )
+	$xml		= simplexml_load_file($url);
+	$pray_id	= intval($pray_id);
+	
+	if ( ! $xml || ! $xml->item[$pray_id] )
 		// return
 		return false;
 
 	$pray = array(
-		'person'	=> $xml->item[$pray_id-1]->person,
-		'prayer'	=> str_replace( "\n", "<br />", $xml->item[$pray_id-1]->prayer )
+		'person'	=> $xml->item[$pray_id]->person,
+		'prayer'	=> str_replace( "\n", "<br />", $xml->item[$pray_id]->prayer )
 	);
 
 	// return

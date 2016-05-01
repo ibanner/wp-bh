@@ -14,15 +14,17 @@ $email_to	= (isset($_POST['mail'])	&& $_POST['mail'])	? $_POST['mail']	: '';
 $pray_id	= (isset($_POST['id'])		&& $_POST['id'])	? $_POST['id']		: '';	// int
 $lang		= (isset($_POST['lang'])	&& $_POST['lang'])	? $_POST['lang']	: '';	// heb/eng
 
-if ( ! $email_to || ! $pray_id )
+if ( ! $email_to || ! $pray_id ) {
 	// die
-	die(999);
+	echo 'result=999';
+	die();
+}
 
 // include functions
 require_once('functions.php');
 
 // build prayer page link
-$protocol		= ( empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off' ) ? 'http://' : 'https://';
+$protocol		= ( empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off' ) ? 'http://www.' : 'https://www.';
 $base_url		= $protocol . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/';
 $query_string	= '?pray_id=' . $pray_id . '&lang=' . ($lang ? $lang : 'heb');
 $link			= $base_url . 'pray.php' . $query_string;
@@ -44,4 +46,5 @@ $result		= mail( $email_to, $email_subject, $email_message, $headers );
 $status		= $result ? 0 : 1;
 
 // die
-die($status);
+echo 'result=' . $status;
+die();

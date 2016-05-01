@@ -21,7 +21,7 @@ if ( ! $pray_id )
 require_once('functions.php');
 
 // xml url
-$url	= 'http://niravigad.com/clients/0416/camel/prayer/Prayer.xml';
+$url	= 'Prayer.xml';
 
 // get pray info
 $pray	= get_pray($url, $pray_id);
