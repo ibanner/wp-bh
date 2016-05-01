@@ -1,0 +1,261 @@
+body {
+  background-color: #edeff2;
+  font-family: 'Open Sans', sans-serif;
+  color: #6a859c;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+h1 {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-size: 38px;
+  line-height: 44px;
+  font-weight: 700;
+}
+
+h2 {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  color: #676770;
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 300;
+  text-align: center;
+}
+
+h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #676770;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 300;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+}
+
+h4 {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+h5 {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  color: #676770;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+h6 {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: 300;
+}
+
+.navigation-link {
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+  color: #676770;
+}
+
+.navigation-link:hover {
+  color: #2e9dff;
+}
+
+.navigation-bar {
+  padding-top: 25px;
+  padding-bottom: 20px;
+  background-image: url('../images/headerBG.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  font-family: Alef, sans-serif;
+  color: #ef771f;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.brand-text {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: 'Open Sans', sans-serif;
+  color: #69b9ff;
+  font-size: 25px;
+  line-height: 25px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.brand-link {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.hero-section {
+  padding-top: 242px;
+  padding-bottom: 242px;
+}
+
+.hero-section.centered {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-image: url('../images/blacker.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  text-align: center;
+}
+
+.headline {
+  margin-bottom: 15px;
+  direction: rtl;
+  font-family: Alef, sans-serif;
+  color: #c9c9c9;
+  font-size: 36px;
+  line-height: 36px;
+  font-weight: 300;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.hero-subheading {
+  font-family: Alef, sans-serif;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+}
+
+.hero-subheading.toright {
+  float: right;
+}
+
+.footer {
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+.footer.center {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-image: url('../images/footerBG.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  text-align: center;
+}
+
+.h1 {
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: 400;
+}
+
+.cont {
+  padding: 30px 40px;
+  border: 1px solid #ef771f;
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.f {
+  color: #c9c9c9;
+  text-decoration: none;
+}
+
+.f:hover {
+  color: #ef771f;
+}
+
+.icon {
+  margin-right: 8px;
+  padding-top: 3px;
+  float: left;
+}
+
+.glow {
+  display: block;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-left: auto;
+}
+
+.main {
+  text-align: center;
+}
+
+.p {
+  direction: rtl;
+  font-family: Alef, sans-serif;
+  color: #c9c9c9;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: justify;
+}
+
+@media (max-width: 991px) {
+  .navigation-link {
+    color: hsla(0, 0%, 100%, .52);
+  }
+  .navigation-link.w--current {
+    color: #fff;
+  }
+  .hamburger-button.w--open {
+    background-color: #3b99d9;
+  }
+  .navigation-menu {
+    background-color: #3b99d9;
+  }
+}
+
+@media (max-width: 767px) {
+  .headline {
+    margin-bottom: 15px;
+    font-size: 32px;
+    line-height: 32px;
+    text-align: center;
+  }
+  .hero-subheading {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .cont {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .icon {
+    margin-top: -4px;
+    padding-top: 0px;
+  }
+  .p {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+@media (max-width: 479px) {
+  .cont {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .p {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
