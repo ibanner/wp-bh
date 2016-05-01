@@ -90,6 +90,37 @@ function email_message($link) {
 
 	<?php $message = ob_get_clean();
 
+	// return
 	return $message;
+
+}
+
+/**
+ * get_pray
+ *
+ * @param	$url (string) xml url
+ * @param	$pray_id (int)
+ * @return	(mixed) array of person and pray content or FALSE in case of failure
+ */
+function get_pray($url, $pray_id) {
+
+	if ( ! $url || ! $pray_id )
+		// return
+		return false;
+
+	// parse xml
+	$xml = simplexml_load_file($url);
+
+	if ( ! $xml || ! $xml->item[$pray_id-1] )
+		// return
+		return false;
+
+	$pray = array(
+		'person'	=> $xml->item[$pray_id-1]->person,
+		'prayer'	=> str_replace( "\n", "<br />", $xml->item[$pray_id-1]->prayer )
+	);
+
+	// return
+	return $pray;
 
 }

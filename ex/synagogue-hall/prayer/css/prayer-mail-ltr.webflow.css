@@ -1,0 +1,28 @@
+.navigation-bar {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.headline {
+  direction: ltr;
+  font-family: 'Open Sans', sans-serif;
+  text-align: left;
+}
+
+.hero-subheading {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.hero-subheading.toright {
+  float: left;
+}
+
+.icon {
+  margin-left: 8px;
+  margin-right: auto;
+  float: right;
+}
+
+.p {
+  direction: ltr;
+  font-family: 'Open Sans', sans-serif;
+}

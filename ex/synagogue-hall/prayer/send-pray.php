@@ -11,7 +11,8 @@
 
 // get POST variables
 $email_to	= (isset($_POST['mail'])	&& $_POST['mail'])	? $_POST['mail']	: '';
-$pray_id	= (isset($_POST['id'])		&& $_POST['id'])	? $_POST['id']		: '';
+$pray_id	= (isset($_POST['id'])		&& $_POST['id'])	? $_POST['id']		: '';	// int
+$lang		= (isset($_POST['lang'])	&& $_POST['lang'])	? $_POST['lang']	: '';	// heb/eng
 
 if ( ! $email_to || ! $pray_id )
 	// die
@@ -21,12 +22,13 @@ if ( ! $email_to || ! $pray_id )
 require_once('functions.php');
 
 // build prayer page link
-$protocol	= ( empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off' ) ? 'http://' : 'https://';
-$base_url	= $protocol . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/';
-$link		= $base_url . 'pray.php/?pray_id=' . $pray_id;
+$protocol		= ( empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off' ) ? 'http://' : 'https://';
+$base_url		= $protocol . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/';
+$query_string	= '?pray_id=' . $pray_id . '&lang=' . ($lang ? $lang : 'heb');
+$link			= $base_url . 'pray.php' . $query_string;
 
 // build email fields
-$email_from		= 'Beit Hatfutsot <do-not-reply@bh.org.il>';
+$email_from		= 'Halleluja Gallery <halleluja@bh.org.il>';
 $email_subject	= 'Beit Hatfutsot - Hallelujah! Assemble, Pray, Study - Synagogues Past and Present';
 $email_message	= email_message($link);
 
