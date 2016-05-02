@@ -526,9 +526,12 @@
 	add_filter( 'wpcf7_validate_file*', 'check_file', 11, 2 );
 	
 	function check_file($result, $tag) {
-		$name	= $tag['name'];
-		
-		if ( $result['valid'] && !isset( $result['reason'][$name] ) ) {
+		$tag = new WPCF7_Shortcode( $tag );
+
+		$name	= $tag->name;
+		$gedcom	= $tag->get_option('gedcom');
+
+		if ( $result['valid'] && !isset( $result['reason'][$name] ) && $gedcom ) {
 			add_action( 'wpcf7_before_send_mail', 'save_file', 10, 1 );
 		}
 		
