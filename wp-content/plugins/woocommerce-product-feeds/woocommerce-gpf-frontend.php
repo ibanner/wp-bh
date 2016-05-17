@@ -6,9 +6,10 @@
  */
 class WoocommerceGpfFrontend {
 
-	protected $feed = null;
+	protected $feed        = null;
 	protected $feed_format = '';
-	protected $settings = array();
+	protected $settings    = array();
+	protected $image_style = 'full';
 
 	/**
 	 * Constructor. Grab the settings, and add filters if we have stuff to do
@@ -39,6 +40,7 @@ class WoocommerceGpfFrontend {
 			add_action( 'woocommerce_gpf_feed_item', array( $this, 'general_feed_item' ), 10, 1 );
 			add_action( 'template_redirect', array( $this, 'render_product_feed' ), 15 );
 		}
+		$this->image_style = apply_filters( 'woocommerce_gpf_image_style', $this->image_style );
 	}
 
 	/**
@@ -57,7 +59,6 @@ class WoocommerceGpfFrontend {
 		}
 
 		list( $src ) = wp_get_attachment_image_src( $post_thumbnail_id, $size, false );
-
 		return $src;
 	}
 
@@ -286,7 +287,7 @@ class WoocommerceGpfFrontend {
 
 		if ( is_array( $images ) && count( $images ) ) {
 			foreach ( $images as $image ) {
-				$full_image_src = wp_get_attachment_image_src( $image->ID, 'original' );
+				$full_image_src = wp_get_attachment_image_src( $image->ID, $this->image_style );
 				$feed_item->additional_images[] = $full_image_src[0];
 			}
 		}
@@ -411,12 +412,12 @@ class WoocommerceGpfFrontend {
 			'woocommerce_gpf_description',
 			apply_filters(
 				'the_content',
-				get_the_content()
+				$post->post_content
 			),
 			$feed_item->ID,
 			null
 		);
-		$feed_item->image_link          = $this->get_the_post_thumbnail_src( $feed_item->ID, 'shop_large' );
+		$feed_item->image_link          = $this->get_the_post_thumbnail_src( $feed_item->ID, $this->image_style );
 		$feed_item->purchase_link       = get_permalink( $feed_item->ID );
 		$feed_item->shipping_weight     = apply_filters( 'woocommerce_gpf_shipping_weight', $woocommerce_product->get_weight(), $feed_item->ID );
 		$feed_item->is_in_stock         = $woocommerce_product->is_in_stock();
@@ -505,7 +506,7 @@ class WoocommerceGpfFrontend {
 			// Use the variation description if possible, main product description if not.
 			$feed_item->description = $variation_product->get_variation_description();
 			if ( empty( $feed_item->description ) ) {
-				$feed_item->description = get_the_content();
+				$feed_item->description = $post->post_content;
 			}
 			$feed_item->description = apply_filters(
 				'woocommerce_gpf_description',
@@ -517,9 +518,9 @@ class WoocommerceGpfFrontend {
 				$variation_id
 			);
 			// Try and get the image from the variation.
-			$feed_item->image_link          = $this->get_the_post_thumbnail_src( $variation_id, 'shop_large' );
+			$feed_item->image_link          = $this->get_the_post_thumbnail_src( $variation_id, $this->image_style );
 			if ( empty( $feed_item->image_link ) ) {
-				$feed_item->image_link = $this->get_the_post_thumbnail_src( $post->ID, 'shop_large' );
+				$feed_item->image_link = $this->get_the_post_thumbnail_src( $post->ID, $this->image_style );
 			}
 			$feed_item->purchase_link       = get_permalink( $post->ID );
 			$feed_item->purchase_link       = $this->add_variation_query_args( $feed_item, $variation_product );
@@ -564,7 +565,6 @@ class WoocommerceGpfFrontend {
 			$variation_values = $woocommerce_gpf_common->get_values_for_variation( $variation_id, $this->feed_format );
 			$product_values = array_merge( $product_values, $variation_values );
 		}
-
 		if ( ! empty ( $product_values ) ) {
 			foreach ( $product_values as $key => $value ) {
 				// Deal with fields that can have multiple, comma separated values
@@ -574,6 +574,7 @@ class WoocommerceGpfFrontend {
 				$elements[ $key ] = (array) $value;
 			}
 		}
+		return $elements;
 	}
 
 	/**
@@ -587,7 +588,6 @@ class WoocommerceGpfFrontend {
 	 * @return array              The modified feed item elements.
 	 */
 	public function all_or_nothing_shipping_elements( $elements, $product_id, $variation_id = null ) {
-
 		if ( !empty( $elements['shipping_width'] ) ||
 			 !empty( $elements['shipping_length'] ) ||
 			 !empty( $elements['shipping_height'] ) ) {

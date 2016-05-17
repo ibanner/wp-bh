@@ -4,7 +4,7 @@
  * Plugin URI: http://www.leewillis.co.uk/wordpress-plugins/?utm_source=wordpress&utm_medium=www&utm_campaign=woocommerce-gpf
  * Description: Woocommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
  * Author: Lee Willis
- * Version: 6.7.1
+ * Version: 6.7.3
  * Author URI: http://www.leewillis.co.uk/
  * License: GPLv3
  *
