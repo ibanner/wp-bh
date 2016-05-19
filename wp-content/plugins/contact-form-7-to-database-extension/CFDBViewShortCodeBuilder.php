@@ -788,7 +788,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
 
                 if (['CSVUTF8BOM', 'CSVUTF8', 'CSVSJIS'].indexOf(exportSelection) > -1) {
                     delim = jQuery('#csv_delim').val();
-                    if (delim != ',') {
+                    if (delim != '') {
                         exportUrlElements.push(getValueUrl("delimiter", delim));
                     }
                 }
@@ -959,7 +959,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
             // Export File
             jQuery('#export_cntl').val(<?php echo json_encode($postedEnc) ?>);
             jQuery('#add_itemtitle').val(<?php echo json_encode($postedItemtitle) ?>);
-            jQuery('#csv_delim').val(<?php echo json_encode(",") ?>);
+            jQuery('#csv_delim').val(<?php echo json_encode("") ?>);
 
             // Short Code
             jQuery('#shortcode_ctrl').val(<?php echo json_encode($postedSC) ?>);
@@ -1190,7 +1190,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
         </select>
         <span id="csvdelim_span">
             <label for="csv_delim"><?php echo htmlspecialchars(__('CSV Delimiter', 'contact-form-7-to-database-extension')); ?></label>
-            <input id="csv_delim" type="text" size="2" value="<?php echo htmlspecialchars(','); ?>"/>
+            <input id="csv_delim" type="text" size="2" value=""/>
         </span>
         <span id="itemtitle_span">
             <label for="add_itemtitle"><?php echo htmlspecialchars(__('Item Title', 'contact-form-7-to-database-extension')); ?></label>
@@ -1594,7 +1594,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
             </select>
             <span id="export_link_csvdelim_span" style="display:none">
                 <label for="export_link_csv_delim"><?php echo htmlspecialchars(__('CSV Delimiter', 'contact-form-7-to-database-extension')); ?></label>
-                <input id="export_link_csv_delim" type="text" size="2" value="<?php echo htmlspecialchars(','); ?>"/>
+                <input id="export_link_csv_delim" type="text" size="2" value=""/>
             </span>
         </div>
         <div>

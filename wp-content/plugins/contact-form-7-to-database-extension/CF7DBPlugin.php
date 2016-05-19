@@ -63,6 +63,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             'IntegrateWithEnfoldThemForms' => array(__('Capture form submissions from Enfold Theme', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithCFormsII' => array(__('Capture form submissions from CformsII', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithFormCraft' => array(__('Capture form submissions from FormCraft Premium', 'contact-form-7-to-database-extension'), 'true', 'false'),
+            'IntegrateWithVerySimpleContactForm' => array(__('Capture form submissions from Very Simple Contact Form', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'CanSeeSubmitData' => array(__('Can See Submission data', 'contact-form-7-to-database-extension'),
                                         'Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber', 'Anyone'),
             'HideAdminPanelFromNonAdmins' => array(__('Allow only Administrators to see CFDB administration screens', 'contact-form-7-to-database-extension'), 'false', 'true'),
@@ -365,22 +366,29 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         // Hook to work with Enfold theme forms
         if ($this->getOption('IntegrateWithEnfoldThemForms', 'true', true) == 'true') {
             require_once('CFDBIntegrationEnfoldTheme.php');
-            $enfold = new CFDBIntegrationEnfoldTheme($this);
-            $enfold->registerHooks();
+            $integration = new CFDBIntegrationEnfoldTheme($this);
+            $integration->registerHooks();
         }
 
         // Hook to work with CFormsII
         if ($this->getOption('IntegrateWithCFormsII', 'true', true) == 'true') {
             require_once('CFDBIntegrationCFormsII.php');
-            $enfold = new CFDBIntegrationCFormsII($this);
-            $enfold->registerHooks();
+            $integration = new CFDBIntegrationCFormsII($this);
+            $integration->registerHooks();
         }
 
         // Hook to work with FormCraft
         if ($this->getOption('IntegrateWithFormCraft', 'true', true) == 'true') {
             require_once('CFDBIntegrationFromCraft.php');
-            $enfold = new CFDBIntegrationFromCraft($this);
-            $enfold->registerHooks();
+            $integration = new CFDBIntegrationFromCraft($this);
+            $integration->registerHooks();
+        }
+
+        // Hook to work with Very Simple Contact Form
+        if ($this->getOption('IntegrateWithVerySimpleContactForm', 'true', true) == 'true') {
+            require_once('CFDBIntegrationVerySimpleContactForm.php');
+            $integration = new CFDBIntegrationVerySimpleContactForm($this);
+            $integration->registerHooks();
         }
 
         // Have our own hook to receive form submissions independent of other plugins
@@ -576,6 +584,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         if (ob_get_level()) {
             ob_end_clean(); // Fix bug where download files can be corrupted
         }
+        ob_end_clean(); // Not sure why have to do this on some sites
         if ($mimeType) {
             header('Content-Type: ' . $mimeType);
             header("Content-Disposition: inline; filename=\"$fileInfo[0]\"");
