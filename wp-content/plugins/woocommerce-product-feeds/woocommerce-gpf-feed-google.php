@@ -79,57 +79,37 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 	 * @return boolean      True if the item needs an identifier. False if not.
 	 */
 	private function needs_identifier( &$item ) {
-
-		if ( isset( $item->additional_elements['google_product_category'] ) ) {
-			$categories = $item->additional_elements['google_product_category'];
-		} else if ( isset( $item->additional_elements['product_type'] ) ) {
-			$categories = $item->additional_elements['product_type'];
-		} else {
-			$item->requires[] = 'two-of-gtin-brand-mpn';
-			return true;
+		if ( ! $this->country_requires_unique_identifiers() ) {
+			return false;
 		}
-
-		foreach ( $categories as $category ) {
-			$hierarchy = explode( '> ', $category );
-			$hierarchy = array_map( 'trim', $hierarchy );
-
-			switch ( $hierarchy[0] ) {
-				case 'Media':
-					if ( 'Books' == $hierarchy[1] ) {
-						// Requires ISBN
-						$item->requires[] = 'isbn';
-					} else {
-						// Requires UPC, EAN or JAN
-						$item->requires[] = 'gtin';
-					}
-					break;
-
-				case 'Apparel & Accessories':
-					if ( 'Shoes' == $hierarchy[1] ||
-						 'Handbags, Wallets & Cases' == $hierarchy[1] ||
-						 'Sunglasses' == $hierarchy[2] ||
-						 'Watches' == $hierarchy[2] ) {
-						// Requires Brand AND "UPC, EAN or JAN" or "MPN"
-						$item->requires[] = 'brand';
-						$item->requires[] = 'gtin-or-mpn';
-					} else {
-						// Requires Brand
-						$item->requires[] = 'brand';
-					}
-					break;
-
-				default:
-					// At least 2 of
-					//      UPC, EAN or JAN
-					//      Brand
-					//      MPN
-					$item->requires[] = 'two-of-gtin-brand-mpn';
-					break;
-			}
-		}
+		$item->requires[] = 'brand-plus-gtin-or-mpn';
 		return true;
 	}
 
+	/**
+	 * Determine if the current country required unique product identifiers.
+	 * https://support.google.com/merchants/answer/160161?hl=en-GB#include
+	 */
+	private function country_requires_unique_identifiers() {
+		switch ( $this->store_info->base_country ) {
+			case 'AU':
+			case 'BR':
+			case 'CZ':
+			case 'FR':
+			case 'DE':
+			case 'IT':
+			case 'JP':
+			case 'NL':
+			case 'ES':
+			case 'CH':
+			case 'GB':
+			case 'US':
+				return true;
+				break;
+			default:
+				return false;
+		}
+	}
 
 
 	/**
@@ -139,61 +119,20 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 	 *                       identifiers. False if not.
 	 */
 	private function has_identifier( &$item ) {
-
 		if ( ! $this->needs_identifier( $item ) || empty( $item->requires ) ) {
 			return true;
 		}
-
 		// Iterate all requirements, return false if we fail any requirements
 		foreach ( $item->requires as $requirement ) {
 			switch ( $requirement ) {
-				case 'isbn':
-					if ( empty( $item->additional_elements['gtin'] ) ) {
-						return false;
-					}
-					break;
-
-				case 'gtin':
-					if ( empty( $item->additional_elements['gtin'] ) &&
-						 empty( $item->additional_elements['upc'] ) ) {
-						return false;
-					}
-					break;
-
-				case 'gtin-or-mpn':
-					if ( empty( $item->additional_elements['gtin'] ) &&
-						 empty( $item->additional_elements['upc'] ) &&
-						 empty( $item->additional_elements['mpn'] ) ) {
-						return false;
-					}
-					break;
-
-				case 'brand':
+				case 'brand-plus-gtin-or-mpn':
 					if ( empty( $item->additional_elements['brand'] ) ) {
 						return false;
 					}
-					break;
-
-				case 'two-of-gtin-brand-mpn':
-					$cnt = 0;
-
-					if ( ! empty( $item->additional_elements['gtin'] ) ||
-						 ! empty( $item->additional_elements['upc'] ) ) {
-						$cnt++;
-					}
-
-					if ( ! empty( $item->additional_elements['brand'] ) ) {
-						$cnt++;
-					}
-
-					if ( ! empty( $item->additional_elements['mpn'] ) ) {
-						$cnt++;
-					}
-
-					if ( $cnt < 2 ) {
+					if ( empty( $item->additional_elements['gtin'] ) &&
+						 empty( $item->additional_elements['mpn'] ) ) {
 						return false;
 					}
-
 					break;
 			}
 		}

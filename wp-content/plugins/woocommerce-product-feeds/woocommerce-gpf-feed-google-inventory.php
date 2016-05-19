@@ -63,7 +63,7 @@ class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 			return false;
 		}
 		echo "    <item>\n";
-		echo '      <guid>woocommerce_gpf_' . $feed_item->ID . "</guid>\n";
+		echo '      <guid>' . $feed_item->guid . "</guid>\n";
 
 		$this->render_prices( $feed_item );
 
@@ -151,6 +151,8 @@ class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 			$effective_date .= '/';
 			$effective_date .= date( 'Y-m-d\TH:i', $feed_item->sale_price_end_date ) . $offset_string;
 			echo '      <g:sale_price_effective_date>' . $effective_date . '</g:sale_price_effective_date>';
+		} else {
+			echo '      <g:sale_price_effective_date />';
 		}
 	}
 

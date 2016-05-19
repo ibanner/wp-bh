@@ -1,5 +1,18 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2016.05.16 - version 6.7.3
+* Do not hardcode guid in Google Inventory feed. Make it filterable in the same way as in the main product feed
+* Update unique identifier checks to match Google specifications
+* Make sure variation descriptions are more reliable where content includes product shortcodes
+* Consistent use of image size across main image, and additional images
+* Make image style filterable. Default to "full"
+* Send empty sale price effective date in inventory feed if none is set
+* Fix translat-ability of "include variations" option in the admin area
+
+2016.04.30 - version 6.7.2
+* Do not send any shipping dimensions unless all are available
+* Fix issues with some elements not coming through into feeds
+
 2016.04.29 - version 6.7.1
 * Avoid warning generated when saving a product after editing variations.
 
