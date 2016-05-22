@@ -38,8 +38,7 @@
       <type>alef</type>
       <person>יוסי אלפי, איש תיאטרון ומספר</person>
       <prayer>
-       תְּפִלָּה
-
+ְּתפִלָּה
 מִיּוֹם שֶׁלָּמַדְתִּי תְּפִלָּה
 לָמַדְתִּי שָׁלוֹם עִם עַצְמִי
 לָמַדְתִּי לְקַבֵּל וְלָתֵת וְלָקַחַת וּלְבַטֵּל
@@ -510,12 +509,94 @@
       </prayer>
     </item>
 
+    <item>
+      <type>yeled</type>
+      <person>שנן כהן, בן 6</person>
+      <prayer>
+שאני אהיה הכי טוב בכדורגל ושיהיו לי הכי המון חברים.
+      </prayer>
+    </item>
 
     <item>
       <type>yeled</type>
-      <person>ילד כלשהו</person>
+      <person>סידני כהן, בת 10</person>
       <prayer>
-       איזושהי תפילה של ילד כלשהו.
+שיהיה לי תוכי.
+      </prayer>
+    </item>
+
+    <item>
+      <type>yeled</type>
+      <person>הראל פרץ, בן 5</person>
+      <prayer>
+מבקש מה' להיות איש ענקי, יותר מאבא.
+      </prayer>
+    </item>
+
+    <item>
+      <type>yeled</type>
+      <person>אריאל שמעוני, בן 7.5</person>
+      <prayer>
+מתפלל שיבוא המשיח. שכשיבוא אני אוכל לראות את סבא רבא שלי מאיר.
+      </prayer>
+    </item>
+
+    <item>
+      <type>yeled</type>
+      <person>רחלי שמעוני, בת 6</person>
+      <prayer>
+כולם יודעים שאני מתפללת שאני רוצה אחות, כי יש לי רק אחים בנים.
+      </prayer>
+    </item>
+
+    <item>
+      <type>yeled</type>
+      <person>תמר ורצברגר, 5.5</person>
+      <prayer>
+אני מבקשת משאלה שתיפול לי שן. ואני גם מבקשת שיהיה מזג אוויר נעים ונוכל ללכת כל הגן לחווה האקולוגית ביום שלישי.
+      </prayer>
+    </item>
+
+    <item>
+      <type>yeled</type>
+      <person>ערבה ענבר, בת 14</person>
+      <prayer>
+רועמת הארץ עִמי בתפילה,
+בזעקה גועשים ההרים.
+קמים ועולים הם בזמר מופלא,
+לבורא עולמנו שרים.
+שוצף הרקיע קולות וברקים,
+הים עם חופו מרקד
+ועיני הנשואות למחוזות רחוקים
+בוערות כלפיד היוקד.
+      </prayer>
+    </item>
+
+
+    <item>
+      <type>yeled</type>
+      <person>ריזה ליפה, בת 12</person>
+      <prayer>
+כשאני מתפללת יש לי רגשות מעורבים. כשאני מתפללת אני לא ממש שמה לב מה אני אומרת. אולי זאת רק אני, אבל בשבילי זאת הרגשה טובה, להתפלל. אולי כי שמעתי הרבה פעמים שדברים טובים קורים כשאת מתפללת, אז זה נכנס לי לראש. תפילה היא חוויה אחרת בשבילי. אבא שלי רב. הייתי מוקפת ביהדות כל החיים שלי, וניסיתי להתחבר, אבל זה פשוט לא קרה. אני לא רוצה לעשות את זה בצורה מאולצת, אבל אני מרגישה שאני אמורה להתפלל כמו שאר המשפחה שלי.
+      </prayer>
+    </item>
+
+
+    <item>
+      <type>yeled</type>
+      <person>אורלי ברקוביץ-חנקין, בת 13</person>
+      <prayer>
+תפילה זה לא רק לפתוח ספר ולדקלם מלים מהדף. היא יותר מזה. בעיני, המטרה של התפילה היא להתחבר למלים שלך ולהבין את המשמעות של מה שאת עושה. המטרה שלה היא לקחת רגע, אפילו רק דקה, ולהשתמש בו כדי להרהר בפעולות שלך.
+זה יותר קשה ממה שזה נשמע. האמת היא שזה יכול להיות קשה מאוד לקחת שנייה, לעצור כל מה שאת עושה ולהרהר. אבל מנסיוני, כשמגיעים בסופו של דבר למצב של תפילה, ההרהור הוא כבר בעצם אינסטינקט.
+      </prayer>
+    </item>
+
+
+    <item>
+      <type>yeled</type>
+      <person>קלייר ג'וזף, בת 16</person>
+      <prayer>
+תפילה תמיד היתה אחד מהדברים שנשמעים נחמד בתיאוריה, אבל לא היו ריאליים מבחינתי במובן המסורתי. השנה הייתי צריכה להתמודד עם הרבה חרדה – עם המתח של תחילת הלימודים בתיכון, של להיות נערה בת 16 שצריכה להבין מי היא, ושל הצורך לאזן בין הרבה דברים במעט מאוד זמן. מה שהקל עלי מאוד היה מדיטציה ושיח משמעותי עם אחרים. היכולת להסתכל גם לתוכי פנימי וגם לדבר עם אחרים על מה שהרגשתי היתה תנאי הכרחי לשפיות בת-העשרה שלי ולאושר שלי בכלל. היכולת לאשר את עצמי לעצמי, ואיתה התמיכה הקהילתית, הפכו למעין תפילה בחיי היומיום שלי.
       </prayer>
     </item>
 
@@ -1152,9 +1233,89 @@ Later, after my wife's anesthesia has faded and my adrenalin drained away, I wat
 
     <item>
       <type>kid</type>
-      <person>Coming soon</person>
+      <person>Orly Berkowitz-Henkin – age 13</person>
       <prayer>
-     
+     Praying isn’t about opening up a book and reciting words from a page. It’s more than that. Praying, to me, is about connecting to your words and understanding the meaning of what you’re doing. Praying is about taking a little bit of time, even if it’s just a minute, and using it to reflect on your actions. 
+It’s harder than it sounds. It can be quite difficult, actually, to take a second to stop everything you’re doing and reflect. But, from personal experience, after finally reaching a state of prayer, reflecting is basically an instinct.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Claire Joseph – age 16</person>
+      <prayer>
+     Prayer has always been one of those things that sounded nice in theory, but not realistic for me in its traditional form. This year I’ve dealt with facing a lot of anxiety. Stress that comes with junior year in high school, being a 16-year-old girl figuring out her identity, and trying to balance many things with minimal time. I’ve found a release in meditation and meaningful discussion with others. Being able to look both internally as well as have external conversations about whatever I am feeling has been crucial to my teenage sanity and overall happiness. Quiet self-validation and communal support have become a kind of prayer for me in my daily life.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Risa Lippe – age 12</person>
+      <prayer>
+     When I pray, I get mixed feelings. When I pray, I don’t really pay attention to the words or what I am saying. It may just be me, but I feel good when I pray. Maybe because I have heard so many times that when you pray good things happen, it went to my head. Praying is a different experience for me. My dad is a rabbi. My whole life I have been surrounded by Judaism yet I have tried to connect, and it just hasn’t happened. I don’t want to force it, but I feel I should pray the same way as my family.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Shanan Cohen – age 6</person>
+      <prayer>
+     That I will be the best at soccer and have the most friends.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Sydney Cohen – age 10</person>
+      <prayer>
+     I would like a parrot.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Harel Peretz – age 5</person>
+      <prayer>
+     I want God to make me into a huge man, even bigger than my dad.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Ariel Shimoni – age 7-and-a-half</person>
+      <prayer>
+     I pray for the Messiah to come. When he comes, I will be able to see my great-grandfather Meir.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Racheli Shimoni – age 6</person>
+      <prayer>
+     Everyone knows that I pray for a sister because I only have brothers.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Tamar Warzburger – age 5-and-a-half</person>
+      <prayer>
+     I want to make a wish for my tooth to fall out. I also ask for nice weather, and that all the kindergarten will be able to go to the ecological farm on Tuesday.
+      </prayer>
+    </item>
+
+    <item>
+      <type>kid</type>
+      <person>Arava Inbar – age 14</person>
+      <prayer>
+The land thunders with me in prayer
+The mountains scream and storm.
+They rise up in wondrous voice
+And sing to the Creator of our world.
+Sound and lightning slash the sky
+The sea dances with the shore.	
+My eyes seek out distant places
+Aflame like a burning torch.
       </prayer>
     </item>
 
