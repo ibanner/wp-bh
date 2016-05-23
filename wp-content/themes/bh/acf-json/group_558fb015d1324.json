@@ -565,7 +565,7 @@
             "label": "Opening Hours",
             "name": "acf-options_opening_hours",
             "type": "repeater",
-            "instructions": "Define all week days from Sunday to Friday in ascending order",
+            "instructions": "Define all week days from Sunday to Saturday in ascending order",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -573,12 +573,11 @@
                 "class": "",
                 "id": ""
             },
-            "row_min": 6,
-            "row_limit": 6,
+            "collapsed": "",
+            "min": 7,
+            "max": 7,
             "layout": "table",
             "button_label": "Add Day",
-            "min": 0,
-            "max": 0,
             "sub_fields": [
                 {
                     "key": "field_53567e3b44fc9",
@@ -599,11 +598,12 @@
                         "Tuesday",
                         "Wednesday",
                         "Thursday",
-                        "Friday"
+                        "Friday",
+                        "Saturday"
                     ],
-                    "default_value": {
-                        "": ""
-                    },
+                    "default_value": [
+
+                    ],
                     "allow_null": 0,
                     "multiple": 0,
                     "ui": 0,
@@ -726,8 +726,7 @@
                     "disabled": 0,
                     "readonly": 0
                 }
-            ],
-            "collapsed": ""
+            ]
         },
         {
             "key": "field_558fb0e276d6a",
@@ -852,5 +851,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1456468098
+    "modified": 1463916444
 }

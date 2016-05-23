@@ -69,6 +69,10 @@ require_once('functions/woocommerce/google-product-feed.php');
 // wpml
 require_once('functions/wpml.php');
 
+// api
+require_once('functions/api/api-functions.php');
+require_once('functions/api/api-hooks.php');
+
 // events
 require_once('functions/events.php');
 
