@@ -74,9 +74,55 @@ var $ = jQuery,
 			
 		},
 
+		/**
+		 * load_opening_hours_msg
+		 *
+		 * Load and display opening hours message
+		 *
+		 * @since		1.0
+		 * @param		N/A
+		 * @return		N/A
+		 */
+		load_opening_hours_msg : function() {
+
+			$.ajax({
+
+				url		: js_globals.ajaxurl,
+				type	: 'POST',
+				data	: {
+					action		: 'opening_hours_msg',
+					wpml_lang	: js_globals.wpml_lang
+				},
+				success: function(result) {
+
+					result = JSON.parse(result);
+
+					// display message
+					if (result.status == '0') {
+						$('.contact-details-layout-opening-hours-message').html(result.msg);
+					}
+
+					// return
+					return true;
+
+				},
+				error: function(result) {
+
+					// return
+					return false;
+
+				}
+
+			});
+
+		},
+
 		loaded	: function() {
 			
 			// $(window).resize(BH_main.alignments).resize();
+
+			// opening hours message
+			BH_main.load_opening_hours_msg();
 
 		},
 

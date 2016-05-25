@@ -7,12 +7,18 @@
  * @version     2.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+$wpml_lang = function_exists('icl_object_id') ? ICL_LANGUAGE_CODE : '';
+
+?>
 
 <script>
 
 	var js_globals = {};
-	js_globals.template_url = "<?php echo TEMPLATE; ?>";
+	js_globals.template_url	= "<?php echo TEMPLATE; ?>";
+	js_globals.wpml_lang	= "<?php echo $wpml_lang; ?>";
+	js_globals.ajaxurl		= "<?php echo $wpml_lang ? str_replace( "/$wpml_lang/", "/", admin_url( "admin-ajax.php" ) ) : admin_url( "admin-ajax.php" ); ?>";		// workaround for WPML bug
 
 </script>
 

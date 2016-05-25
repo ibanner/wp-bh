@@ -3778,7 +3778,7 @@ acf_add_local_field_group(array (
 			'label' => 'Opening Hours',
 			'name' => 'acf-options_opening_hours',
 			'type' => 'repeater',
-			'instructions' => 'Define all week days from Sunday to Friday in ascending order',
+			'instructions' => 'Define all week days from Sunday to Saturday in ascending order',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -3786,12 +3786,11 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'row_min' => 6,
-			'row_limit' => 6,
+			'collapsed' => '',
+			'min' => 7,
+			'max' => 7,
 			'layout' => 'table',
 			'button_label' => 'Add Day',
-			'min' => 0,
-			'max' => 0,
 			'sub_fields' => array (
 				array (
 					'key' => 'field_53567e3b44fc9',
@@ -3813,9 +3812,9 @@ acf_add_local_field_group(array (
 						3 => 'Wednesday',
 						4 => 'Thursday',
 						5 => 'Friday',
+						6 => 'Saturday',
 					),
 					'default_value' => array (
-						'' => '',
 					),
 					'allow_null' => 0,
 					'multiple' => 0,
@@ -3940,7 +3939,6 @@ acf_add_local_field_group(array (
 					'readonly' => 0,
 				),
 			),
-			'collapsed' => '',
 		),
 		array (
 			'key' => 'field_558fb0e276d6a',
