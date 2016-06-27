@@ -37,6 +37,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 		get_template_part('views/footer/sites-links');
 	?>
 
+	<?php // fb-send-msg
+		get_template_part( 'views/footer/fb-send-message-' . ( defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : 'en' ) );
+	?>
+
 	<div class="copyrights">&copy; 1996 <?php bloginfo('name'); ?></div>
 
 	<?php /*
