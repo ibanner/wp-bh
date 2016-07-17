@@ -67,6 +67,9 @@ function showResult(responseText, statusText, xhr, jqForm) {
 		if (responseText=='0') {
 			result_container.find('.result').removeClass('error').addClass('success');
 			result_container.find('.msg-0').removeClass('hide');
+
+			// Add GTM success indication
+			dataLayer.push({'event': 'button-click'});
 		}
 		else {
 			result_container.find('.result').removeClass('success').addClass('error');
