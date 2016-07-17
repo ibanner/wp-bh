@@ -40,6 +40,8 @@
 			get_template_part('views/header/facebook-api');
 			
 		get_template_part('views/header/google-tag-manager');
-		
+
+		get_template_part('views/header/zoom-analytics');
+
 		get_template_part('views/header/header');
 	?>
