@@ -44,7 +44,7 @@
 						
 						if ($show_price) :
 							echo '<div class="col-xs-2 col-sm-2 event-price">' . ( ($price) ? $price . ' &#8362;' : '' ) . '</div>';
-							echo '<div class="col-xs-4 col-sm-3 event-btn">' . ( ($date >= $today && $ticket_net_link) ? '<a class="btn green-btn event-ticket-net-link small" href="javascript:openPopup(\'' . $ticket_net_link . '\')">' . __('Purchase', 'BH') . '</a>' : '' ) . '</div>';
+							echo '<div class="col-xs-4 col-sm-3 event-btn">' . ( ($date >= $today && $ticket_net_link) ? '<a class="btn green-btn event-ticket-net-link small" href="' . $ticket_net_link . '" target="_blank">' . __('Purchase', 'BH') . '</a>' : '' ) . '</div>';
 						endif;
 					echo '</div>';
 				endforeach;
