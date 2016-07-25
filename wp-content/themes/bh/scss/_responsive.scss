@@ -1492,7 +1492,7 @@
 		}
 		
 		.top-msg {
-			margin-bottom: 150px;
+			height: 340px;
 			
 			.top-msg-title {
 				margin-top: 48px;
@@ -2162,16 +2162,6 @@
 				background-position: -145px 0;
 			}
 		}
-		
-		.quote {
-			.bottom-msg {
-				.bottom-msg-content {
-					h2 {
-						font-size: 29px;
-					}
-				}
-			}
-		}
 	}
 
 	/***************************/
@@ -2585,8 +2575,8 @@
 		}
 		
 		.top-msg {
-			margin-bottom: 341px;
-			
+			height: 480px;
+
 			.top-msg-title {
 				margin-top: 105px;
 			}
@@ -2596,7 +2586,7 @@
 			.bottom-msg {
 				.bottom-msg-content {
 					h2 {
-						margin: 0 0 75px;
+						margin: 0 0 60px;
 						font-size: 22px;
 					}
 				}
@@ -3089,8 +3079,8 @@
 		}
 		
 		.top-msg {
-			margin-bottom: 266px;
-			
+			height: 570px;
+
 			.top-msg-title {
 				margin-top: 85px;
 			}

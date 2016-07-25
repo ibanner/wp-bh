@@ -431,7 +431,7 @@ var $ = jQuery,
 			// popup newsletter
 			setTimeout(function() {
 				BH_general.set_newsletter_popup('open');
-			}, 5000);
+			}, 30000);
 			
 		},
 		

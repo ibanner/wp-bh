@@ -648,6 +648,22 @@
 			}
 		}
 	}
+
+	/*******/
+	/* 404 */
+	/*******/
+	
+	.container-404 {
+		.quote {
+			.bottom-msg {
+				.bottom-msg-content {
+					h2 {
+						margin: 0 0 80px;
+					}
+				}
+			}
+		}
+	}
 }
 
 @media (min-width: 481px) and (max-width: 991px) {}
