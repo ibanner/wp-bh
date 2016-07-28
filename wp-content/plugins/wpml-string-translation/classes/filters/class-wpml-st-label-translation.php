@@ -80,7 +80,7 @@ class WPML_ST_Label_Translation {
 			}
 		}
 		
-		$string = new WPML_ST_string( $return[ 'id_singular' ], $wpdb );
+		$string = new WPML_ST_String( $return[ 'id_singular' ], $wpdb );
 		$return[ $string->get_language() ] = array(
 				'singular' => $singular_label,
 				'general'  => $label,
@@ -100,10 +100,10 @@ class WPML_ST_Label_Translation {
 			wp_send_json_error( 'Wrong Nonce' );
 		}
 
-		$general  = isset( $_POST[ 'plural' ] ) ? $_POST[ 'plural' ] : false;
-		$singular = isset( $_POST[ 'singular' ] ) ? $_POST[ 'singular' ] : false;
-		$taxonomy = isset( $_POST[ 'taxonomy' ] ) ? $_POST[ 'taxonomy' ] : false;
-		$language = isset( $_POST[ 'taxonomy_language_code' ] ) ? $_POST[ 'taxonomy_language_code' ] : false;
+		$general  = isset( $_POST[ 'plural' ] ) ? sanitize_text_field( $_POST[ 'plural' ] ) : false;
+		$singular = isset( $_POST[ 'singular' ] ) ? sanitize_text_field( $_POST[ 'singular' ] ) : false;
+		$taxonomy = isset( $_POST[ 'taxonomy' ] ) ? sanitize_text_field( $_POST[ 'taxonomy' ] ) : false;
+		$language = isset( $_POST[ 'taxonomy_language_code' ] ) ? sanitize_text_field( $_POST[ 'taxonomy_language_code' ] ): false;
 
 		if ( $singular && $general && $taxonomy && $language ) {
 

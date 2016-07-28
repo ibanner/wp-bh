@@ -131,17 +131,8 @@ abstract class QM_Output_Html extends QM_Output {
 		$sql = esc_html( $sql );
 		$sql = trim( $sql );
 
-		foreach( array(
-			'ALTER', 'AND', 'COMMIT', 'CREATE', 'DESCRIBE', 'DELETE', 'DROP', 'ELSE', 'END', 'FROM', 'GROUP',
-			'HAVING', 'INNER', 'INSERT', 'LEFT', 'LIMIT', 'ON', 'OR', 'ORDER', 'OUTER', 'REPLACE', 'RIGHT', 'ROLLBACK', 'SELECT', 'SET',
-			'SHOW', 'START', 'THEN', 'TRUNCATE', 'UPDATE', 'VALUES', 'WHEN', 'WHERE'
-		) as $cmd ) {
-			// Why does this trim() every time?
-			$sql = trim( str_replace( " $cmd ", "<br>$cmd ", $sql ) );
-		}
-
-		# @TODO profile this as an alternative:
-		# $sql = preg_replace( '# (ALTER|AND|COMMIT|CREATE|DESCRIBE) #', '<br>$1 ', $sql );
+		$regex = 'ADD|AFTER|ALTER|AND|BEGIN|COMMIT|CREATE|DESCRIBE|DELETE|DROP|ELSE|END|EXCEPT|FROM|GROUP|HAVING|INNER|INSERT|INTERSECT|LEFT|LIMIT|ON|OR|ORDER|OUTER|REPLACE|RIGHT|ROLLBACK|SELECT|SET|SHOW|START|THEN|TRUNCATE|UNION|UPDATE|USING|VALUES|WHEN|WHERE|XOR';
+		$sql = preg_replace( '# (' . $regex . ') #', '<br>$1 ', $sql );
 
 		return $sql;
 
@@ -174,6 +165,10 @@ abstract class QM_Output_Html extends QM_Output {
 	 * @return string The fully formatted file link or file name, safe for output.
 	 */
 	public static function output_filename( $text, $file, $line = 0 ) {
+
+		if ( empty( $file ) ) {
+			return esc_html( $text );
+		}
 
 		# Further reading:
 		# http://simonwheatley.co.uk/2012/07/clickable-stack-traces/

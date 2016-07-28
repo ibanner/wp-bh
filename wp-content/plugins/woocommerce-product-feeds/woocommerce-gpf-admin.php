@@ -224,7 +224,7 @@ class WoocommerceGpfAdmin {
 			$term = $termortax;
 		}
 		if ( $term ) {
-			$current_data = get_metadata( 'woocommerce_term', $term->term_id, '_woocommerce_gpf_data', true );
+			$current_data = get_woocommerce_term_meta( $term->term_id, '_woocommerce_gpf_data', true );
 		} else {
 			$current_data = array();
 		}
@@ -295,7 +295,7 @@ class WoocommerceGpfAdmin {
 			foreach ( $_POST['_woocommerce_gpf_data'] as $key => $value ) {
 				$_POST['_woocommerce_gpf_data'][ $key ] = stripslashes( $value );
 			}
-			update_metadata( 'woocommerce_term', $term_id, '_woocommerce_gpf_data', $_POST['_woocommerce_gpf_data'] );
+			update_woocommerce_term_meta( $term_id, '_woocommerce_gpf_data', $_POST['_woocommerce_gpf_data'] );
 		}
 
 	}

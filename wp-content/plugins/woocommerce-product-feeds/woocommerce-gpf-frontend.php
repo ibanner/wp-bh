@@ -99,7 +99,7 @@ class WoocommerceGpfFrontend {
 	 * Helper function for WooCommerce v2.0.x
 	 * Checks if a variation is visible or not.
 	 */
-	private function variation_is_visible($variation) {
+	private function variation_is_visible( $variation ) {
 		if ( method_exists( $variation, 'variation_is_visible' ) ) {
 			return $variation->variation_is_visible();
 		}
@@ -438,43 +438,6 @@ class WoocommerceGpfFrontend {
 	}
 
 	/**
-	 * Add query args to a URL to select a specific variation.
-	 */
-	private function add_variation_query_args( $feed_item, $variation_product ) {
-		$attribute_terms = $variation_product->get_variation_attributes();
-		if (empty($attribute_terms)) {
-			return $feed_item->purchase_link;
-		}
-		return add_query_arg(
-			$attribute_terms,
-			$feed_item->purchase_link
-		);
-	}
-
-	private function generate_attribute_suffix( $variation_product ) {
-		$excluded_attributes = apply_filters(
-			'woocommerce_gpf_attributes_excluded_from_variation_title',
-			array()
-		);
-		$attribute_terms = $variation_product->get_variation_attributes();
-		$descriptions = array();
-		foreach ( $attribute_terms as $taxonomy => $slug ) {
-			if ( empty( $slug ) || in_array( $taxonomy, $excluded_attributes ) ) {
-				continue;
-			}
-			// See if it's a taxonomy based attribute.
-			$taxonomy = str_replace( 'attribute_', '', $taxonomy );
-			$term     = get_term_by( 'slug', $slug, $taxonomy );
-			if ( $term !== false ) {
-				$descriptions[] = $term->name;
-			} else {
-				$descriptions[] = $slug;
-			}
-		}
-		return ' (' . implode( ', ', $descriptions ) . ')';
-	}
-
-	/**
 	 * Process a variable product, and output its elements.
 	 *
 	 * @param  object  $post                 WordPress post object
@@ -497,7 +460,12 @@ class WoocommerceGpfFrontend {
 			// Get main item information
 			$feed_item->ID    = $variation_id;
 			$feed_item->guid  = 'woocommerce_gpf_' . $variation_id;
-			$feed_item->title = get_the_title( $post->ID ) . $this->generate_attribute_suffix( $variation_product );
+			$feed_item->title = $variation_product->get_title();
+			$suffix           = $variation_product->get_formatted_variation_attributes(true);
+			if ( ! empty( $suffix ) ) {
+				$feed_item->title .= ' (' . $suffix . ')';
+			}
+
 			$feed_item->title = apply_filters(
 				'woocommerce_gpf_title',
 				$feed_item->title,
@@ -522,8 +490,7 @@ class WoocommerceGpfFrontend {
 			if ( empty( $feed_item->image_link ) ) {
 				$feed_item->image_link = $this->get_the_post_thumbnail_src( $post->ID, $this->image_style );
 			}
-			$feed_item->purchase_link       = get_permalink( $post->ID );
-			$feed_item->purchase_link       = $this->add_variation_query_args( $feed_item, $variation_product );
+			$feed_item->purchase_link       = $variation_product->get_permalink();
 			$feed_item->shipping_weight     = apply_filters( 'woocommerce_gpf_shipping_weight', $variation_product->get_weight(), $variation_id );
 			$feed_item->is_in_stock         = $variation_product->is_in_stock();
 			$feed_item->sku                 = $variation_product->get_sku();

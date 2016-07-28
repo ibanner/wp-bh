@@ -43,7 +43,7 @@ abstract class QM_Collector {
 	protected function maybe_log_dupe( $sql, $i ) {
 
 		$sql = str_replace( array( "\r\n", "\r", "\n" ), ' ', $sql );
-		$sql = str_replace( array( "\t" ), '', $sql );
+		$sql = str_replace( array( "\t", '`' ), '', $sql );
 		$sql = preg_replace( '/[ ]+/', ' ', $sql );
 		$sql = trim( $sql );
 
@@ -80,7 +80,8 @@ abstract class QM_Collector {
 
 	public static function format_bool_constant( $constant ) {
 		if ( !defined( $constant ) ) {
-			return 'undefined';
+			/* translators: Undefined PHP constant */
+			return __( 'undefined', 'query-monitor' );
 		} else if ( !constant( $constant ) ) {
 			return 'false';
 		} else {

@@ -31,7 +31,7 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 		// Bing doesn't like foreign chars
 		setlocale( LC_CTYPE, 'en_US.UTF-8' );
 
-		if ( isset ( $_REQUEST['feeddownload'] ) ) {
+		if ( isset( $_REQUEST['feeddownload'] ) ) {
 			header( 'Content-Disposition: attachment; filename="E-Commerce_Product_List.txt"' );
 		} else {
 			header( 'Content-Disposition: inline; filename="E-Commerce_Product_List.txt"' );
@@ -44,20 +44,35 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 		if ( isset( $this->settings['product_fields']['bing_category'] ) ) {
 			echo "\tproduct_category";
 		}
-		if ( isset ( $this->settings['product_fields']['brand'] ) ) {
+		if ( isset( $this->settings['product_fields']['brand'] ) ) {
 			echo "\tbrand";
 		}
-		if ( isset ( $this->settings['product_fields']['mpn'] ) ) {
+		if ( isset( $this->settings['product_fields']['mpn'] ) ) {
 			echo "\tmpn";
 		}
-		if ( isset ( $this->settings['product_fields']['gtin'] ) ) {
+		if ( isset( $this->settings['product_fields']['gtin'] ) ) {
 			echo "\tgtin";
 		}
-		if ( isset ( $this->settings['product_fields']['availability'] ) ) {
+		if ( isset( $this->settings['product_fields']['availability'] ) ) {
 			echo "\tavailability";
 		}
-		if ( isset ( $this->settings['product_fields']['condition'] ) ) {
+		if ( isset( $this->settings['product_fields']['condition'] ) ) {
 			echo "\tCondition";
+		}
+		if ( isset( $this->settings['product_fields']['custom_label_0'] ) ) {
+			echo "\tcustom_label_0";
+		}
+		if ( isset( $this->settings['product_fields']['custom_label_1'] ) ) {
+			echo "\tcustom_label_1";
+		}
+		if ( isset( $this->settings['product_fields']['custom_label_2'] ) ) {
+			echo "\tcustom_label_2";
+		}
+		if ( isset( $this->settings['product_fields']['custom_label_3'] ) ) {
+			echo "\tcustom_label_3";
+		}
+		if ( isset( $this->settings['product_fields']['custom_label_4'] ) ) {
+			echo "\tcustom_label_4";
 		}
 		echo "\r\n";
 
@@ -99,7 +114,7 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 		}
 
 		// id
-		echo $this->tsvescape($feed_item->guid) . "\t";
+		echo $this->tsvescape( $feed_item->guid ) . "\t";
 
 		// title
 		echo $this->tsvescape( substr( $feed_item->title, 0, 255 ) ) . "\t";
@@ -118,7 +133,7 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 		echo $this->tsvescape( $description ) . "\t";
 
 		// image_link
-		if ( ! empty ( $feed_item->image_link ) ) {
+		if ( ! empty( $feed_item->image_link ) ) {
 			echo $this->tsvescape( $feed_item->image_link );
 		}
 
@@ -126,7 +141,6 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 		$this->output_element( $feed_item, 'brand' );
 		$this->output_element( $feed_item, 'mpn' );
 		$this->output_element( $feed_item, 'gtin' );
-		$this->output_element( $feed_item, 'isbn' );
 
 		if ( isset( $this->settings['product_fields']['availability'] ) ) {
 			if ( $feed_item->is_in_stock ) {
@@ -174,6 +188,13 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 				echo "\t";
 			}
 		}
+
+		$this->output_element( $feed_item, 'custom_label_0' );
+		$this->output_element( $feed_item, 'custom_label_1' );
+		$this->output_element( $feed_item, 'custom_label_2' );
+		$this->output_element( $feed_item, 'custom_label_3' );
+		$this->output_element( $feed_item, 'custom_label_4' );
+
 		echo "\r\n";
 		return true;
 	}
