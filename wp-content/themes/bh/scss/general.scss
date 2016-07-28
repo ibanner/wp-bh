@@ -315,12 +315,25 @@ body > header {
 						display: none;
 						
 						& > li {
+							position: relative;
+
 							& > a {
 								padding: 5px 10px;
 								font-size: 19px;
 								color: $font-color;
 								text-decoration: none;
 								display: block;
+							}
+
+							& > .sub-menu {
+								top: -11px;
+								left: 100%;
+							}
+
+							&:hover {
+								& > .sub-menu {
+									display: block;
+								}
 							}
 						}
 					}

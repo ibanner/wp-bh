@@ -107,6 +107,15 @@ body > header {
 			ul.nav {
 				& > li {
 					float: right;
+
+					.sub-menu {
+						& > li {
+							& > .sub-menu {
+								left: auto;
+								right: 100%;
+							}
+						}
+					}
 				}
 			}
 		}
