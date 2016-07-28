@@ -95,6 +95,7 @@ class WoocommerceGpfCommon {
 				'feed_types'      => array( 'google' ),
 				'can_prepopulate' => true,
 				'google_len'      => 50,
+				'multiple'        => true,
 			),
 
 			'gender' => array(
@@ -209,7 +210,7 @@ class WoocommerceGpfCommon {
 				'can_default'     => true,
 				'callback'        => 'render_textfield',
 				'can_prepopulate' => true,
-				'feed_types'      => array( 'google' ),
+				'feed_types'      => array( 'google', 'bing' ),
 				'google_len'      => 100,
 				'max_values'      => 1,
 			),
@@ -220,7 +221,7 @@ class WoocommerceGpfCommon {
 				'can_default'     => true,
 				'callback'        => 'render_textfield',
 				'can_prepopulate' => true,
-				'feed_types'      => array( 'google' ),
+				'feed_types'      => array( 'google', 'bing' ),
 				'google_len'      => 100,
 				'max_values'      => 1,
 			),
@@ -231,7 +232,7 @@ class WoocommerceGpfCommon {
 				'can_default'     => true,
 				'callback'        => 'render_textfield',
 				'can_prepopulate' => true,
-				'feed_types'      => array( 'google' ),
+				'feed_types'      => array( 'google', 'bing' ),
 				'google_len'      => 100,
 				'max_values'      => 1,
 			),
@@ -242,7 +243,7 @@ class WoocommerceGpfCommon {
 				'can_default'     => true,
 				'callback'        => 'render_textfield',
 				'can_prepopulate' => true,
-				'feed_types'      => array( 'google' ),
+				'feed_types'      => array( 'google', 'bing' ),
 				'google_len'      => 100,
 				'max_values'      => 1,
 			),
@@ -253,7 +254,7 @@ class WoocommerceGpfCommon {
 				'can_default'     => true,
 				'callback'        => 'render_textfield',
 				'can_prepopulate' => true,
-				'feed_types'      => array( 'google' ),
+				'feed_types'      => array( 'google', 'bing' ),
 				'google_len'      => 100,
 				'max_values'      => 1,
 			),
@@ -309,7 +310,7 @@ class WoocommerceGpfCommon {
 		}
 		foreach ( array_keys( $array ) as $key ) {
 			if ( empty( $this->product_fields[ $key ] ) || ! in_array( $feed_format, $this->product_fields[ $key ]['feed_types'] ) ) {
-				unset ( $array[ $key ] );
+				unset( $array[ $key ] );
 			}
 		}
 		return $array;
@@ -369,7 +370,6 @@ class WoocommerceGpfCommon {
 			$this->settings['product_defaults'] = array();
 		}
 		$settings = $this->remove_blanks( $this->settings['product_defaults'] );
-
 
 		// Merge category settings
 		$categories = wp_get_object_terms( $product_id, 'product_cat', array( 'fields' => 'ids' ) );
@@ -442,10 +442,10 @@ class WoocommerceGpfCommon {
 		if ( ! $category_id ) {
 			return false;
 		}
-		if ( isset ( $this->category_cache[ $category_id ] ) ) {
+		if ( isset( $this->category_cache[ $category_id ] ) ) {
 			return $this->category_cache[ $category_id ];
 		}
-		$values = get_metadata( 'woocommerce_term', $category_id, '_woocommerce_gpf_data', true );
+		$values = get_woocommerce_term_meta( $category_id, '_woocommerce_gpf_data', true );
 		$this->category_cache[ $category_id ] = &$values;
 		return $this->category_cache[ $category_id ];
 
@@ -521,12 +521,12 @@ class WoocommerceGpfCommon {
 				} else {
 					$result = array();
 				}
-			// Otherwise grab the values to use direct from the term relationships.
 			} else {
+				// Otherwise grab the values to use direct from the term relationships.
 				$terms = wp_get_object_terms( $product_id, array( $value ), array( 'fields' => 'names' ) );
 				if ( ! empty( $terms ) ) {
 					$result = $terms;
-				} elseif ( !empty( $product->parent->id ) ) {
+				} elseif ( ! empty( $product->parent->id ) ) {
 					// Couldn't find it against the variation - grab the parent product value.
 					$terms = wp_get_object_terms( $product->parent->id, array( $value ), array( 'fields' => 'names' ) );
 					if ( ! empty( $terms ) ) {
@@ -563,7 +563,7 @@ class WoocommerceGpfCommon {
 
 		if ( 'sku' == $field ) {
 			$sku = $product->get_sku();
-			if ( !empty( $sku ) ) {
+			if ( ! empty( $sku ) ) {
 				return array( $sku );
 			}
 		}

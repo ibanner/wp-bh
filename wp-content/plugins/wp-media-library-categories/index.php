@@ -1,12 +1,13 @@
 <?php
 /**
  * Plugin Name: Media Library Categories
- * Plugin URI: http://wordpress.org/plugins/wp-media-library-categories/
+ * Plugin URI: https://wordpress.org/plugins/wp-media-library-categories/
  * Description: Adds the ability to use categories in the media library.
- * Version: 1.5.2
+ * Version: 1.5.3
  * Author: Jeffrey-WP
  * Text Domain: wp-media-library-categories
- * Author URI: http://codecanyon.net/user/jeffrey-wp/?ref=jeffrey-wp
+ * Domain Path: /languages
+ * Author URI: https://codecanyon.net/user/jeffrey-wp/?ref=jeffrey-wp
  */
 
 /** Custom update_count_callback */
@@ -30,6 +31,13 @@ function wpmediacategory_update_count_callback( $terms = array(), $taxonomy = 'c
 		$wpdb->update( $wpdb->term_taxonomy, array( 'count' => $rowCount->total ), array( 'term_taxonomy_id' => $rowCount->term_taxonomy_id ) );
 	}
 }
+
+
+/** loading text domain */
+function wpmediacategory_load_plugin_textdomain() {
+	load_plugin_textdomain( 'wp-media-library-categories', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'plugins_loaded', 'wpmediacategory_load_plugin_textdomain' );
 
 
 /** register taxonomy for attachments */
@@ -433,7 +441,7 @@ if ( is_admin() ) {
 		return array_merge(
 			array(
 				'settings' => '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin/edit-tags.php?taxonomy=' . $taxonomy . '&amp;post_type=attachment">' . __( 'Categories', 'wp-media-library-categories' ) . '</a>',
-				'premium' => '<a href="http://codecanyon.net/item/media-library-categories-premium/6691290?ref=jeffrey-wp">' . __( 'Get Premium Version', 'wp-media-library-categories' ) . '</a>'
+				'premium' => '<a href="https://codecanyon.net/item/media-library-categories-premium/6691290?ref=jeffrey-wp">' . __( 'Get Premium Version', 'wp-media-library-categories' ) . '</a>'
 			),
 			$links
 		);

@@ -76,26 +76,36 @@ class QM_Output_Html_HTTP extends QM_Output_Html {
 					$response = $row['response']->get_error_message();
 					$css      = 'qm-warn';
 				} else {
-					$response = wp_remote_retrieve_response_code( $row['response'] );
+					$code     = wp_remote_retrieve_response_code( $row['response'] );
 					$msg      = wp_remote_retrieve_response_message( $row['response'] );
 					$css      = '';
 
-					if ( empty( $response ) ) {
-						$response = __( 'n/a', 'query-monitor' );
-					} else {
-						$response = $response . ' ' . $msg;
-					}
-
-					if ( intval( $response ) >= 400 ) {
+					if ( intval( $code ) >= 400 ) {
 						$css = 'qm-warn';
 					}
 
+					$response = $code . ' ' . $msg;
+
 				}
 
-				$method = $row['args']['method'];
-				if ( !$row['args']['blocking'] ) {
-					$method .= '&nbsp;' . _x( '(non-blocking)', 'non-blocking HTTP transport', 'query-monitor' );
+				$method = esc_html( $row['args']['method'] );
+
+				if ( empty( $row['args']['blocking'] ) ) {
+					$method .= '<br><span class="qm-info">' . esc_html( sprintf(
+						/* translators: A non-blocking HTTP API request. %s: Relevant argument name */
+						__( '(Non-blocking request: %s)', 'query-monitor' ),
+						'blocking=false'
+					) ) . '</span>';
 				}
+
+				if ( empty( $row['args']['sslverify'] ) && empty( $row['args']['local'] ) && 'https' === parse_url( $row['url'], PHP_URL_SCHEME ) ) {
+					$method .= '<br><span class="qm-warn">' . esc_html( sprintf(
+						/* translators: An HTTP API request has disabled certificate verification. %s: Relevant argument name */
+						__( '(Certificate verification disabled: %s)', 'query-monitor' ),
+						'sslverify=false'
+					) ) . '</span>';
+				}
+
 				$url = self::format_url( $row['url'] );
 
 				if ( isset( $row['transport'] ) ) {
@@ -133,7 +143,7 @@ class QM_Output_Html_HTTP extends QM_Output_Html {
 				);
 				printf( // WPCS: XSS ok.
 					'<td class="qm-url qm-ltr qm-wrap">%s<br>%s</td>',
-					esc_html( $method ),
+					$method,
 					$url
 				);
 				printf(
@@ -211,8 +221,8 @@ class QM_Output_Html_HTTP extends QM_Output_Html {
 
 		$data = $this->collector->get_data();
 
-		if ( isset( $data['errors']['error'] ) ) {
-			$class[] = 'qm-error';
+		if ( isset( $data['errors']['alert'] ) ) {
+			$class[] = 'qm-alert';
 		} else if ( isset( $data['errors']['warning'] ) ) {
 			$class[] = 'qm-warning';
 		}
@@ -229,6 +239,7 @@ class QM_Output_Html_HTTP extends QM_Output_Html {
 
 		$title = ( empty( $count ) )
 			? __( 'HTTP Requests', 'query-monitor' )
+			/* translators: %s: Number of HTTP requests */
 			: __( 'HTTP Requests (%s)', 'query-monitor' );
 
 		$args = array(
@@ -238,8 +249,8 @@ class QM_Output_Html_HTTP extends QM_Output_Html {
 			) ),
 		);
 
-		if ( isset( $data['errors']['error'] ) ) {
-			$args['meta']['classname'] = 'qm-error';
+		if ( isset( $data['errors']['alert'] ) ) {
+			$args['meta']['classname'] = 'qm-alert';
 		} else if ( isset( $data['errors']['warning'] ) ) {
 			$args['meta']['classname'] = 'qm-warning';
 		}

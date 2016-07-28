@@ -5,9 +5,8 @@
  */
 class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 
-
-	private $US_feed = false;
-
+	private $tax_excluded  = false;
+	private $tax_attribute = false;
 
 	/**
 	 * Constructor. Grab the settings, and add filters if we have stuff to do
@@ -17,10 +16,15 @@ class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 	function __construct() {
 		parent::__construct();
 		$this->store_info->feed_url = add_query_arg( 'woocommerce_gpf', 'googleinventory', $this->store_info->feed_url_base );
-		if ( ! empty( $this->store_info->base_country ) && substr( 'US' == $this->store_info->base_country, 0, 2 ) ) {
-			$this->US_feed = true;
-		} else {
-			$this->US_feed = false;
+		if ( ! empty( $this->store_info->base_country ) ) {
+			if ( 'US' == substr( $this->store_info->base_country, 0, 2 ) ||
+			     'CA' == substr( $this->store_info->base_country, 0, 2 ) ||
+			     'IN' == substr( $this->store_info->base_country, 0, 2 ) ) {
+				$this->tax_excluded = true;
+				if ( 'US' == substr( $this->store_info->base_country, 0, 2 ) ) {
+					$this->tax_attribute = true;
+				}
+			}
 		}
 	}
 
@@ -117,11 +121,11 @@ class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 	private function render_prices( $feed_item ) {
 
 		// Regular price
-		if ( $this->US_feed ) {
-			// US prices have to be submitted excluding tax
+		if ( $this->tax_excluded ) {
+			// Some country prices have to be submitted excluding tax
 			$price = number_format( $feed_item->regular_price_ex_tax, 2, '.', '' );
 		} else {
-			// Non-US prices have to be submitted including tax
+			// Others have to be submitted including tax
 			$price = number_format( $feed_item->regular_price_inc_tax, 2, '.', '' );
 		}
 		echo '      <g:price>' . $price . ' ' . $this->store_info->currency . "</g:price>\n";
@@ -132,8 +136,7 @@ class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 		}
 
 		// Otherwise, include the sale_price tag.
-		if ( $this->US_feed ) {
-			// US prices have to be submitted excluding tax.
+		if ( $this->tax_excluded ) {
 			$sale_price = number_format( $feed_item->sale_price_ex_tax, 2, '.', '' );
 		} else {
 			$sale_price = number_format( $feed_item->sale_price_inc_tax, 2, '.', '' );

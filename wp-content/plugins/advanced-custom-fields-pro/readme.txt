@@ -106,6 +106,46 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
+= 5.3.10 =
+* Core: Added new 'google_api_key' and 'google_api_client' global settings
+* Google Map: Added new 'acf/fields/google_map/api' filter
+
+= 5.3.9.2 =
+* Time Picker field: Added compatibility with previous 3rd party field settings
+* Core: Fixed JS error setting l10n for Select2 with 3rd party libraries
+
+= 5.3.9.1 =
+* Time Picker field: Fixed bug causing value to appear as current time
+* API: Fixed bug causing `have_rows()` to fail when using an object as $post_id parameter
+
+= 5.3.9 =
+* Date Time Picker field: Added new field
+* Time Picker field: Added new field
+* Taxonomy field: Fixed bug preventing saved terms from being loaded during save/update actions
+* API: Added new function `the_row_index()` to output the current row number (1,2,3)
+* Core: Improved import tool to update existing field groups
+* Core: Added upgrade_notice message to plugins page for future announcements
+* Core: Fixed bug where updating value did not clear persistent cache
+* Core: Added Select2 JS strings to .pot for translation
+* Core: Added Date and Time picker JS strings to .pot for translation
+* Core: Improved compatibility with WPML during AJAX calls
+* Core: Fixed bug preventing access to network database upgrade page
+* Core: Minor fixes and improvements
+* Language: Updated Swedish translation - thanks to Jonathan de Jong
+* Language: Updated Russian translation - thanks to Andy Toniyevych 
+* Language: Updated Portuguese translation - thanks to Pedro Mendonca
+* Language: Updated Polish translation - thanks to Michal Lepiarz
+* Language: Updated Italian translation - thanks to Davide Pantè
+* Language: Updated German translation - thanks to Ralf Koller
+* Language: Added Arabic translation - thanks to Adil el hallaoui
+
+= 5.3.8.1 =
+* Image field: Fixed JS bug causing errors when 'Uploaded to post' library setting is checked
+* File field: Same as above
+* Gallery field: Same as above
+* Flexible Content field: Fixed bug preventing `get_sub_field()` from working within 'layout_title' filter
+* Radio field: Fixed bug causing field name to change when adding 'other' choice to a sub field
+
 = 5.3.8 =
 * Gallery field: Added new 'Insert' setting to control where new attachments are added
 * Radio field: Added new 'Allow Null' setting

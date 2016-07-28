@@ -1,5 +1,20 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2016.07.21 - version 6.7.6
+* Fix issues where not all elements included in Bing feed
+* Robustness fix for deciding whether to send prices inc, or ex. taxes
+* Use WooCommerce standard functions for generating variation titles / URLs
+
+2016.06.20 - version 6.7.5
+* Send custom_label fields in the Bing feed
+* Fix warnings thrown for category settings on WooCommerce 2.6
+
+2016.06.06 - version 6.7.4
+* Make sure non-printable UTF characters are removed in product titles as well as descriptions.
+* Avoid issue where product titles occasionally get generated with a "()"" suffix.
+* Clean up product URLs for attributes with no values set (E.g. "all colours").
+* Allow multiple GTINs to be entered against products.
+
 2016.05.16 - version 6.7.3
 * Do not hardcode guid in Google Inventory feed. Make it filterable in the same way as in the main product feed
 * Update unique identifier checks to match Google specifications

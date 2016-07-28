@@ -5,9 +5,8 @@
  */
 class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 
-
-	private $tax_excluded = false;
-
+	private $tax_excluded  = false;
+	private $tax_attribute = false;
 
 	/**
 	 * Constructor. Grab the settings, and add filters if we have stuff to do
@@ -18,12 +17,13 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 		parent::__construct();
 		$this->store_info->feed_url = add_query_arg( 'woocommerce_gpf', 'google', $this->store_info->feed_url_base );
 		if ( ! empty( $this->store_info->base_country ) ) {
-			if ( substr( 'US' == $this->store_info->base_country, 0, 2 ) ||
-			     substr( 'CA' == $this->store_info->base_country, 0, 2 ) ||
-			     substr( 'IN' == $this->store_info->base_country, 0, 2 ) ) {
+			if ( 'US' == substr( $this->store_info->base_country, 0, 2 ) ||
+			     'CA' == substr( $this->store_info->base_country, 0, 2 ) ||
+			     'IN' == substr( $this->store_info->base_country, 0, 2 ) ) {
 				$this->tax_excluded = true;
-			} else {
-				$this->tax_excluded = false;
+				if ( 'US' == substr( $this->store_info->base_country, 0, 2 ) ) {
+					$this->tax_attribute = true;
+				}
 			}
 		}
 		add_filter( 'woocommerce_gpf_feed_item_google', array( $this, 'enforce_max_lengths' ) );
@@ -178,18 +178,29 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 		if ( empty ( $feed_item->price_inc_tax ) ) {
 			return false;
 		}
-		echo "    <item>\n";
-		echo '      <title><![CDATA[' . $feed_item->title . "]]></title>\n";
-		echo '      <link>' . esc_url( $feed_item->purchase_link ) . "</link>\n";
-		echo '      <g:ID>' . $feed_item->guid . "</g:ID>\n";
+		// Remove non-printable UTF-8 / CDATA escaping
+		$title    = preg_replace(
+			'/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u',
+			'',
+			$feed_item->title
+		);
+		$title = str_replace( ']]>', ']]]]><![CDATA[>', $title );
+		$product_description = preg_replace(
+			'/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u',
+			'',
+			$feed_item->description
+		);
+		$product_description = str_replace( ']]>', ']]]]><![CDATA[>', $product_description );
 
 		// This is basically a hack since we're avoiding using the PHP DOM functions
 		// so we don't have to hold the whole doc in memory
-		$product_description = $feed_item->description;
-		// Remove non-printable UTF-8
-		$product_description = preg_replace( '/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', '', $product_description );
-		$product_description = str_replace( ']]>', ']]]]><![CDATA[>', $product_description );
+
+		echo "    <item>\n";
+		echo '      <title><![CDATA[' . $title . "]]></title>\n";
+		echo '      <link>' . esc_url( $feed_item->purchase_link ) . "</link>\n";
+		echo '      <g:ID>' . $feed_item->guid . "</g:ID>\n";
 		echo '      <description><![CDATA[' . $product_description . "]]></description>\n";
+
 
 		if ( ! empty( $feed_item->image_link ) ) {
 			echo '      <g:image_link><![CDATA[' . $feed_item->image_link . "]]></g:image_link>\n";
