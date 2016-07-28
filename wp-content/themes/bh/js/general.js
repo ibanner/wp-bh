@@ -816,7 +816,7 @@ var $ = jQuery,
 			BH_general.top_menu();
 
 			// footer links
-			// BH_general.footer_links();
+			BH_general.footer_links();
 
 			// close all footer sub menus
 			$('.footer-menu li.menu-item-has-children').removeClass('collapsed');
