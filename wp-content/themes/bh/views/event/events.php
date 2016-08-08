@@ -25,7 +25,7 @@
 		$args['tax_query'] = array(
 			array(
 				'taxonomy'	=> 'event_category',
-				'field'		=> 'id',
+				'field'		=> 'term_id',
 				'terms'		=> $category_id
 			)
 		);
