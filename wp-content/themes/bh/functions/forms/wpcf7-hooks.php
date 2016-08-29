@@ -461,8 +461,6 @@
 		$additional_posted_data['paymentStep'] = 'processing';
 
 		session_start();
-		
-		session_start();
 
 		// store custom payment issuer and customer Emails
 		if ( isset($custom_payment) ) {
