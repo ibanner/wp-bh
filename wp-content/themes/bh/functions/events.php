@@ -224,21 +224,21 @@
 			
 				// regular event
 				if ($ticket_net_link) :
-					$btn = '<a class="btn green-btn event-ticket-net-link" onclick="BH_event.ticketnet_purchase_link(\'' . $ticket_net_link . '\')">' . $order_tickets_btn . '</a>';
+					$btn = '<a class="btn green-btn event-ticket-net-link" onclick="BH_general.ticketnet_purchase_link(\'' . $ticket_net_link . '\')">' . $order_tickets_btn . '</a>';
 				endif;
 				
 			else :
 			
 				// series of events
 				if ($ticket_net_link && $today <= $start_date) :
-					$btn = '<a class="btn green-btn event-ticket-net-link" onclick="BH_event.ticketnet_purchase_link(\'' . $ticket_net_link . '\')">' . $purchase_series_btn . '</a>';
+					$btn = '<a class="btn green-btn event-ticket-net-link" onclick="BH_general.ticketnet_purchase_link(\'' . $ticket_net_link . '\')">' . $purchase_series_btn . '</a>';
 				else :
 					foreach ($series as $event) :
 						$event_date				= $event['date'];
 						$event_ticket_net_link	= $event['ticket_net_link'];
 						
 						if ($today <= $event_date && $event_ticket_net_link) :
-							$btn = '<a class="btn green-btn event-ticket-net-link" onclick="BH_event.ticketnet_purchase_link(\'' . $event_ticket_net_link . '\')">' . $order_tickets_btn . '</a>';
+							$btn = '<a class="btn green-btn event-ticket-net-link" onclick="BH_general.ticketnet_purchase_link(\'' . $event_ticket_net_link . '\')">' . $order_tickets_btn . '</a>';
 							break;
 						endif;
 					endforeach;

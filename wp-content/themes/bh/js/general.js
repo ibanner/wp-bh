@@ -778,6 +778,20 @@ var $ = jQuery,
 		},
 		
 		/**
+		 * ticketnet_purchase_link
+		 *
+		 * Display Ticketnet purchase link including Google Analytics client ID
+		 *
+		 * @param	N/A
+		 * @return	N/A
+		 */
+		ticketnet_purchase_link : function(link) {
+
+			window.open(link + '&googleCid=' + _BH_GA_cid, 'Tickets Purchase', 'width=900,height=550');
+
+		},
+
+		/**
 		 * loaded
 		 *
 		 * Called by $(window).load event
