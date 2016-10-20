@@ -17,6 +17,7 @@ if ( function_exists('acf_add_options_sub_page') ) {
 
 	acf_add_options_sub_page('Header/Footer');
 	acf_add_options_sub_page('Contact Details');
+	acf_add_options_sub_page('Main Banner');
 	acf_add_options_sub_page('General');
 	acf_add_options_sub_page('Shop');
 

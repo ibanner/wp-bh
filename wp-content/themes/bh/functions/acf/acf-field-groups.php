@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @fieldgroup	Shop - Why Shop With Us
  * @fieldgroup	Header/Footer Options
  * @fieldgroup	Contact Details Options
+ * @fieldgroup	Main Banner Options
  * @fieldgroup	General Options
  * @fieldgroup	Shop Options
  */
@@ -4066,6 +4067,323 @@ acf_add_local_field_group(array (
 ));
 
 acf_add_local_field_group(array (
+	'key' => 'group_58062306798a8',
+	'title' => 'Main Banner Options',
+	'fields' => array (
+		array (
+			'key' => 'field_58062452fb08a',
+			'label' => 'Slides',
+			'name' => 'acf-options_main_banner_slides',
+			'type' => 'repeater',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'collapsed' => '',
+			'min' => '',
+			'max' => 5,
+			'layout' => 'row',
+			'button_label' => 'Add Slide',
+			'sub_fields' => array (
+				array (
+					'key' => 'field_580624b5fb08b',
+					'label' => 'Type',
+					'name' => 'type',
+					'type' => 'select',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'choices' => array (
+						'event' => 'Event',
+						'custom' => 'Custom',
+					),
+					'default_value' => array (
+						0 => 'custom',
+					),
+					'allow_null' => 0,
+					'multiple' => 0,
+					'ui' => 0,
+					'ajax' => 0,
+					'placeholder' => '',
+					'disabled' => 0,
+					'readonly' => 0,
+				),
+				array (
+					'key' => 'field_58062521fb08c',
+					'label' => 'Event',
+					'name' => 'event',
+					'type' => 'post_object',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_580624b5fb08b',
+								'operator' => '==',
+								'value' => 'event',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'post_type' => array (
+						0 => 'event',
+					),
+					'taxonomy' => array (
+					),
+					'allow_null' => 0,
+					'multiple' => 0,
+					'return_format' => 'object',
+					'ui' => 1,
+				),
+				array (
+					'key' => 'field_580632e260250',
+					'label' => 'Image',
+					'name' => 'custom_image',
+					'type' => 'image',
+					'instructions' => 'Image dimensions: 1140x527px',
+					'required' => 1,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_580624b5fb08b',
+								'operator' => '==',
+								'value' => 'custom',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'return_format' => 'array',
+					'preview_size' => 'thumbnail',
+					'library' => 'all',
+					'min_width' => '',
+					'min_height' => '',
+					'min_size' => '',
+					'max_width' => '',
+					'max_height' => '',
+					'max_size' => '',
+					'mime_types' => '',
+				),
+				array (
+					'key' => 'field_5806335e60251',
+					'label' => 'Title',
+					'name' => 'custom_title',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_580624b5fb08b',
+								'operator' => '==',
+								'value' => 'custom',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
+					'key' => 'field_5806338560252',
+					'label' => 'Sub Title #1',
+					'name' => 'custom_sub_title1',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_580624b5fb08b',
+								'operator' => '==',
+								'value' => 'custom',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
+					'key' => 'field_580633c660253',
+					'label' => 'Sub Title #2',
+					'name' => 'custom_sub_title2',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_580624b5fb08b',
+								'operator' => '==',
+								'value' => 'custom',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
+					'key' => 'field_580633f560254',
+					'label' => 'Description',
+					'name' => 'custom_desc',
+					'type' => 'textarea',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_580624b5fb08b',
+								'operator' => '==',
+								'value' => 'custom',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'maxlength' => '',
+					'rows' => '',
+					'new_lines' => 'wpautop',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
+					'key' => 'field_5806343960255',
+					'label' => 'Link',
+					'name' => 'custom_link',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_580624b5fb08b',
+								'operator' => '==',
+								'value' => 'custom',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => 'http://',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+					'readonly' => 0,
+					'disabled' => 0,
+				),
+				array (
+					'key' => 'field_5808662ecf197',
+					'label' => 'Link Target',
+					'name' => 'custom_link_target',
+					'type' => 'select',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => array (
+						array (
+							array (
+								'field' => 'field_580624b5fb08b',
+								'operator' => '==',
+								'value' => 'custom',
+							),
+						),
+					),
+					'wrapper' => array (
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'choices' => array (
+						'self' => 'Same window',
+						'blank' => 'New window',
+					),
+					'default_value' => array (
+						0 => 'self',
+					),
+					'allow_null' => 0,
+					'multiple' => 0,
+					'ui' => 0,
+					'ajax' => 0,
+					'placeholder' => '',
+					'disabled' => 0,
+					'readonly' => 0,
+				),
+			),
+		),
+	),
+	'location' => array (
+		array (
+			array (
+				'param' => 'options_page',
+				'operator' => '==',
+				'value' => 'acf-options-main-banner',
+			),
+		),
+	),
+	'menu_order' => 13,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => 1,
+	'description' => '',
+));
+
+acf_add_local_field_group(array (
 	'key' => 'group_558fb01bdfcc6',
 	'title' => 'General Options',
 	'fields' => array (
@@ -4558,7 +4876,7 @@ acf_add_local_field_group(array (
 			),
 		),
 	),
-	'menu_order' => 13,
+	'menu_order' => 14,
 	'position' => 'normal',
 	'style' => 'default',
 	'label_placement' => 'top',
@@ -5466,7 +5784,7 @@ acf_add_local_field_group(array (
 			),
 		),
 	),
-	'menu_order' => 14,
+	'menu_order' => 15,
 	'position' => 'normal',
 	'style' => 'default',
 	'label_placement' => 'top',
