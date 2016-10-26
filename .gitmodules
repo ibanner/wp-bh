@@ -1,7 +1,7 @@
 [submodule "jewish-spotlight/austria"]
         path = jewish-spotlight/austria
-        url = git@bitbucket.org:bhonline/wp-jca.git
+        url = git@github.com:Beit-Hatfutsot/wp-jca.git
 
 [submodule "jewish-spotlight/fiume"]
 	path = jewish-spotlight/fiume
-	url = git@bitbucket.org:bhonline/wp-jcf.git
+	url = git@github.com:Beit-Hatfutsot/wp-jcf.git
