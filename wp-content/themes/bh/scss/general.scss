@@ -358,8 +358,8 @@ body > header {
 					&.current-menu-parent,
 					&.current-menu-ancestor {
 						& > a {
-							color: $font-invert-color;
-							text-shadow: 0px 0.1px 0.1px rgba(255, 255, 255, 1);
+							color: $font-invert-color !important;
+							text-shadow: 0px 0.1px 0.1px rgba(255, 255, 255, 1) !important;
 						}
 					}
 				}
@@ -390,6 +390,13 @@ body > header {
 					background-color: $main-color;
 				}
 			}
+
+			&.featured {
+				& > a {
+					color: $blue-color1;
+					text-shadow: 0px 0.1px 0.1px $blue-color1;
+				}
+			}
 		}
 
 		&.shop nav.menu ul.nav > li {
@@ -414,6 +421,13 @@ body > header {
 			&.current-menu-ancestor {
 				& > a {
 					background-color: $shop-color;
+				}
+			}
+
+			&.featured {
+				& > a {
+					color: $orange-color1;
+					text-shadow: 0px 0.1px 0.1px $orange-color1;
 				}
 			}
 		}
