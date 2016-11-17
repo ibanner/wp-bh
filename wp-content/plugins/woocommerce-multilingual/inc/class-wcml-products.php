@@ -33,9 +33,7 @@ class WCML_Products{
 
             add_filter( 'post_row_actions', array( $this, 'filter_product_actions' ), 10, 2 );
 
-            if( defined( 'ICL_SITEPRESS_VERSION' ) && version_compare( ICL_SITEPRESS_VERSION, '3.2', '>=' ) ){
-                $this->tp_support = new WCML_TP_Support();
-            }
+            $this->tp_support = new WCML_TP_Support();
 
         }else{
             add_filter( 'woocommerce_json_search_found_products', array( $this, 'filter_found_products_by_language' ) );
@@ -47,6 +45,8 @@ class WCML_Products{
         add_action( 'woocommerce_after_product_ordering', array( $this, 'update_all_products_translations_ordering' ) );
         //filter to copy excerpt value
         add_filter( 'wpml_copy_from_original_custom_fields', array( $this, 'filter_excerpt_field_content_copy' ) );
+
+        add_filter( 'wpml_override_is_translator', array( $this, 'wcml_override_is_translator' ), 10, 3 );
     }
 
     // Check if original product
@@ -219,6 +219,15 @@ class WCML_Products{
                     </a>
             <?php } ?>
         <?php }
+    }
+
+    public function wcml_override_is_translator( $is_translator, $user_id, $args ){
+
+        if( current_user_can( 'wpml_operate_woocommerce_multilingual' ) ){
+            return true;
+        }
+
+        return $is_translator;
     }
 
     //product quickedit
@@ -410,6 +419,79 @@ class WCML_Products{
 
         }
         return $args;
+    }
+
+    /*
+     * get meta ids for multiple values post meta key
+     */
+    public function get_mid_ids_by_key( $post_id, $meta_key ) {
+        $ids = $this->wpdb->get_col( $this->wpdb->prepare( "SELECT meta_id FROM {$this->wpdb->postmeta} WHERE post_id = %d AND meta_key = %s", $post_id, $meta_key ) );
+        if( $ids )
+            return $ids;
+
+        return false;
+    }
+
+    // count "in progress" and "waiting on translation" as untranslated too
+    public function get_untranslated_products_count( $language ){
+
+        $count = 0;
+
+        $products = $this->wpdb->get_results( "
+                      SELECT p.ID, t.trid, t.language_code
+                      FROM {$this->wpdb->posts} AS p
+                      LEFT JOIN {$this->wpdb->prefix}icl_translations AS t ON t.element_id = p.id
+                      WHERE p.post_type = 'product' AND t.element_type = 'post_product' AND t.source_language_code IS NULL
+                  " );
+
+        foreach( $products as $product ){
+            if( $product->language_code == $language ) continue;
+
+            $element_key        = array( 'trid' => $product->trid, 'language_code' => $language );
+            $translation_status = apply_filters( 'wpml_tm_translation_status', null, $element_key );
+
+            if( in_array( $translation_status, array( ICL_TM_NOT_TRANSLATED, ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS ) ) ){
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    public function is_hide_resign_button(){
+        global $iclTranslationManagement;
+
+        $hide_resign = false;
+
+        if( isset( $_GET[ 'source_language_code' ] ) && isset( $_GET[ 'language_code' ] ) ){
+
+            $from_lang = $_GET[ 'source_language_code' ];
+            $to_lang = $_GET[ 'language_code' ];
+
+        }elseif( isset( $_GET[ 'job_id' ] ) ){
+
+            $job = $iclTranslationManagement->get_translation_job( $_GET[ 'job_id' ] );
+            $from_lang = $job->source_language_code;
+            $to_lang = $job->language_code;
+
+        }
+
+        if( isset( $from_lang ) ){
+
+            $translators = $iclTranslationManagement->get_blog_translators(
+                array(
+                    'from' => $from_lang,
+                    'to'   => $to_lang
+                )
+            );
+
+            if( empty( $translators ) || ( sizeof( $translators ) == 1 && $translators[0]->ID == get_current_user_id() ) ){
+                $hide_resign = true;
+            }
+
+        }
+
+        return $hide_resign;
     }
 
 }

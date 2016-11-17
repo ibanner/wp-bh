@@ -14,8 +14,9 @@ class WCML_Upgrade{
         '3.7',
         '3.7.3',
         '3.7.11',
-        '3.8'
-
+        '3.8',
+        '3.9',
+        '3.9.1',
     );
     
     function __construct(){
@@ -251,8 +252,8 @@ class WCML_Upgrade{
     }
     
     function upgrade_3_2(){
-        
-        woocommerce_wpml::set_up_capabilities();
+
+        WCML_Capabilities::set_up_capabilities();
         
         //delete not existing currencies in WC
         global $wpdb;
@@ -268,8 +269,8 @@ class WCML_Upgrade{
     
     function upgrade_3_3(){
         global $wpdb, $woocommerce_wpml;
-        
-        woocommerce_wpml::set_up_capabilities();
+
+        WCML_Capabilities::set_up_capabilities();
 
         $currencies = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "icl_currencies ORDER BY `id` ASC", OBJECT);
         if($currencies)
@@ -369,20 +370,16 @@ class WCML_Upgrade{
                     $endpoint_key, 'Endpoint slug: '. $endpoint_key )
             );
 
+            // update domain_name_context_md5 value
+            $string_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}icl_strings WHERE context = 'WooCommerce Endpoints' AND name = %s", $endpoint_key ) );
 
-            if( version_compare(ICL_SITEPRESS_VERSION, '3.2.3', '>=')){
-                // update domain_name_context_md5 value
-                $string_id = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}icl_strings WHERE context = 'WooCommerce Endpoints' AND name = %s", $endpoint_key ) );
-
-                if( $string_id ){
-                    $wpdb->query(
-                        $wpdb->prepare( "UPDATE {$wpdb->prefix}icl_strings
-                                  SET domain_name_context_md5 = %s
-                                  WHERE id = %d",
-                            md5( $endpoint_key,'WooCommerce Endpoints' ), $string_id )
-                    );
-                }
-
+            if( $string_id ){
+                $wpdb->query(
+                    $wpdb->prepare( "UPDATE {$wpdb->prefix}icl_strings
+                              SET domain_name_context_md5 = %s
+                              WHERE id = %d",
+                        md5( $endpoint_key,'WooCommerce Endpoints' ), $string_id )
+                );
             }
 
         }
@@ -464,6 +461,66 @@ class WCML_Upgrade{
 
         update_option('_wcml_settings', $wcml_settings);
 
+    }
+
+    function upgrade_3_9(){
+        global $wpdb;
+
+        $meta_keys_to_fix = array(
+            '_price',
+            '_regular_price',
+            '_sale_price',
+            '_sku'
+        );
+
+        $sql = "
+            UPDATE {$wpdb->postmeta} 
+            SET meta_value = '' 
+            WHERE meta_key IN('" . join("','", $meta_keys_to_fix) . "') 
+                AND meta_value IS NULL";
+
+        $wpdb->query( $sql );
+
+    }
+
+    function upgrade_3_9_1(){
+        global $wpdb, $sitepress;
+
+        $results = $wpdb->get_results("
+                        SELECT p.ID, t.trid, t.element_type
+                        FROM {$wpdb->posts} p
+                        JOIN {$wpdb->prefix}icl_translations t ON t.element_id = p.ID AND t.element_type IN ('post_product', 'post_product_variation')
+                        WHERE p.post_type in ('product', 'product_variation') AND t.source_language_code IS NULL
+                    ");
+
+        foreach( $results as $product ){
+
+            if( get_post_meta( $product->ID, '_manage_stock', true ) === 'yes' ){
+
+                $translations = $sitepress->get_element_translations( $product->trid, $product->element_type );
+
+                $min_stock = false;
+
+                //collect min stock
+                foreach( $translations as $translation ){
+                    $stock = get_post_meta( $translation->element_id, '_stock', true );
+                    if( !$min_stock || $stock < $min_stock ){
+                        $min_stock = $stock;
+                    }
+                }
+
+                //update stock value
+                foreach( $translations as $translation ){
+                    update_post_meta( $translation->element_id, '_stock', $min_stock );
+                }
+            }
+        }
+    }
+
+    function upgrade_3_10(){
+        $wcml_settings = get_option( '_wcml_settings' );
+        $wcml_settings[ 'dismiss_tm_warning' ] = 0;
+        update_option( '_wcml_settings', $wcml_settings );
     }
 
 }
