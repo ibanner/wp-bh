@@ -81,7 +81,7 @@ var $ = jQuery,
 
 			// embedded video - responsive treatment
 			$('.page-content').find('iframe, object, embed').each(function() {
-				if ( $(this).attr('name') == 'chekout_frame' || $(this).attr('name') == 'pelecard_frame' )
+				if ( $(this).attr('name') == 'chekout_frame' || $(this).attr('name') == 'pelecard_frame' || $(this).hasClass('no-flex') )
 					return;
 					
 				var src = $(this).attr('src');
