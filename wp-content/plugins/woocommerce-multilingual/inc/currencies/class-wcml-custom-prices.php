@@ -33,8 +33,12 @@ class WCML_Custom_Prices{
     public function get_product_custom_prices($product_id, $currency = false){
         global $wpdb, $sitepress;
 
-        if(empty($currency)){
+        if( empty( $currency ) ){
             $currency = $this->woocommerce_wpml->multi_currency->get_client_currency();
+        }
+
+        if( get_option('woocommerce_currency') == $currency ){
+            return false;
         }
 
         $original_product_id = $product_id;
@@ -353,7 +357,7 @@ class WCML_Custom_Prices{
 
         if( isset( $_POST[ '_wcml_custom_prices' ] ) && isset( $nonce ) && wp_verify_nonce( $nonce, 'wcml_save_custom_prices' ) && !$this->woocommerce_wpml->products->is_variable_product( $post_id ) ){
             if( isset( $_POST[ '_wcml_custom_prices' ][ $post_id ] ) || isset( $_POST[ '_wcml_custom_prices' ][ 'new' ] ) ) {
-                $wcml_custom_prices_option = isset( $_POST[ '_wcml_custom_prices' ][ $post_id ] ) ? $_POST[ '_wcml_custom_prices' ][ $post_id ] : isset( $_POST[ '_wcml_custom_prices' ][ 'new' ] );
+                $wcml_custom_prices_option = isset( $_POST[ '_wcml_custom_prices' ][ $post_id ] ) ? $_POST[ '_wcml_custom_prices' ][ $post_id ] : $_POST[ '_wcml_custom_prices' ][ 'new' ];
             }else{
                 $current_option = get_post_meta( $post_id, '_wcml_custom_prices_status', true );
                 $wcml_custom_prices_option = $current_option ? $current_option : 0;

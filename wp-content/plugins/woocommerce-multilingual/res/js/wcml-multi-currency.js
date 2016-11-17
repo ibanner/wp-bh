@@ -1,19 +1,23 @@
 jQuery(document).ready(function(){
 
-    jQuery('.wcml_currency_switcher').on('change', function(){
+    jQuery(document).on( 'change', '.wcml_currency_switcher', function(){
         wcml_load_currency( jQuery(this).val() );
     });
-    jQuery('.wcml_currency_switcher li').on('click', function(){
+
+    jQuery(document).on( 'click', '.wcml_currency_switcher li', function(){
         if(jQuery(this).hasClass('wcml-active-currency')){
             return;
         }
         wcml_load_currency( jQuery(this).attr('rel') );
     });
 
+    if( typeof woocommerce_price_slider_params != 'undefined' ){
+        woocommerce_price_slider_params.currency_symbol = wcml_mc_settings.current_currency.symbol;
+    }
 });
 
 
-function wcml_load_currency(currency){
+function wcml_load_currency( currency ){
     var ajax_loader = jQuery('<img style=\"margin-left:10px;\" width=\"16\" heigth=\"16\" src=\"' + wcml_mc_settings.wcml_spinner +'\" />')
     jQuery('.wcml_currency_switcher').attr('disabled', 'disabled');
     jQuery('.wcml_currency_switcher').after();
@@ -31,7 +35,7 @@ function wcml_load_currency(currency){
                 alert(response.error);
             }else{
                 jQuery('.wcml_currency_switcher').removeAttr('disabled');
-                if(typeof wcml_mc_settings.w3tc != 'undefined '){
+                if(typeof wcml_mc_settings.w3tc !== 'undefined'){
                     var original_url = window.location.href;
                     original_url = original_url.replace(/&wcmlc(\=[^&]*)?(?=&|$)|wcmlc(\=[^&]*)?(&|$)/, '');
                     original_url = original_url.replace(/\?$/, '');

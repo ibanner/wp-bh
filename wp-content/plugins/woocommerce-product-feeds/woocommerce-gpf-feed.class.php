@@ -82,6 +82,8 @@ abstract class WoocommerceGpfFeed {
 		}
 		$string = str_replace( "\n", ' ', $string );
 		$string = str_replace( "\r", ' ', $string );
+		$string = str_replace( "\t", ' ', $string );
+
 		if ( stristr( $string, apply_filters( 'woocommerce_gpf_tsv_separator', "\t" ) ) && ! $doneescape ) {
 			$string = "\"$string\"";
 		}
