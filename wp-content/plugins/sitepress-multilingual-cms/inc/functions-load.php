@@ -61,8 +61,9 @@ function load_essential_globals( $is_admin = null ) {
 	$domain_validation      = filter_input( INPUT_GET, '____icl_validate_domain' ) ? 1 : false;
 	$domain_validation      = filter_input( INPUT_GET, '____icl_validate_directory' ) ? 2 : $domain_validation;
 	$url_converter          = load_wpml_url_converter( $settings, $domain_validation, $default_lang_code );
+	$directory = $domain_validation === 2 || ( is_multisite() && ! is_subdomain_install() );
 	if ( $domain_validation ) {
-		echo wpml_validate_host( $_SERVER['REQUEST_URI'], $url_converter, $domain_validation === 2 );
+		echo wpml_validate_host( $_SERVER['REQUEST_URI'], $url_converter, $directory );
 		exit;
 	}
 	if ( $admin ) {
@@ -137,8 +138,14 @@ function load_wpml_url_converter(
 	$url_type     = $domain_validation ? $domain_validation : $url_type;
 	$active_language_codes = $wpml_language_resolution->get_active_language_codes();
 	if ( $url_type == 1 ) {
-		$dir_default        = isset( $settings['urls'] ) && isset( $settings['urls']['directory_for_default_language'] )
-			? $settings['urls']['directory_for_default_language'] : false;
+		$dir_default = false;
+		if ( ! isset( $settings['urls'] ) ) {
+			$settings['urls'] = array();
+		} else {
+			if ( isset( $settings['urls']['directory_for_default_language'] ) ) {
+				$dir_default = $settings['urls']['directory_for_default_language'];
+			}
+		}
 		$wpml_url_converter = new WPML_Lang_Subdir_Converter( $dir_default,
 			$default_lang_code, $active_language_codes, $settings['urls'] );
 	} elseif ( $url_type == 2 ) {
@@ -146,6 +153,9 @@ function load_wpml_url_converter(
 		$wpml_wp_api        = new WPML_WP_API();
 		$wpml_url_converter = new WPML_Lang_Domains_Converter( $domains,
 			$default_lang_code, $active_language_codes, $wpml_wp_api );
+
+		$wpml_fix_url_domain = new WPML_Lang_Domain_Filters( $wpml_url_converter, $wpml_wp_api );
+		$wpml_fix_url_domain->add_hooks();
 	} else {
 		$wpml_url_converter = new WPML_Lang_Parameter_Converter( $default_lang_code,
 			$active_language_codes );
@@ -411,5 +421,5 @@ function wpml_show_user_options() {
 }
 
 if ( is_admin() ) {
-	add_action( 'show_user_profile', 'wpml_show_user_options' );
+	add_action( 'personal_options', 'wpml_show_user_options' );
 }

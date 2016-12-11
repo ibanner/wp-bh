@@ -159,6 +159,8 @@ function icl_disp_language( $native_name, $translated_name = false, $lang_native
 }
 
 /**
+ * @deprecated since 3.6.0 / See new Language Switcher API with use of Twig templates
+ *
  * Get the native or translated language name or both
  * Checks if native_language_name and translated_language_name are different.
  * If so, it returns them both, otherwise, it returns only one.
@@ -485,35 +487,15 @@ function wpml_get_current_language() {
 }
 
 /**
- * @todo: [WPML 3.3] refactor in 3.3
- *
- * @param     $folder
- * @param int $rec
+ * @param string $folder
  *
  * @return bool
  */
-function icl_tf_determine_mo_folder( $folder, $rec = 0 ) {
+function icl_tf_determine_mo_folder( $folder ) {
 	global $sitepress;
+	$mo_file_search = new WPML_MO_File_Search( $sitepress );
 
-	$dh  = @opendir( $folder );
-	$lfn = $sitepress->get_locale_file_names();
-
-	while ( $dh && $file = readdir( $dh ) ) {
-		if ( 0 === strpos( $file, '.' ) ) {
-			continue;
-		}
-		if ( is_file( $folder . '/' . $file ) && preg_match( '#\.mo$#i', $file )
-		     && in_array( preg_replace( '#\.mo$#i', '', $file ), $lfn )
-		) {
-			return $folder;
-		} elseif ( is_dir( $folder . '/' . $file ) && $rec < 5 ) {
-			if ( $f = icl_tf_determine_mo_folder( $folder . '/' . $file, $rec + 1 ) ) {
-				return $f;
-			};
-		}
-	}
-
-	return false;
+	return $mo_file_search->determine_mo_folder( $folder );
 }
 
 /**
@@ -938,22 +920,22 @@ function wpml_custom_post_translation_options() {
  * @deprecated 3.2 use 'wpml_add_language_selector' filter instead
  */
 function icl_language_selector() {
-	global $sitepress;
-
-	return $sitepress->get_language_selector();
+	ob_start();
+	do_action( 'wpml_add_language_selector' );
+	$output = ob_get_contents();
+	ob_end_clean();
+	return $output;
 }
 
 /**
  * Display the drop down language selector
  * @since 3.2
- * Will use the language selector include configuration from the WPML -> Language admin screen
+ * Will use the language selector settings from "Language switcher as shortcode or action"
  * @use \SitePress::api_hooks
- * example: do_action('wpml_add_language_selector');
+ * example: do_action( 'wpml_add_language_selector' );
  */
 function wpml_add_language_selector_action() {
-	global $sitepress;
-
-	echo $sitepress->get_language_selector();
+	do_action( 'wpml_add_language_selector' );
 }
 
 /**
@@ -961,7 +943,11 @@ function wpml_add_language_selector_action() {
  * @deprecated 3.2 use 'wpml_footer_language_selector' filter instead
  */
 function icl_language_selector_footer() {
-	return SitePressLanguageSwitcher::get_language_selector_footer();
+	ob_start();
+	do_action( 'wpml_footer_language_selector' );
+	$output = ob_get_contents();
+	ob_end_clean();
+	return $output;
 }
 
 /**
@@ -972,7 +958,7 @@ function icl_language_selector_footer() {
  * example: do_action('wpml_footer_language_selector');
  */
 function wpml_footer_language_selector_action() {
-	echo SitePressLanguageSwitcher::get_language_selector_footer();
+	do_action( 'wpml_footer_language_selector' );
 }
 
 /**

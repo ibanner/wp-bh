@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
 
 	var hideNotice = function (noticeBox) {
 		if (noticeBox) {
-			var noticeId = noticeBox.data('id');
+			var noticeId = _.escape( noticeBox.data('id') );
 			var noticeGroup = noticeBox.data('group');
 
 			jQuery.ajax({
@@ -66,8 +66,6 @@ jQuery(document).ready(function () {
 	});
 
 	otgsNotice.on('click', '.notice-action.notice-action-link', function (event) {
-		preventDefaultEvent(event);
-
 		var groupToDismiss = jQuery(this).data('dismiss-group');
 		var nonce = jQuery(this).data('nonce');
 		var jsCallback = jQuery(this).data('js-callback');
@@ -89,7 +87,7 @@ jQuery(document).ready(function () {
 									url:      ajaxurl,
 									type:     'POST',
 									data:     {
-										action:  'otgs-hide-notice-for-group',
+										action:  'otgs-dismiss-group',
 										group: groupToDismiss,
 										nonce: nonce
 									},

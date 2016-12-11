@@ -6,8 +6,7 @@
  * @package    wpml-core
  * @subpackage post-translation
  */
-
-class WPML_Admin_Post_Actions extends  WPML_Post_Translation {
+class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 
 	public function init() {
 		parent::init ();
@@ -62,8 +61,7 @@ class WPML_Admin_Post_Actions extends  WPML_Post_Translation {
 		if ( isset( $post_vars['action'] ) && $post_vars['action'] === 'post-quickpress-publish' ) {
 			$language_code = $default_language;
 		} else {
-			$post_id       = isset( $post_vars['post_ID'] ) ? $post_vars['post_ID']
-				: $pidd; //latter case for XML-RPC publishing
+			$post_id       = isset( $post_vars['post_ID'] ) ? $post_vars['post_ID'] : $pidd; //latter case for XML-RPC publishing
 			$language_code = $this->get_save_post_lang( $post_id, $sitepress );
 		}
 

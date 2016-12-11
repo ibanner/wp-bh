@@ -73,7 +73,7 @@ class WPML_Lang_Parameter_Converter extends WPML_URL_Converter {
 		return $this->lang_by_param ( $url, false );
 	}
 
-	protected function convert_url_string( $source_url, $lang_code ) {
+	public function convert_url_string( $source_url, $lang_code ) {
 		$old_lang_code = $this->get_lang_from_url_string( $source_url );
 
 		$lang_code     = (bool) $lang_code === false ? $this->default_language : $lang_code;
@@ -121,7 +121,7 @@ class WPML_Lang_Parameter_Converter extends WPML_URL_Converter {
 			$source_url = str_replace( '?' . $query, '', $source_url );
 		}
 
-		$source_url = trailingslashit( $source_url );
+		$source_url = $this->maybe_user_trailingslashit( $source_url, 'trailingslashit' );
 
 		if ( ! empty( $query ) ) {
 			$source_url .= '?' . $query;

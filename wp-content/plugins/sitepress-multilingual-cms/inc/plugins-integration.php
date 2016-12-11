@@ -5,11 +5,12 @@ add_action('plugins_loaded', 'wpml_plugins_integration_setup', 10);
 //Todo: do not include files: move to autoloaded classes
 function wpml_plugins_integration_setup(){
 	/** @var WPML_URL_Converter $wpml_url_converter */
-    global $sitepress, $wpml_url_converter, $authordata;
+    global $sitepress, $wpml_url_converter;
     // WPSEO integration
     if ( defined( 'WPSEO_VERSION' ) && version_compare( WPSEO_VERSION, '1.0.3', '>=' ) ){
         new WPML_WPSEO_XML_Sitemaps_Filter( $sitepress, $wpml_url_converter );
-        $wpseo_filters = new WPML_WPSEO_Filters( $sitepress, $authordata );
+	    $canonical     = new WPML_Canonicals( $sitepress );
+        $wpseo_filters = new WPML_WPSEO_Filters( $canonical );
         $wpseo_filters->init_hooks();
     }
 	if ( class_exists( 'bbPress' ) ) {

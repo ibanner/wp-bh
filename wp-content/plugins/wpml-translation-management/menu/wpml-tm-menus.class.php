@@ -249,7 +249,7 @@ class WPML_TM_Menus
                 if (isset($tab_item['target'])) {
                     $target = $tab_item['target'];
                     /** @noinspection PhpIncludeInspection */
-                    include $this->build_tab_item_target_url($target);
+                    include_once $this->build_tab_item_target_url($target);
                 }
                 if (isset($tab_item['callback'])) {
                     $callback = $tab_item['callback'];
@@ -699,7 +699,7 @@ class WPML_TM_Menus
 
         </div> <!-- .wpml-section -->
 
-        <?php include ICL_PLUGIN_PATH . '/menu/_posts_sync_options.php'; ?>
+        <?php include_once ICL_PLUGIN_PATH . '/menu/_posts_sync_options.php'; ?>
 
         <div class="wpml-section" id="ml-content-setup-sec-3">
 
@@ -778,7 +778,7 @@ class WPML_TM_Menus
 
         </div> <!-- .wpml-section -->
 
-        <?php if (defined('WPML_ST_VERSION')) include WPML_ST_PATH . '/menu/_slug-translation-options.php'; ?>
+        <?php if (defined('WPML_ST_VERSION')) include_once WPML_ST_PATH . '/menu/_slug-translation-options.php'; ?>
 
         <div class="wpml-section" id="ml-content-setup-sec-5">
 
@@ -831,11 +831,11 @@ class WPML_TM_Menus
         </div> <!-- .wpml-section -->
 
         <?php
-        include WPML_TM_PATH . '/menu/xliff-options.php';
+	    include_once WPML_TM_PATH . '/menu/xliff-options.php';
 	    $this->build_content_mcs_custom_fields();
 
 
-	      include ICL_PLUGIN_PATH . '/menu/_custom_types_translation.php'; ?>
+	    include_once ICL_PLUGIN_PATH . '/menu/_custom_types_translation.php'; ?>
 
         <?php if (!empty($iclTranslationManagement->admin_texts_to_translate) && function_exists('icl_register_string')): //available only with the String Translation plugin ?>
         <div class="wpml-section" id="ml-content-setup-sec-9">

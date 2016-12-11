@@ -80,7 +80,7 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 		global $wpml_language_resolution;
 		$cookie_name  = $this->get_cookie_name();
 		$cookie_value = $this->cookie->get_cookie( $cookie_name );
-		$lang         = $cookie_value ? substr( $cookie_value, 0, 10 ) : "";
+		$lang         = $cookie_value ? substr( $cookie_value, 0, 10 ) : null;
 		$lang         = $wpml_language_resolution->is_language_active( $lang ) ? $lang : $this->default_language;
 
 		return $lang;

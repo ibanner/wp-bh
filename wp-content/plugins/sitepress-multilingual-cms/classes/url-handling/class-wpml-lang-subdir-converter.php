@@ -77,7 +77,7 @@ class WPML_Lang_Subdir_Converter extends WPML_URL_Converter {
 		return $language;
 	}
 
-	protected function convert_url_string( $source_url, $code ) {
+	public function convert_url_string( $source_url, $code ) {
 		if ( ! $this->is_root_url( $source_url ) ) {
 			$source_url        = strpos( $source_url, '?' ) === false ? trailingslashit( $source_url ) : $source_url;
 			$source_url        = strpos( $source_url, '?' ) !== false && strpos( $source_url, '/?' ) === false
@@ -90,16 +90,20 @@ class WPML_Lang_Subdir_Converter extends WPML_URL_Converter {
 
 			$code             = isset( $this->language_codes_map[ $code ] ) ? $this->language_codes_map[ $code ] : $code;
 			$current_language = isset( $this->language_codes_map[ $current_language ] ) ? $this->language_codes_map[ $current_language ] : $current_language;
-			
-			$source_url        = str_replace(
-				trailingslashit( $absolute_home_url . $current_language ),
-				$code ? ( $absolute_home_url . $code . '/' ) : trailingslashit( $absolute_home_url ),
-				$source_url
-			);
-			$source_url        = str_replace( '/' . $code . '//', '/' . $code . '/', $source_url );
+
+			$WPML_WPSEO_Redirection = new WPML_WPSEO_Redirection();
+
+			if( ! $WPML_WPSEO_Redirection->is_redirection() ) {
+				$source_url = str_replace(
+					trailingslashit( $absolute_home_url . $current_language ),
+					$code ? ( $absolute_home_url . $code . '/' ) : trailingslashit( $absolute_home_url ),
+					$source_url
+				);
+				$source_url = str_replace( '/' . $code . '//', '/' . $code . '/', $source_url );
+			}
 		}
 
-		return untrailingslashit( $source_url );
+		return $this->maybe_user_trailingslashit( $source_url, 'untrailingslashit' );
 	}
 
 	/**

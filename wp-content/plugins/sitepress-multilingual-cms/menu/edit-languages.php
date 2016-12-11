@@ -74,7 +74,6 @@ class SitePress_EditLanguages {
 	}
 
 	function render() {
-
 ?>
 <div class="wrap">
     <h2><?php _e('Edit Languages', 'sitepress') ?></h2>
@@ -430,24 +429,24 @@ For each language, you need to enter the following information:
 
 		global $sitepress,$wpdb;
 
-			// First check if add and validate it.
+		// First check if add and validate it.
 		if (isset($_POST['icl_edit_languages']['add']) && $_POST['icl_edit_languages_ignore_add'] == 'false') {
 			if ($this->validate_one('add', $_POST['icl_edit_languages']['add'])) {
 				$this->insert_one($this->sanitize($_POST['icl_edit_languages']['add']));
 			}
-				// Reset flag upload field.
+			// Reset flag upload field.
 			$_POST['icl_edit_languages']['add']['flag_upload'] = 'false';
 		}
 		
 		foreach ($_POST['icl_edit_languages'] as $id => $data){
-				// Ignore insert.
+			// Ignore insert.
 			if ($id == 'add') { continue; }
 			
-				// Validate and sanitize data.
+			// Validate and sanitize data.
 			if (!$this->validate_one($id, $data)) continue;
 			$data = stripslashes_deep($data);
 			
-				// Update main table.
+			// Update main table.
 			$this->update_main_table($id, $data['code'], $data['default_locale'], $data['encode_url'], $data['tag']);
             
             if (
@@ -460,10 +459,10 @@ For each language, you need to enter the following information:
                 $wpdb->insert($wpdb->prefix.'icl_locale_map', array('code'=>$data['code'], 'locale'=>$data['default_locale']));
             }
             
-				// Update translations table.
+			// Update translations table.
 			foreach ($data['translations'] as $translation_code => $translation_value) {
 				
-					// If new (add language) translations are submitted.
+				// If new (add language) translations are submitted.
 				if ($translation_code == 'add' ) {
 					if ( ( $this->is_new_data_and_invalid() ) || $_POST['icl_edit_languages_ignore_add'] == 'true') {
 						continue;
@@ -474,7 +473,7 @@ For each language, you need to enter the following information:
 					$translation_code = $_POST['icl_edit_languages']['add']['code'];
 				}
 				
-					// Check if update.
+				// Check if update.
                 if ( $wpdb->get_var(
                     $wpdb->prepare(
                         "SELECT id FROM {$wpdb->prefix}icl_languages_translations WHERE language_code = %s AND display_language_code=%s",
@@ -508,22 +507,24 @@ For each language, you need to enter the following information:
                     $from_template = $data['flag_upload'] == 'true' ? 1 : 0;
 				}
 			}
-				// Update flag table.
+			// Update flag table.
 			$this->update_flag($data['code'], $data['flag'], $from_template);
-				// Reset flag upload field.
+			// Reset flag upload field.
 			$_POST['icl_edit_languages'][$id]['flag_upload'] = 'false';
 		}
-			// Refresh cache.
+		// Refresh cache.
 		$sitepress->get_language_name_cache()->clear();
 		$sitepress->clear_flags_cache();
 		delete_option('_icl_cache');
 		
-			// Unset ADD fields.
+		// Unset ADD fields.
 		if ( $this->is_new_data_and_valid()) {
 			unset($_POST['icl_edit_languages']['add']);
 		}
-			// Reset active languages.
+
+		// Reset active languages.
 		$this->get_active_languages();
+		$this->update_language_packs( $sitepress );
 	}
 
 	function insert_one($data) {
@@ -582,16 +583,16 @@ For each language, you need to enter the following information:
             }
         }
 		
-			// Insert native name.
+		// Insert native name.
 		if (!isset($data['translations']['add']) || empty($data['translations']['add'])) {
 			$data['translations']['add'] = $data['english_name'];
 		}
 		if (!$this->insert_translation($data['translations']['add'], $data['code'], $data['code'])) {
 			$this->set_errors(__('Error adding native name.', 'sitepress'));
 		}
-		
-			// Handle flag.
-		if ($data['flag_upload'] == 'true' && !empty($_FILES['icl_edit_languages']['name']['add']['flag_file'])) {
+
+		// Handle flag.
+		if ( array_key_exists( 'flag_upload', $data ) && $data['flag_upload'] === 'true' && ! empty( $_FILES['icl_edit_languages']['name']['add']['flag_file'] ) ) {
 			if ( $filename = $this->upload_flag( 'add' ) ) {
 				$data['flag'] = $filename;
 				$from_template = 1;
@@ -600,13 +601,13 @@ For each language, you need to enter the following information:
 				$from_template = 0;
 			}
 		} else {
-			if (empty($data['flag'])) {
+			if ( empty($data['flag'] ) ) {
 				$data['flag'] = $data['code'] . '.png';
 			}
 			$from_template = 0;
 		}
 		
-			// Insert flag table.
+		// Insert flag table.
 		if (!$this->insert_flag($data['code'], $data['flag'], $from_template)) {
 			$this->set_errors(__('Error adding flag.', 'sitepress'));
 		}
@@ -799,7 +800,8 @@ For each language, you need to enter the following information:
                 $sitepress->get_language_name_cache()->clear();
                 
                 $this->set_messages(sprintf(__("The language %s was deleted.", 'sitepress'), '<strong>' . $lang->code . '</strong>'));
-                
+
+		        $this->update_language_packs( $sitepress );
             }                
         }else{
             $error = __('Error: Language not found.', 'sitepress');
@@ -916,6 +918,16 @@ For each language, you need to enter the following information:
 			}
 			$sitepress->save_settings(array('edit_languages_flag_migration' => 1));
 		}
+	}
+
+	/**
+	 * @param $sitepress
+	 */
+	private function update_language_packs( SitePress $sitepress ) {
+		$wpml_localization = new WPML_Download_Localization( $sitepress->get_active_languages(), $sitepress->get_default_language() );
+		$wpml_localization->download_language_packs();
+		$wpml_languages_notices = new WPML_Languages_Notices( wpml_get_admin_notices() );
+		$wpml_languages_notices->missing_languages( $wpml_localization->get_not_founds() );
 	}
 
 }

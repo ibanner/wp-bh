@@ -578,7 +578,7 @@ function icl_suppress_activation() {
  */
 function activate_installer( $sitepress = null ) {
 	// installer hook - start
-	include_once ICL_PLUGIN_PATH . '/embedded/otgs/installer/loader.php'; //produces global variable $wp_installer_instance
+	include_once ICL_PLUGIN_PATH . '/vendor/otgs/installer/loader.php'; //produces global variable $wp_installer_instance
 	$args = array(
 		'plugins_install_tab' => 1,
 		'high_priority'       => 1,
@@ -719,3 +719,14 @@ if ( ! function_exists( 'wp_parse_url' ) ) {
 	}
 }
 
+/**
+ * Wrapper function to prevent ampersand to be encoded (depending on some PHP versions)
+ * @link http://php.net/manual/en/function.http-build-query.php#102324
+ *
+ * @param array|object $query_data
+ *
+ * @return string
+ */
+function wpml_http_build_query( $query_data ) {
+	return http_build_query( $query_data, '', '&' );
+}

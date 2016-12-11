@@ -331,6 +331,8 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 		$all_taxs          = get_object_taxonomies( $post_type );
 		$translations      = $this->sitepress->get_element_translations( $_GET['trid'], 'post_' . $post_type );
 		$js                = array();
+		
+		$this->sitepress->switch_lang($source_lang);
 		foreach ( $all_taxs as $tax ) {
 			$tax_detail = get_taxonomy( $tax );
 			$terms      = get_the_terms( $translations[ $source_lang ]->element_id, $tax );
@@ -362,6 +364,7 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 				$js[] = "jQuery('#new-tag-{$tax}').val('" . join( ', ', $term_names ) . "');";
 			}
 		}
+		$this->sitepress->switch_lang($current_lang);
 
 		if ( $js ) {
 			echo '<script type="text/javascript">';

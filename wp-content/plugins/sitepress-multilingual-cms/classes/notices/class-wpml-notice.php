@@ -4,10 +4,11 @@
  * @author OnTheGo Systems
  */
 class WPML_Notice {
+	private $display_callbacks = array();
 	private $id;
 	private $text;
 	private $collapsed_text;
-	private $group = 'default';
+	private $group             = 'default';
 
 	private $actions            = array();
 	/**
@@ -69,6 +70,17 @@ class WPML_Notice {
 	 */
 	public function can_be_collapsed() {
 		return $this->collapsable;
+	}
+
+	public function add_display_callback( $callback ) {
+		if ( ! is_callable( $callback ) ) {
+			throw new UnexpectedValueException( '\WPML_Notice::add_display_callback expects a callable', 1 );
+		}
+		$this->display_callbacks[] = $callback;
+	}
+
+	public function get_display_callbacks() {
+		return $this->display_callbacks;
 	}
 
 	public function get_actions() {
