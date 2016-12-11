@@ -384,11 +384,19 @@ class WPML_WP_API {
 	}
 
 	public function is_translation_queue_page() {
-		$result = is_admin()
-							&& isset( $_GET[ 'page' ] )
-							&& $_GET[ 'page' ] == WPML_TM_FOLDER . '/menu/translations-queue.php';
+		if ( ! defined( 'WPML_TM_FOLDER' ) ) {
+			return false;
+		}
 
-		return $result;		
+		return is_admin() && isset( $_GET['page'] ) && WPML_TM_FOLDER . '/menu/translations-queue.php' == $_GET['page'];
+	}
+
+	public function is_string_translation_page() {
+		if ( ! defined( 'WPML_ST_FOLDER' ) ) {
+			return false;
+		}
+
+		return is_admin() && isset( $_GET['page'] ) && WPML_ST_FOLDER . '/menu/string-translation.php' == $_GET['page'];
 	}
 
 	public function is_support_page() {
@@ -426,22 +434,37 @@ class WPML_WP_API {
 	public function is_heartbeat() {
 		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
 
-		return $action == 'heartbeat';
+		return 'heartbeat' === $action;
 	}
-	
+
 	public function is_term_edit_page() {
 		global $pagenow;
-		return $pagenow === 'term.php' || ( $pagenow === 'edit-tags.php' && isset( $_GET[ 'action' ] ) && filter_var ( $_GET[ 'action' ] ) === 'edit' );
+
+		return 'term.php' === $pagenow || ( 'edit-tags.php' === $pagenow && isset( $_GET['action'] ) && 'edit' === filter_var( $_GET['action'] ) );
 	}
 
 	public function is_customize_page() {
 		global $pagenow;
-		return $pagenow === 'customize.php';
+
+		return 'customize.php' === $pagenow;
 	}
 
 	public function is_comments_post_page() {
 		global $pagenow;
-		return $pagenow === 'wp-comments-post.php';
+
+		return 'wp-comments-post.php' === $pagenow;
+	}
+
+	public function is_plugins_page() {
+		global $pagenow;
+
+		return 'plugins.php' === $pagenow;
+	}
+
+	public function is_themes_page() {
+		global $pagenow;
+
+		return 'themes.php' === $pagenow;
 	}
 
 	/**

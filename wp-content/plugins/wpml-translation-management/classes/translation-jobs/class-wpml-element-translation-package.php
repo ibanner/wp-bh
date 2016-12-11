@@ -34,7 +34,7 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper{
 		if ( apply_filters( 'wpml_is_external', false, $post ) ) {
 			/** @var stdClass $post */
 			$post_contents = (array) $post->string_data;
-			$original_id   = $post->post_id;
+			$original_id   = isset( $post->post_id ) ? $post->post_id : $post->ID;
 			$type          = 'external';
 		} else {
 			$home_url       = get_home_url();
@@ -89,21 +89,29 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper{
 	public function save_package_to_job( array $translation_package, $job_id, $prev_translation ) {
 		global $wpdb;
 
+		$show = $wpdb->hide_errors();
+
 		foreach ( $translation_package['contents'] as $field => $value ) {
 			$job_translate = array(
-					'job_id'                => $job_id,
-					'content_id'            => 0,
-					'field_type'            => $field,
-					'field_format'          => isset( $value['format'] ) ? $value['format'] : '',
-					'field_translate'       => $value['translate'],
-					'field_data'            => $value['data'],
-					'field_data_translated' => isset( $prev_translation[ $field ] ) ? $prev_translation[ $field ]->get_translation() : '',
-					'field_finished'        => isset( $prev_translation[ $field ] ) ? $prev_translation[ $field ]->is_finished( $value['data'] ) : 0
+				'job_id'                => $job_id,
+				'content_id'            => 0,
+				'field_type'            => $field,
+				'field_format'          => isset( $value['format'] ) ? $value['format'] : '',
+				'field_translate'       => $value['translate'],
+				'field_data'            => $value['data'],
+				'field_data_translated' => '',
+				'field_finished'        => 0,
 			);
 
-			$wpdb->hide_errors();
+			if ( array_key_exists( $field, $prev_translation ) ) {
+				$job_translate['field_data_translated'] = $prev_translation[ $field ]->get_translation();
+				$job_translate['field_finished']        = $prev_translation[ $field ]->is_finished( $value['data'] );
+			}
+
 			$wpdb->insert( $wpdb->prefix . 'icl_translate', $job_translate );
 		}
+
+		$wpdb->show_errors( $show );
 	}
 
 	/**
@@ -222,7 +230,7 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper{
 	 * @param array $package
 	 * @param string $key
 	 * @param string $custom_field_index
-	 * @param array|string $custom_field_val
+	 * @param array|stdClass|string $custom_field_val
 	 *
 	 * @return array
 	 */
@@ -233,17 +241,16 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper{
 			$package['contents'][ $cf ] = array(
 				'translate' => apply_filters( 'wpml_translation_job_post_meta_value_translated', 1, $cf ),
 				'data'      => base64_encode( $custom_field_val ),
-				'format'    => 'base64'
+				'format'    => 'base64',
 			);
 			foreach ( array( 'name' => $key_index, 'type' => 'custom_field' ) as $field_key => $setting ) {
 				$package['contents'][ $cf . '-' . $field_key ] = array(
 					'translate' => 0,
-					'data'      => $setting
+					'data'      => $setting,
 				);
 			}
 		} else {
-			$custom_field_val = array_filter( $custom_field_val );
-			foreach ( $custom_field_val as $ind => $value ) {
+			foreach ( (array) $custom_field_val as $ind => $value ) {
 				$package = $this->add_single_field_content( $package, $key, $custom_field_index . '-' . $ind, $value );
 			}
 		}

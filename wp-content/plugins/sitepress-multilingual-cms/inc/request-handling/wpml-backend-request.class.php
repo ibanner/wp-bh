@@ -56,9 +56,9 @@ class WPML_Backend_Request extends WPML_Request {
 
 	private function get_ajax_request_lang() {
 		$al   = $this->active_languages;
-		$lang = isset( $_POST[ 'lang' ] ) && isset( $al[ $_POST[ 'lang' ] ] ) ? $_POST[ 'lang' ] : null;
-		$lang = $lang === null ? ( $cookie_lang = $this->get_cookie_lang() ) : $lang;
-		$lang = $lang === null && isset( $_SERVER[ 'HTTP_REFERER' ] )
+		$lang = isset( $_POST['lang'] ) && in_array( $_POST['lang'], $al, true ) ? sanitize_text_field( $_POST['lang'] ) : null;
+		$lang = null === $lang ? ( $cookie_lang = $this->get_cookie_lang() ) : $lang;
+		$lang = null === $lang && isset( $_SERVER[ 'HTTP_REFERER' ] )
 			? $this->url_converter->get_language_from_url( $_SERVER[ 'HTTP_REFERER' ] ) : $lang;
 		$lang = $lang ? $lang : ( isset( $cookie_lang ) ? $cookie_lang : $this->get_cookie_lang() );
 		$lang = $lang ? $lang : $this->default_language;

@@ -57,8 +57,12 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			//NOTE: for some reasons 'WPML_register_string' has been created as a filter, which makes little sense, considering that we never actually use it as a filer.
 			//This action is a candidate to be in future the only way to register packages and strings
 			add_action( 'wpml_register_string', array( $this, 'register_string_action' ), 10, 5 );
+			add_filter( 'wpml_string_id_from_package', array( $this, 'string_id_from_package_filter' ), 10, 4 );
+			add_filter( 'wpml_string_title_from_id', array( $this, 'string_title_from_id_filter' ), 10, 2 );
 			//TODO: deprecated, use the 'wpml_register_string' action
 			add_filter( 'WPML_register_string', array( $this, 'register_string_for_translation' ), 10, 5 );
+
+			add_action( 'wpml_add_string_translation', array( $this, 'add_string_translation_action' ), 10, 7 );
 
 			//TODO: These 3 hooks are deprecated. They are needed for Layouts 1.0. Consider removing them after Layouts 1.2 is released
 			add_filter( 'WPML_get_translated_strings', array( $this, 'get_translated_strings' ), 10, 2 );
@@ -80,6 +84,8 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			add_filter( 'wpml_get_package_type', array( $this, 'get_package_type' ), 10, 2 );
 			add_filter( 'wpml_get_package_type_prefix', array( $this, 'get_package_type_prefix' ), 10, 2 );
 			add_filter( 'wpml_language_for_element', array( $this, 'get_language_for_element' ), 10, 2 );
+			add_filter( 'wpml_st_get_post_string_packages', array( $this, 'get_post_string_packages' ), 10, 2 );
+			add_filter( 'wpml_st_get_string_package', array( $this, 'get_string_package' ), 10, 2 );
 
 			/* Translation queue hooks */
 			add_filter( 'wpml_tm_external_translation_job_title', array( $this, 'get_post_title' ), 10, 2 );

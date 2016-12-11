@@ -92,7 +92,19 @@ class WPML_Notice_Render {
 		$restrict_to_pages = $notice->get_restrict_to_pages();
 		$allow_this_page   = ! $restrict_to_pages || in_array( $current_page, $restrict_to_pages, true );
 
-		return ! $page_excluded && $allow_this_page;
+		$allow_by_callback = true;
+		$display_callbacks = $notice->get_display_callbacks();
+		if ( $display_callbacks ) {
+			$allow_by_callback = false;
+			foreach ( $display_callbacks as $callback ) {
+				if ( call_user_func( $callback ) ) {
+					$allow_by_callback = true;
+					break;
+				}
+			}
+		}
+
+		return ! $page_excluded && $allow_this_page && $allow_by_callback;
 	}
 
 	/**
@@ -268,7 +280,7 @@ class WPML_Notice_Render {
 
 		if ( $action->get_group_to_dismiss() ) {
 			$action_url .= ' data-dismiss-group="' . esc_attr( $action->get_group_to_dismiss() ) . '"';
-			$action_url .= ' data-nonce="' . wp_create_nonce( 'otgs-hide-notice-for-group' ) . '"';
+			$action_url .= ' data-nonce="' . wp_create_nonce( 'otgs-dismiss-group' ) . '"';
 		}
 		if ( $action->get_js_callback() ) {
 			$action_url .= ' data-js-callback="' . esc_attr( $action->get_js_callback() ) . '"';

@@ -95,6 +95,8 @@ final class ITSEC_WordPress_Tweaks {
 			add_filter( 'xmlrpc_methods', array( $this, 'xmlrpc_methods' ) );
 		}
 
+		add_filter( 'rest_authentication_errors', array( $this, 'filter_rest_authentication_errors' ), 50 );
+
 		if ( $this->settings['safe_jquery'] ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'current_jquery' ) );
 		}
@@ -114,6 +116,31 @@ final class ITSEC_WordPress_Tweaks {
 			add_action( 'template_redirect', array( $this, 'disable_unused_author_pages' ) );
 		}
 
+		if ( $this->settings['block_tabnapping'] ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'add_block_tabnapping_script' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'add_block_tabnapping_script' ) );
+		}
+	}
+
+	public function filter_rest_authentication_errors( $error ) {
+		if ( 'disable' === $this->settings['rest_api'] ) {
+			return new WP_Error( 'itsec_wt_rest_api_disabled', esc_html__( 'The REST API is disabled on this site.', 'better-wp-security' ), array( 'status' => 403 ) );
+		}
+
+		if ( 'require-admin' === $this->settings['rest_api'] ) {
+			require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-canonical-roles.php' );
+
+			if ( ! ITSEC_Lib_Canonical_Roles::is_user_at_least( 'administrator' ) ) {
+				return new WP_Error( 'itsec_wt_rest_api_requires_admin', esc_html__( 'You are not authorized to access the REST API on this site.', 'better-wp-security' ), array( 'status' => 403 ) );
+			}
+		}
+
+		return $error;
+	}
+
+	public function add_block_tabnapping_script() {
+		wp_enqueue_script( 'blankshield', plugins_url( 'js/blankshield/blankshield.min.js', __FILE__ ), array(), ITSEC_Core::get_plugin_build(), true );
+		wp_enqueue_script( 'itsec-wt-block-tabnapping', plugins_url( 'js/block-tabnapping.js', __FILE__ ), array( 'blankshield' ), ITSEC_Core::get_plugin_build(), true );
 	}
 
 	public function block_multiauth_attempts( $filter_val, $username, $password ) {

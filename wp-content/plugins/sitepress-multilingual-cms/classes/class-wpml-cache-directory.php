@@ -2,7 +2,10 @@
 
 class WPML_Cache_Directory {
 
-	const MAIN_DIRECTORY_NAME = 'wpml';
+	const DIR_PERMISSIONS      = 0775;
+	const MAIN_DIRECTORY_NAME  = 'wpml';
+	const NOTICE_GROUP         = 'wpml-cache-directory';
+	const NOTICE_INVALID_CACHE = 'invalid-cache';
 
 	/**
 	 * @var WPML_WP_API
@@ -53,8 +56,10 @@ class WPML_Cache_Directory {
 		if ( ! $this->filesystem->is_writable( $absolute_path )
 		     || ! $this->filesystem->is_readable( $absolute_path )
 		) {
-			$result = $this->filesystem->chmod( $absolute_path, 0755, true );
+			$result = $this->filesystem->chmod( $absolute_path, self::DIR_PERMISSIONS, true );
 		}
+
+		$this->maybe_show_not_cached_notice( $result, $absolute_path );
 
 		return $result ? $absolute_path : false;
 	}
@@ -83,5 +88,24 @@ class WPML_Cache_Directory {
 		$main_directory_path = $this->get_main_directory_path();
 		$absolute_path = trailingslashit( $main_directory_path . ltrim( $relative_path, '/\\' ) );
 		$this->filesystem->delete( $absolute_path, true );
+	}
+
+	/**
+	 * @param bool   $is_directory_valid
+	 * @param string $absolute_path
+	 */
+	private function maybe_show_not_cached_notice( $is_directory_valid, $absolute_path ) {
+		$admin_notices = wpml_get_admin_notices();
+
+		if ( ! $is_directory_valid ) {
+			$message  = '<p>' . esc_html__( 'In order to improve performances, WPML needs read/write permissions on the following folder for caching:', 'sitepress' ) . '</p>';
+			$message .= '<code>' . $absolute_path . '</code>';
+			$notice  = new WPML_Notice( self::NOTICE_INVALID_CACHE, $message, self::NOTICE_GROUP );
+			$notice->set_css_class_types( 'notice-info' );
+			$notice->set_dismissible( true );
+			$admin_notices->add_notice( $notice );
+		} else {
+			$admin_notices->remove_notice( self::NOTICE_GROUP, self::NOTICE_INVALID_CACHE );
+		}
 	}
 }

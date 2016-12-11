@@ -141,7 +141,7 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 		$post_password = $this->sync_password ? $post->post_password : null;
 		$sync_parent_private = $this->sync_private_flag && get_post_status( $post_id ) === 'private' ? 'private' : null;
 		$menu_order = $this->sync_menu_order && ! empty( $post->menu_order ) ? $post->menu_order : null;
-		$page_template = $this->sync_page_template && get_post_type( $post_id ) === 'page' ? get_page_template_slug( $post_id ) : null;
+		$page_template = $this->sync_page_template && get_post_type( $post_id ) === 'page' ? get_post_meta( $post_id, '_wp_page_template', true ) : null;
 		$post_date = $this->sync_post_date ? $wpdb->get_var( $wpdb->prepare( "SELECT post_date FROM {$wpdb->posts} WHERE ID=%d LIMIT 1", $post_id ) ) : null;
 
 

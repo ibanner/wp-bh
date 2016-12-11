@@ -272,6 +272,9 @@ abstract class WPML_Element_Translation extends WPML_WPDB_User {
 	}
 
 	private function populate_cache( $elements ) {
+		if ( ! $elements ) {
+			return;
+		}
 		$element_ids = array();
 		foreach ( $elements as $element ) {
 			$element_id                    = $element['element_id'];
@@ -283,7 +286,7 @@ abstract class WPML_Element_Translation extends WPML_WPDB_User {
 				'trid'           => $element['trid'],
 				'lang'           => $language_code,
 				'source_lang'    => $element['source_language_code'],
-				'type'           => substr( $element['element_type'], $this->type_prefix_length )
+				'type'           => substr( $element['element_type'], $this->type_prefix_length ),
 			);
 
 			$this->translation_ids_element[ $element['translation_id'] ] = $element_id;

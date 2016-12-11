@@ -19,7 +19,7 @@ class WPML_Lang_Domains_Converter extends WPML_URL_Converter {
 		$domains,
 		$default_language,
 		$active_languages,
-		&$wpml_wp_api
+		$wpml_wp_api
 	) {
 		parent::__construct( $default_language, $active_languages );
 		$this->wpml_wp_api = &$wpml_wp_api;
@@ -28,9 +28,6 @@ class WPML_Lang_Domains_Converter extends WPML_URL_Converter {
 		if ( isset( $this->domains[ $this->default_language ] ) ) {
 			unset( $this->domains[ $this->default_language ] );
 		}
-		add_filter( 'login_url', array( $this, 'convert_url' ) );
-		add_filter( 'logout_url', array( $this, 'convert_url' ) );
-		add_filter( 'admin_url', array( $this, 'admin_url_filter' ), 1, 2 );
 		$this->wpml_xdomain_parser = new WPML_XDomain_Data_Parser();
 	}
 
@@ -51,7 +48,8 @@ class WPML_Lang_Domains_Converter extends WPML_URL_Converter {
 		return isset( $lang ) ? $lang : null;
 	}
 
-	protected function convert_url_string( $source_url, $lang ) {
+	public function convert_url_string( $source_url, $lang ) {
+
 		$original_source_url = untrailingslashit( $source_url );
 		if ( is_admin() && $this->is_url_admin( $original_source_url ) ) {
 			return $original_source_url;
@@ -71,20 +69,6 @@ class WPML_Lang_Domains_Converter extends WPML_URL_Converter {
 				: trailingslashit( $original_source_url )
 		);
 
-		return untrailingslashit( $converted_url );
-	}
-
-	public function admin_url_filter( $url, $path ) {
-		if ( ( strpos( $url, 'http://' ) === 0
-		       || strpos( $url, 'https://' ) === 0 )
-		     && 'admin-ajax.php' === $path && $this->wpml_wp_api->is_front_end()
-		) {
-			global $sitepress;
-
-			$url = $this->convert_url( $url,
-				$sitepress->get_current_language() );
-		}
-
-		return $url;
+		return $this->maybe_user_trailingslashit( $converted_url, 'untrailingslashit' );
 	}
 }

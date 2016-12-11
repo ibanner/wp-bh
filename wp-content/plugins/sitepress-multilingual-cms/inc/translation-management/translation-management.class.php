@@ -151,7 +151,7 @@ class TranslationManagement {
 	/**
 	 * @param $code
 	 *
-*@return bool
+	 * @return bool
 	 */
 	private function is_valid_language_code_format( $code ) {
 		return $code && is_string( $code ) && strlen( $code ) >= 2;
@@ -229,6 +229,10 @@ class TranslationManagement {
 				$this->settings[ 'doc_translation_method' ] = ICL_TM_TMETHOD_MANUAL;
 			}
 		}
+	}
+
+	public function get_settings() {
+		return $this->settings;
 	}
 
 	public function wpml_add_duplicate_check_actions() {
@@ -886,7 +890,8 @@ class TranslationManagement {
 
 				if ( $comment_meta ) {
 					foreach ( $comment_meta as $key => $value ) {
-						update_comment_meta( $dup, $key, $value );
+						wp_cache_delete( $dup, 'comment_meta' );
+						update_comment_meta( $dup, $value->meta_key, $value->meta_value );
 					}
 				}
 			}
@@ -1722,29 +1727,6 @@ class TranslationManagement {
 			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_translations WHERE translation_id=%d AND element_id IS NULL", $translation_id ) );
 			icl_cache_clear();
 		}
-	}
-
-	function read_settings_recursive( $config_settings ) {
-		global $sitepress;
-		$settings_portion = false;
-		foreach ( $config_settings as $s ) {
-			if ( isset( $s[ 'key' ] ) ) {
-				if ( ! is_numeric( key( $s[ 'key' ] ) ) ) {
-					$sub_key[ 0 ] = $s[ 'key' ];
-				} else {
-					$sub_key = $s[ 'key' ];
-				}
-				$read_settings_recursive = $this->read_settings_recursive( $sub_key );
-				if ( $read_settings_recursive ) {
-					$sitepress->set_setting( $s[ 'attr' ][ 'name' ], $read_settings_recursive );
-				}
-			} else {
-				$sitepress->set_setting( $s[ 'attr' ][ 'name' ], $s[ 'value' ] );
-				$settings_portion[ $s[ 'attr' ][ 'name' ] ] = $s[ 'value' ];
-			}
-		}
-
-		return $settings_portion;
 	}
 
 	function render_option_writes( $name, $value, $key = '' ) {

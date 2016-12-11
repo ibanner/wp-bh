@@ -139,3 +139,5 @@ define( 'WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN',     2 );
 define( 'WPML_LANGUAGE_NEGOTIATION_TYPE_PARAMETER',  3 );
 
 define( 'WPML_ELEMENT_TRANSLATIONS_CACHE_GROUP', 'element_translations' );
+
+define('WEBSITE_DETAILS_TRANSIENT_KEY', 'wpml_icl_query_website_details');

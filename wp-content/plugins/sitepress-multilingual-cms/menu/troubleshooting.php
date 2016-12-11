@@ -29,6 +29,8 @@ if ( isset( $action) && wp_verify_nonce($nonce, $action) ) {
 
 		case 'cache_clear':
 			icl_cache_clear();
+			$cache_directory = new WPML_Cache_Directory( new WPML_WP_API() );
+			$cache_directory->remove();
 			exit;
 
 		case 'ghost_clean':

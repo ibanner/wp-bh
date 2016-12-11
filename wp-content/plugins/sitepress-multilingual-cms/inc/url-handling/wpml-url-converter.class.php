@@ -242,7 +242,7 @@ abstract class WPML_URL_Converter {
 
 	protected abstract function get_lang_from_url_string($url);
 
-	protected abstract function convert_url_string( $source_url, $lang );
+	public abstract function convert_url_string( $source_url, $lang );
 
 	/**
 	 * Filters the string content of the .htaccess file that WP writes when saving permalinks.
@@ -389,5 +389,15 @@ abstract class WPML_URL_Converter {
 
 		$this->resolving_url = false;
 		return $new_url;
+	}
+
+	public function maybe_user_trailingslashit( $url, $backup ) {
+		global $wp_rewrite;
+
+		if( null !== $wp_rewrite ) {
+			return user_trailingslashit( $url );
+		} else {
+			return 'untrailingslashit' === $backup ? untrailingslashit( $url ) : trailingslashit( $url );
+		}
 	}
 }

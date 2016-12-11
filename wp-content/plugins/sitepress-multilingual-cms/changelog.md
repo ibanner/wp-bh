@@ -1,43 +1,94 @@
+# 3.6.1
+
+## Fixes
+* [wpmlcore-3763] Fixed trying to get property of non-object issue when wp_rerite wasn't set
+* [wpmlcore-3759] Fixed fatal error `Uncaught exception ‘InvalidArgumentException’`
+* [wpmlcore-3750] Default custom language switcher options are now initialized after the setup wizard
+* [wpmlcore-3765] Language switcher in menu is properly shown when the source language of the menu is different than the default language
+
+## Usability
+* [wpmlcore-3735] Disabled the Save button in language switcher settings after clicking it
+
+# 3.6.0
+
+## Fixes
+* [wpmlcore-3204] Fixed a compatibility issue with Yoast redirections
+* [wpmlcore-3363] Fixed an issue with the browser redirection when using languages with regional variations (e.g. fr-CA).
+* [wpmlcore-3311] Fixed multisite install compatibility issue with WP 4.6+ using `sunrise`
+* [wpmlcore-3266] On multisite, the main site settings are not altered anymore during sub-site setup
+* [wpmlcore-3361] Fixed a login redirection issue in sites with languages configured as domain
+* [wpmlcore-2968] Fixed a redirection issue Nginx servers with language configured as domain
+* [wpmlcore-2849] Fixed issue with cloning non object values for wp_query object.
+* [wpmlcore-3421] Fixed page template synchronization if template is set to default
+* [wpmlcore-3199] Removed Snoopy class and use WP_Http class instead.
+* [wpmlcore-2565] Fixed a compatibility issue with `get_option('siteurl')` in sites with languages set as domain
+* [wpmlcore-3434] Fixed WPML_Backend_Request::get_ajax_request_lang
+* [wpmlcore-3420] Fixed \SitePress::_sync_custom_field to handle serialized data.
+* [wpmlcore-3374] Removed the restriction of only English as default language when synchronizing WP menu
+* [wpmlcore-3441] Fixed issue in the WPML notice when adding posts from frontend 
+* [wpmlcore-3404] Fixed issue when duplicating posts that have comments to be duplicated
+* [wpmlst-887] Fixed issue while dismissing admin notices from plugin that contains special chars in the title
+* [wpmlcore-3438] Fixed issue with setting static blog page when page is permanently deleted
+* [wpmlcore-3471] Fixed compatibility issue when using Google PageSpeed Tools in Apache or Nginx
+* [wpmlcore-3451] Prevent double ampersand encoding in language switcher URL
+* [wpmlcore-3479] Fixed issue where language information wasn't saved when posts were created via AJAX call
+* [wpmlcore-2289] The language switcher in Twenty Sixteen's footer was cut off
+* [wpmlcore-1869] The language switcher in Twenty Fifteen's footer was partially hidden by the sidebar
+* [wpmlcore-2884] In some cases (taxonomy, author, date and post type archives), the language switcher custom link for empty translation was not displayed
+* [wpmlcore-3494] Removed admin user language feature in sites running WordPress 4.7 or higher and included migration logic while upgrading WP. This is now integrated to WordPress itself.
+* [wpmlcore-3497] Adjusted URL in wp_upload_dir return for when WPML is set up as domain
+* [wpmlcore-3544] Automatically download WordPress mo files for active languages
+* [wpmlcore-3682] Fix handling of slashes when copying custom fields
+
+## Usability
+* [wpmlcore-3325] Changed the message style in Sync Field Functionality
+* [wpmlcore-3399] Added a warning about missing menu items when only one language is configured in the site
+
+## Features
+* [wpmlcore-1448] Redesign of the language switcher (new admin UI, new API)
+
 # 3.5.3.1
 
 ## Fixes
-* [wpmlcore-3392] Fixed performance issue with SSO when language per domain is configured. 
+* [wpmlcore-2535] Fixed a compatibility issue with `bloginfo('stylesheet_url')` when languages is set as domain
+* [wpmlcore-3392] Fixed performance issue with SSO when language per domain is configured.
+* [wpmlcore-2375] Fixed an URL inconsistency when using `get_page_link`
 
 # 3.5.3
 
 ## Fixes
-* [wpmlcore-3366] Update language switcher color picker validation to support rgb and transparent option
+* [wpmlcore-3366] Update language switcher color picker validation to support rgb and transparent option 
 
 # 3.5.2
 
 ## Fixes
-* [wpmlcore-3244] Fixed issue with re-initialization of WPML in Network install after resetting settings of main sub-site.
-* [wpmlcore-2663] Fixed issue with browser-redirection when using Languages in Directories.
-* [wpmlcore-2682] Fixed issue with browser redirection and languages with variations.
-* [wpmlcore-3009] Fixed duplicated lang query param when redirection to child page is made.
-* [wpmlcore-3310] Post meta won't return an empty value after automatic post meta synchronization is run.
-* [wpmlcore-3334] Fixed issues with translation from second language are loaded when MO files are used (introduced in WP 4.6)
-* [wpmltm-1532] Ensure the the correct source language is used when sending translation jobs to translation proxy.
+* [wpmlcore-3244] Fixed an issue with the re-initialization of WPML in Network install, after resetting settings of main sub-site.
+* [wpmlcore-2663] Fixed an issue with the browser redirection when using languages in directories.
+* [wpmlcore-2682] Fixed an issue with the browser redirection when using languages with regional variations (e.g. fr-CA).
+* [wpmlcore-3009] Fixed duplicated language querystring argument when redirecting to a child page.
+* [wpmlcore-3310] Post meta won't return an empty value after automatic post meta synchronization is ran.
+* [wpmlcore-3334] Fixed some issues when translating **from a non-default language** and MO files are used for gettext strings (introduced in WP 4.6).
+* [wpmltm-1532] Ensure the correct source language is used when sending translation jobs to Translation Proxy.
 * Other minor bug fixes.
 
 ## API
 
 ### Filters
-* [wpmlcore-3160] Added `wpml_is_translated_taxonomy`
+* [wpmlcore-3160] Added `wpml_is_translated_taxonomy`.
 
 ### Actions
-* [wpmlcore-3316] Added `wpml_user_switch_language`
+* [wpmlcore-3316] Added `wpml_user_switch_language`.
 
 ## Performances
-* [wpmlcore-3227] Reduced the number of queries on the posts listing pages
-* [wpmlcore-2692] Added caching for Twig templates
+* [wpmlcore-3227] Reduced the number of queries in the posts listing pages.
+* [wpmlcore-2692] Added caching for Twig templates.
 
 ## Features
-* [wpmlcore-3320] Users can now login across domains when WPML is configured to use language per domain using "window.postMessage"
-* [wpmlcore-1101] Added a spinner and disabled buttons in the WPML installation wizard, to improve usability
+* [wpmlcore-3320] Users can now login across domains when WPML is configured to use languages per domain (it uses the "window.postMessage" web API).
 
 ## Usability
 * [wpmlcore-3006] Improved usability of the admin notice "Term hierarchy synchronization".
+* [wpmlcore-1101] Added a spinner and disabled buttons in the WPML installation wizard.
 
 # 3.5.1.1
 
