@@ -3,6 +3,16 @@
     "title": "Product Badge Attributes",
     "fields": [
         {
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": "",
             "key": "field_548ca7e03b90e",
             "label": "Badge Image",
             "name": "acf-product-badge_image",
@@ -14,19 +24,10 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "preview_size": "thumbnail",
-            "library": "all",
-            "return_format": "array",
-            "min_width": 0,
-            "min_height": 0,
-            "min_size": 0,
-            "max_width": 0,
-            "max_height": 0,
-            "max_size": 0,
-            "mime_types": ""
+            }
         },
         {
+            "default_value": "",
             "key": "field_56cff1c48adec",
             "label": "Badge Color",
             "name": "acf-product-badge_color",
@@ -38,10 +39,10 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "default_value": ""
+            }
         },
         {
+            "default_value": "",
             "key": "field_56cff2e08aded",
             "label": "Badge Checked Color",
             "name": "acf-product-badge_checked_color",
@@ -53,8 +54,7 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "default_value": ""
+            }
         }
     ],
     "location": [
@@ -74,5 +74,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1456468781
+    "modified": 1483958151
 }

@@ -3,6 +3,11 @@
     "title": "Shop - About",
     "fields": [
         {
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "default_value": "",
+            "delay": 0,
             "key": "field_551d2938892a0",
             "label": "Team Pre Text",
             "name": "acf-shop_about_team_pre_text",
@@ -14,13 +19,83 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "default_value": "",
-            "toolbar": "full",
-            "media_upload": 0,
-            "tabs": "all"
+            }
         },
         {
+            "sub_fields": [
+                {
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "key": "field_551d1d54d76f4",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": 30,
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "key": "field_551d1d2cd76f3",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": 20,
+                        "class": "",
+                        "id": ""
+                    },
+                    "formatting": "none",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "default_value": "",
+                    "new_lines": "br",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "rows": "",
+                    "key": "field_551d1d70d76f5",
+                    "label": "Description",
+                    "name": "description",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": 50,
+                        "class": "",
+                        "id": ""
+                    },
+                    "readonly": 0,
+                    "disabled": 0
+                }
+            ],
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add Team Member",
+            "collapsed": "",
             "key": "field_551d179f7531a",
             "label": "Team Members",
             "name": "acf-shop_about_team_members",
@@ -34,81 +109,7 @@
                 "id": ""
             },
             "row_min": "",
-            "row_limit": "",
-            "layout": "table",
-            "button_label": "Add Team Member",
-            "min": 0,
-            "max": 0,
-            "sub_fields": [
-                {
-                    "key": "field_551d1d54d76f4",
-                    "label": "Image",
-                    "name": "image",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": 30,
-                        "class": "",
-                        "id": ""
-                    },
-                    "preview_size": "thumbnail",
-                    "library": "all",
-                    "return_format": "array",
-                    "min_width": 0,
-                    "min_height": 0,
-                    "min_size": 0,
-                    "max_width": 0,
-                    "max_height": 0,
-                    "max_size": 0,
-                    "mime_types": ""
-                },
-                {
-                    "key": "field_551d1d2cd76f3",
-                    "label": "Name",
-                    "name": "name",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": 20,
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "formatting": "none",
-                    "maxlength": "",
-                    "readonly": 0,
-                    "disabled": 0
-                },
-                {
-                    "key": "field_551d1d70d76f5",
-                    "label": "Description",
-                    "name": "description",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": 50,
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": "br",
-                    "readonly": 0,
-                    "disabled": 0
-                }
-            ],
-            "collapsed": ""
+            "row_limit": ""
         }
     ],
     "location": [
@@ -128,5 +129,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1456468081
+    "modified": 1483958157
 }
