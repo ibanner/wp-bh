@@ -244,9 +244,7 @@
 	function event_subpannel_columns($columns) {
 		$event_columns = array(
 			'start_date'	=> 'Start Date',
-			'end_date'		=> 'End Date',
-			'banner_ind'	=> 'Homepage Banner',
-			'slider_ind'	=> 'Homepage Slider'
+			'end_date'		=> 'End Date'
 		);
 		$columns = array_merge(
 			array_slice($columns, 0, -1),	// before
@@ -269,14 +267,6 @@
 		else if ($columns == 'end_date') {
 			$end_date = get_field('acf-event_end_date', $post->ID);
 			echo ($end_date) ? date( 'd/m/Y', strtotime($end_date) ) : '';
-		}
-		else if ($columns == 'banner_ind') {
-			$banner_ind = get_field('acf-event_homepage_banner_indicator', $post->ID);
-			echo ($banner_ind) ? 'Show' : '';
-		}
-		else if ($columns == 'slider_ind') {
-			$slider_ind = get_field('acf-event_homepage_slider_indicator', $post->ID);
-			echo ($slider_ind) ? 'Show' : '';
 		}
 	}
 	add_action('manage_event_posts_custom_column', 'event_subpannel_columns_values', 10, 2);

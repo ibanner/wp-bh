@@ -24,16 +24,54 @@ $events = array();
 
 $wpml_lang = function_exists('icl_object_id') ? ICL_LANGUAGE_CODE : '';
 
-// get slider events
 foreach ($slider as $s) {
-	$event = $s['event'];
+	// init $item
+	$item = array();
 
-	if ( $event ) {
+	// get slide parameters
+	$type = $s['type'];
+
+	switch ( $type ) {
+
+		// event
+		case 'event' :
+
+			$event = $s['event'];
+
+			if ( $event ) {
+				$item['type']	= 'event';
+				$item['event']	= $event;
+			}
+
+			break;
+
+		// custom
+		case 'custom' :
+
+			// get custom slide parameters
+			$image		= $s['custom_image'];
+			$title		= $s['custom_title'];
+			$link		= $s['custom_link'];
+			$target		= $s['custom_link_target'];
+
+			$item['type']	= 'custom';
+			$item['event']	= array(
+				'image' 	=> $image		? $image		: '',
+				'title' 	=> $title		? $title		: '',
+				'link'		=> $link		? $link			: '',
+				'target'	=> $target		? $target		: ''
+			);
+
+			break;
+
+	}
+
+	if ( $item['event'] ) {
 		if ( $wpml_lang == 'he' ) {
-			array_unshift($events, $event);
+			array_unshift($events, $item);
 		}
 		else {
-			$events[] = $event;
+			$events[] = $item;
 		}
 	}
 }

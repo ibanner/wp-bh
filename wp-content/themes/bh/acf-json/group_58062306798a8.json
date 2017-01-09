@@ -12,7 +12,7 @@
                         "custom": "Custom"
                     },
                     "default_value": [
-                        "custom"
+                        "event"
                     ],
                     "ui": 0,
                     "ajax": 0,
@@ -29,9 +29,7 @@
                         "width": "",
                         "class": "",
                         "id": ""
-                    },
-                    "disabled": 0,
-                    "readonly": 0
+                    }
                 },
                 {
                     "post_type": [
@@ -273,9 +271,7 @@
                         "width": "",
                         "class": "",
                         "id": ""
-                    },
-                    "disabled": 0,
-                    "readonly": 0
+                    }
                 }
             ],
             "min": 0,
@@ -314,5 +310,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1483958183
+    "modified": 1483965934
 }
