@@ -91,7 +91,7 @@ foreach ($events as $e) {
 	else {
 		// custom
 		$event_element =
-			"<div class='event-item' style='display: none;'>" .
+			"<div class='event-item custom-event-item' style='display: none;'>" .
 				"<a href='" . $e['event']['link'] . "' " . ( $e['event']['target'] == 'blank' ? "target='_blank'" : "" ) . ">" .
 					"<img src='" . $e['event']['image']['sizes']['thumbnail'] . "' alt='" . ( ($e['event']['image']['alt']) ? $e['event']['image']['alt'] : '' ) . "' />" .
 					"<div class='event-meta'>" .
