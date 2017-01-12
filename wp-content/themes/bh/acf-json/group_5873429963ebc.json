@@ -216,6 +216,65 @@
                 "class": "",
                 "id": ""
             }
+        },
+        {
+            "placement": "left",
+            "endpoint": 0,
+            "key": "field_58777d6619665",
+            "label": "Events Page",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "sub_fields": [
+                {
+                    "post_type": [
+                        "event"
+                    ],
+                    "taxonomy": [],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "ui": 1,
+                    "key": "field_58777de019667",
+                    "label": "Event",
+                    "name": "event",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    }
+                }
+            ],
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Event",
+            "collapsed": "",
+            "key": "field_58777d8419666",
+            "label": "Sticky Events",
+            "name": "acf-options_exhibitions_and_events_sticky_events",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
         }
     ],
     "location": [
@@ -235,5 +294,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1483965928
+    "modified": 1484226124
 }

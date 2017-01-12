@@ -92,12 +92,15 @@
 		endif;
 
 		// get event start date
-		if ($start_date) 
-			$s_date = strftime( '%B %d', strtotime($start_date) );
+		if ($start_date) { 
+			$s_date			= strftime( '%B %d', strtotime($start_date) );
+			$past_s_date	= strftime( '%B, \'%y', strtotime($start_date) );
+		}
 		
 		// get event end date
 		// assumption: end date must exists since the queries contains only events with future end date
-		$e_date		= strftime( '%B %d', strtotime($end_date) );
+		$e_date			= strftime( '%B %d', strtotime($end_date) );
+		$past_e_date	= strftime( '%B, \'%y', strtotime($end_date) );
 		
 		$date_html =
 			"<div class='event-date'>" .
@@ -132,21 +135,20 @@
 								)
 						)
 					:
-						// past event
 						( ($start_date)
 							?
 								// there is start date
 								( ($start_date == $end_date)
 									?
 										// one day period event
-										mysql2date('F, \'y', $start_date)
+										$past_s_date
 									:
 										// more than one day period event
-										mysql2date('F, \'y', $start_date) . ' - ' . mysql2date('F, \'y', $end_date)
+										$past_s_date . ' - ' . $past_e_date
 								)
 							:
 								// there is no start date
-								mysql2date('F, \'y', $end_date)
+								$past_e_date
 						)
 				) .
 			"</div>";
