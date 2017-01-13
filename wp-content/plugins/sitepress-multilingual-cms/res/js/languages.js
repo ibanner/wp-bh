@@ -103,14 +103,19 @@ jQuery(document).ready(function(){
 
 function manageWizardHeader() {
 	var wizardHeader = jQuery('#icl_setup_wizard_wrap');
-	var wizardHeaderTop = wizardHeader.offset().top;
+	var wizardHeaderInner = jQuery('.wpml-section-wizard-steps-inner');
+	var wizardHeaderInnerTop = wizardHeader.offset().top;
 	var adminbarHeight = jQuery('#wpadminbar').height();
 
+	jQuery(wizardHeader).css('height', wizardHeaderInner.outerHeight() );
+
 	jQuery(window).scroll(function() {
-		if (jQuery(window).scrollTop() >= wizardHeaderTop - adminbarHeight) {
-			wizardHeader.addClass('fixed').css('top', jQuery(window).scrollTop() - 40 ).prev().css('margin-bottom', wizardHeader.outerHeight() + 40);
+
+		if (jQuery(window).scrollTop() >= wizardHeaderInnerTop - adminbarHeight) {
+			//Numeber is .wrap top margin
+			wizardHeaderInner.addClass('fixed').css('top', jQuery(window).scrollTop() - 10 );
 		} else {
-			wizardHeader.removeClass('fixed').css('top', 0).prev().css('margin-bottom', '0');
+			wizardHeaderInner.removeClass('fixed').css('top', 0);
 		}
 	});
 }

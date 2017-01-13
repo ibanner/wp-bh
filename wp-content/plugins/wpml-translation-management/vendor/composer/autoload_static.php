@@ -4,35 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit943f9695922b1126627a15fa4b7adbc6
+class ComposerStaticInit609b0c7ef09808ba7ed4bd00b61cfa9c
 {
-    public static $prefixLengthsPsr4 = array (
-        'C' => 
-        array (
-            'Composer\\Installers\\' => 20,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'Composer\\Installers\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
-        ),
-    );
-
     public static $prefixesPsr0 = array (
         'x' => 
         array (
             'xrstf\\Composer52' => 
             array (
                 0 => __DIR__ . '/..' . '/xrstf/composer-php52/lib',
-            ),
-        ),
-        'T' => 
-        array (
-            'Twig_' => 
-            array (
-                0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
     );
@@ -111,6 +90,7 @@ class ComposerStaticInit943f9695922b1126627a15fa4b7adbc6
         'WPML_TM_MCS_Section_UI' => __DIR__ . '/../..' . '/classes/menu/mcsetup/class-wpml-tm-mcs-section-ui.php',
         'WPML_TM_MCS_Term_Custom_Field_Settings_Menu' => __DIR__ . '/../..' . '/classes/menu/mcsetup/class-wpml-tm-mcs-term-custom-field-settings-menu.php',
         'WPML_TM_Mail_Notification' => __DIR__ . '/../..' . '/inc/local-translation/wpml-tm-mail-notification.class.php',
+        'WPML_TM_Options_Ajax' => __DIR__ . '/../..' . '/classes/menu/mcsetup/wpml-tm-options-ajax.php',
         'WPML_TM_Page_Builders' => __DIR__ . '/../..' . '/classes/page-builders/class-wpml-tm-page-builders.php',
         'WPML_TM_Page_Builders_Field_Wrapper' => __DIR__ . '/../..' . '/classes/page-builders/class-wpml-tm-page-builders-field-wrapper.php',
         'WPML_TM_Page_Builders_Hooks' => __DIR__ . '/../..' . '/classes/page-builders/class-wpml-tm-page-builders-hooks.php',
@@ -217,10 +197,8 @@ class ComposerStaticInit943f9695922b1126627a15fa4b7adbc6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit943f9695922b1126627a15fa4b7adbc6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit943f9695922b1126627a15fa4b7adbc6::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit943f9695922b1126627a15fa4b7adbc6::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit943f9695922b1126627a15fa4b7adbc6::$classMap;
+            $loader->prefixesPsr0 = ComposerStaticInit609b0c7ef09808ba7ed4bd00b61cfa9c::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit609b0c7ef09808ba7ed4bd00b61cfa9c::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -905,8 +905,10 @@ img.icl_als_iclflag {
 		display: none;
 	}
 }
-
 .wpml-section-wizard-steps {
+	margin-top: 30px;
+}
+.wpml-section-wizard-steps-inner {
 	transition: background .3s, box-shadow .3s;
 	&.fixed {
 		box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -941,4 +943,47 @@ div.wpml-simple-lang-selector {
 
 #sso_information {
 	cursor: pointer;
+}
+
+/**
+ * Styles for mobile devices
+ */
+body.mobile {
+  overflow-x: inherit; /* prevent drag & drop issue for language order */
+
+  .wpml-section-content {
+	margin-left: 0;
+	width: auto;
+  }
+
+  .wpml-section-header {
+	width: auto;
+  }
+
+  .wpml-section {
+	margin: 20px 0 0 0;
+	padding: 10px 0;
+  }
+
+  .wpml-ls-dialog {
+	min-width: 0;
+  }
+
+  .wpml-ls-slot-list {
+	width: 100%;
+
+	.wpml-ls-cell-preview {
+	  width: 40%;
+	}
+
+	.wpml-ls-preview-wrapper {
+	  width: 160px;
+	  min-width: 0;
+
+	  .wpml-ls {
+		width: auto;
+	  }
+	}
+  }
+
 }

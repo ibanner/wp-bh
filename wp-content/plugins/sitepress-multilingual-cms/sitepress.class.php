@@ -1720,7 +1720,7 @@ class SitePress extends WPML_WPDB_User{
 
 		$removed = array_diff( $values_to, $values_from );
 		foreach ( $removed as $v ) {
-			delete_post_meta( $post_id_to, $meta_key, $v );
+			delete_post_meta( $post_id_to, $meta_key, maybe_unserialize( $v ) );
 		}
 
 		$added = array_diff( $values_from, $values_to );
@@ -2573,9 +2573,11 @@ class SitePress extends WPML_WPDB_User{
 
 	function terms_clauses( $clauses, $taxonomies, $args ) {
 		// special case for when term hierarchy is cached in wp_options
-		$debug_backtrace = $this->get_backtrace( 6 ); //Limit to first 5 stack frames, since 4 is the highest index we use
+		$debug_backtrace = $this->get_backtrace( 10 ); //Limit to first 5 stack frames, since 4 is the highest index we use
         if ( (bool) $taxonomies === false
              || ( isset( $debug_backtrace[ 4 ] ) && $debug_backtrace[ 4 ][ 'function' ] == '_get_term_hierarchy' )
+             || ( isset( $debug_backtrace[ 7 ] ) && $debug_backtrace[ 7 ][ 'function' ] == '_get_term_hierarchy' )
+             || ( isset( $debug_backtrace[ 8 ] ) && $debug_backtrace[ 8 ][ 'function' ] == 'synchronize_terms' && $debug_backtrace[ 8 ][ 'class' ] == 'WPML_Term_Translation_Utils' )
         ) {
             return $clauses;
         }

@@ -104,12 +104,6 @@ switch($request){
         $this->save_settings($iclsettings);
         echo json_encode(array('message' => __('Languages order updated', 'sitepress')));
         break;
-    case 'icl_tdo_options':
-        $iclsettings['translated_document_status']      = filter_input( INPUT_POST, 'icl_translated_document_status', FILTER_SANITIZE_NUMBER_INT, FILTER_NULL_ON_FAILURE );
-        $iclsettings['translated_document_page_url']    = filter_input( INPUT_POST, 'icl_translated_document_page_url', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
-        $this->save_settings($iclsettings);
-        echo '1|';
-       break;
     case 'registration_form_submit':
         
         $ret['error'] = '';

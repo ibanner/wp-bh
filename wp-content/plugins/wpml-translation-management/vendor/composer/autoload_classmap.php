@@ -79,6 +79,7 @@ return array(
     'WPML_TM_MCS_Section_UI' => $baseDir . '/classes/menu/mcsetup/class-wpml-tm-mcs-section-ui.php',
     'WPML_TM_MCS_Term_Custom_Field_Settings_Menu' => $baseDir . '/classes/menu/mcsetup/class-wpml-tm-mcs-term-custom-field-settings-menu.php',
     'WPML_TM_Mail_Notification' => $baseDir . '/inc/local-translation/wpml-tm-mail-notification.class.php',
+    'WPML_TM_Options_Ajax' => $baseDir . '/classes/menu/mcsetup/wpml-tm-options-ajax.php',
     'WPML_TM_Page_Builders' => $baseDir . '/classes/page-builders/class-wpml-tm-page-builders.php',
     'WPML_TM_Page_Builders_Field_Wrapper' => $baseDir . '/classes/page-builders/class-wpml-tm-page-builders-field-wrapper.php',
     'WPML_TM_Page_Builders_Hooks' => $baseDir . '/classes/page-builders/class-wpml-tm-page-builders-hooks.php',

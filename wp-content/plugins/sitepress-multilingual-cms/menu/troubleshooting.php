@@ -14,15 +14,33 @@ function get_term_taxonomy_id_from_term_object($term_object)
 }
 $action = filter_input(INPUT_GET, 'debug_action', FILTER_SANITIZE_STRING);
 $nonce  = filter_input(INPUT_GET, 'nonce', FILTER_SANITIZE_STRING);
-if ( isset( $action) && wp_verify_nonce($nonce, $action) ) {
+if ( ! $action ) {
+	$action = filter_input( INPUT_POST, 'debug_action', FILTER_SANITIZE_STRING );
+	$nonce  = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
+}
+
+$otgs_twig_cache_disable_key = '_otgs_twig_cache_disabled';
+if ( defined( 'WPML_Templates_Factory::OTGS_TWIG_CACHE_DISABLED_KEY' ) ) {
+	$otgs_twig_cache_disable_key = WPML_Templates_Factory::OTGS_TWIG_CACHE_DISABLED_KEY;
+}
+
+if ( isset( $action ) && wp_verify_nonce( $nonce, $action ) ) {
 	ob_end_clean();
 	global $wpdb;
 	switch ( $action ) {
-		case 'fix_languages':
-			SitePress_Setup::fill_languages();
-			SitePress_Setup::fill_languages_translations();
-            icl_cache_clear();
-			exit;
+	  case 'otgs_twig_cache_enable':
+		  $new_value = false;
+
+		  if ( array_key_exists( 'new_value', $_POST ) ) {
+			  $new_value = (bool) $_POST['new_value'];
+		  }
+	    update_option( $otgs_twig_cache_disable_key, $new_value, 'no' );
+		  exit;
+	  case 'fix_languages':
+		  SitePress_Setup::fill_languages();
+		  SitePress_Setup::fill_languages_translations();
+		  icl_cache_clear();
+		  exit;
 		case 'icl_fix_collation':
 			repair_el_type_collate();
 			exit;
@@ -376,7 +394,30 @@ echo '</textarea>';
 		return xhr.statusText || status || error;
 	}
 
-	jQuery(document).ready(function () {
+	jQuery(document).ready(function ($) {
+		$('#otgs_twig_cache_enable').find('.button-secondary').on('click', function () {
+			jQuery(this).attr('disabled', 'disabled');
+			jQuery(this).after(icl_ajxloaderimg);
+
+			var value = jQuery(this).parent().find('.otgs_twig_cache_new_value').val();
+			var key = '<?php echo $otgs_twig_cache_disable_key ?>';
+
+			jQuery.ajax({
+										type:    "POST",
+										url:     location.href,
+										data:    {
+											'debug_action': 'otgs_twig_cache_enable',
+											'nonce':        '<?php echo wp_create_nonce( 'otgs_twig_cache_enable' ); ?>',
+											'new_value':    value
+										},
+										success: function () {
+											alert('<?php echo esc_js( __( 'Done', 'sitepress' ) ) ?>');
+											location.reload();
+										}
+									});
+
+		});
+
 		jQuery('#icl_fix_languages').click(function () {
 			jQuery(this).attr('disabled', 'disabled');
 			jQuery(this).after(icl_ajxloaderimg);
@@ -554,6 +595,24 @@ echo '</textarea>';
 	})
 </script>
 <div class="icl_cyan_box">
+	<h3><?php _e( 'Advanced settings', 'sitepress' ) ?></h3>
+
+	<p id="otgs_twig_cache_enable">
+	  <?php
+    $twig_cache_disabled  = (bool) get_option( $otgs_twig_cache_disable_key, false );
+	  $twig_cache_new_value = ! $twig_cache_disabled;
+	  $twig_cache_label     = __( 'Disable cache for language switcher templates' );
+	  if ( $twig_cache_disabled ) {
+		  $twig_cache_label = __( 'Enable cache for language switcher templates' );
+	  }
+	  ?>
+		<input type="hidden" id="otgs_twig_cache_new_value" class="otgs_twig_cache_new_value" value="<?php echo $twig_cache_new_value; ?>"/>
+		<input type="button" class="button-secondary" value="<?php echo $twig_cache_label; ?>"/><br/>
+	</p>
+
+</div><br clear="all"/>
+
+<div class="icl_cyan_box">
 	<h3><?php _e( 'Clean up', 'sitepress' ) ?></h3>
 
 	<p class="icl_form_errors" style="padding:6px;"><?php _e( 'Please make backup of your database before using this.', 'sitepress' ) ?></p>
@@ -618,7 +677,7 @@ echo '</textarea>';
 
 		<?php
 		$translatable_posts = $sitepress->get_translatable_documents();
-		$res = $wpdb->get_col( 
+		$res = $wpdb->get_col(
 						$wpdb->prepare("SELECT DISTINCT element_type FROM {$wpdb->prefix}icl_translations WHERE element_type LIKE %s",
 										array( wpml_like_escape('post_') . '%' ) ) );
 		echo '<table class="widefat" style="width:300px;">';
@@ -669,7 +728,7 @@ echo '</textarea>';
 		}
 		$translatable_taxs = array_unique( $translatable_taxs );
 
-		$res = $wpdb->get_col( 
+		$res = $wpdb->get_col(
 						$wpdb->prepare("SELECT DISTINCT element_type FROM {$wpdb->prefix}icl_translations WHERE element_type LIKE %s",
 										array( wpml_like_escape('tax_') . '%' ) ) );
 		echo '<table class="widefat" style="width:300px;">';

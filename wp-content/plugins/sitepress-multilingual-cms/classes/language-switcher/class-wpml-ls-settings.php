@@ -264,7 +264,7 @@ class WPML_LS_Settings {
 		$menus        = wp_get_nav_menus( array( 'orderby' => 'name' ) );
 		if ( $menus ) {
 			foreach ( $menus as $menu ) {
-				$menu_details = $this->sitepress->get_element_language_details( $menu->term_id, 'tax_nav_menu' );
+				$menu_details = $this->sitepress->get_element_language_details( $menu->term_taxonomy_id, 'tax_nav_menu' );
 				if ( isset( $menu_details->language_code ) && $menu_details->language_code === $default_lang ) {
 					$ret[ $menu->slug ] = $menu;
 				}

@@ -57,7 +57,7 @@ class WPML_PB_Update_Shortcodes_In_Content {
 		$translatable_attributes = $this->strategy->get_shortcode_attributes( $shortcode_data['tag'] );
 		if ( ! empty( $attributes ) ) {
 			foreach ( $attributes as $attr => $attr_value ) {
-				if ( in_array( $attr, $translatable_attributes ) ) {
+				if ( in_array( $attr, $translatable_attributes, true ) ) {
 					$encoding            = $this->strategy->get_shortcode_attribute_encoding( $shortcode_data['tag'], $attr );
 					$translation = $this->get_translation( $attr_value, $encoding );
 					$translation         = $this->filter_attribute_translation( $translation );

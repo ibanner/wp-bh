@@ -43,7 +43,7 @@ class WPML_PB_Register_Shortcodes {
 			$translatable_attributes = $this->shortcode_strategy->get_shortcode_attributes( $shortcode['tag'] );
 			if ( ! empty( $attributes ) ) {
 				foreach ( $attributes as $attr => $attr_value ) {
-					if ( in_array( $attr, $translatable_attributes ) ) {
+					if ( in_array( $attr, $translatable_attributes, true ) ) {
 						$encoding   = $this->shortcode_strategy->get_shortcode_attribute_encoding( $shortcode['tag'], $attr );
 						$attr_value = $this->decode( $attr_value, $encoding );
 						$this->remove_from_clean_up_list( $attr_value );

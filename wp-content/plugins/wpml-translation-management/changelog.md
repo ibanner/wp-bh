@@ -1,3 +1,9 @@
+# 2.2.6
+
+## Fixes
+* [wpmltm-1587] Fixed issue where multiple lines got stripped when copying all fields in the Translation Editor
+* [wpmlcore-3784] Fixed compatibility issue with ACF Pro causing fatal error for translatable field groups 
+
 # 2.2.5
 
 ## Fixes

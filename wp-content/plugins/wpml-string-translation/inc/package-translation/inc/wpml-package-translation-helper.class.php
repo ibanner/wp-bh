@@ -4,12 +4,16 @@ class WPML_Package_Helper {
 	private   $default_language;
 	private   $last_registered_string_id;
 	protected $registered_strings;
+	private   $package_cleanup;
 
 	private $cache_group;
 
 	function __construct() {
+		global $wpdb;
+
 		$this->registered_strings = array();
 		$this->cache_group        = 'string_package';
+		$this->package_cleanup = new WPML_ST_Package_Cleanup( $wpdb );
 	}
 
 	/**
@@ -144,6 +148,7 @@ class WPML_Package_Helper {
 
 			$this->set_package_registered_strings( $package_id, $string_type, $string_title, $string_name, $string_value );
 			$this->last_registered_string_id = $this->register_string_with_wpml( $package, $string_name, $string_title, $string_type, $string_value );
+			$this->package_cleanup->record_register_string( $package, $this->last_registered_string_id );
 		}
 
 		return $string_value;
@@ -719,4 +724,13 @@ class WPML_Package_Helper {
 	public function get_string_package( $package, $package_id ) {
 		return new WPML_Package( $package_id );
 	}
+
+	public function start_string_package_registration_action( $package ) {
+		$this->package_cleanup->record_existing_strings( new WPML_Package( $package ) );
+	}
+
+	public function delete_unused_package_strings_action( $package ) {
+		$this->package_cleanup->delete_unused_strings( new WPML_Package( $package ) );
+	}
+
 }

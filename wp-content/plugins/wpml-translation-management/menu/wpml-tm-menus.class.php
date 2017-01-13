@@ -710,7 +710,7 @@ class WPML_TM_Menus
             <div class="wpml-section-content">
 
                 <form name="icl_tdo_options" id="icl_tdo_options" action="">
-                    <?php wp_nonce_field('icl_tdo_options_nonce', '_icl_nonce'); ?>
+                    <?php wp_nonce_field('wpml-translated-document-options-nonce', WPML_TM_Options_Ajax::NONCE_TRANSLATED_DOCUMENT); ?>
 
                     <div class="wpml-section-content-inner">
                         <h4>
@@ -767,8 +767,7 @@ class WPML_TM_Menus
                     <div class="wpml-section-content-inner">
                         <p class="buttons-wrap">
                             <span class="icl_ajx_response" id="icl_ajx_response_tdo"></span>
-                            <input type="submit" class="button-primary"
-                                   value="<?php _e('Save', 'wpml-translation-management') ?>"/>
+                            <input id="js-translated_document-options-btn" type="button" class="button-primary" value="<?php _e('Save', 'wpml-translation-management') ?>"/>
                         </p>
                     </div>
 

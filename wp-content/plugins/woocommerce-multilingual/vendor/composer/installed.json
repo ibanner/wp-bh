@@ -115,7 +115,7 @@
         "source": {
             "type": "git",
             "url": "ssh://git@git.onthegosystems.com:10022/installer/installer.git",
-            "reference": "f841bfb38950e512a8944dd453ec8644a9475b8e"
+            "reference": "e5cd6c7c27b97ad76fb27c133b019ac57f907fac"
         },
         "require": {
             "composer/installers": "~1.0",
@@ -124,7 +124,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.5"
         },
-        "time": "2016-12-06 07:54:24",
+        "time": "2017-01-12 09:40:28",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -158,66 +158,36 @@
         ]
     },
     {
-        "name": "twig/twig",
-        "version": "v1.28.2",
-        "version_normalized": "1.28.2.0",
+        "name": "xrstf/composer-php52",
+        "version": "v1.0.20",
+        "version_normalized": "1.0.20.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/twigphp/Twig.git",
-            "reference": "b22ce0eb070e41f7cba65d78fe216de29726459c"
+            "url": "https://github.com/composer-php52/composer-php52.git",
+            "reference": "bd41459d5e27df8d33057842b32377c39e97a5a8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/b22ce0eb070e41f7cba65d78fe216de29726459c",
-            "reference": "b22ce0eb070e41f7cba65d78fe216de29726459c",
+            "url": "https://api.github.com/repos/composer-php52/composer-php52/zipball/bd41459d5e27df8d33057842b32377c39e97a5a8",
+            "reference": "bd41459d5e27df8d33057842b32377c39e97a5a8",
             "shasum": ""
         },
-        "require": {
-            "php": ">=5.2.7"
-        },
-        "require-dev": {
-            "symfony/debug": "~2.7",
-            "symfony/phpunit-bridge": "~3.2@dev"
-        },
-        "time": "2016-11-23 18:41:40",
+        "time": "2016-04-16 21:52:24",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.28-dev"
+                "dev-default": "1.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-0": {
-                "Twig_": "lib/"
+                "xrstf\\Composer52": "lib/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Armin Ronacher",
-                "email": "armin.ronacher@active-4.com",
-                "role": "Project Founder"
-            },
-            {
-                "name": "Twig Team",
-                "homepage": "http://twig.sensiolabs.org/contributors",
-                "role": "Contributors"
-            }
-        ],
-        "description": "Twig, the flexible, fast, and secure template language for PHP",
-        "homepage": "http://twig.sensiolabs.org",
-        "keywords": [
-            "templating"
+            "MIT"
         ]
     },
     {
@@ -227,12 +197,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Roave/SecurityAdvisories.git",
-            "reference": "5560bd95c22a4ccf9404d8f176fceb4812a7398e"
+            "reference": "8b674956ac0ca9b4c90a98197f244cf81079e084"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/5560bd95c22a4ccf9404d8f176fceb4812a7398e",
-            "reference": "5560bd95c22a4ccf9404d8f176fceb4812a7398e",
+            "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/8b674956ac0ca9b4c90a98197f244cf81079e084",
+            "reference": "8b674956ac0ca9b4c90a98197f244cf81079e084",
             "shasum": ""
         },
         "conflict": {
@@ -273,7 +243,7 @@
             "namshi/jose": "<2.2",
             "oro/crm": ">=1.7,<1.7.4",
             "oro/platform": ">=1.7,<1.7.4",
-            "phpmailer/phpmailer": ">=5,<5.2.14",
+            "phpmailer/phpmailer": ">=5,<5.2.22",
             "pusher/pusher-php-server": "<2.2.1",
             "sabre/dav": ">=1.6,<1.6.99|>=1.7,<1.7.11|>=1.8,<1.8.9",
             "shopware/shopware": "<4.3.7|>=5,<5.1.5",
@@ -282,9 +252,10 @@
             "silverstripe/framework": ">=3,<3.3",
             "silverstripe/userforms": "<3",
             "simplesamlphp/saml2": ">=1.9,<1.9.1|>=1.10,<1.10.3|>=2.3,<2.3.3",
-            "simplesamlphp/simplesamlphp": "<1.14.10",
+            "simplesamlphp/simplesamlphp": "<1.14.11",
+            "simplesamlphp/simplesamlphp-module-infocard": "<1.0.1",
             "socalnick/scn-social-auth": "<1.15.2",
-            "swiftmailer/swiftmailer": ">=4,<4.99.99|>=5,<5.2.1",
+            "swiftmailer/swiftmailer": ">=4,<5.4.5",
             "symfony/dependency-injection": ">=2,<2.0.17",
             "symfony/form": ">=2.3,<2.3.35|>=2.4,<2.6.12|>=2.7,<2.7.7",
             "symfony/framework-bundle": ">=2,<2.3.18|>=2.4,<2.4.8|>=2.5,<2.5.2",
@@ -322,13 +293,13 @@
             "zendframework/zend-http": ">=2,<2.0.99|>=2.1,<2.1.99|>=2.3,<2.3.8|>=2.4,<2.4.1",
             "zendframework/zend-json": ">=2.1,<2.1.6|>=2.2,<2.2.6",
             "zendframework/zend-ldap": ">=2,<2.0.99|>=2.1,<2.1.99|>=2.2,<2.2.8|>=2.3,<2.3.3",
-            "zendframework/zend-mail": ">=2,<2.0.99|>=2.1,<2.1.99|>=2.3,<2.3.8|>=2.4,<2.4.1",
+            "zendframework/zend-mail": ">=2,<2.4.11|>=2.5,<2.7.2",
             "zendframework/zend-navigation": ">=2,<2.2.7|>=2.3,<2.3.1",
             "zendframework/zend-session": ">=2,<2.0.99|>=2.1,<2.1.99|>=2.2,<2.2.9|>=2.3,<2.3.4",
             "zendframework/zend-validator": ">=2.3,<2.3.6",
             "zendframework/zend-view": ">=2,<2.2.7|>=2.3,<2.3.1",
             "zendframework/zend-xmlrpc": ">=2.1,<2.1.6|>=2.2,<2.2.6",
-            "zendframework/zendframework": ">=2,<2.4.9|>=2.5,<2.5.1",
+            "zendframework/zendframework": ">=2,<2.4.11|>=2.5,<2.5.1",
             "zendframework/zendframework1": "<1.12.20",
             "zendframework/zendopenid": ">=2,<2.0.2",
             "zendframework/zendxml": ">=1,<1.0.1",
@@ -336,7 +307,7 @@
             "zfcampus/zf-apigility-doctrine": ">=1,<1.0.3",
             "zfr/zfr-oauth2-server-module": "<0.1.2"
         },
-        "time": "2016-12-06 13:29:26",
+        "time": "2017-01-09 15:59:17",
         "type": "metapackage",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -352,13 +323,76 @@
         "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it"
     },
     {
+        "name": "twig/twig",
+        "version": "v1.31.0",
+        "version_normalized": "1.31.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/twigphp/Twig.git",
+            "reference": "ddc9e3e20ee9c0b6908f401ac8353635b750eca7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/ddc9e3e20ee9c0b6908f401ac8353635b750eca7",
+            "reference": "ddc9e3e20ee9c0b6908f401ac8353635b750eca7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.7"
+        },
+        "require-dev": {
+            "symfony/debug": "~2.7",
+            "symfony/phpunit-bridge": "~3.2"
+        },
+        "time": "2017-01-11 19:36:15",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.31-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com",
+                "role": "Project Founder"
+            },
+            {
+                "name": "Twig Team",
+                "homepage": "http://twig.sensiolabs.org/contributors",
+                "role": "Contributors"
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "http://twig.sensiolabs.org",
+        "keywords": [
+            "templating"
+        ]
+    },
+    {
         "name": "wpml/commons",
-        "version": "1.0.3",
-        "version_normalized": "1.0.3.0",
+        "version": "1.0.4",
+        "version_normalized": "1.0.4.0",
         "source": {
             "type": "git",
             "url": "ssh://git@git.onthegosystems.com:10022/wpml/wpml-commons.git",
-            "reference": "c24b57e249762d505fc70e4716af2132605ab034"
+            "reference": "3451f31222d196c1320daf14b35a06bb46702fe9"
         },
         "require": {
             "php": ">=5.2.0",
@@ -368,7 +402,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.5"
         },
-        "time": "2016-12-08 07:26:19",
+        "time": "2016-12-08 16:57:33",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -406,39 +440,6 @@
         "keywords": [
             "auto-loader",
             "twig-extensions"
-        ]
-    },
-    {
-        "name": "xrstf/composer-php52",
-        "version": "v1.0.20",
-        "version_normalized": "1.0.20.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/composer-php52/composer-php52.git",
-            "reference": "bd41459d5e27df8d33057842b32377c39e97a5a8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/composer-php52/composer-php52/zipball/bd41459d5e27df8d33057842b32377c39e97a5a8",
-            "reference": "bd41459d5e27df8d33057842b32377c39e97a5a8",
-            "shasum": ""
-        },
-        "time": "2016-04-16 21:52:24",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-default": "1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "xrstf\\Composer52": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
         ]
     }
 ]

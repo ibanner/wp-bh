@@ -40,20 +40,6 @@ class WPML_Backend_Request extends WPML_Request {
 						 && $_GET[ 'page' ] === WPML_TM_FOLDER . '/menu/translations-queue.php' ) );
 	}
 
-	/**
-	 * Gets the source_language $_GET parameter from the HTTP_REFERER
-	 *
-	 * @return string|bool
-	 */
-	public function get_source_language_from_referer() {
-		$referer = isset( $_SERVER[ 'HTTP_REFERER' ] ) ? $_SERVER[ 'HTTP_REFERER' ] : '';
-		$query   = wpml_parse_url( $referer, PHP_URL_QUERY );
-		parse_str( $query, $query_parts );
-		$source_lang = isset( $query_parts[ 'source_lang' ] ) ? $query_parts[ 'source_lang' ] : false;
-
-		return $source_lang;
-	}
-
 	private function get_ajax_request_lang() {
 		$al   = $this->active_languages;
 		$lang = isset( $_POST['lang'] ) && in_array( $_POST['lang'], $al, true ) ? sanitize_text_field( $_POST['lang'] ) : null;

@@ -17,21 +17,24 @@ jQuery(document).ready(function () {
 		}
 	};
 
-	var hideNotice = function (noticeBox) {
+	var noticeAction = function (noticeBox, action) {
 		if (noticeBox) {
-			var noticeId = _.escape( noticeBox.data('id') );
+			var ajaxAction  = 'otgs-' + action + '-notice';
+			var noticeId    = _.escape( noticeBox.data('id') );
 			var noticeGroup = noticeBox.data('group');
+			var nonce       = noticeBox.data('nonce');
 
 			jQuery.ajax({
-										url:      ajaxurl,
-										type:     'POST',
-										data:     {
-											action:  'otgs-hide-notice',
-											'id':    noticeId,
-											'group': noticeGroup
-										},
-										dataType: 'json'
-									});
+				url:      ajaxurl,
+				type:     'POST',
+				data:     {
+					action:  ajaxAction,
+					'id':    noticeId,
+					'group': noticeGroup,
+					nonce:   nonce
+				},
+				dataType: 'json'
+			});
 		}
 	};
 
@@ -40,11 +43,18 @@ jQuery(document).ready(function () {
 		contentToMaximize.toggle();
 	};
 
-	otgsNotice.on('click', '.notice-dismiss, a.otgs-hide-link', function (event) {
+	otgsNotice.on('click', '.notice-dismiss, a.otgs-dismiss-link', function (event) {
 		preventDefaultEvent(event);
 
 		var noticeBox = jQuery(this).closest('.is-dismissible');
-		hideNotice(noticeBox);
+		noticeAction(noticeBox, 'dismiss');
+	});
+
+	otgsNotice.on('click', '.notice-hide, a.otgs-hide-link', function (event) {
+		preventDefaultEvent(event);
+
+		var noticeBox = jQuery(this).closest('.is-dismissible');
+		noticeAction(noticeBox, 'hide');
 	});
 
 	otgsNotice.on('click', '.otgs-notice-collapse-hide', function (event) {

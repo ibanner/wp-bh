@@ -105,15 +105,15 @@ class WPML_LS_Model_Build extends WPML_SP_User {
                 );
 
                 /* @deprecated Use 'wpml_ls_language_url' instead */
-                $ret[ $code ]['url'] = apply_filters( 'WPML_filter_link', $ret[ $code ]['url'], $code );
+                $ret[ $code ]['url'] = apply_filters( 'WPML_filter_link', $ret[ $code ]['url'], $data );
 
                 /**
                  * This filter allows to change the URL for each languages links in the switcher
                  *
                  * @param string $ret[ $code ]['url'] The language URL to be filtered
-                 * @param string $code                The language code
+                 * @param array  $data                The language information
                  */
-                $ret[ $code ]['url'] = apply_filters( 'wpml_ls_language_url', $ret[ $code ]['url'], $code );
+                $ret[ $code ]['url'] = apply_filters( 'wpml_ls_language_url', $ret[ $code ]['url'], $data );
 
                 $ret[ $code ]['url'] = $this->sitepress->get_wp_api()->is_admin() ? '#' : $ret[ $code ]['url'];
 

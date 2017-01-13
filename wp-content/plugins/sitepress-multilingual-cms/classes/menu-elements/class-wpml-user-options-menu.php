@@ -79,23 +79,29 @@ class WPML_User_Options_Menu {
 				<span class="description">
 					<?php esc_html_e( 'this will be your admin language and will also be used for translating comments.', 'sitepress' ); ?>
 				</span>
-				<br/>
-				<input type="checkbox" name="icl_admin_language_for_edit" id="icl_admin_language_for_edit" value="1" <?php checked( true, $use_admin_language_for_edit ); ?> />
-				&nbsp;<label for="icl_admin_language_for_edit"><?php esc_html_e( 'Set admin language as editing language.', 'sitepress' ); ?></label>
 			</td>
 		</tr>
 		<?php
-		$this->get_hidden_languages_options();
+		$this->get_hidden_languages_options( $use_admin_language_for_edit );
 
 		return ob_get_clean();
 	}
 
-	private function get_hidden_languages_options() {
+	private function get_hidden_languages_options( $use_admin_language_for_edit ) {
 		$wp_api = $this->sitepress->get_wp_api();
 		if ( $wp_api->current_user_can( 'translate' ) || $wp_api->current_user_can( 'manage_options' ) ) {
 			$hidden_languages  = $this->sitepress->get_setting( 'hidden_languages' );
 			$display_hidden_languages = $wp_api->get_user_meta( $this->current_user->ID, 'icl_show_hidden_languages', true );
 			?>
+
+			<tr class="user-language-wrap">
+				<th><?php esc_html_e( 'Editing language:', 'sitepress' ) ?></th>
+				<td>
+					<input type="checkbox" name="icl_admin_language_for_edit" id="icl_admin_language_for_edit" value="1" <?php checked( true, $use_admin_language_for_edit ); ?> />
+					&nbsp;<label for="icl_admin_language_for_edit"><?php esc_html_e( 'Set admin language as editing language.', 'sitepress' ); ?></label>
+				</td>
+			</tr>
+
 			<tr class="user-language-wrap">
 				<th><?php esc_html_e( 'Hidden languages:', 'sitepress' ) ?></th>
 				<td>

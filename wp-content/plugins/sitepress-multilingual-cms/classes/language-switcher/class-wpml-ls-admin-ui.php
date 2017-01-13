@@ -51,6 +51,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 		add_action( 'wpml_admin_after_languages_url_format', array( $this, 'after_languages_url_format_action' ) );
 		add_action( 'wpml_admin_after_wpml_love', array( $this, 'after_wpml_love_action' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts_action' ) );
+		add_action( 'admin_head', array( $this, 'admin_head_action' ) );
 		add_action( 'wp_ajax_wpml-ls-save-settings', array( $this, 'save_settings_action' ) );
 		add_action( 'wp_ajax_wpml-ls-update-preview', array( $this, 'update_preview_action' ) );
 	}
@@ -96,8 +97,11 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 			wp_localize_script( 'wpml-language-switcher-settings', 'wpml_language_switcher_admin', $js_vars );
 
 			$this->assets->wp_enqueue_scripts_action();
-			$this->inline_styles->wp_enqueue_scripts_action();
 		}
+	}
+
+	public function admin_head_action() {
+		$this->inline_styles->admin_output();
 	}
 
 	public function save_settings_action() {

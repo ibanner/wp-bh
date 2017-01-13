@@ -74,6 +74,9 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			add_action( 'wpml_show_package_language_ui', array( $this, 'show_language_selector' ), 10, 2 );
 			add_action( 'wpml_show_package_language_admin_bar', array( $this, 'show_admin_bar_language_selector' ), 10 , 2 );
 
+			add_action( 'wpml_start_string_package_registration', array( $this, 'start_string_package_registration_action' ), 10, 1 );
+			add_action( 'wpml_delete_unused_package_strings', array( $this, 'delete_unused_package_strings_action' ), 10, 1 );
+
 			/* WPML hooks */
 			add_filter( 'wpml_get_translatable_types', array( $this, 'get_translatable_types' ), 10, 1 );
 			add_filter( 'wpml_get_translatable_item', array( $this, 'get_translatable_item' ), 10, 2 );
@@ -96,6 +99,7 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			/* TM Hooks */
 			//This is called by \TranslationManagement::send_all_jobs - The hook is dynamically built.
 			add_action( 'wpml_tm_send_package_jobs', array( $this, 'send_jobs' ), 10, 5 );
+			add_filter( 'wpml_tm_dashboard_sql', array( $this, 'tm_dashboard_sql_filter' ), 10, 1 );
 
 			/* Translation editor hooks */
 			add_filter( 'wpml_tm_editor_string_name', array( $this, 'get_editor_string_name' ), 10, 2 );
@@ -796,5 +800,12 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 				do_action( 'wpml_tm_send_jobs', $jobs_data );
 			}
 		}
+	}
+
+	public function tm_dashboard_sql_filter( $sql ) {
+		global $wpdb;
+
+		$sql .= " AND i.element_id NOT IN ( SELECT ID FROM {$wpdb->prefix}icl_string_packages WHERE post_id IS NOT NULL )";
+		return $sql;
 	}
 }

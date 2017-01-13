@@ -31,7 +31,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 		$data                = $this->data;
 		/** @var stdClass $job */
 		$job                 = ! empty( $data['job_id'] ) ? $this->get_translation_job( $data['job_id'], true ) : null;
-		$needs_second_update = $job && ICL_TM_IN_PROGRESS === (int) $job->status && 1 === (int) $job->needs_update;
+		$needs_second_update = $job && $job->needs_update ? 1 : 0;
 		$original_post       = null;
 		$element_type_prefix = null;
 		if ( is_object( $job ) ) {
@@ -143,6 +143,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 					$_POST['trid']                   = $translation_status->trid();
 					$_POST['lang']                   = $job->language_code;
 					$_POST['skip_sitepress_actions'] = true;
+					$_POST['needs_second_update']    = $needs_second_update;
 
 					/* @deprecated Use `wpml_pre_save_pro_translation` instead */
 					$postarr = apply_filters( 'icl_pre_save_pro_translation', $postarr );
@@ -258,11 +259,6 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 					) );
 				}
 
-				$translation_status->update( array(
-					'status'       => ICL_TM_COMPLETE,
-					'needs_update' => $needs_second_update ? 1 : 0
-				) );
-
 				if ( $this->get_tm_setting( array( 'notification', 'completed' ) ) != ICL_TM_NOTIFICATION_NONE
 				     && $data['job_id']
 				) {
@@ -284,6 +280,11 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 
 				do_action( 'icl_pro_translation_completed', $new_post_id, $data['fields'], $job );
 				do_action( 'wpml_pro_translation_completed', $new_post_id, $data['fields'], $job );
+
+				$translation_status->update( array(
+					'status'       => ICL_TM_COMPLETE,
+					'needs_update' => $needs_second_update
+				) );
 
 				$this->translate_link_targets_in_posts->new_content();
 				$this->translate_link_targets_in_strings->new_content();
