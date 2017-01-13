@@ -219,7 +219,7 @@ class WPML_LS_Templates {
 			}
 		} else {
 			$search_path = $template_path . $this->ds . '*.' . $ext;
-			if ( count( glob( $search_path ) ) > 0 ) {
+			if ( glob( $search_path ) ) {
 				foreach ( glob( $search_path ) as $file ) {
 					$resources[] = $this->wpml_file->get_uri_from_path( $file );
 				}

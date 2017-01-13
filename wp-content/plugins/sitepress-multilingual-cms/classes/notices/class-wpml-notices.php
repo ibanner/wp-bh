@@ -1,14 +1,16 @@
 <?php
 
 /**
+ * @deprecated This file should be removed in WPML 3.8.0: it has been kept to allow error-less updates from pre 3.6.2.
+ * @since 3.6.2
  * @author OnTheGo Systems
  */
 class WPML_Notices {
 
 	const NOTICES_OPTION_KEY   = 'wpml_notices';
 	const DISMISSED_OPTION_KEY = '_wpml_dismissed_notices';
-
-	private $default_group_name = 'default';
+	const NONCE_NAME           = 'wpml-notices';
+	const DEFAULT_GROUP        = 'default';
 
 	/**
 	 * @var array
@@ -201,14 +203,34 @@ class WPML_Notices {
 		list( $notice_group, $notice_id ) = $this->parse_group_and_id();
 
 		if ( ! $notice_group ) {
-			$notice_group = $this->default_group_name;
+			$notice_group = self::DEFAULT_GROUP;
 		}
 
-		if ( $this->group_and_id_exist( $notice_group, $notice_id ) ) {
+		if ( $this->has_valid_nonce() && $this->group_and_id_exist( $notice_group, $notice_id ) ) {
 			$this->remove_notice( $notice_group, $notice_id );
 			wp_send_json_success( true );
 		}
+
 		wp_send_json_error( __( 'Notice does not exists.', 'sitepress' ) );
+	}
+
+	function wp_ajax_dismiss_notice() {
+		list( $notice_group, $notice_id ) = $this->parse_group_and_id();
+
+		if ( ! $notice_group ) {
+			$notice_group = self::DEFAULT_GROUP;
+		}
+
+		if ( $this->has_valid_nonce() && $this->group_and_id_exist( $notice_group, $notice_id ) ) {
+
+			$this->dismiss_notice( $notice_group, $notice_id, false );
+			$this->remove_notice( $notice_group, $notice_id );
+			$this->save_dismissed();
+
+			wp_send_json_success( true );
+		}
+
+		wp_send_json_error( __( 'Notice does not exist.', 'sitepress' ) );
 	}
 
 	function wp_ajax_dismiss_group() {
@@ -248,7 +270,7 @@ class WPML_Notices {
 	 */
 	private function has_valid_nonce() {
 		$nonce          = isset( $_POST['nonce'] ) ? $_POST['nonce'] : null;
-		return wp_verify_nonce( $nonce, $_POST['action'] );
+		return wp_verify_nonce( $nonce, self::NONCE_NAME );
 	}
 
 	private function group_and_id_exist( $group, $id ) {
@@ -297,6 +319,7 @@ class WPML_Notices {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'wp_ajax_otgs-hide-notice', array( $this, 'wp_ajax_hide_notice' ) );
+		add_action( 'wp_ajax_otgs-dismiss-notice', array( $this, 'wp_ajax_dismiss_notice' ) );
 		add_action( 'wp_ajax_otgs-dismiss-group', array( $this, 'wp_ajax_dismiss_group' ) );
 	}
 }

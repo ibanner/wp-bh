@@ -1,3 +1,23 @@
+# 3.6.2
+
+## Fixes
+* [wpmlcore-3809] Updating serialized CF that are set to 'copy' won't causes extra rows in the DB
+* [wpmlcore-3807] Notifications for translating a page builders can now be dismissed
+* [wpmlcore-3703] Language switcher settings are now accessible from mobiles
+* [wpmlcore-3803] Restored option for setting editing language as admin language
+* [wpmlcore-3772] Resolved issue with users not staying logged in across domains when using different domains per language
+* [wpmlcore-3789] Fixed compatibility issue with Yoast SEO and BuddyPress causing an "Uncaught exception"
+* [wpmlcore-3415] Fixed conflict of Language Switcher with multiple queried taxonomies in WooCommerce layered navigation
+* [wpmlcore-3738] Fixed issue where in some installations, the Language Switcher was missing from the secondary language menu 
+* [wpmlcore-3758] Fixes issue with Sticky header appearing in the Wizard when using Chrome
+* [wpmlcore-3130] Fixed issue where duplicated posts were having the "Needs update" status
+* [wpmlcore-3776] Fixed compatibility issue with Enfold causing "Warning: ILLEGAL STRING OFFSET 'LANGUAGE_CODE'"
+* [wpmlcore-3701] Clearing language switcher colors was not updating the preview
+* [wpmlcore-3770] Some menus were not available to assign a language switcher
+* [wpmlcore-3731] Resolved notice when passing an associative array of post types to `WP_Query`
+* [wpmlcore-3774] Prevent `Exception` when the cache directory is not created or not writable
+* [wpmlcore-3796] In the language switcher dialog, the save button was disabled after clicking on it with no selected slot
+
 # 3.6.1
 
 ## Fixes
@@ -5,6 +25,7 @@
 * [wpmlcore-3759] Fixed fatal error `Uncaught exception ‘InvalidArgumentException’`
 * [wpmlcore-3750] Default custom language switcher options are now initialized after the setup wizard
 * [wpmlcore-3765] Language switcher in menu is properly shown when the source language of the menu is different than the default language
+* [wpmlcore-3769] Fixes possible issues when `glob()` returns `false`
 
 ## Usability
 * [wpmlcore-3735] Disabled the Save button in language switcher settings after clicking it

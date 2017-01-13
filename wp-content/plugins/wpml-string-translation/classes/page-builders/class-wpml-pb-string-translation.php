@@ -25,7 +25,7 @@ class WPML_PB_String_Translation {
 		list( $package_id, $string_id, $language ) = $this->get_package_for_translated_string( $translated_string_id );
 		if ( $package_id ) {
 			$package = $this->factory->get_wpml_package( $package_id );
-			if ( $this->strategy->get_package_kind() === $package->kind ) {
+			if ( $package->post_id && $this->strategy->get_package_kind() === $package->kind ) {
 				$this->add_package_to_update_list( $package, $language );
 				if ( DEFINED( 'DOING_AJAX' ) && DOING_AJAX ) {
 					$this->save_translations_to_post();

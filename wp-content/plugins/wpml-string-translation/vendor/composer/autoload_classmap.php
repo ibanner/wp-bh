@@ -75,6 +75,7 @@ return array(
     'WPML_ST_ICL_Strings' => $baseDir . '/classes/records/class-wpml-st-icl-strings.php',
     'WPML_ST_Label_Translation' => $baseDir . '/classes/filters/class-wpml-st-label-translation.php',
     'WPML_ST_MO_Downloader' => $baseDir . '/inc/auto-download-locales.php',
+    'WPML_ST_Package_Cleanup' => $baseDir . '/classes/package-translation/class-wpml-st-package-cleanup.php',
     'WPML_ST_Page_Translation' => $baseDir . '/classes/filters/db-cache/class-wpml-st-page-translation.php',
     'WPML_ST_Page_Translations' => $baseDir . '/classes/filters/db-cache/class-wpml-st-page-translations.php',
     'WPML_ST_Page_Translations_Cached_Persist' => $baseDir . '/classes/filters/db-cache/persist/class-wpml-st-page-translations-cached-persist.php',

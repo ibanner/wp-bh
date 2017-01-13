@@ -308,4 +308,13 @@ abstract class WPML_Element_Translation extends WPML_WPDB_User {
 
 		return $res;
 	}
+
+	/**
+	 * @param $post_id
+	 *
+	 * @return bool
+	 */
+	public function is_a_duplicate( $post_id ) {
+		return (bool) get_post_meta( $post_id, '_icl_lang_duplicate_of', true ) ? true : false;
+	}
 }

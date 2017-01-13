@@ -207,7 +207,7 @@ class WPML_LS_Inline_Styles {
     }
 
     public function wp_enqueue_scripts_action() {
-        $this->enqueue_inline_styles();
+            $this->enqueue_inline_styles();
     }
 
     private function enqueue_inline_styles() {
@@ -230,8 +230,7 @@ class WPML_LS_Inline_Styles {
                 } else if ( $first_valid_handler ) {
                     wp_add_inline_style( $first_valid_handler, $css );
                 } else {
-                    $style_id = 'wpml-ls-inline-styles-' . $slot->group() . '-' . $slot->slug();
-                    echo '<style type="text/css" id="' . $style_id . '">' . $css . '</style>' . PHP_EOL;
+                    echo $this->get_raw_inline_style_tag( $slot, $css );
                 }
             }
 
@@ -268,6 +267,31 @@ class WPML_LS_Inline_Styles {
         }
 
         return $first_handler;
+    }
+
+    public function admin_output() {
+        if ( $this->settings->can_load_styles() ) {
+            $active_slots        = $this->settings->get_active_slots();
+
+            foreach ( $active_slots as $slot ) {
+                /* @var WPML_LS_Slot $slot */
+                $css = $this->get_slot_color_picker_css( $slot );
+                echo $this->get_raw_inline_style_tag( $slot, $css );
+            }
+
+            echo $this->get_additional_style();
+        }
+    }
+
+    /**
+     * @param WPML_LS_Slot $slot
+     * @param string       $css
+     *
+     * @return string
+     */
+    private function get_raw_inline_style_tag( $slot, $css ) {
+        $style_id = 'wpml-ls-inline-styles-' . $slot->group() . '-' . $slot->slug();
+        return '<style type="text/css" id="' . $style_id . '">' . $css . '</style>' . PHP_EOL;
     }
 
     /**

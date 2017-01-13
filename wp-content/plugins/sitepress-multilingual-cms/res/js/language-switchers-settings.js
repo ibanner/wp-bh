@@ -16,7 +16,8 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 		formAndDialogBox,
 		additionalCssStyleId = 'wpml-ls-inline-styles-additional-css',
 		dialogInlineStyleId  = 'wpml-ls-inline-styles-dialog',
-		currentItemSlug;
+		currentItemSlug,
+		slotInlineStylesBackup;
 
 	var init = function () {
 		form         	 = $('#wpml-ls-settings-form');
@@ -245,6 +246,7 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 	var attachDialogEvents = function() {
 		$('.js-wpml-ls-dialog-close').on('click', function(e) {
 			e.preventDefault();
+			restoreInlineStyles();
 			dialogBox.dialog('close');
 		});
 
@@ -446,12 +448,29 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 			updatePreview(subformClone);
 		}
 
+		prepareSlotInlineStyles(subform);
 		updateAvailableSlotsSelector(subformClone);
 		resetColorpickers(subformClone);
 		preselectSlot(subformClone);
 
 		dialogBox.dialog('option', 'title', subformClone.data('title'))
 			.dialog('open');
+	};
+
+	var prepareSlotInlineStyles = function(subform) {
+		var type = subform.data('item-type');
+		var slug = subform.data('item-slug');
+
+		slug = '%id%' === slug ? '__id__' : slug;
+		var inlineStyles = $('#wpml-ls-inline-styles-' + type + '-' + slug);
+		slotInlineStylesBackup = inlineStyles.detach();
+		updateDialogInlineStyle(slotInlineStylesBackup.clone());
+	};
+
+	var restoreInlineStyles = function() {
+		if ( slotInlineStylesBackup instanceof jQuery && slotInlineStylesBackup.length > 0) {
+			$('#' + additionalCssStyleId).before(slotInlineStylesBackup);
+		}
 	};
 
 	var replaceDialogSubformIntoOrigin = function(subform) {
@@ -556,6 +575,7 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 	var missingSlotWarning = function(subform) {
 		subform.find('.js-wpml-ls-available-slots').addClass('wpml-ls-required');
 		dialogBox.animate({scrollTop:0}, 300);
+		$('.js-wpml-ls-dialog-save').prop('disabled', false);
 	};
 
 	var updateRowOnItemSlotChange = function(row, itemType, slug) {
@@ -790,7 +810,14 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 		 $('#' + dialogInlineStyleId).remove();
 
 		if(styles) {
-			var newDialogStyle = $($.parseHTML(styles)).first();
+			var newDialogStyle;
+
+			if (styles instanceof jQuery) {
+				newDialogStyle = styles;
+			} else {
+				newDialogStyle = $($.parseHTML(styles)).first();
+			}
+
 			newDialogStyle.attr('id', dialogInlineStyleId);
 			$('#' + additionalCssStyleId).before(newDialogStyle);
 		}

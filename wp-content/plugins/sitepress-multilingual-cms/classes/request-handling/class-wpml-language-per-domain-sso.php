@@ -3,13 +3,14 @@
 /**
  * Class WPML_Language_Per_Domain_SSO
  */
-class WPML_Language_Per_Domain_SSO extends WPML_SP_User {
+class WPML_Language_Per_Domain_SSO {
 
 	const WPML_LANGUAGE_PER_DOMAIN_SSO_NONCE_ACTION = '_wpml_gen_iframe_content';
 	const WPML_LANGUAGE_PER_DOMAIN_SSO_CACHE_KEY = '_wpml_user_signed_nonce';
 	const WPML_LANGUAGE_PER_DOMAIN_SSO_TIMEOUT = MINUTE_IN_SECONDS;
 	private $site_url;
 	private $domains;
+	private $sitepress;
 
 	/**
 	 * WPML_Language_Per_Domain_SSO constructor.
@@ -17,9 +18,9 @@ class WPML_Language_Per_Domain_SSO extends WPML_SP_User {
 	 * @param SitePress $sitepress
 	 */
 	public function __construct( $sitepress ) {
-		parent::__construct( $sitepress );
-		$this->site_url = get_option( 'siteurl' );
-		$this->domains  = $this->get_domains();
+		$this->sitepress        = $sitepress;
+		$this->site_url         = $this->sitepress->convert_url( $this->sitepress->get_wp_api()->get_home_url(), $this->sitepress->get_default_language() );
+		$this->domains          = $this->get_domains();
 	}
 
 	public function init_hooks() {
@@ -58,15 +59,17 @@ class WPML_Language_Per_Domain_SSO extends WPML_SP_User {
 			<script>
 				function sendXHRHttpRequest( params ) {
 					var xhr = new XMLHttpRequest();
-					xhr.open('POST', "<?php echo admin_url( 'admin-ajax.php' ); ?>", true);
+					xhr.open( 'POST', "<?php echo admin_url( 'admin-ajax.php' ); ?>", true );
 					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhr.send(params);
 				}
 				window.onmessage = function(e) {
 					var payload = JSON.parse(e.data),
-						params = '';
+						params = '',
+						domains = '<?php echo json_encode( $this->domains ); ?>';
 
-					if (e.origin !== "<?php echo $this->site_url; ?>") {
+					domains = Object.values( JSON.parse( domains ) );
+					if ( -1 === domains.indexOf(e.origin) ) {
 						return;
 					}
 
@@ -189,9 +192,9 @@ class WPML_Language_Per_Domain_SSO extends WPML_SP_User {
 			$scheme = 'https://';
 		}
 
-		array_walk( $domains, function( &$domain, $key, $scheme ) {
+		foreach ( $domains as &$domain ) {
 			$domain = $scheme . $domain;
-		}, $scheme);
+		}
 
 		$domains[] = $this->site_url;
 		return $domains;

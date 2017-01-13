@@ -2,10 +2,10 @@
 /*
 Plugin Name: WPML Translation Management
 Plugin URI: https://wpml.org/
-Description: Add a complete translation process for WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-2-2-5/">WPML 2.2.5 release notes</a>
+Description: Add a complete translation process for WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-2-2-6/">WPML 2.2.6 release notes</a>
 Author: OnTheGoSystems
 Author URI: http://www.onthegosystems.com/
-Version: 2.2.5
+Version: 2.2.6
 Plugin Slug: wpml-translation-management
 */
 
@@ -26,7 +26,7 @@ if ( defined( 'ICL_SITEPRESS_VERSION' ) && is_array( $bundle ) ) {
 	}
 }
 
-define( 'WPML_TM_VERSION', '2.2.5' );
+define( 'WPML_TM_VERSION', '2.2.6' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -75,6 +75,11 @@ function wpml_tm_load_ui() {
 			new WPML_TM_Troubleshooting_Reset_Pro_Trans_Config( $sitepress, $TranslationProxy, $wpml_wp_api, $wpdb );
 			new WPML_TM_Troubleshooting_Clear_TS( $wpml_wp_api );
 			new WPML_TM_Promotions( $wpml_wp_api );
+
+			if ( defined( 'DOING_AJAX' ) ) {
+				$wpml_tm_options_ajax = new WPML_TM_Options_Ajax( $sitepress );
+				$wpml_tm_options_ajax->ajax_hooks();
+			}
 		}
 	}
 }

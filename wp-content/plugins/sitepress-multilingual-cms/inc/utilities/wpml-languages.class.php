@@ -347,8 +347,9 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 			$taxonomy = 'post_tag';
 			$term_id  = $wp_query->get( 'tag_id' );
 		} elseif ( $wp_query->is_tax() ) {
-			$taxonomy = $wp_query->get( 'taxonomy' );
-			$term_id  = $wp_query->get_queried_object_id();
+			$term     = $wp_query->get_queried_object();
+			$taxonomy = $term->taxonomy;
+			$term_id  = $term->term_id;
 		}
 
 		return array( $taxonomy, $term_id );

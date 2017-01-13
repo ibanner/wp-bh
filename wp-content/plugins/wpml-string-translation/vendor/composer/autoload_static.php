@@ -4,35 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9ffae65f3fc7003fd8b956c13c3d67d4
+class ComposerStaticInit0e76a46eae3bc3ca6fd50aeeb6362810
 {
-    public static $prefixLengthsPsr4 = array (
-        'C' => 
-        array (
-            'Composer\\Installers\\' => 20,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'Composer\\Installers\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
-        ),
-    );
-
     public static $prefixesPsr0 = array (
         'x' => 
         array (
             'xrstf\\Composer52' => 
             array (
                 0 => __DIR__ . '/..' . '/xrstf/composer-php52/lib',
-            ),
-        ),
-        'T' => 
-        array (
-            'Twig_' => 
-            array (
-                0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
     );
@@ -107,6 +86,7 @@ class ComposerStaticInit9ffae65f3fc7003fd8b956c13c3d67d4
         'WPML_ST_ICL_Strings' => __DIR__ . '/../..' . '/classes/records/class-wpml-st-icl-strings.php',
         'WPML_ST_Label_Translation' => __DIR__ . '/../..' . '/classes/filters/class-wpml-st-label-translation.php',
         'WPML_ST_MO_Downloader' => __DIR__ . '/../..' . '/inc/auto-download-locales.php',
+        'WPML_ST_Package_Cleanup' => __DIR__ . '/../..' . '/classes/package-translation/class-wpml-st-package-cleanup.php',
         'WPML_ST_Page_Translation' => __DIR__ . '/../..' . '/classes/filters/db-cache/class-wpml-st-page-translation.php',
         'WPML_ST_Page_Translations' => __DIR__ . '/../..' . '/classes/filters/db-cache/class-wpml-st-page-translations.php',
         'WPML_ST_Page_Translations_Cached_Persist' => __DIR__ . '/../..' . '/classes/filters/db-cache/persist/class-wpml-st-page-translations-cached-persist.php',
@@ -150,10 +130,8 @@ class ComposerStaticInit9ffae65f3fc7003fd8b956c13c3d67d4
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9ffae65f3fc7003fd8b956c13c3d67d4::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9ffae65f3fc7003fd8b956c13c3d67d4::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit9ffae65f3fc7003fd8b956c13c3d67d4::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit9ffae65f3fc7003fd8b956c13c3d67d4::$classMap;
+            $loader->prefixesPsr0 = ComposerStaticInit0e76a46eae3bc3ca6fd50aeeb6362810::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit0e76a46eae3bc3ca6fd50aeeb6362810::$classMap;
 
         }, null, ClassLoader::class);
     }

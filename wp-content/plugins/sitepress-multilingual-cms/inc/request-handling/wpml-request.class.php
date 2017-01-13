@@ -120,6 +120,8 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 			$this->cookie->set_cookie( $cookie_name, $lang_code, time() + DAY_IN_SECONDS, $cookie_path, $cookie_domain );
 		}
 		$_COOKIE[ $cookie_name ] = $lang_code;
+
+		do_action( 'wpml_language_cookie_added', $lang_code );
 	}
 
 	/**
@@ -209,5 +211,18 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 
 			$this->set_referer_url_cookie();
 		}
+	}
+
+	/**
+	 * Gets the source_language $_GET parameter from the HTTP_REFERER
+	 * @return string|bool
+	 */
+	public function get_source_language_from_referer() {
+		$referer = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
+		$query   = wpml_parse_url( $referer, PHP_URL_QUERY );
+		parse_str( $query, $query_parts );
+		$source_lang = isset( $query_parts['source_lang'] ) ? $query_parts['source_lang'] : false;
+
+		return $source_lang;
 	}
 }

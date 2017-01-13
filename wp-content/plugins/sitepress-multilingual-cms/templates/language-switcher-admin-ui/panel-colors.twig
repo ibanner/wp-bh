@@ -1,12 +1,20 @@
-{% set options = [
+{% set wrapper_options =  [
         {'label': strings.color_picker.background,         'name': 'background',         'schemes': ['normal'],          'default': '' },
         {'label': strings.color_picker.border,             'name': 'border',             'schemes': ['normal'],          'default': '' },
+    ]
+%}
+
+{% set options = [
         {'label': strings.color_picker.font_current,       'name': 'font_current',       'schemes': ['normal', 'hover'], 'default': '' },
         {'label': strings.color_picker.background_current, 'name': 'background_current', 'schemes': ['normal', 'hover'], 'default': '' },
         {'label': strings.color_picker.font_other,         'name': 'font_other',         'schemes': ['normal', 'hover'], 'default': '' },
         {'label': strings.color_picker.background_other,   'name': 'background_other',   'schemes': ['normal', 'hover'], 'default': '' },
     ]
 %}
+
+{% if slot_type != 'menus' %}
+    {% set options = wrapper_options|merge(options) %}
+{% endif %}
 
 {% set css_class = css_class|default( 'js-wpml-ls-colorpicker' ) %}
 
