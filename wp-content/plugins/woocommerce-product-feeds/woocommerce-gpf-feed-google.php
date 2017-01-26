@@ -289,7 +289,7 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 				$weight_units = $this->store_info->weight_units;
 			}
 			if ( $weight && is_numeric( $weight ) && $weight > 0 ) {
-				echo "      <g:shipping_weight>$weight $weight_units</g:shipping_weight>";
+				echo "      <g:shipping_weight>$weight $weight_units</g:shipping_weight>\n";
 			}
 		}
 		echo "    </item>\n";

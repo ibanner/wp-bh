@@ -302,7 +302,7 @@ class WoocommerceGpfCommon {
 	 * @access public
 	 * @param array $array The list of fields to be filtered
 	 * @param string $feed_format The feed format that should have its fields maintained
-	 * @return array The list of fields filtered to only contain elements that apply to the selectedd $feed_format
+	 * @return array The list of fields filtered to only contain elements that apply to the selected $feed_format
 	 */
 	private function remove_other_feeds( $array, $feed_format ) {
 		if ( empty( $array ) || ! is_array( $array ) ) {
@@ -341,7 +341,7 @@ class WoocommerceGpfCommon {
 			$product_settings = $this->remove_blanks( $product_settings );
 			$values = array_merge( $values, $product_settings );
 		}
-		if ( 'all' != $feed_format ) {
+		if ( 'all' !== $feed_format ) {
 			$values = $this->remove_other_feeds( $values, $feed_format );
 		}
 		$values = $this->limit_max_values( $values );
@@ -513,12 +513,12 @@ class WoocommerceGpfCommon {
 		global $woocommerce_gpf_frontend;
 
 		$result = array();
-		$product = $woocommerce_gpf_frontend->load_product( $product_id );
-		if ( $product->product_type == 'variation' ) {
+		$product = wc_get_product( $product_id );
+		if ( $product->product_type === 'variation' ) {
 			// Get the attributes.
 			$attributes = $product->get_variation_attributes();
 			// If the requested taxonomy is used as an attribute, grab it's value for this variation.
-			if ( isset( $attributes[ 'attribute_' . $value ] ) ) {
+			if ( ! empty( $attributes[ 'attribute_' . $value ] ) ) {
 				$terms = get_terms( array(
 					'taxonomy' => $value,
 					'slug'     => $attributes[ 'attribute_' . $value ],
@@ -531,12 +531,12 @@ class WoocommerceGpfCommon {
 			} else {
 				// Otherwise grab the values to use direct from the term relationships.
 				$terms = get_the_terms( $product_id, $value );
-				if ( ! empty( $terms ) ) {
+				if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 					$result = wp_list_pluck( $terms, 'name' );
 				} elseif ( ! empty( $product->parent->id ) ) {
 					// Couldn't find it against the variation - grab the parent product value.
 					$terms = get_the_terms( $product->parent->id, $value );
-					if ( ! empty( $terms ) ) {
+					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 						$result = wp_list_pluck( $terms, 'name' );
 					}
 				}
@@ -544,7 +544,7 @@ class WoocommerceGpfCommon {
 		} else {
 			// Get the term(s) tagged against the main product.
 			$terms = get_the_terms( $product_id, $value );
-			if ( ! empty( $terms ) ) {
+			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 				$result = wp_list_pluck( $terms, 'name' );
 			}
 		}
@@ -563,7 +563,7 @@ class WoocommerceGpfCommon {
 
 		global $woocommerce_gpf_frontend;
 
-		$product = $woocommerce_gpf_frontend->load_product( $product_id );
+		$product = wc_get_product( $product_id );
 		if ( ! $product ) {
 			return array();
 		}

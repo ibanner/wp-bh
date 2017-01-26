@@ -1,5 +1,16 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2017.01.20 - version 7.0.1
+* Fix issue where partial (chunked) feed settings were not always applied.
+
+2017.01.17 - version 7.0.0
+* Internal rewrites, including some performance improvements
+* Allow the shipping dimension unit types to be overridden
+* Allow feed to be generated for a specific category / set of categories via URL string
+Avoid warnings if taxonomies are removed after being set to be used for preopulation
+* WooCommerce 2.7 related updates. Take advantage of new APIs for fetching products if available.
+* Adds on-page structured data when running on WooCommerce 2.7+ (sku, itemCondition, gtin and mpn)
+
 2016.10.31 - version 6.8.1
 * Change plugin URL to WooCommerce domain
 * Ensure plugin links always go to WooCommerce, not WordPress.org

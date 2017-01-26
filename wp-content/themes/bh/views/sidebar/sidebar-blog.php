@@ -24,7 +24,7 @@
 	
 	// get recent posts
 	$args = array(
-		'numberposts'		=> 5,
+		'numberposts'		=> 15,
 		'post_status'		=> 'publish',
 		'suppress_filters'	=> 0
 	);

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-12-17 23:12:21+0000\n"
+"PO-Revision-Date: 2017-01-18 07:38:13+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3068,6 +3068,10 @@ msgstr "תשלום בהמחאה"
 msgid "Accept payments via PayPal using account balance or credit card."
 msgstr "קבל תשלומים בעזרת פייפאל באמצעות יתרת חשבון או כרטיס אשראי."
 
+#: includes/admin/class-wc-admin-setup-wizard.php:583
+msgid "A modern and robust way to accept credit card payments on your store. %sLearn more about Stripe%s."
+msgstr "שיטה מודרנית ויציבה לקבל תשלומים בכרטיס אשראי באתר. %sמידע נוסף על סטרייפ%s."
+
 #: includes/admin/class-wc-admin-setup-wizard.php:574
 msgid "PayPal Express Checkout"
 msgstr "פייפאל אקספרסס"
@@ -3076,6 +3080,10 @@ msgstr "פייפאל אקספרסס"
 #: includes/admin/class-wc-admin-setup-wizard.php:576
 msgid "Safe and secure payments using credit cards or your customer's PayPal account. %sLearn more about PayPal%s."
 msgstr "תשלומים מאובטחים בכרטיס אשראי או בפייפאל. %sמידע נוסף על פייפאל%s."
+
+#: includes/admin/class-wc-admin-setup-wizard.php:416
+msgid "If you will be charging sales tax, or shipping physical goods to customers, you can enable these below. This is optional and can be changed later."
+msgstr "אם יגבה מע\"מ ויבוצעו משלוחים ללקוחות, ניתן להגדיר זאת כאן. ניתן לשנות הגדרות אלה בשלב מאוחר יותר."
 
 #: includes/admin/class-wc-admin-post-types.php:2287
 msgid "Ready to start selling something awesome?"
@@ -12582,6 +12590,10 @@ msgstr "קבצים זמניים נוקו"
 msgid "Learn more about getting started"
 msgstr "מידע נוסף אודות המדריך למשתמש"
 
+#: includes/admin/class-wc-admin-setup-wizard.php:774
+msgid "Get eCommerce advice in your inbox"
+msgstr "קבל עצות מסחר אלקטרוני לתיבת הדואר שלך"
+
 #: includes/admin/class-wc-admin-setup-wizard.php:773
 msgid "Watch the WC 101 video walkthroughs"
 msgstr "צפו בווקומרס 101 סירטוני הדרכה"
@@ -12643,15 +12655,15 @@ msgstr "מדינה"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:436
 msgid "I will enter prices exclusive of tax"
-msgstr "אני אכנס מחירים כולל מיסים"
+msgstr "אני אכנס מחירים כולל מע\"מ"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:435
 msgid "I will enter prices inclusive of tax"
-msgstr "אני אכנס מחירים לא כולל מיסים"
+msgstr "אני אכנס מחירים לא כולל מע\"מ"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:433
 msgid "How will you enter product prices?"
-msgstr "כיצד תוכל להיכנס מחירי מוצרים?"
+msgstr "כיצד יוזנו מחירי מוצרים?"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:429
 msgid "Yes, I will be charging sales tax"
@@ -12671,7 +12683,7 @@ msgstr "האם אתה מתכנן לשלוח את המוצרים?"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:414
 msgid "Shipping &amp; Tax Setup"
-msgstr "הגדרות משלוח ומיסוי"
+msgstr "הגדרות משלוח ומע\"מ"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:367
 #: includes/admin/settings/class-wc-settings-products.php:451
@@ -12701,7 +12713,7 @@ msgstr "m"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:360
 msgid "Which unit should be used for product dimensions?"
-msgstr "איזו יחידה אמור לשמש עבור מידות המוצר?"
+msgstr "איזו יחידה תשמש למידות של המוצר?"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:355
 #: includes/admin/settings/class-wc-settings-products.php:433
@@ -12784,7 +12796,7 @@ msgstr "היכן ממוקמת החנות?"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:294
 msgid "Store Locale Setup"
-msgstr "הגדרות מקומיות של החנות"
+msgstr "הגדרות מיקום של החנות"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:258
 #: includes/admin/class-wc-admin-setup-wizard.php:374
@@ -12799,6 +12811,10 @@ msgstr "דלג על שלב זה"
 #: includes/admin/class-wc-admin-setup-wizard.php:687
 msgid "Continue"
 msgstr "המשך"
+
+#: includes/admin/class-wc-admin-setup-wizard.php:248
+msgid "Registered customers will be able to manage their account details and view past orders on this page."
+msgstr "לקוחות רשומים יוכלו לנהל את החשבון שלהם ולראות הזמנות קודמות שלהם בעמוד זה."
 
 #: includes/admin/class-wc-admin-setup-wizard.php:246
 #: includes/class-wc-install.php:310
@@ -12871,7 +12887,7 @@ msgstr "תשלומים"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:74
 msgid "Shipping &amp; Tax"
-msgstr "משלוח &amp; מַס"
+msgstr "משלוחים ומע\"מ"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:69
 msgid "Store Locale"
@@ -14910,7 +14926,7 @@ msgstr "פריט %1$s וריאציה #%2$s הופחתה במלאי מ-%3$s ל-%4
 msgid "Order status changed from %1$s to %2$s."
 msgstr "מצב ההזמנה שונה ממצב %1$s למצב %2$s."
 
-#. #-#-#-#-#  tmp-woocommerce.pot (WooCommerce 2.6.12)  #-#-#-#-#
+#. #-#-#-#-#  tmp-woocommerce.pot (WooCommerce 2.6.13)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: includes/abstracts/abstract-wc-order.php:2320
 #: includes/abstracts/abstract-wc-order.php:2321
