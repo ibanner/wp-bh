@@ -415,13 +415,15 @@ class WoocommerceGpfAdmin {
 			if ( isset( $fieldinfo['can_prepopulate'] ) && ! empty( $this->settings['product_prepopulate'][ $key ] ) ) {
 				$prepopulate_vars             = array();
 				$prepopulate_vars['label']    = $this->get_prepopulate_label( $this->settings['product_prepopulate'][ $key ] );
-				$variables['field_defaults'] .= $this->template_loader->get_template_with_variables(
-					'woo-gpf',
-					'product-meta-prepopulate-text',
-					$prepopulate_vars
-				);
+				if ( ! empty( $prepopulate_vars['label'] ) ) {
+					$variables['field_defaults'] .= $this->template_loader->get_template_with_variables(
+						'woo-gpf',
+						'product-meta-prepopulate-text',
+						$prepopulate_vars
+					);
+				}
 			}
-			if ( isset ( $fieldinfo['can_default'] ) && ! empty( $product_defaults[ $key ] ) ) {
+			if ( isset( $fieldinfo['can_default'] ) && ! empty( $product_defaults[ $key ] ) ) {
 				$variables['field_defaults'] .= $this->template_loader->get_template_with_variables(
 					'woo-gpf',
 					'product-meta-default-text',
@@ -1084,7 +1086,9 @@ class WoocommerceGpfAdmin {
 		switch ( $type ) {
 			case 'tax':
 				$taxonomy = get_taxonomy( $value );
-				$descriptor = sprintf( __( '<em>%s</em> taxonomy', 'woo_gpf' ), $taxonomy->labels->singular_name );
+				if ( $taxonomy ) {
+					$descriptor = sprintf( __( '<em>%s</em> taxonomy', 'woo_gpf' ), $taxonomy->labels->singular_name );
+				}
 				break;
 			case 'field':
 				$label = $this->get_label_descriptor_for_field( $value );

@@ -4,7 +4,7 @@
  * Plugin URI: https://www.woocommerce.com/products/google-product-feed/
  * Description: WooCommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
  * Author: Lee Willis
- * Version: 6.8.1
+ * Version: 7.0.1
  * Author URI: http://www.leewillis.co.uk/
  * License: GPLv3
  *
@@ -33,7 +33,7 @@ if ( is_admin() ) {
 
 
 /**
- * Bodge ffor WPEngine.com users - provide the feed at a URL that doesn't
+ * Bodge for WPEngine.com users - provide the feed at a URL that doesn't
  * rely on query arguments as WPEngine don't support URLs with query args
  * if the requestor is a googlebot. #broken
  */
@@ -42,9 +42,12 @@ function woocommerce_gpf_endpoints() {
 	add_rewrite_tag( '%woocommerce_gpf%', '([^/]+)' );
 	add_rewrite_tag( '%gpf_start%', '([0-9]{1,})' );
 	add_rewrite_tag( '%gpf_limit%', '([0-9]{1,})' );
+	add_rewrite_tag( '%gpf_categories%', '^(\d+(,\d+)*)?$' );
+	add_rewrite_rule( 'woocommerce_gpf/([^/]+)/gpf_start/([0-9]{1,})/gpf_limit/([0-9]{1,})/gpf_categories/(\d+(,\d+)*)', 'index.php?woocommerce_gpf=$matches[1]&gpf_start=$matches[2]&gpf_limit=$matches[3]&gpf_categories=$matches[4]', 'top' );
 	add_rewrite_rule( 'woocommerce_gpf/([^/]+)/gpf_start/([0-9]{1,})/gpf_limit/([0-9]{1,})', 'index.php?woocommerce_gpf=$matches[1]&gpf_start=$matches[2]&gpf_limit=$matches[3]', 'top' );
+	add_rewrite_rule( 'woocommerce_gpf/([^/]+)/gpf_start/([0-9]{1,})', 'index.php?woocommerce_gpf=$matches[1]&gpf_start=$matches[2]', 'top' );
+	add_rewrite_rule( 'woocommerce_gpf/([^/]+)/gpf_categories/(\d+(,\d+)*)', 'index.php?woocommerce_gpf=$matches[1]&gpf_categories=$matches[2]', 'top' );
 	add_rewrite_rule( 'woocommerce_gpf/([^/]+)', 'index.php?woocommerce_gpf=$matches[1]', 'top' );
-
 }
 add_action( 'init', 'woocommerce_gpf_endpoints' );
 
@@ -76,11 +79,24 @@ function woocommerce_gpf_includes() {
 		} else if ( 'bing' === $wp_query->query_vars['woocommerce_gpf'] ) {
 			require_once 'woocommerce-gpf-feed-bing.php';
 		}
+		require_once( 'woocommerce-gpf-feed-item.php' );
 		require_once( 'woocommerce-gpf-frontend.php' );
 	}
 
 }
 add_action( 'template_redirect', 'woocommerce_gpf_includes' );
+
+/**
+ * Include/invoke relevant classes if we're doing product structured data.
+ */
+function woocommerce_gpf_structured_data() {
+	global $woocommerce_gpf_structured_data;
+	require_once( 'woocommerce-gpf-structured-data.php' );
+	$woocommerce_gpf_structured_data = new woocommerce_gpf_structured_data();
+}
+// Loads at priority 5 to ensure it runs before WooCommerce's hook.
+add_action( 'woocommerce_single_product_summary', 'woocommerce_gpf_structured_data', 5 );
+
 
 /**
  * Determine if this is a feed URL.
