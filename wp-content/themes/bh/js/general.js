@@ -14,7 +14,7 @@ var $ = jQuery,
 			active_photos			: 0,
 			photos_columns			: 3,
 			active_column			: 0,
-			photos_more_interval	: 6,
+			photos_more_interval	: 12,
 
 			window_width			: 0,									// client window width - used to maintain window resize events (int)
 			breakpoint				: '',									// CSS media query breakpoint (int)
@@ -105,7 +105,7 @@ var $ = jQuery,
 			});
 
 			// Gallery
-			if ( _BH_gallery_images ) {
+			if ( typeof _BH_gallery_images !== 'undefined' && _BH_gallery_images.length > 0 ) {
 				// Init gallery
 				BH_general.params.gallery_images = $.parseJSON( _BH_gallery_images );
 				BH_general.lazyLoad(0, BH_general.params.photos_more_interval);
@@ -533,10 +533,10 @@ var $ = jQuery,
 
 			if ( index == BH_general.params.gallery_images.length ) {
 				// hide more btn
-				$('.gallery-layout-content .load-more').addClass('disabled');
+				$('.gallery-layout-content .load-more').css('display', 'none');
 			} else {
 				// expose more btn
-				$('.gallery-layout-content .load-more').removeClass('disabled');
+				$('.gallery-layout-content .load-more').css('display', 'block');
 			}
 
 			// Update active photos

@@ -1427,6 +1427,8 @@ body > header {
 		/************/
 
 		.gallery-layout-content {
+			margin-bottom: 30px;
+
 			.gallery {
 				.gallery-col {
 					.gallery-item {
@@ -1450,8 +1452,7 @@ body > header {
 			}
 
 			button.load-more {
-				margin: 30px auto;
-				display: block;
+				margin: 30px auto 45px;
 			}
 		}
 
