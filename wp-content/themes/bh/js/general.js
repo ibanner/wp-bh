@@ -8,6 +8,14 @@ var $ = jQuery,
 
 			page					: '',									// current page (string)
 			woocommerce				: false,								// woocommerce page (true/false)
+
+			// gallery params
+			gallery_images			: '',
+			active_photos			: 0,
+			photos_columns			: 3,
+			active_column			: 0,
+			photos_more_interval	: 6,
+
 			window_width			: 0,									// client window width - used to maintain window resize events (int)
 			breakpoint				: '',									// CSS media query breakpoint (int)
 			prev_breakpoint			: '',									// Previous media query breakpoint (int)
@@ -95,6 +103,21 @@ var $ = jQuery,
 					$(this).attr('wmode', 'Opaque');
 				}
 			});
+
+			// Gallery
+			if ( _BH_gallery_images ) {
+				// Init gallery
+				BH_general.params.gallery_images = $.parseJSON( _BH_gallery_images );
+				BH_general.lazyLoad(0, BH_general.params.photos_more_interval);
+
+				// Bind click event to gallery 'load more' btn
+				$('.gallery-layout-content .load-more').bind('click', function() {
+					BH_general.lazyLoad(BH_general.params.active_photos, BH_general.params.photos_more_interval);
+				});
+
+				// PhotoSwipe
+				BH_general.initPhotoSwipeFromDOM('.gallery');
+			}
 
 			// footer menu
 			BH_general.footer_menu();
@@ -478,6 +501,168 @@ var $ = jQuery,
 			
 		},
 		
+		/**
+		 * lazyLoad
+		 *
+		 * Load gallery images
+		 *
+		 * @param	offset (int)
+		 * @param	amount (int)
+		 * @return	N/A
+		 */
+		lazyLoad : function (offset, amount) {
+
+			var index, j;
+
+			for (index=offset, j=0 ; j<amount && BH_general.params.gallery_images.length>index ; index++, j++) {
+				// expose photo
+				var photoItem =
+					'<figure class="gallery-item" data-index="' + index + '" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">' +
+						'<a href="' + BH_general.params.gallery_images[index]['url'] + '" itemprop="contentUrl">' +
+							'<img src="' + BH_general.params.gallery_images[index]['url'] + '" itemprop="thumbnail" alt="' + BH_general.params.gallery_images[index]['alt'] + '" />' +
+						'</a>' +
+						'<figcaption itemprop="caption description">' + BH_general.params.gallery_images[index]['title'] + '<br><span>' + BH_general.params.gallery_images[index]['caption'] +  '</span></figcaption>' +
+					'</figure>'
+					;
+
+				$(photoItem).appendTo( $('.gallery .col' + BH_general.params.active_column%BH_general.params.photos_columns) );
+
+				// Update active column
+				BH_general.params.active_column = BH_general.params.active_column%BH_general.params.photos_columns + 1;
+			}
+
+			if ( index == BH_general.params.gallery_images.length ) {
+				// hide more btn
+				$('.gallery-layout-content .load-more').addClass('disabled');
+			} else {
+				// expose more btn
+				$('.gallery-layout-content .load-more').removeClass('disabled');
+			}
+
+			// Update active photos
+			BH_general.params.active_photos += j;
+
+		},
+
+		/**
+		 * initPhotoSwipeFromDOM
+		 *
+		 * PhotoSwipe init
+		 *
+		 * @param	gallerySelector (string)
+		 * @return	N/A
+		 */
+		initPhotoSwipeFromDOM : function(gallerySelector) {
+
+			// parse slide data (url, title, size ...) from DOM elements
+			// (children of gallerySelector)
+			var parseThumbnailElements = function(el) {
+				var galleryCols = el.children('.gallery-col'),
+					items = [];
+
+				$(galleryCols).each(function() {
+					var galleryColItems = $(this).children('.gallery-item');
+
+					$(galleryColItems).each(function() {
+						var index = $(this).attr('data-index'),
+							link = $(this).children('a'),
+							caption = $(this).children('figcaption'),
+							img = link.children('img');
+
+						// create slide object
+						var item = {
+							src: link.attr('href'),
+							w: img[0].naturalWidth,
+							h: img[0].naturalHeight,
+							msrc: img.attr('src')
+						};
+
+						if (caption) {
+							item.title = caption.html();
+						}
+
+						item.el = $(this)[0]; // save link to element for getThumbBoundsFn
+
+						items[index] = item;
+					});
+				});
+
+				return items;
+			};
+
+			// triggers when user clicks on thumbnail
+			var onThumbnailsClick = function(e) {
+				e = e || window.event;
+				e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+				var eTarget = e.target || e.srcElement;
+
+				// find root element of slide
+				var clickedListItem = $(eTarget).parent().parent();
+
+				if(!clickedListItem) {
+					return;
+				}
+
+				// find index of clicked item
+				var clickedGallery = clickedListItem.parent().parent(),
+					index = clickedListItem.attr('data-index');
+
+				if(clickedGallery && index >= 0) {
+					// open PhotoSwipe if valid index found
+					openPhotoSwipe( index, clickedGallery );
+				}
+
+				return false;
+			};
+
+			var openPhotoSwipe = function(index, galleryElement) {
+				var pswpElement = document.querySelectorAll('.pswp')[0],
+					gallery,
+					options,
+					items;
+
+				items = parseThumbnailElements(galleryElement);
+
+				// define options (if needed)
+				options = {
+
+					// define gallery index (for URL)
+					galleryUID: galleryElement.attr('data-pswp-uid'),
+
+					getThumbBoundsFn: function(index) {
+						// See Options -> getThumbBoundsFn section of documentation for more info
+						var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+						pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+						rect = thumbnail.getBoundingClientRect(); 
+
+						return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+					},
+
+					index: parseInt(index, 10)
+
+				};
+
+				// exit if index not found
+				if( isNaN(options.index) ) {
+					return;
+				}
+
+				// Pass data to PhotoSwipe and initialize it
+				gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+				gallery.init();
+			};
+
+			// loop through all gallery elements and bind events
+			var galleryElements = document.querySelectorAll( gallerySelector );
+
+			for(var i = 0, l = galleryElements.length; i < l; i++) {
+				galleryElements[i].setAttribute('data-pswp-uid', i+1);
+				galleryElements[i].onclick = onThumbnailsClick;
+			}
+
+		},
+
 		/**
 		 * footer_menu
 		 *

@@ -1422,6 +1422,39 @@ body > header {
 			}
 		}
 
+		/************/
+		/* excerpts */
+		/************/
+
+		.gallery-layout-content {
+			.gallery {
+				.gallery-col {
+					.gallery-item {
+						img {
+							margin-bottom: 15px;
+							width: 100%;
+							height: auto;
+						}
+
+						&:hover {
+							img {
+								@include opacity(0.7);
+							}
+						}
+
+						figcaption {
+							display: none;
+						}
+					}
+				}
+			}
+
+			button.load-more {
+				margin: 30px auto;
+				display: block;
+			}
+		}
+
 		/***************************/
 		/* password protected form */
 		/***************************/
@@ -4644,6 +4677,33 @@ footer {
 	
 	table {
 		border-collapse: separate;
+	}
+}
+
+/**************/
+/* PhotoSwipe */
+/**************/
+
+.pswp {
+	.pswp__bg {
+		opacity: 0.85 !important;
+	}
+
+	.pswp__caption {
+		.pswp__caption__center {
+			max-width: 90% !important;
+			font-size: 24px;
+			line-height: 30px;
+			text-align: center !important;
+
+			span {
+				font-size: 16px;
+				display: block;
+				margin-top: 10px;
+				line-height: normal;
+
+			}
+		}
 	}
 }
 

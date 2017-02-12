@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $wpml_lang = function_exists('icl_object_id') ? ICL_LANGUAGE_CODE : '';
 
+global $gallery_exist;
+
 ?>
 
 <script>
@@ -25,19 +27,25 @@ $wpml_lang = function_exists('icl_object_id') ? ICL_LANGUAGE_CODE : '';
 <?php
 	
 	get_template_part('views/footer/footer');
-	
+
+	if ( $gallery_exist ) {
+		get_template_part('views/footer/footer-photoswipe');
+		wp_enqueue_script('photoswipe');
+		wp_enqueue_script('photoswipe-ui-default');
+	}
+
 	wp_enqueue_script('bootstrap');
 	wp_enqueue_script('countdown');
 	wp_enqueue_script('general');
 	wp_enqueue_script('ticketnet');
 	
-	if ( is_cf7_installed() && ! is_home() && ! is_front_page() ) :
+	if ( is_cf7_installed() && ! is_home() && ! is_front_page() ) {
 		wp_enqueue_script('forms');
 		wp_enqueue_script('state-handler');
 		wp_enqueue_script('item-handler');
-	endif;
+	}
 		
-	if ( is_page() ) :
+	if ( is_page() ) {
 		$page_template = basename( get_page_template() );
 		switch ($page_template) :
 			case 'main.php' :
@@ -55,34 +63,34 @@ $wpml_lang = function_exists('icl_object_id') ? ICL_LANGUAGE_CODE : '';
 			case 'blog.php' :
 				wp_enqueue_script('blog');
 		endswitch;
-	endif;
+	}
 	
-	if ( is_category() || is_singular('post') ) :
+	if ( is_category() || is_singular('post') ) {
 		wp_enqueue_script('blog');
-	endif;
+	}
 	
-	if ( is_tax('event_category') ) :
+	if ( is_tax('event_category') ) {
 		wp_enqueue_script('jquery-ui');
-	endif;
+	}
 	
-	if ( is_tax('event_category') ) :
+	if ( is_tax('event_category') ) {
 		wp_enqueue_script('event');
-	endif;
+	}
 	
-	if ( is_product() ) :
+	if ( is_product() ) {
 		wp_enqueue_script('elevateZoom');
-	endif;
+	}
 	
-	if ( is_singular('post') ) :
+	if ( is_singular('post') ) {
 		get_template_part('views/blog/add-this');
-	endif;
+	}
 	
-	if ( is_woocommerce() ) :
+	if ( is_woocommerce() ) {
 		wp_enqueue_script('cycle2');
 		wp_enqueue_script('cycle2-carousel');
 		wp_enqueue_script('cycle2-swipe');
 		wp_enqueue_script('cycle2-ios6fix');
-	endif;
+	}
 	
 	wp_footer();
 

@@ -43,9 +43,19 @@
 				/************/
 				
 				get_template_part('views/page/content/contacts');
+
+				break;
+				
+			case 'gallery' :
+			
+				/***********/
+				/* gallery */
+				/***********/
+				
+				get_template_part('views/page/content/gallery');
 				
 		endswitch;
-		
+
 	endwhile;
 
 ?>

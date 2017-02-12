@@ -29,11 +29,13 @@ function BH_wp_scripts_n_styles() {
 	/**
 	 * styles
 	 */
-	wp_enqueue_style ( 'bootstrap',					CSS_DIR . '/libs/bootstrap.min.css',				array(),													VERSION );
-	wp_register_style( 'bootstrap-rtl',				CSS_DIR . '/libs/bootstrap-rtl.min.css',			array('bootstrap'),											VERSION );
-	wp_register_style( 'jquery-ui',					CSS_DIR . '/libs/jquery-ui.css',					array('bootstrap'),											VERSION );
-	wp_enqueue_style ( 'font-awesome',		 		CSS_DIR . '/libs/font-awesome.min.css',				array(),													VERSION );
-	
+	wp_enqueue_style ( 'bootstrap',					CSS_DIR . '/libs/bootstrap.min.css',							array(),										VERSION );
+	wp_register_style( 'bootstrap-rtl',				CSS_DIR . '/libs/bootstrap-rtl.min.css',						array('bootstrap'),								VERSION );
+	wp_register_style( 'jquery-ui',					CSS_DIR . '/libs/jquery-ui.css',								array('bootstrap'),								VERSION );
+	wp_enqueue_style ( 'font-awesome',		 		CSS_DIR . '/libs/font-awesome.min.css',							array(),										VERSION );
+	wp_register_style( 'photoswipe',				CSS_DIR . '/libs/PhotoSwipe/photoswipe.css',					array(),										VERSION );
+	wp_register_style( 'photoswipe-default-skin',	CSS_DIR . '/libs/PhotoSwipe/default-skin/default-skin.css',		array(),										VERSION );
+
 	wp_enqueue_style ( 'general',					CSS_DIR . '/general.css',							array('bootstrap'),											VERSION );
 	wp_register_style( 'main',						CSS_DIR . '/main.css',								array('bootstrap'),											VERSION );
 	wp_register_style( 'event',						CSS_DIR . '/event.css',								array('bootstrap'),											VERSION );
@@ -88,7 +90,9 @@ function BH_wp_scripts_n_styles() {
 	wp_register_script( 'rcSubmit',					JS_DIR . '/libs/rcSubmit.js',									    array('angular'),						                    VERSION,	true );
 	wp_register_script( 'ticketnet',				JS_DIR . '/libs/ticketnet.js',										array('jquery'),											VERSION,	true );
 	wp_register_script( 'elevateZoom',				JS_DIR . '/libs/jquery.elevateZoom-3.0.8.min.js',					array('jquery'),											VERSION,	true );
-	
+	wp_register_script( 'photoswipe',				JS_DIR . '/libs/PhotoSwipe/photoswipe.min.js',						array('jquery'),											VERSION,	true );
+	wp_register_script( 'photoswipe-ui-default',	JS_DIR . '/libs/PhotoSwipe/photoswipe-ui-default.min.js',			array('jquery', 'photoswipe'),								VERSION,	true );
+
 	wp_register_script( 'general',					JS_DIR . '/min/general.min.js',										array('jquery', 'bootstrap'),								VERSION,	true );
 	wp_register_script( 'main',						JS_DIR . '/min/main.min.js',										array('cycle2-carousel', 'cycle2-swipe', 'cycle2-ios6fix'),	VERSION,	true );
 	wp_register_script( 'bh-analytics',				JS_DIR . '/bh-analytics.js',										array('jquery'),											VERSION,	true );
