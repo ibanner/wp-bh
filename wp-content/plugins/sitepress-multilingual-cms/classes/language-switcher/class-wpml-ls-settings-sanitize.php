@@ -8,6 +8,7 @@ class WPML_LS_Settings_Sanitize {
     private function get_global_settings_keys() {
         return array(
             'migrated'                        => array( 'type' => 'int', 'force_missing_to' => 1 ),
+            'converted_menu_ids'              => array( 'type' => 'int', 'force_missing_to' => 0 ),
             'languages_order'                 => array( 'type' => 'array' ),
             'link_empty'                      => array( 'type' => 'int' ),
             'additional_css'                  => array( 'type' => 'string' ),

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.7.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-01-18 06:46:00+0000\n"
+"PO-Revision-Date: 2017-01-26 15:39:45+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,169 +40,171 @@ msgstr ","
 msgid "This address is used for admin purposes, like new user notification."
 msgstr "כתובת זו משתמש לצרכי ניהול, למשל התראות על משתמשים חדשים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:809
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:101
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:832
 msgid "Unique identifier for the term."
 msgstr "מזהה ייחודיי למונח זה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:100
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:116
 msgid "Required to be true, as revisions do not support trashing."
 msgstr "חייב להיות true כיוון שלא ניתן להעביר גרסאות לפח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:121
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:127
 msgid "Required to be true, as terms do not support trashing."
 msgstr "חייב להיות true כיוון שלא ניתן להעביר מונחים לפח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:219
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:225
 msgid "Whether or not the post type should have children."
 msgstr "האם סוג התוכן יכול להכיל ילדים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:268
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:53
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:274
 msgid "An alphanumeric identifier for the taxonomy."
 msgstr "מזהה אלפאנומרי עבור הטקסונומיה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:237
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:53
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:243
 msgid "An alphanumeric identifier for the post type."
 msgstr "מזהה אלפאנומרי עבור סוג התוכן."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:225
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:231
 msgid "Human-readable labels for the post type for various contexts."
 msgstr "התוויות של סוג התוכן בהקשרים שונים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:213
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:219
 msgid "A human-readable description of the post type."
 msgstr "תיאור של סוג התוכן."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:207
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:213
 msgid "All capabilities used by the post type."
 msgstr "כל היכולות המשתמשות את סוג התוכן."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:252
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:258
 msgid "REST base route for the post type."
 msgstr "נתיב REST שישמש כתובת בסיס לסוגי תוכן."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1330
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1349
 msgid "Limit response to comments published before a given ISO8601 compliant date."
 msgstr "הגבלת תוצאות לתגובות שפורסמו לפני תאריך מסויים בתקן ISO8601."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1301
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1320
 msgid "Limit response to comments published after a given ISO8601 compliant date."
 msgstr "הגבלת תוצאות לתגובות שפורסמו אחרי תאריך מסויים בתקן ISO8601."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:287
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:53
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:293
 msgid "An alphanumeric identifier for the status."
 msgstr "מזהה אלפאנומרי עבור הסטטוס."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1261
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1291
 msgid "Avatar URLs for the user."
 msgstr "כתובת צלמית-משתמש של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1214
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1244
 msgid "Roles assigned to the user."
 msgstr "תפקידים המשוייכים למשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1185
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1215
 msgid "Locale for the user."
 msgstr "השפה של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1167
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1197
 msgid "URL of the user."
 msgstr "הכתובת של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1173
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1203
 msgid "Description of the user."
 msgstr "התיאור של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1191
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1221
 msgid "The nickname for the user."
 msgstr "הכינוי של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1178
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1208
 msgid "Author URL of the user."
 msgstr "כתובת המחבר של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1152
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1182
 msgid "Last name for the user."
 msgstr "שם המשפחה של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1144
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1174
 msgid "First name for the user."
 msgstr "השם הפרטי של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1136
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1166
 msgid "Display name for the user."
 msgstr "השם של המשתמש שיוצג."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1127
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1157
 msgid "Login name for the user."
 msgstr "שם המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:706
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:740
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:738
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:770
 msgid "The user cannot be deleted."
 msgstr "לא ניתן למחוק משתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:472
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:496
 msgid "Error creating new user."
 msgstr "שגיאה ביצירת משתמש חדש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:863
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:886
 msgid "The parent term ID."
 msgstr "המספר של מונח האב."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:826
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:849
 msgid "URL of the term."
 msgstr "הכתובת של המונח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:833
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:856
 msgid "HTML title for the term."
 msgstr "כותרת HTML למונח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:377
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:484
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:406
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:512
 msgid "Parent term doesn't exist."
 msgstr "מונח אב לא קיים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:582
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:605
 msgid "The term cannot be deleted."
 msgstr "לא ניתן למחוק את המונח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:371
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:478
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:400
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:506
 msgid "Can not set parent term, taxonomy is not hierarchical."
 msgstr "לא ניתן להגדיר מונח אב, הטקסונומיה איננה היררכית."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:324
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:456
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:545
-msgid "Term doesn't exist."
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:305
+msgid "Term does not exist."
 msgstr "מונח לא קיים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:280
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:286
 msgid "Types associated with the taxonomy."
 msgstr "סוגים הקשורים לטקסונומיה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:262
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:268
 msgid "The title for the taxonomy."
 msgstr "הכותרת של הטקסונומיה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:231
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:237
 msgid "The title for the post type."
 msgstr "הכותרת של סוג התוכן."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:126
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:132
 msgid "Cannot view post type."
 msgstr "לא ניתן לראות תכנים מסוג זה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:128
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:180
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:134
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:186
 msgid "Invalid status."
 msgstr "סטטוס לא תקין."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:251
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:257
 msgid "The title for the status."
 msgstr "הכותרת של הסטטוס."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:134
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:140
 msgid "Cannot view status."
 msgstr "לא ניתן לראות סטטוס."
 
@@ -258,11 +260,11 @@ msgstr "[%1$s] הפעלת %2$s"
 msgid "RSS Error:"
 msgstr "שגיאת RSS:"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:471
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:495
 msgid "Cannot create a comment with that type."
 msgstr "לא ניתן ליצור תגובה מהסוג הזה."
 
-#: wp-includes/post.php:3131 wp-includes/rest-api.php:1043
+#: wp-includes/post.php:3131 wp-includes/rest-api.php:1051
 msgid "Invalid date."
 msgstr "תאריך לא תקין."
 
@@ -270,17 +272,17 @@ msgstr "תאריך לא תקין."
 msgid "Invalid page template."
 msgstr "תבנית עמוד לא תקינה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:576
-#: wp-includes/rest-api.php:1053
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:606
+#: wp-includes/rest-api.php:1061
 msgid "Invalid email address."
 msgstr "כתובת אימייל לא תקינה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:486
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:687
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:510
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:710
 msgid "Invalid comment content."
 msgstr "תוכן תגובה לא תקין."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:584
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:614
 msgid "Invalid slug."
 msgstr "מזהה לא תקין."
 
@@ -346,63 +348,63 @@ msgctxt "Theme starter content"
 msgid "Meta"
 msgstr "מטה"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:658
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:681
 msgid "Sorry, you are not allowed to change the comment type."
 msgstr "אין לך הרשאות לשנות את סוג התגובה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:184
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:190
 msgid "Sorry, you are not allowed to order users by this parameter."
 msgstr "אין לך הרשאות לסדר משתמשים לפי פרמטר זה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:176
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:182
 msgid "Sorry, you are not allowed to filter users by role."
 msgstr "אין לך הרשאות לסנן משתמשים לפי תפקיד."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1034
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1044
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1064
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1074
 msgid "Sorry, you are not allowed to give users that role."
 msgstr "אין לך הרשאות לתת למשתמשים את התפקיד הזה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:437
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:441
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:461
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:465
 msgid "Sorry, you are not allowed to create a comment on this post."
 msgstr "אין לך הרשאות ליצור תגובה בפוסט זה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:428
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:433
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:452
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:457
 msgid "Sorry, you are not allowed to create this comment without a post."
 msgstr "אין לך הרשאות ליצור תגובה זו ללא פוסט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:327
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:360
 msgid "Sorry, you are not allowed to read this comment."
 msgstr "אין לך הרשאות לקרוא תגובה זו."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:120
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:331
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:445
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:126
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:364
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:469
 msgid "Sorry, you are not allowed to read the post for this comment."
 msgstr "אין לך הרשאות לקרוא את הפוסט של התגובה הזו."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:126
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:164
 msgid "Sorry, you are not allowed to view revisions of this post."
 msgstr "אין לך הרשאות לראות גרסאות של הפוסט הזה."
 
 #. translators: %s: request parameter
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:404
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:413
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:422
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:428
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:437
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:446
 msgid "Sorry, you are not allowed to edit '%s' for comments."
 msgstr "אין לך הרשאות לעדכן '%s' של תגובות."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:755
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:776
 msgid "Sorry, you are not allowed to delete this comment."
 msgstr "אין לך הרשאות למחוק תגובה זו."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:353
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:382
 msgid "Sorry, you are not allowed to create new terms."
 msgstr "אין לך הרשאות ליצור משתמשים חדשים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:122
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:128
 msgid "Sorry, you are not allowed to read comments without a post."
 msgstr "אין לך הרשאות לקרוא תגובות ללא פוסטים."
 
@@ -431,8 +433,8 @@ msgctxt "Theme starter content"
 msgid "LinkedIn"
 msgstr "לינקדאין"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:474
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:611
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:505
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:645
 msgid "Sorry, you are not allowed to assign the provided terms."
 msgstr "אין לך הרשאות לשייך מונח זה."
 
@@ -444,8 +446,8 @@ msgid "Sorry, you are not allowed to edit the %s custom field."
 msgstr "אין לך הרשאות לערוך את השדה המיוחד %s."
 
 #: wp-includes/class-wp-xmlrpc-server.php:1273
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:466
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:607
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:497
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:641
 msgid "Sorry, you are not allowed to make posts sticky."
 msgstr "אין לך הרשאות להפוך פוסטים לדביקים."
 
@@ -459,8 +461,8 @@ msgctxt "Theme starter content"
 msgid "This may be a good place to introduce yourself and your site or include some credits."
 msgstr "זה מקום מצויין להציג את עצמך ואת האתר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:94
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:129
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:100
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:135
 msgid "Reassign the deleted user's posts and links to this user ID."
 msgstr "העברת תכנים של משתמש שנמחק אל המשתמש הזה."
 
@@ -580,20 +582,20 @@ msgctxt "Theme starter content"
 msgid "Find Us"
 msgstr "תמצאו אותנו"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1100
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1130
 msgid "Passwords cannot contain the \"\\\" character."
 msgstr "סיסמא לא יכולה להכיל את התו \"\\\"."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1067
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1097
 msgid "Username contains invalid characters."
 msgstr "שם המשתמש מכיל תווים שאינם תקינים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:161
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:455
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:167
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:479
 msgid "Invalid user parameter(s)."
 msgstr "פרמטר משתמש לא תקין."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1096
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1126
 msgid "Passwords cannot be empty."
 msgstr "סיסמה לא יכולה להיות ריקה."
 
@@ -615,7 +617,7 @@ msgstr "תצוגת מסמך"
 msgid "Header Media"
 msgstr "כותרת מדיה"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:289
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:295
 msgid "REST base route for the taxonomy."
 msgstr "נתיב REST שישמש כתובת בסיס לטקונומיות."
 
@@ -665,23 +667,23 @@ msgstr "לכווץ תפריט ראשי"
 msgid "Or, enter a YouTube URL:"
 msgstr "או, הזן קישור יוטיוב:"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:232
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:302
 msgid "Revisions do not support trashing. Set force=true to delete."
 msgstr "לא ניתן להעביר גרסאות לפח. יש להגדיר force=true כדי למחוק."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:570
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:595
 msgid "Terms do not support trashing. Set force=true to delete."
 msgstr "לא ניתן להעביר מונחים לפח. יש להגדיר force=true כדי למחוק."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:801
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:820
 msgid "The comment does not support trashing. Set force=true to delete."
 msgstr "לא ניתן להעביר תגובות לפח. יש להגדיר force=true כדי למחוק."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:782
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:815
 msgid "The post does not support trashing. Set force=true to delete."
 msgstr "לא ניתן להעביר פוסטים לפח. יש להגדיר force=true כדי למחוק."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:715
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:751
 msgid "Users do not support trashing. Set force=true to delete."
 msgstr "לא ניתן להעביר משתמשים לפח. יש להגדיר force=true כדי למחוק."
 
@@ -690,16 +692,16 @@ msgid "Invalid JSON body passed."
 msgstr "תוכן ה-JSON לא תקין."
 
 #. translators: %s: taxonomy name
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2136
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2174
 msgid "Limit result set to all items except those that have the specified term assigned in the %s taxonomy."
 msgstr "הגבלת תוצאות לפריטים שאינם מכילים מונח מסויים בטקסונומיה %s."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2110
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2148
 msgid "Limit result set to posts assigned one or more statuses."
 msgstr "הגבלת תוצאות לפוסטים המשוייכים לסטטוס אחד או יותר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:531
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:695
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:555
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:718
 msgid "Comment field exceeds maximum length allowed."
 msgstr "שדה התגובה חורג מהאורך המירבי המותר."
 
@@ -707,11 +709,11 @@ msgstr "שדה התגובה חורג מהאורך המירבי המותר."
 msgid "Display Location"
 msgstr "תצוגת מיקום"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:243
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:249
 msgid "Taxonomies associated with post type."
 msgstr "טקסונומיות המשוייכות לפוסט מסוג זה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2100
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2138
 msgid "Limit result set to posts with one or more specific slugs."
 msgstr "הגבלת תוצאות לפוסטים עם מזהה מסויים אחד או יותר."
 
@@ -760,47 +762,47 @@ msgid "Item selected."
 msgstr "פריט נבחר."
 
 #. translators: %s: IP address
-#: wp-includes/rest-api.php:1059
+#: wp-includes/rest-api.php:1067
 msgid "%s is not a valid IP address."
 msgstr "%s היא לא כתובת IP תקינה."
 
 #. translators: 1: parameter, 2: minimum number, 3: maximum number
-#: wp-includes/rest-api.php:1101
+#: wp-includes/rest-api.php:1109
 msgid "%1$s must be between %2$d (inclusive) and %3$d (inclusive)"
 msgstr "%1$s צריך להיות בין %2$d (כולל) ו-%3$d (כולל)"
 
 #. translators: 1: parameter, 2: minimum number, 3: maximum number
-#: wp-includes/rest-api.php:1096
+#: wp-includes/rest-api.php:1104
 msgid "%1$s must be between %2$d (exclusive) and %3$d (inclusive)"
 msgstr "%1$s צריך להיות בין %2$d (לא כולל) ו-%3$d (כולל)"
 
 #. translators: 1: parameter, 2: minimum number, 3: maximum number
-#: wp-includes/rest-api.php:1091
+#: wp-includes/rest-api.php:1099
 msgid "%1$s must be between %2$d (inclusive) and %3$d (exclusive)"
 msgstr "%1$s צריך להיות בין %2$d (כולל) ו-%3$d (לא כולל)"
 
 #. translators: 1: parameter, 2: minimum number, 3: maximum number
-#: wp-includes/rest-api.php:1086
+#: wp-includes/rest-api.php:1094
 msgid "%1$s must be between %2$d (exclusive) and %3$d (exclusive)"
 msgstr "%1$s צריך להיות בין %2$d (לא כולל) ו-%3$d (לא כולל)"
 
 #. translators: 1: parameter, 2: maximum number
-#: wp-includes/rest-api.php:1080
+#: wp-includes/rest-api.php:1088
 msgid "%1$s must be less than %2$d (inclusive)"
 msgstr "%1$s צריך להיות קטן מ-%2$d (כולל)"
 
 #. translators: 1: parameter, 2: maximum number
-#: wp-includes/rest-api.php:1077
+#: wp-includes/rest-api.php:1085
 msgid "%1$s must be less than %2$d (exclusive)"
 msgstr "%1$s צריך להיות קטן מ-%2$d (לא כולל)"
 
 #. translators: 1: parameter, 2: minimum number
-#: wp-includes/rest-api.php:1072
+#: wp-includes/rest-api.php:1080
 msgid "%1$s must be greater than %2$d (inclusive)"
 msgstr "%1$s צריך להיות גדול מ-%2$d (כולל)"
 
 #. translators: 1: parameter, 2: minimum number
-#: wp-includes/rest-api.php:1069
+#: wp-includes/rest-api.php:1077
 msgid "%1$s must be greater than %2$d (exclusive)"
 msgstr "%1$s צריך להיות גדול מ-%2$d (לא כולל)"
 
@@ -809,22 +811,22 @@ msgid "Meta fields."
 msgstr "שדות מיוחדים."
 
 #. translators: 1: parameter, 2: type name
-#: wp-includes/rest-api.php:1003 wp-includes/rest-api.php:1021
-#: wp-includes/rest-api.php:1026 wp-includes/rest-api.php:1031
-#: wp-includes/rest-api.php:1036
+#: wp-includes/rest-api.php:1011 wp-includes/rest-api.php:1029
+#: wp-includes/rest-api.php:1034 wp-includes/rest-api.php:1039
+#: wp-includes/rest-api.php:1044
 msgid "%1$s is not of type %2$s."
 msgstr "%1$s אינו מסוג %2$s."
 
 #. translators: 1: parameter, 2: list of valid values
-#: wp-includes/rest-api.php:1015
+#: wp-includes/rest-api.php:1023
 msgid "%1$s is not one of %2$s."
 msgstr "%1$s אינו אחד מ-%2$s."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1237
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1267
 msgid "Any extra capabilities assigned to the user."
 msgstr "יכולות נוספות המשוייכות למשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1338
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1368
 msgid "Limit result set to users matching at least one specific role provided. Accepts csv list or single role."
 msgstr "הגבלת תוצאות למשתמשים בעלי לפחות תפקיד אחד שהוזן. מקבל רשימת CSV או תפקיד בודד."
 
@@ -838,97 +840,97 @@ msgstr "לא ניתן למחוק שדות מיוחדים ממסד הנתונים
 msgid "Could not update meta value in database."
 msgstr "לא ניתן לעדכן שדות מיוחדים במסד הנתונים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1160
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1190
 msgid "The email address for the user."
 msgstr "כתובת האימייל של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1207
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1237
 msgid "Registration date for the user."
 msgstr "תאריך רישום של המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1222
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1252
 msgid "Password for the user (never included)."
 msgstr "הסיסמה של המשתמש (לעולם לא כלול)."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1231
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1261
 msgid "All capabilities assigned to the user."
 msgstr "כל היכולות המשוייכות למשתמש."
 
 #. translators: %s: role key
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1020
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1050
 msgid "The role %s does not exist."
 msgstr "התפקיד %s לא קיים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:580
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:610
 msgid "Username isn't editable."
 msgstr "שם המשתמש אינו ניתן לעריכה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:688
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:720
 msgid "Sorry, you are not allowed to delete this user."
 msgstr "אין לך הרשאות למחוק משתמש זה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:726
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:756
 msgid "Invalid user ID for reassignment."
 msgstr "מספר משתמש לא תקין."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:396
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:420
 msgid "You are not currently logged in."
 msgstr "אינך מחובר עכשיו."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:552
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:578
 msgid "Sorry, you are not allowed to edit roles of this user."
 msgstr "אין לך הרשאות לערוך תפקידים למשתמש זה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:436
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:460
 msgid "Cannot create existing user."
 msgstr "לא ניתן ליצור משתמש קיים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:939
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:962
 msgid "Whether to hide terms not assigned to any posts."
 msgstr "האם להסתיר מונחים שלא משוייכים לאף פוסט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:924
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:947
 msgid "Sort collection by term attribute."
 msgstr "מיין לפי התכונות של המונח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:850
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:873
 msgid "Type attribution for the term."
 msgstr "סוגי תוכונות של המונח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:958
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:981
 msgid "Limit result set to terms with a specific slug."
 msgstr "הגבלת תוצאות למונחים עם מזהה יחודי."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:952
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:975
 msgid "Limit result set to terms assigned to a specific post."
 msgstr "הגבלת תוצאות למונחים המשוייכים לפוסט מסויים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:946
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:969
 msgid "Limit result set to terms assigned to a specific parent."
 msgstr "הגבלת תוצאות למונחים המשוייכים לאב מסויים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:842
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:865
 msgid "An alphanumeric identifier for the term unique to its type."
 msgstr "מזהה אלפאנומרי עבור המונח היחודי מסוגו."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1121
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:70
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1151
 msgid "Unique identifier for the user."
 msgstr "מזהה יחודי למשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:815
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:838
 msgid "Number of published posts for the term."
 msgstr "מספר הפוסטים שפורסמו למונח זה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:821
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:844
 msgid "HTML description of the term."
 msgstr "תיאור HTML של המונח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:187
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:212
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:179
 msgid "Invalid revision ID."
 msgstr "מספר גרסה לא תקין."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2202
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2240
 msgid "Status is forbidden."
 msgstr "סטטוס אסור לשימוש."
 
@@ -936,272 +938,272 @@ msgstr "סטטוס אסור לשימוש."
 msgid "The %s property has an invalid stored value, and cannot be updated to null."
 msgstr "התכונה %s מכילה ערך לא תקין, ולא ניתן לעדכן אותה ל-null."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2147
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2185
 msgid "Limit result set to items that are sticky."
 msgstr "הגבלת תוצאות לפריטים דביקים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:311
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:317
 msgid "Limit results to taxonomies associated with a specific post type."
 msgstr "הגבלת תוצאות לטקסונומיות המשוייכות לסוגי פוסטים מסויימים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:90
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:125
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:96
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:131
 msgid "Required to be true, as users do not support trashing."
 msgstr "חייב להיות true כיוון שלא ניתן להעביר משתמשים לפח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:274
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:280
 msgid "Whether or not the term cloud should be displayed."
 msgstr "האם להציג ענן תגיות בטקסונומיה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1333
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1363
 msgid "Limit result set to users with a specific slug."
 msgstr "הגבלת תוצאות למשתמשים עם מזהה יחודי."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2082
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2120
 msgid "Limit result set to those of particular parent IDs."
 msgstr "הגבלת תוצאות לאלה התואמים למספר פוסט אב מסויים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2043
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2081
 msgid "Limit result set to posts with a specific menu_order value."
 msgstr "הגבלת תוצאות לפוסטים עם ערך menu_order מסויים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2000
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2038
 msgid "Limit result set to posts assigned to specific authors."
 msgstr "הגבלת תוצאות לפוסטים המשוייכים למחבר מסויים."
 
 #. translators: %s: taxonomy name
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2126
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2164
 msgid "Limit result set to all items that have the specified term assigned in the %s taxonomy."
 msgstr "הגבלת תוצאות לפריטים בעלי מונח מסויים בטקסונומיה %s."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2090
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2128
 msgid "Limit result set to all items except those of a particular parent ID."
 msgstr "הגבלת תוצאות לפריטים שאינם משוייכים למספר פוסט אב מסויים."
 
 #. translators: %s: taxonomy name
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1967
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2005
 msgid "The terms assigned to the object in the %s taxonomy."
 msgstr "המונחים המשוייכים לאובייקט בטקסונומיה \"%s\"."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1354
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2049
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:908
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1306
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1373
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2087
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:931
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1336
 msgid "Offset the result set by a specific number of items."
 msgstr "לדלג על מספר מסויים של פריטים בתוצאה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2008
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2046
 msgid "Ensure result set excludes posts assigned to specific authors."
 msgstr "יש לוודא כי התוצאות לא כוללות פוסטים המשוייכים למחברים מסויימים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1933
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1971
 msgid "The format for the object."
 msgstr "הפורמט של האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1949
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1987
 msgid "Whether or not the object should be treated as sticky."
 msgstr "האם להתייחס לאובייקט כדביק."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1884
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1922
 msgid "Whether the excerpt is protected with a password."
 msgstr "האם התקציר מוגן בסיסמה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1903
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1941
 msgid "Whether or not comments are open on the object."
 msgstr "האם האובייקט פתוח לתגובות."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1909
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1947
 msgid "Whether or not the object can be pinged."
 msgstr "האם האובייקט פתוח לפינגים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1956
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1994
 msgid "The theme file to use to display the object."
 msgstr "קובץ בתבנית שצריך להשתמש בו כדי להציג את האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1732
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1770
 msgid "A password to protect access to the content and excerpt."
 msgstr "סיסמה להגנת הגישה לתוכן ולתיאור."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1918
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1956
 msgid "The order of the object in relation to other object of its type."
 msgstr "סדר האובייקטים ביחס לאובייקטים אחרים מסוגו."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1878
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1916
 msgid "HTML excerpt for the object, transformed for display."
 msgstr "תקציר HTML של האובייקט, ששונה לצורך תצוגה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1895
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1933
 msgid "The ID of the featured media for the object."
 msgstr "ה-ID של התמונה הראשית."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1803
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1841
 msgid "The title for the object."
 msgstr "כותרת האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1865
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1903
 msgid "The excerpt for the object."
 msgstr "התקציר של האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1811
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1849
 msgid "Title for the object, as it exists in the database."
 msgstr "הכותרת של האובייקט, כפי שהיא מופיעה במסד הנתונים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1846
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1884
 msgid "Whether the content is protected with a password."
 msgstr "האם התוכן מוגן בסיסמה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1712
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:446
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1750
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:515
 msgid "An alphanumeric identifier for the object unique to its type."
 msgstr "מזהה אלפאנומרי עבור האובייקט היחודי לסוגו."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1720
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1758
 msgid "A named status for the object."
 msgstr "שם הסטטוס עבור האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1726
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1764
 msgid "Type of Post for the object."
 msgstr "סוג התוכן עבור האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1873
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1911
 msgid "Excerpt for the object, as it exists in the database."
 msgstr "התקציר של האובייקט, כפי שהוא מופיע במסד הנתונים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1816
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1854
 msgid "HTML title for the object, transformed for display."
 msgstr "כותרת HTML של האובייקט, ששונתה לצורך תצוגה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1857
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:402
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1895
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:471
 msgid "The ID for the author of the object."
 msgstr "ה-ID של המחבר האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1021
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:144
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:182
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1059
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:134
 msgid "Invalid post parent ID."
 msgstr "מספר פוסט אב לא תקין."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1112
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1150
 msgid "Invalid featured media ID."
 msgstr "מספר המדיה לא תקין."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1003
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1041
 msgid "A sticky post can not be password protected."
 msgstr "פוסט דביק לא יכול להיות מוגן בסיסמה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1010
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1048
 msgid "A password protected post can not be set to sticky."
 msgstr "פוסט מוגן בסיסמה לא יכול להיות דביק."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1212
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1653
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:407
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1231
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1691
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:476
 msgid "The date the object was published, in the site's timezone."
 msgstr "התאריך בו האובייקט פורסם, באזור הזמן של האתר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1218
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1659
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:413
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1237
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1697
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:482
 msgid "The date the object was published, as GMT."
 msgstr "התאריך בו האובייקט פורסם, ב-GMT."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1705
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:435
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1743
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:504
 msgid "The date the object was last modified, as GMT."
 msgstr "התאריך בו האובייקט עודכן לאחרונה, ב-GMT."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1698
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:429
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1736
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:498
 msgid "The date the object was last modified, in the site's timezone."
 msgstr "התאריך בו האובייקט עודכן לאחרונה, באזור הזמן של האתר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1671
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:419
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1709
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:488
 msgid "GUID for the object, as it exists in the database."
 msgstr "המספר של האובייקט, כפי שהוא מופיע במסד הנתונים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1677
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1715
 msgid "GUID for the object, transformed for display."
 msgstr "המספר HTML של האובייקט, ששונה לצורך תצוגה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1665
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1703
 msgid "The globally unique identifier for the object."
 msgstr "המזהה היחודי הגלובי עבור האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:787
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:820
 msgid "The post has already been deleted."
 msgstr "הפוסט כבר נמחק."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:128
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:321
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:134
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:354
 msgid "Sorry, you are not allowed to edit comments."
 msgstr "אין לך הרשאות לערוך תגובות."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:491
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:487
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:522
 msgid "Cannot create existing post."
 msgstr "לא ניתן ליצור פוסט קיים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:419
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:443
 msgid "Sorry, you are not allowed to create new users."
 msgstr "אין לך הרשאות ליצור משתמשים חדשים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:999
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1037
 msgid "A post can not be sticky and have a password."
 msgstr "פוסט לא יכול להיות דביק ולהכיל סיסמה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:372
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:402
 msgid "Incorrect post password."
 msgstr "סיסמה שגויה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:152
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:158
 msgid "You need to define a search term to order by relevance."
 msgstr "יש להגדיר מילות חיפוש כדי לסדר לפי הקשר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:73
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:95
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1427
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:79
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:101
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1446
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:86
 msgid "The password for the post if it is password protected."
 msgstr "הסיסמה של הפוסט אם הוא מוגן בסיסמה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:263
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:269
 msgid "Whether posts with this status should be protected."
 msgstr "האם פוסטים המשוייכים לסטטוס זה צריכים להיות מוגנים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:275
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:281
 msgid "Whether posts with this status should be publicly-queryable."
 msgstr "האם פוסטים המשוייכים לסטטוס זה יכולים להופיע בשאילתות ציבוריות."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:269
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:275
 msgid "Whether posts of this status should be shown in the front end of the site."
 msgstr "האם פוסטים המשוייכים לסטטוס זה צריכים להופיע בעמוד הראשי."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:250
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:256
 msgid "Whether or not the taxonomy should have children."
 msgstr "האם פוסטים המשוייכים לטקסונומיה זו יכולים להכיל ילדים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:244
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:250
 msgid "A human-readable description of the taxonomy."
 msgstr "תיאור של הטקסונומיה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:281
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:287
 msgid "Whether to include posts in the edit listing for their post type."
 msgstr "האם לכלול פוסטים ברשימת העריכה עבור סוגי התוכן שלהם."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:238
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:244
 msgid "All capabilities used by the taxonomy."
 msgstr "כל היכולות המשתמשות את הטקסונומיה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1199
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1229
 msgid "An alphanumeric identifier for the user."
 msgstr "מזהה אלפאנומרי עבור המשתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:256
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:262
 msgid "Human-readable labels for the taxonomy for various contexts."
 msgstr "התוויות של הטקסונומיה בהקשרים שונים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:257
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:263
 msgid "Whether posts with this status should be private."
 msgstr "האם פוסטים המשוייכים לסטטוס זה צריכים להיות פרטיים."
 
@@ -1236,19 +1238,19 @@ msgstr "העמוד הנוכחי של האוסף."
 msgid "Scope under which the request is made; determines fields present in response."
 msgstr "ההיקף לפיו הבקשה נשלחה; קובע את השדות שיוצגו בתגובה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1403
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1422
 msgid "Limit result set to comments assigned to specific post IDs."
 msgstr "הגבלת תוצאות לתגובות המשוייכות למספר פוסט מסויים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1420
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1439
 msgid "Limit result set to comments assigned a specific type. Requires authorization."
 msgstr "הגבלת תוצאות לתגובות המשוייכות לסוג מסויים. נדרשת הרשאה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1412
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1431
 msgid "Limit result set to comments assigned a specific status. Requires authorization."
 msgstr "הגבלת תוצאות לתגובות המשוייכות לסטטוס מסויים. נדרשת הרשאה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1385
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1404
 msgid "Limit result set to comments of specific parent IDs."
 msgstr "הגבלת תוצאות לתגובות המשוייכות לאב מסויים."
 
@@ -1256,174 +1258,179 @@ msgstr "הגבלת תוצאות לתגובות המשוייכות לאב מסו�
 msgid "The register_routes() method must be overridden"
 msgstr "יש לדרוס את המתודה register_routes()."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1369
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2061
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1319
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1388
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2099
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1349
 msgid "Sort collection by object attribute."
 msgstr "מיון אוסף על פי תכונות אובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1359
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2054
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:914
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1312
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1378
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2092
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:937
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1342
 msgid "Order sort attribute ascending or descending."
 msgstr "סדר מיון עולה או יורד."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1394
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1413
 msgid "Ensure result set excludes specific parent IDs."
 msgstr "יש לוודא כי התוצאות לא כוללות מספרי אב מסויימים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1345
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2033
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:898
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1297
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1364
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2071
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:921
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1327
 msgid "Limit result set to specific IDs."
 msgstr "הגבלת תוצאות לאלה התואמים למספר פוסט מסויים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1324
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1343
 msgid "Limit result set to that from a specific author email. Requires authorization."
 msgstr "הגבלת תוצאות למשתמש בעל אימייל מסויים. נדרשת הרשאה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1307
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1326
 msgid "Limit result set to comments assigned to specific user IDs. Requires authorization."
 msgstr "הגבלת תוצאות לתגובות המשוייכות למשתמש מסויים. נדרשת הרשאה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2018
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2056
 msgid "Limit response to posts published before a given ISO8601 compliant date."
 msgstr "הגבלת תוצאות לפוסטים שפורסמו לפני תאריך מסויים בתקן ISO8601."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1993
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2031
 msgid "Limit response to posts published after a given ISO8601 compliant date."
 msgstr "הגבלת תוצאות לפוסטים שפורסמו אחריי תאריך מסויים בתקן ISO8601."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1251
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1270
 msgid "Type of Comment for the object."
 msgstr "סוג התגובה עבור האובייקט."
 
 #. translators: %d: avatar image size in pixels
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1266
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1253
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1285
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1283
 msgid "Avatar URL with image size of %d pixels."
 msgstr "הכתובת של צלמית המשתמש עם גודל התמונה של %d פיקסלים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1274
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1293
 msgid "Avatar URLs for the object author."
 msgstr "הכתובת של צלמית המשתמש של אובייקט המחבר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1336
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2024
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:889
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1288
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1355
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2062
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:912
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1318
 msgid "Ensure result set excludes specific IDs."
 msgstr "יש לוודא כי התוצאות לא כוללות מספרי ID מסויימים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1315
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1334
 msgid "Ensure result set excludes comments assigned to specific user IDs. Requires authorization."
 msgstr "יש לוודא כי התוצאות לא כוללות תגובות המשוייכות למשתמש מסויים. נדרשת הרשאה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1224
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1691
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1243
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1729
 msgid "URL to the object."
 msgstr "כתובת האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1191
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1827
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1210
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1865
 msgid "The content for the object."
 msgstr "התוכן של האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1199
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1835
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1218
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1873
 msgid "Content for the object, as it exists in the database."
 msgstr "התוכן של האובייקט, כפי שהוא מופיע במסד הנתונים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1204
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1840
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1223
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1878
 msgid "HTML content for the object, transformed for display."
 msgstr "תוכן HTML של האובייקט, ששונה לצורך תצוגה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1243
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1262
 msgid "State of the object."
 msgstr "המצב של האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1237
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1256
 msgid "The ID of the associated post object."
 msgstr "ה-ID של הפוסט המשוייך."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1231
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1743
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:441
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1250
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1781
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:76
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:92
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:510
 msgid "The ID for the parent of the object."
 msgstr "ה-ID של אובייקט האב."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1070
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1089
 msgid "Invalid comment author ID."
 msgstr "מספר מחבר תגובה לא תקין."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1177
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1196
 msgid "URL for the object author."
 msgstr "כתובת מחבר האובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1142
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1685
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:424
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:68
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1161
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:93
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1723
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:96
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:493
 msgid "Unique identifier for the object."
 msgstr "מזהה יחודי לאובייקט."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:814
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:833
 msgid "The comment cannot be deleted."
 msgstr "לא ניתן למחוק את התגובה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1169
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1188
 msgid "Display name for the object author."
 msgstr "שם מחבר התגובה שיוצג בפומבי."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:805
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:824
 msgid "The comment has already been trashed."
 msgstr "התגובה כבר עברה לפח."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1183
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1202
 msgid "User agent for the object author."
 msgstr "סוכן משתמש עבור אובייקט המחבר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1163
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1182
 msgid "IP address for the object author."
 msgstr "כתובת IP של אובייקט המחבר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1153
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1172
 msgid "Email address for the object author."
 msgstr "כתובת אימייל של אובייקט המחבר."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1148
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1167
 msgid "The ID of the user object, if author was a user."
 msgstr "ה-ID של משתמש האובייקט, אם המחבר היה משתמש."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:701
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:724
 msgid "Updating comment failed."
 msgstr "עדכון תגובה נכשל."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:679
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:702
 msgid "Updating comment status failed."
 msgstr "עדכון סטטוס תגובה נכשל."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:466
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:490
 msgid "Cannot create existing comment."
 msgstr "לא ניתן ליצור תגובה קיימת."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:512
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:536
 msgid "Creating a comment requires valid author name and email values."
 msgstr "יצירת תגובה מצריכה שם ואימייל מחבר תקינים."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:566
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:590
 msgid "Creating comment failed."
 msgstr "יצירת תגובה נכשלה."
 
 #: wp-includes/comment.php:3057
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:379
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:396
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:403
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:420
 msgid "Sorry, you must be logged in to comment."
 msgstr "צריך להתחבר למערכת כדי להגיב."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:150
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:156
 msgid "Query parameter not permitted: %s"
 msgstr "פרמטר שאילתה אסור לשימוש: %s"
 
@@ -1431,8 +1438,8 @@ msgstr "פרמטר שאילתה אסור לשימוש: %s"
 msgid "The ID for the associated post of the attachment."
 msgstr "מספר הפוסט המשוייך למדיה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:92
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:111
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:98
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:117
 msgid "Whether to bypass trash and force deletion."
 msgstr "האם לדלג על הפח ולאלץ מחיקה."
 
@@ -1724,13 +1731,13 @@ msgid "Sorry, you are not allowed to assign this term."
 msgstr "אין לך הרשאות לשייך מונח זה."
 
 #: wp-includes/class-wp-xmlrpc-server.php:2073
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:549
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:570
 msgid "Sorry, you are not allowed to delete this term."
 msgstr "אין לך הרשאות למחוק מונח זה."
 
 #: wp-includes/class-wp-xmlrpc-server.php:1982
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:305
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:460
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:339
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:483
 msgid "Sorry, you are not allowed to edit this term."
 msgstr "אין לך הרשאות לערוך מונח זה."
 
@@ -2098,7 +2105,7 @@ msgid "Sorry, you are not allowed to edit pages."
 msgstr "אין לך הרשאות לערוך עמודים."
 
 #: wp-includes/class-wp-xmlrpc-server.php:2421
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:548
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:574
 msgid "Sorry, you are not allowed to edit this user."
 msgstr "אין לך הרשאות לערוך משתמש זה."
 
@@ -2149,8 +2156,8 @@ msgstr "אין לך הרשאות לערוך עמוד זה."
 
 #: wp-includes/class-wp-xmlrpc-server.php:1640
 #: wp-includes/class-wp-xmlrpc-server.php:4777
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:721
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:767
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:755
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:800
 msgid "Sorry, you are not allowed to delete this post."
 msgstr "אין לך הרשאות למחוק פוסט זה."
 
@@ -2303,9 +2310,9 @@ msgid "Sorry, you are not allowed to add a category."
 msgstr "אין לך הרשאות להוסיף קטגוריה."
 
 #: wp-includes/class-wp-xmlrpc-server.php:2479
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:180
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:352
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:354
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:186
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:378
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:380
 msgid "Sorry, you are not allowed to list users."
 msgstr "אין לך הרשאות לראות משתמשים."
 
@@ -2685,7 +2692,7 @@ msgstr "השתמש ב-%s כדי לשלוף את הערך מבלי להציג א�
 msgid "Use %s instead."
 msgstr "יש להשתמש ב-%s במקום."
 
-#: wp-includes/class-wp-term.php:167
+#: wp-includes/class-wp-term.php:166
 msgid "Term ID is shared between multiple taxonomies"
 msgstr "מזהה מונח משותף בין מספר טקסונומיות"
 
@@ -2960,16 +2967,16 @@ msgid "Permalink saved"
 msgstr "מבנה קישורים נשמר"
 
 #. translators: 1: function name, 2: WordPress version number
-#: wp-includes/rest-api.php:477 wp-includes/rest-api.php:498
+#: wp-includes/rest-api.php:485 wp-includes/rest-api.php:506
 msgid "%1$s (since %2$s; no alternative available)"
 msgstr "%1$s (מוורדפרס %2$s; אין אלטרנטיבה)"
 
 #. translators: 1: function name, 2: WordPress version number, 3: error message
-#: wp-includes/rest-api.php:495
+#: wp-includes/rest-api.php:503
 msgid "%1$s (since %2$s; %3$s)"
 msgstr "%1$s (מוורדפרס %2$s; %3$s)"
 
-#: wp-includes/rest-api.php:714
+#: wp-includes/rest-api.php:722
 msgid "Cookie nonce is invalid"
 msgstr "קוד אבטחה (nonce) של העוגיה אינו תקין"
 
@@ -2985,7 +2992,7 @@ msgstr "השם של פקודת המקרו אינו תקין: %1$s. אין להש
 
 #. translators: 1: function name, 2: WordPress version number, 3: new function
 #. name
-#: wp-includes/rest-api.php:474
+#: wp-includes/rest-api.php:482
 msgid "%1$s (since %2$s; use %3$s instead)"
 msgstr "%1$s (מוורדפרס %2$s; השתמשו בפונקציה %3$s)"
 
@@ -2998,7 +3005,7 @@ msgid "No route was found matching the URL and request method"
 msgstr "לא נמצא נתיב אשר תואם את הURL ושיטת הבקשה"
 
 #: wp-includes/rest-api/class-wp-rest-request.php:890
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:157
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:163
 msgid "Missing parameter(s): %s"
 msgstr "פרמטרים חסרים: %s"
 
@@ -3064,7 +3071,7 @@ msgid "Post Type Archive"
 msgstr "ארכיון סוגי תוכן"
 
 #: wp-includes/ms-functions.php:434 wp-includes/ms-functions.php:441
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1074
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1104
 #: wp-includes/user.php:1465
 msgid "Sorry, that username is not allowed."
 msgstr "שם המשתמש אינו מורשה."
@@ -6061,10 +6068,8 @@ msgid "Site Address (URL)"
 msgstr "כתובת URL של האתר"
 
 #: wp-includes/class-wp-xmlrpc-server.php:2426
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:344
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:374
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:572
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:721
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:343
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:602
 #: wp-includes/user.php:1417 wp-includes/user.php:1738
 #: wp-includes/user.php:1744
 msgid "Invalid user ID."
@@ -6622,7 +6627,7 @@ msgstr "החלף תמונה"
 msgid "Remove image"
 msgstr "הסר תמונה"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:633
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:657
 msgid "Sorry, you are not allowed to edit this comment."
 msgstr "אין לך הרשאות לערוך תגובה זו."
 
@@ -6660,7 +6665,7 @@ msgstr "מחיקת הפריט נכשלה."
 msgid "Sorry, editing the term failed."
 msgstr "עריכת הפריט נכשלה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:144
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:150
 msgid "Sorry, you are not allowed to edit terms in this taxonomy."
 msgstr "אין לך הרשאות לערוך פריטים בטקסונומיה זו."
 
@@ -6682,14 +6687,14 @@ msgid "This taxonomy is not hierarchical so you can't set a parent."
 msgstr "הטקסונומיה איננה היררכיית, לכן לא ניתן להגדיר לה הורה."
 
 #: wp-includes/class-wp-tax-query.php:565
-#: wp-includes/class-wp-tax-query.php:572 wp-includes/class-wp-term.php:180
+#: wp-includes/class-wp-tax-query.php:572 wp-includes/class-wp-term.php:179
 #: wp-includes/class-wp-xmlrpc-server.php:1876
 #: wp-includes/class-wp-xmlrpc-server.php:1964
 #: wp-includes/class-wp-xmlrpc-server.php:2061
 #: wp-includes/class-wp-xmlrpc-server.php:2132
 #: wp-includes/class-wp-xmlrpc-server.php:2191
 #: wp-includes/class-wp-xmlrpc-server.php:2286
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:163
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:169
 #: wp-includes/taxonomy.php:419 wp-includes/taxonomy.php:639
 #: wp-includes/taxonomy.php:730 wp-includes/taxonomy.php:894
 #: wp-includes/taxonomy.php:1114 wp-includes/taxonomy.php:1867
@@ -6698,8 +6703,8 @@ msgstr "הטקסונומיה איננה היררכיית, לכן לא ניתן �
 msgid "Invalid taxonomy."
 msgstr "טקסונומיה לא תקינה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:84
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:144
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:90
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:150
 msgid "Sorry, you are not allowed to manage terms in this taxonomy."
 msgstr "אין לך הרשאות לשנות פריטים בטקסונומיה זו."
 
@@ -6819,8 +6824,8 @@ msgstr "קישור תמונת ברירת מחדל"
 #: wp-includes/class-wp-xmlrpc-server.php:5850
 #: wp-includes/class-wp-xmlrpc-server.php:6021
 #: wp-includes/class-wp-xmlrpc-server.php:6075
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:366
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:599
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:396
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:633
 msgid "Sorry, you are not allowed to edit this post."
 msgstr "אין לך הרשאות לערוך פוסט זה."
 
@@ -6836,8 +6841,8 @@ msgstr "עריכת אתר"
 
 #: wp-includes/class-wp-xmlrpc-server.php:1646
 #: wp-includes/class-wp-xmlrpc-server.php:4783
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:798
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:253
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:831
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:322
 msgid "The post cannot be deleted."
 msgstr "לא ניתן למחוק את הפוסט."
 
@@ -6853,10 +6858,10 @@ msgstr "אין לך הרשאות להוסיף שדות לטקסונומיות ז
 
 #: wp-includes/class-wp-xmlrpc-server.php:1798
 #: wp-includes/class-wp-xmlrpc-server.php:4120
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:81
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:79
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:130
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:133
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:87
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:85
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:136
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:139
 msgid "Sorry, you are not allowed to edit posts in this post type."
 msgstr "אין לך הרשאות לערוך תכנים מסוג זה."
 
@@ -6866,8 +6871,8 @@ msgstr "נעשה שימוש במונח מעורפל בטקסונומיה היר�
 
 #: wp-includes/class-wp-xmlrpc-server.php:1346
 #: wp-includes/class-wp-xmlrpc-server.php:4930
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:462
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:470
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:493
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:501
 msgid "Sorry, you are not allowed to create posts as this user."
 msgstr "אין לך הרשאות ליצור פוסטים."
 
@@ -6880,7 +6885,7 @@ msgid "Sorry, you are not allowed to add a term to one of the given taxonomies."
 msgstr "אין לך הרשאות להוסיף שדות לאחת מהטקסונומיות האלה."
 
 #: wp-includes/class-wp-xmlrpc-server.php:1327
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1075
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1113
 msgid "Sorry, you are not allowed to create private posts in this post type."
 msgstr "אין לך הרשאות ליצור תכנים פרטיים עבור תכנים מהסוג הזה."
 
@@ -6890,7 +6895,7 @@ msgstr "אין לך הרשאות ליצור תכנים מוגנים בסיסמה
 
 #: wp-includes/class-wp-xmlrpc-server.php:1351
 #: wp-includes/class-wp-xmlrpc-server.php:4941
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:986
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1024
 msgid "Invalid author ID."
 msgstr "מספר משתמש לא תקין."
 
@@ -8224,11 +8229,11 @@ msgid "Could not write file %1$s (%2$s)."
 msgstr "לא ניתן לכתוב לקובץ %1$s (%2$s)."
 
 #: wp-includes/class-wp-xmlrpc-server.php:1332
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1081
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1119
 msgid "Sorry, you are not allowed to publish posts in this post type."
 msgstr "אין לך הרשאות לפרסם פוסטים מהסוג הזה."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:603
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:637
 msgid "Sorry, you are not allowed to update posts as this user."
 msgstr "אין לך הרשאות לעדכן פוסטים."
 
@@ -8240,7 +8245,7 @@ msgstr "אין לך הרשאות לעדכן פוסטים."
 #: wp-includes/class-wp-xmlrpc-server.php:4937
 #: wp-includes/class-wp-xmlrpc-server.php:5215
 #: wp-includes/class-wp-xmlrpc-server.php:5279 wp-includes/post.php:1160
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:122
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:128
 msgid "Invalid post type."
 msgstr "סוג תוכן לא תקין."
 
@@ -8263,11 +8268,9 @@ msgstr "סוג תוכן לא תקין."
 #: wp-includes/class-wp-xmlrpc-server.php:6072
 #: wp-includes/class-wp-xmlrpc-server.php:6191 wp-includes/post.php:3012
 #: wp-includes/post.php:3546
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:357
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:670
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:435
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:631
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:743
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:331
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:693
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:367
 #: wp-includes/revision.php:292
 msgid "Invalid post ID."
 msgstr "מספר פוסט לא תקין."
@@ -8280,10 +8283,7 @@ msgstr "סטטוס תגובה לא תקין."
 #: wp-includes/class-wp-xmlrpc-server.php:3231
 #: wp-includes/class-wp-xmlrpc-server.php:3363
 #: wp-includes/class-wp-xmlrpc-server.php:3430
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:351
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:654
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:751
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:776
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:317
 msgid "Invalid comment ID."
 msgstr "מספר תגובה לא תקין."
 
@@ -10043,7 +10043,7 @@ msgid "Edit This"
 msgstr "עריכה"
 
 #: wp-includes/class-wp-xmlrpc-server.php:3553 wp-includes/comment.php:2983
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:449
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:473
 msgid "Sorry, comments are closed for this item."
 msgstr "פריט זה סגור לתגובות."
 

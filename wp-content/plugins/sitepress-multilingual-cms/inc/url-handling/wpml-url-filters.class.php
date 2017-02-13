@@ -3,7 +3,13 @@
 /**
  * Class WPML_URL_Filters
  */
-class WPML_URL_Filters extends WPML_SP_And_PT_User {
+class WPML_URL_Filters {
+	/** @var SitePress */
+	private $sitepress;
+
+	/** @var  WPML_Post_Translation $post_translation */
+	private $post_translation;
+
 	/** @var WPML_Canonicals */
 	private $canonicals;
 
@@ -17,7 +23,9 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 	 * @param SitePress             $sitepress
 	 */
 	public function __construct( &$post_translation, &$url_converter, WPML_Canonicals $canonicals, &$sitepress ) {
-		parent::__construct( $post_translation, $sitepress );
+		$this->sitepress        = &$sitepress;
+		$this->post_translation = &$post_translation;
+
 		$this->url_converter = &$url_converter;
 		$this->canonicals    = $canonicals;
 		if ( $this->frontend_uses_root() === true ) {
@@ -301,7 +309,7 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 		) {
 			$link = get_permalink( $post_id );
 		} else {
-			$link = $this->url_converter->convert_url_string( $link, $code );
+			$link = $this->url_converter->get_strategy()->convert_url_string( $link, $code );
 		}
 		if ( $this->sitepress->get_wp_api()->is_feed() ) {
 			$link = str_replace( '&lang=', '&#038;lang=', $link );
@@ -328,7 +336,7 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 		) {
 			$link = get_page_link( $post_id );
 		} else {
-			$link = $this->url_converter->convert_url_string( $link, $code );
+			$link = $this->url_converter->get_strategy()->convert_url_string( $link, $code );
 		}
 		if ( $this->sitepress->get_wp_api()->is_feed() ) {
 			$link = str_replace( '&lang=', '&#038;lang=', $link );

@@ -302,12 +302,12 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 		return $res;
 	}
 
-	protected function has_save_post_action( $post ) {
+	public function has_save_post_action( $post ) {
 		if ( ! $post ) {
 			return false;
 		}
 		$is_auto_draft              = isset( $post->post_status ) && $post->post_status === 'auto-draft';
-		$is_editing_current_post    = array_key_exists( 'post_ID', $_POST ) & array_key_exists( 'action', $_POST ) && 'editpost' === $_POST['action'] && $post->ID === $_POST['post_ID'];
+		$is_editing_different_post  = array_key_exists( 'post_ID', $_POST ) && $post->ID != $_POST['post_ID'];
 		$is_saving_a_revision       = array_key_exists( 'post_type', $_POST ) && 'revision' === $_POST['post_type'];
 		$is_untrashing              = array_key_exists( 'action', $_GET ) && 'untrash' === $_GET['action'];
 		$is_auto_save               = array_key_exists( 'autosave', $_POST );
@@ -316,10 +316,10 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 		$is_scheduled_to_be_trashed = get_post_meta( $post->ID, '_wp_trash_meta_status', true );
 
 		return $this->is_translated_type( $post->post_type )
-		       || ! ( $is_auto_draft
+		       && ! ( $is_auto_draft
 		              || $is_auto_save
 		              || $skip_sitepress_actions
-		              || $is_editing_current_post
+		              || $is_editing_different_post
 		              || $is_saving_a_revision
 		              || $is_post_a_revision
 		              || $is_scheduled_to_be_trashed

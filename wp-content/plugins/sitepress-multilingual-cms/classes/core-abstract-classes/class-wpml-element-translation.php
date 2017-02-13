@@ -75,19 +75,24 @@ abstract class WPML_Element_Translation extends WPML_WPDB_User {
 		$element_id  = (int) $element_id;
 		$source_lang = $this->maybe_populate_cache( $element_id )
 			? $this->element_data[ $element_id ]['source_lang'] : null;
-		$res         = $source_lang === null ? $element_id : null;
-		$res         = $res === null && ! $root ? $this->translations[ $element_id ][ $source_lang ] : $res;
-		if ( $res === null && $root ) {
+
+		if ( null === $source_lang ) {
+			return null;
+		}
+
+		if ( ! $root && isset( $this->translations[ $element_id ][ $source_lang ] ) ) {
+			return (int) $this->translations[ $element_id ][ $source_lang ];
+		}
+
+		if ( $root ) {
 			foreach ( $this->translations[ $element_id ] as $trans_id ) {
 				if ( ! $this->element_data[ $trans_id ]['source_lang'] ) {
-					$res = $trans_id;
-					break;
+					return (int) $trans_id;
 				}
 			}
 		}
-		$res = $res ? (int) $res : null;
 
-		return $res !== $element_id ? $res : null;
+		return null;
 	}
 
 	public function get_element_id( $lang, $trid ) {

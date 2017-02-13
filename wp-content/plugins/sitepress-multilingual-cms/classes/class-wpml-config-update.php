@@ -82,8 +82,20 @@ class WPML_Config_Update {
 						}
 					}
 
+					$current_theme_name = $this->sitepress->get_wp_api()->get_theme_name();
+
+					$current_theme_parent = '';
+					if( method_exists( $this->sitepress->get_wp_api(), 'get_theme_parent_name' ) ) {
+						$current_theme_parent = $this->sitepress->get_wp_api()->get_theme_parent_name();
+					}
+
+					$active_theme_names = array( $current_theme_name );
+					if ( $current_theme_parent ) {
+						$active_theme_names[] = $current_theme_parent;
+					}
 					foreach ( $arr->themes as $theme ) {
-						if ( $this->sitepress->get_wp_api()->get_theme_name() == $theme->name ) {
+
+						if ( in_array( $theme->name, $active_theme_names ) ) {
 
 							unset( $deleted_configs_for_themes[ $theme->name ] );
 

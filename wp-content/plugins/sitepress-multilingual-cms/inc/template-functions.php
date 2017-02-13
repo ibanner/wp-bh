@@ -329,11 +329,11 @@ function wpml_link_to_element_filter(
 		$url .= '#' . $anchor;
 	}
 
-	$link = '<a href="' . $url . '">';
+	$link = '<a href="' . esc_url( $url ) . '">';
 	if ( isset( $link_text ) && $link_text ) {
-		$link .= $link_text;
+		$link .= esc_html( $link_text );
 	} else {
-		$link .= $title;
+		$link .= esc_html( $title );
 	}
 	$link .= '</a>';
 
@@ -698,7 +698,10 @@ function wpml_cf_translation_preferences( $id, $custom_field = false, $class = '
 }
 
 /**
- * @todo: [WPML 3.3] refactor in 3.3
+ *
+ * @deprecated It will be removed in WPML 3.8.0
+ *
+ * @since 3.7.0
  *
  * @param $id
  * @param $custom_field
@@ -712,14 +715,13 @@ function wpml_cf_translation_preferences_store( $id, $custom_field ) {
 		) {
 			return false;
 		}
-		$custom_field = @strval( $custom_field );
-		$action       = @intval( $_POST[ 'wpml_cf_translation_preferences' ][ $id ] );
+		$custom_field = sanitize_text_field( $custom_field );
+		$action       = (int) $_POST[ 'wpml_cf_translation_preferences' ][ $id ];
 		/** @var TranslationManagement $iclTranslationManagement */
 		global $iclTranslationManagement;
 		if ( ! empty( $iclTranslationManagement ) ) {
 			$iclTranslationManagement->settings[ 'custom_fields_translation' ][ $custom_field ] = $action;
 			$iclTranslationManagement->save_settings();
-
 			return true;
 		} else {
 			return false;
@@ -980,7 +982,7 @@ function wpml_footer_language_selector_action() {
 function wpml_get_language_input_field() {
 	global $sitepress;
 	if ( isset( $sitepress ) ) {
-		return "<input type='hidden' name='lang' value='" . $sitepress->get_current_language() . "' />";
+		return "<input type='hidden' name='lang' value='" . esc_attr( $sitepress->get_current_language() ) . "' />";
 	}
 
 	return null;
@@ -1023,7 +1025,7 @@ function wpml_get_language_form_field() {
 	global $sitepress;
 	if ( isset( $sitepress ) ) {
 		$current_language    = $sitepress->get_current_language();
-		$language_form_field = "<input type='hidden' name='lang' value='" . $current_language . "' />";
+		$language_form_field = "<input type='hidden' name='lang' value='" . esc_attr( $current_language ) . "' />";
 		$language_form_field = apply_filters( 'wpml_language_form_input_field', $language_form_field, $current_language );
 	}
 

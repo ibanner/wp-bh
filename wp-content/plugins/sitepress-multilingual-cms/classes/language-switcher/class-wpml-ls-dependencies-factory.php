@@ -29,6 +29,9 @@ class WPML_LS_Dependencies_Factory {
 	/* @var WPML_LS_Admin_UI $admin_ui */
 	private $admin_ui;
 
+	/** @var WPML_LS_Shortcodes */
+	private $shortcodes;
+
 	/**
 	 * WPML_LS_Dependencies_Factory constructor.
 	 *
@@ -131,6 +134,17 @@ class WPML_LS_Dependencies_Factory {
 		}
 
 		return $this->admin_ui;
+	}
+
+	/**
+	 * @return WPML_LS_Shortcodes
+	 */
+	public function shortcodes() {
+		if ( ! $this->shortcodes ) {
+			$this->shortcodes = new WPML_LS_Shortcodes( $this->settings(), $this->render(), $this->sitepress() );
+		}
+
+		return $this->shortcodes;
 	}
 
 }

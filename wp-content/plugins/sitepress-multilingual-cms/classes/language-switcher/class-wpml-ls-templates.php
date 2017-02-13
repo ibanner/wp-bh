@@ -5,6 +5,9 @@ class WPML_LS_Templates {
 	const CONFIG_FILE    = 'config.json';
 	const TRANSIENT_NAME = 'wpml_language_switcher_template_objects';
 
+	/** @var  @var string $uploads_path */
+	private $uploads_path;
+
 	/**
 	 * @var WPML_File
 	 */
@@ -108,8 +111,9 @@ class WPML_LS_Templates {
 			$wpml_core_path   = ICL_PLUGIN_PATH . $sub_dir;
 			$theme_path       = get_template_directory() . $this->ds . 'wpml' . $sub_dir;
 			$child_theme_path = get_stylesheet_directory() . $this->ds . 'wpml' . $sub_dir;
+			$uploads_path     = $this->get_uploads_path() . $this->ds . 'wpml' . $sub_dir;
 
-			array_unshift( $dirs_to_scan, $wpml_core_path, $theme_path, $child_theme_path );
+			array_unshift( $dirs_to_scan, $wpml_core_path, $theme_path, $child_theme_path, $uploads_path );
 
 			$templates_paths = $this->scan_template_paths( $dirs_to_scan );
 
@@ -242,8 +246,10 @@ class WPML_LS_Templates {
 
 		if ( strpos( $path, $this->wpml_file->fix_dir_separator( get_template_directory() ) ) === 0 ) {
 			$theme = wp_get_theme();
-			$name = $theme . ' - ' . $name;
-		} else if (
+			$name  = $theme . ' - ' . $name;
+		} elseif ( strpos( $path, $this->wpml_file->fix_dir_separator( $this->get_uploads_path() ) ) === 0 ) {
+			$name = __( 'Uploads', 'sitepress' ) . ' - ' . $name;
+		} elseif (
 			strpos( $path, $this->wpml_file->fix_dir_separator( WP_PLUGIN_DIR ) ) === 0
 			&& ! $this->is_core_template( $path )
 		) {
@@ -286,6 +292,11 @@ class WPML_LS_Templates {
 		return $templates;
 	}
 
+	/**
+	 * @param WPML_LS_Template[] $templates
+	 *
+	 * @return bool
+	 */
 	private function are_template_paths_valid( $templates ) {
 		$paths_are_valid = true;
 		foreach ( $templates as $template ) {
@@ -295,5 +306,20 @@ class WPML_LS_Templates {
 			}
 		}
 		return $paths_are_valid;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	private function get_uploads_path() {
+		if ( ! $this->uploads_path ) {
+			$uploads = wp_get_upload_dir();
+
+			if ( isset( $uploads['basedir'] ) ) {
+				$this->uploads_path = $uploads['basedir'];
+			}
+		}
+
+		return $this->uploads_path;
 	}
 }

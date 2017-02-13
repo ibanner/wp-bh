@@ -4,11 +4,11 @@
     {% for menu_key, menu in menus %}
         {% if menu_key == slug %}
             {% set attr = ' selected="selected"' %}
-        {% elseif menu.slug in settings.menus|keys %}
+        {% elseif menu.term_id in settings.menus|keys %}
             {% set attr = ' disabled="disabled"' %}
         {% else %}
             {% set attr = '' %}
         {% endif %}
-        <option value="{{ menu.slug }}"{{ attr }}>{{ menu.name }}</option>
+        <option value="{{ menu.term_id }}"{{ attr }}>{{ menu.name }}</option>
     {% endfor %}
 </select>

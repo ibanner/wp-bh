@@ -4,15 +4,12 @@
 var WPMLLanguageSwitcherDropdownClick = (function() {
     "use strict";
 
+    var wrapperSelector = '.js-wpml-ls-legacy-dropdown-click';
+    var submenuSelector = '.js-wpml-ls-sub-menu';
     var isOpen = false;
 
-    var toggle = function(switcher) {
-
-        var subMenu;
-
-        if (switcher !== undefined) {
-            subMenu = switcher.getElementsByClassName('wpml-ls-sub-menu')[0];
-        }
+    var toggle = function(event) {
+        var subMenu = this.querySelectorAll(submenuSelector)[0];
 
         if(subMenu.style.visibility === 'visible'){
             subMenu.style.visibility = 'hidden';
@@ -29,10 +26,10 @@ var WPMLLanguageSwitcherDropdownClick = (function() {
     var close = function(){
 
         if(!isOpen){
-            var switchers = document.getElementsByClassName('js-wpml-ls-legacy-dropdown-click');
+            var switchers = document.querySelectorAll(wrapperSelector);
 
             for(var i=0;i<switchers.length;i++){
-                var altLangs = switchers[i].getElementsByClassName('wpml-ls-sub-menu')[0];
+                var altLangs = switchers[i].querySelectorAll(submenuSelector)[0];
                 altLangs.style.visibility = 'hidden';
             }
         }
@@ -40,8 +37,35 @@ var WPMLLanguageSwitcherDropdownClick = (function() {
         isOpen = false;
     };
 
+    var preventDefault = function(e) {
+        var evt = e ? e : window.event;
+
+        if (evt.preventDefault) {
+            evt.preventDefault();
+        }
+
+        evt.returnValue = false;
+    };
+
+    var init = function() {
+        var wrappers = document.querySelectorAll(wrapperSelector);
+        for(var i=0; i < wrappers.length; i++ ) {
+            wrappers[i].addEventListener('click', toggle );
+        }
+
+        var links = document.querySelectorAll(wrapperSelector + ' a.js-wpml-ls-item-toggle');
+        for(var j=0; j < links.length; j++) {
+            links[j].addEventListener('click', preventDefault );
+        }
+    };
+
     return {
-        'toggle': toggle
+        'init': init
     };
 
 })();
+
+document.addEventListener('DOMContentLoaded', function(){
+    "use strict";
+    WPMLLanguageSwitcherDropdownClick.init();
+});

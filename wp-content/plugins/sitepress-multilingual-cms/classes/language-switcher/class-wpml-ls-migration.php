@@ -1,11 +1,14 @@
 <?php
 
-class WPML_LS_Migration extends WPML_SP_User {
+class WPML_LS_Migration {
 
 	const ICL_OPTIONS_SLUG = 'icl_sitepress_settings';
 
 	/* @var WPML_LS_Settings $settings */
 	private $settings;
+
+	/* @var SitePress $sitepress */
+	private $sitepress;
 
 	/* @var WPML_LS_Slot_Factory $slot_factory */
 	private $slot_factory;
@@ -22,8 +25,8 @@ class WPML_LS_Migration extends WPML_SP_User {
 	 */
 	public function __construct( $settings, $sitepress, $slot_factory ) {
 		$this->settings     = $settings;
+		$this->sitepress    = $sitepress;
 		$this->slot_factory = $slot_factory;
-		parent::__construct( $sitepress );
 	}
 
 	/**
@@ -71,14 +74,11 @@ class WPML_LS_Migration extends WPML_SP_User {
 		if ( $this->get_old_setting( 'display_ls_in_menu' ) ) {
 			$menu_id = $this->get_old_setting( 'menu_for_ls' );
 			$menu_id = $this->sitepress->get_object_id( $menu_id, 'nav_menu', true, $this->sitepress->get_default_language() );
-			remove_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1 );
-			$menu = get_term( $menu_id, 'nav_menu' );
-			add_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1, 1 );
 
-			if ( $menu && ! is_wp_error( $menu ) ) {
+			if ( $menu_id ) {
 				$s = array(
 					'slot_group'                    => 'menus',
-					'slot_slug'                     => $menu->slug,
+					'slot_slug'                     => $menu_id,
 					'show'                          => 1,
 					'template'                      => $this->get_template_for( 'menus' ),
 					'display_flags'                 => $this->get_old_setting( 'icl_lso_flags' ),
@@ -89,7 +89,7 @@ class WPML_LS_Migration extends WPML_SP_User {
 					'is_hierarchical'               => $this->get_old_setting( 'icl_lang_sel_type' ) === 'dropdown' ? 1 : 0,
 				);
 
-				$menus_settings[ $menu->slug ] = $this->slot_factory->get_slot( $s );
+				$menus_settings[ $menu_id ] = $this->slot_factory->get_slot( $s );
 			}
 		}
 
@@ -300,5 +300,39 @@ class WPML_LS_Migration extends WPML_SP_User {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @since 3.7.0 Convert menu LS handled now by ID instead of slugs previously
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function convert_menu_ids( $settings ) {
+		if ( $settings['menus'] ) {
+
+			foreach ( $settings['menus'] as $slug => $menu_slot ) {
+
+				/** @var WPML_LS_Menu_Slot $menu_slot */
+				if ( is_string( $slug ) ) {
+
+					$current_lang = $this->sitepress->get_current_language();
+					$this->sitepress->switch_lang( $this->sitepress->get_default_language() );
+					$menu      = wp_get_nav_menu_object( $slug );
+					$new_id    = $menu->term_id;
+					$slot_args = $menu_slot->get_model();
+					$slot_args['slot_slug'] = $new_id;
+					$new_slot = $this->slot_factory->get_slot( $slot_args );
+					unset( $settings['menus'][ $slug ] );
+					$settings['menus'][ $new_id ] = $new_slot;
+					$this->sitepress->switch_lang( $current_lang );
+				}
+			}
+		}
+
+		$settings['converted_menu_ids'] = 1;
+
+		return $settings;
 	}
 }

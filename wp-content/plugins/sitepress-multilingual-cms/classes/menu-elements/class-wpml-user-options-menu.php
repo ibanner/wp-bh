@@ -47,12 +47,12 @@ class WPML_User_Options_Menu {
 		<tr class="user-language-wrap">
 			<th colspan="2"><h3><a name="wpml"></a><?php esc_html_e( 'WPML language settings', 'sitepress' ); ?></h3></th>
 		</tr>
-		<tr class="user-language-wrap" <?php echo $hide_wpml_languages ?>>
+		<tr class="user-language-wrap" <?php echo $hide_wpml_languages; ?>>
 			<th><label for="icl_user_admin_language"><?php esc_html_e( 'Select your language:', 'sitepress' ) ?></label></th>
 			<td>
 				<select id="icl_user_admin_language" name="icl_user_admin_language">
 					<option value=""<?php selected( true, $admin_default_language_selected ) ?>>
-						<?php printf( esc_html__( 'Default admin language (currently %s)', 'sitepress' ), $this->admin_default_language ); ?>
+						<?php echo esc_html( sprintf( __( 'Default admin language (currently %s)', 'sitepress' ), $this->admin_default_language ) ); ?>
 					</option>
 					<?php
 					foreach ( array( true, false ) as $active ) {
@@ -65,7 +65,7 @@ class WPML_User_Options_Menu {
 									$language_name .= ' (' . $al['native_name'] . ')';
 								}
 								?>
-								<option value="<?php echo $lang_code ?>"<?php selected( true, $current_language_selected ) ?>>
+								<option value="<?php echo esc_attr( $lang_code ); ?>"<?php selected( true, $current_language_selected ) ?>>
 									<?php echo esc_html( $language_name ); ?>
 								</option>
 								<?php
@@ -87,6 +87,9 @@ class WPML_User_Options_Menu {
 		return ob_get_clean();
 	}
 
+	/**
+	 * @param $use_admin_language_for_edit
+	 */
 	private function get_hidden_languages_options( $use_admin_language_for_edit ) {
 		$wp_api = $this->sitepress->get_wp_api();
 		if ( $wp_api->current_user_can( 'translate' ) || $wp_api->current_user_can( 'manage_options' ) ) {
@@ -109,14 +112,14 @@ class WPML_User_Options_Menu {
 						<?php
 						if ( ! empty( $hidden_languages ) ) {
 							if ( 1 === count( $hidden_languages ) ) {
-								printf( esc_html__( '%s is currently hidden to visitors.', 'sitepress' ), $this->all_languages[ end( $hidden_languages ) ]['display_name'] );
+								echo esc_html( sprintf( __( '%s is currently hidden to visitors.', 'sitepress' ), $this->all_languages[ end( $hidden_languages ) ]['display_name'] ) );
 							} else {
 								$hidden_languages_array = array();
 								foreach ( (array) $hidden_languages as $l ) {
 									$hidden_languages_array[] = $this->all_languages[ $l ]['display_name'];
 								}
 								$hidden_languages = implode( ', ', $hidden_languages_array );
-								printf( esc_html__( '%s are currently hidden to visitors.', 'sitepress' ), $hidden_languages );
+								echo esc_html( sprintf( __( '%s are currently hidden to visitors.', 'sitepress' ), $hidden_languages ) );
 							}
 						} else {
 							esc_html_e( 'All languages are currently displayed. Choose what to do when site languages are hidden.', 'sitepress' );

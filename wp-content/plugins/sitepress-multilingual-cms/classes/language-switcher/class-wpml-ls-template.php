@@ -21,6 +21,11 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	 */
 	public function __construct( $template_data, $template_model = array() ) {
 		$this->template = $this->format_data( $template_data );
+
+		if ( array_key_exists( 'template_string', $this->template ) ) {
+			$this->template_string = $this->template['template_string'];
+		}
+
 		$this->model    = $template_model;
 		parent::__construct();
 	}
@@ -53,7 +58,7 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	 */
 	public function get_html() {
 		$ret = '';
-		if ( !empty( $this->template_paths ) ) {
+		if ( $this->template_paths || $this->template_string ) {
 			$ret = parent::get_view();
 		}
 		return $ret;
@@ -131,12 +136,15 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	 * @return string Template filename
 	 */
 	public function get_template() {
+		$template = self::FILENAME;
 
-		if ( !isset( $this->template['filename'] ) ) {
-			$this->template['filename'] = self::FILENAME;
+		if ( isset( $this->template_string ) ) {
+			$template = $this->template_string;
+		} elseif ( array_key_exists( 'filename', $this->template ) ) {
+			$template = $this->template['filename'];
 		}
 
-		return $this->template['filename'];
+		return $template;
 	}
 
 	/**
@@ -183,5 +191,14 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 			}
 		}
 		return $valid;
+	}
+
+	/**
+	 * @param string $template_string
+	 */
+	public function set_template_string( $template_string ) {
+		if ( method_exists( $this, 'is_string_template' ) ) {
+			$this->template_string = $template_string;
+		}
 	}
 }

@@ -173,7 +173,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                         <?php else: ?>
                             <p class="wpml-wizard-instruction"><?php _e('Select the languages to enable for your site (you can also add and remove languages later).','sitepress'); ?></p>
                         <?php endif; ?>
-                        <?php wp_nonce_field('set_default_language_nonce', 'set_default_language_nonce'); ?>
+                        <?php wp_nonce_field('wpml_set_default_language', 'set_default_language_nonce'); ?>
                         <p class="buttons-wrap">
                             <button id="icl_cancel_default_button" class="button-secondary action"><?php _e('Cancel', 'sitepress') ?></button>
                             <button id="icl_save_default_button" class="button-primary action"><?php _e('Save', 'sitepress') ?></button>
@@ -214,7 +214,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
                                 <input id="icl_save_language_selection" type="button" class="button-primary action" value="<?php _e('Save', 'sitepress') ?>" />
                             </p>
                             <?php endif; ?>
-                            <?php wp_nonce_field('set_active_languages_nonce', 'set_active_languages_nonce'); ?>
+                            <?php wp_nonce_field('wpml_set_active_languages', 'set_active_languages_nonce'); ?>
                         </div>
 
                         <?php if (!empty( $setup_complete )): ?>

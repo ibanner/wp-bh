@@ -14,8 +14,8 @@ class WPML_Requirements_Notification {
 		$this->template_service = $template_service;
 	}
 
-	public function get_dependencies( $issues, $limit = 0 ) {
-		if ( $issues && $issues['issues'] ) {
+	public function get_message( $issues, $limit = 0 ) {
+		if ( $issues ) {
 			$model = array(
 				'strings' => array(
 					'title'    => sprintf( __( 'To easily translate %s, you need to add the following WPML components:', 'sitepress' ), $this->get_product_names( $issues ) ),
@@ -37,11 +37,11 @@ class WPML_Requirements_Notification {
 		return null;
 	}
 
-	public function get_settings( $page_builders ) {
-		if ( $page_builders ) {
+	public function get_settings( $integrations ) {
+		if ( $integrations ) {
 			$model = array(
 				'strings' => array(
-					'title'   => sprintf( __( 'One more step before you can translate %s', 'sitepress' ), $this->build_items_in_sentence( $page_builders ) ),
+					'title'   => sprintf( __( 'One more step before you can translate %s', 'sitepress' ), $this->build_items_in_sentence( $integrations ) ),
 					'message' => __( "You need to enable WPML's Translation Editor, to translate conveniently.", 'sitepress' ),
 					'enable_done' => __( 'Done.', 'sitepress' ),
 					'enable_error' => __( 'Something went wrong. Please try again or contact the support.', 'sitepress' ),
@@ -51,7 +51,7 @@ class WPML_Requirements_Notification {
 				),
 			);
 
-			return $this->template_service->show( $model, 'page-builder-tm-settings.twig' );
+			return $this->template_service->show( $model, 'integrations-tm-settings.twig' );
 		}
 
 		return null;
@@ -63,7 +63,7 @@ class WPML_Requirements_Notification {
 	 * @return string
 	 */
 	private function get_product_names( $issues ) {
-		$products = wp_list_pluck( wp_list_pluck( $issues['issues'], 'cause' ), 'name' );
+		$products = wp_list_pluck( $issues['causes'], 'name' );
 
 		return $this->build_items_in_sentence( $products );
 	}

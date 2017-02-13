@@ -37,6 +37,23 @@ class WPML_User_Language {
 		add_action( 'wpml_restore_language_from_email', array( $this, 'restore_language_from_email_action' ), 10, 0 );
 		add_action( 'profile_update', array( $this, 'sync_admin_user_language_action' ), 10, 2 );
 		add_action( 'wpml_language_cookie_added', array( $this, 'update_user_lang_on_cookie_update' ) );
+
+		if ( $this->is_editing_current_profile() || $this->is_editing_other_profile() ) {
+			add_filter( 'get_available_languages', array( $this, 'intersect_wpml_wp_languages' ) );
+		}
+
+		register_activation_hook( WP_PLUGIN_DIR . '/' . ICL_PLUGIN_FOLDER . '/sitepress.php',  array( $this, 'update_user_lang_on_site_setup' ) );
+	}
+
+	/**
+	 * @param array $wp_languages
+	 *
+	 * @return array
+	 */
+	public function intersect_wpml_wp_languages( $wp_languages ) {
+		$active_wpml_languages = wp_list_pluck( $this->sitepress->get_active_languages(), 'default_locale' );
+
+		return array_intersect( $active_wpml_languages, $wp_languages );
 	}
 
 	/**
@@ -114,7 +131,7 @@ class WPML_User_Language {
 		}
 		update_user_meta( $user_id, 'icl_admin_language', $user_language );
 
-		if( $this->user_admin_language_for_edit( $user_id ) ) {
+		if( $this->user_admin_language_for_edit( $user_id ) && $this->is_editing_current_profile() ) {
 			$this->set_language_cookie( $user_language );
 		}
 	}
@@ -151,6 +168,30 @@ class WPML_User_Language {
 		if( $this->user_needs_sync_admin_lang() && $user_id && $this->user_admin_language_for_edit( $user_id ) ) {
 			update_user_meta( $user_id, 'icl_admin_language', $lang );
 			update_user_meta( $user_id, 'locale', $wp_lang['default_locale'] );
+		}
+	}
+
+	private function is_editing_current_profile() {
+		global $pagenow;
+		return isset( $pagenow ) && 'profile.php' === $pagenow;
+	}
+
+	private function is_editing_other_profile() {
+		global $pagenow;
+		return isset( $pagenow ) && 'user-edit.php' === $pagenow;
+	}
+
+	public function update_user_lang_on_site_setup() {
+		$current_user_id = get_current_user_id();
+		$site_locale = get_locale();
+		$wpml_lang = $this->sitepress->get_language_code_from_locale( $site_locale );
+
+		$wp_user_lang = get_user_meta( $current_user_id, 'locale', true );
+		$wpml_user_lang = get_user_meta( $current_user_id, 'icl_admin_language', true );
+
+		if ( $site_locale && $current_user_id && ! $wp_user_lang && ! $wpml_user_lang ) {
+			update_user_meta( $current_user_id, 'locale', $site_locale );
+			update_user_meta( $current_user_id, 'icl_admin_language', $wpml_lang );
 		}
 	}
 }

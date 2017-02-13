@@ -164,25 +164,6 @@ class WPML_Canonicals {
 		return ! $this->has_wp_get_canonical_url() && $this->sitepress->get_wp_api()->is_front_end();
 	}
 
-	function maybe_fix_nginx_redirection() {
-		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) && strpos( strtolower( $_SERVER['SERVER_SOFTWARE'] ), 'nginx' ) !== false ) {
-			add_filter( 'redirect_canonical', array( $this, 'maybe_fix_nginx_redirection_callback' ) );
-		}
-	}
-
-	/**
-	 * @param string $redirect
-	 *
-	 * @return bool|string
-	 */
-	function maybe_fix_nginx_redirection_callback( $redirect ) {
-		if ( is_front_page() ) {
-			$redirect = false;
-		}
-
-		return $redirect;
-	}
-
 	private function init_wpml_translations() {
 		if ( ! $this->wpml_translations ) {
 			$this->wpml_translations = new WPML_Translations( $this->sitepress );

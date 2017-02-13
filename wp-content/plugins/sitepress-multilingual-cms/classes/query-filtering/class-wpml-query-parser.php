@@ -118,37 +118,53 @@ class WPML_Query_Parser {
 		} else if ( $type === 'slugs' ) {
 
 			foreach ( $values as $slug ) {
-				$slug = preg_replace( '#((.*)/)#', '', $slug );
+				$slug_elements = explode( '/', $slug );
 
-				$id = $this->wpdb->get_var(
-					$this->wpdb->prepare(
-						"SELECT t.term_id FROM {$this->wpdb->terms} t
-								 JOIN {$this->wpdb->term_taxonomy} tt ON t.term_id = tt.term_id
-								 WHERE tt.taxonomy = %s AND t.slug = %s LIMIT 1",
-						$taxonomy,
-						$slug
-					)
-				);
-
-				$term_id = (int) $this->term_translations->term_id_in( $id, $lang, true );
-
-				if ( $term_id !== $id ) {
-
-					$slug = $this->wpdb->get_var(
-						$this->wpdb->prepare(
-							"SELECT slug FROM {$this->wpdb->terms}
-								 WHERE term_id = %d LIMIT 1",
-							$term_id
-						)
-					);
-
+				foreach ( $slug_elements as &$slug_element ) {
+					$slug_element = $this->translate_term_slug( $slug_element, $taxonomy, $lang );
 				}
+
+				$slug = implode( '/', $slug_elements );
 
 				$translated_values[] = $slug;
 			}
 		}
 
 		return $translated_values;
+	}
+
+	/**
+	 * @param string $slug
+	 * @param string $taxonomy
+	 * @param string $lang
+	 *
+	 * @return null|string
+	 */
+	private function translate_term_slug( $slug, $taxonomy, $lang ) {
+		$id = $this->wpdb->get_var(
+			$this->wpdb->prepare(
+				"SELECT t.term_id FROM {$this->wpdb->terms} t
+								 JOIN {$this->wpdb->term_taxonomy} tt ON t.term_id = tt.term_id
+								 WHERE tt.taxonomy = %s AND t.slug = %s LIMIT 1",
+				$taxonomy,
+				$slug
+			)
+		);
+
+		$term_id = (int) $this->term_translations->term_id_in( $id, $lang, true );
+
+		if ( $term_id !== $id ) {
+
+			$slug = $this->wpdb->get_var(
+				$this->wpdb->prepare(
+					"SELECT slug FROM {$this->wpdb->terms}
+								 WHERE term_id = %d LIMIT 1",
+					$term_id
+				)
+			);
+		}
+
+		return $slug;
 	}
 
 	/**
@@ -267,15 +283,14 @@ class WPML_Query_Parser {
 			}
 		}
 
+		$post_type = 'post';
+		if ( ! empty( $q->query_vars['post_type'] ) ) {
+			$post_type = $q->query_vars['post_type'];
+		}
+
 		$current_language = $this->sitepress->get_current_language();
-		if ( $current_language !== $this->sitepress->get_default_language() ) {
-
+		if ( 'attachment' === $post_type || $current_language !== $this->sitepress->get_default_language() ) {
 			$q = $this->adjust_default_taxonomies_query_vars( $q, $current_language );
-
-			$post_type = 'post';
-			if ( ! empty( $q->query_vars['post_type'] ) ) {
-				$post_type = $q->query_vars['post_type'];
-			}
 
 			if ( ! is_array( $post_type ) ) {
 				$post_type = (array) $post_type;
