@@ -17,11 +17,13 @@ class WPML_LS_Menu_Item {
     public $post_title;                   // A "no title" label if menu item represents a post that lacks a title.
     public $target;                       // The target attribute of the link element for this menu item.
     public $title;                        // The title of this menu item.
-    public $type   = 'wpml_ls_menu_item'; // The family of objects originally represented, such as "post_type" or "taxonomy."
+    public $type = 'wpml_ls_menu_item';   // The family of objects originally represented, such as "post_type" or "taxonomy."
     public $type_label;                   // The singular label used to describe this type of menu item.
     public $url;                          // The URL to which this menu item points.
     public $xfn;                          // The XFN relationship expressed in the link of this menu item.
     public $_invalid = false;             // Whether the menu item represents an object that no longer exists.
+
+    public $post_type = 'nav_menu_item';  // * Extra property => see [wpmlcore-3855]
 
     /**
      * WPML_LS_Menu_Item constructor.
@@ -52,5 +54,14 @@ class WPML_LS_Menu_Item {
                 $this->classes = explode( ' ', $lang['css_classes'] );
             }
         }
+    }
+
+    /**
+     * @param string $property
+     *
+     * @return mixed
+     */
+    public function __get( $property ) {
+        return isset( $this->{$property} ) ? $this->{$property} : null;
     }
 }

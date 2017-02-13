@@ -48,7 +48,7 @@ msgstr "מסד הנתונים MaxMind GeoIP אינו קיים - מיקום גא�
 msgid "https://woocommerce.com/"
 msgstr "https://woocommerce.com/"
 
-#: includes/api/class-wc-rest-products-controller.php:2444
+#: includes/api/class-wc-rest-products-controller.php:2461
 msgid "If the variation is visible."
 msgstr "אם הוריאציה גלויה."
 
@@ -1058,134 +1058,135 @@ msgstr "משלוח %s"
 msgid "Return to shop"
 msgstr "חזור לחנות"
 
-#: includes/api/class-wc-rest-webhooks-controller.php:551
+#: includes/api/class-wc-rest-webhooks-controller.php:567
 msgid "Limit result set to webhooks assigned a specific status."
 msgstr "הגבלת תוצאות webhooks לסטטוס מסויים."
 
-#: includes/api/class-wc-rest-webhooks-controller.php:530
+#: includes/api/class-wc-rest-webhooks-controller.php:546
 msgid "The date the webhook was last modified, in the site's timezone."
 msgstr "תאריך עדכון אחרון של ה-webhook, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-webhooks-controller.php:524
+#: includes/api/class-wc-rest-webhooks-controller.php:540
 msgid "The date the webhook was created, in the site's timezone."
 msgstr "תאריך יצירת ה-webhook, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-webhooks-controller.php:500
+#: includes/api/class-wc-rest-webhooks-controller.php:513
 msgid "Webhook event."
 msgstr "אירוע Webhook."
 
-#: includes/api/class-wc-rest-webhooks-controller.php:494
+#: includes/api/class-wc-rest-webhooks-controller.php:507
 msgid "Webhook resource."
 msgstr "משאב webhook."
 
-#: includes/api/class-wc-rest-webhooks-controller.php:489
+#: includes/api/class-wc-rest-webhooks-controller.php:72
+#: includes/api/class-wc-rest-webhooks-controller.php:502
 msgid "Webhook topic."
 msgstr "נושא webhook."
 
-#: includes/api/class-wc-rest-webhooks-controller.php:479
+#: includes/api/class-wc-rest-webhooks-controller.php:492
 msgid "Webhook status."
 msgstr "סטטוס webhook."
 
-#: includes/api/class-wc-rest-webhooks-controller.php:474
+#: includes/api/class-wc-rest-webhooks-controller.php:487
 msgid "A friendly name for the webhook."
 msgstr "שם ידידותי עבור webhook."
 
-#: includes/api/class-wc-rest-webhooks-controller.php:227
+#: includes/api/class-wc-rest-webhooks-controller.php:240
 msgid "Webhook topic must be valid."
 msgstr "נושא Webhook חייב להיות חוקי."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:286
+#: includes/api/class-wc-rest-webhook-deliveries.php:308
 msgid "The date the webhook delivery was logged, in the site's timezone."
 msgstr "תאריך רישום יומן של ה-webhook, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:280
+#: includes/api/class-wc-rest-webhook-deliveries.php:302
 msgid "The response body from the receiving server."
 msgstr "גוף התגובה משרת המקבל."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:274
+#: includes/api/class-wc-rest-webhook-deliveries.php:293
 msgid "Array of the response headers from the receiving server."
 msgstr "מערך של כותרות התגובה משרת המקבל."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:268
+#: includes/api/class-wc-rest-webhook-deliveries.php:287
 msgid "The HTTP response message from the receiving server."
 msgstr "הודעת תשובה HTTP מהשרת המקבל."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:262
+#: includes/api/class-wc-rest-webhook-deliveries.php:281
 msgid "The HTTP response code from the receiving server."
 msgstr "קוד תשובה HTTP משרת המקבל."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:256
+#: includes/api/class-wc-rest-webhook-deliveries.php:275
 msgid "Request body."
 msgstr "גוף של בקשה."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:250
+#: includes/api/class-wc-rest-webhook-deliveries.php:266
 msgid "Request headers."
 msgstr "כותרות של בקשה."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:236
-#: includes/api/class-wc-rest-webhook-deliveries.php:243
+#: includes/api/class-wc-rest-webhook-deliveries.php:252
+#: includes/api/class-wc-rest-webhook-deliveries.php:259
 msgid "The URL where the webhook was delivered."
 msgstr "URL לשם webhook נמסר."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:230
+#: includes/api/class-wc-rest-webhook-deliveries.php:246
 msgid "A friendly summary of the response including the HTTP response code, message, and body."
 msgstr "סיכום ידידותי של תשובה כולל קוד תשובה HTTP, הודעה וגוף."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:224
+#: includes/api/class-wc-rest-webhook-deliveries.php:240
 msgid "The delivery duration, in seconds."
 msgstr "משך המסירה, בשניות."
 
-#: includes/api/class-wc-rest-webhook-deliveries.php:106
-#: includes/api/class-wc-rest-webhook-deliveries.php:132
+#: includes/api/class-wc-rest-webhook-deliveries.php:122
+#: includes/api/class-wc-rest-webhook-deliveries.php:148
 msgid "Invalid webhook id."
 msgstr "ה-ID של ה-webhook לא חוקי."
 
-#: includes/api/class-wc-rest-taxes-controller.php:687
+#: includes/api/class-wc-rest-taxes-controller.php:700
 msgid "Sort by tax class."
 msgstr "מיין לפי סוג מס."
 
-#: includes/api/class-wc-rest-taxes-controller.php:622
+#: includes/api/class-wc-rest-taxes-controller.php:629
 msgid "Indicates the order that will appear in queries."
 msgstr "מסמן הזמנה שתופיע בשאילתות."
 
-#: includes/api/class-wc-rest-taxes-controller.php:616
+#: includes/api/class-wc-rest-taxes-controller.php:623
 msgid "Whether or not this tax rate also gets applied to shipping."
 msgstr "האם המס הזה חל גם כן על המשלוח."
 
-#: includes/api/class-wc-rest-taxes-controller.php:610
+#: includes/api/class-wc-rest-taxes-controller.php:617
 msgid "Whether or not this is a compound rate."
 msgstr "האם זה מס מורכב או לא."
 
-#: includes/api/class-wc-rest-taxes-controller.php:604
+#: includes/api/class-wc-rest-taxes-controller.php:611
 msgid "Tax priority."
 msgstr "עדיפות מס."
 
-#: includes/api/class-wc-rest-taxes-controller.php:599
+#: includes/api/class-wc-rest-taxes-controller.php:606
 msgid "Tax rate name."
 msgstr "שם שיעור מס."
 
-#: includes/api/class-wc-rest-taxes-controller.php:594
+#: includes/api/class-wc-rest-taxes-controller.php:601
 msgid "Tax rate."
 msgstr "שיעור מס."
 
-#: includes/api/class-wc-rest-taxes-controller.php:584
+#: includes/api/class-wc-rest-taxes-controller.php:591
 msgid "Postcode/ZIP."
 msgstr "מיקוד."
 
-#: includes/api/class-wc-rest-taxes-controller.php:579
+#: includes/api/class-wc-rest-taxes-controller.php:586
 msgid "State code."
 msgstr "קוד מדינה."
 
-#: includes/api/class-wc-rest-taxes-controller.php:574
+#: includes/api/class-wc-rest-taxes-controller.php:581
 msgid "Country ISO 3166 code."
 msgstr "ISO קוד המדינה 3166."
 
-#: includes/api/class-wc-rest-tax-classes-controller.php:331
+#: includes/api/class-wc-rest-tax-classes-controller.php:338
 msgid "Tax class name."
 msgstr "שם סוג מס."
 
-#: includes/api/class-wc-rest-tax-classes-controller.php:216
-#: includes/api/class-wc-rest-taxes-controller.php:449
+#: includes/api/class-wc-rest-tax-classes-controller.php:223
+#: includes/api/class-wc-rest-taxes-controller.php:456
 msgid "Taxes do not support trashing."
 msgstr "מיסים אינם תומכים בזבל."
 
@@ -1209,15 +1210,15 @@ msgstr "רשימה של דוחות מכירה."
 msgid "Total number of purchases."
 msgstr "מספר כולל של רכישות."
 
-#: includes/api/class-wc-rest-report-sales-controller.php:387
+#: includes/api/class-wc-rest-report-sales-controller.php:390
 msgid "Return sales for a specific end date, the date need to be in the %s format."
 msgstr "מכירות עד תאריך מסויים, התאריך צריך להיות בפורמט %s."
 
-#: includes/api/class-wc-rest-report-sales-controller.php:380
+#: includes/api/class-wc-rest-report-sales-controller.php:383
 msgid "Return sales for a specific start date, the date need to be in the %s format."
 msgstr "מכירות מתאריך מסויים, התאריך צריך להיות בפורמט %s."
 
-#: includes/api/class-wc-rest-report-sales-controller.php:373
+#: includes/api/class-wc-rest-report-sales-controller.php:376
 msgid "Report period."
 msgstr "תקופת הדוח."
 
@@ -1265,429 +1266,429 @@ msgstr "מכירות נקיות לתקופה."
 msgid "Gross sales in the period."
 msgstr "מכירות גולמיות לתקופה."
 
-#: includes/api/class-wc-rest-products-controller.php:2733
+#: includes/api/class-wc-rest-products-controller.php:2753
 msgid "Limit result set to products with a specific SKU."
 msgstr "הגבלת תוצאות למוצרים עם מק\"ט מסויים."
 
-#: includes/api/class-wc-rest-products-controller.php:2727
+#: includes/api/class-wc-rest-products-controller.php:2747
 msgid "Limit result set to products with a specific attribute term (required an assigned attribute)."
 msgstr "הגבל את התוצאות למוצרים עם מונחים מסויימים של תכונות (מחייב שיוך תכונה)."
 
-#: includes/api/class-wc-rest-products-controller.php:2721
+#: includes/api/class-wc-rest-products-controller.php:2741
 msgid "Limit result set to products with a specific attribute."
 msgstr "הגבל את התוצאות למוצרים עם תכונה מסויימת."
 
-#: includes/api/class-wc-rest-products-controller.php:2715
+#: includes/api/class-wc-rest-products-controller.php:2735
 msgid "Limit result set to products assigned a specific shipping class."
 msgstr "הגבל את התוצאות למוצרים עם סוג משלוח מסויים."
 
-#: includes/api/class-wc-rest-products-controller.php:2709
+#: includes/api/class-wc-rest-products-controller.php:2729
 msgid "Limit result set to products assigned a specific tag."
 msgstr "הגבל את התוצאות למוצרים עם תגית מסויימת."
 
-#: includes/api/class-wc-rest-products-controller.php:2703
+#: includes/api/class-wc-rest-products-controller.php:2723
 msgid "Limit result set to products assigned a specific category."
 msgstr "הגבל את התוצאות למוצרים מקטגוריה מסויימת."
 
-#: includes/api/class-wc-rest-products-controller.php:2696
+#: includes/api/class-wc-rest-products-controller.php:2716
 msgid "Limit result set to products assigned a specific type."
 msgstr "הגבל את התוצאות למוצרים מסוג מסויים."
 
-#: includes/api/class-wc-rest-products-controller.php:2689
+#: includes/api/class-wc-rest-products-controller.php:2709
 msgid "Limit result set to products assigned a specific status."
 msgstr "הגבל את התוצאות למוצרים בסטטוס מסויים."
 
-#: includes/api/class-wc-rest-products-controller.php:2683
+#: includes/api/class-wc-rest-products-controller.php:2703
 msgid "Limit result set to products with a specific slug."
 msgstr "הגבלת תוצאות למוצרים עם מזהה כתובת מסויים."
 
-#: includes/api/class-wc-rest-products-controller.php:2664
+#: includes/api/class-wc-rest-products-controller.php:2684
 msgid "Menu order, used to custom sort products."
 msgstr "סדר תפריט המשמש לסידור מותאם של המוצרים."
 
-#: includes/api/class-wc-rest-products-controller.php:2658
+#: includes/api/class-wc-rest-products-controller.php:2675
 msgid "List of grouped products ID."
 msgstr "מספרי ID של קבוצות מוצרים."
 
-#: includes/api/class-wc-rest-products-controller.php:2585
+#: includes/api/class-wc-rest-products-controller.php:2602
 msgid "Variation image data."
 msgstr "וריאציה נתוני תמונת."
 
-#: includes/api/class-wc-rest-products-controller.php:2567
+#: includes/api/class-wc-rest-products-controller.php:2584
 msgid "Variation height (%s)."
 msgstr "גובה וריאציה (%s)."
 
-#: includes/api/class-wc-rest-products-controller.php:2562
+#: includes/api/class-wc-rest-products-controller.php:2579
 msgid "Variation width (%s)."
 msgstr "רוחב וריאציה (%s)."
 
-#: includes/api/class-wc-rest-products-controller.php:2557
+#: includes/api/class-wc-rest-products-controller.php:2574
 msgid "Variation length (%s)."
 msgstr "אורך וריאציה (%s)."
 
-#: includes/api/class-wc-rest-products-controller.php:2552
+#: includes/api/class-wc-rest-products-controller.php:2569
 msgid "Variation dimensions."
 msgstr "מימדי הווריאציה."
 
-#: includes/api/class-wc-rest-products-controller.php:2547
+#: includes/api/class-wc-rest-products-controller.php:2564
 msgid "Variation weight (%s)."
 msgstr "משקל וריאציה (%s)."
 
-#: includes/api/class-wc-rest-products-controller.php:2541
+#: includes/api/class-wc-rest-products-controller.php:2558
 msgid "Shows if the variation is on backordered."
 msgstr "הצג אם הוריאציה בהזמנות מראש."
 
-#: includes/api/class-wc-rest-products-controller.php:2511
+#: includes/api/class-wc-rest-products-controller.php:2528
 msgid "Stock management at variation level."
 msgstr "ניהול מלאי ברמת הווריאציה."
 
-#: includes/api/class-wc-rest-products-controller.php:2493
+#: includes/api/class-wc-rest-products-controller.php:2510
 msgid "Number of days that the customer has up to be able to download the variation."
 msgstr "מספר הימים שיש ללקוח להוריד את הווריאציה."
 
-#: includes/api/class-wc-rest-products-controller.php:2487
+#: includes/api/class-wc-rest-products-controller.php:2504
 msgid "Amount of times the variation can be downloaded."
 msgstr "מספר הפעמים שניתן להוריד את הוריאציה."
 
-#: includes/api/class-wc-rest-products-controller.php:2455
+#: includes/api/class-wc-rest-products-controller.php:2472
 msgid "If the variation is downloadable."
 msgstr "אם הווריאציה היא להורדה."
 
-#: includes/api/class-wc-rest-products-controller.php:2449
+#: includes/api/class-wc-rest-products-controller.php:2466
 msgid "If the variation is virtual."
 msgstr "אם הווריאציה וירטואלית."
 
-#: includes/api/class-wc-rest-products-controller.php:2438
+#: includes/api/class-wc-rest-products-controller.php:2455
 msgid "Shows if the variation can be bought."
 msgstr "מראה האם הוריאציה יכולה להירכש."
 
-#: includes/api/class-wc-rest-products-controller.php:2432
+#: includes/api/class-wc-rest-products-controller.php:2449
 msgid "Shows if the variation is on sale."
 msgstr "הצג אם הוריאציה במבצע."
 
-#: includes/api/class-wc-rest-products-controller.php:2417
+#: includes/api/class-wc-rest-products-controller.php:2434
 msgid "Variation sale price."
 msgstr "מחיר וריאציה במבצע."
 
-#: includes/api/class-wc-rest-products-controller.php:2412
+#: includes/api/class-wc-rest-products-controller.php:2429
 msgid "Variation regular price."
 msgstr "מחיר וריאציה רגיל."
 
-#: includes/api/class-wc-rest-products-controller.php:2406
+#: includes/api/class-wc-rest-products-controller.php:2423
 msgid "Current variation price."
 msgstr "מחיר וריאציה נוכחי."
 
-#: includes/api/class-wc-rest-products-controller.php:2394
+#: includes/api/class-wc-rest-products-controller.php:2411
 msgid "Variation URL."
 msgstr "כתובת הוריאציה."
 
-#: includes/api/class-wc-rest-products-controller.php:2388
+#: includes/api/class-wc-rest-products-controller.php:2405
 msgid "The date the variation was last modified, in the site's timezone."
 msgstr "תאריך עדכון אחרון של הווריאציה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-products-controller.php:2382
+#: includes/api/class-wc-rest-products-controller.php:2399
 msgid "The date the variation was created, in the site's timezone."
 msgstr "תאריך יצירת הווריאציה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-products-controller.php:2376
+#: includes/api/class-wc-rest-products-controller.php:2393
 msgid "Variation ID."
 msgstr "ה-ID של הווריאציה."
 
-#: includes/api/class-wc-rest-products-controller.php:2369
+#: includes/api/class-wc-rest-products-controller.php:2386
 msgid "List of variations."
 msgstr "רשימה של וריאציות."
 
-#: includes/api/class-wc-rest-products-controller.php:2361
-#: includes/api/class-wc-rest-products-controller.php:2647
+#: includes/api/class-wc-rest-products-controller.php:2378
+#: includes/api/class-wc-rest-products-controller.php:2664
 msgid "Selected attribute term name."
 msgstr "שם התכונה שנבחרה."
 
-#: includes/api/class-wc-rest-products-controller.php:2344
+#: includes/api/class-wc-rest-products-controller.php:2361
 msgid "Defaults variation attributes."
 msgstr "ברירות מחדל של תכונות וריאציה."
 
-#: includes/api/class-wc-rest-products-controller.php:2336
+#: includes/api/class-wc-rest-products-controller.php:2353
 msgid "List of available term names of the attribute."
 msgstr "רשימה של שמות של מונחים עבור התכונה."
 
-#: includes/api/class-wc-rest-products-controller.php:2330
+#: includes/api/class-wc-rest-products-controller.php:2347
 msgid "Define if the attribute can be used as variation."
 msgstr "קבע האם התכונה יכולה לשמש כווריאציה."
 
-#: includes/api/class-wc-rest-products-controller.php:2319
+#: includes/api/class-wc-rest-products-controller.php:2336
 msgid "Attribute position."
 msgstr "מיקום התכונה."
 
-#: includes/api/class-wc-rest-products-controller.php:2309
-#: includes/api/class-wc-rest-products-controller.php:2351
-#: includes/api/class-wc-rest-products-controller.php:2637
+#: includes/api/class-wc-rest-products-controller.php:2326
+#: includes/api/class-wc-rest-products-controller.php:2368
+#: includes/api/class-wc-rest-products-controller.php:2654
 msgid "Attribute ID."
 msgstr "מזהה תכונה."
 
-#: includes/api/class-wc-rest-products-controller.php:2302
-#: includes/api/class-wc-rest-products-controller.php:2630
+#: includes/api/class-wc-rest-products-controller.php:2319
+#: includes/api/class-wc-rest-products-controller.php:2647
 msgid "List of attributes."
 msgstr "רשימה של תכונות."
 
-#: includes/api/class-wc-rest-products-controller.php:2294
-#: includes/api/class-wc-rest-products-controller.php:2623
+#: includes/api/class-wc-rest-products-controller.php:2311
+#: includes/api/class-wc-rest-products-controller.php:2640
 msgid "Image position. 0 means that the image is featured."
 msgstr "מיקום תמונה. 0 כלומר תמונה נבחרת."
 
-#: includes/api/class-wc-rest-products-controller.php:2254
+#: includes/api/class-wc-rest-products-controller.php:2271
 msgid "List of images."
 msgstr "רשימה של תמונות."
 
-#: includes/api/class-wc-rest-products-controller.php:2245
+#: includes/api/class-wc-rest-products-controller.php:2262
 msgid "Tag slug."
 msgstr "מזהה כתובת של תגית."
 
-#: includes/api/class-wc-rest-products-controller.php:2234
+#: includes/api/class-wc-rest-products-controller.php:2251
 msgid "Tag ID."
 msgstr "ה-ID של התגית."
 
-#: includes/api/class-wc-rest-products-controller.php:2227
+#: includes/api/class-wc-rest-products-controller.php:2244
 msgid "List of tags."
 msgstr "רשימת תגיות."
 
-#: includes/api/class-wc-rest-products-controller.php:2218
+#: includes/api/class-wc-rest-products-controller.php:2235
 msgid "Category slug."
 msgstr "מזהה כתובת של קטגוריה."
 
-#: includes/api/class-wc-rest-products-controller.php:2207
+#: includes/api/class-wc-rest-products-controller.php:2224
 msgid "Category ID."
 msgstr "ה-ID של הקטגוריה."
 
-#: includes/api/class-wc-rest-products-controller.php:2200
+#: includes/api/class-wc-rest-products-controller.php:2217
 msgid "List of categories."
 msgstr "רשימת קטגוריות."
 
-#: includes/api/class-wc-rest-products-controller.php:2195
+#: includes/api/class-wc-rest-products-controller.php:2212
 msgid "Optional note to send the customer after purchase."
 msgstr "הערת אופציונאלית שתשלח ללקוח לאחר הרכישה."
 
-#: includes/api/class-wc-rest-products-controller.php:2190
+#: includes/api/class-wc-rest-products-controller.php:2207
 msgid "Product parent ID."
 msgstr "ה-ID של מוצר האב."
 
-#: includes/api/class-wc-rest-products-controller.php:2185
+#: includes/api/class-wc-rest-products-controller.php:2199
 msgid "List of cross-sell products IDs."
 msgstr "מספרי ID של מוצרים משלימים."
 
-#: includes/api/class-wc-rest-products-controller.php:2180
+#: includes/api/class-wc-rest-products-controller.php:2191
 msgid "List of up-sell products IDs."
 msgstr "מספרי ID של קידומי מכירות."
 
-#: includes/api/class-wc-rest-products-controller.php:2174
+#: includes/api/class-wc-rest-products-controller.php:2182
 msgid "List of related products IDs."
 msgstr "מספרי ID של מוצרים קשורים."
 
-#: includes/api/class-wc-rest-products-controller.php:2168
+#: includes/api/class-wc-rest-products-controller.php:2176
 msgid "Amount of reviews that the product have."
 msgstr "מספר חוות הדעת שיש למוצר"
 
-#: includes/api/class-wc-rest-products-controller.php:2162
+#: includes/api/class-wc-rest-products-controller.php:2170
 msgid "Reviews average rating."
 msgstr "דירוג ביקורות ממוצע."
 
-#: includes/api/class-wc-rest-products-controller.php:2156
+#: includes/api/class-wc-rest-products-controller.php:2164
 msgid "Allow reviews."
 msgstr "אפשר חוות דעת."
 
-#: includes/api/class-wc-rest-products-controller.php:2150
-#: includes/api/class-wc-rest-products-controller.php:2579
+#: includes/api/class-wc-rest-products-controller.php:2158
+#: includes/api/class-wc-rest-products-controller.php:2596
 msgid "Shipping class ID."
 msgstr "ה-ID של סוג משלוח."
 
-#: includes/api/class-wc-rest-products-controller.php:2145
-#: includes/api/class-wc-rest-products-controller.php:2574
+#: includes/api/class-wc-rest-products-controller.php:2153
+#: includes/api/class-wc-rest-products-controller.php:2591
 msgid "Shipping class slug."
 msgstr "מזהה כתובת של משלוח."
 
-#: includes/api/class-wc-rest-products-controller.php:2139
+#: includes/api/class-wc-rest-products-controller.php:2147
 msgid "Shows whether or not the product shipping is taxable."
 msgstr "מציין אם המשלוח חייב במס."
 
-#: includes/api/class-wc-rest-products-controller.php:2133
+#: includes/api/class-wc-rest-products-controller.php:2141
 msgid "Shows if the product need to be shipped."
 msgstr "מראה אם ​​המוצר דורש משלוח."
 
-#: includes/api/class-wc-rest-products-controller.php:2126
+#: includes/api/class-wc-rest-products-controller.php:2134
 msgid "Product height (%s)."
 msgstr "גובה המוצר (%s)."
 
-#: includes/api/class-wc-rest-products-controller.php:2121
+#: includes/api/class-wc-rest-products-controller.php:2129
 msgid "Product width (%s)."
 msgstr "רוחב המוצר (%s)."
 
-#: includes/api/class-wc-rest-products-controller.php:2116
+#: includes/api/class-wc-rest-products-controller.php:2124
 msgid "Product length (%s)."
 msgstr "אורך מוצר (%s)."
 
-#: includes/api/class-wc-rest-products-controller.php:2111
+#: includes/api/class-wc-rest-products-controller.php:2119
 msgid "Product dimensions."
 msgstr "מימדי המוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:2106
+#: includes/api/class-wc-rest-products-controller.php:2114
 msgid "Product weight (%s)."
 msgstr "משקל המוצר (%s)."
 
-#: includes/api/class-wc-rest-products-controller.php:2100
+#: includes/api/class-wc-rest-products-controller.php:2108
 msgid "Allow one item to be bought in a single order."
 msgstr "אפשר רכישת פריט אחד בהזמנה בודדת."
 
-#: includes/api/class-wc-rest-products-controller.php:2094
+#: includes/api/class-wc-rest-products-controller.php:2102
 msgid "Shows if the product is on backordered."
 msgstr "הצג אם המוצר בהזמנות מראש."
 
-#: includes/api/class-wc-rest-products-controller.php:2088
-#: includes/api/class-wc-rest-products-controller.php:2535
+#: includes/api/class-wc-rest-products-controller.php:2096
+#: includes/api/class-wc-rest-products-controller.php:2552
 msgid "Shows if backorders are allowed."
 msgstr "הצג אם אפשר להזמין מראש."
 
-#: includes/api/class-wc-rest-products-controller.php:2081
-#: includes/api/class-wc-rest-products-controller.php:2528
+#: includes/api/class-wc-rest-products-controller.php:2089
+#: includes/api/class-wc-rest-products-controller.php:2545
 msgid "If managing stock, this controls if backorders are allowed."
 msgstr "אם קיים מלאי, זה מאפשר להזמין הזמנות מראש."
 
-#: includes/api/class-wc-rest-products-controller.php:2070
-#: includes/api/class-wc-rest-products-controller.php:2517
+#: includes/api/class-wc-rest-products-controller.php:2078
+#: includes/api/class-wc-rest-products-controller.php:2534
 msgid "Stock quantity."
 msgstr "כמות במלאי."
 
-#: includes/api/class-wc-rest-products-controller.php:2064
+#: includes/api/class-wc-rest-products-controller.php:2072
 msgid "Stock management at product level."
 msgstr "ניהול מלאי ברמת המוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:2052
-#: includes/api/class-wc-rest-products-controller.php:2499
+#: includes/api/class-wc-rest-products-controller.php:2060
+#: includes/api/class-wc-rest-products-controller.php:2516
 msgid "Tax status."
 msgstr "סטטוס מיסים."
 
-#: includes/api/class-wc-rest-products-controller.php:2047
+#: includes/api/class-wc-rest-products-controller.php:2055
 msgid "Product external button text. Only for external products."
 msgstr "טקסט חיצוני בכפתור של המוצר. רק עבור מוצרים חיצוניים."
 
-#: includes/api/class-wc-rest-products-controller.php:2041
+#: includes/api/class-wc-rest-products-controller.php:2049
 msgid "Product external URL. Only for external products."
 msgstr "כתובת חיצונית של המוצר. רק עבור מוצרים חיצוניים."
 
-#: includes/api/class-wc-rest-products-controller.php:2034
+#: includes/api/class-wc-rest-products-controller.php:2042
 msgid "Download type, this controls the schema on the front-end."
 msgstr "סוג ההורדה, זה שולט סכימה חזיתית."
 
-#: includes/api/class-wc-rest-products-controller.php:2022
+#: includes/api/class-wc-rest-products-controller.php:2030
 msgid "Amount of times the product can be downloaded."
 msgstr "מספר הפעמים שניתן להוריד את המוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:2003
-#: includes/api/class-wc-rest-products-controller.php:2468
+#: includes/api/class-wc-rest-products-controller.php:2011
+#: includes/api/class-wc-rest-products-controller.php:2485
 msgid "File MD5 hash."
 msgstr "גיבוב MD5 של הקובץ."
 
-#: includes/api/class-wc-rest-products-controller.php:1996
-#: includes/api/class-wc-rest-products-controller.php:2461
+#: includes/api/class-wc-rest-products-controller.php:2004
+#: includes/api/class-wc-rest-products-controller.php:2478
 msgid "List of downloadable files."
 msgstr "רשימה של קבצים להורדה."
 
-#: includes/api/class-wc-rest-products-controller.php:1990
+#: includes/api/class-wc-rest-products-controller.php:1998
 msgid "If the product is downloadable."
 msgstr "אם המוצר ניתן להורדה."
 
-#: includes/api/class-wc-rest-products-controller.php:1984
+#: includes/api/class-wc-rest-products-controller.php:1992
 msgid "If the product is virtual."
 msgstr "אם המוצר הוא וירטואלי."
 
-#: includes/api/class-wc-rest-products-controller.php:1978
+#: includes/api/class-wc-rest-products-controller.php:1986
 msgid "Amount of sales."
 msgstr "כמות המכירות."
 
-#: includes/api/class-wc-rest-products-controller.php:1972
+#: includes/api/class-wc-rest-products-controller.php:1980
 msgid "Shows if the product can be bought."
 msgstr "מציג אם ניתן לרכוש את המוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:1966
+#: includes/api/class-wc-rest-products-controller.php:1974
 msgid "Shows if the product is on sale."
 msgstr "מראה אם המוצר הוא במבצע."
 
-#: includes/api/class-wc-rest-products-controller.php:1960
+#: includes/api/class-wc-rest-products-controller.php:1968
 msgid "Price formatted in HTML."
 msgstr "פורמט מחיר ב-HTML"
 
-#: includes/api/class-wc-rest-products-controller.php:1955
-#: includes/api/class-wc-rest-products-controller.php:2427
+#: includes/api/class-wc-rest-products-controller.php:1963
+#: includes/api/class-wc-rest-products-controller.php:2444
 msgid "End data of sale price."
 msgstr "תאריך הסיום של מחיר המכירה."
 
-#: includes/api/class-wc-rest-products-controller.php:1950
-#: includes/api/class-wc-rest-products-controller.php:2422
+#: includes/api/class-wc-rest-products-controller.php:1958
+#: includes/api/class-wc-rest-products-controller.php:2439
 msgid "Start date of sale price."
 msgstr "תאריך ההתחלה של מחיר המכירה."
 
-#: includes/api/class-wc-rest-products-controller.php:1945
+#: includes/api/class-wc-rest-products-controller.php:1953
 msgid "Product sale price."
 msgstr "מחיר מכירה של מוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:1940
+#: includes/api/class-wc-rest-products-controller.php:1948
 msgid "Product regular price."
 msgstr "מחיר רגיל של מוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:1934
+#: includes/api/class-wc-rest-products-controller.php:1942
 msgid "Current product price."
 msgstr "מחיר מוצר הנוכחי."
 
-#: includes/api/class-wc-rest-products-controller.php:1929
-#: includes/api/class-wc-rest-products-controller.php:2401
+#: includes/api/class-wc-rest-products-controller.php:1937
+#: includes/api/class-wc-rest-products-controller.php:2418
 msgid "Unique identifier."
 msgstr "מזהה ייחודי."
 
-#: includes/api/class-wc-rest-products-controller.php:1924
+#: includes/api/class-wc-rest-products-controller.php:1932
 msgid "Product short description."
 msgstr "תיאור קצר של המוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:1919
+#: includes/api/class-wc-rest-products-controller.php:1927
 msgid "Product description."
 msgstr "תיאור המוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:1912
+#: includes/api/class-wc-rest-products-controller.php:1920
 msgid "Catalog visibility."
 msgstr "נראות קטלוג."
 
-#: includes/api/class-wc-rest-products-controller.php:1906
+#: includes/api/class-wc-rest-products-controller.php:1914
 msgid "Featured product."
 msgstr "מוצר נבחר."
 
-#: includes/api/class-wc-rest-products-controller.php:1899
+#: includes/api/class-wc-rest-products-controller.php:1907
 msgid "Product status (post status)."
 msgstr "סטטוס מוצר (סטטוס פוסט)."
 
-#: includes/api/class-wc-rest-products-controller.php:1892
+#: includes/api/class-wc-rest-products-controller.php:1900
 msgid "Product type."
 msgstr "סוג המוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:1886
+#: includes/api/class-wc-rest-products-controller.php:1894
 msgid "The date the product was last modified, in the site's timezone."
 msgstr "תאריך עדכון אחרון של המוצר, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-products-controller.php:1880
+#: includes/api/class-wc-rest-products-controller.php:1888
 msgid "The date the product was created, in the site's timezone."
 msgstr "תאריך יצירת המוצר, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-products-controller.php:1873
+#: includes/api/class-wc-rest-products-controller.php:1881
 msgid "Product URL."
 msgstr "כתובת מוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:1868
+#: includes/api/class-wc-rest-products-controller.php:1876
 msgid "Product slug."
 msgstr "מזהה כתובת של מוצר."
 
-#: includes/api/class-wc-rest-products-controller.php:968
-#: includes/api/class-wc-rest-products-controller.php:1376
+#: includes/api/class-wc-rest-products-controller.php:976
+#: includes/api/class-wc-rest-products-controller.php:1384
 msgid "The SKU already exists on another product."
 msgstr "מק\"ט זה כבר קיים על מוצר אחר."
 
 #: includes/api/class-wc-rest-product-tags-controller.php:100
-#: includes/api/class-wc-rest-products-controller.php:2239
+#: includes/api/class-wc-rest-products-controller.php:2256
 msgid "Tag name."
 msgstr "שם תגית."
 
@@ -1695,64 +1696,64 @@ msgstr "שם תגית."
 msgid "Shipping class name."
 msgstr "שם סוג משלוח."
 
-#: includes/api/class-wc-rest-product-reviews-controller.php:250
+#: includes/api/class-wc-rest-product-reviews-controller.php:310
 msgid "Shows if the reviewer bought the product or not."
 msgstr "מציג אם המבקר קנה את המוצר או לא."
 
-#: includes/api/class-wc-rest-product-reviews-controller.php:244
+#: includes/api/class-wc-rest-product-reviews-controller.php:304
 msgid "Reviewer email."
 msgstr "האימייל של המבקר."
 
-#: includes/api/class-wc-rest-product-reviews-controller.php:238
+#: includes/api/class-wc-rest-product-reviews-controller.php:298
 msgid "Reviewer name."
 msgstr "שם המסקר."
 
-#: includes/api/class-wc-rest-product-reviews-controller.php:232
+#: includes/api/class-wc-rest-product-reviews-controller.php:292
 msgid "Review rating (0 to 5)."
 msgstr "חוות דעת (0 עד 5)."
 
-#: includes/api/class-wc-rest-product-reviews-controller.php:226
+#: includes/api/class-wc-rest-product-reviews-controller.php:286
 msgid "The date the review was created, in the site's timezone."
 msgstr "תאריך יצירת הסקירה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-product-reviews-controller.php:106
-#: includes/api/class-wc-rest-product-reviews-controller.php:131
+#: includes/api/class-wc-rest-product-reviews-controller.php:166
+#: includes/api/class-wc-rest-product-reviews-controller.php:191
 msgid "Invalid product id."
 msgstr "ה-ID של המוצר לא תקין."
 
 #: includes/api/class-wc-rest-product-categories-controller.php:243
-#: includes/api/class-wc-rest-products-controller.php:2289
-#: includes/api/class-wc-rest-products-controller.php:2618
+#: includes/api/class-wc-rest-products-controller.php:2306
+#: includes/api/class-wc-rest-products-controller.php:2635
 msgid "Image alternative text."
 msgstr "טקסט חלופי לתמונה."
 
 #: includes/api/class-wc-rest-product-categories-controller.php:238
-#: includes/api/class-wc-rest-products-controller.php:2284
-#: includes/api/class-wc-rest-products-controller.php:2613
+#: includes/api/class-wc-rest-products-controller.php:2301
+#: includes/api/class-wc-rest-products-controller.php:2630
 msgid "Image name."
 msgstr "שם תמונה."
 
 #: includes/api/class-wc-rest-product-categories-controller.php:232
-#: includes/api/class-wc-rest-products-controller.php:2278
-#: includes/api/class-wc-rest-products-controller.php:2607
+#: includes/api/class-wc-rest-products-controller.php:2295
+#: includes/api/class-wc-rest-products-controller.php:2624
 msgid "Image URL."
 msgstr "כתובת תמונה."
 
 #: includes/api/class-wc-rest-product-categories-controller.php:226
-#: includes/api/class-wc-rest-products-controller.php:2272
-#: includes/api/class-wc-rest-products-controller.php:2601
+#: includes/api/class-wc-rest-products-controller.php:2289
+#: includes/api/class-wc-rest-products-controller.php:2618
 msgid "The date the image was last modified, in the site's timezone."
 msgstr "תאריך עדכון אחרון של התמונה, לפי אזור הזמן של האתר."
 
 #: includes/api/class-wc-rest-product-categories-controller.php:220
-#: includes/api/class-wc-rest-products-controller.php:2266
-#: includes/api/class-wc-rest-products-controller.php:2595
+#: includes/api/class-wc-rest-products-controller.php:2283
+#: includes/api/class-wc-rest-products-controller.php:2612
 msgid "The date the image was created, in the site's timezone."
 msgstr "תאריך יצירת התמונה, לפי אזור הזמן של האתר."
 
 #: includes/api/class-wc-rest-product-categories-controller.php:215
-#: includes/api/class-wc-rest-products-controller.php:2261
-#: includes/api/class-wc-rest-products-controller.php:2590
+#: includes/api/class-wc-rest-products-controller.php:2278
+#: includes/api/class-wc-rest-products-controller.php:2607
 msgid "Image ID."
 msgstr "מזהה תמונה."
 
@@ -1769,872 +1770,888 @@ msgid "The id for the parent of the resource."
 msgstr "ה-ID של המשאב האב."
 
 #: includes/api/class-wc-rest-product-categories-controller.php:174
-#: includes/api/class-wc-rest-products-controller.php:2212
+#: includes/api/class-wc-rest-products-controller.php:2229
 msgid "Category name."
 msgstr "שם קטגוריה."
 
-#: includes/api/class-wc-rest-product-attributes-controller.php:639
+#: includes/api/class-wc-rest-product-attributes-controller.php:648
 msgid "Slug \"%s\" is already in use."
 msgstr "מזהה כתובת \"%s\" כבר נמצא בשימוש."
 
-#: includes/api/class-wc-rest-product-attributes-controller.php:637
+#: includes/api/class-wc-rest-product-attributes-controller.php:646
 msgid "Slug \"%s\" is not allowed because it is a reserved term."
 msgstr "מזהה כתובת \"%s\" אינו מורשה מכיוון שזה מונח שמור."
 
-#: includes/api/class-wc-rest-product-attributes-controller.php:635
+#: includes/api/class-wc-rest-product-attributes-controller.php:644
 msgid "Slug \"%s\" is too long (28 characters max)."
 msgstr "מזהה כתובת \"%s\" ארוך מדי (28 תווים מקסימום)."
 
-#: includes/api/class-wc-rest-product-attributes-controller.php:561
+#: includes/api/class-wc-rest-product-attributes-controller.php:570
 msgid "Enable/Disable attribute archives."
 msgstr "הפעל / בטל ארכיוני תכונות."
 
-#: includes/api/class-wc-rest-product-attributes-controller.php:554
+#: includes/api/class-wc-rest-product-attributes-controller.php:563
 msgid "Default sort order."
 msgstr "סידור ברירת מחדל."
 
-#: includes/api/class-wc-rest-product-attributes-controller.php:547
+#: includes/api/class-wc-rest-product-attributes-controller.php:556
 msgid "Type of attribute."
 msgstr "סוג של תכונה."
 
-#: includes/api/class-wc-rest-product-attributes-controller.php:531
-#: includes/api/class-wc-rest-products-controller.php:2314
-#: includes/api/class-wc-rest-products-controller.php:2356
-#: includes/api/class-wc-rest-products-controller.php:2642
+#: includes/api/class-wc-rest-product-attributes-controller.php:540
+#: includes/api/class-wc-rest-products-controller.php:2331
+#: includes/api/class-wc-rest-products-controller.php:2373
+#: includes/api/class-wc-rest-products-controller.php:2659
 msgid "Attribute name."
 msgstr "שם התכונה."
 
-#: includes/api/class-wc-rest-product-attribute-terms-controller.php:141
+#: includes/api/class-wc-rest-product-attribute-terms-controller.php:230
 #: includes/api/class-wc-rest-product-categories-controller.php:255
 #: includes/api/class-wc-rest-product-shipping-classes-controller.php:124
 #: includes/api/class-wc-rest-product-tags-controller.php:124
 msgid "Number of published products for the resource."
 msgstr "מספר המוצרים שפורסמו עבור משאב זה."
 
-#: includes/api/class-wc-rest-product-attribute-terms-controller.php:136
+#: includes/api/class-wc-rest-product-attribute-terms-controller.php:225
 #: includes/api/class-wc-rest-product-categories-controller.php:250
 msgid "Menu order, used to custom sort the resource."
 msgstr "סדר תפריטים, למיון מותאם אישית של המשאב."
 
-#: includes/api/class-wc-rest-product-attribute-terms-controller.php:128
+#: includes/api/class-wc-rest-product-attribute-terms-controller.php:217
 #: includes/api/class-wc-rest-product-categories-controller.php:195
 #: includes/api/class-wc-rest-product-shipping-classes-controller.php:116
 #: includes/api/class-wc-rest-product-tags-controller.php:116
 msgid "HTML description of the resource."
 msgstr "תיאור HTML של המשאב."
 
-#: includes/api/class-wc-rest-product-attribute-terms-controller.php:120
-#: includes/api/class-wc-rest-product-attributes-controller.php:539
+#: includes/api/class-wc-rest-product-attribute-terms-controller.php:209
+#: includes/api/class-wc-rest-product-attributes-controller.php:548
 #: includes/api/class-wc-rest-product-categories-controller.php:182
 #: includes/api/class-wc-rest-product-shipping-classes-controller.php:108
 #: includes/api/class-wc-rest-product-tags-controller.php:108
 msgid "An alphanumeric identifier for the resource unique to its type."
 msgstr "זיהוי אלפאנומרי של המשאב יחודי לסוג זה."
 
-#: includes/api/class-wc-rest-product-attribute-terms-controller.php:112
+#: includes/api/class-wc-rest-product-attribute-terms-controller.php:201
 msgid "Term name."
 msgstr "שם המונח."
 
-#: includes/api/class-wc-rest-orders-controller.php:1830
+#: includes/api/class-wc-rest-orders-controller.php:1836
 msgid "Limit result set to orders assigned a specific product."
 msgstr "הגבלת תוצאות להזמנות של מוצר מסויים."
 
-#: includes/api/class-wc-rest-orders-controller.php:1824
+#: includes/api/class-wc-rest-orders-controller.php:1830
 msgid "Limit result set to orders assigned a specific customer."
 msgstr "הגבלת תוצאות להזמנות של לקוח מסויים."
 
-#: includes/api/class-wc-rest-orders-controller.php:1817
+#: includes/api/class-wc-rest-orders-controller.php:1823
 msgid "Limit result set to orders assigned a specific status."
 msgstr "הגבלת תוצאות להזמנות בסטטוס מסויים."
 
-#: includes/api/class-wc-rest-orders-controller.php:1793
+#: includes/api/class-wc-rest-orders-controller.php:1799
 msgid "Refund total."
 msgstr "סה\"כ החזר"
 
-#: includes/api/class-wc-rest-orders-controller.php:1787
+#: includes/api/class-wc-rest-orders-controller.php:1793
 msgid "Refund reason."
 msgstr "סיבת החזר."
 
-#: includes/api/class-wc-rest-orders-controller.php:1781
+#: includes/api/class-wc-rest-orders-controller.php:1787
 msgid "Refund ID."
 msgstr "מזהה החזר כספי."
 
-#: includes/api/class-wc-rest-orders-controller.php:1773
+#: includes/api/class-wc-rest-orders-controller.php:1779
 msgid "List of refunds."
 msgstr "רשימת החזרים."
 
-#: includes/api/class-wc-rest-orders-controller.php:1764
+#: includes/api/class-wc-rest-orders-controller.php:1770
 msgid "Discount total tax."
 msgstr "סה\"כ מס הנחה"
 
-#: includes/api/class-wc-rest-orders-controller.php:1759
+#: includes/api/class-wc-rest-orders-controller.php:1765
 msgid "Discount total."
 msgstr "סה\"כ הנחה"
 
-#: includes/api/class-wc-rest-orders-controller.php:1741
+#: includes/api/class-wc-rest-orders-controller.php:1747
 msgid "Coupons line data."
 msgstr "שורות מידע לקופונים."
 
-#: includes/api/class-wc-rest-orders-controller.php:1694
+#: includes/api/class-wc-rest-orders-controller.php:1700
 msgid "Tax status of fee."
 msgstr "סטטוס המס של העמלה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1689
+#: includes/api/class-wc-rest-orders-controller.php:1695
 msgid "Tax class of fee."
 msgstr "סוג המס של העמלה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1684
+#: includes/api/class-wc-rest-orders-controller.php:1690
 msgid "Fee name."
 msgstr "שם עמלה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1671
+#: includes/api/class-wc-rest-orders-controller.php:1677
 msgid "Fee lines data."
 msgstr "פרטי שורות עמלה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1629
+#: includes/api/class-wc-rest-orders-controller.php:1635
 msgid "Shipping method ID."
 msgstr "ה-ID של שיטת המשלוח."
 
-#: includes/api/class-wc-rest-orders-controller.php:1624
+#: includes/api/class-wc-rest-orders-controller.php:1630
 msgid "Shipping method name."
 msgstr "שם שיטת המשלוח."
 
-#: includes/api/class-wc-rest-orders-controller.php:1611
+#: includes/api/class-wc-rest-orders-controller.php:1617
 msgid "Shipping lines data."
 msgstr "נתונים קווי ספנות."
 
-#: includes/api/class-wc-rest-orders-controller.php:1602
+#: includes/api/class-wc-rest-orders-controller.php:1608
 msgid "Shipping tax total."
 msgstr "סה\"כ מס משלוח."
 
-#: includes/api/class-wc-rest-orders-controller.php:1596
+#: includes/api/class-wc-rest-orders-controller.php:1602
 msgid "Tax total (not including shipping taxes)."
 msgstr "סה\"כ מיסים (לא כולל מיסי משלוחים)."
 
-#: includes/api/class-wc-rest-orders-controller.php:1590
+#: includes/api/class-wc-rest-orders-controller.php:1596
 msgid "Show if is a compound tax rate."
 msgstr "הצג אם הוא שיעור המס מורכב."
 
-#: includes/api/class-wc-rest-orders-controller.php:1584
+#: includes/api/class-wc-rest-orders-controller.php:1590
 msgid "Tax rate label."
 msgstr "תווית שיעור מס."
 
-#: includes/api/class-wc-rest-orders-controller.php:1572
+#: includes/api/class-wc-rest-orders-controller.php:1578
 msgid "Tax rate code."
 msgstr "קוד שיעור המס."
 
-#: includes/api/class-wc-rest-orders-controller.php:1558
+#: includes/api/class-wc-rest-orders-controller.php:1564
 msgid "Tax lines data."
 msgstr "פרטי שורות מס."
 
-#: includes/api/class-wc-rest-orders-controller.php:1419
+#: includes/api/class-wc-rest-orders-controller.php:1425
 msgid "MD5 hash of cart items to ensure orders are not modified."
 msgstr "גיבוב MD5 של פריטים לעגלת הקניות כדי להבטיח שההזמנות אינן משתנות."
 
-#: includes/api/class-wc-rest-orders-controller.php:1413
+#: includes/api/class-wc-rest-orders-controller.php:1419
 msgid "The date the order has been paid, in the site's timezone."
 msgstr "תאריך התשלום עבור ההזמנה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-orders-controller.php:1407
+#: includes/api/class-wc-rest-orders-controller.php:1413
 msgid "The date the order was completed, in the site's timezone."
 msgstr "תאריך השלמת ההזמנה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-orders-controller.php:1402
+#: includes/api/class-wc-rest-orders-controller.php:1408
 msgid "Note left by customer during checkout."
 msgstr "הערה הושארה על-ידי הלקוח במהלך התשלום."
 
-#: includes/api/class-wc-rest-orders-controller.php:1396
+#: includes/api/class-wc-rest-orders-controller.php:1402
 msgid "Shows where the order was created."
 msgstr "מציג מהיכן ההזמנה נוצרה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1390
+#: includes/api/class-wc-rest-orders-controller.php:1396
 msgid "User agent of the customer."
 msgstr "ה-user agent של הלקוח."
 
-#: includes/api/class-wc-rest-orders-controller.php:1384
+#: includes/api/class-wc-rest-orders-controller.php:1390
 msgid "Customer's IP address."
 msgstr "כתובת IP של הלקוח."
 
-#: includes/api/class-wc-rest-orders-controller.php:1379
+#: includes/api/class-wc-rest-orders-controller.php:1385
 msgid "Unique transaction ID."
 msgstr "מזהה עסקה ייחודי."
 
-#: includes/api/class-wc-rest-orders-controller.php:1373
+#: includes/api/class-wc-rest-orders-controller.php:1379
 msgid "Define if the order is paid. It will set the status to processing and reduce stock items."
 msgstr "הגדר אם ההזמנה שולמה. זה יגדיר סטטוס בטיפול ויפחית את כמות הפריטים במלאי."
 
-#: includes/api/class-wc-rest-orders-controller.php:1368
+#: includes/api/class-wc-rest-orders-controller.php:1374
 msgid "Payment method title."
 msgstr "כותרת שיטת תשלום."
 
-#: includes/api/class-wc-rest-orders-controller.php:1363
+#: includes/api/class-wc-rest-orders-controller.php:1369
 msgid "Payment method ID."
 msgstr "מזהה אמצעי תשלום."
 
-#: includes/api/class-wc-rest-orders-controller.php:1311
+#: includes/api/class-wc-rest-orders-controller.php:1317
 msgid "Shipping address."
 msgstr "כתובת משלוח."
 
-#: includes/api/class-wc-rest-orders-controller.php:1293
-#: includes/api/class-wc-rest-orders-controller.php:1356
+#: includes/api/class-wc-rest-orders-controller.php:1299
+#: includes/api/class-wc-rest-orders-controller.php:1362
 msgid "Country code in ISO 3166-1 alpha-2 format."
 msgstr "קוד מדינה בפורמט ISO 3166-1 alpha-2."
 
-#: includes/api/class-wc-rest-orders-controller.php:1248
+#: includes/api/class-wc-rest-orders-controller.php:1254
 msgid "Billing address."
 msgstr "כתובת לחיוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:1242
+#: includes/api/class-wc-rest-orders-controller.php:1248
 msgid "Sum of all taxes."
 msgstr "סה\"כ כל המיסים."
 
-#: includes/api/class-wc-rest-orders-controller.php:1236
+#: includes/api/class-wc-rest-orders-controller.php:1242
 msgid "Grand total."
 msgstr "סך הכל."
 
-#: includes/api/class-wc-rest-orders-controller.php:1230
+#: includes/api/class-wc-rest-orders-controller.php:1236
 msgid "Sum of line item taxes only."
 msgstr "סכום שורת מס בלבד."
 
-#: includes/api/class-wc-rest-orders-controller.php:1224
+#: includes/api/class-wc-rest-orders-controller.php:1230
 msgid "Total shipping tax amount for the order."
 msgstr "סה\"כ מס על משלוחים עבור ההזמנה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1218
+#: includes/api/class-wc-rest-orders-controller.php:1224
 msgid "Total shipping amount for the order."
 msgstr "סה\"כ עלות משלוחים עבור ההזמנה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1212
+#: includes/api/class-wc-rest-orders-controller.php:1218
 msgid "Total discount tax amount for the order."
 msgstr "סה\"כ מס על הנחות עבור ההזמנה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1206
+#: includes/api/class-wc-rest-orders-controller.php:1212
 msgid "Total discount amount for the order."
 msgstr "סה\"כ עלות הנחות עבור ההזמנה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1200
+#: includes/api/class-wc-rest-orders-controller.php:1206
 msgid "User ID who owns the order. 0 for guests."
 msgstr "ה-ID של המשתמש שבבעלותו ההזמנה. 0 לאורחים."
 
-#: includes/api/class-wc-rest-orders-controller.php:1194
+#: includes/api/class-wc-rest-orders-controller.php:1200
 msgid "The date the order was last modified, in the site's timezone."
 msgstr "תאריך עדכון אחרון של ההזמנה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-orders-controller.php:1188
+#: includes/api/class-wc-rest-orders-controller.php:1194
 msgid "The date the order was created, in the site's timezone."
 msgstr "תאריך יצירת ההזמנה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-orders-controller.php:1182
+#: includes/api/class-wc-rest-orders-controller.php:1188
 msgid "Shows if the prices included tax during checkout."
 msgstr "מציג במהלך התשלום אם המחירים כוללים מס."
 
-#: includes/api/class-wc-rest-orders-controller.php:1176
+#: includes/api/class-wc-rest-orders-controller.php:1182
 msgid "Version of WooCommerce when the order was made."
 msgstr "גרסת ווקמרס כאשר נעשה ההזמנה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1169
+#: includes/api/class-wc-rest-orders-controller.php:1175
 msgid "Currency the order was created with, in ISO format."
 msgstr "המטבע המקורי של ההזמנה, בפורמט ISO."
 
-#: includes/api/class-wc-rest-orders-controller.php:1150
+#: includes/api/class-wc-rest-orders-controller.php:1156
 msgid "Order status."
 msgstr "מצב הזמנה."
 
-#: includes/api/class-wc-rest-orders-controller.php:1145
+#: includes/api/class-wc-rest-orders-controller.php:1151
 msgid "Parent order ID."
 msgstr "ה-ID של הזמנת אב."
 
-#: includes/api/class-wc-rest-orders-controller.php:941
+#: includes/api/class-wc-rest-orders-controller.php:947
 msgid "Order item ID provided is not associated with order."
 msgstr "ה-ID של פריט ההזמנה שצוין אינו משויך להזמנה."
 
-#: includes/api/class-wc-rest-orders-controller.php:854
+#: includes/api/class-wc-rest-orders-controller.php:860
 msgid "Cannot update coupon, try again."
 msgstr "לא ניתן לעדכן קופון, נסה שוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:837
+#: includes/api/class-wc-rest-orders-controller.php:843
 msgid "Cannot create coupon, try again."
 msgstr "לא ניתן ליצור קופון, נסה שוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:831
+#: includes/api/class-wc-rest-orders-controller.php:837
 msgid "Coupon code is required."
 msgstr "נדרש קוד קופון."
 
-#: includes/api/class-wc-rest-orders-controller.php:825
+#: includes/api/class-wc-rest-orders-controller.php:831
 msgid "Coupon discount must be a positive amount."
 msgstr "קופון הנחה חייב להיות בסכום חיובי."
 
-#: includes/api/class-wc-rest-orders-controller.php:809
+#: includes/api/class-wc-rest-orders-controller.php:815
 msgid "Cannot update fee, try again."
 msgstr "לא ניתן לעדכן עמלה, נסה שוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:784
+#: includes/api/class-wc-rest-orders-controller.php:790
 msgid "Cannot create fee, try again."
 msgstr "לא ניתן ליצור עמלה, נסה שוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:770
+#: includes/api/class-wc-rest-orders-controller.php:776
 msgid "Fee tax class is required when fee is taxable."
 msgstr "נדרש להגדיר סוג מס לעמלה כאשר העמלה חייבת במס."
 
-#: includes/api/class-wc-rest-orders-controller.php:754
+#: includes/api/class-wc-rest-orders-controller.php:760
 msgid "Fee name is required."
 msgstr "נדרש שם עמלה."
 
-#: includes/api/class-wc-rest-orders-controller.php:736
+#: includes/api/class-wc-rest-orders-controller.php:742
 msgid "Cannot update shipping method, try again."
 msgstr "לא ניתן לעדכן שיטת משלוח, נסה שוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:715
+#: includes/api/class-wc-rest-orders-controller.php:721
 msgid "Cannot create shipping method, try again."
 msgstr "לא ניתן ליצור שיטת שילוח, נסה שוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:707
+#: includes/api/class-wc-rest-orders-controller.php:713
 msgid "Shipping method ID is required."
 msgstr "ה-ID של שיטת משלוח הוא שדה חובה."
 
-#: includes/api/class-wc-rest-orders-controller.php:701
+#: includes/api/class-wc-rest-orders-controller.php:707
 msgid "Shipping total must be a positive amount."
 msgstr "סה\"כ משלוחים חייב להיות בסכום חיובי."
 
-#: includes/api/class-wc-rest-orders-controller.php:685
+#: includes/api/class-wc-rest-orders-controller.php:691
 msgid "Cannot update line item, try again."
 msgstr "לא ניתן לעדכן פריט שורה, נסה שוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:680
+#: includes/api/class-wc-rest-orders-controller.php:686
 msgid "Cannot create line item, try again."
 msgstr "לא ניתן ליצור פריט שורה, נסה שוב."
 
-#: includes/api/class-wc-rest-orders-controller.php:644
+#: includes/api/class-wc-rest-orders-controller.php:650
 msgid "Product quantity is required."
 msgstr "דרושה כמות המוצר."
 
-#: includes/api/class-wc-rest-orders-controller.php:639
+#: includes/api/class-wc-rest-orders-controller.php:645
 msgid "Product quantity must be a positive float."
 msgstr "כמות המוצר חייבת להיות חיובית."
 
-#: includes/api/class-wc-rest-orders-controller.php:634
+#: includes/api/class-wc-rest-orders-controller.php:640
 msgid "Product is invalid."
 msgstr "המוצר לא זמין"
 
-#: includes/api/class-wc-rest-orders-controller.php:626
+#: includes/api/class-wc-rest-orders-controller.php:632
 msgid "Product ID or variation ID provided does not match this line item."
 msgstr "ה-ID של המוצר או ה-ID של הוריאציה שסופק אינו תואם לפריט השואה הזה."
 
-#: includes/api/class-wc-rest-orders-controller.php:609
+#: includes/api/class-wc-rest-orders-controller.php:615
 msgid "Product ID or SKU is required."
 msgstr "נדרש ID או מק\"ט של המוצר."
 
-#: includes/api/class-wc-rest-orders-controller.php:508
+#: includes/api/class-wc-rest-orders-controller.php:514
 msgid "Cannot create order: %s."
 msgstr "לא ניתן ליצור הזמנה: %s."
 
-#: includes/api/class-wc-rest-orders-controller.php:495
-#: includes/api/class-wc-rest-orders-controller.php:989
+#: includes/api/class-wc-rest-orders-controller.php:501
+#: includes/api/class-wc-rest-orders-controller.php:995
 msgid "Customer ID is invalid."
 msgstr "ה-ID של לקוח אינו תקין."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:517
-#: includes/api/class-wc-rest-orders-controller.php:1837
+#: includes/api/class-wc-rest-order-refunds-controller.php:533
+#: includes/api/class-wc-rest-orders-controller.php:1843
 msgid "Number of decimal points to use in each resource."
 msgstr "מספר נקודות עשרוניות בכל משאב."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:484
-#: includes/api/class-wc-rest-orders-controller.php:1540
+#: includes/api/class-wc-rest-order-refunds-controller.php:500
+#: includes/api/class-wc-rest-orders-controller.php:1546
 msgid "Meta label."
 msgstr "תווית Meta."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:478
-#: includes/api/class-wc-rest-orders-controller.php:1534
+#: includes/api/class-wc-rest-order-refunds-controller.php:494
+#: includes/api/class-wc-rest-orders-controller.php:1540
 msgid "Meta key."
 msgstr "תגית מטה."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:461
-#: includes/api/class-wc-rest-orders-controller.php:1517
-#: includes/api/class-wc-rest-orders-controller.php:1729
+#: includes/api/class-wc-rest-order-refunds-controller.php:477
+#: includes/api/class-wc-rest-orders-controller.php:1523
+#: includes/api/class-wc-rest-orders-controller.php:1735
 msgid "Tax subtotal."
 msgstr "סכום ביניים מיסים"
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:455
-#: includes/api/class-wc-rest-orders-controller.php:1511
-#: includes/api/class-wc-rest-orders-controller.php:1659
-#: includes/api/class-wc-rest-orders-controller.php:1723
+#: includes/api/class-wc-rest-order-refunds-controller.php:471
+#: includes/api/class-wc-rest-orders-controller.php:1517
+#: includes/api/class-wc-rest-orders-controller.php:1665
+#: includes/api/class-wc-rest-orders-controller.php:1729
 msgid "Tax total."
 msgstr "סה\"כ מיסים."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:441
-#: includes/api/class-wc-rest-orders-controller.php:1497
-#: includes/api/class-wc-rest-orders-controller.php:1645
-#: includes/api/class-wc-rest-orders-controller.php:1709
+#: includes/api/class-wc-rest-order-refunds-controller.php:457
+#: includes/api/class-wc-rest-orders-controller.php:1503
+#: includes/api/class-wc-rest-orders-controller.php:1651
+#: includes/api/class-wc-rest-orders-controller.php:1715
 msgid "Line taxes."
 msgstr "שורת מס."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:436
-#: includes/api/class-wc-rest-orders-controller.php:1492
-#: includes/api/class-wc-rest-orders-controller.php:1639
-#: includes/api/class-wc-rest-orders-controller.php:1704
+#: includes/api/class-wc-rest-order-refunds-controller.php:452
+#: includes/api/class-wc-rest-orders-controller.php:1498
+#: includes/api/class-wc-rest-orders-controller.php:1645
+#: includes/api/class-wc-rest-orders-controller.php:1710
 msgid "Line total tax (after discounts)."
 msgstr "סה\"כ מיסים (אחרי הנחות)."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:431
-#: includes/api/class-wc-rest-orders-controller.php:1487
-#: includes/api/class-wc-rest-orders-controller.php:1634
-#: includes/api/class-wc-rest-orders-controller.php:1699
+#: includes/api/class-wc-rest-order-refunds-controller.php:447
+#: includes/api/class-wc-rest-orders-controller.php:1493
+#: includes/api/class-wc-rest-orders-controller.php:1640
+#: includes/api/class-wc-rest-orders-controller.php:1705
 msgid "Line total (after discounts)."
 msgstr "סה\"כ (אחרי הנחות)."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:426
-#: includes/api/class-wc-rest-orders-controller.php:1482
+#: includes/api/class-wc-rest-order-refunds-controller.php:442
+#: includes/api/class-wc-rest-orders-controller.php:1488
 msgid "Line subtotal tax (before discounts)."
 msgstr "סכום ביניים מיסים (לפני הנחות)."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:421
-#: includes/api/class-wc-rest-orders-controller.php:1477
+#: includes/api/class-wc-rest-order-refunds-controller.php:437
+#: includes/api/class-wc-rest-orders-controller.php:1483
 msgid "Line subtotal (before discounts)."
 msgstr "סכום ביניים (לפני הנחות)."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:415
-#: includes/api/class-wc-rest-orders-controller.php:1471
+#: includes/api/class-wc-rest-order-refunds-controller.php:431
+#: includes/api/class-wc-rest-orders-controller.php:1477
 msgid "Product price."
 msgstr "מחיר מוצר."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:409
-#: includes/api/class-wc-rest-orders-controller.php:1465
+#: includes/api/class-wc-rest-order-refunds-controller.php:425
+#: includes/api/class-wc-rest-orders-controller.php:1471
 msgid "Tax class of product."
 msgstr "סוג מס של המוצר"
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:404
-#: includes/api/class-wc-rest-orders-controller.php:1460
+#: includes/api/class-wc-rest-order-refunds-controller.php:420
+#: includes/api/class-wc-rest-orders-controller.php:1466
 msgid "Quantity ordered."
 msgstr "כמות שהוזמנה."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:399
-#: includes/api/class-wc-rest-orders-controller.php:1455
+#: includes/api/class-wc-rest-order-refunds-controller.php:415
+#: includes/api/class-wc-rest-orders-controller.php:1461
 msgid "Variation ID, if applicable."
 msgstr "זיהוי וריאציה, אם ניתן ליישום."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:382
-#: includes/api/class-wc-rest-orders-controller.php:1438
-#: includes/api/class-wc-rest-products-controller.php:1863
+#: includes/api/class-wc-rest-order-refunds-controller.php:398
+#: includes/api/class-wc-rest-orders-controller.php:1444
+#: includes/api/class-wc-rest-products-controller.php:1871
 #: includes/api/class-wc-rest-report-top-sellers-controller.php:152
 msgid "Product name."
 msgstr "שם המוצר."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:376
-#: includes/api/class-wc-rest-orders-controller.php:1432
-#: includes/api/class-wc-rest-orders-controller.php:1566
-#: includes/api/class-wc-rest-orders-controller.php:1618
-#: includes/api/class-wc-rest-orders-controller.php:1678
-#: includes/api/class-wc-rest-orders-controller.php:1748
+#: includes/api/class-wc-rest-order-refunds-controller.php:392
+#: includes/api/class-wc-rest-orders-controller.php:1438
+#: includes/api/class-wc-rest-orders-controller.php:1572
+#: includes/api/class-wc-rest-orders-controller.php:1624
+#: includes/api/class-wc-rest-orders-controller.php:1684
+#: includes/api/class-wc-rest-orders-controller.php:1754
 msgid "Item ID."
 msgstr "ה-ID של הפריט."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:364
+#: includes/api/class-wc-rest-order-refunds-controller.php:380
 msgid "Reason for refund."
 msgstr "סיבה להחזר."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:359
+#: includes/api/class-wc-rest-order-refunds-controller.php:375
 msgid "Refund amount."
 msgstr "כמות החזר."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:353
+#: includes/api/class-wc-rest-order-refunds-controller.php:369
 msgid "The date the order refund was created, in the site's timezone."
 msgstr "תאריך יצירת החזר ההזמנה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:309
+#: includes/api/class-wc-rest-order-refunds-controller.php:325
 msgid "An error occurred while attempting to create the refund using the payment gateway API."
 msgstr "ארעה שגיאה בעת הניסיון ליצירת הזיכוי באמצעות ה-API של חברת הסליקה."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:292
+#: includes/api/class-wc-rest-order-refunds-controller.php:308
 msgid "Cannot create order refund, please try again."
 msgstr "לא ניתן ליצור החזר כספי, נסה שנית."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:276
+#: includes/api/class-wc-rest-order-refunds-controller.php:292
 msgid "Refund amount must be greater than zero."
 msgstr "סכום ההחזר הכספי חייב להיות גדול מאפס."
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:272
+#: includes/api/class-wc-rest-order-refunds-controller.php:288
 msgid "Order is invalid"
 msgstr "הזמנה אינה חוקית"
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:118
+#: includes/api/class-wc-rest-order-refunds-controller.php:134
 msgid "Invalid order refund ID."
 msgstr "ה-ID של ההחזר כספי לא תקין."
 
-#: includes/api/class-wc-rest-order-notes-controller.php:164
-#: includes/api/class-wc-rest-order-refunds-controller.php:112
+#: includes/api/class-wc-rest-order-notes-controller.php:183
+#: includes/api/class-wc-rest-order-refunds-controller.php:128
 msgid "Invalid order ID."
 msgstr "ה-ID של ההזמנה לא חוקי."
 
-#: includes/api/class-wc-rest-order-notes-controller.php:392
+#: includes/api/class-wc-rest-order-notes-controller.php:411
 msgid "Order note."
 msgstr "הערות הזמנה."
 
-#: includes/api/class-wc-rest-order-notes-controller.php:386
+#: includes/api/class-wc-rest-order-notes-controller.php:405
 msgid "The date the order note was created, in the site's timezone."
 msgstr "תאריך יצירת הערת ההזמנה, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-order-notes-controller.php:274
-#: includes/api/class-wc-rest-webhooks-controller.php:299
+#: includes/api/class-wc-rest-order-notes-controller.php:293
+#: includes/api/class-wc-rest-webhooks-controller.php:312
 msgid "Webhooks do not support trashing."
 msgstr "Webhooks לא תומך בפח."
 
-#: includes/api/class-wc-rest-order-notes-controller.php:212
+#: includes/api/class-wc-rest-order-notes-controller.php:231
 msgid "Cannot create order note, please try again."
 msgstr "לא ניתן ליצור הערת הזמנה, נסה שוב."
 
-#: includes/api/class-wc-rest-order-notes-controller.php:203
-#: includes/api/class-wc-rest-order-notes-controller.php:247
-#: includes/api/class-wc-rest-order-notes-controller.php:280
+#: includes/api/class-wc-rest-order-notes-controller.php:222
+#: includes/api/class-wc-rest-order-notes-controller.php:266
+#: includes/api/class-wc-rest-order-notes-controller.php:299
 msgid "Invalid order id."
 msgstr "ה-ID של ההזמנה לא חוקי."
 
-#: includes/api/class-wc-rest-customers-controller.php:885
+#: includes/api/class-wc-rest-customers-controller.php:908
 msgid "Limit result set to resources with a specific role."
 msgstr "הגבלת תוצאות למשאבים עם תפקיד מסויים."
 
-#: includes/api/class-wc-rest-customers-controller.php:879
+#: includes/api/class-wc-rest-customers-controller.php:902
 msgid "Limit result set to resources with a specific email."
 msgstr "הגבלת תוצאות למשאבים עם אימייל מסויים."
 
-#: includes/api/class-wc-rest-customers-controller.php:761
+#: includes/api/class-wc-rest-customers-controller.php:778
 msgid "List of shipping address data."
 msgstr "רשימה של כתובות משלוחים."
 
-#: includes/api/class-wc-rest-customers-controller.php:754
-#: includes/api/class-wc-rest-orders-controller.php:1304
+#: includes/api/class-wc-rest-customers-controller.php:771
+#: includes/api/class-wc-rest-orders-controller.php:1310
 msgid "Phone number."
 msgstr "מספר טלפון."
 
-#: includes/api/class-wc-rest-customers-controller.php:748
-#: includes/api/class-wc-rest-orders-controller.php:1298
+#: includes/api/class-wc-rest-customers-controller.php:765
+#: includes/api/class-wc-rest-orders-controller.php:1304
 msgid "Email address."
 msgstr "כתובת אימייל"
 
-#: includes/api/class-wc-rest-customers-controller.php:743
-#: includes/api/class-wc-rest-customers-controller.php:806
+#: includes/api/class-wc-rest-customers-controller.php:760
+#: includes/api/class-wc-rest-customers-controller.php:823
 msgid "ISO code of the country."
 msgstr "קוד ISO של המדינה."
 
-#: includes/api/class-wc-rest-customers-controller.php:738
-#: includes/api/class-wc-rest-customers-controller.php:801
-#: includes/api/class-wc-rest-orders-controller.php:1288
-#: includes/api/class-wc-rest-orders-controller.php:1351
+#: includes/api/class-wc-rest-customers-controller.php:755
+#: includes/api/class-wc-rest-customers-controller.php:818
+#: includes/api/class-wc-rest-orders-controller.php:1294
+#: includes/api/class-wc-rest-orders-controller.php:1357
 msgid "Postal code."
 msgstr "מיקוד."
 
-#: includes/api/class-wc-rest-customers-controller.php:733
-#: includes/api/class-wc-rest-customers-controller.php:796
-#: includes/api/class-wc-rest-orders-controller.php:1283
-#: includes/api/class-wc-rest-orders-controller.php:1346
+#: includes/api/class-wc-rest-customers-controller.php:750
+#: includes/api/class-wc-rest-customers-controller.php:813
+#: includes/api/class-wc-rest-orders-controller.php:1289
+#: includes/api/class-wc-rest-orders-controller.php:1352
 msgid "ISO code or name of the state, province or district."
 msgstr "קוד ISO או שם המדינה, הפרובינציה או המחוז."
 
-#: includes/api/class-wc-rest-customers-controller.php:728
-#: includes/api/class-wc-rest-customers-controller.php:791
-#: includes/api/class-wc-rest-orders-controller.php:1278
-#: includes/api/class-wc-rest-orders-controller.php:1341
-#: includes/api/class-wc-rest-taxes-controller.php:589
+#: includes/api/class-wc-rest-customers-controller.php:745
+#: includes/api/class-wc-rest-customers-controller.php:808
+#: includes/api/class-wc-rest-orders-controller.php:1284
+#: includes/api/class-wc-rest-orders-controller.php:1347
+#: includes/api/class-wc-rest-taxes-controller.php:596
 msgid "City name."
 msgstr "עיר"
 
-#: includes/api/class-wc-rest-customers-controller.php:723
-#: includes/api/class-wc-rest-customers-controller.php:786
-#: includes/api/class-wc-rest-orders-controller.php:1273
-#: includes/api/class-wc-rest-orders-controller.php:1336
+#: includes/api/class-wc-rest-customers-controller.php:740
+#: includes/api/class-wc-rest-customers-controller.php:803
+#: includes/api/class-wc-rest-orders-controller.php:1279
+#: includes/api/class-wc-rest-orders-controller.php:1342
 msgid "Address line 2."
 msgstr "כתובת 2"
 
-#: includes/api/class-wc-rest-customers-controller.php:718
-#: includes/api/class-wc-rest-customers-controller.php:781
-#: includes/api/class-wc-rest-orders-controller.php:1268
-#: includes/api/class-wc-rest-orders-controller.php:1331
+#: includes/api/class-wc-rest-customers-controller.php:735
+#: includes/api/class-wc-rest-customers-controller.php:798
+#: includes/api/class-wc-rest-orders-controller.php:1274
+#: includes/api/class-wc-rest-orders-controller.php:1337
 msgid "Address line 1."
 msgstr "כתובת 1"
 
-#: includes/api/class-wc-rest-customers-controller.php:713
-#: includes/api/class-wc-rest-customers-controller.php:776
-#: includes/api/class-wc-rest-orders-controller.php:1263
-#: includes/api/class-wc-rest-orders-controller.php:1326
+#: includes/api/class-wc-rest-customers-controller.php:730
+#: includes/api/class-wc-rest-customers-controller.php:793
+#: includes/api/class-wc-rest-orders-controller.php:1269
+#: includes/api/class-wc-rest-orders-controller.php:1332
 msgid "Company name."
 msgstr "שם חברה."
 
-#: includes/api/class-wc-rest-customers-controller.php:708
-#: includes/api/class-wc-rest-customers-controller.php:771
-#: includes/api/class-wc-rest-orders-controller.php:1258
-#: includes/api/class-wc-rest-orders-controller.php:1321
+#: includes/api/class-wc-rest-customers-controller.php:725
+#: includes/api/class-wc-rest-customers-controller.php:788
+#: includes/api/class-wc-rest-orders-controller.php:1264
+#: includes/api/class-wc-rest-orders-controller.php:1327
 msgid "Last name."
 msgstr "שם משפחה"
 
-#: includes/api/class-wc-rest-customers-controller.php:703
-#: includes/api/class-wc-rest-customers-controller.php:766
-#: includes/api/class-wc-rest-orders-controller.php:1253
-#: includes/api/class-wc-rest-orders-controller.php:1316
+#: includes/api/class-wc-rest-customers-controller.php:720
+#: includes/api/class-wc-rest-customers-controller.php:783
+#: includes/api/class-wc-rest-orders-controller.php:1259
+#: includes/api/class-wc-rest-orders-controller.php:1322
 msgid "First name."
 msgstr "שם פרטי."
 
-#: includes/api/class-wc-rest-customers-controller.php:698
+#: includes/api/class-wc-rest-customers-controller.php:715
 msgid "List of billing address data."
 msgstr "רשימה של פרטי כתובת חיוב."
 
-#: includes/api/class-wc-rest-customers-controller.php:692
+#: includes/api/class-wc-rest-customers-controller.php:709
 msgid "Avatar URL."
 msgstr "כתובת אוואטר."
 
-#: includes/api/class-wc-rest-customers-controller.php:686
+#: includes/api/class-wc-rest-customers-controller.php:703
 msgid "Total amount spent."
 msgstr "סה\"כ הסכום שהוצא."
 
-#: includes/api/class-wc-rest-customers-controller.php:680
+#: includes/api/class-wc-rest-customers-controller.php:697
 msgid "Quantity of orders made by the customer."
 msgstr "מספר ההזמנות שבוצעו על ידי הלקוח."
 
-#: includes/api/class-wc-rest-customers-controller.php:672
+#: includes/api/class-wc-rest-customers-controller.php:689
 msgid "UTC DateTime of the customer last order."
 msgstr "הזמנה אחרונה של הלקוח בזמן UTC."
 
-#: includes/api/class-wc-rest-customers-controller.php:666
+#: includes/api/class-wc-rest-customers-controller.php:683
 msgid "Last order ID."
 msgstr "מזהה הזמנה האחרונה"
 
-#: includes/api/class-wc-rest-customers-controller.php:660
+#: includes/api/class-wc-rest-customers-controller.php:677
 msgid "Last order data."
 msgstr "פרטי ההזמנה האחרונה."
 
-#: includes/api/class-wc-rest-customers-controller.php:655
+#: includes/api/class-wc-rest-customers-controller.php:672
 msgid "Customer password."
 msgstr "סיסמת לקוח."
 
-#: includes/api/class-wc-rest-customers-controller.php:647
+#: includes/api/class-wc-rest-customers-controller.php:664
 msgid "Customer login name."
 msgstr "שם המשתמש של הלקוח."
 
-#: includes/api/class-wc-rest-customers-controller.php:639
+#: includes/api/class-wc-rest-customers-controller.php:656
 msgid "Customer last name."
 msgstr "שם משפחה של הלקוח."
 
-#: includes/api/class-wc-rest-customers-controller.php:631
+#: includes/api/class-wc-rest-customers-controller.php:648
 msgid "Customer first name."
 msgstr "שם פרטי של הלקוח."
 
-#: includes/api/class-wc-rest-customers-controller.php:625
+#: includes/api/class-wc-rest-customers-controller.php:642
 msgid "The email address for the customer."
 msgstr "כתובת האימייל של הלקוח."
 
-#: includes/api/class-wc-rest-customers-controller.php:619
+#: includes/api/class-wc-rest-customers-controller.php:636
 msgid "The date the customer was last modified, in the site's timezone."
 msgstr "תאריך עדכון אחרון של הלקוח, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-customers-controller.php:613
+#: includes/api/class-wc-rest-customers-controller.php:630
 msgid "The date the customer was created, in the site's timezone."
 msgstr "תאריך יצירת הלקוח, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-customers-controller.php:607
-#: includes/api/class-wc-rest-order-notes-controller.php:380
-#: includes/api/class-wc-rest-order-refunds-controller.php:347
-#: includes/api/class-wc-rest-orders-controller.php:1139
-#: includes/api/class-wc-rest-product-attribute-terms-controller.php:106
-#: includes/api/class-wc-rest-product-attributes-controller.php:525
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:60
+#: includes/api/class-wc-rest-coupons-controller.php:82
+#: includes/api/class-wc-rest-customer-downloads-controller.php:46
+#: includes/api/class-wc-rest-customers-controller.php:78
+#: includes/api/class-wc-rest-customers-controller.php:624
+#: includes/api/class-wc-rest-order-notes-controller.php:81
+#: includes/api/class-wc-rest-order-notes-controller.php:399
+#: includes/api/class-wc-rest-order-refunds-controller.php:87
+#: includes/api/class-wc-rest-order-refunds-controller.php:363
+#: includes/api/class-wc-rest-orders-controller.php:76
+#: includes/api/class-wc-rest-orders-controller.php:1145
+#: includes/api/class-wc-rest-product-attribute-terms-controller.php:74
+#: includes/api/class-wc-rest-product-attribute-terms-controller.php:195
+#: includes/api/class-wc-rest-product-attributes-controller.php:75
+#: includes/api/class-wc-rest-product-attributes-controller.php:534
 #: includes/api/class-wc-rest-product-categories-controller.php:168
-#: includes/api/class-wc-rest-product-reviews-controller.php:220
+#: includes/api/class-wc-rest-product-reviews-controller.php:92
+#: includes/api/class-wc-rest-product-reviews-controller.php:280
 #: includes/api/class-wc-rest-product-shipping-classes-controller.php:94
 #: includes/api/class-wc-rest-product-tags-controller.php:94
-#: includes/api/class-wc-rest-products-controller.php:1857
-#: includes/api/class-wc-rest-tax-classes-controller.php:325
-#: includes/api/class-wc-rest-taxes-controller.php:568
-#: includes/api/class-wc-rest-webhook-deliveries.php:218
-#: includes/api/class-wc-rest-webhooks-controller.php:468
+#: includes/api/class-wc-rest-products-controller.php:77
+#: includes/api/class-wc-rest-products-controller.php:1865
+#: includes/api/class-wc-rest-tax-classes-controller.php:332
+#: includes/api/class-wc-rest-taxes-controller.php:62
+#: includes/api/class-wc-rest-taxes-controller.php:575
+#: includes/api/class-wc-rest-webhook-deliveries.php:66
+#: includes/api/class-wc-rest-webhook-deliveries.php:234
+#: includes/api/class-wc-rest-webhooks-controller.php:92
+#: includes/api/class-wc-rest-webhooks-controller.php:481
 msgid "Unique identifier for the resource."
 msgstr "מזהה יחודי עבור המשאב."
 
-#: includes/api/class-wc-rest-customers-controller.php:440
+#: includes/api/class-wc-rest-customers-controller.php:457
 msgid "Invalid resource id for reassignment."
 msgstr "מזהה משאב לא חוקי עבור הניתוח."
 
-#: includes/api/class-wc-rest-customers-controller.php:430
+#: includes/api/class-wc-rest-customers-controller.php:447
 msgid "Customers do not support trashing."
 msgstr "לקוחות אינם תומכים בזבל."
 
-#: includes/api/class-wc-rest-customers-controller.php:384
+#: includes/api/class-wc-rest-customers-controller.php:401
 msgid "Username isn't editable."
 msgstr "שם המשתמש לא ניתן לעריכה."
 
-#: includes/api/class-wc-rest-customers-controller.php:380
+#: includes/api/class-wc-rest-customers-controller.php:397
 msgid "Email address is invalid."
 msgstr "כתובת דוא\"ל לא חוקית."
 
-#: includes/api/class-wc-rest-customers-controller.php:356
-#: includes/api/class-wc-rest-customers-controller.php:376
-#: includes/api/class-wc-rest-customers-controller.php:435
-#: includes/api/class-wc-rest-order-notes-controller.php:253
-#: includes/api/class-wc-rest-order-notes-controller.php:286
-#: includes/api/class-wc-rest-product-reviews-controller.php:137
-#: includes/api/class-wc-rest-tax-classes-controller.php:236
-#: includes/api/class-wc-rest-taxes-controller.php:392
-#: includes/api/class-wc-rest-taxes-controller.php:412
-#: includes/api/class-wc-rest-taxes-controller.php:455
-#: includes/api/class-wc-rest-webhook-deliveries.php:138
+#: includes/api/class-wc-rest-customers-controller.php:373
+#: includes/api/class-wc-rest-customers-controller.php:393
+#: includes/api/class-wc-rest-customers-controller.php:452
+#: includes/api/class-wc-rest-order-notes-controller.php:272
+#: includes/api/class-wc-rest-order-notes-controller.php:305
+#: includes/api/class-wc-rest-product-reviews-controller.php:197
+#: includes/api/class-wc-rest-tax-classes-controller.php:243
+#: includes/api/class-wc-rest-taxes-controller.php:399
+#: includes/api/class-wc-rest-taxes-controller.php:419
+#: includes/api/class-wc-rest-taxes-controller.php:462
+#: includes/api/class-wc-rest-webhook-deliveries.php:154
 msgid "Invalid resource id."
 msgstr "ה-ID של המשאב לא חוקי"
 
-#: includes/api/class-wc-rest-customers-controller.php:305
-#: includes/api/class-wc-rest-tax-classes-controller.php:175
-#: includes/api/class-wc-rest-taxes-controller.php:356
+#: includes/api/class-wc-rest-customers-controller.php:322
+#: includes/api/class-wc-rest-tax-classes-controller.php:182
+#: includes/api/class-wc-rest-taxes-controller.php:363
 msgid "Cannot create existing resource."
 msgstr "לא ניתן ליצור משאבים קיימים."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:220
-#: includes/api/class-wc-rest-products-controller.php:2014
-#: includes/api/class-wc-rest-products-controller.php:2479
+#: includes/api/class-wc-rest-customer-downloads-controller.php:226
+#: includes/api/class-wc-rest-products-controller.php:2022
+#: includes/api/class-wc-rest-products-controller.php:2496
 msgid "File URL."
 msgstr "קישור קובץ."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:214
-#: includes/api/class-wc-rest-products-controller.php:2009
-#: includes/api/class-wc-rest-products-controller.php:2474
+#: includes/api/class-wc-rest-customer-downloads-controller.php:220
+#: includes/api/class-wc-rest-products-controller.php:2017
+#: includes/api/class-wc-rest-products-controller.php:2491
 msgid "File name."
 msgstr "שם הקובץ."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:208
+#: includes/api/class-wc-rest-customer-downloads-controller.php:214
 msgid "File details."
 msgstr "פרטי הקובץ."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:202
+#: includes/api/class-wc-rest-customer-downloads-controller.php:208
 msgid "The date when the download access expires, in the site's timezone."
 msgstr "התאריך שבו פג תוקף ההורדה, בהתאם לאזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:196
+#: includes/api/class-wc-rest-customer-downloads-controller.php:202
 msgid "Amount of downloads remaining."
 msgstr "מספר ההורדות שנותרו."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:190
-#: includes/api/class-wc-rest-orders-controller.php:1157
+#: includes/api/class-wc-rest-customer-downloads-controller.php:196
+#: includes/api/class-wc-rest-orders-controller.php:1163
 msgid "Order key."
 msgstr "הזמן מפתח."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:184
+#: includes/api/class-wc-rest-customer-downloads-controller.php:190
 msgid "Order ID."
 msgstr "מזהה הזמנה."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:178
+#: includes/api/class-wc-rest-customer-downloads-controller.php:184
 msgid "Downloadable file name."
 msgstr "שם קובץ ההורדה."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:172
+#: includes/api/class-wc-rest-customer-downloads-controller.php:178
 msgid "Downloadable product ID."
 msgstr "מזהה מוצר להורדה."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:166
+#: includes/api/class-wc-rest-customer-downloads-controller.php:172
 msgid "Download ID (MD5)."
 msgstr "מזהה הורדה (MD5)."
 
-#: includes/api/class-wc-rest-customer-downloads-controller.php:160
+#: includes/api/class-wc-rest-customer-downloads-controller.php:166
 msgid "Download file URL."
 msgstr "הכתובת של הקובץ להורדה."
 
-#: includes/api/class-wc-rest-coupons-controller.php:574
+#: includes/api/class-wc-rest-coupons-controller.php:601
 msgid "Limit result set to resources with a specific code."
 msgstr "הגבלת תוצאות למשאבים עם קוד מסויים."
 
-#: includes/api/class-wc-rest-coupons-controller.php:554
+#: includes/api/class-wc-rest-coupons-controller.php:578
 msgid "List of user IDs who have used the coupon."
 msgstr "מספרי ID של משתמשים שהשתמשו בקופונים."
 
-#: includes/api/class-wc-rest-coupons-controller.php:549
+#: includes/api/class-wc-rest-coupons-controller.php:570
 msgid "List of email addresses that can use this coupon."
 msgstr "רשימה של כתובות דואר שיוכלו להשתמש בקופון זה."
 
-#: includes/api/class-wc-rest-coupons-controller.php:544
+#: includes/api/class-wc-rest-coupons-controller.php:565
 msgid "Maximum order amount allowed when using the coupon."
 msgstr "סכום הזמנה מרבי מותר למימוש הקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:539
+#: includes/api/class-wc-rest-coupons-controller.php:560
 msgid "Minimum order amount that needs to be in the cart before coupon applies."
 msgstr "המספר המינימאלי של הפריטים בעגלת הקניות כדי ליישם את הקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:533
+#: includes/api/class-wc-rest-coupons-controller.php:554
 msgid "Define if should not apply when have sale items."
 msgstr "הגדר האם לא צריך להחיל כאשר יש פריטים למכירה."
 
-#: includes/api/class-wc-rest-coupons-controller.php:528
+#: includes/api/class-wc-rest-coupons-controller.php:546
 msgid "List of category ID's the coupon does not apply to."
 msgstr "מספרי ID של קטגוריות עליהם לא יחול הקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:523
+#: includes/api/class-wc-rest-coupons-controller.php:538
 msgid "List of category ID's the coupon applies to."
 msgstr "מספרי ID של קטגוריות עליהם יחול הקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:517
+#: includes/api/class-wc-rest-coupons-controller.php:532
 msgid "Define if can be applied for free shipping."
 msgstr "הגדר האם ניתן להחיל עבור משלוח חינם."
 
-#: includes/api/class-wc-rest-coupons-controller.php:512
+#: includes/api/class-wc-rest-coupons-controller.php:527
 msgid "Max number of items in the cart the coupon can be applied to."
 msgstr "המספר המרבי של פריטים בעגלת הקניות עליהם ניתן ליישם את הקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:507
+#: includes/api/class-wc-rest-coupons-controller.php:522
 msgid "How many times the coupon can be used per customer."
 msgstr "כמה פעמים ניתן להשתמש בקופון לכל לקוח."
 
-#: includes/api/class-wc-rest-coupons-controller.php:502
+#: includes/api/class-wc-rest-coupons-controller.php:517
 msgid "How many times the coupon can be used."
 msgstr "כמות הפעמים שניתן להשתמש בקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:497
+#: includes/api/class-wc-rest-coupons-controller.php:509
 msgid "List of product ID's the coupon cannot be used on."
 msgstr "מספרי ID של מוצרים בהם לא ניתן להשתמש בקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:492
+#: includes/api/class-wc-rest-coupons-controller.php:501
 msgid "List of product ID's the coupon can be used on."
 msgstr "מספרי ID של מוצרים בהם ניתן להשתמש בקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:486
+#: includes/api/class-wc-rest-coupons-controller.php:495
 msgid "Whether coupon can only be used individually."
 msgstr "אם ניתן להשתמש בקופון באופן פרטני."
 
-#: includes/api/class-wc-rest-coupons-controller.php:480
+#: includes/api/class-wc-rest-coupons-controller.php:489
 msgid "Number of times the coupon has been used already."
 msgstr "מספר הפעמים שכבר נעשה שימוש בקופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:475
+#: includes/api/class-wc-rest-coupons-controller.php:484
 msgid "UTC DateTime when the coupon expires."
 msgstr "תאריך פקיעה של הקופון בזמן UTC."
 
-#: includes/api/class-wc-rest-coupons-controller.php:470
+#: includes/api/class-wc-rest-coupons-controller.php:479
 msgid "The amount of discount."
 msgstr "כמות ההנחה."
 
-#: includes/api/class-wc-rest-coupons-controller.php:463
+#: includes/api/class-wc-rest-coupons-controller.php:472
 msgid "Determines the type of discount that will be applied."
 msgstr "קובע את סוג ההנחה שתחול."
 
-#: includes/api/class-wc-rest-coupons-controller.php:458
+#: includes/api/class-wc-rest-coupons-controller.php:467
 msgid "Coupon description."
 msgstr "תיאור קופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:452
+#: includes/api/class-wc-rest-coupons-controller.php:461
 msgid "The date the coupon was last modified, in the site's timezone."
 msgstr "תאריך עדכון אחרון של הקופון, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-coupons-controller.php:446
+#: includes/api/class-wc-rest-coupons-controller.php:455
 msgid "The date the coupon was created, in the site's timezone."
 msgstr "תאריך יצירת הקופון, לפי אזור הזמן של האתר."
 
-#: includes/api/class-wc-rest-coupons-controller.php:441
-#: includes/api/class-wc-rest-orders-controller.php:1754
+#: includes/api/class-wc-rest-coupons-controller.php:70
+#: includes/api/class-wc-rest-coupons-controller.php:450
+#: includes/api/class-wc-rest-orders-controller.php:1760
 msgid "Coupon code."
 msgstr "קוד קופון."
 
-#: includes/api/class-wc-rest-coupons-controller.php:435
+#: includes/api/class-wc-rest-coupons-controller.php:444
 msgid "Unique identifier for the object."
 msgstr "מזהה ייחודי לאובייקט."
 
-#: includes/api/class-wc-rest-coupons-controller.php:220
+#: includes/api/class-wc-rest-coupons-controller.php:229
 msgid "The coupon code cannot be empty."
 msgstr "קוד הקופון לא יכול להיות ריק."
 
-#: includes/api/class-wc-rest-coupons-controller.php:99
-#: includes/api/class-wc-rest-orders-controller.php:95
-#: includes/api/class-wc-rest-products-controller.php:96
+#: includes/api/class-wc-rest-coupons-controller.php:108
+#: includes/api/class-wc-rest-orders-controller.php:102
+#: includes/api/class-wc-rest-product-reviews-controller.php:118
+#: includes/api/class-wc-rest-products-controller.php:102
 msgid "Whether to bypass trash and force deletion."
 msgstr "האם לדלג על הפח ולאלץ מחיקה."
 
@@ -3160,154 +3177,153 @@ msgstr "האם אתה בטוח שברצונך למחוק הערה זו? לא נ�
 msgid "Items"
 msgstr "חפצים"
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:751
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:766
 msgid "Limit result set to resources with a specific slug."
 msgstr "הגבלת תוצאות למשאבים עם מזהה כתובת מסויים."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:745
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:760
 msgid "Limit result set to resources assigned to a specific product."
 msgstr "הגבלת תוצאות למשאבים של מוצר מסויים."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:738
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:753
 msgid "Limit result set to resources assigned to a specific parent."
 msgstr "הגבלת תוצאות למשאבים עם אב מסויים."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:731
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:746
 msgid "Whether to hide resources not assigned to any products."
 msgstr "האם להסתיר את המשאב או לשייך למוצר כלשהו."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:715
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:730
 msgid "Sort collection by resource attribute."
 msgstr "מיון אוסף על ידי תכונת המשאב."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:536
-#: includes/api/class-wc-rest-customers-controller.php:453
-#: includes/api/class-wc-rest-product-attributes-controller.php:425
-#: includes/api/class-wc-rest-taxes-controller.php:464
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:545
+#: includes/api/class-wc-rest-customers-controller.php:470
+#: includes/api/class-wc-rest-product-attributes-controller.php:434
+#: includes/api/class-wc-rest-taxes-controller.php:471
 msgid "The resource cannot be deleted."
 msgstr "המשאב לא ניתן למחיקה."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:527
-#: includes/api/class-wc-rest-product-attributes-controller.php:406
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:536
+#: includes/api/class-wc-rest-product-attributes-controller.php:415
 msgid "Resource does not support trashing."
 msgstr "המשאב אינו תומך בהעברה לפח."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:373
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:477
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:382
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:486
 msgid "Parent resource doesn't exist."
 msgstr "משאב אב לא קיים."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:367
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:471
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:376
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:480
 msgid "Can not set resource parent, taxonomy is not hierarchical."
 msgstr "לא ניתן להגדיר משאב אב, הטקסונומיה אינה היררכית."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:228
-#: includes/api/class-wc-rest-customer-downloads-controller.php:64
-#: includes/api/class-wc-rest-product-attributes-controller.php:146
-#: includes/api/class-wc-rest-product-attributes-controller.php:164
-#: includes/api/class-wc-rest-product-attributes-controller.php:182
-#: includes/api/class-wc-rest-product-attributes-controller.php:620
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:237
+#: includes/api/class-wc-rest-customer-downloads-controller.php:70
+#: includes/api/class-wc-rest-product-attributes-controller.php:155
+#: includes/api/class-wc-rest-product-attributes-controller.php:173
+#: includes/api/class-wc-rest-product-attributes-controller.php:191
+#: includes/api/class-wc-rest-product-attributes-controller.php:629
 msgid "Resource doesn't exist."
 msgstr "המשאב לא קיים."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:220
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:229
 msgid "Taxonomy doesn't exist."
 msgstr "הטקסונומיה לא קיימת."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:184
-#: includes/api/class-wc-rest-product-attributes-controller.php:186
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:193
+#: includes/api/class-wc-rest-product-attributes-controller.php:195
 msgid "Sorry, you cannot delete resource."
 msgstr "איו לך הרשאות למחוק משאבים."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:165
-#: includes/api/class-wc-rest-product-attributes-controller.php:168
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:174
+#: includes/api/class-wc-rest-product-attributes-controller.php:177
 msgid "Sorry, you cannot update resource."
 msgstr "איו לך הרשאות לעדכן משאבים."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:127
-#: includes/api/class-wc-rest-product-attributes-controller.php:132
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:136
+#: includes/api/class-wc-rest-product-attributes-controller.php:141
 msgid "Sorry, you cannot create new resource."
 msgstr "איו לך הרשאות ליצור משאבים חדשים."
 
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:77
-#: includes/api/class-wc-rest-customers-controller.php:91
-#: includes/api/class-wc-rest-order-notes-controller.php:86
-#: includes/api/class-wc-rest-order-refunds-controller.php:90
-#: includes/api/class-wc-rest-product-attributes-controller.php:92
-#: includes/api/class-wc-rest-tax-classes-controller.php:67
-#: includes/api/class-wc-rest-taxes-controller.php:81
-#: includes/api/class-wc-rest-webhooks-controller.php:105
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:86
+#: includes/api/class-wc-rest-customers-controller.php:104
+#: includes/api/class-wc-rest-order-notes-controller.php:105
+#: includes/api/class-wc-rest-order-refunds-controller.php:107
+#: includes/api/class-wc-rest-product-attribute-terms-controller.php:104
+#: includes/api/class-wc-rest-product-attributes-controller.php:101
+#: includes/api/class-wc-rest-tax-classes-controller.php:74
+#: includes/api/class-wc-rest-taxes-controller.php:88
+#: includes/api/class-wc-rest-webhooks-controller.php:118
 msgid "Required to be true, as resource does not support trashing."
 msgstr "חובה להיות אמיתי, כמו משאב אינו תומך בזבל."
 
-#: includes/abstracts/abstract-wc-rest-posts-controller.php:674
+#: includes/abstracts/abstract-wc-rest-posts-controller.php:684
 msgid "Limit result set to all items except those of a particular parent id."
 msgstr "הגבלת תוצאות לכל הפריטים מלבד אלה עם מספר האב המסויים."
 
-#: includes/abstracts/abstract-wc-rest-posts-controller.php:668
+#: includes/abstracts/abstract-wc-rest-posts-controller.php:675
 msgid "Limit result set to those of particular parent ids."
 msgstr "הגבלת תוצאות לאלה עם מספר האב המסויים."
 
-#: includes/abstracts/abstract-wc-rest-posts-controller.php:652
-#: includes/api/class-wc-rest-customers-controller.php:867
-#: includes/api/class-wc-rest-taxes-controller.php:677
+#: includes/abstracts/abstract-wc-rest-posts-controller.php:658
+#: includes/api/class-wc-rest-customers-controller.php:890
+#: includes/api/class-wc-rest-taxes-controller.php:690
 msgid "Sort collection by object attribute."
 msgstr "מיון אוסף על ידי תכונת האובייקט."
 
-#: includes/abstracts/abstract-wc-rest-posts-controller.php:645
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:704
-#: includes/api/class-wc-rest-customers-controller.php:859
-#: includes/api/class-wc-rest-taxes-controller.php:669
+#: includes/abstracts/abstract-wc-rest-posts-controller.php:651
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:719
+#: includes/api/class-wc-rest-customers-controller.php:882
+#: includes/api/class-wc-rest-taxes-controller.php:682
 msgid "Order sort attribute ascending or descending."
 msgstr "סדר מיון תכונות עולה או יורד."
 
-#: includes/abstracts/abstract-wc-rest-posts-controller.php:633
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:690
-#: includes/api/class-wc-rest-customers-controller.php:846
-#: includes/api/class-wc-rest-taxes-controller.php:656
+#: includes/abstracts/abstract-wc-rest-posts-controller.php:636
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:702
 msgid "Limit result set to specific ids."
 msgstr "הגבלת תוצאות למספר ID מסויימים."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:460
-#: includes/api/class-wc-rest-order-notes-controller.php:295
-#: includes/api/class-wc-rest-products-controller.php:1823
-#: includes/api/class-wc-rest-webhooks-controller.php:314
+#: includes/api/class-wc-rest-order-notes-controller.php:314
+#: includes/api/class-wc-rest-products-controller.php:1831
+#: includes/api/class-wc-rest-webhooks-controller.php:327
 msgid "The %s cannot be deleted."
 msgstr "לא ניתן למחוק %s."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:451
-#: includes/api/class-wc-rest-products-controller.php:1814
+#: includes/api/class-wc-rest-products-controller.php:1822
 msgid "The %s has already been deleted."
 msgstr "%s כבר נמחק."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:446
-#: includes/api/class-wc-rest-products-controller.php:1809
+#: includes/api/class-wc-rest-products-controller.php:1817
 msgid "The %s does not support trashing."
 msgstr "%s לא תומך בהעברה לפח."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:434
-#: includes/api/class-wc-rest-products-controller.php:1778
+#: includes/api/class-wc-rest-products-controller.php:1786
 msgid "Sorry, you are not allowed to delete %s."
 msgstr "איו לך הרשאות למחוק %s."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:418
-#: includes/api/class-wc-rest-products-controller.php:1762
-#: includes/api/class-wc-rest-webhooks-controller.php:305
+#: includes/api/class-wc-rest-products-controller.php:1770
+#: includes/api/class-wc-rest-webhooks-controller.php:318
 msgid "Invalid post id."
 msgstr "ה-ID של הפוסט לא תקין."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:259
-#: includes/api/class-wc-rest-orders-controller.php:1084
-#: includes/api/class-wc-rest-webhooks-controller.php:217
+#: includes/api/class-wc-rest-orders-controller.php:1090
+#: includes/api/class-wc-rest-webhooks-controller.php:230
 msgid "ID is invalid."
 msgstr "ה-ID לא תקין."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:176
-#: includes/api/class-wc-rest-order-notes-controller.php:197
-#: includes/api/class-wc-rest-order-refunds-controller.php:266
-#: includes/api/class-wc-rest-orders-controller.php:884
-#: includes/api/class-wc-rest-webhooks-controller.php:131
+#: includes/api/class-wc-rest-order-notes-controller.php:216
+#: includes/api/class-wc-rest-order-refunds-controller.php:282
+#: includes/api/class-wc-rest-orders-controller.php:890
+#: includes/api/class-wc-rest-webhooks-controller.php:144
 msgid "Cannot create existing %s."
 msgstr "לא ניתן ליצור %s קיימים."
 
@@ -3316,70 +3332,70 @@ msgid "Invalid id."
 msgstr "ה-ID לא תקין."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:129
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:203
-#: includes/api/class-wc-rest-customers-controller.php:194
-#: includes/api/class-wc-rest-product-attributes-controller.php:200
-#: includes/api/class-wc-rest-taxes-controller.php:177
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:212
+#: includes/api/class-wc-rest-customers-controller.php:211
+#: includes/api/class-wc-rest-product-attributes-controller.php:209
+#: includes/api/class-wc-rest-taxes-controller.php:184
 msgid "Sorry, you are not allowed to manipule this resource."
 msgstr "איו לך הרשאות לשנות משאב זה."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:115
-#: includes/api/class-wc-rest-customers-controller.php:180
-#: includes/api/class-wc-rest-order-notes-controller.php:148
-#: includes/api/class-wc-rest-tax-classes-controller.php:111
-#: includes/api/class-wc-rest-taxes-controller.php:163
+#: includes/api/class-wc-rest-customers-controller.php:197
+#: includes/api/class-wc-rest-order-notes-controller.php:167
+#: includes/api/class-wc-rest-tax-classes-controller.php:118
+#: includes/api/class-wc-rest-taxes-controller.php:170
 msgid "Sorry, you are not allowed to delete this resource."
 msgstr "איו לך הרשאות למחוק משאב זה."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:99
-#: includes/api/class-wc-rest-customers-controller.php:164
-#: includes/api/class-wc-rest-taxes-controller.php:149
+#: includes/api/class-wc-rest-customers-controller.php:181
+#: includes/api/class-wc-rest-taxes-controller.php:156
 msgid "Sorry, you are not allowed to edit this resource."
 msgstr "איו לך הרשאות לערוך משאב זה."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:83
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:146
-#: includes/api/class-wc-rest-customers-controller.php:148
-#: includes/api/class-wc-rest-order-notes-controller.php:132
-#: includes/api/class-wc-rest-product-attributes-controller.php:150
-#: includes/api/class-wc-rest-product-reviews-controller.php:90
-#: includes/api/class-wc-rest-taxes-controller.php:135
-#: includes/api/class-wc-rest-webhook-deliveries.php:90
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:155
+#: includes/api/class-wc-rest-customers-controller.php:165
+#: includes/api/class-wc-rest-order-notes-controller.php:151
+#: includes/api/class-wc-rest-product-attributes-controller.php:159
+#: includes/api/class-wc-rest-product-reviews-controller.php:150
+#: includes/api/class-wc-rest-taxes-controller.php:142
+#: includes/api/class-wc-rest-webhook-deliveries.php:106
 msgid "Sorry, you cannot view this resource."
 msgstr "איו לך הרשאות לראות משאב זה."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:67
-#: includes/api/class-wc-rest-customers-controller.php:132
-#: includes/api/class-wc-rest-order-notes-controller.php:116
-#: includes/api/class-wc-rest-tax-classes-controller.php:97
-#: includes/api/class-wc-rest-taxes-controller.php:121
+#: includes/api/class-wc-rest-customers-controller.php:149
+#: includes/api/class-wc-rest-order-notes-controller.php:135
+#: includes/api/class-wc-rest-tax-classes-controller.php:104
+#: includes/api/class-wc-rest-taxes-controller.php:128
 msgid "Sorry, you are not allowed to create resources."
 msgstr "איו לך הרשאות ליצור משאבים."
 
 #: includes/abstracts/abstract-wc-rest-posts-controller.php:53
-#: includes/abstracts/abstract-wc-rest-terms-controller.php:108
-#: includes/api/class-wc-rest-customer-downloads-controller.php:68
-#: includes/api/class-wc-rest-customers-controller.php:118
-#: includes/api/class-wc-rest-order-notes-controller.php:102
-#: includes/api/class-wc-rest-product-attributes-controller.php:118
-#: includes/api/class-wc-rest-product-reviews-controller.php:74
+#: includes/abstracts/abstract-wc-rest-terms-controller.php:117
+#: includes/api/class-wc-rest-customer-downloads-controller.php:74
+#: includes/api/class-wc-rest-customers-controller.php:135
+#: includes/api/class-wc-rest-order-notes-controller.php:121
+#: includes/api/class-wc-rest-product-attributes-controller.php:127
+#: includes/api/class-wc-rest-product-reviews-controller.php:134
 #: includes/api/class-wc-rest-report-sales-controller.php:69
 #: includes/api/class-wc-rest-reports-controller.php:62
-#: includes/api/class-wc-rest-tax-classes-controller.php:83
-#: includes/api/class-wc-rest-taxes-controller.php:107
-#: includes/api/class-wc-rest-webhook-deliveries.php:74
+#: includes/api/class-wc-rest-tax-classes-controller.php:90
+#: includes/api/class-wc-rest-taxes-controller.php:114
+#: includes/api/class-wc-rest-webhook-deliveries.php:90
 msgid "Sorry, you cannot list resources."
 msgstr "איו לך הרשאות להציג רשימת משאבים."
 
-#: includes/abstracts/abstract-wc-rest-controller.php:210
+#: includes/abstracts/abstract-wc-rest-controller.php:222
 msgid "List of delete resources."
 msgstr "רשימה של משאבים מחיקים."
 
-#: includes/abstracts/abstract-wc-rest-controller.php:205
+#: includes/abstracts/abstract-wc-rest-controller.php:214
 msgid "List of updated resources."
 msgstr "רשימה של משאבים מעודכנים."
 
-#: includes/abstracts/abstract-wc-rest-controller.php:200
+#: includes/abstracts/abstract-wc-rest-controller.php:206
 msgid "List of created resources."
 msgstr "רשימה של משאבים שנוצרו."
 
@@ -3641,7 +3657,7 @@ msgstr "מחלקת מס זו כבר קיימת"
 msgid "You do not have permission to create tax classes"
 msgstr "אין לך הרשאה ליצור מחלקת מס"
 
-#: includes/api/class-wc-rest-tax-classes-controller.php:129
+#: includes/api/class-wc-rest-tax-classes-controller.php:136
 #: includes/api/legacy/v3/class-wc-api-taxes.php:534
 #: includes/cli/class-wc-cli-tax.php:434
 msgid "Standard Rate"
@@ -3959,7 +3975,7 @@ msgctxt "Order #123 details"
 msgid "%s #%s details"
 msgstr "%s #%s פרטים"
 
-#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:129
+#: includes/admin/meta-boxes/class-wc-meta-box-order-actions.php:132
 msgid "%s email notification manually sent."
 msgstr "%s התראת מייל נשלחה ידנית."
 
@@ -4317,7 +4333,7 @@ msgid_plural "%s for %s items"
 msgstr[0] "%s עבור פריט %s"
 msgstr[1] "%s עבור %s פריטים"
 
-#: includes/api/class-wc-rest-orders-controller.php:1163
+#: includes/api/class-wc-rest-orders-controller.php:1169
 msgid "Order number."
 msgstr "מספר הזמנה."
 
@@ -8032,7 +8048,7 @@ msgstr "לא ניתן למחוק תכונה"
 msgid "You do not have permission to delete product attributes"
 msgstr "אין לך הרשאה למחוק תכונות מוצר"
 
-#: includes/api/class-wc-rest-product-attributes-controller.php:363
+#: includes/api/class-wc-rest-product-attributes-controller.php:372
 #: includes/api/legacy/v2/class-wc-api-products.php:2262
 #: includes/api/legacy/v3/class-wc-api-products.php:2844
 msgid "Could not edit the attribute"
@@ -8087,8 +8103,8 @@ msgstr "תיקייה בגודל אפס הורדה."
 msgid "Invalid URL %s"
 msgstr "כתובת URL %s לא תקינה"
 
-#: includes/api/class-wc-rest-products-controller.php:316
-#: includes/api/class-wc-rest-products-controller.php:317
+#: includes/api/class-wc-rest-products-controller.php:322
+#: includes/api/class-wc-rest-products-controller.php:323
 #: includes/api/legacy/v1/class-wc-api-products.php:464
 #: includes/api/legacy/v1/class-wc-api-products.php:465
 #: includes/api/legacy/v2/class-wc-api-products.php:1736
@@ -8549,7 +8565,7 @@ msgstr "לא הוגדר מידע %1$s לעריכת %1$s"
 msgid "Invalid coupon type - the coupon type must be any of these: %s"
 msgstr "סוג קופון לא תקין - סוג הקופון חייב להיות אחד מהבאים: %s"
 
-#: includes/api/class-wc-rest-coupons-controller.php:240
+#: includes/api/class-wc-rest-coupons-controller.php:249
 #: includes/api/legacy/v2/class-wc-api-coupons.php:242
 #: includes/api/legacy/v2/class-wc-api-coupons.php:358
 #: includes/api/legacy/v3/class-wc-api-coupons.php:242
@@ -9573,11 +9589,11 @@ msgstr "הסר את השורות שנבחרו"
 msgid "Insert row"
 msgstr "להוסיף שורה"
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:449
-#: includes/api/class-wc-rest-orders-controller.php:1505
-#: includes/api/class-wc-rest-orders-controller.php:1578
-#: includes/api/class-wc-rest-orders-controller.php:1653
-#: includes/api/class-wc-rest-orders-controller.php:1717
+#: includes/api/class-wc-rest-order-refunds-controller.php:465
+#: includes/api/class-wc-rest-orders-controller.php:1511
+#: includes/api/class-wc-rest-orders-controller.php:1584
+#: includes/api/class-wc-rest-orders-controller.php:1659
+#: includes/api/class-wc-rest-orders-controller.php:1723
 msgid "Tax rate ID."
 msgstr "מזהה שיעור מס."
 
@@ -10864,9 +10880,9 @@ msgstr "נמכר בשווי של %s ב%d ימים האחרונים"
 msgid "Variation description"
 msgstr "תיאור וריאציה"
 
-#: includes/api/class-wc-rest-products-controller.php:2059
-#: includes/api/class-wc-rest-products-controller.php:2506
-#: includes/api/class-wc-rest-taxes-controller.php:627
+#: includes/api/class-wc-rest-products-controller.php:2067
+#: includes/api/class-wc-rest-products-controller.php:2523
+#: includes/api/class-wc-rest-taxes-controller.php:634
 msgid "Tax class."
 msgstr "מחלקת מס."
 
@@ -11177,8 +11193,8 @@ msgstr "אחרי הנחות טרום-מיסים."
 msgid "Add&nbsp;meta"
 msgstr "הוסף מטא"
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:388
-#: includes/api/class-wc-rest-orders-controller.php:1444
+#: includes/api/class-wc-rest-order-refunds-controller.php:404
+#: includes/api/class-wc-rest-orders-controller.php:1450
 msgid "Product SKU."
 msgstr "מק\"ט מוצר."
 
@@ -11190,8 +11206,8 @@ msgstr "לא קיים עוד"
 msgid "Variation ID:"
 msgstr "ה-ID של הווריאציה:"
 
-#: includes/api/class-wc-rest-order-refunds-controller.php:394
-#: includes/api/class-wc-rest-orders-controller.php:1450
+#: includes/api/class-wc-rest-order-refunds-controller.php:410
+#: includes/api/class-wc-rest-orders-controller.php:1456
 #: includes/api/class-wc-rest-report-top-sellers-controller.php:158
 msgid "Product ID."
 msgstr "ה-ID של המוצר."
@@ -11249,7 +11265,7 @@ msgstr "#%s &ndash; וריאצית מק\"ט חייבת להיות ייחודית
 
 #: includes/admin/class-wc-admin-duplicate-product.php:167
 #: includes/admin/meta-boxes/class-wc-meta-box-product-data.php:1289
-#: includes/api/class-wc-rest-products-controller.php:1329
+#: includes/api/class-wc-rest-products-controller.php:1337
 #: includes/api/legacy/v2/class-wc-api-products.php:1263
 #: includes/api/legacy/v3/class-wc-api-products.php:1758
 #: includes/cli/class-wc-cli-product.php:1536
@@ -11542,7 +11558,7 @@ msgstr "נמכרים בנפרד"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-product-data.php:330
 #: includes/admin/meta-boxes/views/html-variation-admin.php:160
-#: includes/api/class-wc-rest-products-controller.php:2075
+#: includes/api/class-wc-rest-products-controller.php:2083
 msgid "Controls whether or not the product is listed as \"in stock\" or \"out of stock\" on the frontend."
 msgstr "שליטה על האם המוצר רשום כ\"במלאי\" או \"אזל מהמלאי\" בממשק המשתמש."
 
@@ -12331,7 +12347,7 @@ msgstr "אין לכם רשות ליצור Webhooks!"
 #: includes/admin/class-wc-admin-webhooks.php:49
 #: includes/admin/class-wc-admin-webhooks.php:198
 #: includes/admin/settings/views/html-webhooks-edit.php:16
-#: includes/api/class-wc-rest-webhooks-controller.php:350
+#: includes/api/class-wc-rest-webhooks-controller.php:363
 #: includes/api/legacy/v2/class-wc-api-webhooks.php:197
 #: includes/api/legacy/v3/class-wc-api-webhooks.php:197
 msgctxt "Webhook created on date parsed by strftime"
@@ -12340,7 +12356,7 @@ msgstr "%b %d, %Y @ %I:%M %p"
 
 #: includes/admin/class-wc-admin-webhooks.php:49
 #: includes/admin/class-wc-admin-webhooks.php:198
-#: includes/api/class-wc-rest-webhooks-controller.php:350
+#: includes/api/class-wc-rest-webhooks-controller.php:363
 #: includes/api/legacy/v2/class-wc-api-webhooks.php:197
 #: includes/api/legacy/v3/class-wc-api-webhooks.php:197
 msgid "Webhook created on %s"
@@ -14926,7 +14942,7 @@ msgstr "פריט %1$s וריאציה #%2$s הופחתה במלאי מ-%3$s ל-%4
 msgid "Order status changed from %1$s to %2$s."
 msgstr "מצב ההזמנה שונה ממצב %1$s למצב %2$s."
 
-#. #-#-#-#-#  tmp-woocommerce.pot (WooCommerce 2.6.13)  #-#-#-#-#
+#. #-#-#-#-#  tmp-woocommerce.pot (WooCommerce 2.6.14)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: includes/abstracts/abstract-wc-order.php:2320
 #: includes/abstracts/abstract-wc-order.php:2321
@@ -18729,7 +18745,7 @@ msgstr "בואנוס איירס"
 msgid "Ciudad Aut&oacute;noma de Buenos Aires"
 msgstr "סיודאד C & oacute; נומה דה בואנוס איירס"
 
-#: i18n/locale-info.php:351
+#: i18n/locale-info.php:371
 msgid "Consumption tax"
 msgstr "מס צריכה"
 

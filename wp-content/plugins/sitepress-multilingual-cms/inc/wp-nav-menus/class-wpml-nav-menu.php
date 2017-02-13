@@ -118,7 +118,7 @@ class WPML_Nav_Menu {
         // filter menu by language when adjust ids is off
         // not on ajax calls
         if(!$sitepress_settings['auto_adjust_ids'] && !defined('DOING_AJAX')){
-            add_filter('get_term', array($sitepress, 'get_term_adjust_id'));
+            add_filter('get_term', array($sitepress, 'get_term_adjust_id'), 1, 1);
         }
 	    $this->setup_menu_item();
 

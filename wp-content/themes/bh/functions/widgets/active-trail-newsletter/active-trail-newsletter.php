@@ -16,11 +16,14 @@ Changes Log:
 
 class Active_Trail_Newsletter extends WP_Widget
 {
-	function Active_Trail_Newsletter() {
-		$widget_ops = array('classname' => 'Active_Trail_Newsletter', 'description' => 'Handles several groups registration');
-		$this->WP_Widget('Active_Trail_Newsletter', 'Active Trail Newsletter', $widget_ops);
+	function __construct() {
+		$widget_options = array( 
+			'classname' => 'Active_Trail_Newsletter',
+			'description' => 'Handles several groups registration',
+		);
+		parent::__construct( 'Active_Trail_Newsletter', 'Active Trail Newsletter', $widget_options );
 	}
-	
+
 	function form($instance) {
 		$instance = wp_parse_args((array) $instance,
 			array (

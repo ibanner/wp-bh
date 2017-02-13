@@ -228,7 +228,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 
 		if ( 'menus' === $type ) {
 			$menu = wp_get_nav_menu_object( $slug_or_id );
-			$slug = isset( $menu->slug ) ? $menu->slug : null;
+			$slug = isset( $menu->term_id ) ? $menu->term_id : null;
 		}
 
 		$slot = $this->settings->get_slot( $type, $slug );

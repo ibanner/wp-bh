@@ -200,8 +200,8 @@ if(!class_exists('ICL_AdminNotifier')) {
 		}
 
 		public static function hide_message() {
-			$message_id = isset( $_POST['icl-admin-message-id'] ) ? $_POST['icl-admin-message-id'] : '';
-			$message_id = preg_replace( '/^icl-id-/', '', $message_id );
+
+			$message_id = self::get_message_id();
 			$dismiss    = isset( $_POST['dismiss'] ) ? $_POST['dismiss'] : false;
 			if ( ! self::message_id_exists( $message_id ) ) {
 				exit;
@@ -221,9 +221,19 @@ if(!class_exists('ICL_AdminNotifier')) {
 			exit;
 		}
 
-		public static function show_message() {
-			$message_id = isset( $_POST['icl-admin-message-id'] ) ? $_POST['icl-admin-message-id'] : '';
+		public static function get_message_id() {
+			$message_id = '';
+			if ( isset( $_POST['icl-admin-message-id'] ) ) {
+				$message_id = filter_var( $_POST['icl-admin-message-id'], FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			}
+			$message_id = $message_id ? $message_id : '';
 			$message_id = preg_replace( '/^icl-id-/', '', $message_id );
+
+			return $message_id;
+		}
+
+		public static function show_message() {
+			$message_id = self::get_message_id();
 			if ( ! self::message_id_exists( $message_id ) ) {
 				exit;
 			}
@@ -239,8 +249,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 		}
 
 		public static function engage_message() {
-			$message_id = isset( $_POST['icl-admin-message-id'] ) ? $_POST['icl-admin-message-id'] : '';
-			$message_id = preg_replace( '/^icl-id-/', '', $message_id );
+			$message_id = self::get_message_id();
 			if ( ! self::message_id_exists( $message_id ) ) {
 				exit;
 			}

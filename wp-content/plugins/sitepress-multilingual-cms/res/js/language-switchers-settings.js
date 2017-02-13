@@ -633,9 +633,9 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 	};
 
 	var isSlotAllowed = function(slot, itemType) {
-			var allowedSlots = $.map(wpml_ls[ itemType ], function(el) {
-				return itemType === 'menus' ? el.slug : el.id;
-			});
+		var allowedSlots = $.map(wpml_ls[ itemType ], function(el) {
+			return itemType === 'menus' ? el.term_id.toString() : el.id;
+		});
 
 		return 0 <= $.inArray(slot, allowedSlots);
 	};

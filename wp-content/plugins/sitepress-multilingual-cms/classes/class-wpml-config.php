@@ -232,6 +232,11 @@ class WPML_Config {
             return self::$wpml_config_files;
         }
 
+		$parent_theme = $theme_data->parent_theme;
+		if ( $parent_theme && ! self::check_on_config_file( $parent_theme ) ) {
+			return self::$wpml_config_files;
+		}
+
 		if ( get_template_directory() != get_stylesheet_directory() ) {
 			$config_file = get_stylesheet_directory() . '/wpml-config.xml';
 			if ( file_exists( $config_file ) ) {

@@ -72,6 +72,16 @@ class WPML_LS_Slot_Factory {
 	}
 
 	/**
+	 * @param string $slot_group
+	 *
+	 * @return WPML_LS_Slot
+	 */
+	public function get_default_slot( $slot_group ) {
+		$slot_args = $this->get_default_slot_arguments( $slot_group );
+		return $this->get_slot( $slot_args );
+	}
+
+	/**
 	 * @param string $slug
 	 *
 	 * @return string|null

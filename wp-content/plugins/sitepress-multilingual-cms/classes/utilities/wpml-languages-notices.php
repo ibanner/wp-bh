@@ -83,9 +83,15 @@ class WPML_Languages_Notices {
 		$suggestions = array();
 		if ( function_exists( 'translations_api' ) ) {
 			if ( ! $this->translations ) {
-				$api                = translations_api( 'core', array( 'version' => $GLOBALS['wp_version'] ) );
-				$this->translations = $api['translations'];
+				$api = translations_api( 'core', array( 'version' => $GLOBALS['wp_version'] ) );
+
+				if ( ! is_wp_error( $api ) ) {
+					$this->translations = $api['translations'];
+				}
 			}
+		}
+
+		if ( $this->translations ) {
 			foreach ( $this->translations as $translation ) {
 				$default_locale = $this->get_matching_language( $language, $translation );
 				if ( $default_locale ) {
@@ -93,6 +99,7 @@ class WPML_Languages_Notices {
 				}
 			}
 		}
+
 		if ( ! $suggestions ) {
 			$suggestions[] = _x( 'None', 'Suggested default locale', 'sitepress' );
 		}

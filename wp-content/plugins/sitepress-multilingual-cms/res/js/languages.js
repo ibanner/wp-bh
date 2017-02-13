@@ -1,5 +1,5 @@
 /*jslint browser: true, nomen: true, laxbreak: true*/
-/*global iclSaveForm, iclSaveForm_success_cb, jQuery, alert, confirm, icl_ajx_url, icl_ajx_saved, icl_ajxloaderimg, icl_default_mark, icl_ajx_error, fadeInAjxResp */
+/*global ajaxurl, iclSaveForm, iclSaveForm_success_cb, jQuery, alert, confirm, icl_ajx_url, icl_ajx_saved, icl_ajxloaderimg, icl_default_mark, icl_ajx_error, fadeInAjxResp */
 
 (function () {
 	"use strict";
@@ -189,40 +189,39 @@ function saveDefaultLanguage() {
             def_lang = this.value;
         }
     });
-    jQuery.ajax({
-        type: "POST",
-        url: icl_ajx_url,
-        data: "icl_ajx_action=set_default_language&lang=" + def_lang + '&_icl_nonce=' + jQuery('#set_default_language_nonce').val(),
-        success: function (msg) {
-            var enabled_languages_items, spl, selected_language, avail_languages_picker;
-            spl = msg.split('|');
-            selected_language = enabled_languages.find('li input[value="' + def_lang + '"]');
-            if (spl[0] === '1') {
-                fadeInAjxResp(icl_ajx_saved);
-                avail_languages_picker = jQuery('#icl_avail_languages_picker');
-                avail_languages_picker.find('input[value="' + spl[1] + '"]').prop('disabled', false);
-                avail_languages_picker.find('input[value="' + def_lang + '"]').prop('disabled', true);
-                enabled_languages_items = jQuery('#icl_enabled_languages').find('li');
-                enabled_languages_items.removeClass('selected');
-                var selected_language_item = selected_language.closest('li');
-                selected_language_item.addClass('selected');
-                selected_language_item.find('label').append(' (' + icl_default_mark + ')');
-                enabled_languages_items.find('input').removeAttr('checked');
-                selected_language.attr('checked', 'checked');
-                enabled_languages.find('input[value="' + spl[1] + '"]').parent().html(enabled_languages.find('input[value="' + spl[1] + '"]').parent().html().replace('(' + icl_default_mark + ')', ''));
-                doneEditingDefaultLanguage();
-                fadeInAjxResp('#icl_ajx_response', icl_ajx_saved);
-                if (spl[2]) {
-                    jQuery('#icl_ajx_response').html(spl[2]);
-                } else {
-                    location.href = location.href.replace(/#[\w\W]*/, '') + '&setup=2';
-                }
-            } else {
-                //noinspection JSLint
-                fadeInAjxResp('#icl_ajx_response', icl_ajx_error);
-            }
-        }
-    });
+	jQuery.ajax({
+								type:    "POST",
+								url:     ajaxurl,
+								data:    {
+									'action':   'wpml_set_default_language',
+									'nonce':    jQuery('#set_default_language_nonce').val(),
+									'language': def_lang
+								},
+								success: function (response) {
+									if (response.success) {
+										var enabled_languages_items, spl, selected_language, avail_languages_picker, selected_language_item;
+										selected_language = enabled_languages.find('li input[value="' + def_lang + '"]');
+
+										fadeInAjxResp(icl_ajx_saved);
+										avail_languages_picker = jQuery('#icl_avail_languages_picker');
+										avail_languages_picker.find('input[value="' + response.data.previousLanguage + '"]').prop('disabled', false);
+										avail_languages_picker.find('input[value="' + def_lang + '"]').prop('disabled', true);
+										enabled_languages_items = jQuery('#icl_enabled_languages').find('li');
+										enabled_languages_items.removeClass('selected');
+										selected_language_item = selected_language.closest('li');
+										selected_language_item.addClass('selected');
+										selected_language_item.find('label').append(' (' + icl_default_mark + ')');
+										enabled_languages_items.find('input').removeAttr('checked');
+										selected_language.attr('checked', 'checked');
+										enabled_languages.find('input[value="' + response.data.previousLanguage + '"]').parent().html(enabled_languages.find('input[value="' + response.data.previousLanguage + '"]').parent().html().replace('(' + icl_default_mark + ')', ''));
+										doneEditingDefaultLanguage();
+										fadeInAjxResp('#icl_ajx_response', icl_ajx_saved);
+										location.href = location.href.replace(/#[\w\W]*/, '') + '&setup=2';
+									} else {
+										fadeInAjxResp('#icl_ajx_response', icl_ajx_error);
+									}
+								}
+							});
 }
 function showLanguagePicker() {
     jQuery('#icl_avail_languages_picker').slideDown();
@@ -242,28 +241,29 @@ function saveLanguageSelection() {
             sel_lang.push(this.value);
         }
     });
-    jQuery.ajax({
-        type: "POST",
-        url: icl_ajx_url,
-        data: "icl_ajx_action=set_active_languages&langs=" + sel_lang.join(',') + '&_icl_nonce=' + jQuery('#set_active_languages_nonce').val(),
-        success: function (msg) {
-            var spl = msg.split('|');
-            if (spl[0] === '1') {
-                fadeInAjxResp('#icl_ajx_response', icl_ajx_saved);
-                jQuery('#icl_enabled_languages').html(spl[1]);
-            } else {
-                fadeInAjxResp('#icl_ajx_response', icl_ajx_error, true);
-            }
-            if (spl[2] === '1') {
-                location.href = location.href.replace(/#[\w\W]*/, '');
-            } else if (spl[2] === '-1') {
-                location.href = location.href.replace(/#[\w\W]*/, '');
-            } else {
-                location.href = location.href.replace(/(#|&)[\w\W]*/, '');
-            }
-
-        }
-    });
+	jQuery.ajax({
+								type:    "POST",
+								url:     ajaxurl,
+								data:    {
+									'action':    'wpml_set_active_languages',
+									'nonce':     jQuery('#set_active_languages_nonce').val(),
+									'languages': sel_lang
+								},
+								success: function (response) {
+									if (response.success) {
+										if (!response.data.noLanguages) {
+											fadeInAjxResp('#icl_ajx_response', icl_ajx_saved);
+											jQuery('#icl_enabled_languages').html(response.data.enabledLanguages);
+											location.href = location.href.replace(/#[\w\W]*/, '');
+										} else {
+											location.href = location.href.replace(/(#|&)[\w\W]*/, '');
+										}
+									} else {
+										fadeInAjxResp('#icl_ajx_response', icl_ajx_error, true);
+										location.href = location.href.replace(/(#|&)[\w\W]*/, '');
+									}
+								}
+							});
     hideLanguagePicker();
 }
 

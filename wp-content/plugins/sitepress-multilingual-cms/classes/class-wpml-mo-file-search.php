@@ -1,9 +1,6 @@
 <?php
 
 class WPML_MO_File_Search {
-	const USE_ST = 1;
-	const USE_MO_FILES = 2;
-
 	/**
 	 * @var SitePress
 	 */
@@ -55,8 +52,8 @@ class WPML_MO_File_Search {
 	}
 
 	public function reload_theme_dirs() {
-		$type = isset( $this->settings['theme_localization_type'] ) ? $this->settings['theme_localization_type'] : self::USE_MO_FILES;
-		if ( self::USE_MO_FILES === $type ) {
+		$type = isset( $this->settings['theme_localization_type'] ) ? $this->settings['theme_localization_type'] : WPML_Theme_Localization_Type::USE_MO_FILES;
+		if ( WPML_Theme_Localization_Type::USE_MO_FILES === $type ) {
 			$dirs = $this->find_theme_mo_dirs();
 			$this->save_mo_dirs( $dirs );
 			$this->settings['theme_language_folders'] = $dirs;

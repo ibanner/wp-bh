@@ -1784,7 +1784,7 @@ class TranslationManagement {
 
 		$context_html = '';
 		if ( ! $key ) {
-			$context_html = '[' . $context . ': ' . $slug . '] ';
+			$context_html = '[' . esc_html( $context ) . ': ' . esc_html( $slug ) . '] ';
 		}
 
 		if ( is_scalar( $value ) ) {
@@ -1808,9 +1808,9 @@ class TranslationManagement {
 
 				if ( ! $key ) {
 					if ( icl_st_is_registered_string( $es_context, $name ) ) {
-						$edit_link = '[<a href="' . admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&context=' . $es_context ) . '">' . __( 'translate', 'sitepress' ) . '</a>]';
+						$edit_link = '[<a href="' . admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&context=' . esc_html( $es_context ) ) . '">' . esc_html__( 'translate', 'sitepress' ) . '</a>]';
 					} else {
-						$edit_link = '<div class="updated below-h2">' . __( 'string not registered', 'sitepress' ) . '</div>';
+						$edit_link = '<div class="updated below-h2">' . esc_html__( 'string not registered', 'sitepress' ) . '</div>';
 					}
 				} else {
 					$edit_link = '';
@@ -1818,19 +1818,19 @@ class TranslationManagement {
 			}
 
 			if ( false !== strpos( $name, '*' ) ) {
-				$o_value = '<span style="color:#bbb">{{ ' . __( 'Multiple options', 'wpml-translation-management' ) . ' }}</span>';
+				$o_value = '<span style="color:#bbb">{{ ' . esc_html__( 'Multiple options', 'wpml-translation-management' ) . ' }}</span>';
 			} else {
 				$o_value = esc_html( $o_value );
 				if ( strlen( $o_value ) > 200 ) {
 					$o_value = substr( $o_value, 0, 200 ) . ' ...';
 				}
 			}
-			echo '<li>' . $context_html . $name . ': <i>' . $o_value . '</i> ' . $edit_link . '</li>';
+			echo '<li>' . $context_html . esc_html( $name ) . ': <i>' . $o_value . '</i> ' . $edit_link . '</li>';
 		} else {
-			$edit_link = '[<a href="' . admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&context=' . $es_context ) . '">' . __( 'translate', 'sitepress' ) . '</a>]';
+			$edit_link = '[<a href="' . admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&context=' . esc_html( $es_context ) ) . '">' . esc_html__( 'translate', 'sitepress' ) . '</a>]';
 			echo '<strong>' . $context_html . $name . '</strong> ' . $edit_link;
 			if ( ! icl_st_is_registered_string( $es_context, $name ) ) {
-				$notice = '<div class="updated below-h2">' . __( 'some strings might be not registered', 'sitepress' ) . '</div>';
+				$notice = '<div class="updated below-h2">' . esc_html__( 'some strings might be not registered', 'sitepress' ) . '</div>';
 				echo $notice;
 			}
 

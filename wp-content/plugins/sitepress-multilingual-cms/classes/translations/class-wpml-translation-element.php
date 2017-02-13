@@ -73,7 +73,7 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 	 */
 	public function get_translation( $language_code ) {
 		if ( ! $language_code ) {
-			throw new InvalidArgumentException( 'Argument $language_code must a non empty string.' );
+			throw new InvalidArgumentException( 'Argument $language_code must be a non empty string.' );
 		}
 		$this->maybe_init_translations();
 

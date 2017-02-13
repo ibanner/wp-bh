@@ -64,18 +64,28 @@ class WPML_Backend_Request extends WPML_Request {
 		 */
 		global $wpml_language_resolution, $wpml_post_translations;
 
+		$url_lang_param = '';
+		if ( isset( $_GET[ 'lang' ] ) ) {
+			$url_lang_param = filter_var( $_GET[ 'lang' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		}
+
+		$icl_post_language = '';
+		if ( isset( $_POST[ 'icl_post_language' ] ) ) {
+			$icl_post_language = filter_var( $_POST[ 'icl_post_language' ], FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		}
+
 		if ( $this->force_default() === true ) {
 			$lang = $this->default_language;
-		} elseif ( isset( $_GET[ 'lang' ] )
-				   && $wpml_language_resolution->is_language_active( $_GET[ 'lang' ], true )
+		} elseif ( $url_lang_param
+				   && $wpml_language_resolution->is_language_active( $url_lang_param, true )
 		) {
-			$lang = $_GET[ 'lang' ];
+			$lang = $url_lang_param;
 		} elseif ( wpml_is_ajax() ) {
 			$lang = $this->get_ajax_request_lang();
-		} elseif ( isset( $_POST[ 'icl_post_language' ] )
-				   && $wpml_language_resolution->is_language_active( $_POST[ 'icl_post_language' ] )
+		} elseif ( $icl_post_language
+				   && $wpml_language_resolution->is_language_active( $icl_post_language )
 		) {
-			$lang = $_POST[ 'icl_post_language' ];
+			$lang = $icl_post_language;
 		} elseif ( isset( $_GET[ 'p' ] )
 				   && ( $p = (int) $_GET[ 'p' ] ) > 0
 				   && (bool) ( $posts_lang = $wpml_post_translations->get_element_lang_code( $p ) ) === true
@@ -92,12 +102,5 @@ class WPML_Backend_Request extends WPML_Request {
 
 		return wpml_is_ajax() && $this->check_if_admin_action_from_referer() === false
 			? '_icl_current_language' : '_icl_current_admin_language_' . md5( $this->get_cookie_domain() );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_referer_url_cookie_name() {
-		return 'wpml_admin_referer_url';
 	}
 }

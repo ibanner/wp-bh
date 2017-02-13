@@ -26,84 +26,6 @@ $iclsettings = $this->get_settings();
 $default_language = $this->get_default_language();
 
 switch($request){
-    case 'set_active_languages':
-        $resp = array();
-        $old_active_languages_count = count($this->get_active_languages());
-	    $lang_codes = filter_input( INPUT_POST, 'langs', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
-        $lang_codes = explode(',',$lang_codes);
-        $setup_instance = wpml_get_setup_instance();
-        if ( $setup_instance->set_active_languages ( $lang_codes ) ) {
-            $resp[0] = 1;
-            $iclsettings['active_languages'] = wpml_reload_active_languages_setting();
-            $active_langs = $this->get_active_languages();
-            $iclresponse ='';
-            $default_categories = $sitepress->get_setting( 'default_categories', array() );
-            $default_category_main = $wpdb->get_var(
-                $wpdb->prepare("SELECT name FROM {$wpdb->terms} t
-                                JOIN {$wpdb->term_taxonomy} tx ON t.term_id=tx.term_id
-                                WHERE term_taxonomy_id = %d
-                                  AND taxonomy='category'",
-                               $default_categories[$default_language] ));
-            $default_category_trid = $wpdb->get_var(
-                $wpdb->prepare("SELECT trid FROM {$wpdb->prefix}icl_translations
-                                WHERE element_id = %d
-                                  AND element_type='tax_category'",
-                               $default_categories[$default_language]));
-            foreach($active_langs as $lang){
-                $is_default = ( $default_language ==$lang['code']);
-                $iclresponse .= '<li ';
-                if($is_default) $iclresponse .= 'class="default_language"';
-                $iclresponse .= '><label><input type="radio" name="default_language" value="' . $lang['code'] .'" ';
-                if($is_default) $iclresponse .= 'checked="checked"';
-                $iclresponse .= '>' . $lang['display_name'];
-                if($is_default) $iclresponse .= ' ('. __('default','sitepress') . ')';
-                $iclresponse .= '</label></li>';
-            }
-
-            $resp[1] = $iclresponse;
-            // response 1 - blog got more than 2 languages; -1 blog reduced to 1 language; 0 - no change
-            if(count($lang_codes) > 1){
-                $resp[2] =$this->get_setting('setup_complete') ? 1 : -2;
-            }elseif($old_active_languages_count > 1 && count($lang_codes) < 2){
-                $resp[2] = $this->get_setting('setup_complete') ? -1 : -3;
-            }else{
-                $resp[2] = $this->get_setting('setup_complete') ? 0 : -3;
-            }
-	        $wpml_localization = new WPML_Download_Localization( $sitepress->get_active_languages(), $sitepress->get_default_language() );
-	        $wpml_localization->download_language_packs();
-
-	        $wpml_languages_notices = new WPML_Languages_Notices( wpml_get_admin_notices() );
-	        $wpml_languages_notices->maybe_create_notice_missing_menu_items( count( $lang_codes ) );
-	        $wpml_languages_notices->missing_languages( $wpml_localization->get_not_founds() );
-        }else{
-            $resp[0] = 0;
-        }
-
-        echo implode('|',$resp);
-		/** @deprecated Use `wpml_update_active_languages` instead */
-        do_action('icl_update_active_languages');
-        do_action('wpml_update_active_languages');
-        break;
-    case 'set_default_language':
-        $previous_default = $default_language;
-	    $new_default_language = filter_input( INPUT_POST, 'lang', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
-
-	    $response = $this->set_default_language( $new_default_language );
-	    if ( $response ) {
-            echo '1|'.$previous_default.'|';
-        }else{
-            echo'0||' ;
-        }
-        if(1 === $response){
-            echo __('WordPress language file (.mo) is missing. Keeping existing display language.', 'sitepress');
-        }
-        break;
-    case 'set_languages_order':
-	    $languages_order = filter_input( INPUT_POST, 'order', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
-        $iclsettings['languages_order'] = explode(';', $languages_order );
-        $this->save_settings($iclsettings);
-        echo json_encode(array('message' => __('Languages order updated', 'sitepress')));
-        break;
     case 'registration_form_submit':
         
         $ret['error'] = '';
@@ -170,34 +92,6 @@ switch($request){
     case 'language_domains':
         $language_domains_helper = new WPML_Lang_Domains_Box( $this );
         echo $language_domains_helper->render();
-        break;
-    case 'icl_theme_localization_type':
-	    if ( class_exists( 'WPML_ST_Themes_And_Plugins_Settings' ) ) {
-		    $display_strings_scan_notices = false;
-		    if ( array_key_exists( 'wpml_st_display_strings_scan_notices', $_POST ) ) {
-			    $display_strings_scan_notices = (bool) $_POST['wpml_st_display_strings_scan_notices'];
-		    }
-		    $themes_and_plugins_settings = new WPML_ST_Themes_And_Plugins_Settings();
-		    $themes_and_plugins_settings->set_strings_scan_notices( $display_strings_scan_notices );
-	    }
-
-	    $iclsettings['theme_localization_type']            = array_key_exists( 'icl_theme_localization_type', $_POST ) ? (int) $_POST['icl_theme_localization_type'] : WPML_MO_File_Search::USE_MO_FILES;
-	    $iclsettings['theme_localization_load_textdomain'] = array_key_exists( 'icl_theme_localization_load_td', $_POST ) ? (int) $_POST['icl_theme_localization_load_td'] : 0;
-	    $iclsettings['gettext_theme_domain_name']          = filter_input( INPUT_POST, 'textdomain_value', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
-	    if ( $iclsettings['theme_localization_type'] === WPML_MO_File_Search::USE_MO_FILES ) {
-	        $mo_file_search = new WPML_MO_File_Search( $this );
-	        $iclsettings['theme_language_folders'] = $mo_file_search->find_theme_mo_dirs();
-        }
-        $this->save_settings($iclsettings);
-
-	    if ( class_exists( 'WPML_ST_DB_Cache_Factory' ) ) {
-		    // clear ST DB Cache
-		    $factory = new WPML_ST_DB_Cache_Factory( $wpdb );
-		    $persist = $factory->create_persist();
-		    $persist->clear_cache();
-	    }
-
-	    echo '1|' . $iclsettings['theme_localization_type'];
         break;
     case 'dismiss_help':
         icl_set_setting('dont_show_help_admin_notice', true);

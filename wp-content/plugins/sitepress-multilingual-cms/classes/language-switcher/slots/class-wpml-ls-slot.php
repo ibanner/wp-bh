@@ -110,6 +110,13 @@ class WPML_LS_Slot {
 	}
 
 	/**
+	 * @return mixed
+	 */
+	public function template_string() {
+		return $this->get( 'template_string' );
+	}
+
+	/**
 	 * @param array $args
 	 */
 	private function set_properties( array $args ) {
@@ -143,6 +150,7 @@ class WPML_LS_Slot {
 			'font_other_hover'              => array( 'type' => 'string' ),
 			'background_other_normal'       => array( 'type' => 'string' ),
 			'background_other_hover'        => array( 'type' => 'string' ),
+			'template_string'               => array( 'type' => 'string', 'twig_string' => 1 ),
 		);
 	}
 
@@ -156,10 +164,15 @@ class WPML_LS_Slot {
 		if ( ! is_null( $value ) ) {
 			switch( $meta_data['type'] ) {
 				case 'string':
+					$value = (string) $value;
 					if ( array_key_exists( 'stripslashes', $meta_data ) && $meta_data['stripslashes'] ) {
 						$value = stripslashes( $value );
 					}
-					$value = (string) sanitize_text_field( $value );
+					if ( array_key_exists( 'twig_string', $meta_data ) ) {
+						$value = preg_replace( '/<br\W*?\/>/', '', $value );
+					} else {
+						$value = sanitize_text_field( $value );
+					}
 					break;
 				case 'int':
 					$value = (int) $value;

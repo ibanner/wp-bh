@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // check for ACF existence
-if ( ! function_exists(get_field) )
+if ( ! function_exists('get_field') )
 	return;
 
 // layout parameters

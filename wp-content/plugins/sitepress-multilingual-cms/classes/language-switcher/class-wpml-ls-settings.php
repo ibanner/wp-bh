@@ -236,6 +236,11 @@ class WPML_LS_Settings {
 				$this->save_settings( $this->settings );
 			}
 
+			if ( ! isset( $this->settings['converted_menu_ids'] ) ) {
+				$this->settings = $this->migration()->convert_menu_ids( $this->settings );
+				$this->persist_settings( $this->settings );
+			}
+
 			$this->init_shared_settings();
 
 			if ( ! $this->sitepress->get_wp_api()->is_admin() ) {
@@ -266,7 +271,7 @@ class WPML_LS_Settings {
 			foreach ( $menus as $menu ) {
 				$menu_details = $this->sitepress->get_element_language_details( $menu->term_taxonomy_id, 'tax_nav_menu' );
 				if ( isset( $menu_details->language_code ) && $menu_details->language_code === $default_lang ) {
-					$ret[ $menu->slug ] = $menu;
+					$ret[ $menu->term_id ] = $menu;
 				}
 			}
 		}
@@ -305,24 +310,22 @@ class WPML_LS_Settings {
 	}
 
 	/**
-	 * @param int $menu_id
+	 * @param int $term_id
 	 *
 	 * @return WPML_LS_Slot
 	 */
-	public function get_menu_settings_from_id( $menu_id ) {
-		$menu_element = new WPML_Menu_Element( $menu_id, $this->sitepress );
+	public function get_menu_settings_from_id( $term_id ) {
+		$menu_element = new WPML_Menu_Element( $term_id, $this->sitepress );
 		$default_lang = $this->sitepress->get_default_language();
 
-		if ( $menu_element->get_language_code() === $default_lang ) {
-			$nav_menu = $menu_element->get_wp_object();
-		} else {
+		if ( $menu_element->get_language_code() !== $default_lang ) {
 			$nav_menu = $menu_element->get_translation( $default_lang )
 				? $menu_element->get_translation( $default_lang )->get_wp_object() : null;
-		}
-		
-		$menu_slug = $nav_menu && ! is_wp_error( $nav_menu ) ? $nav_menu->slug : null;
 
-		return $this->get_slot( 'menus', $menu_slug );
+			$term_id = $nav_menu && ! is_wp_error( $nav_menu ) ? $nav_menu->term_id : null;
+		}
+
+		return $this->get_slot( 'menus', $term_id );
 	}
 
 	/**
@@ -665,29 +668,6 @@ class WPML_LS_Settings {
 		}
 
 		return $can_load;
-	}
-
-	/**
-	 * @param string $slot_group
-	 *
-	 * @return array
-	 */
-	public function get_default_slot_arguments( $slot_group ) {
-		$args = array(
-			'slot_group' => $slot_group,
-			'display_link_for_current_lang' => 1,
-			'display_names_in_native_lang'  => 1,
-			'display_names_in_current_lang' => 1,
-		);
-
-		if ( $slot_group === 'menus' ) {
-			$args['template']        = $this->get_core_templates( 'menu-item' );
-			$args['is_hierarchical'] = 1;
-		} else if ( $slot_group === 'sidebars' ) {
-			$args['template'] = $this->get_core_templates( 'dropdown' );
-		}
-
-		return $args;
 	}
 
 	/**

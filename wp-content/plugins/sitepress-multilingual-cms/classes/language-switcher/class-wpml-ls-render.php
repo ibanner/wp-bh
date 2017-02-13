@@ -39,20 +39,18 @@ class WPML_LS_Render extends WPML_SP_User {
 	}
 
 	public function init_hooks() {
-		add_filter( 'wp_nav_menu_objects',           array( $this, 'wp_nav_menu_objects_filter' ), 10, 2 );
-		add_filter( 'the_content',                   array( $this, 'the_content_filter' ), 100 );
-		add_action( 'wp_footer',                     array( $this, 'wp_footer_action' ), 19 );
+		if ( $this->sitepress->get_setting( 'setup_complete' ) ) {
+			add_filter( 'wp_nav_menu_objects',           array( $this, 'wp_nav_menu_objects_filter' ), 10, 2 );
+			add_filter( 'the_content',                   array( $this, 'the_content_filter' ), 100 );
+			add_action( 'wp_footer',                     array( $this, 'wp_footer_action' ), 19 );
 
-		//@deprecated see 'wpml_add_language_selector'
-		add_action( 'icl_language_selector',         array( $this, 'wpml_add_language_selector_action' ) );
-		add_action( 'wpml_add_language_selector',    array( $this, 'wpml_add_language_selector_action' ) );
-		add_action( 'wpml_footer_language_selector', array( $this, 'wpml_footer_language_selector_action' ) );
+			//@deprecated see 'wpml_add_language_selector'
+			add_action( 'icl_language_selector',         array( $this, 'wpml_add_language_selector_action' ) );
+			add_action( 'wpml_add_language_selector',    array( $this, 'wpml_add_language_selector_action' ) );
+			add_action( 'wpml_footer_language_selector', array( $this, 'wpml_footer_language_selector_action' ) );
 
-		// Backward compatibility
-		add_shortcode( 'wpml_language_selector_widget', array( $this, 'wpml_language_selector_widget_shortcode' ) );
-		add_shortcode( 'wpml_language_selector_footer', array( $this, 'wpml_language_selector_footer_shortcode' ) );
-
-		$this->assets->init_hooks();
+			$this->assets->init_hooks();
+		}
 	}
 
 	/**
@@ -68,7 +66,13 @@ class WPML_LS_Render extends WPML_SP_User {
 
 			$this->assets->maybe_late_enqueue_template( $slot->template() );
 			$this->current_template = $this->templates->get_template( $slot->template() );
-			$model                  = $this->model_build->get( $slot, $this->current_template->get_template_data() );
+
+			if ( $slot->template_string() ) {
+				$this->current_template->set_template_string( $slot->template_string() );
+			}
+
+			$model = $this->model_build->get( $slot, $this->current_template->get_template_data() );
+
 			if ( $model['languages'] ) {
 				$this->current_template->set_model( $model );
 				$html = $this->current_template->get_html();
@@ -105,7 +109,7 @@ class WPML_LS_Render extends WPML_SP_User {
 		if ( $slot->is_menu() ) {
 			$ret['html'] = $this->render_menu_preview( $slot );
 		} else if ( $slot->is_post_translations() ) {
-			$ret['html'] = $this->get_parsed_availability_text( $slot );
+			$ret['html'] = $this->post_translations_label( $slot );
 		} else {
 			$ret['html'] = $this->render( $slot );
 		}
@@ -125,7 +129,7 @@ class WPML_LS_Render extends WPML_SP_User {
 	 */
 	public function wp_nav_menu_objects_filter( $items, $args ) {
 		$args    = (object) $args;
-		$menu_id = isset( $args->menu->term_id ) ? $args->menu->term_id : null;
+		$menu_id = isset( $args->menu ) ? $this->retrieve_menu_id( $args->menu ) : null;
 
 		if ( $menu_id ) {
 			$slot = $this->settings->get_menu_settings_from_id( $menu_id );
@@ -144,6 +148,27 @@ class WPML_LS_Render extends WPML_SP_User {
 		}
 
 		return $items;
+	}
+
+	/**
+	 * @param WP_Term|int|string $menu
+	 *
+	 * @return int|null
+	 */
+	private function retrieve_menu_id( $menu ) {
+		$menu_id = null;
+
+		if ( isset( $menu->term_id ) ) {
+			$menu_id = $menu->term_id;
+		} else {
+			$menu = wp_get_nav_menu_object( $menu );
+
+			if ( $menu ) {
+				$menu_id = $menu->term_id;
+			}
+		}
+
+		return $menu_id;
 	}
 
 	/**
@@ -214,7 +239,7 @@ class WPML_LS_Render extends WPML_SP_User {
 		$slot              = $this->settings->get_slot( 'statics', 'post_translations' );
 
 		if ( $slot->is_enabled() && $this->sitepress->get_wp_api()->is_singular() ) {
-			$post_translations = $this->get_parsed_availability_text( $slot	);
+			$post_translations = $this->post_translations_label( $slot	);
 		}
 
 		if ( $post_translations ) {
@@ -235,7 +260,7 @@ class WPML_LS_Render extends WPML_SP_User {
 	 *
 	 * @return mixed|string|void
 	 */
-	private function get_parsed_availability_text( $slot ) {
+	public function post_translations_label( $slot ) {
 		$css_classes = $this->model_build->get_slot_css_classes( $slot );
 		$html        = $this->render( $slot );
 		if ( $html ) {
@@ -267,26 +292,9 @@ class WPML_LS_Render extends WPML_SP_User {
 		echo $this->render( $slot );
 	}
 
-	/**
-	 * @return string
-	 */
-	public function wpml_language_selector_widget_shortcode() {
-		$slot = $this->settings->get_slot( 'statics', 'shortcode_actions' );
-		return $this->render( $slot );
-	}
-
 	public function wpml_footer_language_selector_action() {
 		$slot = clone $this->settings->get_slot( 'statics', 'footer' );
 		$slot->set( 'show', 1 );
 		echo $this->render( $slot );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function wpml_language_selector_footer_shortcode() {
-		$slot = clone $this->settings->get_slot( 'statics', 'footer' );
-		$slot->set( 'show', 1 );
-		return $this->render( $slot );
 	}
 }

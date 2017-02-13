@@ -24,7 +24,7 @@ WPML_core.PostEditDuplicates = function($) {
 	};
 
 	var _duplicate_click_handler = function () {
-		if(jQuery('#post ').find('input[name="icl_dupes[]"]:checked'.length > 0)){
+		if(jQuery('#post').find('input[name="icl_dupes[]"]:checked').length > 0){
 			jQuery('#icl_make_duplicates').show().removeAttr('disabled');
 		}else{
 			jQuery('#icl_make_duplicates').hide().attr('disabled', 'disabled');

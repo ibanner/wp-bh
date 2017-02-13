@@ -187,14 +187,20 @@ For each language, you need to enter the following information:
 	}
 
 	function table_row( $lang, $echo = true, $add = false ){
-        if ('add' === $lang['id']) {
-            $lang['english_name'] = isset($_POST['icl_edit_languages']['add']['english_name']) ? stripslashes_deep($_POST['icl_edit_languages']['add']['english_name']) : '';
-            $lang['code'] = isset($_POST['icl_edit_languages']['add']['code']) ? $_POST['icl_edit_languages']['add']['code'] : '';
-            $lang['default_locale'] = isset($_POST['icl_edit_languages']['add']['default_locale']) ? $_POST['icl_edit_languages']['add']['default_locale'] : '';
-            $lang['flag'] = '';
-            $lang['from_template'] = true;
-            $lang['tag'] = isset($_POST['icl_edit_languages']['add']['tag']) ? $_POST['icl_edit_languages']['add']['tag'] : '';
-        }
+		if ('add' === $lang['id']) {
+			$keys = array( 'english_name', 'code', 'default_locale', 'tag' );
+			foreach ( $keys as $key ) {
+				if (isset( $_POST['icl_edit_languages']['add'][ $key ] )) {
+					$lang[ $key ] = filter_var( $_POST['icl_edit_languages']['add'][ $key ], FILTER_SANITIZE_STRING );
+				} else {
+					$lang[ $key ] = '';
+				}
+			}
+
+			$lang['flag'] = '';
+			$lang['from_template'] = true;
+
+		}
         global $sitepress;
 
 
@@ -251,21 +257,18 @@ For each language, you need to enter the following information:
 				}
 				?>
 			</td>
-			<td <?php if ( $this->must_display_new_language_translation_column() ) {
-				echo 'style="display:none;" ';
-			} ?>class="icl_edit_languages_show"><input type="text"
+			<td
+                <?php if ( $this->must_display_new_language_translation_column() ) {
+				    echo 'style="display:none;" ';
+			    }
+			    ?>class="icl_edit_languages_show"><input type="text"
 			                                           name="icl_edit_languages[<?php echo $lang['id']; ?>][translations][add]"
-			                                           value="<?php echo isset( $_POST['icl_edit_languages'][ $lang['id'] ]['translations']['add'] ) ? stripslashes_deep( $_POST['icl_edit_languages'][ $lang['id'] ]['translations']['add'] ) : ''; ?>"/>
+			                                           value="<?php echo $this->get_add_language_from_post_data( $lang['id'] ); ?>"/>
 			</td>
 			<?php
 			foreach ( $this->active_languages as $translation ) {
-						if ($lang['id'] == 'add') {
-							$value = isset($_POST['icl_edit_languages']['add']['translations'][$translation['code']]) ? $_POST['icl_edit_languages']['add']['translations'][$translation['code']] : '';
-						} else {
-							$value = isset($lang['translation'][$translation['id']]) ? $lang['translation'][$translation['id']] : '';
-						}
 					?>
-					<td><input type="text" name="icl_edit_languages[<?php echo $lang['id']; ?>][translations][<?php echo $translation['code']; ?>]" value="<?php echo stripslashes_deep($value); ?>" /></td>
+					<td><input type="text" name="icl_edit_languages[<?php echo $lang['id']; ?>][translations][<?php echo $translation['code']; ?>]" value="<?php echo $this->get_translations_data( $lang, $translation ); ?>" /></td>
 				<?php
 			}
 			?>
@@ -850,11 +853,15 @@ For each language, you need to enter the following information:
     }
 
 	function upload_flag( $id ) {
-		$result    = false;
-		$validated = ! empty( $_FILES['icl_edit_languages']['tmp_name'][ $id ]['flag_file'] );
+		$result        = false;
+		$uploaded_file = false;
 
-		if ( $validated ) {
-			$filename    = basename( $_FILES['icl_edit_languages']['name'][ $id ]['flag_file'] );
+		if ( isset( $_FILES['icl_edit_languages']['tmp_name'][ $id ]['flag_file'] ) ) {
+			$uploaded_file = filter_var( $_FILES['icl_edit_languages']['tmp_name'][ $id ]['flag_file'], FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		}
+
+		if ( $uploaded_file ) {
+			$filename    = basename( $uploaded_file );
 			$target_path = $this->upload_dir . '/' . $filename;
 
 			$wpml_wp_api = new WPML_WP_API();
@@ -863,7 +870,7 @@ For each language, you need to enter the following information:
 			$allowed_mime_types = array_values( $this->allowed_flag_mime_types );
 			$validated          = in_array( $mime, $allowed_mime_types, true );
 
-			if ( $validated && move_uploaded_file( $_FILES['icl_edit_languages']['tmp_name'][ $id ]['flag_file'], $target_path ) ) {
+			if ( $validated && move_uploaded_file( $uploaded_file, $target_path ) ) {
 
 				if ( function_exists( 'wp_get_image_editor' ) && 'image/svg+xml' !== $mime ) {
 					$image = wp_get_image_editor( $target_path );
@@ -875,9 +882,7 @@ For each language, you need to enter the following information:
 
 				$result = $filename;
 			}
-		}
-
-		if ( ! $validated ) {
+		} else {
 			$error_message = __( 'There was an error uploading the file, please try again!', 'sitepress' );
 			if ( ! empty( $_FILES['icl_edit_languages']['error'][ $id ]['flag_file'] ) ) {
 				switch ( $_FILES['icl_edit_languages']['error'][ $id ]['flag_file'] ) {
@@ -928,6 +933,36 @@ For each language, you need to enter the following information:
 		$wpml_localization->download_language_packs();
 		$wpml_languages_notices = new WPML_Languages_Notices( wpml_get_admin_notices() );
 		$wpml_languages_notices->missing_languages( $wpml_localization->get_not_founds() );
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return string
+	 */
+	private function get_add_language_from_post_data( $id ) {
+		$value = isset( $_POST['icl_edit_languages'][ $id ]['translations']['add'] ) ? stripslashes_deep( $_POST['icl_edit_languages'][ $id ]['translations']['add'] ) : '';
+		$value = filter_var( $value, FILTER_SANITIZE_STRING );
+
+		return $value;
+	}
+
+	/**
+	 * @param $lang
+	 * @param $translation
+	 *
+	 * @return string
+	 */
+	private function get_translations_data( $lang, $translation ) {
+		if ( $lang['id'] == 'add' ) {
+			$value = isset( $_POST['icl_edit_languages']['add']['translations'][ $translation['code'] ] ) ? $_POST['icl_edit_languages']['add']['translations'][ $translation['code'] ] : '';
+			$value = filter_var( $value, FILTER_SANITIZE_STRING );
+		} else {
+			$value = isset( $lang['translation'][ $translation['id'] ] ) ? $lang['translation'][ $translation['id'] ] : '';
+		}
+		$value = stripslashes_deep( $value );
+
+		return $value;
 	}
 
 }

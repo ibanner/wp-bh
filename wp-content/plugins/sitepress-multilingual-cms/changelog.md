@@ -1,3 +1,48 @@
+# 3.6.3
+
+## Fixes
+
+* [wpmlcore-3411] Fixed some glitches for dropdown language switchers
+* [wpmlcore-3853] Fixed `SitePress::get_term_adjust_id` to retain the `object_id` if needed. Fixes missing WC product variations
+* [wpmlcore-3847] Fixed error on front-end when using WPML in Menus but with incomplete setup
+* [wpmlcore-3839] Fixed not saved settings when assigning a language switcher to a menu with a name in an encoded language (Hebrew, Chinese, ...)
+* [wpmlcore-3866] Fixed some compatibility issues for language switcher in menus
+* [wpmlcore-3007] Fixed title sanitization when German (de_DE) and Danish (da_DA) languages are present
+* [wpmlcore-3837] Fixed path returned by `get_home_path` when in the second language and using languages in domains
+* [wpmlcore-3860] Fixed default locale for some affected languages
+* [wpmlcore-3885] Fixed domain in the `content_url` function to match the current domain URL
+* [wpmlcore-3766] Applied some changes in WPML cookies: `wpml_referer_url` will be set on WCML and `_icl_current_language` will be set only if user is logged in
+* [wpmlcore-3427] Fixed redirection from URL with no language directory to URL with default language directory (applies with root page setup)
+* [wpmlcore-3889] Fixed fatal error during WPML setup (step 2) if not possible to connect to WP translation API
+* [wpmlmedia-114] Fixed retrieving gallery's images after changing the default language
+* [wpmlcore-3876] Added page builder requirements message for Divi theme
+* [wpmlcore-3892] Fixed post relationship for Types plugin when saving posts
+* [wpmlcore-3883] Fixed issue where translations can get disconnected when editing a duplicate post
+* [wpmlcore-3893] Fixed issue where an auto-draft draft is being assigned as a translation
+* [wpmlcore-3903] Fixed issues for retrieving object terms in a language different than the request language (related to `wp_get_object_terms`
+* [wpmlcore-4035] Fixed issue when updating any WPML user field from other user 
+* [wpmlcore-4042] Fixed issue in WPML wizard language not matching site language on fresh install
+* [wpmlcore-4142] Fixed issue in user admin language when trying to set a language which is not an active WPML language
+
+## Features
+* [wpmlcore-3597] WPML now scans for language switcher templates in the uploads folder
+* [wpmlcore-3510] Introduced a new generic shortcode for language switcher `wpml_language_switcher` 
+* [wpmlcore-3886] Downloading and using `wpml-config.xml` for parent theme when available 
+
+## Compatibility
+* [wpmlcore-4185] Removed Avada page builders integration.
+* [wpmlcore-3910] Resolved compatibility issues with 'Twenty Seventeen` theme and translation of Theme Options
+* [wpmlcore-3937] Fixed issue with Enfold's page builder and new string translation workflow
+* [wpmlcore-3943] Fixed issue with single sign-on when Object Cache is enabled using W3TC
+* [wpmlcore-3797] Resolved JS conflict with ACF Pro, affecting WYSIWYG fields
+
+## Security
+* [wpmlcore-3773] Several security fixes
+
+## API
+### Filters
+* [wpmlcore-3913] Added `wpml_duplicate_generic_string` in some locations to replace deprecated `icl_duplicate_generic_string`
+
 # 3.6.2
 
 ## Fixes
