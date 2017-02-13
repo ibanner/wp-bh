@@ -4,15 +4,16 @@
  *
  * @author 		Beit Hatfutsot
  * @package 	bh/views/page/content
- * @version     1.0
+ * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+// Get variables
 $images = get_sub_field('images');
 
-global $gallery_exist;
-$gallery_exist = false;
+// Globals
+global $globals;
 
 if ( $images ) { ?>
 
@@ -23,12 +24,16 @@ if ( $images ) { ?>
 			<?php 
 				$gallery_images = array();
 
+				function fix_str($string_to_fix) {
+					return str_replace(array("\r\n", "\n", "\r"), array("\\r\\n", "\\n", "\\r"), $string_to_fix);
+				};
+
 				foreach ($images as $i) {
 					$image = array(
-						'title'		=> esc_js( $i['title'] ),
-						'alt'		=> esc_js( $i['alt'] ),
-						'caption'	=> esc_js( $i['caption'] ),
-						'url'		=> esc_js( $i['url'] )
+						'title'		=> esc_attr( fix_str( $i['title'] ) ),
+						'alt'		=> esc_attr( fix_str( $i['alt'] ) ),
+						'caption'	=> esc_attr( fix_str( $i['caption'] ) ),
+						'url'		=> esc_attr( fix_str( $i['url'] ) )
 					);
 
 					$gallery_images[] = $image;
@@ -54,12 +59,9 @@ if ( $images ) { ?>
 				_BH_gallery_images = '<?php echo json_encode( $gallery_images ); ?>';
 			</script>
 
-			<?php $gallery_exist = true;
+			<?php $globals['_gallery_layout_exist'] = true; ?>
 
-			wp_enqueue_style('photoswipe');
-			wp_enqueue_style('photoswipe-default-skin');
-
-		} ?>
+		<?php } ?>
 
 	</div>
 

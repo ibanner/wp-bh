@@ -28,7 +28,7 @@ endif;
 
 define( 'VERSION', $theme_version );
 
-// other
+// Other constants
 $stylesheet = get_stylesheet();
 $theme_root = get_theme_root( $stylesheet );
 
@@ -38,6 +38,12 @@ define( 'THEME_ROOT',	"$theme_root/$stylesheet" );
 define( 'CSS_DIR',		TEMPLATE . '/css' );
 define( 'JS_DIR',		TEMPLATE . '/js' );
 define( 'EXR_API_KEY',	'8173E30F944972AB110F61D13501D61B' );	// Exchange Rate API key
+
+// Globals
+global $globals;
+$globals = array(
+	'_gallery_layout_exist'	=> false
+);
 
 // Google Fonts
 $google_fonts = array (

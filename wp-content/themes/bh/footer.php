@@ -9,9 +9,11 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+// Get variables
 $wpml_lang = function_exists('icl_object_id') ? ICL_LANGUAGE_CODE : '';
 
-global $gallery_exist;
+// Globals
+global $globals;
 
 ?>
 
@@ -28,8 +30,10 @@ global $gallery_exist;
 	
 	get_template_part('views/footer/footer');
 
-	if ( $gallery_exist ) {
+	if ( $globals['_gallery_layout_exist'] ) {
 		get_template_part('views/footer/footer-photoswipe');
+		wp_enqueue_style('photoswipe');
+		wp_enqueue_style('photoswipe-default-skin');
 		wp_enqueue_script('photoswipe');
 		wp_enqueue_script('photoswipe-ui-default');
 	}
