@@ -2,9 +2,9 @@
 /**
  * Theme configuration
  *
- * @author 		Beit Hatfutsot
- * @package 	bh/functions
- * @version     2.0
+ * @author		Beit Hatfutsot
+ * @package		bh/functions
+ * @version		2.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -13,22 +13,26 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * theme prefix => BH
  */
 
-// theme version is used to register styles and scripts
-if ( function_exists('wp_get_theme') ) :
+/**
+ * Theme version
+ * Used to register styles and scripts
+ */
+if ( function_exists('wp_get_theme') ) {
 
 	$theme_data = wp_get_theme();
 	$theme_version = $theme_data->get('Version');
 
-else :
+} else {
 
 	$theme_data = get_theme_data( trailingslashit(get_stylesheet_directory()).'style.css' );
 	$theme_version = $theme_data['Version'];
 
-endif;
-
+}
 define( 'VERSION', $theme_version );
 
-// Other constants
+/**
+ * Other constants
+ */
 $stylesheet = get_stylesheet();
 $theme_root = get_theme_root( $stylesheet );
 
@@ -39,13 +43,17 @@ define( 'CSS_DIR',		TEMPLATE . '/css' );
 define( 'JS_DIR',		TEMPLATE . '/js' );
 define( 'EXR_API_KEY',	'8173E30F944972AB110F61D13501D61B' );	// Exchange Rate API key
 
-// Globals
+/**
+ * Globals
+ */
 global $globals;
 $globals = array(
-	'_gallery_layout_exist'	=> false
+	'_galleries' => array()
 );
 
-// Google Fonts
+/**
+ * Google Fonts
+ */
 $google_fonts = array (
 	'Open Sans'			=> 'http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700',
 //	'Open Sans Hebrew'	=> 'http://fonts.googleapis.com/earlyaccess/opensanshebrew.css'

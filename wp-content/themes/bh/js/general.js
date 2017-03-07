@@ -10,10 +10,8 @@ var $ = jQuery,
 			woocommerce				: false,								// woocommerce page (true/false)
 
 			// gallery params
-			gallery_images			: '',
-			active_photos			: 0,
+			galleries				: {},
 			photos_columns			: 3,
-			active_column			: 0,
 			photos_more_interval	: 12,
 
 			window_width			: 0,									// client window width - used to maintain window resize events (int)
@@ -105,18 +103,27 @@ var $ = jQuery,
 			});
 
 			// Gallery
-			if ( typeof _BH_gallery_images !== 'undefined' && _BH_gallery_images.length > 0 ) {
-				// Init gallery
-				BH_general.params.gallery_images = $.parseJSON( _BH_gallery_images );
-				BH_general.lazyLoad(0, BH_general.params.photos_more_interval);
+			if (js_globals.galleries.length > 0) {
+				var image_galleries = $.parseJSON(js_globals.galleries);
 
-				// Bind click event to gallery 'load more' btn
-				$('.gallery-layout-content .load-more').bind('click', function() {
-					BH_general.lazyLoad(BH_general.params.active_photos, BH_general.params.photos_more_interval);
+				$.each( image_galleries, function(id, images) {
+					// Init gallery
+					BH_general.params.galleries[id] = {
+						images			: images,
+						active_photos	: 0,
+						active_column	: 0
+					};
+
+					BH_general.lazyLoad(id, BH_general.params.galleries[id]);
+
+					// Bind click event to gallery 'load more' btn
+					$('.'+id).next('.load-more').bind('click', function() {
+						BH_general.lazyLoad(id, BH_general.params.galleries[id]);
+					});
+
+					// PhotoSwipe
+					BH_general.initPhotoSwipeFromDOM('.'+id);
 				});
-
-				// PhotoSwipe
-				BH_general.initPhotoSwipeFromDOM('.gallery');
 			}
 
 			// footer menu
@@ -506,41 +513,41 @@ var $ = jQuery,
 		 *
 		 * Load gallery images
 		 *
-		 * @param	offset (int)
-		 * @param	amount (int)
+		 * @param	id (int) Gallery ID
+		 * @param	gallery (obj) Gallery object
 		 * @return	N/A
 		 */
-		lazyLoad : function (offset, amount) {
+		lazyLoad : function (id, gallery) {
 
 			var index, j;
 
-			for (index=offset, j=0 ; j<amount && BH_general.params.gallery_images.length>index ; index++, j++) {
+			for (index=gallery['active_photos'], j=0 ; j<BH_general.params.photos_more_interval && gallery['images'].length>index ; index++, j++) {
 				// expose photo
 				var photoItem =
 					'<figure class="gallery-item" data-index="' + index + '" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">' +
-						'<a href="' + BH_general.params.gallery_images[index]['url'] + '" itemprop="contentUrl">' +
-							'<img class="no-border" src="' + BH_general.params.gallery_images[index]['url'] + '" itemprop="thumbnail" alt="' + BH_general.params.gallery_images[index]['alt'] + '" />' +
+						'<a href="' + gallery['images'][index]['url'] + '" itemprop="contentUrl">' +
+							'<img class="no-border" src="' + gallery['images'][index]['url'] + '" itemprop="thumbnail" alt="' + gallery['images'][index]['alt'] + '" />' +
 						'</a>' +
-						'<figcaption itemprop="caption description">' + BH_general.params.gallery_images[index]['title'] + '<br><span>' + BH_general.params.gallery_images[index]['caption'] +  '</span></figcaption>' +
+						'<figcaption itemprop="caption description">' + gallery['images'][index]['title'] + '<br><span>' + gallery['images'][index]['caption'] +  '</span></figcaption>' +
 					'</figure>'
 					;
 
-				$(photoItem).appendTo( $('.gallery .col' + BH_general.params.active_column%BH_general.params.photos_columns) );
+				$(photoItem).appendTo( $('.'+id+' .col' + gallery['active_column']%BH_general.params.photos_columns) );
 
 				// Update active column
-				BH_general.params.active_column = BH_general.params.active_column%BH_general.params.photos_columns + 1;
+				gallery['active_column'] = gallery['active_column']%BH_general.params.photos_columns + 1;
 			}
 
-			if ( index == BH_general.params.gallery_images.length ) {
+			if ( index == gallery['images'].length ) {
 				// hide more btn
-				$('.gallery-layout-content .load-more').css('display', 'none');
+				$('.'+id).next('.load-more').css('display', 'none');
 			} else {
 				// expose more btn
-				$('.gallery-layout-content .load-more').css('display', 'block');
+				$('.'+id).next('.load-more').css('display', 'block');
 			}
 
 			// Update active photos
-			BH_general.params.active_photos += j;
+			gallery['active_photos'] += j;
 
 		},
 

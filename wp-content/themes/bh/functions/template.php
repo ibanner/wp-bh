@@ -271,7 +271,9 @@ function BH_get_gallery_html( $id, $title ) {
 	// Globals
 	global $globals;
 
-	$output .= '<!-- Gallery #' . $id . ' --><div class="gallery-layout-content gallery-layout-content-' . $id . '"><div class="gallery row" itemscope itemtype="http://schema.org/ImageGallery">';
+	$output .= '<!-- Gallery #' . $id . ' --><div class="gallery-layout-content">';
+	$output .= $title ? '<h2 class="title">' . $title . '</h2><hr />' : '';
+	$output .= '<div class="gallery gallery-' . $id . ' row" itemscope itemtype="http://schema.org/ImageGallery">';
 
 	$gallery_images = array();
 
@@ -302,13 +304,7 @@ function BH_get_gallery_html( $id, $title ) {
 	if ( $gallery_images ) {
 
 		$output .= '<button class="btn load-more inline-btn cyan-btn big">' . __('Load more', 'BH') . '</button>';
-
-		$output .=
-			'<script>
-				_BH_gallery_images = \'' . json_encode( $gallery_images ) . '\';
-			</script>';
-
-		$globals['_gallery_layout_exist'] = true;
+		$globals['_galleries']['gallery-'.$id] = $gallery_images;
 
 	}
 
