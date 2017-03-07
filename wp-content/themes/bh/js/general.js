@@ -519,7 +519,7 @@ var $ = jQuery,
 				var photoItem =
 					'<figure class="gallery-item" data-index="' + index + '" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">' +
 						'<a href="' + BH_general.params.gallery_images[index]['url'] + '" itemprop="contentUrl">' +
-							'<img src="' + BH_general.params.gallery_images[index]['url'] + '" itemprop="thumbnail" alt="' + BH_general.params.gallery_images[index]['alt'] + '" />' +
+							'<img class="no-border" src="' + BH_general.params.gallery_images[index]['url'] + '" itemprop="thumbnail" alt="' + BH_general.params.gallery_images[index]['alt'] + '" />' +
 						'</a>' +
 						'<figcaption itemprop="caption description">' + BH_general.params.gallery_images[index]['title'] + '<br><span>' + BH_general.params.gallery_images[index]['caption'] +  '</span></figcaption>' +
 					'</figure>'

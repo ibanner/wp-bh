@@ -2,18 +2,18 @@
 /**
  * The Template for displaying page layouts content
  *
- * @author 		Beit Hatfutsot
- * @package 	bh/views/page/content
- * @version     2.0
+ * @author		Beit Hatfutsot
+ * @package		bh/views/page/content
+ * @version		2.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-while (has_sub_field('acf-content_page_template_layouts')) :
+while ( has_sub_field('acf-content_page_template_layouts') ) :
 
 	$layout = get_row_layout();
 	
-	switch ($layout) :
+	switch ( $layout ) :
 	
 		case 'content_row' :
 		
@@ -21,7 +21,7 @@ while (has_sub_field('acf-content_page_template_layouts')) :
 			/* content row */
 			/***************/
 			
-			get_template_part('views/page/content/content-row');
+			get_template_part( 'views/page/content/content-row' );
 			
 			break;
 			
@@ -31,7 +31,7 @@ while (has_sub_field('acf-content_page_template_layouts')) :
 			/* FAQs */
 			/********/
 			
-			get_template_part('views/page/content/faqs');
+			get_template_part( 'views/page/content/faqs' );
 			
 			break;
 			
@@ -41,7 +41,7 @@ while (has_sub_field('acf-content_page_template_layouts')) :
 			/* excerpts */
 			/************/
 			
-			get_template_part('views/page/content/excerpts');
+			get_template_part( 'views/page/content/excerpts' );
 			
 			break;
 			
@@ -51,18 +51,8 @@ while (has_sub_field('acf-content_page_template_layouts')) :
 			/* contacts */
 			/************/
 			
-			get_template_part('views/page/content/contacts');
+			get_template_part( 'views/page/content/contacts' );
 
-			break;
-			
-		case 'gallery' :
-		
-			/***********/
-			/* gallery */
-			/***********/
-			
-			get_template_part('views/page/content/gallery');
-			
 	endswitch;
 
 endwhile;
