@@ -173,10 +173,12 @@ class woocommerce_gpf_feed_item {
 		// Add other elements.
 		$this->general_elements();
 		$this->get_additional_images();
-		$this->shipping_height_elements();
-		$this->shipping_width_elements();
-		$this->shipping_length_elements();
-		$this->all_or_nothing_shipping_elements();
+		if ( 'google' === $this->feed_format ) {
+			$this->shipping_height_elements();
+			$this->shipping_width_elements();
+			$this->shipping_length_elements();
+			$this->all_or_nothing_shipping_elements();
+		}
 		$this->force_stock_status();
 
 		// General, or feed-specific items
@@ -274,7 +276,7 @@ class woocommerce_gpf_feed_item {
 		}
 		$children = $this->wc_product->get_children();
 		foreach ( $children as $child ) {
-			$child_product = $this->wc_product->get_child( $child );
+			$child_product = wc_get_product( $child );
 			if ( ! $child_product ) {
 				continue;
 			}
@@ -289,7 +291,7 @@ class woocommerce_gpf_feed_item {
 			$child_prices = $this->generate_prices_for_product( $child_product );
 			if ( ( 0 == $current_prices['price_inc_tax'] ) && ( $child_prices['price_inc_tax'] > 0 ) ) {
 				$current_prices = $child_prices;
-			} elseif ( ($child_prices->price_inc_tax > 0) && ($child_prices->price_inc_tax < $current_prices->price_inc_tax) ) {
+			} elseif ( ($child_prices['price_inc_tax'] > 0) && ($child_prices['price_inc_tax'] < $current_prices['price_inc_tax']) ) {
 				$current_prices = $child_prices;
 			}
 		}
@@ -343,6 +345,8 @@ class woocommerce_gpf_feed_item {
 	private function general_elements() {
 
 		global $woocommerce_gpf_common;
+
+		$elements = array();
 
 		// Retrieve the info set against the product by this plugin.
 		$product_values = $woocommerce_gpf_common->get_values_for_product( $this->general_id, $this->feed_format );
