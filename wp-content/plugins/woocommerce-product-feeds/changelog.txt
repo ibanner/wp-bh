@@ -1,5 +1,13 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2017.02.27 - version 7.0.4
+* Fix error triggered on PHP releases < 5.4.
+
+2017.02.20 - version 7.0.3
+* Fix issue where incorrect variation price was picked when not including all variations in the feed
+* Update Bing feed to apply tax in relevant countries
+* Remove shipping dimension attributes from Google Inventory feed
+
 2017.02.06 - version 7.0.2
 * Fix issue where PHP warning could be generated.
 
