@@ -54,12 +54,6 @@
 	height: 33px;
 }
 
-.sprite-mjs-en-s{
-	background-position: -323px -59px ;
-	width: 65px;
-	height: 48px;
-}
-
 .sprite-museum-he{
 	background-position: -390px -59px ;
 	width: 64px;
@@ -82,12 +76,6 @@
 	background-position: -599px -59px ;
 	width: 63px;
 	height: 34px;
-}
-
-.sprite-mjs-he-s{
-	background-position: -664px -59px ;
-	width: 58px;
-	height: 43px;
 }
 
 .sprite-newsletter{
@@ -252,6 +240,18 @@
 	height: 74px;
 }
 
+.sprite-mjs-he-s{
+	background-position: -511px -165px ;
+	width: 52px;
+	height: 35px;
+}
+
+.sprite-mjs-en-s{
+	background-position: -565px -165px ;
+	width: 80px;
+	height: 31px;
+}
+
 /******************/
 /* sprites mixins */
 /******************/
@@ -308,12 +308,6 @@
 	height: 33px;
 }
 
-@mixin sprite-mjs-en-s{
-	background-position: -323px -59px ;
-	width: 65px;
-	height: 48px;
-}
-
 @mixin sprite-museum-he{
 	background-position: -390px -59px ;
 	width: 64px;
@@ -336,12 +330,6 @@
 	background-position: -599px -59px ;
 	width: 63px;
 	height: 34px;
-}
-
-@mixin sprite-mjs-he-s{
-	background-position: -664px -59px ;
-	width: 58px;
-	height: 43px;
 }
 
 @mixin sprite-newsletter{
@@ -504,4 +492,16 @@
 	background-position: -443px -165px ;
 	width: 66px;
 	height: 74px;
+}
+
+@mixin sprite-mjs-he-s{
+	background-position: -511px -165px ;
+	width: 52px;
+	height: 35px;
+}
+
+@mixin sprite-mjs-en-s{
+	background-position: -565px -165px ;
+	width: 80px;
+	height: 31px;
 }
