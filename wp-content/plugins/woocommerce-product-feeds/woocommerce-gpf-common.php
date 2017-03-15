@@ -20,7 +20,6 @@ class WoocommerceGpfCommon {
 
 		$this->settings = get_option( 'woocommerce_gpf_config' );
 		$this->product_fields = array(
-
 			'availability' => array(
 				'desc'        => __( 'Availability', 'woocommerce_gpf' ),
 				'full_desc'   => __( 'What status to send for in stock items. Out of stock products will always show as "Out of stock" irrespective of this setting.', 'woocommerce_gpf' ),
@@ -514,7 +513,12 @@ class WoocommerceGpfCommon {
 
 		$result = array();
 		$product = wc_get_product( $product_id );
-		if ( $product->product_type === 'variation' ) {
+		if ( is_callable( array( $product, 'get_type' ) ) ) {
+			$product_type = $product->get_type();
+		} else {
+			$product_type = $product->product_type;
+		}
+		if ( $product_type === 'variation' ) {
 			// Get the attributes.
 			$attributes = $product->get_variation_attributes();
 			// If the requested taxonomy is used as an attribute, grab it's value for this variation.
@@ -533,9 +537,13 @@ class WoocommerceGpfCommon {
 				$terms = get_the_terms( $product_id, $value );
 				if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 					$result = wp_list_pluck( $terms, 'name' );
-				} elseif ( ! empty( $product->parent->id ) ) {
+				} else {
 					// Couldn't find it against the variation - grab the parent product value.
-					$terms = get_the_terms( $product->parent->id, $value );
+					if ( is_callable( array( $product, 'get_parent_id' ) ) ) {
+						$terms = get_the_terms( $product->get_parent_id(), $value );
+					} else {
+						$terms = get_the_terms( $product->parent->id, $value );
+					}
 					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 						$result = wp_list_pluck( $terms, 'name' );
 					}

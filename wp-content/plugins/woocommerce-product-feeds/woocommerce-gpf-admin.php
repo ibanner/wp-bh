@@ -202,6 +202,7 @@ class WoocommerceGpfAdmin {
 	 */
 	function enqueue_scripts() {
 		wp_enqueue_script( 'wooautocomplete', plugins_url( basename( dirname( __FILE__ ) ) ) . '/js/jquery.autocomplete.js', array( 'jquery', 'jquery-ui-core' ) );
+		wp_enqueue_script( 'woocommerce_gpf', plugins_url( basename( dirname( __FILE__ ) ) ) . '/js/woocommerce-gpf.js', array( 'jquery' ) );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 	}
 
@@ -305,7 +306,12 @@ class WoocommerceGpfAdmin {
 
 		global $woocommerce_gpf_common;
 
-		echo '<h4>' . __( 'Product Feed Information', 'woocommerce_gpf' ) . '</h4>';
+		echo '<div class="wc_gpf_metabox closed">';
+		echo '<h2><strong>';
+		echo __( 'Product Feed Information', 'woocommerce_gpf' );
+		echo '</strong><div class="handlediv" aria-label="Click to toggle"></div>';
+		echo '</h2>';
+		echo '<div class="wc_gpf_metabox_content" style="display:none;">';
 		echo '<p>' . __( 'Set values here if you want to override the information for this specific variation. If information should apply to all variations, then set it against the main product.', 'woocommerce_gpf' ) . '</p>';
 		$current_data     = get_post_meta( $variation->ID, '_woocommerce_gpf_data', true );
 		$product_defaults = $woocommerce_gpf_common->get_values_for_product( $variation->ID, 'all', true );
@@ -382,7 +388,8 @@ class WoocommerceGpfAdmin {
 			$this->template_loader->output_template_with_variables( 'woo-gpf', 'product-meta-field-row', $variables );
 		}
 		$this->template_loader->output_template_with_variables( 'woo-gpf', 'product-meta-edit-footer', array() );
-
+		echo '</div>';
+		echo '</div>';
 	}
 
 	/**
