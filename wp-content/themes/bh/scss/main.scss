@@ -64,7 +64,6 @@
 				padding: 21px;
 				background-color: black;
 				font-size: 20px;
-				font-family: arial;
 				background-color: rgba(229, 230, 231, 0.8);
 				overflow: hidden;
 
@@ -450,6 +449,12 @@
 			
 			p {
 				margin-bottom: 0;
+			}
+
+			ul,
+			ol {
+				padding-left: 25px;
+				list-style-type: circle;
 			}
 	
 			/*******/
