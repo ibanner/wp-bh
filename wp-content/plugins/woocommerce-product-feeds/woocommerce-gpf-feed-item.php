@@ -118,7 +118,13 @@ class woocommerce_gpf_feed_item {
 		$this->guid  = 'woocommerce_gpf_' . $this->ID;
 		$this->title = $this->wc_product->get_title();
 		if ( $this->is_variation ) {
-			$suffix = $this->wc_product->get_formatted_variation_attributes(true);
+			if ( is_callable( 'wc_get_formatted_variation' ) ) {
+				// WC >= 2.7.0
+				$suffix = wc_get_formatted_variation( $this->wc_product, true, true );
+			} else {
+				// WC < 2.7.0
+				$suffix = $this->wc_product->get_formatted_variation_attributes( true );
+			}
 			if ( ! empty( $suffix ) ) {
 				$this->title .= ' (' . $suffix . ')';
 			}
@@ -128,30 +134,14 @@ class woocommerce_gpf_feed_item {
 			$this->title,
 			$this->specific_id
 		);
-		// Use the variation description if possible, main product description if not.
-		$this->description = null;
-		if ( $this->is_variation ) {
-			$this->description = $this->wc_product->get_variation_description();
-		}
-		if ( is_callable( array( $this->wc_product, 'get_description' ) ) ) {
-			// WC > 2.7.0
-			$description = $this->wc_product->get_description();
-		} else {
-			// WC < 2.7.0
-			$description = $this->wc_product->post->post_content;
-		}
-		if ( empty( $this->description ) ) {
-			$this->description = apply_filters(
-				'the_content',
-				$description
-			);
-		}
+		$this->description = $this->get_product_description();
 		$this->description = apply_filters(
 			'woocommerce_gpf_description',
 			$this->description,
 			$this->general_id,
 			$this->is_variation ? $this->specific_id : null
 		);
+
 		$this->image_link      = $this->get_the_post_thumbnail_src( $this->ID, $this->image_style );
 		if ( $this->is_variation && empty( $this->image_link ) ) {
 			$this->image_link = $this->get_the_post_thumbnail_src( $this->general_id, $this->image_style );
@@ -184,6 +174,46 @@ class woocommerce_gpf_feed_item {
 		// General, or feed-specific items
 		$this->additional_elements = apply_filters( 'woocommerce_gpf_elements', $this->additional_elements, $this->ID, isset( $this->variation_id ) ? $this->variation_id : null );
 		$this->additional_elements = apply_filters( 'woocommerce_gpf_elements_' . $this->feed_format, $this->additional_elements, $this->ID, isset( $this->variation_id ) ? $this->variation_id : null );
+	}
+
+	private function get_product_description_legacy() {
+		$description = null;
+		if ( $this->is_variation ) {
+			$description = $this->wc_product->get_variation_description();
+		}
+		$description = $this->wc_product->post->post_content;
+		if ( empty( $description ) ) {
+			$description = apply_filters(
+				'the_content',
+				$description
+			);
+		}
+		return $description;
+	}
+
+	private function get_product_description() {
+		if ( ! is_callable( array( $this->wc_product, 'get_description' ) ) ) {
+			// WC < 2.7.0
+			return $this->get_product_description_legacy();
+		}
+		$description = null;
+		if ( $this->is_variation ) {
+			// Use the variation description if possible
+			$description = $this->wc_product->get_description();
+			// Use the main product description if there was no variation specific
+			// description.
+			if ( empty( $description ) ) {
+				$parent_id = $this->wc_product->get_parent_id();
+				$parent = new WC_Product( $parent_id );
+				$description = $parent->get_description();
+			}
+		} else {
+			$description = $this->wc_product->get_description();
+		}
+		return apply_filters(
+			'the_content',
+			$description
+		);
 	}
 
 	/**
@@ -280,7 +310,12 @@ class woocommerce_gpf_feed_item {
 			if ( ! $child_product ) {
 				continue;
 			}
-			if ( 'variation' === $child_product->product_type ) {
+			if ( is_callable( array( $child_product, 'get_type' ) ) ) {
+				$product_type = $child_product->get_type();
+			} else {
+				$product_type = $child_product->product_type;
+			}
+			if ( 'variation' === $product_type ) {
 				$child_is_visible = $this->variation_is_visible( $child_product );
 			} else {
 				$child_is_visible = $child_product->is_visible();

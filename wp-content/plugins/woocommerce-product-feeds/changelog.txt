@@ -1,5 +1,8 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2017.03.06 - version 7.0.5
+* Further compatibility changes in preparation for WooCommerce 2.7
+
 2017.02.27 - version 7.0.4
 * Fix error triggered on PHP releases < 5.4.
 
