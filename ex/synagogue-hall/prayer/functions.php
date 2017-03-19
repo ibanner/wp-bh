@@ -56,6 +56,7 @@ function email_message($link) {
 					<p>
 						Shalom, and thank you for visiting "Hallelujah! Assemble, Pray, Study – Synagogues Past and Present" at the Museum of the Jewish People at Beit Hatfutsot.<br>
 						Here is a link to the prayer you selected during your visit: <a href="<?php echo $link; ?>"><?php echo $link; ?></a>.<br><br>
+						<i>Text sent to you is for your personal use only and is subject to copyright law.</i><br><br>
 						It was our pleasure having you at the museum.<br><br>
 						We hope to see you again soon,<br>
 						<strong>The Museum Team</strong>
@@ -65,6 +66,7 @@ function email_message($link) {
 						שלום,<br>
 						תודה רבה שביקרתם בתערוכת "הללו-יה! להתכנס, להתפלל, ללמוד – בית הכנסת אז והיום" במוזיאון העם היהודי בבית התפוצות.<br>
 						להלן הלינק לתפילה שבחרתם בזמן הביקור: <a href="<?php echo $link; ?>"><?php echo $link; ?></a>.<br><br>
+						<i>ניתן להשתמש בטקסט שנשלח אליך לשימוש אישי בלבד, בכפוף לחוק זכויות יוצרים.</i><br><br>
 						שמחנו לארח אתכם במוזיאון.<br><br>
 						בברכה,<br>
 						<strong>צוות מוזיאון העם היהודי בבית התפוצות</strong>
