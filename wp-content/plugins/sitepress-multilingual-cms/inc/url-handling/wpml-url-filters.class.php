@@ -3,7 +3,15 @@
 /**
  * Class WPML_URL_Filters
  */
-class WPML_URL_Filters extends WPML_SP_And_PT_User {
+class WPML_URL_Filters {
+	/** @var SitePress */
+	private $sitepress;
+
+	/** @var  WPML_Post_Translation $post_translation */
+	private $post_translation;
+
+	/** @var WPML_Canonicals */
+	private $canonicals;
 
 	/** @var WPML_URL_Converter $url_converter */
 	private $url_converter;
@@ -11,22 +19,51 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 	/**
 	 * @param WPML_Post_Translation $post_translation
 	 * @param WPML_URL_Converter    $url_converter
+	 * @param WPML_Canonicals       $canonicals
 	 * @param SitePress             $sitepress
 	 */
-	public function __construct( &$post_translation, &$url_converter, &$sitepress ) {
-		parent::__construct( $post_translation, $sitepress );
+	public function __construct( &$post_translation, &$url_converter, WPML_Canonicals $canonicals, &$sitepress ) {
+		$this->sitepress        = &$sitepress;
+		$this->post_translation = &$post_translation;
+
 		$this->url_converter = &$url_converter;
+		$this->canonicals    = $canonicals;
 		if ( $this->frontend_uses_root() === true ) {
 			WPML_Root_Page::init();
-			add_filter( 'page_link', array( $this, 'permalink_filter_root' ), 1, 2 );
-		} else {
-			add_filter( 'page_link', array( $this, 'permalink_filter' ), 1, 2 );
 		}
+		$this->add_hooks();
+	}
+
+	private function add_hooks() {
+		if ( $this->frontend_uses_root() === true ) {
+			add_filter( 'page_link', array( $this, 'page_link_filter_root' ), 1, 2 );
+		} else {
+			add_filter( 'page_link', array( $this, 'page_link_filter' ), 1, 2 );
+		}
+
+		$this->add_global_hooks();
+		if ( $this->has_wp_get_canonical_url() ) {
+			add_filter( 'get_canonical_url', array( $this, 'get_canonical_url_filter' ), 1, 2 );
+		}
+	}
+
+	public function add_global_hooks() {
 		add_filter( 'home_url', array( $this, 'home_url_filter' ), - 10, 4 );
 		// posts and pages links filters
 		add_filter( 'post_link', array( $this, 'permalink_filter' ), 1, 2 );
 		add_filter( 'post_type_link', array( $this, 'permalink_filter' ), 1, 2 );
+		add_filter( 'wpml_filter_link', array( $this, 'permalink_filter' ), 1, 2 );
 		add_filter( 'get_edit_post_link', array( $this, 'get_edit_post_link' ), 1, 3 );
+	}
+
+	public function remove_global_hooks() {
+		// posts and pages links filters
+		remove_filter( 'get_edit_post_link', array( $this, 'get_edit_post_link' ), 1 );
+		remove_filter( 'wpml_filter_link', array( $this, 'permalink_filter' ), 1 );
+		remove_filter( 'post_type_link', array( $this, 'permalink_filter' ), 1 );
+		remove_filter( 'post_link', array( $this, 'permalink_filter' ), 1 );
+
+		remove_filter( 'home_url', array( $this, 'home_url_filter' ), - 10 );
 	}
 
 	/**
@@ -70,6 +107,20 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 	}
 
 	/**
+	 * @param $link
+	 * @param $pid
+	 *
+	 * @return string|WPML_Notice|WPML_Notice_Render
+	 */
+	public function page_link_filter_root( $link, $pid ) {
+		$pid  = is_object( $pid ) ? $pid->ID : $pid;
+		$link = $this->sitepress->get_root_page_utils()->get_root_page_id() != $pid
+			? $this->page_link_filter( $link, $pid ) : $this->filter_root_permalink( $link );
+
+		return $link;
+	}
+
+	/**
 	 * Filters links to the root page, so that they are displayed properly in the front-end.
 	 *
 	 * @param $url
@@ -96,35 +147,73 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 
 	/**
 	 * @param string      $link
-	 * @param int|WP_Post $post_object
+	 * @param int|WP_Post $post
 	 *
 	 * @return bool|mixed|string
 	 */
-	public function permalink_filter( $link, $post_object ) {
-		$post_object = is_object( $post_object ) ? $post_object->ID : $post_object;
-		$post_type   = isset( $post_object->post_type )
-			? $post_object->post_type : $this->sitepress->get_wp_api()->get_post_type( $post_object );
-		if ( $this->sitepress->is_translated_post_type( $post_type ) ) {
-			$code             = $this->get_permalink_filter_lang( $post_object );
-			$current_language = $this->sitepress->get_current_language();
-			$post_id          = isset( $post_object->ID ) ? $post_object->ID : $post_object;
-			if ( ! is_admin()
-			     && $this->sitepress->get_setting( 'auto_adjust_ids' )
-			     && $this->post_translation->get_element_lang_code(
-					$post_id
-				) !== $current_language
-			     && ( $post_id = $this->post_translation->element_id_in( $post_id,
-					$current_language ) )
-			) {
-				$link = get_permalink( $post_id );
-			} else {
-				$link = $this->url_converter->convert_url( $link, $code );
-			}
-			$link = $this->sitepress->get_wp_api()->is_feed()
-				? str_replace( "&lang=", "&#038;lang=", $link ) : $link;
+	public function permalink_filter( $link, $post ) {
+		if ( ! $post ) {
+			return $link;
 		}
 
+		/** @var int $post */
+		if ( is_object( $post ) ) {
+			$post = $post->ID;
+		}
+
+		$canonical_url = $this->canonicals->permalink_filter( $link, $post );
+		if ( $canonical_url ) {
+			return $canonical_url;
+		}
+
+		$post_element = new WPML_Post_Element( $post, $this->sitepress );
+		if ( $post_element->is_translatable() ) {
+				$link = $this->get_translated_permalink( $link, $post, $post_element );
+		}
 		return $link;
+	}
+
+	/**
+	 * @param $link
+	 * @param $post
+	 *
+	 * @return WPML_Notice|WPML_Notice_Render
+	 */
+	public function page_link_filter( $link, $post ) {
+		if ( ! $post ) {
+			return $link;
+		}
+
+		/** @var int $post */
+		if ( is_object( $post ) ) {
+			$post = $post->ID;
+		}
+
+		$canonical_url = $this->canonicals->permalink_filter( $link, $post );
+		if ( $canonical_url ) {
+			return $canonical_url;
+		}
+
+		$post_element = new WPML_Post_Element( $post, $this->sitepress );
+		if ( $post_element->is_translatable() ) {
+			$link = $this->get_translated_page_link( $link, $post, $post_element );
+		}
+		return $link;
+	}
+
+	private function has_wp_get_canonical_url() {
+		return $this->sitepress->get_wp_api()->function_exists( 'wp_get_canonical_url' );
+	}
+
+	/**
+	 * @param string|bool $canonical_url
+	 * @param WP_Post     $post
+	 *
+	 * @return mixed
+	 * @throws \InvalidArgumentException
+	 */
+	public function get_canonical_url_filter( $canonical_url, $post ) {
+		return $this->canonicals->get_canonical_url( $canonical_url, $post );
 	}
 
 	public function home_url_filter( $url, $path, $orig_scheme, $blog_id ) {
@@ -154,11 +243,11 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 	/**
 	 * Finds the correct language a post belongs to by handling the special case of the post edit screen.
 	 *
-	 * @param WP_Post $post_object
+	 * @param int $post_id
 	 *
 	 * @return bool|mixed|null|String
 	 */
-	private function get_permalink_filter_lang( $post_object ) {
+	private function get_permalink_filter_lang( $post_id ) {
 		if ( isset( $_POST['action'] ) && $_POST['action'] === 'sample-permalink' ) {
 			$code = $this->get_language_from_url();
 			$code = $code
@@ -167,7 +256,7 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 					? $this->sitepress->get_default_language()
 					: $this->url_converter->get_language_from_url( $_SERVER["HTTP_REFERER"] ) );
 		} else {
-			$code = $this->post_translation->get_element_lang_code( $post_object );
+			$code = $this->post_translation->get_element_lang_code( $post_id );
 		}
 
 		return $code;
@@ -200,5 +289,59 @@ class WPML_URL_Filters extends WPML_SP_And_PT_User {
 		}
 
 		return $language;
+	}
+
+	/**
+	 * @param string            $link
+	 * @param int               $post
+	 * @param WPML_Post_Element $post_element
+	 *
+	 * @return bool|false|mixed|string
+	 */
+	public function get_translated_permalink( $link, $post, $post_element ) {
+		$code             = $this->get_permalink_filter_lang( $post );
+		$post_id          = $post_element->get_element_id();
+		$current_language = $this->sitepress->get_current_language();
+		if ( ! is_admin()
+		     && $this->sitepress->get_setting( 'auto_adjust_ids' )
+		     && $post_element->get_language_code() !== $this->sitepress->get_current_language()
+		     && ( $post_id = $this->post_translation->element_id_in( $post_id, $current_language ) )
+		) {
+			$link = get_permalink( $post_id );
+		} else {
+			$link = $this->url_converter->get_strategy()->convert_url_string( $link, $code );
+		}
+		if ( $this->sitepress->get_wp_api()->is_feed() ) {
+			$link = str_replace( '&lang=', '&#038;lang=', $link );
+		}
+
+		return $link;
+	}
+
+	/**
+	 * @param $link
+	 * @param $post
+	 * @param $post_element
+	 *
+	 * @return bool|mixed|string
+	 */
+	public function get_translated_page_link( $link, $post, $post_element ) {
+		$code             = $this->get_permalink_filter_lang( $post );
+		$post_id          = $post_element->get_element_id();
+		$current_language = $this->sitepress->get_current_language();
+		if ( ! is_admin()
+		     && $this->sitepress->get_setting( 'auto_adjust_ids' )
+		     && $post_element->get_language_code() !== $this->sitepress->get_current_language()
+		     && ( $post_id = $this->post_translation->element_id_in( $post_id, $current_language ) )
+		) {
+			$link = get_page_link( $post_id );
+		} else {
+			$link = $this->url_converter->get_strategy()->convert_url_string( $link, $code );
+		}
+		if ( $this->sitepress->get_wp_api()->is_feed() ) {
+			$link = str_replace( '&lang=', '&#038;lang=', $link );
+		}
+
+		return $link;
 	}
 }

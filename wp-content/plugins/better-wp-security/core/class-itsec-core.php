@@ -1,4 +1,5 @@
 <?php
+
 /**
  * iThemes Security Core.
  *
@@ -17,27 +18,40 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 
 	final class ITSEC_Core {
 
+		private static $instance = false;
+
 		/**
-		 * @var ITSEC_Core - Static property to hold our singleton instance
+		 * This number keeps track of data format changes and triggers data upgrade handlers.
+		 *
+		 * @access private
 		 */
-		static $instance = false;
+		private $plugin_build = 4070;
+
+		/**
+		 * Used to distinguish between a user modifying settings and the API modifying settings (such as from Sync
+		 * requests).
+		 *
+		 * @access private
+		 */
+		private $interactive = false;
+
+		private $notices_loaded = false;
+		private $doing_data_upgrade = false;
 
 		private
 			$itsec_files,
 			$itsec_notify,
-			$itsec_sync,
-			$plugin_build,
+			$sync_api,
 			$plugin_file,
 			$plugin_dir,
+			$plugin_name,
 			$current_time,
 			$current_time_gmt,
 			$is_iwp_call,
-			$interactive,
 			$request_type,
 			$wp_upload_dir,
-			$notices_loaded,
-			$doing_data_upgrade,
 			$storage_dir;
+
 
 		/**
 		 * Private constructor to make this a singleton
@@ -74,23 +88,21 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		public function init( $plugin_file, $plugin_name ) {
 			global $itsec_globals, $itsec_logger, $itsec_lockout;
 
-			$this->plugin_build = 4041; // used to trigger updates
 			$this->plugin_file = $plugin_file;
 			$this->plugin_dir = dirname( $plugin_file ) . '/';
+			$this->plugin_name = $plugin_name;
 			$this->current_time = current_time( 'timestamp' );
 			$this->current_time_gmt = current_time( 'timestamp', true );
-			$this->notices_loaded = false;
-			$this->doing_data_upgrade = false;
-
-			$this->interactive = false; // Used to distinguish between a user modifying settings and the API modifying
-			                            // settings (such as from Sync requests).
 
 			$itsec_globals = array(
-				'plugin_name'      => sanitize_text_field( $plugin_name ),
 				'plugin_dir'       => $this->plugin_dir,
 				'current_time'     => $this->current_time,
 				'current_time_gmt' => $this->current_time_gmt,
 			);
+
+			register_activation_hook( $this->plugin_file, array( 'ITSEC_Core', 'handle_activation' ) );
+			register_deactivation_hook( $this->plugin_file, array( 'ITSEC_Core', 'handle_deactivation' ) );
+			register_uninstall_hook( $this->plugin_file, array( 'ITSEC_Core', 'handle_uninstall' ) );
 
 
 			require( $this->plugin_dir . 'core/class-itsec-modules.php' );
@@ -103,83 +115,39 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			require( $this->plugin_dir . 'core/class-itsec-files.php' );
 			require( $this->plugin_dir . 'core/class-itsec-notify.php' );
 			require( $this->plugin_dir . 'core/class-itsec-response.php' );
+			require( $this->plugin_dir . 'core/lib/class-itsec-lib-user-activity.php' );
 
 			$this->itsec_files = ITSEC_Files::get_instance();
 			$this->itsec_notify = new ITSEC_Notify();
 			$itsec_logger = new ITSEC_Logger();
 			$itsec_lockout = new ITSEC_Lockout( $this );
 
-
-			//Determine if we need to run upgrade scripts
-			$plugin_data = get_site_option( 'itsec_data' );
-
-			if ( false === $plugin_data ) {
-				$plugin_data = $this->save_plugin_data();
+			// Handle upgrade if needed.
+			if ( ITSEC_Modules::get_setting( 'global', 'build' ) < $this->plugin_build ) {
+				add_action( 'plugins_loaded', array( $this, 'handle_upgrade' ), -100 );
 			}
 
-			$itsec_globals['data'] = $plugin_data;
 
-			if ( ( isset( $plugin_data['build'] ) && $plugin_data['build'] !== $this->plugin_build ) ) {
-				// We need to upgrade the data. Delay init of the rest of the plugin until the upgrade is complete.
+			if ( is_admin() ) {
+				require( $this->plugin_dir . 'core/admin-pages/init.php' );
 
-				$this->doing_data_upgrade = true;
-
-				// Run the actions early so that the rest of the code can still use the plugins_loaded hook.
-				add_action( 'plugins_loaded', array( $this, 'execute_upgrade' ), -100 );
-				add_action( 'plugins_loaded', array( $this, 'continue_init' ), -90 );
-			} else {
-				$this->continue_init();
+				add_filter( 'plugin_action_links', array( $this, 'add_action_link' ), 10, 2 );
+				add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links' ), 10, 4 );
 			}
+
+
+			add_action( 'plugins_loaded', array( $this, 'continue_init' ), -90 );
+			add_action( 'wp_login_failed', array( 'ITSEC_Lib', 'handle_wp_login_failed' ) );
+			add_action( 'ithemes_sync_register_verbs', array( $this, 'register_sync_verbs' ) );
 		}
 
 		public function continue_init() {
 			ITSEC_Modules::run_active_modules();
 
-
-			add_action( 'ithemes_sync_register_verbs', array( $this, 'register_sync_verbs' ) );
-
-			if ( is_admin() ) {
-				require( $this->plugin_dir . 'core/admin-pages/init.php' );
-
-				require( $this->plugin_dir . 'core/class-itsec-dashboard-admin.php' );
-				new ITSEC_Dashboard_Admin( $this );
-
-				//add action link
-				add_filter( 'plugin_action_links', array( $this, 'add_action_link' ), 10, 2 );
-
-				//add plugin meta links
-				add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links' ), 10, 4 );
-
-			}
-
-			register_activation_hook( $this->plugin_file, array( 'ITSEC_Core', 'on_activate' ) );
-			register_deactivation_hook( $this->plugin_file, array( 'ITSEC_Core', 'on_deactivate' ) );
-			register_uninstall_hook( $this->plugin_file, array( 'ITSEC_Core', 'on_uninstall' ) );
-
 			//Admin bar links
 			if ( ! ITSEC_Modules::get_setting( 'global', 'hide_admin_bar' ) ) {
-				add_action( 'admin_bar_menu', array( $this, 'admin_bar_links' ), 99 );
+				add_action( 'admin_bar_menu', array( $this, 'modify_admin_bar' ), 99 );
 			}
-
-			//See if they're upgrade from Better WP Security
-			if ( is_multisite() && true === ITSEC_Modules::get_setting( 'global', 'did_upgrade' ) ) {
-
-				switch_to_blog( 1 );
-
-				$bwps_options = get_option( 'bit51_bwps' );
-
-				restore_current_blog();
-
-			} else {
-
-				$bwps_options = get_option( 'bit51_bwps' );
-
-			}
-
-			if ( $bwps_options !== false ) {
-				add_action( 'plugins_loaded', array( $this, 'do_upgrade' ) );
-			}
-
 
 			do_action( 'itsec_initialized' );
 		}
@@ -194,51 +162,52 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			return $self->itsec_notify;
 		}
 
-		public static function get_itsec_sync() {
+		public static function get_sync_api() {
 			$self = self::get_instance();
-
-			if ( ! isset( $self->itsec_sync ) ) {
-				require( dirname( __FILE__ ) . '/class-itsec-sync.php' );
-				$self->itsec_sync = new ITSEC_Sync();
-			}
-
-			return $self->itsec_sync;
+			return $self->sync_api;
 		}
 
 		public function register_sync_verbs( $sync_api ) {
-			$itsec_sync = self::get_itsec_sync();
-			$itsec_sync->register_verbs( $sync_api );
+			// For use by the itsec-get-everything verb as it has to run other verbs to get their details.
+			$this->sync_api = $sync_api;
+
+			$sync_api->register( 'itsec-get-everything', 'Ithemes_Sync_Verb_ITSEC_Get_Everything', dirname( __FILE__ ) . '/sync-verbs/itsec-get-everything.php' );
 		}
 
 		public function register_modules() {
 			$path = dirname( __FILE__ );
 
-			include( "$path/modules/security-check/init.php" );
-			include( "$path/modules/global/init.php" );
-			include( "$path/modules/404-detection/init.php" );
-			include( "$path/modules/away-mode/init.php" );
-			include( "$path/modules/ban-users/init.php" );
-			include( "$path/modules/brute-force/init.php" );
-			include( "$path/modules/core/init.php" );
-			include( "$path/modules/backup/init.php" );
-			include( "$path/modules/file-change/init.php" );
-			include( "$path/modules/file-permissions/init.php" );
-			include( "$path/modules/hide-backend/init.php" );
-			include( "$path/modules/ipcheck/init.php" );
-			include( "$path/modules/malware/init.php" );
-			include( "$path/modules/ssl/init.php" );
-			include( "$path/modules/strong-passwords/init.php" );
-			include( "$path/modules/system-tweaks/init.php" );
-			include( "$path/modules/wordpress-tweaks/init.php" );
-			include( "$path/modules/multisite-tweaks/init.php" );
+			ITSEC_Modules::register_module( 'security-check', "$path/modules/security-check", 'always-active' );
+			ITSEC_Modules::register_module( 'global', "$path/modules/global", 'always-active' );
+			ITSEC_Modules::register_module( '404-detection', "$path/modules/404-detection" );
+			ITSEC_Modules::register_module( 'away-mode', "$path/modules/away-mode" );
+			ITSEC_Modules::register_module( 'ban-users', "$path/modules/ban-users", 'default-active' );
+			include( "$path/modules/ban-users/init.php" ); // Provides the itsec_ban_users_handle_new_blacklisted_ip function which is always needed.
+			ITSEC_Modules::register_module( 'brute-force', "$path/modules/brute-force", 'default-active' );
+			ITSEC_Modules::register_module( 'core', "$path/modules/core", 'always-active' );
+			ITSEC_Modules::register_module( 'backup', "$path/modules/backup", 'default-active' );
+			ITSEC_Modules::register_module( 'file-change', "$path/modules/file-change" );
+			ITSEC_Modules::register_module( 'file-permissions', "$path/modules/file-permissions", 'always-active' );
+			ITSEC_Modules::register_module( 'hide-backend', "$path/modules/hide-backend", 'always-active' );
+			ITSEC_Modules::register_module( 'network-brute-force', "$path/modules/ipcheck", 'default-active' );
+			ITSEC_Modules::register_module( 'malware', "$path/modules/malware", 'always-active' );
+			ITSEC_Modules::register_module( 'ssl', "$path/modules/ssl" );
+			ITSEC_Modules::register_module( 'strong-passwords', "$path/modules/strong-passwords", 'default-active' );
+			ITSEC_Modules::register_module( 'system-tweaks', "$path/modules/system-tweaks" );
+			ITSEC_Modules::register_module( 'wordpress-tweaks', "$path/modules/wordpress-tweaks", 'default-active' );
 
-			include( "$path/modules/admin-user/init.php" );
-			include( "$path/modules/salts/init.php" );
-			include( "$path/modules/content-directory/init.php" );
-			include( "$path/modules/database-prefix/init.php" );
-			include( "$path/modules/file-writing/init.php" );
+			if ( is_multisite() ) {
+				ITSEC_Modules::register_module( 'multisite-tweaks', "$path/modules/multisite-tweaks" );
+			}
+
+			ITSEC_Modules::register_module( 'admin-user', "$path/modules/admin-user", 'always-active' );
+			ITSEC_Modules::register_module( 'wordpress-salts', "$path/modules/salts", 'always-active' );
+			ITSEC_Modules::register_module( 'content-directory', "$path/modules/content-directory", 'always-active' );
+			ITSEC_Modules::register_module( 'database-prefix', "$path/modules/database-prefix", 'always-active' );
+			ITSEC_Modules::register_module( 'file-writing', "$path/modules/file-writing", 'always-active' );
+
 			if ( ! ITSEC_Core::is_pro() ) {
-				include( "$path/modules/pro/init.php" );
+				ITSEC_Modules::register_module( 'pro-module-upsells', "$path/modules/pro", 'always-active' );
 			}
 		}
 
@@ -258,8 +227,6 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		function add_action_link( $links, $file ) {
 
 			static $this_plugin;
-
-			global $itsec_globals;
 
 			if ( empty( $this_plugin ) ) {
 				$this_plugin = str_replace( WP_PLUGIN_DIR . '/', '', self::get_plugin_file() );
@@ -285,7 +252,6 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		 */
 		public function add_plugin_meta_links( $meta, $plugin_file ) {
 
-			global $itsec_globals;
 			$plugin_base = str_replace( WP_PLUGIN_DIR . '/', '', self::get_plugin_file() );
 
 			if ( $plugin_base == $plugin_file ) {
@@ -304,16 +270,14 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		 *
 		 * @return void
 		 */
-		public function admin_bar_links() {
-
-			global $wp_admin_bar, $itsec_globals;
+		public function modify_admin_bar( $wp_admin_bar ) {
 
 			if ( ! ITSEC_Core::current_user_can_manage() ) {
 				return;
 			}
 
 			// Add the Parent link.
-			$wp_admin_bar->add_menu(
+			$wp_admin_bar->add_node(
 				array(
 					'title' => __( 'Security', 'better-wp-security' ),
 					'href'  => self::get_settings_page_url(),
@@ -321,209 +285,63 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 				)
 			);
 
-			$wp_admin_bar->add_menu(
+			$wp_admin_bar->add_node(
 				array(
-					'id'     => 'itsec_admin_bar_settings',
+					'parent' => 'itsec_admin_bar_menu',
 					'title'  => __( 'Settings', 'better-wp-security' ),
 					'href'   => self::get_settings_page_url(),
-					'parent' => 'itsec_admin_bar_menu',
+					'id'     => 'itsec_admin_bar_settings',
 				)
 			);
 
-			$wp_admin_bar->add_menu(
+			$wp_admin_bar->add_node(
 				array(
-					'id'     => 'itsec_admin_bar_security_check',
+					'parent' => 'itsec_admin_bar_menu',
 					'title'  => __( 'Security Check', 'better-wp-security' ),
 					'href'   => self::get_security_check_page_url(),
-					'parent' => 'itsec_admin_bar_menu',
+					'id'     => 'itsec_admin_bar_security_check',
 				)
 			);
 
-			$wp_admin_bar->add_menu(
+			$wp_admin_bar->add_node(
 				array(
-					'id'     => 'itsec_admin_bar_logs',
+					'parent' => 'itsec_admin_bar_menu',
 					'title'  => __( 'Logs', 'better-wp-security' ),
 					'href'   => self::get_logs_page_url(),
-					'parent' => 'itsec_admin_bar_menu',
+					'id'     => 'itsec_admin_bar_logs',
 				)
 			);
 		}
 
-		/**
-		 * Calls upgrade script for older versions (pre 4.x).
-		 *
-		 * @since 4.0
-		 *
-		 * @return void
-		 */
-		public function do_upgrade() {
-
-			global $itsec_globals;
-
-			//require plugin setup information
-			if ( ! class_exists( 'ITSEC_Setup' ) ) {
-				require( self::get_core_dir() . '/class-itsec-setup.php' );
-			}
-
-			new ITSEC_Setup( 'upgrade', 3064 ); //run upgrade scripts
-
-		}
-
-		/**
-		 * Execute upgrade for version after 4.0
-		 *
-		 * @since 4.0.6
-		 *
-		 * @return void
-		 */
-		public function execute_upgrade( $current_data_build = false ) {
-
-			global $itsec_globals;
-
+		public function handle_upgrade( $build = false ) {
 			$this->doing_data_upgrade = true;
 
-			//require plugin setup information
-			if ( ! class_exists( 'ITSEC_Setup' ) ) {
-				require( self::get_core_dir() . '/class-itsec-setup.php' );
-			}
-
-			if ( empty( $current_data_build ) ) {
-				$current_data_build = $itsec_globals['data']['build'];
-			}
-
-			new ITSEC_Setup( 'upgrade', $current_data_build ); //run upgrade scripts
-
-			$itsec_modules = ITSEC_Modules::get_instance();
-			$itsec_modules->run_activation();
-
-		}
-
-		/**
-		 * Call activation script
-		 *
-		 * @since 4.5
-		 *
-		 * @return void
-		 */
-		public static function on_activate() {
-
-			//require plugin setup information
-			if ( ! class_exists( 'ITSEC_Setup' ) ) {
-				require( self::get_core_dir() . '/class-itsec-setup.php' );
-			}
-
-			ITSEC_Setup::on_activate();
-
-		}
-
-		/**
-		 * Call deactivation script
-		 *
-		 * @since 4.5
-		 *
-		 * @return void
-		 */
-		public static function on_deactivate() {
-
-			//require plugin setup information
-			if ( ! class_exists( 'ITSEC_Setup' ) ) {
-				require( self::get_core_dir() . '/class-itsec-setup.php' );
-			}
-
-			ITSEC_Setup::on_deactivate();
-
-		}
-
-		/**
-		 * Call uninstall script
-		 *
-		 * @since 4.5
-		 *
-		 * @return void
-		 */
-		public static function on_uninstall() {
-
-			// Ensure that the uninstall routines are run only if there are no other iThemes Security plugins active.
-			$active_plugins = get_option( 'active_plugins', array() );
-			if ( ! is_array( $active_plugins ) ) {
-				$active_plugins = array();
-			}
-
-			if ( is_multisite() ) {
-				$network_plugins = (array) get_site_option( 'active_sitewide_plugins', array() );
-				$active_plugins = array_merge( $active_plugins, array_keys( $network_plugins ) );
-			}
-
-			foreach ( $active_plugins as $active_plugin ) {
-				$file = basename( $active_plugin );
-
-				if ( in_array( $file, array( 'better-wp-security.php', 'ithemes-security-pro.php' ) ) ) {
-					return;
-				}
-			}
-
 			require_once( self::get_core_dir() . '/class-itsec-setup.php' );
-			ITSEC_Setup::on_uninstall();
-
+			ITSEC_Setup::handle_upgrade( $build );
 		}
 
-		/**
-		 * Saves general plugin data to determine global items.
-		 *
-		 * Sets up general plugin data such as build, and others.
-		 *
-		 * @since 4.0
-		 *
-		 * @return array plugin data
-		 */
-		public function save_plugin_data() {
-
-			global $itsec_globals;
-
-			$save_data = false; //flag to avoid saving data if we don't have to
-
-			$plugin_data = get_site_option( 'itsec_data' );
-
-			//Update the build number if we need to
-			if ( ! isset( $plugin_data['build'] ) || ( isset( $plugin_data['build'] ) && $plugin_data['build'] !== $this->plugin_build ) ) {
-				$plugin_data['build'] = $this->plugin_build;
-				$save_data            = true;
-			}
-
-			//update the activated time if we need to in order to tell when the plugin was installed
-			if ( ! isset( $plugin_data['activation_timestamp'] ) ) {
-				$plugin_data['activation_timestamp'] = self::get_current_time_gmt();
-				$save_data                           = true;
-			}
-
-			//update the activated time if we need to in order to tell when the plugin was installed
-			if ( ! isset( $plugin_data['already_supported'] ) ) {
-				$plugin_data['already_supported'] = false;
-				$save_data                        = true;
-			}
-
-			//update the activated time if we need to in order to tell when the plugin was installed
-			if ( ! isset( $plugin_data['setup_completed'] ) ) {
-				$plugin_data['setup_completed'] = false;
-				$save_data                      = true;
-			}
-
-			//update the tooltips dismissed
-			if ( ! isset( $plugin_data['tooltips_dismissed'] ) ) {
-				$plugin_data['tooltips_dismissed'] = false;
-				$save_data                         = true;
-			}
-
-			//update the options table if we have to
-			if ( $save_data === true ) {
-				update_site_option( 'itsec_data', $plugin_data );
-			}
-
-			return $plugin_data;
-
+		public static function handle_activation() {
+			require_once( self::get_core_dir() . '/class-itsec-setup.php' );
+			ITSEC_Setup::handle_activation();
 		}
 
-		public static function add_notice( $callback ) {
+		public static function handle_deactivation() {
+			require_once( self::get_core_dir() . '/class-itsec-setup.php' );
+			ITSEC_Setup::handle_deactivation();
+		}
+
+		public static function handle_uninstall() {
+			require_once( self::get_core_dir() . '/class-itsec-setup.php' );
+			ITSEC_Setup::handle_uninstall();
+		}
+
+		public static function add_notice( $callback, $all_pages = false ) {
+			global $pagenow, $plugin_page;
+
+			if ( ! $all_pages && ! in_array( $pagenow, array( 'plugins.php', 'update-core.php' ) ) && ( ! isset( $plugin_page ) || ! in_array( $plugin_page, array( 'itsec', 'itsec-logs' ) ) ) ) {
+				return;
+			}
+
 			$self = self::get_instance();
 
 			if ( ! $self->notices_loaded ) {
@@ -573,6 +391,11 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			return self::get_plugin_dir() . 'core/';
 		}
 
+		public static function get_plugin_name() {
+			$self = self::get_instance();
+			return $self->plugin_name;
+		}
+
 		public static function is_pro() {
 			return is_dir( self::get_plugin_dir() . 'pro' );
 		}
@@ -617,7 +440,11 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		}
 
 		public static function get_security_check_page_url() {
-			return admin_url( 'admin.php?page=itsec&module=security-check' );
+			return network_admin_url( 'admin.php?page=itsec&module=security-check' );
+		}
+
+		public static function get_settings_module_url( $module ) {
+			return network_admin_url( 'admin.php?page=itsec&module=' . $module );
 		}
 
 		public static function set_interactive( $interactive ) {
@@ -645,10 +472,10 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			}
 
 
-			$HTTP_RAW_POST_DATA = @file_get_contents( 'php://input' );
+			$post_data = @file_get_contents( 'php://input' );
 
-			if ( ! empty( $HTTP_RAW_POST_DATA ) ) {
-				$data = base64_decode( $HTTP_RAW_POST_DATA );
+			if ( ! empty( $post_data ) ) {
+				$data = base64_decode( $post_data );
 
 				if ( false !== strpos( $data, 's:10:"iwp_action";' ) ) {
 					$self->is_iwp_call = true;

@@ -191,13 +191,14 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 			$feed_item->description
 		);
 		$product_description = str_replace( ']]>', ']]]]><![CDATA[>', $product_description );
+		$escaped_url = apply_filters( 'woocommerce_gpf_feed_item_escaped_url', esc_url( $feed_item->purchase_link ), $feed_item );
 
 		// This is basically a hack since we're avoiding using the PHP DOM functions
 		// so we don't have to hold the whole doc in memory
 
 		echo "    <item>\n";
 		echo '      <title><![CDATA[' . $title . "]]></title>\n";
-		echo '      <link>' . esc_url( $feed_item->purchase_link ) . "</link>\n";
+		echo '      <link>' . $escaped_url . "</link>\n";
 		echo '      <g:ID>' . $feed_item->guid . "</g:ID>\n";
 		echo '      <description><![CDATA[' . $product_description . "]]></description>\n";
 
@@ -288,7 +289,7 @@ class WoocommerceGpfFeedGoogle extends WoocommerceGpfFeed {
 				$weight_units = $this->store_info->weight_units;
 			}
 			if ( $weight && is_numeric( $weight ) && $weight > 0 ) {
-				echo "      <g:shipping_weight>$weight $weight_units</g:shipping_weight>";
+				echo "      <g:shipping_weight>$weight $weight_units</g:shipping_weight>\n";
 			}
 		}
 		echo "    </item>\n";

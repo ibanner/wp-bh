@@ -137,8 +137,8 @@ body > header {
 						display: block;
 
 						.title {
-							line-height: 16px;
-							font-size: 16px;
+							line-height: 15px;
+							font-size: 15px;
 							font-weight: $font-semi-bold;
 							color: $font-invert-color;
 						}
@@ -358,8 +358,8 @@ body > header {
 					&.current-menu-parent,
 					&.current-menu-ancestor {
 						& > a {
-							color: $font-invert-color;
-							text-shadow: 0px 0.1px 0.1px rgba(255, 255, 255, 1);
+							color: $font-invert-color !important;
+							text-shadow: 0px 0.1px 0.1px rgba(255, 255, 255, 1) !important;
 						}
 					}
 				}
@@ -390,6 +390,13 @@ body > header {
 					background-color: $main-color;
 				}
 			}
+
+			&.featured {
+				& > a {
+					color: $blue-color1;
+					text-shadow: 0px 0.1px 0.1px $blue-color1;
+				}
+			}
 		}
 
 		&.shop nav.menu ul.nav > li {
@@ -414,6 +421,13 @@ body > header {
 			&.current-menu-ancestor {
 				& > a {
 					background-color: $shop-color;
+				}
+			}
+
+			&.featured {
+				& > a {
+					color: $orange-color1;
+					text-shadow: 0px 0.1px 0.1px $orange-color1;
 				}
 			}
 		}
@@ -1405,6 +1419,40 @@ body > header {
 						font-weight: $font-bold;
 					}
 				}
+			}
+		}
+
+		/************/
+		/* gallery */
+		/************/
+
+		.gallery-layout-content {
+			margin: 30px 0;
+
+			.gallery {
+				.gallery-col {
+					.gallery-item {
+						img {
+							margin-bottom: 15px;
+							width: 100%;
+							height: auto;
+						}
+
+						&:hover {
+							img {
+								@include opacity(0.7);
+							}
+						}
+
+						figcaption {
+							display: none;
+						}
+					}
+				}
+			}
+
+			button.load-more {
+				margin: 30px auto 45px;
 			}
 		}
 
@@ -4630,6 +4678,33 @@ footer {
 	
 	table {
 		border-collapse: separate;
+	}
+}
+
+/**************/
+/* PhotoSwipe */
+/**************/
+
+.pswp {
+	.pswp__bg {
+		opacity: 0.85 !important;
+	}
+
+	.pswp__caption {
+		.pswp__caption__center {
+			max-width: 90% !important;
+			font-size: 24px;
+			line-height: 30px;
+			text-align: center !important;
+
+			span {
+				font-size: 16px;
+				display: block;
+				margin-top: 10px;
+				line-height: normal;
+
+			}
+		}
 	}
 }
 

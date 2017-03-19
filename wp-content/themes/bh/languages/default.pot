@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BH Website 1.0\n"
-"POT-Creation-Date: 2016-03-24 14:45+0200\n"
-"PO-Revision-Date: 2016-03-24 14:46+0200\n"
+"POT-Creation-Date: 2017-02-12 20:52+0200\n"
+"PO-Revision-Date: 2017-02-12 20:52+0200\n"
 "Last-Translator: Nir Goldberg <nir@htmline.com>\n"
 "Language-Team: BH online <nirg@bh.org.il>\n"
 "Language: he_IL\n"
@@ -71,6 +71,10 @@ msgstr ""
 msgid ""
 "This content is password protected. To view it please enter your password "
 "below:"
+msgstr ""
+
+#: views/page/content/gallery.php:51
+msgid "Load more"
 msgstr ""
 
 #: views/microfilm/microfilm-view.php:9
@@ -269,7 +273,7 @@ msgstr ""
 msgid "Search Results"
 msgstr ""
 
-#: views/woocommerce/archive/home-featured.php:52
+#: views/woocommerce/archive/home-featured.php:55
 msgid "Monthly Recommended Products"
 msgstr ""
 
@@ -611,46 +615,46 @@ msgstr ""
 msgid "Transaction ID"
 msgstr ""
 
-#: functions/pelecard/payment-result.php:143
+#: functions/pelecard/payment-result.php:152
 msgid "Thank you for your request!"
 msgstr ""
 
-#: functions/pelecard/payment-result.php:144
+#: functions/pelecard/payment-result.php:153
 msgid "An invoice for your payment will be sent to your email address shortly."
 msgstr ""
 
-#: functions/pelecard/payment-result.php:149
+#: functions/pelecard/payment-result.php:158
 msgid "Payment failed"
 msgstr ""
 
-#: functions/pelecard/payment-result.php:155
-#: functions/pelecard/payment-result.php:163
-#: functions/pelecard/payment-result.php:170
-#: functions/pelecard/payment-result.php:177
+#: functions/pelecard/payment-result.php:164
+#: functions/pelecard/payment-result.php:172
+#: functions/pelecard/payment-result.php:179
+#: functions/pelecard/payment-result.php:186
 msgid "Error #"
 msgstr ""
 
-#: functions/pelecard/payment-result.php:155
+#: functions/pelecard/payment-result.php:164
 msgid "Wrong ID or CVV."
 msgstr ""
 
-#: functions/pelecard/payment-result.php:156
-#: functions/pelecard/payment-result.php:164
+#: functions/pelecard/payment-result.php:165
+#: functions/pelecard/payment-result.php:173
 msgid "Please correct the errors and submit the request again."
 msgstr ""
 
-#: functions/pelecard/payment-result.php:163
+#: functions/pelecard/payment-result.php:172
 msgid "Wrong credit card number."
 msgstr ""
 
-#: functions/pelecard/payment-result.php:170
+#: functions/pelecard/payment-result.php:179
 msgid "Unsupported credit card."
 msgstr ""
 
-#: functions/pelecard/payment-result.php:171
+#: functions/pelecard/payment-result.php:180
 msgid "Please submit the request again using a different credit card."
 msgstr ""
 
-#: functions/pelecard/payment-result.php:177
+#: functions/pelecard/payment-result.php:186
 msgid "General Error."
 msgstr ""

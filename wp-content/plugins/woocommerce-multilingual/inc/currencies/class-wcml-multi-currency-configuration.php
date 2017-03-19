@@ -1,10 +1,10 @@
 <?php
-  
+
 class WCML_Multi_Currency_Configuration{
-    
+
     private static $multi_currency;
     private static $woocommerce_wpml;
-    
+
     public static function set_up( &$multi_currency, &$woocommerce_wpml ){
 
         self::$multi_currency =& $multi_currency;
@@ -26,17 +26,9 @@ class WCML_Multi_Currency_Configuration{
             add_action('wp_ajax_wcml_delete_currency', array(__CLASS__,'delete_currency'));
 
             add_action('wp_ajax_wcml_update_currency_lang', array(__CLASS__,'update_currency_lang'));
-            add_action('wp_ajax_wcml_update_default_currency', array(__CLASS__,'update_default_currency'));
-            
+            add_action('wp_ajax_wcml_update_default_currency', array(__CLASS__,'update_default_currency_ajax'));
+
         }
-        
-        if(is_admin()){
-            add_action( 'woocommerce_settings_save_general', array( __CLASS__, 'currency_options_update_default_currency' ), 5); // below 10
-        }
-
-        add_action( 'update_option_woocommerce_currency', array( 'WCML_Multi_Currency_Install', 'set_default_currencies_languages' ), 10, 2 );
-
-
 
     }
 
@@ -44,11 +36,13 @@ class WCML_Multi_Currency_Configuration{
 
         if( check_admin_referer( 'wcml_mc_options', 'wcml_nonce' ) ){
 
-            self::$woocommerce_wpml->settings['enable_multi_currency'] = isset($_POST['multi_currency']) ? intval($_POST['multi_currency']) : 0;
-            self::$woocommerce_wpml->settings['display_custom_prices'] = isset($_POST['display_custom_prices']) ? intval($_POST['display_custom_prices']) : 0;
+            $wcml_settings =& self::$woocommerce_wpml->settings;
+
+            $wcml_settings['enable_multi_currency'] = isset($_POST['multi_currency']) ? intval($_POST['multi_currency']) : 0;
+            $wcml_settings['display_custom_prices'] = isset($_POST['display_custom_prices']) ? intval($_POST['display_custom_prices']) : 0;
 
             //update default currency settings
-            if( self::$woocommerce_wpml->settings['enable_multi_currency'] == WCML_MULTI_CURRENCIES_INDEPENDENT ){
+            if( $wcml_settings['enable_multi_currency'] == WCML_MULTI_CURRENCIES_INDEPENDENT ){
 
                 $options = array(
                     'woocommerce_currency_pos'          => 'position',
@@ -60,20 +54,20 @@ class WCML_Multi_Currency_Configuration{
                 $woocommerce_currency = get_option('woocommerce_currency', true);
 
                 foreach($options as $wc_key => $key){
-                    self::$woocommerce_wpml->settings['currency_options'][$woocommerce_currency][$key] = get_option( $wc_key, true );
+                    $wcml_settings['currency_options'][$woocommerce_currency][$key] = get_option( $wc_key, true );
                 }
             }
 
-            self::$woocommerce_wpml->settings['currency_switcher_style']              = sanitize_text_field( $_POST['currency_switcher_style'] );
-            self::$woocommerce_wpml->settings['wcml_curr_sel_orientation']            = sanitize_text_field( $_POST['wcml_curr_sel_orientation'] );
-            self::$woocommerce_wpml->settings['wcml_curr_template']                   = sanitize_text_field( $_POST['wcml_curr_template'] );
-            self::$woocommerce_wpml->settings['currency_switcher_product_visibility'] = isset($_POST['currency_switcher_product_visibility']) ? intval( $_POST['currency_switcher_product_visibility'] ) : 0;
+            $wcml_settings['currency_switcher_product_visibility'] = isset($_POST['currency_switcher_product_visibility']) ? intval( $_POST['currency_switcher_product_visibility'] ) : 0;
+            $wcml_settings['currency_switcher_additional_css'] = isset($_POST['currency_switcher_additional_css']) ? sanitize_text_field( $_POST['currency_switcher_additional_css'] ) : '';
 
-            self::$woocommerce_wpml->update_settings();
+            self::$woocommerce_wpml->update_settings( $wcml_settings );
+
+            do_action( 'wcml_saved_mc_options', $_POST );
 
             $message = array(
                 'id'            => 'wcml-settings-saved',
-                'text'          => __('Settings saved!', 'woocommerce-multilingual' ),
+                'text'          => __('Your settings have been saved.', 'woocommerce-multilingual' ),
                 'group'         => 'wcml-multi-currency',
                 'admin_notice'  => true,
                 'limit_to_page' => true,
@@ -81,7 +75,6 @@ class WCML_Multi_Currency_Configuration{
                 'show_once'     => true
             );
             ICL_AdminNotifier::add_message( $message );
-
 
         }
 
@@ -107,7 +100,7 @@ class WCML_Multi_Currency_Configuration{
                 $args['currency_symbol'] = get_woocommerce_currency_symbol( $args['currency_code'] );
 
                 $args['title'] = sprintf( __( 'Update settings for %s', 'woocommerce-multilingual' ),
-                                '<strong>' . $args['currency_name'] . ' (' . $args['currency_symbol'] . ')</strong>' );
+                    '<strong>' . $args['currency_name'] . ' (' . $args['currency_symbol'] . ')</strong>' );
 
             }
 
@@ -163,19 +156,21 @@ class WCML_Multi_Currency_Configuration{
         $changed = false;
         $rate_changed = false;
         foreach( self::$multi_currency->currencies[$currency_code] as $key => $value ){
-            
+
             if(isset($options[$key]) && $options[$key] != $value){
+                if( $key == 'rate' ){
+                    $previous_rate = self::$multi_currency->currencies[$currency_code][$key];
+                    $rate_changed  = true;
+                }
                 self::$multi_currency->currencies[$currency_code][$key] = $options[$key];
                 $changed = true;
-                if($key == 'rate'){
-                    $rate_changed = true;
-                }
             }
-            
+
         }
 
         if($changed){
             if($rate_changed){
+                self::$multi_currency->currencies[$currency_code]['previous_rate'] = $previous_rate;
                 self::$multi_currency->currencies[$currency_code]['updated'] = date('Y-m-d H:i:s');
             }
             self::$woocommerce_wpml->settings['currency_options'] = self::$multi_currency->currencies;
@@ -184,7 +179,7 @@ class WCML_Multi_Currency_Configuration{
 
         $wc_currency = get_option('woocommerce_currency');
         $wc_currencies = get_woocommerce_currencies();
-        
+
         switch( self::$multi_currency->currencies[$currency_code]['position'] ){
             case 'left': $price = sprintf('%s99.99', get_woocommerce_currency_symbol($currency_code)); break;
             case 'right': $price = sprintf('99.99%s', get_woocommerce_currency_symbol($currency_code)); break;
@@ -193,7 +188,7 @@ class WCML_Multi_Currency_Configuration{
         }
 
         $return['currency_name_formatted'] = sprintf('<span class="truncate">%s</span> <small>(%s)</small>', $wc_currencies[$currency_code], $price);
-        
+
         $return['currency_meta_info'] = sprintf('1 %s = %s %s', $wc_currency, self::$multi_currency->currencies[$currency_code]['rate'], $currency_code);
 
         $args = array();
@@ -221,19 +216,8 @@ class WCML_Multi_Currency_Configuration{
             die('Invalid nonce');
         }
 
-        $settings = self::$woocommerce_wpml->get_settings();
-        unset($settings['currency_options'][$_POST['code']]);
-        
-        if(isset($settings['currencies_order'])){
-            foreach($settings['currencies_order'] as $key=>$cur_code){
-                if($cur_code == $_POST['code']) {
-                    unset($settings['currencies_order'][$key]);
-                }
-            }
-        }
+        self::$multi_currency->delete_currency_by_code( $_POST[ 'code' ] );
 
-        self::$woocommerce_wpml->update_settings($settings);
-        
         exit;
     }
 
@@ -250,40 +234,56 @@ class WCML_Multi_Currency_Configuration{
         exit;
     }
 
-    public static function update_default_currency(){
+    public static function update_default_currency_ajax(){
+
+
         $nonce = filter_input( INPUT_POST, 'wcml_nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
         if(!$nonce || !wp_verify_nonce($nonce, 'wcml_update_default_currency')){
             die('Invalid nonce');
         }
 
-        self::$woocommerce_wpml->settings['default_currencies'][$_POST['lang']] = $_POST['code'];
-        self::$woocommerce_wpml->update_settings();
-        
+        self::update_default_currency();
+
         exit;
     }
 
-    public static function currency_options_update_default_currency(){
+    public static function update_default_currency(){
+        global $woocommerce;
 
-        $current_currency = get_option('woocommerce_currency');
-        $new_currency = $_POST['woocommerce_currency'];
-
-        if($new_currency != $current_currency) {
-            $message_id = 'wcml-woocommerce-default-currency-changed';
-            $message_args = array(
-                'id' => $message_id,
-                'text' => sprintf(__('The default currency was changed. In order to show accurate prices in all currencies, you need to update the exchange rates under the %sMulti-currency%s configuration.',
-                    'woocommerce-multilingual'), '<a href="' . admin_url('admin.php?page=wpml-wcml&tab=multi-currency') . '">', '</a>'),
-                'type' => 'warning',
-                'group' => 'wcml-multi-currency',
-                'admin_notice' => true,
-                'hide' => true
-            );
-
-            ICL_AdminNotifier::remove_message($message_id); // clear any previous instances
-            ICL_AdminNotifier::add_message($message_args);
-
+        if( !empty( $woocommerce->session ) &&
+            $_POST[ 'lang' ] == $woocommerce->session->get( 'client_currency_language' ) ){
+            $woocommerce->session->set( 'client_currency', $_POST[ 'code' ] );
         }
 
+        self::$woocommerce_wpml->settings['default_currencies'][$_POST['lang']] = $_POST['code'];
+        self::$woocommerce_wpml->update_settings();
+
+    }
+
+    public static function currency_options_update_default_currency( $settings, $current_currency, $new_currency ){
+
+        //When the default WooCommerce currency is updated, if it existed as a secondary currency, remove it
+        if( isset( $settings[ 'currency_options' ][ $current_currency ] ) ){
+            $currency_settings = $settings[ 'currency_options' ][ $current_currency ];
+            $settings[ 'currency_options' ][ $new_currency ] = $currency_settings;
+            $settings = self::$woocommerce_wpml->multi_currency->delete_currency_by_code( $current_currency, $settings, false );
+        }
+
+        $message_id = 'wcml-woocommerce-default-currency-changed';
+        $message_args = array(
+            'id' => $message_id,
+            'text' => sprintf(__('The default currency was changed. In order to show accurate prices in all currencies, you need to update the exchange rates under the %sMulti-currency%s configuration.',
+                'woocommerce-multilingual'), '<a href="' . admin_url('admin.php?page=wpml-wcml&tab=multi-currency') . '">', '</a>'),
+            'type' => 'warning',
+            'group' => 'wcml-multi-currency',
+            'admin_notice' => true,
+            'hide' => true
+        );
+
+        ICL_AdminNotifier::remove_message($message_id); // clear any previous instances
+        ICL_AdminNotifier::add_message($message_args);
+
+        return $settings;
     }
 
     public static function legacy_update_custom_rates(){
@@ -295,11 +295,11 @@ class WCML_Multi_Currency_Configuration{
         foreach($_POST['posts'] as $post_id => $rates){
             update_post_meta($post_id, '_custom_conversion_rate', $rates);
         }
-        
+
         echo json_encode(array());
         exit;
     }
-    
+
     public static function legacy_remove_custom_rates(){
 
         $nonce = filter_input( INPUT_POST, 'wcml_nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
@@ -310,7 +310,7 @@ class WCML_Multi_Currency_Configuration{
 
         delete_post_meta($_POST['post_id'], '_custom_conversion_rate');
         echo json_encode(array());
-        
+
         exit;
     }
 
@@ -344,8 +344,8 @@ class WCML_Multi_Currency_Configuration{
         foreach( $keys as $key ){
             $iclTranslationManagement->settings[ 'custom_fields_readonly_config' ][] = $key;
             if( !isset( $sitepress_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $key ] ) ||
-                $wpml_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $key ] != 1 ) {
-                $wpml_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $key ] = 1;
+                $wpml_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $key ] != WPML_COPY_CUSTOM_FIELD ) {
+                $wpml_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $key ] = WPML_COPY_CUSTOM_FIELD;
                 $save = true;
             }
 
@@ -355,8 +355,8 @@ class WCML_Multi_Currency_Configuration{
                     $iclTranslationManagement->settings[ 'custom_fields_readonly_config' ][] = $new_key;
 
                     if( !isset( $sitepress_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $new_key ] ) ||
-                        $wpml_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $new_key ] != 0) {
-                        $wpml_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $new_key ] = 0;
+                        $wpml_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $new_key ] != WPML_IGNORE_CUSTOM_FIELD) {
+                        $wpml_settings[ 'translation-management' ][ 'custom_fields_translation' ][ $new_key ] = WPML_IGNORE_CUSTOM_FIELD;
                         $save = true;
                     }
                 }
@@ -368,6 +368,4 @@ class WCML_Multi_Currency_Configuration{
         }
     }
 
-
 }
-

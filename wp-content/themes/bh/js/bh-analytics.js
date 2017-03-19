@@ -8,6 +8,13 @@
  */
 ga('create', _BH_GA_tid, 'auto');
 
+/*
+ Google Analytics client ID
+ */
+ga(function(tracker) {
+	_BH_GA_cid = tracker.get('clientId');
+});
+
 ec = (jQuery('body').hasClass('woocommerce-page') && !jQuery('body').hasClass('woocommerce-cart'));	// indicates whether we are in WooCommerce page or not (excluding cart page)
 currency_set = false;																		// indicates whether currency has been set
 

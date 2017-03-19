@@ -15,20 +15,21 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 	protected $default_language;
 	protected $qs_lang_cache;
 	private   $cookie;
+	protected $wp_api;
 
 	/**
 	 * @param WPML_URL_Converter $url_converter
 	 * @param array              $active_languages
 	 * @param string             $default_language
 	 * @param WPML_Cookie        $cookie
+	 * @param WPML_WP_API        $wp_api
 	 */
-	public function __construct( &$url_converter, $active_languages, $default_language, $cookie ) {
+	public function __construct( &$url_converter, $active_languages, $default_language, $cookie, $wp_api ) {
 		parent::__construct( $url_converter );
 		$this->active_languages = $active_languages;
 		$this->default_language = $default_language;
 		$this->cookie           = $cookie;
-		add_filter( 'WPML_get_language_cookie', array( $this, 'get_cookie_lang' ), 10, 0 );
-		add_filter( 'wmpl_get_language_cookie', array( $this, 'get_cookie_lang' ), 10, 0 );
+		$this->wp_api           = $wp_api;
 	}
 
 	protected abstract function get_cookie_name();
@@ -77,7 +78,7 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 		global $wpml_language_resolution;
 		$cookie_name  = $this->get_cookie_name();
 		$cookie_value = $this->cookie->get_cookie( $cookie_name );
-		$lang         = $cookie_value ? substr( $cookie_value, 0, 10 ) : "";
+		$lang         = $cookie_value ? substr( $cookie_value, 0, 10 ) : null;
 		$lang         = $wpml_language_resolution->is_language_active( $lang ) ? $lang : $this->default_language;
 
 		return $lang;
@@ -114,9 +115,11 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 
 			$cookie_domain = $this->get_cookie_domain();
 			$cookie_path   = defined( 'COOKIEPATH' ) ? COOKIEPATH : '/';
-			$this->cookie->set_cookie( $cookie_name, $lang_code, time() + 86400, $cookie_path, $cookie_domain );
+			$this->cookie->set_cookie( $cookie_name, $lang_code, time() + DAY_IN_SECONDS, $cookie_path, $cookie_domain );
 		}
 		$_COOKIE[ $cookie_name ] = $lang_code;
+
+		do_action( 'wpml_language_cookie_added', $lang_code );
 	}
 
 	/**
@@ -139,12 +142,37 @@ abstract class WPML_Request extends WPML_URL_Converter_User {
 			: ( isset( $_SERVER[ 'SERVER_NAME' ] )
 				? $_SERVER[ 'SERVER_NAME' ]
 				  . ( isset( $_SERVER[ 'SERVER_PORT' ] ) && ! in_array( $_SERVER[ 'SERVER_PORT' ], array( 80, 443 ) )
-					? $_SERVER[ 'SERVER_PORT' ] : '' )
+					? ':' . $_SERVER[ 'SERVER_PORT' ] : '' )
 				: '' );
 
 		//Removes standard ports 443 (80 should be already omitted in all cases)
 		$result = preg_replace( "@:[443]+([/]?)@", '$1', $host );
 
 		return $result;
+	}
+
+	/**
+	 * Gets the source_language $_GET parameter from the HTTP_REFERER
+	 * @return string|bool
+	 */
+	public function get_source_language_from_referer() {
+		$referer = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
+		$query   = wpml_parse_url( $referer, PHP_URL_QUERY );
+		parse_str( $query, $query_parts );
+		$source_lang = isset( $query_parts['source_lang'] ) ? $query_parts['source_lang'] : false;
+
+		return $source_lang;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_comment_language() {
+		$comment_language = $this->default_language;
+
+		if ( array_key_exists( WPML_WP_Comments::LANG_CODE_FIELD, $_POST ) ) {
+			$comment_language = filter_var( $_POST[WPML_WP_Comments::LANG_CODE_FIELD], FILTER_SANITIZE_SPECIAL_CHARS );
+		}
+		return $comment_language;
 	}
 }

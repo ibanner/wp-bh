@@ -16,8 +16,8 @@
 	// could be defined with 2 different forms:
 	// [payment custom {en/he}]				: for custom payment form
 	// [payment {gen/com} {en/he} {total}]	: for genealogy/communities forms
-	wpcf7_add_shortcode( 'payment', 'create_payment_form', false );
-	wpcf7_add_shortcode( 'payment*', 'create_payment_form', false );
+	wpcf7_add_form_tag( 'payment', 'create_payment_form', false );
+	wpcf7_add_form_tag( 'payment*', 'create_payment_form', false );
 	
 	function create_payment_form( $tag ) {
 		if ( !is_array( $tag ) ) return '';
@@ -104,8 +104,8 @@
 	}
 	
 	// paymentkey - custom tag (custom payment form)
-	wpcf7_add_shortcode( 'paymentkey', 'create_paymentkey_input', true );
-	wpcf7_add_shortcode( 'paymentkey*', 'create_paymentkey_input', true );
+	wpcf7_add_form_tag( 'paymentkey', 'create_paymentkey_input', true );
+	wpcf7_add_form_tag( 'paymentkey*', 'create_paymentkey_input', true );
 	
 	$custom_payment = null;
 	
@@ -167,8 +167,8 @@
 	}
 	
 	// transactionkey - custom tag (custom payment form)
-	wpcf7_add_shortcode( 'transactionkey', 'create_transactionkey_input', true );
-	wpcf7_add_shortcode( 'transactionkey*', 'create_transactionkey_input', true );
+	wpcf7_add_form_tag( 'transactionkey', 'create_transactionkey_input', true );
+	wpcf7_add_form_tag( 'transactionkey*', 'create_transactionkey_input', true );
 	
 	function create_transactionkey_input( $tag ) {
 		global $custom_payment;
@@ -211,8 +211,8 @@
 	}
 	
 	// total - custom tag (custom payment form)
-	wpcf7_add_shortcode( 'total', 'create_total_input', true );
-	wpcf7_add_shortcode( 'total*', 'create_total_input', true );
+	wpcf7_add_form_tag( 'total', 'create_total_input', true );
+	wpcf7_add_form_tag( 'total*', 'create_total_input', true );
 	
 	function create_total_input( $tag ) {
 		global $custom_payment;
@@ -255,8 +255,8 @@
 	}
 	
 	// event - custom tag
-	wpcf7_add_shortcode( 'event', 'create_event_select', true );
-	wpcf7_add_shortcode( 'event*', 'create_event_select', true );
+	wpcf7_add_form_tag( 'event', 'create_event_select', true );
+	wpcf7_add_form_tag( 'event*', 'create_event_select', true );
 	
 	function create_event_select( $tag ) {
 		if ( !is_array( $tag ) ) return '';
@@ -329,8 +329,8 @@
 	}
 	
 	// country - custom tag
-	wpcf7_add_shortcode( 'country', 'create_country_select', true );
-	wpcf7_add_shortcode( 'country*', 'create_country_select', true );
+	wpcf7_add_form_tag( 'country', 'create_country_select', true );
+	wpcf7_add_form_tag( 'country*', 'create_country_select', true );
 	
 	function create_country_select( $tag ) {
 		if ( !is_array( $tag ) ) return '';
@@ -364,8 +364,8 @@
 	}
 	
 	// state - custom tag
-	wpcf7_add_shortcode( 'state', 'create_state_select', true );
-	wpcf7_add_shortcode( 'state*', 'create_state_select', true );
+	wpcf7_add_form_tag( 'state', 'create_state_select', true );
+	wpcf7_add_form_tag( 'state*', 'create_state_select', true );
 	
 	function create_state_select( $tag ) {
 		if ( !is_array( $tag ) ) return '';
@@ -399,8 +399,8 @@
 	}
 	
 	// province - custom tag
-	wpcf7_add_shortcode( 'province', 'create_province_select', true );
-	wpcf7_add_shortcode( 'province*', 'create_province_select', true );
+	wpcf7_add_form_tag( 'province', 'create_province_select', true );
+	wpcf7_add_form_tag( 'province*', 'create_province_select', true );
 	
 	function create_province_select( $tag ) {
 		if ( !is_array( $tag ) ) return '';
@@ -434,7 +434,7 @@
 	}
 	
 	// formfooter - custom tag
-	wpcf7_add_shortcode( 'formfooter', 'create_form_footer', true );
+	wpcf7_add_form_tag( 'formfooter', 'create_form_footer', true );
 	
 	function create_form_footer( $tag ) {
 		if ( !is_array( $tag ) ) return '';
@@ -460,8 +460,6 @@
 		// update posted data with payment step as 'processing'
 		$additional_posted_data['paymentStep'] = 'processing';
 
-		session_start();
-		
 		session_start();
 
 		// store custom payment issuer and customer Emails

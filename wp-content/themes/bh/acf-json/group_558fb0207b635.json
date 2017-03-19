@@ -3,6 +3,8 @@
     "title": "Shop Options",
     "fields": [
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_54ad4405241f8",
             "label": "Homepage Banners",
             "name": "",
@@ -14,29 +16,21 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
-            "key": "field_54b23b3e25fe3",
-            "label": "Banners",
-            "name": "acf-options-shop_banners",
-            "type": "repeater",
-            "instructions": "<p>Image dimensions:<\/p>\r\n\r\n<div>Image #01: 493x633px<\/div>\r\n<div>Image #02: 627x633px<\/div>\r\n<div>Image #03: 627x633px<\/div>\r\n<div>Image #04: 399x633px<\/div>",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "min": "",
-            "max": "",
-            "layout": "row",
-            "button_label": "Add Banner",
             "sub_fields": [
                 {
+                    "return_format": "array",
+                    "preview_size": "full",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
                     "key": "field_558fd6c414fc8",
                     "label": "Image",
                     "name": "image",
@@ -48,19 +42,26 @@
                         "width": 25,
                         "class": "",
                         "id": ""
-                    },
-                    "return_format": "array",
-                    "preview_size": "full",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": ""
+                    }
                 },
                 {
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "choices": {
+                        "no": "No Link",
+                        "page": "Page\/Product",
+                        "category": "Product Category",
+                        "occasion": "Occasion",
+                        "artist": "Artist",
+                        "ext": "External Link"
+                    },
+                    "default_value": {
+                        "no": "no"
+                    },
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "return_format": "value",
                     "key": "field_558fd6dd14fc9",
                     "label": "Link Type",
                     "name": "link_type",
@@ -73,26 +74,19 @@
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "no": "No Link",
-                        "page": "Page\/Product",
-                        "category": "Product Category",
-                        "occasion": "Occasion",
-                        "artist": "Artist",
-                        "ext": "External Link"
-                    },
-                    "default_value": {
-                        "no": "no"
-                    },
-                    "allow_null": 0,
-                    "multiple": 0,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": "",
                     "disabled": 0,
                     "readonly": 0
                 },
                 {
+                    "post_type": [
+                        "page",
+                        "product"
+                    ],
+                    "taxonomy": [],
+                    "allow_null": 1,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "ui": 1,
                     "key": "field_558fd6f214fca",
                     "label": "Page\/Product Link",
                     "name": "page_product_link",
@@ -112,20 +106,17 @@
                         "width": 25,
                         "class": "",
                         "id": ""
-                    },
-                    "post_type": [
-                        "page",
-                        "product"
-                    ],
-                    "taxonomy": [
-
-                    ],
-                    "allow_null": 1,
-                    "multiple": 0,
-                    "return_format": "object",
-                    "ui": 1
+                    }
                 },
                 {
+                    "taxonomy": "product_cat",
+                    "field_type": "select",
+                    "multiple": 0,
+                    "allow_null": 1,
+                    "return_format": "object",
+                    "add_term": 1,
+                    "load_terms": 0,
+                    "save_terms": 0,
                     "key": "field_558fd70c14fcb",
                     "label": "Product Category Link",
                     "name": "product_category_link",
@@ -145,17 +136,17 @@
                         "width": 25,
                         "class": "",
                         "id": ""
-                    },
-                    "taxonomy": "product_cat",
-                    "field_type": "select",
-                    "allow_null": 1,
-                    "add_term": 1,
-                    "save_terms": 0,
-                    "load_terms": 0,
-                    "return_format": "object",
-                    "multiple": 0
+                    }
                 },
                 {
+                    "taxonomy": "occasion",
+                    "field_type": "select",
+                    "multiple": 0,
+                    "allow_null": 1,
+                    "return_format": "object",
+                    "add_term": 1,
+                    "load_terms": 0,
+                    "save_terms": 0,
                     "key": "field_558fd71e14fcc",
                     "label": "Product Occasion Link",
                     "name": "product_occasion_link",
@@ -175,17 +166,17 @@
                         "width": 25,
                         "class": "",
                         "id": ""
-                    },
-                    "taxonomy": "occasion",
-                    "field_type": "select",
-                    "allow_null": 1,
-                    "add_term": 1,
-                    "save_terms": 0,
-                    "load_terms": 0,
-                    "return_format": "object",
-                    "multiple": 0
+                    }
                 },
                 {
+                    "taxonomy": "artist",
+                    "field_type": "select",
+                    "multiple": 0,
+                    "allow_null": 1,
+                    "return_format": "object",
+                    "add_term": 1,
+                    "load_terms": 0,
+                    "save_terms": 0,
                     "key": "field_558fd72e14fcd",
                     "label": "Product Artist Link",
                     "name": "product_artist_link",
@@ -205,17 +196,14 @@
                         "width": 25,
                         "class": "",
                         "id": ""
-                    },
-                    "taxonomy": "artist",
-                    "field_type": "select",
-                    "allow_null": 1,
-                    "add_term": 1,
-                    "save_terms": 0,
-                    "load_terms": 0,
-                    "return_format": "object",
-                    "multiple": 0
+                    }
                 },
                 {
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "http:\/\/",
+                    "prepend": "",
+                    "append": "",
                     "key": "field_558fd73c14fce",
                     "label": "External Link",
                     "name": "external_link",
@@ -236,18 +224,31 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "placeholder": "http:\/\/",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
                     "readonly": 0,
                     "disabled": 0
                 }
             ],
-            "collapsed": ""
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Banner",
+            "collapsed": "",
+            "key": "field_54b23b3e25fe3",
+            "label": "Banners",
+            "name": "acf-options-shop_banners",
+            "type": "repeater",
+            "instructions": "<p>Image dimensions:<\/p>\r\n\r\n<div>Image #01: 493x633px<\/div>\r\n<div>Image #02: 627x633px<\/div>\r\n<div>Image #03: 627x633px<\/div>\r\n<div>Image #04: 399x633px<\/div>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
         },
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_56447e801dda7",
             "label": "Homepage Categories Menu",
             "name": "",
@@ -259,11 +260,17 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
+            "taxonomy": "product_cat",
+            "field_type": "checkbox",
+            "multiple": 0,
+            "allow_null": 0,
+            "return_format": "object",
+            "add_term": 0,
+            "load_terms": 0,
+            "save_terms": 0,
             "key": "field_56447eab1dda8",
             "label": "Include Categories",
             "name": "acf-options_shop_include_categories",
@@ -275,17 +282,14 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "taxonomy": "product_cat",
-            "field_type": "checkbox",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "object",
-            "multiple": 0
+            }
         },
         {
+            "default_value": 1,
+            "message": "",
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
             "key": "field_5644b659d9492",
             "label": "Show Manual Item",
             "name": "acf-options_shop_show_manual_item",
@@ -297,11 +301,14 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "message": "",
-            "default_value": 1
+            }
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_5644b6eed9493",
             "label": "Manual Item Title",
             "name": "acf-options_shop_manual_item_title",
@@ -322,15 +329,15 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_5644b715d9494",
             "label": "Manual Item Subtext",
             "name": "acf-options_shop_manual_item_subtext",
@@ -351,15 +358,18 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1,
             "key": "field_5644b767d9495",
             "label": "Manual Item Link",
             "name": "acf-options_shop_manual_item_link",
@@ -379,19 +389,11 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": [
-
-            ],
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1
+            }
         },
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_56f3d8cdae6bd",
             "label": "Homepage Featured Products",
             "name": "",
@@ -403,11 +405,23 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
+            "post_type": [
+                "product"
+            ],
+            "taxonomy": [],
+            "min": "",
+            "max": "",
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "return_format": "object",
             "key": "field_56f3d99f37bdf",
             "label": "Featured Products",
             "name": "acf-options_shop_featured_products",
@@ -419,25 +433,11 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "post_type": [
-                "product"
-            ],
-            "taxonomy": [
-
-            ],
-            "filters": [
-                "search",
-                "taxonomy"
-            ],
-            "elements": [
-                "featured_image"
-            ],
-            "min": "",
-            "max": "",
-            "return_format": "object"
+            }
         },
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_54ae437133895",
             "label": "Homepage Sliders",
             "name": "",
@@ -449,11 +449,62 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
+            "sub_fields": [
+                {
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "default_value": "",
+                    "delay": 0,
+                    "key": "field_558fd75714fcf",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "wysiwyg",
+                    "instructions": "You may declare Category\/Occasion name as link",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "post_type": [
+                        "product"
+                    ],
+                    "taxonomy": [],
+                    "min": 0,
+                    "max": "",
+                    "filters": [
+                        "search"
+                    ],
+                    "elements": [
+                        "featured_image"
+                    ],
+                    "return_format": "object",
+                    "key": "field_54ae451047ed5",
+                    "label": "Products",
+                    "name": "products",
+                    "type": "relationship",
+                    "instructions": "This field can be specified for only one language, the rest of the languages will be updated automatically",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    }
+                }
+            ],
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Add Slider",
+            "collapsed": "",
             "key": "field_54ae444447ed3",
             "label": "Sliders",
             "name": "acf-options-shop_sliders",
@@ -467,63 +518,11 @@
                 "id": ""
             },
             "row_min": "",
-            "row_limit": 4,
-            "layout": "row",
-            "button_label": "Add Slider",
-            "min": 0,
-            "max": 0,
-            "sub_fields": [
-                {
-                    "key": "field_558fd75714fcf",
-                    "label": "Title",
-                    "name": "title",
-                    "type": "wysiwyg",
-                    "instructions": "You may declare Category\/Occasion name as link",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "basic",
-                    "media_upload": 0
-                },
-                {
-                    "key": "field_54ae451047ed5",
-                    "label": "Products",
-                    "name": "products",
-                    "type": "relationship",
-                    "instructions": "This field can be specified for only one language, the rest of the languages will be updated automatically",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "object",
-                    "post_type": [
-                        "product"
-                    ],
-                    "taxonomy": [
-
-                    ],
-                    "filters": [
-                        "search"
-                    ],
-                    "max": "",
-                    "min": 0,
-                    "elements": [
-                        "featured_image"
-                    ]
-                }
-            ],
-            "collapsed": ""
+            "row_limit": 4
         },
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_548d4f4a0945d",
             "label": "Experience",
             "name": "",
@@ -535,30 +534,16 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
-            "key": "field_56d2cb8c7c10c",
-            "label": "Reasons",
-            "name": "acf-options_experience_reasons",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": "",
-            "max": "",
-            "layout": "table",
-            "button_label": "Add Reason",
             "sub_fields": [
                 {
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
                     "key": "field_56d2cc047c10d",
                     "label": "Reason",
                     "name": "reason",
@@ -571,17 +556,37 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
                     "readonly": 0,
                     "disabled": 0
                 }
-            ]
+            ],
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add Reason",
+            "collapsed": "",
+            "key": "field_56d2cb8c7c10c",
+            "label": "Reasons",
+            "name": "acf-options_experience_reasons",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
         },
         {
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1,
             "key": "field_551bfb72256c3",
             "label": "Experience Page",
             "name": "acf-options_experience_page",
@@ -593,19 +598,11 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": [
-
-            ],
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "object",
-            "ui": 1
+            }
         },
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_5533a5d3f26dd",
             "label": "Emails",
             "name": "",
@@ -617,11 +614,19 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
+            "return_format": "url",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": "",
             "key": "field_5533a61404e06",
             "label": "Customer Processing Order Title",
             "name": "acf-email_customer_processing_order_title",
@@ -633,19 +638,19 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
+            }
+        },
+        {
+            "return_format": "url",
             "preview_size": "thumbnail",
             "library": "all",
-            "return_format": "url",
             "min_width": 0,
             "min_height": 0,
             "min_size": 0,
             "max_width": 0,
             "max_height": 0,
             "max_size": 0,
-            "mime_types": ""
-        },
-        {
+            "mime_types": "",
             "key": "field_5533f7277cc2a",
             "label": "Customer Completed Order Title",
             "name": "acf-email_customer_completed_order_title",
@@ -657,19 +662,11 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "preview_size": "thumbnail",
-            "library": "all",
-            "return_format": "url",
-            "min_width": 0,
-            "min_height": 0,
-            "min_size": 0,
-            "max_width": 0,
-            "max_height": 0,
-            "max_size": 0,
-            "mime_types": ""
+            }
         },
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_56667ef86eb5a",
             "label": "Pelecard",
             "name": "",
@@ -681,11 +678,14 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_56667f106eb5b",
             "label": "User",
             "name": "acf-options_pelecard_user",
@@ -698,15 +698,15 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_56667f4f6eb5c",
             "label": "Password",
             "name": "acf-options_pelecard_password",
@@ -719,15 +719,15 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_56667f846eb5d",
             "label": "Terminal",
             "name": "acf-options_pelecard_terminal",
@@ -740,15 +740,12 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_5565d2376c4db",
             "label": "iCount",
             "name": "",
@@ -760,11 +757,14 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_5565d2446c4dc",
             "label": "API URL",
             "name": "acf-options_icount_api_url",
@@ -777,16 +777,16 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
             "formatting": "html",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_5565d26b6c4dd",
             "label": "Company ID",
             "name": "acf-options_icount_company_id",
@@ -799,16 +799,16 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
             "formatting": "none",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_5565d28d6c4de",
             "label": "User",
             "name": "acf-options_icount_user",
@@ -821,16 +821,16 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
             "formatting": "none",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "key": "field_5565d2a76c4df",
             "label": "Password",
             "name": "acf-options_icount_password",
@@ -843,16 +843,13 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
             "formatting": "none",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
         {
+            "placement": "left",
+            "endpoint": 0,
             "key": "field_553667710b0f6",
             "label": "Misc",
             "name": "",
@@ -864,11 +861,14 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0
+            }
         },
         {
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "default_value": "",
+            "delay": 0,
             "key": "field_558fd81814fd7",
             "label": "Product Image Disclaimer",
             "name": "acf-options_product_image_disclaimer",
@@ -880,11 +880,7 @@
                 "width": "",
                 "class": "",
                 "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0
+            }
         }
     ],
     "location": [
@@ -896,7 +892,7 @@
             }
         ]
     ],
-    "menu_order": 14,
+    "menu_order": 16,
     "position": "normal",
     "style": "default",
     "label_placement": "top",
@@ -904,5 +900,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1458821961
+    "modified": 1483958195
 }

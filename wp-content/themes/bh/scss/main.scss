@@ -64,7 +64,6 @@
 				padding: 21px;
 				background-color: black;
 				font-size: 20px;
-				font-family: arial;
 				background-color: rgba(229, 230, 231, 0.8);
 				overflow: hidden;
 
@@ -259,6 +258,7 @@
 /**********/
 
 .categories-filter {
+	margin-top: -10px;
 	margin-bottom: 15px;
 	font-size: 14px;
 	
@@ -311,8 +311,8 @@
 	@include not-selectable;
 	
 	.events-slider {
-		direction: ltr;
-		
+		direction: ltr;		
+
 		.event-item {
 			position: relative !important;
 			width: 221px;
@@ -357,6 +357,14 @@
 						padding-right: 10px;
 						font-size: 14px;
 						white-space: normal;
+					}
+				}
+			}
+
+			&.custom-event-item {
+				.event-meta {
+					h3 {
+						margin-top: 23px;
 					}
 				}
 			}
@@ -441,6 +449,12 @@
 			
 			p {
 				margin-bottom: 0;
+			}
+
+			ul,
+			ol {
+				padding-left: 25px;
+				list-style-type: circle;
 			}
 	
 			/*******/

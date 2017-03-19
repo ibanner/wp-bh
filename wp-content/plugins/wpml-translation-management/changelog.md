@@ -1,3 +1,78 @@
+# 2.2.7
+
+## Fixes
+* [wpmltm-1599] Fixed an issue when saving the translation pickup mode
+* [wpmltm-1580] Fixed an issue when translating forms created with Gravity Forms containing HTML elements
+* [wpmltm-1571] Fixed stripped backslash in the translation editor fields
+* [wpmltm-852] Fixed email notification informing about new string translation jobs
+* [wpmltm-1613] Fixed issue where flag icons were sometimes displayed incorrectly when viewing "All Languages"
+
+## Performances
+* [wpmltm-1576] Improved performance of translation management dashboard.
+
+# 2.2.6
+
+## Fixes
+* [wpmltm-1587] Fixed issue where multiple lines got stripped when copying all fields in the Translation Editor
+* [wpmlcore-3784] Fixed compatibility issue with ACF Pro causing fatal error for translatable field groups 
+
+# 2.2.5
+
+## Fixes
+* [wpmltm-1555] Fixed a console error in translation basket when sending batches to an unsupported language
+* [wpmltm-1528] Clear batch when rolling back to avoid duplicatd jobs
+* [wpmltm-1566] Prevent sending empty units in XLIFF files 
+
+# 2.2.4.1
+
+## Fixes
+* [wpmltm-1554] Removed ACF compatibility classes: they will be part of the ACF bridge plugin (ACFML: wpmlbridge-17)
+
+# 2.2.4
+
+## Fixes
+* [wpmltm-1549] Fix fatal error in user account when user is translator
+
+# 2.2.3
+
+## Fixes
+* [wpmltm-1504] Fixed the link to "Custom fields translation".
+* [wpmltm-1434] Fixed the validation of zipped XLIFF files, when they are made from Mac OS.
+* [wpmltm-1524] Fixed a fatal error when using "Advanced Custom Fields" plugin and saving a group with no fields in it.
+* [wpmltm-1525] Fixed an issue with the multi-site configuration, when a sub-site admin can't access post translations.
+* [wpmltm-1529] Extra fields received from Translation Proxy are properly rendered.
+
+## Performances
+* [wpmlcore-3227] Reduced the number of queries in the post listing pages.
+
+# 2.2.2
+
+## Fixes
+* [wpmlcore-3104] Fixed compatibility issue with ACF repeated fields
+* [wpmltm-1381] Fixed word count for translatable custom fields.
+* [wpmltm-1489] Resolved a compatibility issue with a change in `WP_Http` introduced in WP 4.6
+* [wpmlcore-3104] ACF Repeater subfields are now visible on edit post screen after downloading translated content with Translation Management
+* [wpmlcore-2637] Add `wpml_translate_link_targets` filter to fix links to point to translated content
+* [wpmltm-1175] Fix missing links in other posts and strings when translations return via pro translation
+* [wpmltm-1467] Fixed NextGen Gallery compatibility issue.
+* Other minor bug fixes
+
+## Features
+* [wpmltm-1241] Added button in Translation Dashboard to refresh language pairs defined in Translation Proxy
+* [wpmltm-744] Improved messages when sending jobs to Translation Proxy fails
+* [wpmltm-1204] Added UI to Multilingual Content Setup Tab to allow to scan the whole site for links that need fixing.
+* [wpmltm-1487] Added a button in WPML > TM > Translators to refresh translators data from ICanLocalize
+
+# 2.2.1.2
+ 
+## Feature
+* [wpmltm-1487] Added button to refresh data from ICanLocalize
+
+# 2.2.1.1
+ 
+## Fixes
+* [wpmltm-1487] Reduced automatic calls to ICanLocalize server to one per hour
+
 # 2.2.1
 
 ## Fixes
@@ -29,6 +104,9 @@
 ## Usability
 * [wpmltm-1442] Improved feedback message when sending jobs to a translation service fails
 * [wpmltm-1408] Improved the admin notice when the XLIFF is missing the `target` element, or the element is empty
+
+## Performances
+* [wpmlcore-2988] Removed unneeded dependencies checks in admin pages: this now runs only once and later only when activating/deactivating plugins
 
 # 2.1.7
 

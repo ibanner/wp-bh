@@ -20,6 +20,20 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 		$this->old_locale = get_locale();
 	}
 
+	/**
+	 * Determine if prices should include, or exclude taxes.
+	 *
+	 * Country list from: https://help.bingads.microsoft.com/#apex/3/en/56731/1
+	 */
+	private function include_tax() {
+		if ( in_array(
+			$this->store_info->base_country,
+			array( 'GB', 'AU', 'DE', 'FR' )
+		) ) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Render the feed header information
@@ -78,8 +92,6 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 
 	}
 
-
-
 	/**
 	 * Helper function used to output a value in a warnings-safe way
 	 *
@@ -98,8 +110,6 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 			}
 		}
 	}
-
-
 
 	/**
 	 * Generate the output for an individual item
@@ -123,7 +133,11 @@ class WoocommerceGpfFeedBing extends WoocommerceGpfFeed {
 		echo $this->tsvescape( $feed_item->purchase_link ) . "\t";
 
 		// price
-		$price = number_format( $feed_item->price_ex_tax, 2, '.', '' );
+		if ( $this->include_tax() ) {
+			$price = number_format( $feed_item->price_inc_tax, 2, '.', '' );
+		} else {
+			$price = number_format( $feed_item->price_ex_tax, 2, '.', '' );
+		}
 		echo $this->tsvescape( $price )."\t";
 
 		// description

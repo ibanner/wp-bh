@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: WooCommerce Google Product Feed
- * Plugin URI: https://www.woothemes.com/products/google-product-feed/
- * Description: Woocommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
+ * Plugin URI: https://www.woocommerce.com/products/google-product-feed/
+ * Description: WooCommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
  * Author: Lee Willis
- * Version: 6.7.6
+ * Version: 7.0.5
  * Author URI: http://www.leewillis.co.uk/
  * License: GPLv3
  *
@@ -33,7 +33,7 @@ if ( is_admin() ) {
 
 
 /**
- * Bodge ffor WPEngine.com users - provide the feed at a URL that doesn't
+ * Bodge for WPEngine.com users - provide the feed at a URL that doesn't
  * rely on query arguments as WPEngine don't support URLs with query args
  * if the requestor is a googlebot. #broken
  */
@@ -42,9 +42,12 @@ function woocommerce_gpf_endpoints() {
 	add_rewrite_tag( '%woocommerce_gpf%', '([^/]+)' );
 	add_rewrite_tag( '%gpf_start%', '([0-9]{1,})' );
 	add_rewrite_tag( '%gpf_limit%', '([0-9]{1,})' );
+	add_rewrite_tag( '%gpf_categories%', '^(\d+(,\d+)*)?$' );
+	add_rewrite_rule( 'woocommerce_gpf/([^/]+)/gpf_start/([0-9]{1,})/gpf_limit/([0-9]{1,})/gpf_categories/(\d+(,\d+)*)', 'index.php?woocommerce_gpf=$matches[1]&gpf_start=$matches[2]&gpf_limit=$matches[3]&gpf_categories=$matches[4]', 'top' );
 	add_rewrite_rule( 'woocommerce_gpf/([^/]+)/gpf_start/([0-9]{1,})/gpf_limit/([0-9]{1,})', 'index.php?woocommerce_gpf=$matches[1]&gpf_start=$matches[2]&gpf_limit=$matches[3]', 'top' );
+	add_rewrite_rule( 'woocommerce_gpf/([^/]+)/gpf_start/([0-9]{1,})', 'index.php?woocommerce_gpf=$matches[1]&gpf_start=$matches[2]', 'top' );
+	add_rewrite_rule( 'woocommerce_gpf/([^/]+)/gpf_categories/(\d+(,\d+)*)', 'index.php?woocommerce_gpf=$matches[1]&gpf_categories=$matches[2]', 'top' );
 	add_rewrite_rule( 'woocommerce_gpf/([^/]+)', 'index.php?woocommerce_gpf=$matches[1]', 'top' );
-
 }
 add_action( 'init', 'woocommerce_gpf_endpoints' );
 
@@ -76,6 +79,7 @@ function woocommerce_gpf_includes() {
 		} else if ( 'bing' === $wp_query->query_vars['woocommerce_gpf'] ) {
 			require_once 'woocommerce-gpf-feed-bing.php';
 		}
+		require_once( 'woocommerce-gpf-feed-item.php' );
 		require_once( 'woocommerce-gpf-frontend.php' );
 	}
 
@@ -83,15 +87,37 @@ function woocommerce_gpf_includes() {
 add_action( 'template_redirect', 'woocommerce_gpf_includes' );
 
 /**
- * Override the default customer address.
- *
- * Needs to happen before parse_query, so we have to manually check all sorts of query combinations.
+ * Include/invoke relevant classes if we're doing product structured data.
  */
-function woocommerce_gpf_set_customer_default_location($location) {
-	if ( ( isset( $_REQUEST['action'] ) && 'woocommerce_gpf' == $_REQUEST['action'] ) ||
-		 ( isset ( $_SERVER['REQUEST_URI'] ) && stripos( $_SERVER['REQUEST_URI'], '/woocommerce_gpf' ) === 0 ) ||
-		 isset( $_REQUEST['woocommerce_gpf'] )
-		  ) {
+function woocommerce_gpf_structured_data() {
+	global $woocommerce_gpf_structured_data;
+	require_once( 'woocommerce-gpf-structured-data.php' );
+	$woocommerce_gpf_structured_data = new woocommerce_gpf_structured_data();
+}
+// Loads at priority 5 to ensure it runs before WooCommerce's hook.
+add_action( 'woocommerce_single_product_summary', 'woocommerce_gpf_structured_data', 5 );
+
+
+/**
+ * Determine if this is a feed URL.
+ *
+ * May need to be used before parse_query, so we have to manually check all
+ * sorts of combinations.
+ *
+ * @return boolean  True if a feed is being generated.
+ */
+function woocommerce_gpf_is_generating_feed() {
+	return
+		( isset( $_REQUEST['action'] ) && 'woocommerce_gpf' === $_REQUEST['action'] ) ||
+		( isset( $_SERVER['REQUEST_URI'] ) && stripos( $_SERVER['REQUEST_URI'], '/woocommerce_gpf' ) === 0 ) ||
+		isset( $_REQUEST['woocommerce_gpf'] );
+}
+
+/**
+ * Override the default customer address.
+ */
+function woocommerce_gpf_set_customer_default_location( $location ) {
+	if ( woocommerce_gpf_is_generating_feed() ) {
 		return wc_format_country_state_string( get_option( 'woocommerce_default_country' ) );
 	} else {
 		return $location;
@@ -156,3 +182,19 @@ function woocommerce_gpf_block_wordpress_gzip_compression() {
 	}
 }
 add_action( 'plugins_loaded', 'woocommerce_gpf_block_wordpress_gzip_compression' );
+
+
+function woocommerce_gpf_prevent_wporg_update_check( $r, $url ) {
+	if ( 0 === strpos( $url, 'https://api.wordpress.org/plugins/update-check/' ) ) {
+		$my_plugin = plugin_basename( __FILE__ );
+		$plugins   = @json_decode( $r['body']['plugins'], true );
+		if ( null === $plugins ) {
+			return $r;
+		}
+		unset( $plugins['active'][ array_search( $my_plugin, $plugins['active'] ) ] );
+		unset( $plugins['plugins'][ $my_plugin ] );
+		$r['body']['plugins'] = json_encode( $plugins );
+	}
+	return $r;
+}
+add_filter( 'http_request_args', 'woocommerce_gpf_prevent_wporg_update_check', 10, 2 );

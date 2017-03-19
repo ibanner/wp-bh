@@ -1,63 +1,92 @@
 <?php
+/**
+ * Main - Banner layout
+ *
+ * @author 		Beit Hatfutsot
+ * @package 	bh/views/main
+ * @version     2.0
+ */
 
-	$args = array(
-		'post_type'			=> 'event',
-		'posts_per_page'	=> 5,
-		'orderby'			=> 'menu_order',
-		'order'				=> 'ASC',
-		'meta_query'		=> array(
-			'relation'		=> 'AND',
-			array(
-				'key'		=> 'acf-event_homepage_banner_indicator',
-				'value'		=> true
-			),
-			array(
-				'key'		=> 'acf-event_end_date',
-				'value'		=> date_i18n('Ymd'),
-				'type'		=> 'DATE',
-				'compare'	=> '>='
-			)
-		)
-	);
-	
-	if ( function_exists('BH_get_cached_wp_query') ) :
-		$events = BH_get_cached_wp_query($args, 'events-' . ICL_LANGUAGE_CODE);
-	else :
-		$events = array();
-		$query = new WP_Query($args);
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+// check for ACF existence
+if ( ! function_exists('get_field') )
+	return;
+
+// layout parameters
+$slides = get_field('acf-options_main_banner_slides', 'option');
+
+if ( ! $slides )
+	return;
+
+$items = array();
+
+foreach ($slides as $s) {
+	// get slide parameters
+	$type = $s['type'];
+
+	switch ( $type ) {
 		
-		if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
-			$events[] = $post;
-		endwhile; endif; wp_reset_postdata();
-	endif;
-	
-	if ($events) :
-		$items = array();
+		// event
+		case 'event' :
+
+			$event = $s['event'];
+
+			if ( $event ) {
+				$image = get_field('acf-event_main_image', $event->ID);
+				
+				if ($image) {
 		
-		foreach ($events as $event) :
-			$image = get_field('acf-event_main_image', $event->ID);
-			
-			if ($image) {
-	
-				$event_cats	= wp_get_post_terms($event->ID, 'event_category');
-				$cat		= $event_cats ? get_field('acf-event_category_singular_name', 'event_category_' . $event_cats[0]->term_id) : ''; 
-	
-				$item = array(
-					'category' 	=> $cat,
-					'date_html'	=> BH_get_event_date($event->ID),
-					'title' 	=> get_the_title($event->ID),
-					'text' 		=> get_field('acf-event_description', $event->ID),
-					'image' 	=> $image,
-					'link'		=> get_permalink($event->ID),
-				);
-	
-				$items[] = $item;
+					$event_cats	= wp_get_post_terms($event->ID, 'event_category');
+					$cat		= $event_cats ? get_field('acf-event_category_singular_name', 'event_category_' . $event_cats[0]->term_id) : ''; 
+		
+					$item = array(
+						'category' 	=> $cat,
+						'date_html'	=> BH_get_event_date($event->ID),
+						'title' 	=> get_the_title($event->ID),
+						'text' 		=> get_field('acf-event_description', $event->ID),
+						'image' 	=> $image,
+						'link'		=> get_permalink($event->ID),
+						'target'	=> 'self'
+					);
+		
+					$items[] = $item;
+				}
 			}
-		endforeach;
-	endif; 
+
+			break;
+
+		// custom
+		case 'custom' :
+
+			// get custom slide parameters
+			$image		= $s['custom_image'];
+			$title		= $s['custom_title'];
+			$sub_title1	= $s['custom_sub_title1'];
+			$sub_title2	= $s['custom_sub_title2'];
+			$desc		= $s['custom_desc'];
+			$link		= $s['custom_link'];
+			$target		= $s['custom_link_target'];
+
+			$item = array(
+				'category' 	=> $sub_title1	? $sub_title1	: '',
+				'date_html'	=> $sub_title2	? $sub_title2	: '',
+				'title' 	=> $title		? $title		: '',
+				'text' 		=> $desc		? $desc			: '',
+				'image' 	=> $image		? $image		: '',
+				'link'		=> $link		? $link			: '',
+				'target'	=> $target		? $target		: ''
+			);
+
+			$items[] = $item;
+
+			break;
+
+	}
+}
 
 ?>
-
+	
 <section class="main-layout main-layout-banner">
 	<div class="container">
 		<div id="slideshow-wrapper">
@@ -80,7 +109,7 @@
 			<?php
 				echo '<img src="' . $items[count($items)-1]['image']['sizes']['large'] . '" class="slide" />';
 				foreach($items as $index => $item) {
-					echo '<a href="' . $item['link'] . '"><img src="' . $item['image']['sizes']['large'] . '" class="slide" /></a>';
+					echo '<a href="' . $item['link'] . '" ' . ( $item['target'] == 'blank' ? 'target="_blank"' : '' ) . '><img src="' . $item['image']['sizes']['large'] . '" class="slide" /></a>';
 				}
 				echo '<img src="' . $items[0]['image']['sizes']['large'] . '" class="slide" />';
 			?>

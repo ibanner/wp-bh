@@ -129,6 +129,15 @@ require_once('../../../../../wp-load.php'); ?>
 			
 			$cfdb_form_title = $contact_form->title();
 			
+			// Add GTM success indication
+			?><script>
+				dataLayer.push({
+					'event': 'payment-form',
+					'conversionValue': <?php echo $posted_data['total']; ?>,
+					'formName': '<?php echo $cfdb_form_title; ?>'
+				});
+			</script><?php
+			
 		endif;
 		
 		// document the completed request
@@ -142,7 +151,7 @@ require_once('../../../../../wp-load.php'); ?>
 		// display payment approval
 		echo '<h2>' . __('Thank you for your request!', 'BH') . '</h2>';
 		echo '<p>' . __('An invoice for your payment will be sent to your email address shortly.', 'BH') . '</p>';
-		
+
 	else :
 	
 		// error

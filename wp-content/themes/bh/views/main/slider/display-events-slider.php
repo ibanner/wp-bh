@@ -47,6 +47,7 @@
     						data-cycle-log=false
 							data-cycle-next="#events-slider-next"
 							data-cycle-prev="#events-slider-prev"
+							' . ( (defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE == 'he') ? 'data-cycle-starting-slide=' . (count($categories[0])-6) : '' ) . '
 							>';
 							
 							echo implode('', $categories[0]);

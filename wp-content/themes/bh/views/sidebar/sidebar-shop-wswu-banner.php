@@ -4,7 +4,7 @@
  *
  * @author 		Beit Hatfutsot
  * @package 	bh/views/sidebar
- * @version     1.0
+ * @version     2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly

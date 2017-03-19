@@ -1,48 +1,87 @@
 <?php
+/**
+ * Main - Slider layout
+ *
+ * @author 		Beit Hatfutsot
+ * @package 	bh/views/main
+ * @version     2.0
+ */
 
-	global $events;
-	
-	// get future events
-	$args = array(
-		'post_type'			=> 'event',
-		'posts_per_page'	=> -1,
-		'no_found_rows'		=> true,
-		'orderby'			=> 'menu_order',
-		'order'				=> (ICL_LANGUAGE_CODE == 'he') ? 'DESC' : 'ASC',
-		'meta_query'		=> array(
-			'relation'		=> 'AND',
-			array(
-				'key'		=> 'acf-event_homepage_slider_indicator',
-				'value'		=> true
-			),
-			array(
-				'key'		=> 'acf-event_end_date',
-				'value'		=> date_i18n('Ymd'),
-				'type'		=> 'DATE',
-				'compare'	=> '>='
-			)
-		)
-	);
-	
-	if ( function_exists('BH_get_cached_wp_query') ) :
-		$events = BH_get_cached_wp_query($args, 'events-' . ICL_LANGUAGE_CODE);
-	else :
-		$events = array();
-		$query = new WP_Query($args);
-		
-		if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
-			$events[] = $post;
-		endwhile; endif; wp_reset_postdata();
-	endif;
-	
-	if ($events) :
-	
-		// build event elements
-		get_template_part('views/main/slider/set-event-elements');
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-		// display events slider
-		get_template_part('views/main/slider/display-events-slider');
-		
-	endif;
+// check for ACF existence
+if ( ! function_exists('get_field') )
+	return;
+
+// layout parameters
+$slider = get_field('acf-options_exhibitions_and_events_slider', 'option');
+
+if ( ! $slider )
+	return;
+
+global $events;
+$events = array();
+
+$wpml_lang = function_exists('icl_object_id') ? ICL_LANGUAGE_CODE : '';
+
+foreach ($slider as $s) {
+	// init $item
+	$item = array();
+
+	// get slide parameters
+	$type = $s['type'];
+
+	switch ( $type ) {
+
+		// event
+		case 'event' :
+
+			$event = $s['event'];
+
+			if ( $event ) {
+				$item['type']	= 'event';
+				$item['event']	= $event;
+			}
+
+			break;
+
+		// custom
+		case 'custom' :
+
+			// get custom slide parameters
+			$image		= $s['custom_image'];
+			$title		= $s['custom_title'];
+			$link		= $s['custom_link'];
+			$target		= $s['custom_link_target'];
+
+			$item['type']	= 'custom';
+			$item['event']	= array(
+				'image' 	=> $image		? $image		: '',
+				'title' 	=> $title		? $title		: '',
+				'link'		=> $link		? $link			: '',
+				'target'	=> $target		? $target		: ''
+			);
+
+			break;
+
+	}
+
+	if ( $item['event'] ) {
+		if ( $wpml_lang == 'he' ) {
+			array_unshift($events, $item);
+		}
+		else {
+			$events[] = $item;
+		}
+	}
+}
+
+if ($events) {
+
+	// build event elements
+	get_template_part('views/main/slider/set-event-elements');
+
+	// display events slider
+	get_template_part('views/main/slider/display-events-slider');
 	
-?>
+}

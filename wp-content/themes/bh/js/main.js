@@ -55,10 +55,15 @@ var $ = jQuery,
 					// reinitialize slider
 					var slideshow = $('.cycle-slideshow');
 					var visible_events = _BH_events[category].length;
-					visible_events = (visible_events < 5) ? visible_events : 5;
+					visible_events = (visible_events < 6) ? visible_events : 6;
 					
 					slideshow.cycle('destroy');
 					slideshow.attr('data-cycle-carousel-visible', visible_events);
+
+					if (js_globals.wpml_lang == 'he') {
+						slideshow.attr('data-cycle-starting-slide', _BH_events[category].length-6);
+					}
+
 					slideshow.html(_BH_events[category]);
 					slideshow.cycle();
 

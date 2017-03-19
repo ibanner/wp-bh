@@ -1,40 +1,53 @@
 <?php
+/**
+ * Main - Slider event elements builder
+ *
+ * @author 		Beit Hatfutsot
+ * @package 	bh/views/main/slider
+ * @version     2.0
+ */
 
-	global $categories, $events, $is_categories_empty, $is_events_empty;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-	// set $categories - array of categories term_id
-	// this array will hold arrays of event DOM elements related to each category
-	// used for two purposes:
-	// 1. display categories filter - display only categories which include at least one future event
-	// 2. filter events based on a JSON encoded information
-	$args = array(
-		'orderby'	=> 'term_order'
-	);
-	
-	if ( function_exists('BH_get_cached_terms') )
-		$category_terms = BH_get_cached_terms('event_category', $args);
-	else
-		$category_terms = get_terms('event_category', $args);
-	
-	$categories = array();
-	$is_categories_empty	= true;	// indicates there is no category includes at least 1 future event
-	$is_events_empty		= true;	// indicates there is no events to show
+global $categories, $events, $is_categories_empty, $is_events_empty;
 
-	// set $categories[0] for all events
-	$categories[0] = array();
-	
-	if ($category_terms) :
-		foreach ($category_terms as $category_term) :
-			// set empty array to each category as default
-			$categories[$category_term->term_id] = array();
-		endforeach;
-	endif;
-	
-	// fill in $categories array
-	foreach ($events as $event) :
+// set $categories - array of categories term_id
+// this array will hold arrays of event DOM elements related to each category
+// used for two purposes:
+// 1. display categories filter - display only categories which include at least one future event
+// 2. filter events based on a JSON encoded information
+$args = array(
+	'orderby'	=> 'term_order'
+);
+
+if ( function_exists('BH_get_cached_terms') )
+	$category_terms = BH_get_cached_terms('event_category', $args);
+else
+	$category_terms = get_terms('event_category', $args);
+
+$categories = array();
+$is_categories_empty	= true;	// indicates there is no category includes at least 1 future event
+$is_events_empty		= true;	// indicates there is no events to show
+
+// set $categories[0] for all events
+$categories[0] = array();
+
+if ($category_terms) :
+	foreach ($category_terms as $category_term) :
+		// set empty array to each category as default
+		$categories[$category_term->term_id] = array();
+	endforeach;
+endif;
+
+// fill in $categories array
+foreach ($events as $e) {
+	if ( $e['type'] == 'event' ) {
+		// event
+		$event = $e['event'];
+
 		$image = get_field('acf-event_slider_image', $event->ID);
-		
-		if ($image) :
+
+		if ($image) {
 			$event_categories	= wp_get_post_terms($event->ID, 'event_category');
 			$singular_name		= ($event_categories) ? get_field('acf-event_category_singular_name',				'event_category_' . $event_categories[0]->term_id) : '';
 			$description		= get_field('acf-event_description',		$event->ID);
@@ -72,7 +85,26 @@
 			endif;
 			
 			$is_events_empty = false;	// at least 1 event to show
-		endif;
-	endforeach;
+		}
+	}
 
-?>
+	else {
+		// custom
+		$event_element =
+			"<div class='event-item custom-event-item' style='display: none;'>" .
+				"<a href='" . $e['event']['link'] . "' " . ( $e['event']['target'] == 'blank' ? "target='_blank'" : "" ) . ">" .
+					"<img src='" . $e['event']['image']['sizes']['thumbnail'] . "' alt='" . ( ($e['event']['image']['alt']) ? $e['event']['image']['alt'] : '' ) . "' />" .
+					"<div class='event-meta'>" .
+
+						// event title
+						"<h3>" . $e['event']['title'] . "</h3>" .
+					"</div>" .
+				"</a>" .
+			"</div>";
+		
+		// include event as part of "all events" array
+		$categories[0][] = $event_element;
+
+		$is_events_empty = false;	// at least 1 event to show
+	}
+}
