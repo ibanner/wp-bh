@@ -23,9 +23,16 @@ if ( ! $email_to || ! $pray_id ) {
 // include functions
 require_once('functions.php');
 
+// verify host name
+$allowed_hosts = array( 'bh.org.il', 'www.bh.org.il' );
+if ( ! isset( $_SERVER['HTTP_HOST'] ) || ! in_array( $_SERVER['HTTP_HOST'], $allowed_hosts) ) {
+	header( $_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request' );
+	exit;
+}
+
 // build prayer page link
-$protocol		= ( empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off' ) ? 'http://www.' : 'https://www.';
-$base_url		= $protocol . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/';
+$protocol		= ( empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off' ) ? 'http://' : 'https://';
+$base_url		= $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/';
 $query_string	= '?pray_id=' . $pray_id . '&lang=' . ($lang ? $lang : 'heb');
 $link			= $base_url . 'pray.php' . $query_string;
 
