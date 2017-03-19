@@ -112,15 +112,15 @@ class WCML_WC_Shipping{
     function translate_shipping_methods_in_package( $available_methods ){
 
         foreach($available_methods as $key => $method){
-            $method->label =  $this->translate_shipping_method_title( $method->label, $key );
+            $available_methods[$key]->label =  $this->translate_shipping_method_title( $method->label, $key );
         }
 
         return $available_methods;
     }
 
-    function translate_shipping_method_title( $title, $shipping_id ) {
+    function translate_shipping_method_title( $title, $shipping_id, $language = false ) {
         $shipping_id = str_replace( ':', '', $shipping_id );
-        $title = apply_filters( 'wpml_translate_single_string', $title, 'woocommerce', $shipping_id .'_shipping_method_title', $this->current_language );
+        $title = apply_filters( 'wpml_translate_single_string', $title, 'woocommerce', $shipping_id .'_shipping_method_title', $language ? $language : $this->current_language );
 
         return $title;
     }
@@ -219,7 +219,8 @@ class WCML_WC_Shipping{
         }
 
         $updated_costs_settings = $this->update_woocommerce_shipping_settings_for_class_costs( $settings );
-        $inst_settings = array_replace( $inst_settings, $updated_costs_settings );
+
+        $inst_settings = is_array( $inst_settings ) ? array_replace( $inst_settings, $updated_costs_settings ) : $updated_costs_settings;
 
         return $inst_settings;
     }

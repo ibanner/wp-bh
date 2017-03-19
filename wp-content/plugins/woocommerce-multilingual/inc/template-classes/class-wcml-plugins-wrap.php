@@ -1,24 +1,27 @@
 <?php
 
-class WCML_Plugins_Wrap extends WPML_Templates_Factory {
+class WCML_Plugins_Wrap {
 
     private $woocommerce_wpml;
     private $sitepress;
 
+	private $twig;
+
     function __construct( &$woocommerce_wpml, &$sitepress ){
-        parent::__construct();
 
         $this->woocommerce_wpml = $woocommerce_wpml;
         $this->sitepress = $sitepress;
+
+	    $loader = new Twig_Loader_Filesystem( WCML_PLUGIN_PATH . '/templates' );
+	    $this->twig = new Twig_Environment( $loader );
     }
 
     public function get_model(){
 
         $model = array(
             'link_url' => admin_url('admin.php?page=wpml-wcml'),
-            'old_wpml' => defined('ICL_SITEPRESS_VERSION') && version_compare( ICL_SITEPRESS_VERSION, '2.0.5', '<' ),
+            'old_wpml' => defined('ICL_SITEPRESS_VERSION') && version_compare( ICL_SITEPRESS_VERSION, '3.4', '<' ),
             'tracking_link' => WCML_Links::generate_tracking_link( 'https://wpml.org/shop/account/', false, 'account' ),
-            'check_design_update' => $this->woocommerce_wpml->check_design_update,
             'install_wpml_link' => $this->woocommerce_wpml->dependencies->required_plugin_install_link( 'wpml' ),
             'icl_version' => defined('ICL_SITEPRESS_VERSION'),
             'icl_setup' => $this->sitepress ? $this->sitepress->setup() : false,
@@ -60,14 +63,9 @@ class WCML_Plugins_Wrap extends WPML_Templates_Factory {
 
     }
 
-    protected function init_template_base_dir() {
-        $this->template_paths = array(
-            WCML_PLUGIN_PATH . '/templates/',
-        );
-    }
-
-    public function get_template() {
-        return 'plugins-wrap.twig';
+    public function show(){
+	    $template = $this->twig->load( 'plugins-wrap.twig' );
+	    echo $template->render( $this->get_model() );
     }
 
 }

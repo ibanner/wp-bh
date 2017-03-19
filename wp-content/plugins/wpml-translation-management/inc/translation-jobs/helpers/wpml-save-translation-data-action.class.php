@@ -9,11 +9,18 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 	private $data;
 
 	private $redirect_target = false;
+	private $translate_link_targets_in_posts;
+	private $translate_link_targets_in_strings;
 
 	public function __construct( $data, &$tm_records ) {
+		global $wpdb, $ICL_Pro_Translation, $sitepress;
 		parent::__construct();
-		$this->data       = $data;
-		$this->tm_records = &$tm_records;
+		$this->data                              = $data;
+		$this->tm_records                        = &$tm_records;
+		$translate_link_targets_global_state = new WPML_Translate_Link_Target_Global_State( $sitepress );
+		$this->translate_link_targets_in_posts   = new WPML_Translate_Link_Targets_In_Posts( $translate_link_targets_global_state, $wpdb, $ICL_Pro_Translation );
+		$this->translate_link_targets_in_strings = new WPML_Translate_Link_Targets_In_Strings( $translate_link_targets_global_state, $wpdb, new WPML_WP_API(), $ICL_Pro_Translation );
+
 	}
 
 	function save_translation() {
@@ -24,6 +31,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 		$data                = $this->data;
 		/** @var stdClass $job */
 		$job                 = ! empty( $data['job_id'] ) ? $this->get_translation_job( $data['job_id'], true ) : null;
+		$needs_second_update = $job && $job->needs_update ? 1 : 0;
 		$original_post       = null;
 		$element_type_prefix = null;
 		if ( is_object( $job ) ) {
@@ -69,13 +77,9 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 
 			$element_id = $translation_status->element_id();
 			delete_post_meta( $element_id, '_icl_lang_duplicate_of' );
-			
+
 			if ( ! empty( $data['complete'] ) && ! $is_incomplete ) {
 				$icl_translate_job->update( array( 'translated' => 1 ) );
-				$translation_status->update( array(
-					'status'       => ICL_TM_COMPLETE,
-					'needs_update' => 0
-				) );
 				$job = $this->get_translation_job( $data['job_id'], true );
 
 				if ( $is_external ) {
@@ -139,8 +143,12 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 					$_POST['trid']                   = $translation_status->trid();
 					$_POST['lang']                   = $job->language_code;
 					$_POST['skip_sitepress_actions'] = true;
+					$_POST['needs_second_update']    = $needs_second_update;
 
+					/* @deprecated Use `wpml_pre_save_pro_translation` instead */
 					$postarr = apply_filters( 'icl_pre_save_pro_translation', $postarr );
+
+					$postarr = apply_filters( 'wpml_pre_save_pro_translation', $postarr, $job );
 
 					// it's an update and user do not want to translate urls so do not change the url
 					if ( isset( $element_id ) && $sitepress->get_setting( 'translated_document_page_url' ) !== 'translate' ) {
@@ -158,6 +166,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 					}
 
 					$new_post_id = $iclTranslationManagement->icl_insert_post( $postarr, $job->language_code );
+
 					icl_cache_clear( $postarr['post_type'] . 's_per_language' ); // clear post counter per language in cache
 
 					// set taxonomies for users with limited caps
@@ -172,7 +181,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 
 					if ( $ICL_Pro_Translation ) {
 						/** @var WPML_Pro_Translation $ICL_Pro_Translation */
-						$ICL_Pro_Translation->_content_fix_links_to_translated_content( $new_post_id, $job->language_code );
+						$ICL_Pro_Translation->fix_links_to_translated_content( $new_post_id, $job->language_code );
 					}
 
 					// update body translation with the links fixed
@@ -205,7 +214,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 					//sync plugins texts
 					$cf_translation_settings = $this->get_tm_setting( array( 'custom_fields_translation' ) );
 					foreach ( (array) $cf_translation_settings as $cf => $op ) {
-						if ( $op == 1 ) {
+						if ( 1 === (int) $op && get_post_meta( $original_post->ID, $cf ) ) {
 							update_post_meta( $new_post_id, $cf, get_post_meta( $original_post->ID, $cf, true ) );
 						}
 					}
@@ -271,6 +280,14 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 
 				do_action( 'icl_pro_translation_completed', $new_post_id, $data['fields'], $job );
 				do_action( 'wpml_pro_translation_completed', $new_post_id, $data['fields'], $job );
+
+				$translation_status->update( array(
+					'status'       => ICL_TM_COMPLETE,
+					'needs_update' => $needs_second_update
+				) );
+
+				$this->translate_link_targets_in_posts->new_content();
+				$this->translate_link_targets_in_strings->new_content();
 
 				if ( ! defined( 'XMLRPC_REQUEST' ) && ! defined( 'DOING_AJAX' ) && ! isset( $_POST['xliff_upload'] ) ) {
 					$action_type           = is_null( $element_id ) ? 'added' : 'updated';

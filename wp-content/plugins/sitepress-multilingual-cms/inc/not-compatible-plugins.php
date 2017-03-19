@@ -13,18 +13,18 @@ if(!empty($icl_ncp_plugins)){
     
     
     add_action('admin_notices', 'icl_incomp_plugins_warn');
-    function icl_incomp_plugins_warn(){
-        global $icl_ncp_plugins;
-        echo '<div class="error"><ul><li><strong>';
-        echo __('WPML cannot be activated together with these older plugins:', 'sitepress');
-        echo '<ul style="list-style:disc;margin:20px;">';
-        foreach($icl_ncp_plugins as $incp){
-            echo '<li>'.$incp.'</li>';
-        }
-        echo '</ul>';
-        echo __('WPML will be deactivated', 'sitepress');
-        echo '</strong></li></ul></div>';        
-    }
+	function icl_incomp_plugins_warn() {
+		global $icl_ncp_plugins;
+		echo '<div class="error"><ul><li><strong>';
+		esc_html_e( 'WPML cannot be activated together with these older plugins:', 'sitepress' );
+		echo '<ul style="list-style:disc;margin:20px;">';
+		foreach ( $icl_ncp_plugins as $incp ) {
+			echo '<li>' . esc_html( $incp ) . '</li>';
+		}
+		echo '</ul>';
+		esc_html_e( 'WPML will be deactivated', 'sitepress' );
+		echo '</strong></li></ul></div>';
+	}
 }else{
     $icl_sitepress_disabled = false;
 }
@@ -38,26 +38,18 @@ if( 0 === strcmp( $filtered_page, ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php
     $icl_ncp_plugins2 = array_intersect($icl_ncp_plugins2, $active_plugins);
     if(!empty($icl_ncp_plugins2)){
 	    if( 0 === strcmp( $filtered_page, ICL_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) ){
-            add_action('admin_notices', 'icl_incomp_plugins_warn2');        
-            function icl_incomp_plugins_warn2(){
-                global $icl_ncp_plugins2;
-                echo '<a name="icl_inc_plugins_notice"></a><div class="error" style="padding:10px;">';
-                echo __('These plugins are known to have compatibiliy issues with WPML:', 'sitepress');
-                echo '<ul style="list-style:disc;margin-left:20px;">';
-                foreach($icl_ncp_plugins2 as $incp){
-                    echo '<li>'.$incp.'</li>';
-                }
-                echo '</ul>';
-                echo '</div>';        
-            }
-        }else{
-            add_action('icl_dashboard_widget_content_top', 'icl_incomp_plugins_warn_dashboard', 1, 0);
-            function icl_incomp_plugins_warn_dashboard(){
-                echo '<div class="icl_form_errors" style="width:98%">';
-                printf (__('You are using plugins that are incompatible with WPML - <a href="%s">see details</a>.', 'sitepress'), admin_url('admin.php?page='.ICL_PLUGIN_FOLDER.'/menu/troubleshooting.php'));
-                echo '</div>';        
-                
-            }
+            add_action('admin_notices', 'icl_incomp_plugins_warn2');
+		    function icl_incomp_plugins_warn2() {
+			    global $icl_ncp_plugins2;
+			    echo '<a name="icl_inc_plugins_notice"></a><div class="error" style="padding:10px;">';
+			    esc_html_e( 'These plugins are known to have compatibiliy issues with WPML:', 'sitepress' );
+			    echo '<ul style="list-style:disc;margin-left:20px;">';
+			    foreach ( $icl_ncp_plugins2 as $incp ) {
+				    echo '<li>' . esc_html( $incp ) . '</li>';
+			    }
+			    echo '</ul>';
+			    echo '</div>';
+		    }
         }
     }
 }

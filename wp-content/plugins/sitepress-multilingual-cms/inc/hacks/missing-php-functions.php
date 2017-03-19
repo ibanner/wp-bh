@@ -284,7 +284,8 @@ if ( ! function_exists( 'array_replace_recursive' ) ) {
 		if ( ! is_array( $array ) ) {
 			return $array;
 		}
-		for ( $i = 1; $i < count( $args ); $i ++ ) {
+		$args_count = count( $args );
+		for ( $i = 1; $i < $args_count; $i ++ ) {
 			if ( is_array( $args[ $i ] ) ) {
 				$array = array_replace_recursive_recurse( $array, $args[ $i ] );
 			}
@@ -310,3 +311,4 @@ if ( ! function_exists( 'array_replace_recursive' ) ) {
 		return $array;
 	}
 }
+

@@ -2,17 +2,28 @@
   
   
 class WCML_Ajax_Setup{
-    
-    function __construct(){
-        
-        add_action('init', array($this, 'init'));
-        add_action('localize_woocommerce_on_ajax', array($this, 'localize_woocommerce_on_ajax'));
-        
+
+	/**
+	 * @var SitePress
+	 */
+	private $sitepress;
+
+    public function __construct( $sitepres ){
+
+    	$this->sitepress =& $sitepres;
+
+        add_action( 'init', array( $this, 'init' ) );
+        add_action( 'wcml_localize_woocommerce_on_ajax', array( $this, 'wcml_localize_woocommerce_on_ajax' ) );
+
+        //@deprecated 3.9
+        add_action( 'localize_woocommerce_on_ajax', array( $this, 'localize_woocommerce_on_ajax' ) );
+
+	    add_action( 'woocommerce_ajax_get_endpoint', array( $this, 'add_language_to_endpoint' ) );
     }
-    
-    function init(){
+
+    public function init(){
         if (wpml_is_ajax()){
-           do_action('localize_woocommerce_on_ajax');
+           do_action('wcml_localize_woocommerce_on_ajax');
         }
         
         add_filter('woocommerce_params', array($this, 'filter_woocommerce_ajax_params'));
@@ -102,8 +113,9 @@ class WCML_Ajax_Setup{
 
         return $value; 
     }
-    
-    function localize_woocommerce_on_ajax(){
+
+
+    function wcml_localize_woocommerce_on_ajax(){
         if( isset($_POST['action']) && in_array( $_POST['action'], array( 'wcml_product_data', 'wpml_translation_dialog_save_job' ) ) ){
             return;
         }
@@ -113,6 +125,34 @@ class WCML_Ajax_Setup{
         $current_language = $sitepress->get_current_language();
         
         $sitepress->switch_lang($current_language, true);
+    }
+
+	/**
+	 * @param $endpoint string
+	 *
+	 * Adds a language parameter to the url when different domains for each language are used
+	 *
+	 * @return string
+	 */
+	public function add_language_to_endpoint( $endpoint ){
+
+		$is_per_domain = WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN === (int) $this->sitepress->get_setting( 'language_negotiation_type' );
+		if( $is_per_domain && $this->sitepress->get_current_language() != $this->sitepress->get_default_language() ){
+
+			$endpoint = add_query_arg('lang',  $this->sitepress->get_current_language(), remove_query_arg( 'lang', $endpoint ) );
+            $endpoint = urldecode($endpoint);
+
+		}
+
+		return $endpoint;
+	}
+
+
+	/**
+     * @deprecated 3.9
+     */
+    function localize_woocommerce_on_ajax(){
+        $this->wcml_localize_woocommerce_on_ajax();
     }
     
     

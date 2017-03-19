@@ -104,7 +104,6 @@ class WoocommerceGpfFeedGoogleInventory extends WoocommerceGpfFeed {
 					echo '      <g:' . $element_name . '>';
 					echo '<![CDATA[' . $element_value . ']]>';
 					echo '</g:' . $element_name . ">\n";
-
 				}
 			}
 		}

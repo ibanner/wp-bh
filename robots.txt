@@ -2,5 +2,7 @@ User-agent: *
 Disallow: /wp-admin/
 Disallow: /2014/
 Disallow: /2015/
+Disallow: /gallery/
+Disallow: /he/gallery/
 Disallow: /*add-to-cart=*
-Disallow: /*?s
+Disallow: /*?*

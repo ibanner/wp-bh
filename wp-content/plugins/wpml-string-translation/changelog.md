@@ -1,3 +1,90 @@
+# 2.5.2
+
+## Fixes
+* [wpmltm-1602] Fixed the query which list items in the Translation Management dashboard
+* [wpmlst-1047] Fixed exporting in po files duplicated strings with different contexts
+* [wpmlst-1117] Removed feature for page builders that updates the translated post when the original post is updated
+* [wpmlst-1009] Fixed the display of string tracking in source
+
+## Features
+* [wpmlst-1044] Grouped strings registered without context / domain
+
+# 2.5.1
+
+## Fixes
+* [wpmlst-1014] Raised the order of calling the `wpml_translatable_user_meta_fields` filter to allow displaying translated user meta on the front-end
+ 
+## API
+* [wpmlst-1032] Add actions for cleaning up unused package strings `wpml_start_string_package_registration` and `wpml_delete_unused_package_strings`
+
+# 2.5.0
+
+## Fixes
+* [wpmlst-907] Fixed an issue when trying to register a string with `0` as name
+* [wpmlst-920] Fixed an issue in double registering of Multilingual Widget content
+* [wpmlcore-3333] Fixed an issue that was happening when you try to scan strings before completing the wizard. Now it is not allowed
+* [wpmlst-954] Fixed database error when running WPML reset
+* [wpmlst-937] Fixed an issue when importing large `.po` files
+* [wpmlst-988] Fixed issue with DEFAULT in Text fields for compatibility with MySQL 5.7
+* [wpmlcore-3505] Add troubleshooting option `Recreate ST DB Cache tables` to re-run ST upgrade
+* [wpmlst-996] Fix 'Create PO file' functionality so it includes the msgctxt when required
+* [wpmlst-1028] Fix wrong table prefix when resetting WPML in multisite
+
+## API
+* [wpmlcore-3372] Added more API hooks including `wpml_add_string_translation`
+
+## Performances
+* [wpmlst-925] Improved usage of server's resources when scanning themes or plugins for strings
+* [wpmlst-831] Improved page loading and memory consumption in Theme's and Plugin's localization page
+
+## Features
+* [wpmlst-955] Add support to translate shortcode strings used by page builders.
+
+# 2.4.3
+
+## Features
+* [wpmlst-929] Updated package registration API to give option to connect package to post.   
+
+# 2.4.2.1
+
+## Fixes
+* [wcml-1499] Problem with WooCommerce endpoints resolved
+* [wpmlst-945] Fixed PHP notice when Views uses AJAX pagination.
+* [wpmlst-946] Fixed PHP notice when "My Account" endpoint contains special chars
+
+# 2.4.2
+
+## Fixes
+* [wpmlst-889] Sanitized the strings before registering them in String Translation tables.
+* [wpmlst-896] Improved the detection of URLs used to store data in `icl_string_urls`.
+* [wpmlst-919] Admin notices for strings scanning when a plugin is installed/updated can be permanently dismissed.
+
+# 2.4.1.1
+
+## Fixes
+* [wpmlst-892] Moved table migration from Core plugin to String Translation, to avoid dependency issues
+* [wpmlst-895] Fixed index in icl_string_pages table
+
+# 2.4.1
+
+## Fixes
+* [wpmlcore-3278] Fixed illegal mix of collations between `icl_strings` and `icl_string_pages` tables 
+* [wpmlst-881] Removed leading backslash `\` to avoid warnings in PHP <5.3
+* [wpmlst-880] Fixed error appearing during plugin update
+* [wpmlst-882] Improved handling of the the admin notice Something doesn't look right with "Caching of String Translation plugin"
+* [wpmlst-886] Improved caching of strings per page, to not flood tables with duplicated data and not cause performance issues
+* [wpmlst-888] Improved caching of strings per page, it requires less memory in db now.
+
+# 2.4.0
+
+## Fixes
+* [wpmlst-836] Fixed getting translated string when icl_t is called directly after icl_register_string.
+* [wpmlst-819] Improvement to ST performance, especially important where there are a lot of registered strings.  
+* [wpmlst-825] New box in WPML > ST to exclude contexts from auto-registration. Currently all strings are auto-registered by default.
+* [wpmlst-745] Keep track of which strings have links to content and fix the links to translated content in string translations
+* [wpmlst-879] Fixed outdated check message.
+* Other minor bug fixes and improvements
+
 # 2.3.9
 
 ## Fixes

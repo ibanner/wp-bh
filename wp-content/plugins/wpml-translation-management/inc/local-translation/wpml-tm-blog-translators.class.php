@@ -1,17 +1,22 @@
 <?php
 
-class WPML_TM_Blog_Translators extends WPML_SP_User {
+class WPML_TM_Blog_Translators {
 
 	/** @var WPML_TM_Records $tm_records */
 	private $tm_records;
 
 	/**
+	 * @var SitePress;
+	 */
+	private $sitepress;
+
+	/**
 	 * @param SitePress       $sitepress
 	 * @param WPML_TM_Records $tm_records
 	 */
-	public function __construct( &$sitepress, &$tm_records ) {
-		parent::__construct( $sitepress );
-		$this->tm_records = &$tm_records;
+	public function __construct( $sitepress, $tm_records ) {
+		$this->sitepress = $sitepress;
+		$this->tm_records = $tm_records;
 	}
 
 	/**
@@ -29,6 +34,13 @@ class WPML_TM_Blog_Translators extends WPML_SP_User {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function get_raw_blog_translators() {
+		return TranslationManagement::get_blog_translators();
+	}
+
+	/**
 	 * @param int   $user_id
 	 * @param array $args
 	 *
@@ -41,7 +53,7 @@ class WPML_TM_Blog_Translators extends WPML_SP_User {
 		                                 ->user_can( $user_id, 'translate' );
 		// check if user is administrator and return true if he is
 		if ( $admin_override && $this->sitepress->get_wp_api()
-		                                        ->user_can( $user_id, 'activate_plugins' )
+		                                        ->user_can( $user_id, 'manage_options' )
 		) {
 			$is_translator = true;
 		} else {

@@ -33,9 +33,9 @@ class WCML_Products{
 
             add_filter( 'post_row_actions', array( $this, 'filter_product_actions' ), 10, 2 );
 
-            if( defined( 'ICL_SITEPRESS_VERSION' ) && version_compare( ICL_SITEPRESS_VERSION, '3.2', '>=' ) ){
-                $this->tp_support = new WCML_TP_Support();
-            }
+            $this->tp_support = new WCML_TP_Support();
+
+            add_action( 'wp_ajax_wpml_switch_post_language', array( $this, 'switch_product_variations_language' ), 9 );
 
         }else{
             add_filter( 'woocommerce_json_search_found_products', array( $this, 'filter_found_products_by_language' ) );
@@ -47,6 +47,9 @@ class WCML_Products{
         add_action( 'woocommerce_after_product_ordering', array( $this, 'update_all_products_translations_ordering' ) );
         //filter to copy excerpt value
         add_filter( 'wpml_copy_from_original_custom_fields', array( $this, 'filter_excerpt_field_content_copy' ) );
+
+        add_filter( 'wpml_override_is_translator', array( $this, 'wcml_override_is_translator' ), 10, 3 );
+        add_filter( 'wc_product_has_unique_sku', array( $this, 'check_product_sku' ), 10, 3 );
     }
 
     // Check if original product
@@ -61,8 +64,8 @@ class WCML_Products{
             $this->wpdb->prepare(
                 "SELECT source_language_code IS NULL
                                 FROM {$this->wpdb->prefix}icl_translations
-                                WHERE element_id=%d AND element_type='post_product'",
-                $product_id )
+                                WHERE element_id=%d AND element_type=%s",
+                $product_id, 'post_'.get_post_type( $product_id ) )
         );
 
         wp_cache_set( $cache_key, $is_original, $cache_group );
@@ -87,11 +90,20 @@ class WCML_Products{
     }
 
     public function is_variable_product( $product_id ){
+        $cache_key = $product_id;
+        $cache_group = 'is_variable_product';
+        $temp_is_variable = wp_cache_get( $cache_key, $cache_group );
+        if( $temp_is_variable ) return $temp_is_variable;
+
         $get_variation_term_taxonomy_ids = $this->wpdb->get_col( "SELECT tt.term_taxonomy_id FROM {$this->wpdb->terms} AS t LEFT JOIN {$this->wpdb->term_taxonomy} AS tt ON t.term_id = tt.term_id WHERE t.name = 'variable' AND tt.taxonomy = 'product_type'" );
         $get_variation_term_taxonomy_ids = apply_filters( 'wcml_variation_term_taxonomy_ids',(array)$get_variation_term_taxonomy_ids );
 
         $is_variable_product = $this->wpdb->get_var( $this->wpdb->prepare( "SELECT count(object_id) FROM {$this->wpdb->term_relationships} WHERE object_id = %d AND term_taxonomy_id IN (".join(',',$get_variation_term_taxonomy_ids).")",$product_id ) );
-        return apply_filters( 'wcml_is_variable_product', $is_variable_product, $product_id );
+        $is_variable_product = apply_filters( 'wcml_is_variable_product', $is_variable_product, $product_id );
+
+        wp_cache_set( $cache_key, $is_variable_product, $cache_group );
+
+        return $is_variable_product;
     }
 
     public function is_grouped_product($product_id){
@@ -219,6 +231,15 @@ class WCML_Products{
                     </a>
             <?php } ?>
         <?php }
+    }
+
+    public function wcml_override_is_translator( $is_translator, $user_id, $args ){
+
+        if( current_user_can( 'wpml_operate_woocommerce_multilingual' ) ){
+            return true;
+        }
+
+        return $is_translator;
     }
 
     //product quickedit
@@ -411,5 +432,145 @@ class WCML_Products{
         }
         return $args;
     }
+
+    /*
+     * get meta ids for multiple values post meta key
+     */
+    public function get_mid_ids_by_key( $post_id, $meta_key ) {
+        $ids = $this->wpdb->get_col( $this->wpdb->prepare( "SELECT meta_id FROM {$this->wpdb->postmeta} WHERE post_id = %d AND meta_key = %s", $post_id, $meta_key ) );
+        if( $ids )
+            return $ids;
+
+        return false;
+    }
+
+    // count "in progress" and "waiting on translation" as untranslated too
+    public function get_untranslated_products_count( $language ){
+
+        $count = 0;
+
+        $products = $this->wpdb->get_results( "
+                      SELECT p.ID, t.trid, t.language_code
+                      FROM {$this->wpdb->posts} AS p
+                      LEFT JOIN {$this->wpdb->prefix}icl_translations AS t ON t.element_id = p.id
+                      WHERE p.post_type = 'product' AND t.element_type = 'post_product' AND t.source_language_code IS NULL
+                  " );
+
+        foreach( $products as $product ){
+            if( $product->language_code == $language ) continue;
+
+            $element_key        = array( 'trid' => $product->trid, 'language_code' => $language );
+            $translation_status = apply_filters( 'wpml_tm_translation_status', null, $element_key );
+
+            if( in_array( $translation_status, array( ICL_TM_NOT_TRANSLATED, ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS ) ) ){
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    public function is_hide_resign_button(){
+        global $iclTranslationManagement;
+
+        $hide_resign = false;
+
+        if( isset( $_GET[ 'source_language_code' ] ) && isset( $_GET[ 'language_code' ] ) ){
+
+            $from_lang = $_GET[ 'source_language_code' ];
+            $to_lang = $_GET[ 'language_code' ];
+
+        }elseif( isset( $_GET[ 'job_id' ] ) ){
+
+            $job = $iclTranslationManagement->get_translation_job( $_GET[ 'job_id' ] );
+            $from_lang = $job->source_language_code;
+            $to_lang = $job->language_code;
+
+        }
+
+        if( isset( $from_lang ) ){
+
+            $translators = $iclTranslationManagement->get_blog_translators(
+                array(
+                    'from' => $from_lang,
+                    'to'   => $to_lang
+                )
+            );
+
+            if( empty( $translators ) || ( sizeof( $translators ) == 1 && $translators[0]->ID == get_current_user_id() ) ){
+                $hide_resign = true;
+            }
+
+        }
+
+        return $hide_resign;
+    }
+
+    public function switch_product_variations_language(){
+
+        $lang_to = false;
+        $post_id = false;
+
+        if ( isset( $_POST[ 'wpml_to' ] ) ) {
+            $lang_to = $_POST[ 'wpml_to' ];
+        }
+        if ( isset( $_POST[ 'wpml_post_id' ] ) ) {
+            $post_id = $_POST[ 'wpml_post_id' ];
+        }
+
+        if ( $post_id && $lang_to && get_post_type( $post_id ) == 'product' ) {
+            $product_variations = $this->woocommerce_wpml->sync_variations_data->get_product_variations( $post_id );
+            foreach( $product_variations as $product_variation ){
+                $trid = $this->sitepress->get_element_trid( $product_variation->ID, 'post_product_variation' );
+                $current_prod_variation_id = apply_filters( 'translate_object_id', $product_variation->ID, 'product_variation', false, $lang_to );
+                if( is_null( $current_prod_variation_id ) ){
+                    $this->sitepress->set_element_language_details( $product_variation->ID, 'post_product_variation', $trid, $lang_to );
+
+                    foreach( get_post_custom( $product_variation->ID ) as $meta_key => $meta ) {
+                        foreach ( $meta as $meta_value ) {
+                            if ( substr( $meta_key, 0, 10 ) == 'attribute_' ) {
+                                $trn_post_meta = $this->woocommerce_wpml->attributes->get_translated_variation_attribute_post_meta( $meta_value, $meta_key, $product_variation->ID, $product_variation->ID, $lang_to );
+                                update_post_meta( $product_variation->ID, $trn_post_meta['meta_key'], $trn_post_meta['meta_value']);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+	function check_product_sku( $sku_found, $product_id, $sku ) {
+
+		if ( $sku_found ) {
+
+			$product_trid = $this->sitepress->get_element_trid( $product_id, 'post_' . get_post_type( $product_id ) );
+
+			$products = $this->wpdb->get_results(
+				$this->wpdb->prepare(
+					"
+                SELECT p.ID
+                FROM {$this->wpdb->posts} as p
+                LEFT JOIN {$this->wpdb->postmeta} as pm ON ( p.ID = pm.post_id )
+                WHERE p.post_type IN ( 'product', 'product_variation' )
+                AND p.post_status = 'publish'
+                AND pm.meta_key = '_sku' AND pm.meta_value = '%s'
+             ",
+					wp_slash( $sku )
+				)
+			);
+
+			$sku_found = false;
+
+			foreach ( (array) $products as $product ) {
+				$trid = $this->sitepress->get_element_trid( $product->ID, 'post_' . get_post_type( $product_id ) );
+				if ( $product_trid !== $trid ) {
+					$sku_found = true;
+					break;
+				}
+			}
+		}
+
+		return $sku_found;
+	}
 
 }
