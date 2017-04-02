@@ -10,3 +10,7 @@ wp-content/uploads/
 wp-content/plugins/wp-migrate-db-pro/
 wp-content/plugins/wordpress-importer/
 .htaccess
+wp-content/plugins/developer/
+wp-content/plugins/show-current-template/
+wp-content/plugins/debug-bar/
+wp-content/plugins/rtl-tester/
