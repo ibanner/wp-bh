@@ -11,7 +11,11 @@ jQuery(document).ready(function(){
         wcml_load_currency( jQuery(this).attr('rel') );
     });
 
-    if( typeof woocommerce_price_slider_params != 'undefined' ){
+    // HTMLine - changed by Nir Goldberg / 2017-05-25 due to bug, should be fixed at next plugin update
+    /*if( typeof woocommerce_price_slider_params != 'undefined' ){
+        woocommerce_price_slider_params.currency_symbol = wcml_mc_settings.current_currency.symbol;
+    }*/
+    if( typeof woocommerce_price_slider_params !== 'undefined' ){
         woocommerce_price_slider_params.currency_symbol = wcml_mc_settings.current_currency.symbol;
     }
 });
@@ -30,8 +34,7 @@ function wcml_load_currency( currency, force_switch ){
         data : {
             action: 'wcml_switch_currency',
             currency : currency,
-            force_switch: force_switch,
-            wcml_nonce: wcml_mc_settings.wcml_mc_nonce
+            force_switch: force_switch
         },
         success: function(response) {
             if(typeof response.error !== 'undefined') {
