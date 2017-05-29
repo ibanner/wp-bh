@@ -42,14 +42,15 @@ class WoocommerceGpfFrontend {
 			add_action( 'template_redirect', array( $this, 'render_product_feed' ), 15 );
 		}
 
-		if ( ! empty( $_GET['gpf_categories'] ) ) {
+		if ( ! empty( $wp_query->query_vars['gpf_categories'] ) ) {
 			add_filter( 'woocommerce_gpf_wc_get_products_args', array( $this, 'limit_categories' ) );
 			add_filter( 'woocommerce_gpf_get_posts_args', array( $this, 'limit_categories' ) );
 		}
 	}
 
 	public function limit_categories( $args ) {
-		$categories = explode( ',', $_GET['gpf_categories'] );
+		global $wp_query;
+		$categories = explode( ',', $wp_query->query_vars['gpf_categories'] );
 		$categories = array_map( 'intval', $categories );
 		if ( 'woocommerce_gpf_get_posts_args' === current_action() ) {
 			$args['tax_query'] = array(
@@ -85,7 +86,9 @@ class WoocommerceGpfFrontend {
 		global $wpdb;
 
 		// Don't cache feed under WP Super-Cache.
-		define( 'DONOTCACHEPAGE', true );
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', true );
+		}
 
 		// Cater for large stores.
 		$wpdb->hide_errors();
@@ -93,60 +96,6 @@ class WoocommerceGpfFrontend {
 		while ( ob_get_level() ) {
 			@ob_end_clean();
 		}
-	}
-
-	/**
-	 * Work out if a feed item should be excluded from the feed.
-	 *
-	 * @param  Object  $woocommerce_product The WooCommerce product object.
-	 * @return bool                         True if the product should be excluded. False otherwise.
-	 */
-	private function product_is_excluded( $woocommerce_product ) {
-		$excluded = false;
-		$visibility = is_callable( array( $woocommerce_product, 'get_catalog_visibility' ) ) ?
-		              $woocommerce_product->get_catalog_visibility() :
-					  $woocommerce_product->visibility;
-		// Check to see if the product is set as Hidden within WooCommerce.
-		if ( 'hidden' === $visibility ) {
-			$excluded = true;
-		}
-
-		// Check to see if the product has been excluded in the feed config.
-		if ( is_callable( array( $woocommerce_product, 'get_meta' ) ) ) {
-			// WC > 2.7.0.
-			$gpf_data = get_post_meta( $woocommerce_product->get_id(), '_woocommerce_gpf_data', true );
-		} else {
-			// WC < 2.7.0.
-			if ( $gpf_data = $woocommerce_product->woocommerce_gpf_data ) {
-				$gpf_data = maybe_unserialize( $gpf_data );
-			} else {
-				$gpf_data = array();
-			}
-		}
-		if ( ! empty( $gpf_data ) ) {
-			$gpf_data = maybe_unserialize( $gpf_data );
-		}
-		if ( ! empty( $gpf_data['exclude_product'] ) ) {
-			$excluded = true;
-		}
-		if ( $woocommerce_product instanceof WC_Product_Variation ) {
-			if ( is_callable( array( $woocommerce_product, 'get_parent_id' ) ) ) {
-				// WC > 2.7.0
-				$id = $woocommerce_product->get_parent_id();
-			} else {
-				// WC < 2.7.0
-				$id = $woocommerce_product->id;
-			}
-		} else {
-			if ( is_callable( array( $woocommerce_product, 'get_id' ) ) ) {
-				// WC > 2.7.0
-				$id = $woocommerce_product->get_id();
-			} else {
-				// WC < 2.7.0
-				$id = $woocommerce_product->id;
-			}
-		}
-		return apply_filters( 'woocommerce_gpf_exclude_product', $excluded, $id, $this->feed_format );
 	}
 
 	/**
@@ -174,11 +123,13 @@ class WoocommerceGpfFrontend {
 		if ( function_exists( 'wc_get_products' ) ) {
 			$args = array(
 				'status'      => array( 'publish' ),
-				'type'        => array( 'simple', 'external', 'variable' ),
+				'type'        => array( 'simple', 'variable', 'composite', 'bundle' ),
 				'limit'       => $chunk_size,
 				'offset'      => $offset,
-				'return'      => 'objects',
 			);
+			if ( $this->cache->is_enabled() ) {
+				$args['return'] = 'ids';
+			}
 			return array(
 				'wc_get_products',
 				apply_filters(
@@ -210,14 +161,20 @@ class WoocommerceGpfFrontend {
 	 */
 	public function render_product_feed() {
 
-		global $wp_query, $post, $_wp_using_ext_object_cache;
+		global $wp_query, $_wp_using_ext_object_cache;
 
+		$this->cache   = new WoocommerceGpfCache();
 		$this->factory = new WC_Product_Factory();
 
 		$this->set_optimisations();
 		$this->feed->render_header();
 
-		$chunk_size = apply_filters( 'woocommerce_gpf_chunk_size', 10 );
+		if ( $this->cache->is_enabled() ) {
+			$chunk_size = 100;
+		} else {
+			$chunk_size = 10;
+		}
+		$chunk_size = apply_filters( 'woocommerce_gpf_chunk_size', $chunk_size, $this->cache->is_enabled() );
 
 		list($query_function, $args) = $this->get_query_args( $chunk_size );
 
@@ -228,19 +185,46 @@ class WoocommerceGpfFrontend {
 		$output_count = 0;
 
 		// Query for the products, and process them.
-		$products     = $query_function( $args );
+		// Note: $products will be:
+		// - post IDs if the cache is enabled
+		// - WC_Product objects if cache is disabled, and WC3+ in use
+		// - WP_Post objects if < WC3.
+		$products = $query_function( $args );
 
 		while ( count( $products ) ) {
-			foreach ( $products as $post ) {
-				if ( $this->process_product( $post ) ) {
+
+			if ( $this->cache->is_enabled() ) {
+				// Output any that we have in the cache.
+				$outputs = $this->cache->fetch_multi( $products, $this->feed_format );
+				foreach ( $products as $product_id ) {
+					if ( ! empty( $outputs[ $product_id ] ) ) {
+						echo $outputs[ $product_id ];
+						$output_count ++;
+					}
+					if ( $gpf_limit && $output_count >= $gpf_limit ) {
+						break;
+					}
+				}
+				// Remove any we got from the list to be generated.
+				$products = array_diff( $products, array_keys( $outputs ) );
+			}
+
+			// Bail if we're done.
+			if ( $gpf_limit && $output_count >= $gpf_limit ) {
+				break;
+			}
+
+			// If we have any still to generate, go do them.
+			foreach ( $products as $product ) {
+				if ( $this->process_product( $product ) ) {
 					$output_count++;
 				}
 				// Quit if we've done all of the products
-				if ( $gpf_limit && $output_count === $gpf_limit ) {
+				if ( $gpf_limit && $output_count >= $gpf_limit ) {
 					break;
 				}
 			}
-			if ( $gpf_limit && $output_count === $gpf_limit ) {
+			if ( $gpf_limit && $output_count >= $gpf_limit ) {
 				break;
 			}
 			$args['offset'] += $chunk_size;
@@ -262,77 +246,143 @@ class WoocommerceGpfFrontend {
 	 * Uses process_simple_product() to process simple products, or all products if variation
 	 * support is disabled. Uses process_variable_product() to process variable products.
 	 *
-	 * @param  object  $post  WordPress post object / WC_Product instance
-	 * @return bool           True if one or more products were output, false otherwise.
+	 * @param  object  $product      Product ID / WC_Product / WP_Post
+	 * @return bool                  True if one or more products were output,
+	 *                               false otherwise.
 	 */
-	private function process_product( $post ) {
-		setup_postdata( $post );
-		if ( ! $post instanceof WC_Product ) {
-			$woocommerce_product = wc_get_product( $post );
+	private function process_product( $product ) {
+		// Make sure we have a WC_Product.
+		if ( is_int( $product ) ) {
+			$woocommerce_product = wc_get_product( $product );
+		} elseif ( get_class( $product ) === 'WP_Post' ) {
+			$woocommerce_product = wc_get_product( $product );
 		} else {
-			$woocommerce_product = $post;
+			$woocommerce_product = $product;
 		}
-		if ( $this->product_is_excluded( $woocommerce_product ) ) {
-			return false;
+		if ( is_callable( array( $woocommerce_product, 'get_type' ) ) ) {
+			$product_type = $woocommerce_product->get_type();
+		} else {
+			$product_type = $woocommerce_product->product_type;
 		}
-		if ( empty( $this->settings['include_variations'] ) ||
-		     $woocommerce_product->is_type( 'simple' ) ) {
-			return $this->process_simple_product( $post, $woocommerce_product );
-		} elseif ( $woocommerce_product->is_type( 'variable' ) ) {
-			return $this->process_variable_product( $post, $woocommerce_product );
+		switch ( $product_type ) {
+			case 'simple':
+				return $this->process_simple_product( $woocommerce_product );
+				break;
+			case 'variable':
+				if ( empty( $this->settings['include_variations'] ) ) {
+					return $this->process_simple_product( $woocommerce_product );
+				} else {
+					return $this->process_variable_product( $woocommerce_product );
+				}
+				break;
+			case 'composite':
+				return $this->process_composite_product( $woocommerce_product );
+				break;
+			case 'bundle':
+				return $this->process_bundle_product( $woocommerce_product );
+				break;
+			default:
+				break;
 		}
 	}
 
 	/**
 	 * Process a simple product, and output its elements.
 	 *
-	 * @param  object  $post                 WordPress post object
 	 * @param  object  $woocommerce_product  WooCommerce Product Object (May not be Simple)
 	 * @return bool                          True if one or more products were output, false
 	 *                                       otherwise.
 	 */
-	private function process_simple_product( $post, $woocommerce_product ) {
+	private function process_simple_product( $woocommerce_product ) {
+		// Check whether it should be excluded
+		if ( WoocommerceGpfFeedItem::should_exclude( $woocommerce_product, $this->feed_format ) ) {
+			if ( is_callable( array( $woocommerce_product, 'get_id' ) ) ) {
+				$this->cache->store( $woocommerce_product->get_id(), $this->feed_format, '' );
+			} else {
+				$this->cache->store( $woocommerce_product->id, $this->feed_format, '' );
+			}
+			return false;
+		}
 		// Construct the data for this item.
-		$feed_item = new woocommerce_gpf_feed_item( $woocommerce_product, $this->feed_format );
+		$feed_item = new WoocommerceGpfFeedItem( $woocommerce_product, $this->feed_format );
 
 		// Allow other plugins to modify the item before its rendered to the feed
 		$feed_item = apply_filters( 'woocommerce_gpf_feed_item', $feed_item );
 		$feed_item = apply_filters( 'woocommerce_gpf_feed_item_' . $this->feed_format, $feed_item );
 
-		return $this->feed->render_item( $feed_item );
+		$output = $this->feed->render_item( $feed_item );
+		$this->cache->store( $feed_item->ID, $this->feed_format, $output );
+		echo $output;
+		return ! empty( $output );
 	}
 
 	/**
 	 * Process a variable product, and output its elements.
 	 *
-	 * @param  object  $post                 WordPress post object
 	 * @param  object  $woocommerce_product  WooCommerce Product Object
+	 *
 	 * @return bool                          True if one or more products were output, false
 	 *                                       otherwise.
 	 */
-	private function process_variable_product( $post, $woocommerce_product ) {
-		$success    = false;
+	private function process_variable_product( $woocommerce_product ) {
+		// Check if the whole product is excluded.
+		if ( WoocommerceGpfFeedItem::should_exclude( $woocommerce_product, $this->feed_format ) ) {
+			if ( is_callable( array( $woocommerce_product, 'get_id' ) ) ) {
+				$this->cache->store( $woocommerce_product->get_id(), $this->feed_format, '' );
+			} else {
+				$this->cache->store( $woocommerce_product->id, $this->feed_format, '' );
+			}
+			return false;
+		}
 		$variations = $woocommerce_product->get_available_variations();
-
+		$output     = '';
 		foreach ( $variations as $variation ) {
 			// Get the variation product.
 			$variation_id      = $variation['variation_id'];
 			$variation_product = $this->factory->get_product( $variation_id );
+			$feed_item         = new WoocommerceGpfFeedItem( $variation_product, $this->feed_format );
+
 			// Skip to the next if this variation isn't to be included.
-			if ( $this->product_is_excluded( $variation_product ) ) {
+			if ( $feed_item->is_excluded() ) {
 				continue;
 			}
-			// Construct the data for this item.
-			$feed_item = new woocommerce_gpf_feed_item( $variation_product, $this->feed_format );
 
 			// Allow other plugins to modify the item before its rendered to the feed
 			$feed_item = apply_filters( 'woocommerce_gpf_feed_item', $feed_item );
 			$feed_item = apply_filters( 'woocommerce_gpf_feed_item_' . $this->feed_format, $feed_item );
 
 			// Render it.
-			$success |= $this->feed->render_item( $feed_item );
+			$output .= $this->feed->render_item( $feed_item );
 		}
-		return $success;
+		if ( is_callable( array( $woocommerce_product, 'get_id' ) ) ) {
+			$this->cache->store( $woocommerce_product->get_id(), $this->feed_format, $output );
+		} else {
+			$this->cache->store( $woocommerce_product->id, $this->feed_format, $output );
+		}
+		echo $output;
+		return ! empty( $output );
+	}
+
+	/**
+	 * Process a composite product.
+	 *
+	 * @param  object  $woocommerce_product  WooCommerce Product Object
+	 * @return bool                          True if one or more products were output, false
+	 *                                       otherwise.
+	 */
+	private function process_composite_product( $woocommerce_product ) {
+		return $this->process_simple_product( $woocommerce_product );
+	}
+
+	/**
+	 * Process a bundle product.
+	 *
+	 * @param  object  $woocommerce_product  WooCommerce Product Object
+	 * @return bool                          True if one or more products were output, false
+	 *                                       otherwise.
+	 */
+	private function process_bundle_product( $woocommerce_product ) {
+		return $this->process_simple_product( $woocommerce_product );
 	}
 }
 

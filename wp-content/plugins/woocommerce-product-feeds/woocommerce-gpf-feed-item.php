@@ -1,6 +1,6 @@
 <?php
 
-class woocommerce_gpf_feed_item {
+class WoocommerceGpfFeedItem {
 
 	/**
 	 * The WC_Product that this item represents.
@@ -118,9 +118,9 @@ class woocommerce_gpf_feed_item {
 		$this->guid  = 'woocommerce_gpf_' . $this->ID;
 		$this->title = $this->wc_product->get_title();
 		if ( $this->is_variation ) {
-			if ( is_callable( 'wc_get_formatted_variation' ) ) {
+			if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.9', '>' ) ) {
 				// WC >= 2.7.0
-				$suffix = wc_get_formatted_variation( $this->wc_product, true, true );
+				$suffix = wc_get_formatted_variation( $this->wc_product, true );
 			} else {
 				// WC < 2.7.0
 				$suffix = $this->wc_product->get_formatted_variation_attributes( true );
@@ -162,6 +162,7 @@ class woocommerce_gpf_feed_item {
 
 		// Add other elements.
 		$this->general_elements();
+
 		$this->get_additional_images();
 		if ( 'google' === $this->feed_format ) {
 			$this->shipping_height_elements();
@@ -172,8 +173,8 @@ class woocommerce_gpf_feed_item {
 		$this->force_stock_status();
 
 		// General, or feed-specific items
-		$this->additional_elements = apply_filters( 'woocommerce_gpf_elements', $this->additional_elements, $this->ID, isset( $this->variation_id ) ? $this->variation_id : null );
-		$this->additional_elements = apply_filters( 'woocommerce_gpf_elements_' . $this->feed_format, $this->additional_elements, $this->ID, isset( $this->variation_id ) ? $this->variation_id : null );
+		$this->additional_elements = apply_filters( 'woocommerce_gpf_elements', $this->additional_elements, $this->general_id, ( $this->specific_id !== $this->general_id ) ? $this->specific_id : null );
+		$this->additional_elements = apply_filters( 'woocommerce_gpf_elements_' . $this->feed_format, $this->additional_elements, $this->general_id, ( $this->specific_id !== $this->general_id ) ? $this->specific_id : null );
 	}
 
 	private function get_product_description_legacy() {
@@ -192,23 +193,25 @@ class woocommerce_gpf_feed_item {
 	}
 
 	private function get_product_description() {
+		$description = null;
 		if ( ! is_callable( array( $this->wc_product, 'get_description' ) ) ) {
 			// WC < 2.7.0
-			return $this->get_product_description_legacy();
-		}
-		$description = null;
-		if ( $this->is_variation ) {
-			// Use the variation description if possible
-			$description = $this->wc_product->get_description();
-			// Use the main product description if there was no variation specific
-			// description.
-			if ( empty( $description ) ) {
-				$parent_id = $this->wc_product->get_parent_id();
-				$parent = new WC_Product( $parent_id );
-				$description = $parent->get_description();
-			}
+			$description = $this->get_product_description_legacy();
 		} else {
-			$description = $this->wc_product->get_description();
+			// WC >= 2.7.0
+			if ( $this->is_variation ) {
+				// Use the variation description if possible
+				$description = $this->wc_product->get_description();
+				// Use the main product description if there was no variation specific
+				// description.
+				if ( empty( $description ) ) {
+					$parent_id = $this->wc_product->get_parent_id();
+					$parent = new WC_Product( $parent_id );
+					$description = $parent->get_description();
+				}
+			} else {
+				$description = $this->wc_product->get_description();
+			}
 		}
 		return apply_filters(
 			'the_content',
@@ -247,16 +250,28 @@ class woocommerce_gpf_feed_item {
 	 *                             $this->wc_product is used.
 	 */
 	private function generate_prices_for_product( $product = null ) {
+
+		// Initialise defaults.
 		$prices = array();
-		if ( is_null( $product ) ) {
-			$product = $this->wc_product;
-		}
 		$prices['sale_price_ex_tax']     = null;
 		$prices['sale_price_inc_tax']    = null;
 		$prices['regular_price_ex_tax']  = null;
 		$prices['regular_price_inc_tax'] = null;
 		$prices['sale_price_start_date'] = null;
 		$prices['sale_price_end_date']   = null;
+		if ( is_null( $product ) ) {
+			$product = $this->wc_product;
+		}
+
+		// Bundle products require their own logic.
+		if ( is_callable( array( $product, 'get_type' ) ) ) {
+			$product_type = $product->get_type();
+		} else {
+			$product_type = $product->product_type;
+		}
+		if ( 'bundle' === $product_type ) {
+			return $this->generate_prices_for_bundle_product( $product, $prices );
+		}
 
 		// Grab the regular price of the base product.
 		$regular_price = $product->get_regular_price();
@@ -273,8 +288,13 @@ class woocommerce_gpf_feed_item {
 		// Grab the sale price of the base product.
 		$sale_price = $product->get_sale_price();
 		if ( '' !== $sale_price ) {
-			$prices['sale_price_ex_tax']     = $product->get_price_excluding_tax( 1, $sale_price );
-			$prices['sale_price_inc_tax']    = $product->get_price_including_tax( 1, $sale_price );
+			if ( function_exists( 'wc_get_price_excluding_tax' ) ) {
+				$prices['sale_price_ex_tax']     = wc_get_price_excluding_tax( $product, array( 'price' => $sale_price ) );
+				$prices['sale_price_inc_tax']    = wc_get_price_including_tax( $product, array( 'price' => $sale_price ) );
+			} else {
+				$prices['sale_price_ex_tax']     = $product->get_price_excluding_tax( 1, $sale_price );
+				$prices['sale_price_inc_tax']    = $product->get_price_including_tax( 1, $sale_price );
+			}
 			if ( is_callable( array( $product, 'get_date_on_sale_from' ) ) ) {
 				// WC > 2.7.0
 				$prices['sale_price_start_date'] = $product->get_date_on_sale_from();
@@ -283,6 +303,43 @@ class woocommerce_gpf_feed_item {
 				// WC < 2.7.0
 				$prices['sale_price_start_date'] = $product->sale_price_dates_from;
 				$prices['sale_price_end_date']   = $product->sale_price_dates_to;
+			}
+		}
+
+		// Populate a "price", using the sale price if there is one, the actual price if not.
+		if ( null !== $prices['sale_price_ex_tax'] ) {
+			$prices['price_ex_tax']  = $prices['sale_price_ex_tax'];
+			$prices['price_inc_tax'] = $prices['sale_price_inc_tax'];
+		} else {
+			$prices['price_ex_tax']  = $prices['regular_price_ex_tax'];
+			$prices['price_inc_tax'] = $prices['regular_price_inc_tax'];
+		}
+		return $prices;
+	}
+
+	private function generate_prices_for_bundle_product( $product, $prices ) {
+		// Grab the regular price of the product.
+		$regular_price = $product->get_bundle_regular_price();
+		if ( '' !== $regular_price ) {
+			if ( function_exists( 'wc_get_price_excluding_tax' ) ) {
+				$prices['regular_price_ex_tax']  = wc_get_price_excluding_tax( $product, array( 'price' => $regular_price ) );
+				$prices['regular_price_inc_tax'] = wc_get_price_including_tax( $product, array( 'price' => $regular_price ) );
+			} else {
+				$prices['regular_price_ex_tax']  = $product->get_price_excluding_tax( 1, $regular_price );
+				$prices['regular_price_inc_tax'] = $product->get_price_including_tax( 1, $regular_price );
+			}
+		}
+
+		// Grab the current price of the product.
+		$current_price = $product->get_bundle_price();
+		if ( $current_price < $regular_price && ! empty( $current_price ) ) {
+			$sale_price = $current_price;
+			if ( function_exists( 'wc_get_price_excluding_tax' ) ) {
+				$prices['sale_price_ex_tax']     = wc_get_price_excluding_tax( $product, array( 'price' => $sale_price ) );
+				$prices['sale_price_inc_tax']    = wc_get_price_including_tax( $product, array( 'price' => $sale_price ) );
+			} else {
+				$prices['sale_price_ex_tax']     = $product->get_price_excluding_tax( 1, $sale_price );
+				$prices['sale_price_inc_tax']    = $product->get_price_including_tax( 1, $sale_price );
 			}
 		}
 
@@ -385,7 +442,6 @@ class woocommerce_gpf_feed_item {
 
 		// Retrieve the info set against the product by this plugin.
 		$product_values = $woocommerce_gpf_common->get_values_for_product( $this->general_id, $this->feed_format );
-
 		// Merge variation values over the top if this is a variation.
 		if ( $this->is_variation ) {
 			$variation_values = $woocommerce_gpf_common->get_values_for_variation( $this->specific_id, $this->feed_format );
@@ -548,5 +604,66 @@ class woocommerce_gpf_feed_item {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Work out if a WC Product should be excluded from the feed.
+	 *
+	 * @return bool  True if the product should be excluded. False otherwise.
+	 */
+	public static function should_exclude( $wc_product, $feed_format ) {
+		$excluded = false;
+		$visibility = is_callable( array( $wc_product, 'get_catalog_visibility' ) ) ?
+					  $wc_product->get_catalog_visibility() :
+					  $wc_product->visibility;
+		// Check to see if the product is set as Hidden within WooCommerce.
+		if ( 'hidden' === $visibility ) {
+			$excluded = true;
+		}
+		// Check to see if the product has been excluded in the feed config.
+		if ( is_callable( array( $wc_product, 'get_meta' ) ) ) {
+			// WC > 2.7.0.
+			$gpf_data = get_post_meta( $wc_product->get_id(), '_woocommerce_gpf_data', true );
+		} else {
+			// WC < 2.7.0.
+			if ( $gpf_data = $wc_product->woocommerce_gpf_data ) {
+				$gpf_data = maybe_unserialize( $gpf_data );
+			} else {
+				$gpf_data = array();
+			}
+		}
+		if ( ! empty( $gpf_data ) ) {
+			$gpf_data = maybe_unserialize( $gpf_data );
+		}
+		if ( ! empty( $gpf_data['exclude_product'] ) ) {
+			$excluded = true;
+		}
+		if ( $wc_product instanceof WC_Product_Variation ) {
+			if ( is_callable( array( $wc_product, 'get_parent_id' ) ) ) {
+				// WC > 2.7.0
+				$id = $wc_product->get_parent_id();
+			} else {
+				// WC < 2.7.0
+				$id = $wc_product->id;
+			}
+		} else {
+			if ( is_callable( array( $wc_product, 'get_id' ) ) ) {
+				// WC > 2.7.0
+				$id = $wc_product->get_id();
+			} else {
+				// WC < 2.7.0
+				$id = $wc_product->id;
+			}
+		}
+		return apply_filters( 'woocommerce_gpf_exclude_product', $excluded, $id, $feed_format );
+	}
+
+	/**
+	 * Work out if a feed item should be excluded from the feed based on.
+	 *
+	 * @return bool  True if the product should be excluded. False otherwise.
+	 */
+	public function is_excluded() {
+		return self::should_exclude( $this->wc_product, $this->feed_format );
 	}
 }

@@ -505,3 +505,7 @@
 	Bug Fix: Fixed issue that could cause improper database table creation on multisite sites.
 3.1.1 - 2017-03-14 - Chris Jean
 	Bug Fix: Fixed a bug that could prevent settings from saving properly if the site was migrated to a new server or a new home path on the server.
+3.1.2 - 2017-03-23 - Chris Jean
+	Bug Fix: When a requesting IP address cannot be found, default to 127.0.0.1. This fixes issues with some alternate cron setups.
+	Bug Fix: Having more than one iThemes Security modification in a .htaccess, nginx.conf, or wp-config.php file will no longer result in having all the file content between each section removed when updating the file.
+	Bug Fix: Modifications to the wp-config.php file added by W3 Total Cache now have their Windows-style newlines preserved when iThemes Security updates the file.

@@ -71,21 +71,23 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 		}
 
 		/**
-		 * Check whether Image should be resized or not
+		 *  Check whether Image should be resized or not
+		 * @param string $id Attachment ID
+		 * @param string $meta Attachment Metadata
 		 *
-		 * @param string $params
-		 * @param string $action
+		 * @return bool Should resize or not
 		 *
-		 * @return bool
 		 */
 		public function should_resize( $id = '', $meta = '' ) {
+
+			global $wpsmush_helper;
 
 			//If resizing not enabled, or if both max width and height is set to 0, return
 			if ( ! $this->resize_enabled || ( $this->max_w == 0 && $this->max_h == 0 ) ) {
 				return false;
 			}
 
-			$file_path = get_attached_file( $id );
+			$file_path = $wpsmush_helper->get_attached_file( $id );
 
 			if ( ! empty( $file_path ) ) {
 
@@ -143,10 +145,10 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 		/**
 		 * Handles the Auto resizing of new uploaded images
 		 *
-		 * @param array $upload
-		 * @param string $action
+		 * @param $id Attachment ID
+		 * @param $meta Attachment Metadata
 		 *
-		 * @return array $upload
+		 * @return mixed Updated/Original Metadata if image was resized or not
 		 */
 		function auto_resize( $id, $meta ) {
 
@@ -158,6 +160,14 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 			if ( ! empty( $_REQUEST['do'] ) && ( 'restore' == $_REQUEST['do'] || 'scale' == $_REQUEST['do'] ) ) {
 				return $meta;
 			}
+
+			global $wpsmush_helper;
+
+			$savings = array(
+				'bytes'       => 0,
+				'size_before' => 0,
+				'size_after'  => 0
+			);
 
 			//Check if the image should be resized or not
 			$should_resize = $this->should_resize( $id, $meta );
@@ -185,14 +195,15 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 			}
 
 			//Good to go
-			$file_path = get_attached_file( $id );
+			$file_path = $wpsmush_helper->get_attached_file( $id );
 
 			$original_file_size = filesize( $file_path );
 
 			$resize = $this->perform_resize( $file_path, $original_file_size, $id, $meta );
 
 			//If resize wasn't successful
-			if ( ! $resize ) {
+			if ( ! $resize || $resize['filesize'] == $original_file_size ) {
+				update_post_meta( $id, WP_SMUSH_PREFIX . 'resize_savings', $savings );
 				return $meta;
 			}
 
@@ -219,7 +230,7 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 				$meta['height'] = ! empty( $resize['height'] ) ? $resize['height'] : $meta['height'];
 
 				/**
-				 * Called after the image have been successfully resized
+				 * Called after the image has been successfully resized
 				 * Can be used to update the stored stats
 				 */
 				do_action( 'wp_smush_image_resized', $id, $savings );
@@ -235,8 +246,12 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 		 * Checks if the size of generated image is greater,
 		 *
 		 * @param $file_path Original File path
+		 * @param $original_file_size File size before optimisation
+		 * @param $id Attachment ID
+		 * @param string $meta Attachment Metadata
+		 * @param bool $unlink Whether to unlink the original image or not
 		 *
-		 * @return bool, If the image generation was succesfull
+		 * @return array|bool|false If the image generation was successful
 		 */
 		function perform_resize( $file_path, $original_file_size, $id, $meta = '', $unlink = true ) {
 
@@ -283,18 +298,14 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 
 			$data['file_path'] = $resize_path;
 
-			$file_size = filesize( $resize_path );
+			$file_size        = filesize( $resize_path );
+			$data['filesize'] = $file_size;
 			if ( $file_size > $original_file_size ) {
 				//Don't Unlink for nextgen images
 				if ( $unlink ) {
 					$this->maybe_unlink( $resize_path, $meta );
 				}
-
-				return false;
 			}
-
-			//Store filesize
-			$data['filesize'] = $file_size;
 
 			return $data;
 		}
@@ -302,81 +313,19 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 		/**
 		 * Replace the original file with resized file
 		 *
-		 * @param $upload
-		 *
+		 * @param $file_path
 		 * @param $resized
+		 * @param string $attachment_id
+		 * @param string $meta
 		 *
+		 * @return bool
 		 */
 		function replcae_original_image( $file_path, $resized, $attachment_id = '', $meta = '' ) {
-			$replaced = false;
-
-			//Take Backup, if we have to, off by default
-			$this->backup_image( $file_path, $attachment_id, $meta );
 
 			$replaced = @copy( $resized['file_path'], $file_path );
 			$this->maybe_unlink( $resized['file_path'], $meta );
 
 			return $replaced;
-		}
-
-		/**
-		 * Creates a WordPress backup of original image, Disabled by default
-		 *
-		 * @param $upload
-		 *
-		 * @param $attachment_id
-		 *
-		 * @param $meta
-		 */
-		function backup_image( $path, $attachment_id, $meta ) {
-
-			/**
-			 * Allows to turn on the backup for resized image
-			 */
-			$backup = apply_filters( 'wp_smush_resize_create_backup', false );
-
-			//If we don't have a attachment id, return
-			if ( empty( $attachment_id ) || ! $backup ) {
-				return;
-			}
-
-			//Creating Backup
-			$backup_sizes = get_post_meta( $attachment_id, '_wp_attachment_backup_sizes', true );
-
-			if ( ! is_array( $backup_sizes ) ) {
-				$backup_sizes = array();
-			}
-
-			//There is alrready a backup, no need to create one
-			if ( ! empty( $backup_sizes['full-orig'] ) ) {
-				return;
-			}
-
-			//Create a copy of original
-			if ( empty( $path ) ) {
-				$path = get_attached_file( $attachment_id );
-			}
-
-			$path_parts = pathinfo( $path );
-			$filename   = $path_parts['filename'];
-			$filename .= '-orig';
-
-			//Backup Path
-			$backup_path = path_join( $path_parts['dirname'], $filename ) . ".{$path_parts['extension']}";
-
-			//Create a copy
-			if ( file_exists( $path ) ) {
-				$copy_created = @copy( $path, $backup_path );
-				if ( $copy_created ) {
-					$backup_sizes['full-orig'] = array(
-						'file'   => basename( $backup_path ),
-						'width'  => $meta['width'],
-						'height' => $meta['height']
-					);
-					//Save in Attachment meta
-					update_post_meta( $attachment_id, '_wp_attachment_backup_sizes', $backup_sizes );
-				}
-			}
 		}
 
 		/**

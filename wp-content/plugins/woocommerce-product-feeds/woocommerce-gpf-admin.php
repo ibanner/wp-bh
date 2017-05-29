@@ -21,11 +21,12 @@ class WoocommerceGpfAdmin {
 
 		global $woocommerce_gpf_common;
 
-		$this->settings = get_option( 'woocommerce_gpf_config', array() );
-		$this->product_fields = $woocommerce_gpf_common->product_fields;
-		$this->template_loader = new WoocommerceGpfTemplateLoader();
+		$this->settings          = get_option( 'woocommerce_gpf_config', array() );
+		$this->product_fields    = $woocommerce_gpf_common->product_fields;
+		$this->template_loader   = new WoocommerceGpfTemplateLoader();
 
 		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ), 11 );
 		add_action( 'admin_print_styles', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_print_scripts', array( $this, 'enqueue_scripts' ) );
@@ -43,10 +44,15 @@ class WoocommerceGpfAdmin {
 		add_filter( 'woocommerce_settings_tabs_array', array( $this, 'add_woocommerce_settings_tab' ), 99 );
 		add_action( 'woocommerce_settings_tabs_gpf', array( $this, 'config_page' ) );
 		add_action( 'woocommerce_update_options_gpf', array( $this, 'save_settings' ) );
-
 	}
 
-
+	/**
+	 * Instantiate the render cache.
+	 */
+	public function plugins_loaded() {
+		$this->cache             = new WoocommerceGpfCache();
+		$this->cache_invalidator = new WoocommerceGpfCacheInvalidator( $this->cache );
+	}
 
 	/**
 	 * Handle ajax callbacks for Google and bing category lookups
@@ -57,13 +63,13 @@ class WoocommerceGpfAdmin {
 	function init() {
 
 		// Handle ajax requests for the google taxonomy search
-		if ( isset ( $_GET['woocommerce_gpf_search'] ) ) {
+		if ( isset( $_GET['woocommerce_gpf_search'] ) ) {
 			$this->ajax_handler( $_GET['query'] );
 			exit();
 		}
 
 		// Handle ajax requests for the bing taxonomy search
-		if ( isset ( $_GET['woocommerce_gpf_bing_search'] ) ) {
+		if ( isset( $_GET['woocommerce_gpf_bing_search'] ) ) {
 			$this->bing_ajax_handler( $_GET['query'] );
 			exit();
 		}
@@ -96,9 +102,60 @@ class WoocommerceGpfAdmin {
 				'high'
 			);
 		}
+		if ( isset( $_GET['gpf_action'] ) && $_GET['gpf_action'] === 'rebuild_cache' ) {
+			if ( wp_verify_nonce( $_GET['_wpnonce'], 'gpf_rebuild_cache' ) ) {
+				$this->cache->flush_all();
+			}
+			wp_redirect(
+				add_query_arg(
+					array(
+						'page'       => 'wc-settings',
+						'tab'        => 'gpf',
+					),
+					admin_url('admin.php')
+				)
+			);
+			exit;
+		}
+		$this->check_db();
 	}
 
+	/**
+	 * Check the database version, and upgrade if required.
+	 */
+	private function check_db() {
+		$current_version = (int) get_option( 'woocommerce_gpf_db_version', 1 );
+		if ( $current_version >= WOOCOMMERCE_GPF_DB_VERSION ) {
+			return;
+		}
+		// Otherwise, check for, and run updates.
+		foreach ( range( $current_version + 1, WOOCOMMERCE_GPF_DB_VERSION ) as $version ) {
+			if ( is_callable( array( $this, 'upgrade_db_to_' . $version ) ) ) {
+				$this->{'upgrade_db_to_' . $version}();
+			}
+			update_option( 'woocommerce_gpf_db_version', $version );
+		}
+	}
 
+	/**
+	 * Upgrade the DB schema to v2.
+	 *
+	 * Creates render cache table.
+	 */
+	private function upgrade_db_to_2() {
+		global $wpdb;
+
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		$charset_collate = $wpdb->get_charset_collate();
+		$sql = "CREATE TABLE `" . $wpdb->prefix . "wc_gpf_render_cache` (
+		    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		    `post_id` bigint(20) unsigned NOT NULL,
+		    `name` varchar(32) NOT NULL,
+		    `value` text NOT NULL,
+		    UNIQUE KEY composite_cache_idx (`post_id`, `name`)
+		) $charset_collate";
+		dbDelta( $sql );
+	}
 
 	/**
 	 * Handle ajax requests for the google taxonomy search. Returns a JSON encoded list of matches
@@ -234,7 +291,7 @@ class WoocommerceGpfAdmin {
 		foreach ( $this->product_fields as $key => $fieldinfo ) {
 
 			// Skip fields which haven't been enabled in the main settings.
-			if ( ! isset ( $this->{'settings'}['product_fields'][ $key ] ) ) {
+			if ( ! isset( $this->{'settings'}['product_fields'][ $key ] ) ) {
 				continue;
 			}
 
@@ -247,7 +304,7 @@ class WoocommerceGpfAdmin {
 
 			$header_vars['default_text'] = '';
 			$placeholder                 = '';
-			if ( isset ( $fieldinfo['can_default'] ) && ! empty ( $this->settings['product_defaults'][ $key ] ) ) {
+			if ( isset( $fieldinfo['can_default'] ) && ! empty ( $this->settings['product_defaults'][ $key ] ) ) {
 				$header_vars['default_text'] .= '<span class="woocommerce_gpf_default_label">(' .
 					__( 'Default: ', 'woocommerce_gpf' ) .
 					esc_html( $this->settings['product_defaults'][ $key ] ) .
@@ -291,14 +348,12 @@ class WoocommerceGpfAdmin {
 	 * @param unknown $term_id
 	 */
 	function save_category( $term_id ) {
-
-		if ( isset ( $_POST['_woocommerce_gpf_data'] ) ) {
+		if ( isset( $_POST['_woocommerce_gpf_data'] ) ) {
 			foreach ( $_POST['_woocommerce_gpf_data'] as $key => $value ) {
 				$_POST['_woocommerce_gpf_data'][ $key ] = stripslashes( $value );
 			}
 			update_woocommerce_term_meta( $term_id, '_woocommerce_gpf_data', $_POST['_woocommerce_gpf_data'] );
 		}
-
 	}
 
 
@@ -345,7 +400,7 @@ class WoocommerceGpfAdmin {
 					$prepopulate_vars
 				);
 			}
-			if ( isset ( $fieldinfo['can_default'] ) && ! empty( $product_defaults[ $key ] ) ) {
+			if ( isset( $fieldinfo['can_default'] ) && ! empty( $product_defaults[ $key ] ) ) {
 				$variables['field_defaults'] .= $this->template_loader->get_template_with_variables(
 					'woo-gpf',
 					'variation-meta-default-text',
@@ -358,7 +413,7 @@ class WoocommerceGpfAdmin {
 				);
 				$placeholder = __( 'Use default', 'woo_gpf' );
 			}
-			if ( ! isset ( $fieldinfo['callback'] ) || ! is_callable( array( &$this, $fieldinfo['callback'] ) ) ) {
+			if ( ! isset( $fieldinfo['callback'] ) || ! is_callable( array( &$this, $fieldinfo['callback'] ) ) ) {
 				$current_value = ! empty ( $current_data[ $key ] ) ? $current_data[ $key ] : '';
 				$variables['field_input'] = $this->render_field_default_input(
 					$key,
@@ -367,7 +422,7 @@ class WoocommerceGpfAdmin {
 					$loop_idx
 				);
 			} else {
-				if ( isset ( $current_data[ $key ] ) ) {
+				if ( isset( $current_data[ $key ] ) ) {
 					$variables['field_input'] = call_user_func(
 						array( $this, $fieldinfo['callback'] ),
 						$key,
@@ -440,7 +495,7 @@ class WoocommerceGpfAdmin {
 				);
 				$placeholder = __( 'Use default', 'woo_gpf' );
 			}
-			if ( ! isset ( $fieldinfo['callback'] ) || ! is_callable( array( &$this, $fieldinfo['callback'] ) ) ) {
+			if ( ! isset( $fieldinfo['callback'] ) || ! is_callable( array( &$this, $fieldinfo['callback'] ) ) ) {
 				$current_value = ! empty ( $current_data[ $key ] ) ? $current_data[ $key ] : '';
 				$variables['field_input'] = $this->render_field_default_input(
 					$key,
@@ -449,7 +504,7 @@ class WoocommerceGpfAdmin {
 					null
 				);
 			} else {
-				if ( isset ( $current_data[ $key ] ) ) {
+				if ( isset( $current_data[ $key ] ) ) {
 					$variables['field_input'] = call_user_func(
 						array( $this, $fieldinfo['callback'] ),
 						$key,
@@ -481,23 +536,16 @@ class WoocommerceGpfAdmin {
 	 * @param unknown $product_id
 	 */
 	function save_product( $product_id ) {
-
-		// verify if this is an auto save routine.
-		// If it is our form has not been submitted, so we dont want to do anything
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
-
 		if ( empty ( $_POST['_woocommerce_gpf_data'] ) ) {
 			return;
 		}
-
 		$current_data = get_post_meta( $product_id, '_woocommerce_gpf_data', true );
-
 		if ( ! $current_data ) {
 			$current_data = array();
 		}
-
 		// Remove entries that are blanked out
 		foreach ( $_POST['_woocommerce_gpf_data'] as $key => $value ) {
 			if ( is_numeric( $key ) ) {
@@ -505,23 +553,23 @@ class WoocommerceGpfAdmin {
 				continue;
 			}
 			if ( empty ( $value ) ) {
-				unset ( $_POST['_woocommerce_gpf_data'][ $key ] );
-				if ( isset ( $current_data[ $key ] ) ) {
-					unset ( $current_data[ $key ] );
+				unset( $_POST['_woocommerce_gpf_data'][ $key ] );
+				if ( isset( $current_data[ $key ] ) ) {
+					unset( $current_data[ $key ] );
 				}
 			} else {
 				$_POST['_woocommerce_gpf_data'][ $key ] = stripslashes( $value );
 			}
 		}
 		// Including missing checkboxes
-		if ( ! isset ( $_POST['_woocommerce_gpf_data']['exclude_product'] ) ) {
-			unset ( $current_data['exclude_product'] );
+		if ( ! isset( $_POST['_woocommerce_gpf_data']['exclude_product'] ) ) {
+			unset( $current_data['exclude_product'] );
 		}
-
+		if ( ! isset ( $_POST['_woocommerce_gpf_data']['is_bundle'] ) ) {
+			unset ( $current_data['is_bundle'] );
+		}
 		$current_data = array_merge( $current_data, $_POST['_woocommerce_gpf_data'] );
-
 		update_post_meta( $product_id, '_woocommerce_gpf_data', $current_data );
-
 	}
 
 	/**
@@ -539,17 +587,17 @@ class WoocommerceGpfAdmin {
 		// Remove entries that are blanked out
 		foreach ( $_POST['_woocommerce_gpf_data'][ $idx ] as $key => $value ) {
 			if ( empty ( $value ) ) {
-				unset ( $_POST['_woocommerce_gpf_data'][ $idx ][ $key ] );
-				if ( isset ( $current_data[ $key ] ) ) {
-					unset ( $current_data[ $key ] );
+				unset( $_POST['_woocommerce_gpf_data'][ $idx ][ $key ] );
+				if ( isset( $current_data[ $key ] ) ) {
+					unset( $current_data[ $key ] );
 				}
 			} else {
 				$_POST['_woocommerce_gpf_data'][ $idx ][ $key ] = stripslashes( $value );
 			}
 		}
 		// Including missing checkboxes
-		if ( ! isset ( $_POST['_woocommerce_gpf_data'][ $idx ]['exclude_product'] ) ) {
-			unset ( $current_data['exclude_product'] );
+		if ( ! isset( $_POST['_woocommerce_gpf_data'][ $idx ]['exclude_product'] ) ) {
+			unset( $current_data['exclude_product'] );
 		}
 		$current_data = array_merge( $current_data, $_POST['_woocommerce_gpf_data'][ $idx ] );
 		update_post_meta( $product_id, '_woocommerce_gpf_data', $current_data );
@@ -641,7 +689,7 @@ class WoocommerceGpfAdmin {
 	private function render_i_exists( $key, $current_data = null, $placeholder = null, $loop_idx = null ) {
 		$variables = $this->default_field_variables( $key, $loop_idx );
 		$variables = $this->default_selected_choices(
-			array( 'included', 'no-included' ),
+			array( 'included', 'not-included' ),
 			$current_data,
 			$variables
 		);
@@ -1118,6 +1166,8 @@ class WoocommerceGpfAdmin {
 	 */
 	function config_page() {
 
+		global $wpdb, $table_prefix;
+
 		// Output the header.
 		$variables = array();
 		$variables['inventory_text']              = __( 'product inventory feed also available.', 'woo_gpf' );
@@ -1130,6 +1180,61 @@ class WoocommerceGpfAdmin {
 		$variables['inventory_url']               = esc_url(
 			add_query_arg( array( 'woocommerce_gpf' => 'googleinventory' ), get_home_url( null, '/' ) )
 		);
+		if ( $this->cache->is_enabled() ) {
+			// Work out how many products we have cached per-feed type.
+			$status = array(
+				'google'          => 0,
+				'googleinventory' => 0,
+				'bing'            => 0,
+			);
+			$results = $wpdb->get_results(
+				"SELECT `name`,
+				        COUNT(DISTINCT(post_id)) AS total
+				   FROM {$table_prefix}wc_gpf_render_cache
+			   GROUP BY `name`",
+			   OBJECT_K
+			);
+			$results = wp_list_pluck( $results, 'total' );
+			$status = array_merge( $status, $results );
+			// Work out the total number of eligible products.
+			$args = array(
+				'status'      => array( 'publish' ),
+				'type'        => array( 'simple', 'composite', 'variable', 'bundle' ),
+				'limit'       => 1,
+				'offset'      => 0,
+				'return'      => 'ids',
+				'paginate'    => true,
+			);
+			$results = wc_get_products( $args );
+			$total_cache = $results->total;
+
+			$settings_url = add_query_arg(
+				array(
+					'page'       => 'wc-settings',
+					'tab'        => 'gpf',
+				),
+				admin_url('admin.php')
+			);
+			$rebuild_url = wp_nonce_url(
+				add_query_arg(
+					array(
+						'gpf_action' => 'rebuild_cache',
+					),
+					$settings_url
+				),
+				'gpf_rebuild_cache'
+			);
+			$cache_status_variables = array(
+				'google_cache_status' => sprintf( __( '<strong>%d</strong> / <strong>%d</strong> generated', 'woocommerce_gpf' ), $status['google'], $total_cache ),
+				'google_inventory_cache_status' => sprintf( __( '<strong>%d</strong> / <strong>%d</strong> generated', 'woocommerce_gpf' ), $status['googleinventory'], $total_cache ),
+				'bing_cache_status' => sprintf( __( '<strong>%d</strong> / <strong>%d</strong> generated', 'woocommerce_gpf' ), $status['bing'], $total_cache ),
+				'rebuild_url' => $rebuild_url,
+				'settings_url' => $settings_url,
+			);
+			$variables['cache_status'] = $this->template_loader->get_template_with_variables( 'woo-gpf', 'admin-cache-status', $cache_status_variables );
+		} else {
+			$variables['cache_status'] = '';
+		}
 		$this->template_loader->output_template_with_variables( 'woo-gpf', 'admin-intro', $variables );
 
 		// Output the fields.
@@ -1161,7 +1266,7 @@ class WoocommerceGpfAdmin {
 			}
 			$def_vars['prepopulates'] = $this->prepopulate_selector_for_field( $key );
 			$def_vars['key'] = $key;
-			if ( ! isset ( $this->settings['product_fields'][ $key ] ) ) {
+			if ( ! isset( $this->settings['product_fields'][ $key ] ) ) {
 				$def_vars['displaynone'] = ' style="display:none;"';
 			} else {
 				$def_vars['displaynone'] = '';
@@ -1270,7 +1375,7 @@ class WoocommerceGpfAdmin {
 				$_POST['_woocommerce_gpf_data'][ $key ] = stripslashes( $value );
 			}
 			$_POST['woocommerce_gpf_config']['product_defaults'] = $_POST['_woocommerce_gpf_data'];
-			unset ( $_POST['_woocommerce_gpf_data'] );
+			unset( $_POST['_woocommerce_gpf_data'] );
 		}
 
 		if ( ! empty( $_POST['_woocommerce_gpf_prepopulate'] ) ) {
@@ -1279,15 +1384,12 @@ class WoocommerceGpfAdmin {
 				$_POST['_woocommerce_gpf_prepopulate'][ $key ] = stripslashes( $value );
 			}
 			$_POST['woocommerce_gpf_config']['product_prepopulate'] = $_POST['_woocommerce_gpf_prepopulate'];
-			unset ( $_POST['_woocommerce_gpf_prepopulate'] );
+			unset( $_POST['_woocommerce_gpf_prepopulate'] );
 		}
 
 		$this->settings = $_POST['woocommerce_gpf_config'];
 		update_option( 'woocommerce_gpf_config', $this->settings );
-
 	}
-
-
 }
 
 global $woocommerce_gpf_admin;

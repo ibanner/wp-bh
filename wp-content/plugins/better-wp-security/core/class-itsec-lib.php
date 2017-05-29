@@ -369,6 +369,12 @@ final class ITSEC_Lib {
 			}
 		}
 
+		if ( empty( $ip ) ) {
+			// If an IP is not found, force it to a localhost IP that would not be blacklisted as this typically
+			// indicates a local request that does not provide the localhost IP.
+			$ip = '127.0.0.1';
+		}
+
 		$GLOBALS['__itsec_remote_ip'] = (string) $ip;
 
 		return $GLOBALS['__itsec_remote_ip'];

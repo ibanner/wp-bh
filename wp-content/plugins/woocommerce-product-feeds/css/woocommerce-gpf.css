@@ -1,3 +1,29 @@
+.woocommerce_gpf_intro_first {
+    width: 70%;
+    float: left;
+    padding:0 3em 0 0;
+}
+
+.woocommerce_gpf_intro_second {
+    width: 20%;
+    background-color: #f9f9f9;
+    padding: 0 1em;
+    float: left;
+    border: 1px solid #999;
+}
+
+.woocommerce_gpf_intro_second ul ul {
+    margin-top: 0.5em;
+}
+
+.woocommerce_gpf_intro_second > ul > li {
+    margin-top: 1.5em;
+}
+
+.woocommerce_gpf_settings hr {
+    clear: both;
+}
+
 .woocommerce_gpf_default_label, .woocommerce_gpf_prepopulate_label {
     font-size: 90%;
     color: #666;
