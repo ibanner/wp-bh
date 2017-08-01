@@ -5,4 +5,5 @@ Disallow: /2015/
 Disallow: /gallery/
 Disallow: /he/gallery/
 Disallow: /*add-to-cart=*
-Disallow: /*?*
+Allow: /wp-admin/admin-ajax.php
+Crawl-delay: 10
