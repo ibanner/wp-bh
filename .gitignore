@@ -9,6 +9,8 @@ wp-content/themes/bh/js/min/
 wp-content/themes/bh/functions/forms/save_file_log.txt
 wp-content/uploads/
 wp-content/plugins/wp-rocket/cache.json
+wp-content/plugins/wp-simple-firewall/mode.login_throttled
+wp-content/plugins/wpmudev-updates/
 wp-content/advanced-cache.php
 wp-content/wp-rocket-config/
 wp-content/themes/twentysixteen/
