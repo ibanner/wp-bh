@@ -5,7 +5,7 @@
  *
  * Enriches the on-page microdata based on Google Product Feed data values.
  */
-class woocommerce_gpf_structured_data {
+class WoocommerceGpfStructuredData {
 
 	/**
 	 * Constructor.
@@ -33,7 +33,12 @@ class woocommerce_gpf_structured_data {
 	 * @return array                The modified array.
 	 */
 	public function structured_data_product( $markup, $product ) {
-		if ( 'simple' === $product->product_type ) {
+		if ( is_callable( array( $product, 'get_type' ) ) ) {
+			$product_type = $product->get_type();
+		} else {
+			$product_type = $product->product_type;
+		}
+		if ( 'simple' === $product_type ) {
 			return $this->structured_data_simple_product( $markup, $product );
 		}
 		return $markup;
@@ -52,11 +57,16 @@ class woocommerce_gpf_structured_data {
 	 * @return array                The modified array.
 	 */
 	public function structured_data_product_offer( $markup, $offer_product ) {
-		if ( 'variation' !== $offer_product->product_type ) {
+		if ( is_callable( array( $offer_product, 'get_type' ) ) ) {
+			$product_type = $offer_product->get_type();
+		} else {
+			$product_type = $offer_product->product_type;
+		}
+		if ( 'variable' !== $product_type ) {
 			return $markup;
 		}
 		// Get the feed information for this product.
-		$feed_item = new woocommerce_gpf_feed_item( $offer_product, 'google' );
+		$feed_item = new WoocommerceGpfFeedItem( $offer_product, 'google' );
 		// SKU.
 		$markup['sku'] = $feed_item->guid;
 		// Condition.
@@ -93,7 +103,7 @@ class woocommerce_gpf_structured_data {
 	 */
 	private function structured_data_simple_product( $markup, $product ) {
 		// Get the feed information for this product.
-		$feed_item = new woocommerce_gpf_feed_item( $product, 'google' );
+		$feed_item = new WoocommerceGpfFeedItem( $product, 'google' );
 		// SKU.
 		$markup['sku'] = $feed_item->guid;
 		// Condition.

@@ -4,7 +4,7 @@
  * Plugin URI: https://www.woocommerce.com/products/google-product-feed/
  * Description: WooCommerce extension that allows you to more easily populate advanced attributes into the Google Merchant Centre feed
  * Author: Lee Willis
- * Version: 7.0.5
+ * Version: 7.1.2
  * Author URI: http://www.leewillis.co.uk/
  * License: GPLv3
  *
@@ -18,19 +18,23 @@ if ( ! function_exists( 'woothemes_queue_update' ) ) {
 	require_once( 'woo-includes/woo-functions.php' );
 }
 
+// The current DB schema version.
+define( 'WOOCOMMERCE_GPF_DB_VERSION', 2 );
+
 /**
  * Plugin updates
  */
 woothemes_queue_update( plugin_basename( __FILE__ ), 'd55b4f852872025741312839f142447e', '18619' );
 
 
+require_once( dirname( __FILE__ ) . '/vendor/autoload_52.php' );
+require_once( 'woocommerce-gpf-cache.php' );
 if ( is_admin() ) {
 	require_once( 'woocommerce-gpf-common.php' );
 	require_once( 'gamajo-template-loader.class.php' );
 	require_once( 'woocommerce-gpf-template-loader.class.php' );
 	require_once( 'woocommerce-gpf-admin.php' );
 }
-
 
 /**
  * Bodge for WPEngine.com users - provide the feed at a URL that doesn't
@@ -71,12 +75,12 @@ function woocommerce_gpf_includes() {
 
 	if ( isset( $wp_query->query_vars['woocommerce_gpf'] ) ) {
 		require_once( 'woocommerce-gpf-common.php' );
-		require_once( 'woocommerce-gpf-feed.class.php' );
+		require_once( 'woocommerce-gpf-feed.php' );
 		if ( 'google' === $wp_query->query_vars['woocommerce_gpf'] ) {
 			require_once 'woocommerce-gpf-feed-google.php';
-		} else if ( 'googleinventory' === $wp_query->query_vars['woocommerce_gpf'] ) {
+		} elseif ( 'googleinventory' === $wp_query->query_vars['woocommerce_gpf'] ) {
 			require_once 'woocommerce-gpf-feed-google-inventory.php';
-		} else if ( 'bing' === $wp_query->query_vars['woocommerce_gpf'] ) {
+		} elseif ( 'bing' === $wp_query->query_vars['woocommerce_gpf'] ) {
 			require_once 'woocommerce-gpf-feed-bing.php';
 		}
 		require_once( 'woocommerce-gpf-feed-item.php' );
@@ -92,7 +96,7 @@ add_action( 'template_redirect', 'woocommerce_gpf_includes' );
 function woocommerce_gpf_structured_data() {
 	global $woocommerce_gpf_structured_data;
 	require_once( 'woocommerce-gpf-structured-data.php' );
-	$woocommerce_gpf_structured_data = new woocommerce_gpf_structured_data();
+	$woocommerce_gpf_structured_data = new WoocommerceGpfStructuredData();
 }
 // Loads at priority 5 to ensure it runs before WooCommerce's hook.
 add_action( 'woocommerce_single_product_summary', 'woocommerce_gpf_structured_data', 5 );
@@ -136,17 +140,29 @@ function woocommerce_gpf_install() {
 
 	$table_name = $wpdb->prefix . 'woocommerce_gpf_google_taxonomy';
 
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
 	$sql = "CREATE TABLE $table_name (
 	            taxonomy_term text,
 	            search_term text
 			) $charset_collate";
-
-	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	dbDelta( $sql );
+
+	$sql = "CREATE TABLE `" . $wpdb->prefix . "wc_gpf_render_cache` (
+	  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	  `post_id` bigint(20) unsigned NOT NULL,
+	  `name` varchar(32) NOT NULL,
+	  `value` text NOT NULL,
+	  UNIQUE KEY composite_cache_idx (`post_id`, `name`)
+	) $charset_collate";
+	dbDelta( $sql );
+
 	flush_rewrite_rules();
 
 	// Upgrade old tables on plugin deactivation / activation.
 	$wpdb->query( "ALTER TABLE $table_name CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci" );
+
+	update_option( 'woocommerce_gpf_db_version', WOOCOMMERCE_GPF_DB_VERSION );
 
 	// Set default settings if there are none.
 	$settings = get_option( 'woocommerce_gpf_config' );
@@ -191,7 +207,7 @@ function woocommerce_gpf_prevent_wporg_update_check( $r, $url ) {
 		if ( null === $plugins ) {
 			return $r;
 		}
-		unset( $plugins['active'][ array_search( $my_plugin, $plugins['active'] ) ] );
+		unset( $plugins['active'][ array_search( $my_plugin, $plugins['active'], true ) ] );
 		unset( $plugins['plugins'][ $my_plugin ] );
 		$r['body']['plugins'] = json_encode( $plugins );
 	}

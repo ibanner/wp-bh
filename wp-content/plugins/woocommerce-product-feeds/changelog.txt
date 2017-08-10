@@ -1,5 +1,36 @@
 *** WooCommerce Google Product Feed Changelog ***
 
+2017.05.17 - version 7.1.2
+* Fix issue where saving a variation caused on error on WooCommerce 2.6.x
+
+2017.05.09 - version 7.1.1
+* Fix issue where some files missing from packaged release
+* Add basic support for bundle products
+
+2017.05.03 - version 7.1.0
+* Fix issue where Composite products weren't included
+* Fix issue where External products were incorrectly included
+* Fix issue where definition of constant could conflict with other plugins
+* Introduce render cache for feeds, disabled by default pending testing, see https://docs.woocommerce.com/document/google-product-feed-feed-item-caching/ for information on how to test this
+
+2017.04.25 - version 7.0.8
+* Fix issue where variation ID not passed to woocommerce_gpf_elements filters
+* Fix issue where incorrect product ID passed to woocommerce_gpf_elements filters
+* Fix issue where is_bundle checkbox could not be unticked on a product edit screen
+* Fix issue where sale price effective dates weren't output correctly on WooCommerce 3.x
+* Fix warning shown generated when products have sale prices on WooCommerce 3.x
+* Update identifier_exists logic. Identifiers are now required for all countries
+
+2017.03.30 - version 7.0.7
+* Fix issue with "identifier exists" option not showing selected value correctly on settings form
+* Change mime-type of bing feed to fix issues when running behind CloudFlare
+* Fix issues where variation options were missing from variation titles in the feed
+
+2017.03.06 - version 7.0.6
+* Fix issue where descriptions weren't always passed through the_content filter
+* Fix issue where URL-based category filtering didn't work with permalink-style feed URLs
+* Remove some unused code
+
 2017.03.06 - version 7.0.5
 * Further compatibility changes in preparation for WooCommerce 2.7
 
