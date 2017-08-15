@@ -13,3 +13,4 @@ wp-content/plugins/wp-simple-firewall/mode.login_throttled
 wp-content/plugins/wpmudev-updates/
 wp-content/advanced-cache.php
 wp-content/wp-rocket-config/
+.htaccess
