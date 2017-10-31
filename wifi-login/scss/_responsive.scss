@@ -40,14 +40,13 @@
 	/***********/
 
 	.wrapper {
-		padding: 0 15px;
-		@include calc(width, "100% - 30px");
 
 		/***********/
 		/* content */
 		/***********/
 
 		.content {
+			padding: 30px 15px;
 
 			/********/
 			/* logo */
@@ -74,28 +73,33 @@
 
 			.form {
 				float: none;
-				margin: 30px -15px;
-				padding: 50px 0;
+				margin: 0 -15px;
+				padding: 30px 0;
 				background: rgba(0,0,0,0.65);
 
 				.form-title {
 					margin: 0 15px 30px;
-					line-height: 40px;
-					font-size: 36px;
+					line-height: 30px;
+					font-size: 28px;
 				}
 
 				form {
 					margin: 0 15px;
 
 					input {
-						line-height: 48px;
-						font-size: 24px;
+						line-height: 38px;
+						font-size: 20px;
 
 						&.button {
 							float: none;
-							padding: 0 30px;
-							font-size: 32px;
+							padding: 0 20px;
+							font-size: 20px;
 						}
+					}
+
+					small {
+						line-height: 13px;
+						font-size: 13px;
 					}
 				}
 			}
