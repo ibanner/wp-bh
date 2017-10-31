@@ -1,0 +1,126 @@
+@import "functions";
+
+/**
+ * These values will not show up in content, but can be 
+ * queried by JavaScript to know which breakpoint is active
+ */
+
+@media (max-width: 1199px) {
+	body:before {
+		content: "1199";
+	}
+}
+
+@media (max-width: 991px) {
+	body:before {
+		content: "991";
+	}
+}
+
+@media (max-width: 767px) {
+	body:before {
+		content: "767";
+	}
+}
+
+@media (max-width: 480px) {
+	body:before {
+		content: "480";
+	}
+}
+
+@media (max-width: 1199px) {}
+
+@media (max-width: 991px) {}
+
+@media (max-width: 767px) {
+
+	/***********/
+	/* content */
+	/***********/
+
+	.wrapper {
+		padding: 0 15px;
+		@include calc(width, "100% - 30px");
+
+		/***********/
+		/* content */
+		/***********/
+
+		.content {
+
+			/********/
+			/* logo */
+			/********/
+
+			.logo-wrapper {
+				margin: 0 -15px;
+				background: rgba(0,0,0,0.65);
+
+				.logo {
+					width: 250px;
+					height: 95px;
+
+					svg {
+						width: 250px;
+						height: 95px;
+					}
+				}
+			}
+
+			/********/
+			/* form */
+			/********/
+
+			.form {
+				float: none;
+				margin: 30px -15px;
+				padding: 50px 0;
+				background: rgba(0,0,0,0.65);
+
+				.form-title {
+					margin: 0 15px 30px;
+					line-height: 40px;
+					font-size: 36px;
+				}
+
+				form {
+					margin: 0 15px;
+
+					input {
+						line-height: 48px;
+						font-size: 24px;
+
+						&.button {
+							float: none;
+							padding: 0 30px;
+							font-size: 32px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 480px) {}
+
+@media (min-width: 1200px) {}
+	
+@media (min-width: 992px) {}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 481px) {}
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 768px) and (max-width: 1199px) {}
+
+@media (min-width: 768px) and (max-width: 991px) {}
+
+@media (min-width: 481px) and (max-width: 1199px) {}
+
+@media (min-width: 481px) and (max-width: 991px) {}
+
+@media (min-width: 481px) and (max-width: 767px) {}

@@ -15,3 +15,10 @@ wp-content/plugins/wpmudev-updates/
 wp-content/advanced-cache.php
 wp-content/wp-rocket-config/
 .htaccess
+wifi-login/.sass-cache/
+wifi-login/node_modules/
+wifi-login/css/*.css
+wifi-login/css/*.map
+wifi-login/js/min/
+wifi-login/images/general/svg-defs.svg
+
