@@ -6,6 +6,7 @@ wp-content/themes/bh/css/admin/
 wp-content/themes/bh/css/*.css
 wp-content/themes/bh/css/*.map
 wp-content/themes/bh/js/min/
+wp-content/themes/bh/images/general/svg-defs.svg
 wp-content/themes/bh/functions/forms/save_file_log.txt
 wp-content/uploads/
 wp-content/plugins/wp-rocket/cache.json
@@ -14,3 +15,10 @@ wp-content/plugins/wpmudev-updates/
 wp-content/advanced-cache.php
 wp-content/wp-rocket-config/
 .htaccess
+wifi-login/.sass-cache/
+wifi-login/node_modules/
+wifi-login/css/*.css
+wifi-login/css/*.map
+wifi-login/js/min/
+wifi-login/images/general/svg-defs.svg
+

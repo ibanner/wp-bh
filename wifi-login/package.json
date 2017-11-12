@@ -1,0 +1,27 @@
+{
+	"name": "bh.org.il-wifi-login",
+	"version": "1.0.0",
+	"description": "Beit Hatfutsot – The Museum of the Jewish People – WiFI Login",
+	"homepage": "https://github.com/Beit-Hatfutsot/wp-bh.git#readme",
+	"bugs": {
+		"url": "https://github.com/Beit-Hatfutsot/wp-bh/issues",
+		"email": "nirg@bh.org.il"
+	},
+	"license": "GPL-2.0",
+	"author": {
+		"name": "Beit Hatfutsot",
+		"email": "nirg@bh.org.il"
+	},
+	"main": "Gruntfile.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Beit-Hatfutsot/wp-bh.git"
+	},
+	"devDependencies": {
+		"grunt": "^1.0.1",
+		"grunt-contrib-sass": "^1.0.0",
+		"grunt-contrib-uglify": "^3.0.1",
+		"grunt-contrib-watch": "^1.0.0",
+		"grunt-svgstore": "^1.0.0"
+	}
+}

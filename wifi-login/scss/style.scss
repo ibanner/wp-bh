@@ -1,0 +1,162 @@
+@import "functions";
+
+@charset "utf-8";
+
+/******************/
+/* general layout */
+/******************/
+
+* {
+	@include reset;
+	-webkit-box-sizing:	border-box;
+	-moz-box-sizing:	border-box;
+	box-sizing:			border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0 auto;
+	line-height: $line-height;
+	@include font;
+	font-size: $font-size;
+	font-weight: $font-regular;
+	color: $font-color;
+
+	&:before {
+		content: "1200";
+		display: none;
+	}
+}
+
+h1, h2, h3, h4, h5, h6, p, form {
+	@include font;
+}
+
+/************/
+/* svg-defs */
+/************/
+
+body > svg {
+	display: none;
+}
+
+.shape {
+	vertical-align: top;
+}
+
+/***********/
+/* content */
+/***********/
+
+.wrapper {
+	min-height: 100%;
+	background: url(../images/general/bg.jpg) 0 0 no-repeat;
+	background-size: cover;
+
+	/***********/
+	/* content */
+	/***********/
+
+	.content {
+		padding: 55px 50px 0;
+		overflow: hidden;
+
+		/********/
+		/* logo */
+		/********/
+
+		.logo-wrapper {
+			padding: 15px 0;
+
+			.logo {
+				margin: 0 auto;
+				width: 330px;
+				height: 126px;
+
+				svg {
+					width: 330px;
+					height: 126px;
+				}
+			}
+		}
+
+		/********/
+		/* form */
+		/********/
+
+		.form {
+			float: right;
+			margin: 30px 0;
+
+			.form-title {
+				margin: 0 0 30px;
+				line-height: 46px;
+				font-size: 42px;
+				font-weight: $font-regular;
+			}
+
+			form {
+				overflow: hidden;
+
+				input {
+					margin-bottom: 15px;
+					padding: 0 5px;
+					width: 100%;
+					line-height: 65px;
+					@include font;
+					font-size: 33px;
+					color: $black;
+					display: block;
+
+					&.button {
+						float: right;
+						margin-bottom: 0;
+						padding: 0 50px;
+						width: auto;
+						font-size: 38px;
+						font-weight: $font-bold;
+						color: $white;
+						background-color: $cyan;
+						-webkit-appearance: button;
+						cursor: pointer;
+					}
+
+					&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+						font-style: italic;
+						color: $gray;
+					}
+
+					&::-moz-placeholder { /* Firefox 19+ */
+						font-style: italic;
+						color: $gray;
+					}
+
+					&:-ms-input-placeholder { /* IE 10+ */
+						font-style: italic;
+						color: $gray;
+					}
+
+					&:-moz-placeholder { /* Firefox 18- */
+						font-style: italic;
+						color: $gray;
+					}
+				}
+
+				small {
+					margin-bottom: 30px;
+					font-size: 20px;
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+/**************/
+/* responsive */
+/**************/
+
+@import "responsive";
