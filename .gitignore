@@ -22,3 +22,4 @@ wifi-login/css/*.map
 wifi-login/js/min/
 wifi-login/images/general/svg-defs.svg
 
+wp-content/themes/bh/package-lock.json
