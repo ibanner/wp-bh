@@ -1,14 +1,5 @@
 wp-config.php
 nginx.conf
-wp-content/themes/bh/package-lock.json
-wp-content/themes/bh/.sass-cache/
-wp-content/themes/bh/node_modules/
-wp-content/themes/bh/css/admin/
-wp-content/themes/bh/css/*.css
-wp-content/themes/bh/css/*.map
-wp-content/themes/bh/js/min/
-wp-content/themes/bh/images/general/svg-defs.svg
-wp-content/themes/bh/functions/forms/save_file_log.txt
 wp-content/uploads/
 wp-content/plugins/wp-rocket/cache.json
 wp-content/plugins/wp-simple-firewall/mode.login_throttled
