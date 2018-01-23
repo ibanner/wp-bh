@@ -34,8 +34,11 @@ define ( 'ICL_TM_IN_BASKET', 20);
 //@since 3.2
 define ( 'ICL_TM_PENDING_TP', 102);
 
+/** @deprecated Use constants in WPML_TM_Emails_Settings instead */
 define('ICL_TM_NOTIFICATION_NONE', 0);
+/** @deprecated Use WPML_TM_Emails_Settings::NOTIFY_IMMEDIATELY instead */
 define('ICL_TM_NOTIFICATION_IMMEDIATELY', 1);
+/** @deprecated Use WPML_TM_Emails_Settings::NOTIFY_DAILY instead */
 define('ICL_TM_NOTIFICATION_DAILY', 2);
 
 define('ICL_TM_TMETHOD_MANUAL', 0);
@@ -141,3 +144,11 @@ define( 'WPML_LANGUAGE_NEGOTIATION_TYPE_PARAMETER',  3 );
 define( 'WPML_ELEMENT_TRANSLATIONS_CACHE_GROUP', 'element_translations' );
 
 define('WEBSITE_DETAILS_TRANSIENT_KEY', 'wpml_icl_query_website_details');
+
+if ( ! defined('WPML_COMPATIBILITY_ENDPOINT' ) ) {
+	define( 'WPML_COMPATIBILITY_ENDPOINT', 'https://wpml.org/account/wpml-compatibility/' );
+}
+
+define( 'WPML_CONTENT_TYPE_DONT_TRANSLATE', 0 );
+define( 'WPML_CONTENT_TYPE_TRANSLATE', 1 );
+define( 'WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED', 2 );

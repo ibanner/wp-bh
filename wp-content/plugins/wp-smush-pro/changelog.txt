@@ -5,6 +5,40 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+= 2.7.5 =
+
+* Security: Fixed path traversal vulnerability. Thanks Ricardo Sánchez (@neorichi) for responsible disclosure.
+
+= 2.7.5 =
+
+* Update:
+    * UI/UX has been updated for Bulk Smush page
+
+* Fixed:
+    * Start from latest image while Bulk Smushing
+    * S3 config error if AWS keys are defined in wp-config.php
+    * NextGen smush page not working properly
+    * Do not redirect to settings page on activation if WP CLI is installed
+    * Fixed a bunch of Notices/Errors
+
+
+= 2.7.4.1 =
+
+* Fixed:
+    * `get_current_screen()` method causing error on some sites
+
+= 2.7.4 =
+
+    * Update: Minor UI changes
+    * Fixed: Images not being resized when image is uploaded via Mobile App
+    * Fixed: Notices and Warnings
+    * Fixed: S3 offload Integration - Original Image not being deleted in some cases
+
+= 2.7.3.1 =
+
+    * Fixed: Pro user unable to login to WPMU DEV Dashboard plugin when Smush is active, Error: "Your key is invalid."
+    * Updated: S3 Integration, return URL for any error, 'as3cf_get_attached_file'
+
 = 2.7.3 =
 
     * Fixed:
@@ -338,4 +372,4 @@ Change Log:
 - First release
 
 
-555537-1498978513-ai
+555537-1516702227-au

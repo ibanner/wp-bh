@@ -1,151 +1,74 @@
 <?php
+class WPML_TranslationProxy_Com_Log {
+	private static $wrapped_class;
 
-if ( !class_exists( 'TranslationProxy_Com_Log' ) ) {
-	class WPML_TranslationProxy_Com_Log {
-		private static $keys_to_block = array(
-			'api_token',
-			'username',
-			'api_key',
-			'sitekey',
-			'accesskey',
-			'file',
-		);
-
-		public static function log_call( $url, $params ) {
-			$sanitized_params = self::sanitize_data( $params );
-			$sanitized_url    = self::sanitize_url( $url );
-
-			self::add_to_log( 'call - ' . $sanitized_url . ' - ' . json_encode( $sanitized_params ) );
-		}
-
-		public static function get_keys_to_block() {
-			return self::$keys_to_block;
-		}
-
-		public static function log_response( $response ) {
-			self::add_to_log( 'response - ' . $response );
-		}
-
-		public static function log_error( $message ) {
-			self::add_to_log( 'error - ' . $message );
-		}
-		
-		public static function log_xml_rpc( $data ) {
-			self::add_to_log('xml-rpc - ' . json_encode( $data ) );
-		}
-
-		public static function get_log( ) {
-			return get_option( 'wpml_tp_com_log', '' );
-		}
-		
-		public static function clear_log( ) {
-			self::save_log( '' );
-		}
-		
-		public static function is_logging_enabled( ) {
+	/**
+	 * @return WPML_TranslationProxy_Communication_Log
+	 */
+	private static function get_wrapped_class_instance() {
+		if ( null === self::$wrapped_class ) {
 			global $sitepress;
-			
-			return $sitepress->get_setting( 'tp-com-logging', true );
+			self::$wrapped_class = new WPML_TranslationProxy_Communication_Log( $sitepress );
 		}
 
-		/**
-		 * @param string|array|stdClass $params
-		 *
-		 * @return array|stdClass
-		 */
-		public static function sanitize_data( $params ) {
-			$sanitized_params = $params;
+		return self::$wrapped_class;
+	}
 
-			if ( is_object( $sanitized_params ) ) {
-				$sanitized_params = get_object_vars( $sanitized_params );
-			}
+	public static function log_call( $url, $params ) {
+	  self::get_wrapped_class_instance()->log_call( $url, $params );
+	}
 
-			if ( is_array( $sanitized_params ) ) {
-				foreach ( $sanitized_params as $key => $value ) {
-					$sanitized_params[$key] = self::sanitize_data_item( $key, $sanitized_params[ $key ] );
-				}
-			}
+	public static function get_keys_to_block() {
+	  return self::get_wrapped_class_instance()->get_keys_to_block();
+	}
 
-			return $sanitized_params;
-		}
+	public static function log_response( $response ) {
+	  self::get_wrapped_class_instance()->log_response( $response );
+	}
 
-		/**
-		 * @param string                $key
-		 * @param string|array|stdClass $item
-		 *
-		 * @return string|array|stdClass
-		 */
-		private static function sanitize_data_item( $key, $item ) {
-			if ( is_array( $item ) || is_object( $item ) ) {
-				$item = self::sanitize_data( $item );
-			} elseif ( in_array( $key, self::get_keys_to_block(), true ) ) {
-				$item = 'UNDISCLOSED';
-			}
+	public static function log_error( $message ) {
+	  self::get_wrapped_class_instance()->log_error( $message );
+	}
 
-			return $item;
-		}
+	public static function log_xml_rpc( $data ) {
+	  self::get_wrapped_class_instance()->log_xml_rpc( $data );
+	}
 
-		/**
-		 * @param $url
-		 *
-		 * @return mixed
-		 */
-		public static function sanitize_url( $url ) {
-			$original_url_parsed = wpml_parse_url( $url, PHP_URL_QUERY );
-			parse_str( $original_url_parsed, $original_query_vars );
+	public static function get_log( ) {
+	  return self::get_wrapped_class_instance()->get_log();
+	}
 
-			$sanitized_query_vars = self::sanitize_data( $original_query_vars );
+	public static function clear_log( ) {
+	  self::get_wrapped_class_instance()->clear_log();
+	}
 
-			return add_query_arg( $sanitized_query_vars, $url );
-		}
+	public static function is_logging_enabled( ) {
+	  return self::get_wrapped_class_instance()->is_logging_enabled();
+	}
 
-		public static function set_logging_state( $state ) {
-			global $sitepress;
-				
-			$sitepress->set_setting( 'tp-com-logging', $state );
-			$sitepress->save_settings( );
-		}
-		
-		public static function add_com_log_link( ) {
-			if ( '' !== self::get_log() ) {
-				$url = esc_attr( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=com-log' );
-				?>
-				<p style="margin-top: 20px;">
-				    <?php printf(__('For retrieving debug information for communication between your site and the translation system, use the <a href="%s">communication log</a> page.', 'wpml-translation-management'), $url ); ?>
-				</p>
-				<?php
-			}
-		}
-		
-		private static function now( ) {
-			return date( 'm/d/Y h:i:s a', time() );
-		}
-		
-		private static function add_to_log( $string ) {
-			
-			if ( self::is_logging_enabled( ) ) {
-				
-				$max_log_length = 10000;
-				
-				$string = self::now( ) . ' - ' . $string;
-				
-				$log = self::get_log( );
-				$log .= $string;
-				$log .= PHP_EOL;
-				
-				$log_length = strlen( $log );
-				if ( $log_length > $max_log_length ) {
-					$log = substr( $log, $log_length - $max_log_length );
-				}
-				
-				self::save_log( $log );
-			}
-		}
-		
-		private static function save_log( $log ) {
-			update_option( 'wpml_tp_com_log', $log, 'no');
-		}
+	/**
+	 * @param string|array|stdClass $params
+	 *
+	 * @return array|stdClass
+	 */
+	public static function sanitize_data( $params ) {
+	  return self::get_wrapped_class_instance()->sanitize_data( $params );
+	}
 
-		
+	/**
+	 * @param $url
+	 *
+	 * @return mixed
+	 */
+	public static function sanitize_url( $url ) {
+	  return self::get_wrapped_class_instance()->sanitize_url( $url );
+	}
+
+	public static function set_logging_state( $state ) {
+	  self::get_wrapped_class_instance()->set_logging_state( $state );
+	}
+
+	public static function add_com_log_link() {
+	  self::get_wrapped_class_instance()->add_com_log_link();
 	}
 }

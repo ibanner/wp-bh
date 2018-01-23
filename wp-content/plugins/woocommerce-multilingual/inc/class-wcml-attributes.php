@@ -2,14 +2,27 @@
 
 class WCML_Attributes{
 
+    /** @var woocommerce_wpml */
     private $woocommerce_wpml;
+    /** @var Sitepress */
     private $sitepress;
+    /** @var wpdb */
     private $wpdb;
 
-    public function __construct( &$woocommerce_wpml, &$sitepress, &$wpdb ){
+    /**
+     * WCML_Attributes constructor.
+     *
+     * @param woocommerce_wpml $woocommerce_wpml
+     * @param SitePress $sitepress
+     * @param wpdb $wpdb
+     */
+    public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress, wpdb $wpdb ){
         $this->woocommerce_wpml = $woocommerce_wpml;
         $this->sitepress = $sitepress;
         $this->wpdb = $wpdb;
+    }
+
+    public function add_hooks(){
 
         add_action( 'init', array( $this, 'init' ) );
 
@@ -23,12 +36,23 @@ class WCML_Attributes{
 
         add_action( 'woocommerce_before_attribute_delete', array( $this, 'refresh_taxonomy_translations_cache' ), 10, 3 );
 
-        if( ( defined('WC_VERSION') && version_compare( WC_VERSION , '3.0.0', '<' ) ) ){
+        $deprecated_wc = $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WC_VERSION' ), '3.0.0', '<' );
+        if ( $deprecated_wc ) {
             add_filter( 'woocommerce_get_product_attributes', array( $this, 'filter_adding_to_cart_product_attributes_names' ) );
         }else{
             add_filter( 'woocommerce_product_get_attributes', array( $this, 'filter_adding_to_cart_product_attributes_names' ) );
         }
 
+	    if ( $this->woocommerce_wpml->products->is_product_display_as_translated_post_type() ) {
+		    add_filter( 'woocommerce_available_variation', array(
+			    $this,
+			    'filter_available_variation_attribute_values_in_current_language'
+		    ) );
+		    add_filter( 'get_post_metadata', array(
+			    $this,
+			    'filter_product_variation_post_meta_attribute_values_in_current_language'
+		    ), 10, 4 );
+	    }
     }
 
     public function init(){
@@ -247,7 +271,7 @@ class WCML_Attributes{
             }elseif( !$orig_product_attr[ 'is_taxonomy' ] ){
                 if( isset( $trnsl_product_attrs[ $key ] ) ){
                     $orig_product_attrs[ $key_to_save ][ 'value' ] = $trnsl_product_attrs[ $key ][ 'value' ];
-                }else{
+                }elseif( !empty( $trnsl_product_attrs ) ){
                     unset ( $orig_product_attrs[ $key_to_save ] );
                 }
             }
@@ -282,6 +306,7 @@ class WCML_Attributes{
 
     public function sync_default_product_attr( $orig_post_id, $transl_post_id, $lang ){
         $original_default_attributes = get_post_meta( $orig_post_id, '_default_attributes', true );
+
         if( !empty( $original_default_attributes ) ){
             $unserialized_default_attributes = array();
             foreach(maybe_unserialize( $original_default_attributes ) as $attribute => $default_term_slug ){
@@ -306,6 +331,7 @@ class WCML_Attributes{
 
                     if( isset( $unserialized_orig_product_attributes[ $attribute ] ) ){
                         $orig_attr_values = explode( '|', $unserialized_orig_product_attributes[ $attribute ][ 'value' ] );
+	                    $orig_attr_values = array_map( 'trim', $orig_attr_values );
 
                         foreach( $orig_attr_values as $key => $orig_attr_value ){
                             $orig_attr_value_sanitized = strtolower( sanitize_title ( $orig_attr_value ) );
@@ -336,7 +362,14 @@ class WCML_Attributes{
         }
 
         $where = array( 'post_id' => $transl_post_id, 'meta_key' => '_default_attributes' );
-        $this->wpdb->update( $this->wpdb->postmeta, $data, $where );
+
+        $translated_product_meta = get_post_meta( $transl_post_id );
+	    if ( isset( $translated_product_meta['_default_attributes'] ) ) {
+		    $this->wpdb->update( $this->wpdb->postmeta, $data, $where );
+	    } else {
+		    $this->wpdb->insert( $this->wpdb->postmeta, array_merge( $data, $where ) );
+	    }
+
     }
 
     /*
@@ -491,6 +524,12 @@ class WCML_Attributes{
 
         if( isset( $args['attribute'] ) && isset( $args['product'] ) ){
             $args['attribute'] = $this->filter_attribute_name( $args['attribute'],  WooCommerce_Functions_Wrapper::get_product_id( $args['product'] ) );
+
+            if( $this->woocommerce_wpml->products->is_product_display_as_translated_post_type() ){
+	            foreach( $args[ 'options' ] as $key => $attribute_value ){
+		            $args[ 'options' ][ $key ] = $this->get_attribute_term_translation_in_current_language( $args[ 'attribute' ], $attribute_value );
+	            }
+            }
         }
 
         return $args;
@@ -501,18 +540,19 @@ class WCML_Attributes{
      * needs handle special chars accordingly
      * https://onthegosystems.myjetbrains.com/youtrack/issue/wcml-1785
      */
-    function filter_attribute_name( $attribute_name, $product_id, $return_sanitized = false ){
+    function filter_attribute_name( $attribute_name, $product_id, $return_sanitized = false ) {
 
-        if( !is_admin() && $product_id ) {
+        if ( ! is_admin() && $product_id ) {
             $orig_lang = $this->woocommerce_wpml->products->get_original_product_language( $product_id );
-            if ( in_array( $orig_lang, array('de', 'da' ) ) ) {
+            $current_language = $this->sitepress->get_current_language();
+
+            if ( in_array( $orig_lang, array( 'de', 'da' ) ) && $current_language !== $orig_lang ) {
                 $attribute_name = $this->sitepress->locale_utils->filter_sanitize_title( remove_accents( $attribute_name ), $attribute_name );
                 remove_filter( 'sanitize_title', array( $this->sitepress->locale_utils, 'filter_sanitize_title' ), 10 );
-                return $attribute_name;
             }
         }
 
-        if( $return_sanitized ){
+        if ( $return_sanitized ) {
             $attribute_name = sanitize_title( $attribute_name );
         }
 
@@ -531,5 +571,99 @@ class WCML_Attributes{
 
         return $attributes;
     }
+
+    public function is_a_taxonomy( $attribute ){
+
+        if(
+            (
+                $attribute instanceof WC_Product_Attribute &&
+                $attribute->is_taxonomy()
+            ) ||
+            (
+                is_array( $attribute ) &&
+                $attribute['is_taxonomy']
+            )
+        ){
+            return true;
+        }
+
+        return false;
+    }
+
+	/**
+	 *
+	 * @param array $args
+	 *
+	 * @return array
+	 */
+	public function filter_available_variation_attribute_values_in_current_language( $args ) {
+
+		foreach ( $args['attributes'] as $attribute_key => $attribute_value ) {
+
+			$args['attributes'][ $attribute_key ] = $this->get_attribute_term_translation_in_current_language( substr( $attribute_key, 10 ), $attribute_value );
+		}
+
+		return $args;
+	}
+
+	/**
+	 * @param null $value
+	 * @param int $object_id
+	 * @param string $meta_key
+	 * @param bool $single
+	 *
+	 * @return array
+	 */
+	public function filter_product_variation_post_meta_attribute_values_in_current_language( $value, $object_id, $meta_key, $single ) {
+
+		if ( 'product_variation' === get_post_type( $object_id ) && '' === $meta_key ) {
+
+			remove_filter( 'get_post_metadata', array(
+				$this,
+				'filter_product_variation_post_meta_attribute_values_in_current_language'
+			), 10, 4 );
+
+			$all_meta = get_post_meta( $object_id );
+
+			add_filter( 'get_post_metadata', array(
+				$this,
+				'filter_product_variation_post_meta_attribute_values_in_current_language'
+			), 10, 4 );
+
+			if ( $all_meta ) {
+				foreach ( $all_meta as $meta_key => $meta_value ) {
+					if ( 'attribute_' === substr( $meta_key, 0, 10 ) ) {
+						foreach ( $meta_value as $key => $value ) {
+							$all_meta[ $meta_key ][ $key ] = $this->get_attribute_term_translation_in_current_language( substr( $meta_key, 10 ), $value );
+						}
+					}
+				}
+
+				return $all_meta;
+			}
+
+		}
+
+		return $value;
+
+	}
+
+	/**
+	 *
+	 * @param string $attribute_taxonomy
+	 * @param string $attribute_value
+	 *
+	 * @return string
+	 */
+	private function get_attribute_term_translation_in_current_language( $attribute_taxonomy, $attribute_value ) {
+
+		if( taxonomy_exists( $attribute_taxonomy ) ){
+			$term = get_term_by( 'slug', $attribute_value, $attribute_taxonomy );
+			$attribute_value = $term->slug;
+		}
+
+		return $attribute_value;
+	}
+
 
 }

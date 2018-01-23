@@ -59,15 +59,15 @@ class WCML_Custom_Prices{
 
         if(!empty($product_meta['_wcml_custom_prices_status'][0])){
 
-            $prices_keys = array(
+            $prices_keys = apply_filters( 'wcml_price_custom_fields_filtered', array(
                 '_price', '_regular_price', '_sale_price',
                 '_min_variation_price', '_max_variation_price',
                 '_min_variation_regular_price', '_max_variation_regular_price',
-                '_min_variation_sale_price', '_max_variation_sale_price');
+                '_min_variation_sale_price', '_max_variation_sale_price' ));
 
             foreach($prices_keys as $key){
 
-                if(!empty($product_meta[$key . '_' . $currency][0])){
+                if( isset($product_meta[$key . '_' . $currency][0])){
                     $custom_prices[$key] = $product_meta[$key . '_' . $currency][0];
                 }
 
@@ -80,8 +80,7 @@ class WCML_Custom_Prices{
         $current__price_value = $custom_prices['_price'];
 
         // update sale price
-        if(!empty($custom_prices['_sale_price'])){
-
+        if(isset($custom_prices['_sale_price']) && is_numeric($custom_prices['_sale_price']) ){
             if(!empty($product_meta['_wcml_schedule_' . $currency][0])){
                 // custom dates
                 if(!empty($product_meta['_sale_price_dates_from_' . $currency][0]) && !empty($product_meta['_sale_price_dates_to_' . $currency][0])){

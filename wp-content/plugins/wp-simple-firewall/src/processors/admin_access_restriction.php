@@ -14,12 +14,12 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 		public function run() {
 			/** @var ICWP_WPSF_FeatureHandler_AdminAccessRestriction $oFO */
 			$oFO = $this->getFeature();
-			$oWp = $this->loadWpFunctions();
+			$oWp = $this->loadWp();
 
 			add_filter( $oFO->prefix( 'has_permission_to_manage' ), array( $oFO, 'doCheckHasPermissionToSubmit' ) );
 			add_filter( $oFO->prefix( 'has_permission_to_view' ), array( $oFO, 'doCheckHasPermissionToSubmit' ) );
 
-			if ( ! $oFO->getIsUpgrading() && ! $oWp->getIsLoginRequest() ) {
+			if ( !$oFO->getIsUpgrading() && !$oWp->isRequestUserLogin() ) {
 				add_filter( 'pre_update_option', array( $this, 'blockOptionsSaves' ), 1, 3 );
 			}
 
@@ -82,8 +82,8 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 				$oWpUsers = $this->loadWpUsers();
 				$oUser = $oWpUsers->getUserById( $nId );
 				if ( $oUser && $oWpUsers->isUserAdmin( $oUser ) ) {
-					$this->loadWpFunctions()
-						->wpDie( 'Sorry, deleting administrators is currently restricted to your Security Admin' );
+					$this->loadWp()
+						 ->wpDie( 'Sorry, deleting administrators is currently restricted to your Security Admin' );
 				}
 			}
 		}
@@ -160,7 +160,7 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 				return;
 			}
 
-			$sCurrentPage = $this->loadWpFunctions()->getCurrentPage();
+			$sCurrentPage = $this->loadWp()->getCurrentPage();
 			$sCurrentGetPage = $this->loadDataProcessor()->FetchGet( 'page' );
 			if ( !in_array( $sCurrentPage, $oFO->getOptionsPagesToRestrict() ) || !empty( $sCurrentGetPage ) ) {
 				return;
@@ -175,7 +175,7 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 				'hrefs' => array(
 					'setting_page' => sprintf(
 						'<a href="%s" title="%s">%s</a>',
-						$oFO->getFeatureAdminPageUrl(),
+						$oFO->getUrl_AdminPage(),
 						_wpsf__( 'Admin Access Login' ),
 						sprintf( _wpsf__('Go here to manage settings and authenticate with the %s plugin.'), $this->getController()->getHumanName() )
 					)
@@ -195,7 +195,7 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 				return;
 			}
 
-			$sCurrentPage = $this->loadWpFunctions()->getCurrentPage();
+			$sCurrentPage = $this->loadWp()->getCurrentPage();
 			if ( !in_array( $sCurrentPage, $this->getUserPagesToRestrict() ) ) {
 				return;
 			}
@@ -210,7 +210,7 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 				'hrefs' => array(
 					'setting_page' => sprintf(
 						'<a href="%s" title="%s">%s</a>',
-						$oFO->getFeatureAdminPageUrl(),
+						$oFO->getUrl_AdminPage(),
 						_wpsf__( 'Security Admin Login' ),
 						sprintf( _wpsf__('Go here to manage settings and authenticate with the %s plugin.'), $this->getController()->getHumanName() )
 					)
@@ -224,7 +224,7 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 		 */
 		protected function getUserPagesToRestrict() {
 			return array(
-				'user-new.php',
+//				'user-new.php',
 				'user-edit.php',
 				'users.php',
 			);
@@ -240,28 +240,25 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 		 * @return mixed
 		 */
 		public function blockOptionsSaves( $mNewOptionValue, $sOptionKey, $mOldValue ) {
-			if ( !$this->getIsOptionKeyForThisPlugin( $sOptionKey ) ) {
-				// Now we test certain other options saving based on where it's restricted
-				if ( !$this->getIsSavingOptionRestricted( $sOptionKey ) ) {
-					return $mNewOptionValue;
+
+			$bSavingIsPermitted = true;
+
+			if ( $this->isOptionForThisPlugin( $sOptionKey ) || $this->isOptionRestricted( $sOptionKey ) ) {
+				$bSavingIsPermitted = $this->isSecurityAdmin();
+
+				if ( !$bSavingIsPermitted ) {
+					$this->doStatIncrement( 'option.save.blocked' );
 				}
 			}
 
-			if ( !$this->isSecurityAdmin() ) {
-//				$sAuditMessage = sprintf( _wpsf__('Attempt to save/update option "%s" was blocked.'), $sOption );
-//			    $this->addToAuditEntry( $sAuditMessage, 3, 'admin_access_option_block' );
-				$this->doStatIncrement( 'option.save.blocked' ); // TODO: Display stats
-				return $mOldValue;
-			}
-
-			return $mNewOptionValue;
+			return $bSavingIsPermitted ? $mNewOptionValue : $mOldValue;
 		}
 
 		/**
 		 * @param string $sOptionKey
 		 * @return int
 		 */
-		protected function getIsOptionKeyForThisPlugin( $sOptionKey ) {
+		protected function isOptionForThisPlugin( $sOptionKey ) {
 			return preg_match( $this->getOptionRegexPattern(), $sOptionKey );
 		}
 
@@ -269,7 +266,7 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 		 * @param string $sOptionKey
 		 * @return int
 		 */
-		protected function getIsSavingOptionRestricted( $sOptionKey ) {
+		protected function isOptionRestricted( $sOptionKey ) {
 			$bRestricted = false;
 			/** @var ICWP_WPSF_FeatureHandler_AdminAccessRestriction $oFO */
 			$oFO = $this->getFeature();
@@ -380,7 +377,9 @@ if ( !class_exists( 'ICWP_WPSF_Processor_AdminAccessRestriction', false ) ):
 		 */
 		protected function getOptionRegexPattern() {
 			if ( !isset( $this->sOptionRegexPattern ) ) {
-				$this->sOptionRegexPattern = '/^'. $this->getFeature()->getOptionStoragePrefix() . '.*_options$/';
+				$this->sOptionRegexPattern = sprintf( '/^%s.*_options$/',
+					$this->getFeature()->getOptionStoragePrefix()
+				);
 			}
 			return $this->sOptionRegexPattern;
 		}

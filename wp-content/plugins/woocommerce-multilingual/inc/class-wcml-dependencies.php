@@ -27,6 +27,11 @@ class WCML_Dependencies{
         } elseif(version_compare(ICL_SITEPRESS_VERSION, '3.4', '<')){
             add_action('admin_notices', array($this, '_old_wpml_warning'));
             $this->allok = false;
+        }elseif ( !$sitepress->setup() ) {
+	        if ( !( isset( $_GET['page'] ) && ICL_PLUGIN_FOLDER.'/menu/languages.php' === $_GET['page'] ) ) {
+		        add_action('admin_notices', array($this, '_wpml_not_installed_warning'));
+	        }
+	        $this->allok = false;
         }
 
         if( !class_exists( 'WooCommerce' ) || !function_exists( 'WC' ) ){
@@ -67,6 +72,7 @@ class WCML_Dependencies{
         
         if($this->allok){
             $this->check_for_incompatible_permalinks();
+	        $this->check_for_transaltable_default_taxonomies();
         }
 
         if(isset($sitepress)){
@@ -86,6 +92,13 @@ class WCML_Dependencies{
         <div class="message error"><p><?php printf(__('WooCommerce Multilingual is enabled but not effective. It is not compatible with  <a href="%s">WPML</a> versions prior %s.',
                     'woocommerce-multilingual'), WCML_Links::generate_tracking_link('https://wpml.org/'), '3.4'); ?></p></div>
     <?php }
+
+	function _wpml_not_installed_warning() {
+		?>
+        <div class="message error">
+            <p><?php printf( __( 'WooCommerce Multilingual is enabled but not effective. Please finish the installation of WPML first.', 'woocommerce-multilingual' ) ); ?></p></div>
+		<?php
+	}
 
     function _old_wc_warning(){
         ?>
@@ -110,7 +123,42 @@ class WCML_Dependencies{
         <div class="message error"><p><?php printf(__('WooCommerce Multilingual is enabled but not effective. It is not compatible with  <a href="%s">WPML Media</a> versions prior %s.',
                     'woocommerce-multilingual'), WCML_Links::generate_tracking_link('https://wpml.org/'), '2.1'); ?></p></div>
     <?php }
-    
+
+	/**
+	 * Adds default taxonomies notice.
+	 */
+    public function check_for_transaltable_default_taxonomies() {
+
+        $default_taxonomies = array( 'product_cat', 'product_tag', 'product_shipping_class' );
+        $show_error         = false;
+
+        foreach ( $default_taxonomies as $taxonomy ) {
+            if ( ! is_taxonomy_translated( $taxonomy ) ) {
+                $show_error = true;
+                break;
+            }
+        }
+
+        if ( $show_error ) {
+            $support_link = '<a href="https://wpml.org/forums/forum/english-support/">' . __( 'WPML support', 'woocommerce-multilingual' ) . '</a>';
+
+            /* translators: Part 1/6 of a message telling users that some taxonomies, required for WCML to work, are not set as translatable when they should */
+            $sentences[] = _x( "Some taxonomies in your site are forced to be untranslatable. This is causing a problem when you're trying to run a multilingual WooCommerce site.", 'Default taxonomies must be translatable: 1/6', 'woocommerce-multilingual' );
+            /* translators: Part 2/6 of a message telling users that some taxonomies, required for WCML to work, are not set as translatable when they should */
+            $sentences[] = _x( 'A plugin or the theme are probably doing this.', 'Default taxonomies must be translatable: 2/6', 'woocommerce-multilingual' );
+            /* translators: Part 3/6 of a message telling users that some taxonomies, required for WCML to work, are not set as translatable when they should */
+            $sentences[] = _x( 'What you can do:', 'Default taxonomies must be translatable: 3/6', 'woocommerce-multilingual' );
+            /* translators: Part 4/6 of a message telling users that some taxonomies, required for WCML to work, are not set as translatable when they should */
+            $sentences[] = _x( '1. Temporarily disable plugins and see if this message disappears.', 'Default taxonomies must be translatable: 4/6', 'woocommerce-multilingual' );
+            /* translators: Part 5/6 of a message telling users that some taxonomies, required for WCML to work, are not set as translatable when they should */
+            $sentences[] = _x( '2. Temporarily switch the theme and see if this message disappears.', 'Default taxonomies must be translatable: 5/6', 'woocommerce-multilingual' );
+            /* translators: Part 6/6 of a message telling users that some taxonomies, required for WCML to work, are not set as translatable when they should */
+            $sentences[] = sprintf( _x( "It's best to contact %s, tell that you're getting this message and offer to send a Duplicator copy of the site. We will work with the theme/plugin author and fix the problem for good. In the meanwhile, we'll give you a temporary solution, so you're not stuck.", 'Default taxonomies must be translatable: 6/6', 'woocommerce-multilingual' ), $support_link );
+
+            $this->err_message = '<div class="message error"><p>' . implode( '</p><p>', $sentences ) . '</p></div>';
+            add_action( 'admin_notices', array( $this, 'plugin_notice_message' ) );
+        }
+    }
       
     /**
     * Adds admin notice.
@@ -151,9 +199,9 @@ class WCML_Dependencies{
             return;
         }
         
-        $message = sprintf('Because this site uses the default permalink structure, you cannot use slug translation for product permalinks.', 'woocommerce-multilingual');
+        $message = __('Because this site uses the default permalink structure, you cannot use slug translation for product permalinks.', 'woocommerce-multilingual');
         $message .= '<br /><br />';
-        $message .= sprintf('Please choose a different permalink structure or disable slug translation.', 'woocommerce-multilingual');
+        $message .= __('Please choose a different permalink structure or disable slug translation.', 'woocommerce-multilingual');
         $message .= '<br /><br />';            
         $message .= '<a href="' . admin_url('options-permalink.php') . '">' . __('Permalink settings', 'woocommerce-multilingual') . '</a>';
         $message .= ' | ';
@@ -233,16 +281,16 @@ class WCML_Dependencies{
     }
     
     public function check_wpml_config(){
-        global $sitepress_settings;
-        
-        if(empty($sitepress_settings)) return;
-        
+        global $sitepress_settings, $sitepress, $woocommerce_wpml;
+
+        if(empty($sitepress_settings)  || ! $this->check() ) return;
+
         $file = realpath(WCML_PLUGIN_PATH  . '/wpml-config.xml');
         if(!file_exists($file)){
             $this->xml_config_errors[] = __('wpml-config.xml file missing from WooCommerce Multilingual folder.', 'woocommerce-multilingual');
         }else{
-            $config = icl_xml2array(file_get_contents($file));    
-            
+            $config = icl_xml2array(file_get_contents($file));
+
             if(isset($config['wpml-config'])){
 
                 //custom-fields
@@ -254,21 +302,21 @@ class WCML_Dependencies{
                             $cfs[] = $cf;
                         }
                     }
-                    
+
                     if($cfs)
                     foreach($cfs as $cf){
-                        if(!isset($sitepress_settings['translation-management']['custom_fields_translation'][$cf['value']])) continue; 
-                                               
+                        if(!isset($sitepress_settings['translation-management']['custom_fields_translation'][$cf['value']])) continue;
+
                         $effective_config_value = $sitepress_settings['translation-management']['custom_fields_translation'][$cf['value']];
                         $correct_config_value   = $cf['attr']['action'] == 'copy' ? 1 : ($cf['attr']['action'] == 'translate' ? 2: 0);
-                        
+
                         if($effective_config_value != $correct_config_value){
                             $this->xml_config_errors[] = sprintf(__('Custom field %s configuration from wpml-config.xml file was altered!', 'woocommerce-multilingual'), '<i>' . $cf['value'] . '</i>');
                         }
                     }
-                    
+
                 }
-                
+
                 //custom-types
                 if(isset($config['wpml-config']['custom-types'])){
                     if(isset($config['wpml-config']['custom-types']['custom-type']['value'])){ //single
@@ -278,18 +326,24 @@ class WCML_Dependencies{
                             $cts[] = $cf;
                         }
                     }
-                    
-                    if($cts)
-                    foreach($cts as $ct){
-                        if(!isset($sitepress_settings['custom_posts_sync_option'][$ct['value']])) continue;
-                        $effective_config_value = $sitepress_settings['custom_posts_sync_option'][$ct['value']];
-                        $correct_config_value   = $ct['attr']['translate'];
-                        
-                        if($effective_config_value != $correct_config_value){
-                            $this->xml_config_errors[] = sprintf(__('Custom type %s configuration from wpml-config.xml file was altered!', 'woocommerce-multilingual'), '<i>' . $ct['value'] . '</i>');
-                        }
+
+                    if($cts){
+	                    foreach($cts as $ct){
+		                    if(!isset($sitepress_settings['custom_posts_sync_option'][$ct['value']])) continue;
+		                    $effective_config_value = $sitepress_settings['custom_posts_sync_option'][$ct['value']];
+		                    $correct_config_value   = $ct['attr']['translate'];
+
+
+			                    if ('product' === $ct['value'] && $woocommerce_wpml->products->is_product_display_as_translated_post_type() ) {
+				                    $correct_config_value = WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED;
+			                    }
+
+
+		                    if($effective_config_value != $correct_config_value){
+			                    $this->xml_config_errors[] = sprintf(__('Custom type %s configuration from wpml-config.xml file was altered!', 'woocommerce-multilingual'), '<i>' . $ct['value'] . '</i>');
+		                    }
+	                    }
                     }
-                    
                 }
 
                 //taxonomies
@@ -301,22 +355,26 @@ class WCML_Dependencies{
                             $txs[] = $cf;
                         }
                     }
-                    
+
                     if($txs)
                     foreach($txs as $tx){
                         if(!isset($sitepress_settings['taxonomies_sync_option'][$tx['value']])) continue;
                         $effective_config_value = $sitepress_settings['taxonomies_sync_option'][$tx['value']];
                         $correct_config_value   = $tx['attr']['translate'];
-                        
+
+	                    if( method_exists( $sitepress, 'is_display_as_translated_taxonomy' ) && $sitepress->is_display_as_translated_taxonomy( $tx['value'] ) ){
+		                    $correct_config_value = WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED;
+                        }
+
                         if($effective_config_value != $correct_config_value){
                             $this->xml_config_errors[] = sprintf(__('Custom taxonomy %s configuration from wpml-config.xml file was altered!', 'woocommerce-multilingual'), '<i>' . $tx['value'] . '</i>');
                         }
                     }
-                    
+
                 }
             }
         }
-        
+
     }
 
     public function required_plugin_install_link($repository = 'wpml'){

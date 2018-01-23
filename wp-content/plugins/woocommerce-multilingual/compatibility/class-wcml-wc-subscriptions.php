@@ -4,48 +4,84 @@ class WCML_WC_Subscriptions{
 
 	private $new_subscription = false;
 
-	function __construct(){
+	/** @var woocommerce_wpml */
+	private $woocommerce_wpml;
+	/** @var wpdb */
+	private $wpdb;
 
-		add_action('init', array($this, 'init'),9);
-		add_filter('wcml_variation_term_taxonomy_ids',array($this,'wcml_variation_term_taxonomy_ids'));
-		add_filter('woocommerce_subscription_lengths', array($this, 'woocommerce_subscription_lengths'), 10, 2);
+	function __construct(  woocommerce_wpml $woocommerce_wpml, wpdb $wpdb ){
+		$this->woocommerce_wpml = $woocommerce_wpml;
+		$this->wpdb             = $wpdb;
+	}
 
-		add_filter('wcml_register_endpoints_query_vars', array($this, 'register_endpoint' ), 10, 3 );
-		add_filter('wcml_endpoint_permalink_filter', array($this, 'endpoint_permalink_filter'), 10, 2);
+	public function add_hooks(){
+
+		add_action( 'init', array( $this, 'init' ), 9 );
+		add_filter( 'wcml_variation_term_taxonomy_ids', array( $this, 'wcml_variation_term_taxonomy_ids' ) );
+		add_filter( 'woocommerce_subscription_lengths', array( $this, 'woocommerce_subscription_lengths' ), 10, 2 );
+
+		add_filter( 'wcml_register_endpoints_query_vars', array( $this, 'register_endpoint' ), 10, 3 );
+		add_filter( 'wcml_endpoint_permalink_filter', array( $this, 'endpoint_permalink_filter' ), 10, 2 );
 
 		//custom prices
 		add_filter( 'wcml_custom_prices_fields', array( $this, 'set_prices_fields' ), 10, 2 );
 		add_filter( 'wcml_custom_prices_strings', array( $this, 'set_labels_for_prices_fields' ), 10, 2 );
 		add_filter( 'wcml_custom_prices_fields_labels', array( $this, 'set_labels_for_prices_fields' ), 10, 2 );
-		add_filter( 'wcml_update_custom_prices_values', array( $this, 'update_custom_prices_values' ), 10 ,3 );
-		add_action( 'wcml_after_custom_prices_block', array( $this, 'new_subscription_prices_block') );
+		add_filter( 'wcml_update_custom_prices_values', array( $this, 'update_custom_prices_values' ), 10, 3 );
+		add_action( 'wcml_after_custom_prices_block', array( $this, 'new_subscription_prices_block' ) );
 
-		// reenable coupons for subscriptions when multicurrency is on
-		add_action('woocommerce_subscription_cart_after_grouping', array($this, 'woocommerce_subscription_cart_after_grouping'));
+		add_action( 'woocommerce_subscriptions_product_options_pricing', array( $this, 'show_pointer_info' ) );
+		add_action( 'woocommerce_variable_subscription_pricing', array( $this, 'show_pointer_info' ) );
 
-		add_action( 'woocommerce_subscriptions_product_options_pricing',   array( $this, 'show_pointer_info' ) );
-		add_action( 'woocommerce_variable_subscription_pricing',   array( $this, 'show_pointer_info' ) );
+		add_filter( 'woocommerce_subscriptions_product_price', array(
+			$this,
+			'woocommerce_subscription_price_from'
+		), 10, 2 );
+
 	}
 
 	function init(){
 		if( !is_admin() ){
-			add_filter('woocommerce_subscriptions_product_sign_up_fee', array($this, 'product_price_filter'), 10, 2);
+			add_filter( 'woocommerce_subscriptions_product_sign_up_fee', array(
+				$this,
+				'subscriptions_product_sign_up_fee_filter'
+			), 10, 2 );
 
 			add_action( 'woocommerce_before_calculate_totals', array( $this, 'maybe_backup_recurring_carts'), 1 );
 			add_action( 'woocommerce_after_calculate_totals', array( $this, 'maybe_restore_recurring_carts'), 200 );
+
+			$this->maybe_force_client_currency_for_resubscribe_subscription();
 		}
 	}
 
-	function product_price_filter($subscription_sign_up_fee, $product){
 
-		$subscription_sign_up_fee = apply_filters('wcml_raw_price_amount', $subscription_sign_up_fee );
+	/**
+	 * Filter Subscription Sign-up fee cost
+	 *
+	 * @param string $subscription_sign_up_fee
+	 * @param WC_Product $product
+	 * @return string
+	 */
+	function subscriptions_product_sign_up_fee_filter( $subscription_sign_up_fee, $product ) {
+
+		if ( wcml_is_multi_currency_on() ) {
+			$currency = $this->woocommerce_wpml->multi_currency->get_client_currency();
+
+			if ( $currency !== get_option( 'woocommerce_currency' ) ) {
+				if ( get_post_meta( $product->get_id(), '_wcml_custom_prices_status', true ) ) {
+					$subscription_sign_up_fee = get_post_meta( $product->get_id(), '_subscription_sign_up_fee_' . $currency, true );
+				} else {
+					$subscription_sign_up_fee = apply_filters( 'wcml_raw_price_amount', $subscription_sign_up_fee );
+				}
+			}
+		}
 
 		return $subscription_sign_up_fee;
 	}
 
 	function wcml_variation_term_taxonomy_ids($get_variation_term_taxonomy_ids){
-		global $wpdb;
-		$get_variation_term_taxonomy_id = $wpdb->get_var("SELECT tt.term_taxonomy_id FROM $wpdb->terms AS t LEFT JOIN $wpdb->term_taxonomy AS tt ON t.term_id = tt.term_id WHERE t.slug = 'variable-subscription'");
+
+		$get_variation_term_taxonomy_id = $this->wpdb->get_var("SELECT tt.term_taxonomy_id FROM {$this->wpdb->terms} AS t LEFT JOIN {$this->wpdb->term_taxonomy} AS tt ON t.term_id = tt.term_id WHERE t.slug = 'variable-subscription'");
 
 		if(!empty($get_variation_term_taxonomy_id)){
 			$get_variation_term_taxonomy_ids[] = $get_variation_term_taxonomy_id;
@@ -70,15 +106,6 @@ class WCML_WC_Subscriptions{
 		}
 
 		return isset($new_subscription_ranges) ? $new_subscription_ranges : $subscription_ranges;
-	}
-
-	public function woocommerce_subscription_cart_after_grouping() {
-		global $woocommerce_wpml;
-
-		if( $woocommerce_wpml->settings['enable_multi_currency'] == WCML_MULTI_CURRENCIES_INDEPENDENT ){
-			remove_action('woocommerce_before_calculate_totals', 'WC_Subscriptions_Coupon::remove_coupons', 10);
-		}
-
 	}
 
 	function set_prices_fields( $fields, $product_id ){
@@ -116,23 +143,28 @@ class WCML_WC_Subscriptions{
 	}
 
 	function is_subscriptions_product( $product_id ){
-		global $wpdb;
-		$get_variation_term_taxonomy_ids = $wpdb->get_col("SELECT tt.term_taxonomy_id FROM $wpdb->terms AS t LEFT JOIN $wpdb->term_taxonomy AS tt ON t.term_id = tt.term_id WHERE t.slug IN ( 'subscription', 'variable-subscription' ) AND tt.taxonomy = 'product_type'");
+
+		$get_variation_term_taxonomy_ids = $this->wpdb->get_col("SELECT tt.term_taxonomy_id FROM {$this->wpdb->terms} AS t LEFT JOIN {$this->wpdb->term_taxonomy} AS tt ON t.term_id = tt.term_id WHERE t.slug IN ( 'subscription', 'variable-subscription' ) AND tt.taxonomy = 'product_type'");
 
 		if( get_post_type( $product_id ) == 'product_variation' ){
 			$product_id = wp_get_post_parent_id( $product_id );
 		}
 
-		$is_subscriptions_product = $wpdb->get_var($wpdb->prepare("SELECT count(object_id) FROM $wpdb->term_relationships WHERE object_id = %d AND term_taxonomy_id IN (".join(',',$get_variation_term_taxonomy_ids).")",$product_id));
+		$is_subscriptions_product = $this->wpdb->get_var(
+			$this->wpdb->prepare(
+				"SELECT count(object_id) FROM {$this->wpdb->term_relationships}
+				WHERE object_id = %d AND term_taxonomy_id IN (" . wpml_prepare_in( $get_variation_term_taxonomy_ids, '%d' ) . ")",
+				$product_id )
+		);
 		return $is_subscriptions_product;
 	}
 
 	function new_subscription_prices_block( $product_id ){
-		global $woocommerce_wpml;
+
 		if( $product_id == 'new' ){
 			$this->new_subscription = true;
 			echo '<div class="wcml_prices_if_subscription" style="display: none">';
-			$custom_prices_ui = new WCML_Custom_Prices_UI( $woocommerce_wpml, 'new' );
+			$custom_prices_ui = new WCML_Custom_Prices_UI( $this->woocommerce_wpml, 'new' );
 			$custom_prices_ui->show();
 			echo '</div>';
 			?>
@@ -177,6 +209,7 @@ class WCML_WC_Subscriptions{
 	function register_endpoint( $query_vars, $wc_vars, $obj ){
 
 		$query_vars[ 'view-subscription' ] = $obj->get_endpoint_translation( 'view-subscription',  isset( $wc_vars['view-subscription'] ) ? $wc_vars['view-subscription'] : 'view-subscription' );
+		$query_vars[ 'subscriptions' ] = $obj->get_endpoint_translation( 'subscriptions',  isset( $wc_vars['subscriptions'] ) ? $wc_vars['subscriptions'] : 'subscriptions' );
 		return $query_vars;
 	}
 
@@ -217,6 +250,43 @@ class WCML_WC_Subscriptions{
 		if( ! empty( $this->recurring_carts ) ){
 			$cart->recurring_carts = $this->recurring_carts;
 			$this->recurring_carts = null;
+		}
+	}
+
+	function woocommerce_subscription_price_from( $price, $product ){
+
+		if ( in_array( $product->get_type(), array( 'variable-subscription', 'subscription_variation' ) ) ) {
+
+			$variation_id = $product->get_meta( '_min_price_variation_id', true );
+
+			if( $variation_id && get_post_meta( $variation_id, '_wcml_custom_prices_status', true ) ){
+				$client_currency = $this->woocommerce_wpml->multi_currency->get_client_currency();
+
+				$price = get_post_meta( $variation_id, '_price_'.$client_currency, true );
+			}else{
+				$price = apply_filters( 'wcml_raw_price_amount', $price );
+			}
+
+		}
+
+		return $price;
+	}
+
+	/**
+	 * Force client currency for resubscribe subscription
+	 *
+	 */
+	function maybe_force_client_currency_for_resubscribe_subscription( ){
+
+		if ( wcml_is_multi_currency_on() && ( isset( $_GET['resubscribe'] ) || false !== ( $resubscribe_cart_item = wcs_cart_contains_resubscribe() ) ) ) {
+			$subscription_id = ( isset( $_GET['resubscribe'] ) ) ? (int) $_GET['resubscribe'] : $resubscribe_cart_item['subscription_resubscribe']['subscription_id'];
+
+			$subscription_currency = get_post_meta( $subscription_id, '_order_currency', true );
+			$client_currency = $this->woocommerce_wpml->multi_currency->get_client_currency();
+
+			if( $subscription_currency && $client_currency !== $subscription_currency ){
+				$this->woocommerce_wpml->multi_currency->set_client_currency( $subscription_currency );
+            }
 		}
 	}
 

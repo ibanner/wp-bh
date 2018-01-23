@@ -4,13 +4,11 @@ class WCML_Product_Bundles_Legacy{
 	/**
 	 * @var WPML_Element_Translation_Package
 	 */
-	var $tp;
-
+	private $tp;
 	/**
 	 * @var SitePress
 	 */
 	private $sitepress;
-
 	/**
 	 * @var woocommerce_wpml
 	 */
@@ -18,10 +16,17 @@ class WCML_Product_Bundles_Legacy{
 
 	/**
 	 * WCML_Product_Bundles constructor.
+	 * @param SitePress $sitepress
+	 * @param woocommerce_wpml $woocommerce_wpml
+	 * @param WPML_Element_Translation_Package $tp
 	 */
-	function __construct(  &$sitepress, &$woocommerce_wpml ){
-		$this->sitepress = $sitepress;
+	function __construct( SitePress $sitepress, woocommerce_wpml $woocommerce_wpml, WPML_Element_Translation_Package $tp ) {
+		$this->sitepress        = $sitepress;
 		$this->woocommerce_wpml = $woocommerce_wpml;
+		$this->tp               = $tp;
+	}
+
+	public function add_hooks(){
 
 		add_action( 'wcml_gui_additional_box_html', array( $this, 'custom_box_html' ), 10, 3 );
 		add_filter( 'wcml_gui_additional_box_data', array( $this, 'custom_box_html_data' ), 10, 4 );
@@ -30,16 +35,16 @@ class WCML_Product_Bundles_Legacy{
 		add_action( 'woocommerce_get_cart_item_from_session', array( $this, 'resync_bundle' ), 5, 3 );
 		add_filter( 'woocommerce_cart_loaded_from_session', array( $this, 'resync_bundle_clean' ), 10 );
 
-		if( version_compare( WCML_VERSION, '3.7.2', '>' ) ){
+		if ( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WCML_VERSION' ), '3.7.2', '>' ) ) {
 			add_filter( 'option_wpml_config_files_arr', array( $this, 'make__bundle_data_not_translatable_by_default' ), 0 );
 		}
 
 		if( is_admin() ){
-			$this->tp = new WPML_Element_Translation_Package();
 
 			add_filter( 'wpml_tm_translation_job_data', array( $this, 'append_bundle_data_translation_package' ), 10, 2 );
 			add_action( 'wpml_translation_job_saved',   array( $this, 'save_bundle_data_translation' ), 10, 3 );
 
+			add_filter( 'wcml_do_not_display_custom_fields_for_product', array( $this, 'replace_tm_editor_custom_fields_with_own_sections' ) );
 		}
 
 
@@ -327,7 +332,7 @@ class WCML_Product_Bundles_Legacy{
 
 	function resync_bundle_clean( $cart ) {
 		foreach ( $cart->cart_contents as $cart_item_key => $cart_item ) {
-			if ( isset( $cart_item[ 'bundled_items' ] ) && WooCommerce_Functions_Wrapper::get_product_type( $cart_item[ 'product_id' ] ) === 'bundle' ) {
+			if ( isset( $cart_item[ 'bundled_items' ] ) && $this->is_bundle_product( $cart_item[ 'product_id' ] ) ) {
 				if ( isset( $cart_item[ 'remapped_bundled_item_ids' ] ) ) {
 					unset( WC()->cart->cart_contents[ $cart_item_key ][ 'remapped_bundled_item_ids' ] );
 				}
@@ -368,45 +373,64 @@ class WCML_Product_Bundles_Legacy{
 
 	function save_bundle_data_translation( $post_id, $data, $job ){
 
-		remove_action( 'wcml_after_duplicate_product_post_meta', array( $this, 'sync_bundled_ids' ), 10, 2 );
+		if ( $this->is_bundle_product( $post_id ) ) {
 
-		$bundle_data = get_post_meta( $post_id, '_bundle_data', true );
+			remove_action( 'wcml_after_duplicate_product_post_meta', array( $this, 'sync_bundled_ids' ), 10, 2 );
 
-		$bundle_data_original = get_post_meta( $job->original_doc_id , '_bundle_data', true );
+			$bundle_data = get_post_meta( $post_id, '_bundle_data', true );
 
-		$translated_bundle_pieces = array();
+			$bundle_data_original = get_post_meta( $job->original_doc_id , '_bundle_data', true );
 
-		foreach( $data as $value){
+			$translated_bundle_pieces = array();
 
-			if( preg_match( '/product_bundles:([0-9]+):(.+)/', $value[ 'field_type' ], $matches ) ){
+			foreach( $data as $value){
 
-				$bundle_key = $matches[1];
-				$field      = $matches[2];
+				if( preg_match( '/product_bundles:([0-9]+):(.+)/', $value[ 'field_type' ], $matches ) ){
 
-				$key_data = $this->translate_bundle_key( $bundle_key, $job->language_code  );
+					$bundle_key = $matches[1];
+					$field      = $matches[2];
 
-				if( !isset( $bundle_data[ $key_data->tr_key ] ) ){
-					$bundle_data[ $key_data->tr_key ] = array(
-						'product_id'            => $key_data->tr_id,
-						'hide_thumbnail'        => $bundle_data_original[ $bundle_key ][ 'hide_thumbnail' ],
-						'override_title'        => $bundle_data_original[ $bundle_key ][ 'override_title' ],
-						'product_title'         => '',
-						'override_description'  => $bundle_data_original[ $bundle_key ][ 'override_description' ],
-						'product_description'   => '',
-						'optional'              => $bundle_data_original[ $bundle_key ][ 'optional' ],
-						'bundle_quantity'       => $bundle_data_original[ $bundle_key ][ 'bundle_quantity' ],
-						'bundle_quantity_max'   => $bundle_data_original[ $bundle_key ][ 'bundle_quantity_max' ],
-						'bundle_discount'       => $bundle_data_original[ $bundle_key ][ 'bundle_discount' ],
-						'visibility'            => $bundle_data_original[ $bundle_key ][ 'visibility' ],
-					);
+					$key_data = $this->translate_bundle_key( $bundle_key, $job->language_code  );
+
+					if( !isset( $bundle_data[ $key_data->tr_key ] ) ){
+						$bundle_data[ $key_data->tr_key ] = array(
+							'product_id'            => $key_data->tr_id,
+							'hide_thumbnail'        => $bundle_data_original[ $bundle_key ][ 'hide_thumbnail' ],
+							'override_title'        => $bundle_data_original[ $bundle_key ][ 'override_title' ],
+							'product_title'         => '',
+							'override_description'  => $bundle_data_original[ $bundle_key ][ 'override_description' ],
+							'product_description'   => '',
+							'optional'              => $bundle_data_original[ $bundle_key ][ 'optional' ],
+							'bundle_quantity'       => $bundle_data_original[ $bundle_key ][ 'bundle_quantity' ],
+							'bundle_quantity_max'   => $bundle_data_original[ $bundle_key ][ 'bundle_quantity_max' ],
+							'bundle_discount'       => $bundle_data_original[ $bundle_key ][ 'bundle_discount' ],
+							'visibility'            => $bundle_data_original[ $bundle_key ][ 'visibility' ],
+						);
+					}
+
+					$bundle_data[ $key_data->tr_key ][ 'product_'.$field ] = $value[ 'data' ];
+
 				}
-
-				$bundle_data[ $key_data->tr_key ][ 'product_'.$field ] = $value[ 'data' ];
-
 			}
+
+			update_post_meta( $post_id, '_bundle_data', $bundle_data );
+
 		}
 
-		update_post_meta( $post_id, '_bundle_data', $bundle_data );
-
 	}
+
+	function replace_tm_editor_custom_fields_with_own_sections( $fields ){
+		$fields[] = '_bundle_data';
+
+		return $fields;
+	}
+
+	public function is_bundle_product( $product_id ){
+		if ( 'bundle' === WooCommerce_Functions_Wrapper::get_product_type( $product_id ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
 }

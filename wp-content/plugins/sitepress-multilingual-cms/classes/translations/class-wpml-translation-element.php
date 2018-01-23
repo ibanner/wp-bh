@@ -93,8 +93,12 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 			$this->element_translations = array();
 			$translations               = $this->get_element_translations();
 			foreach ( $translations as $language_code => $element_data ) {
-				$instance                                     = $this->get_new_instance( $element_data );
-				$this->element_translations[ $language_code ] = $instance;
+
+				if ( ! isset( $element_data->element_id ) ) {
+					continue;
+				}
+
+				$this->element_translations[ $language_code ] = $this->get_new_instance( $element_data );
 			}
 		}
 
@@ -110,6 +114,9 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 		return $trid;
 	}
 
+	/**
+	 * @return string|WP_Error
+	 */
 	function get_wp_element_type() {
 		$element = $this->get_wp_object();
 		if ( is_wp_error( $element ) ) {
@@ -178,5 +185,7 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 	}
 
 	abstract function is_translatable();
+	abstract function is_display_as_translated();
 
-}
+
+	}

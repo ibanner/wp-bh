@@ -1,12 +1,16 @@
 {
   "properties": {
     "slug": "support",
-    "name": "Premium Support",
-    "show_feature_menu_item": true,
+    "name": "Shield Central Pro",
+    "show_feature_menu_item": false,
+    "hide_summary": true,
     "storage_key": "support",
     "tagline": "Premium Plugin Support Centre",
     "auto_enabled": true,
-    "highlight_menu_item": true
+    "highlight_menu_item": true,
+    "show_central": false,
+    "premium": false,
+    "access_restricted": false
   },
   "sections": [
     {
@@ -32,12 +36,13 @@
       "type": "checkbox",
       "link_info": "",
       "link_blog": "",
-      "name": "Enable Automatic Updates",
+      "name": "Enable Premium Support",
       "summary": "Enable (or Disable) The Premium Support Feature",
       "description": "Checking/Un-Checking this option will completely turn on/off the whole Premium Support feature"
     }
   ],
   "definitions": {
-    "default_helpdesk_url": "http://icwp.io/shieldhelpdesk"
+    "default_helpdesk_url": "http://icwp.io/shieldhelpdesk",
+    "landing_page_url": "//icwp.io/shieldcentralpluginframe"
   }
 }

@@ -1,11 +1,16 @@
 {
   "slug": "admin_access_restriction",
   "properties": {
+    "slug": "admin_access_restriction",
     "name": "Security Admin",
     "show_feature_menu_item": true,
     "storage_key": "admin_access_restriction",
-    "tagline": "Protect your security plugin not just your WordPress site",
-    "menu_title": "Security Admin"
+    "tagline": "Protect your Security Plugin, not just your WordPress site",
+    "menu_title": "Security Admin",
+    "show_central": true,
+    "access_restricted": true,
+    "premium": false,
+    "order": 20
   },
   "admin_notices": {
     "certain-options-restricted": {
@@ -97,8 +102,8 @@
       "section": "section_admin_access_restriction_areas",
       "default": "Y",
       "type": "checkbox",
-      "link_info": "http://icwp.io/wpsf32",
-      "link_blog": "",
+      "link_info": "http://icwp.io/a0",
+      "link_blog": "http://icwp.io/wpsf32",
       "name": "Pages",
       "summary": "Restrict Access To Key WordPress Posts And Pages Actions",
       "description": "Careful: This will restrict access to page/post creation, editing and deletion. Note: Selecting 'Edit' will also restrict all other options."
@@ -108,7 +113,7 @@
       "section": "section_admin_access_restriction_areas",
       "default": "N",
       "type": "checkbox",
-      "link_info": "",
+      "link_info": "http://icwp.io/a0",
       "link_blog": "",
       "name": "Admin Users",
       "summary": "Restrict Access To Create/Delete/Modify Other Admin Users",
@@ -137,8 +142,11 @@
           "text": "Delete"
         }
       ],
-      "link_info": "http://icwp.io/wpsf21",
-      "link_blog": ""
+      "link_info": "http://icwp.io/a0",
+      "link_blog": "http://icwp.io/wpsf21",
+      "summary": "Restrict Access To Key WordPress Plugin Actions",
+      "description": "Careful: This will restrict access to plugin installation, update, activation and deletion. Note: Selecting 'Activate' will also restrict all other options."
+
     },
     {
       "key": "admin_access_restrict_themes",
@@ -167,8 +175,10 @@
           "text": "Delete"
         }
       ],
-      "link_info": "http://icwp.io/wpsf21",
-      "link_blog": ""
+      "link_info": "http://icwp.io/a0",
+      "link_blog": "http://icwp.io/wpsf21",
+      "summary": "Restrict Access To WordPress Theme Actions",
+      "description": "Careful: This will restrict access to theme installation, update, activation and deletion."
     },
     {
       "key": "admin_access_restrict_posts",
@@ -189,13 +199,15 @@
           "text": "Delete"
         }
       ],
-      "link_info": "http://icwp.io/wpsf21",
-      "link_blog": ""
+      "link_info": "http://icwp.io/a0",
+      "link_blog": "http://icwp.io/wpsf21",
+      "summary": "Restrict Access To Key WordPress Posts And Pages Actions",
+      "description": "Careful: This will restrict access to page/post creation, editing and deletion."
     }
   ],
   "definitions": {
     "help_video_id": "214855538",
-    "admin_access_key_cookie_name": "icwp_wpsf_aakcook",
+    "security_admin_cookie_name": "icwp_wpsf_aakcook",
     "admin_access_options_to_restrict": {
       "wpms_options": [
         "admin_email",

@@ -3,11 +3,6 @@
 class WCML_Products{
 
     /**
-     * @var WCML_TP_Support
-     */
-    public $tp_support;
-
-    /**
      * @var woocommerce_wpml
      */
     private $woocommerce_wpml;
@@ -18,14 +13,27 @@ class WCML_Products{
     /**
      * @var wpdb
      */
-    private $wpdb;
+    private $wpdb;/**
+     * @var WPML_WP_Cache
+     */
+    private $wpml_cache;
 
 
-    public function __construct( &$woocommerce_wpml, &$sitepress, &$wpdb  )
-    {
+    /**
+     * WCML_Products constructor.
+     *
+     * @param woocommerce_wpml $woocommerce_wpml
+     * @param SitePress $sitepress
+     * @param wpdb $wpdb
+     * @param WPML_WP_Cache $wpml_cache
+     */
+    public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress, wpdb $wpdb, WPML_WP_Cache $wpml_cache = null ) {
         $this->woocommerce_wpml = $woocommerce_wpml;
-        $this->sitepress = $sitepress;
-        $this->wpdb = $wpdb;
+        $this->sitepress        = $sitepress;
+        $this->wpdb             = $wpdb;
+
+        $cache_group = 'WCML_Products';
+        $this->wpml_cache    = is_null( $wpml_cache ) ? new WPML_WP_Cache( $cache_group ) : $wpml_cache;
 
     }
 
@@ -37,14 +45,14 @@ class WCML_Products{
 
             add_filter( 'post_row_actions', array( $this, 'filter_product_actions' ), 10, 2 );
 
-            $this->tp_support = new WCML_TP_Support();
-
             add_action( 'wp_ajax_wpml_switch_post_language', array( $this, 'switch_product_variations_language' ), 9 );
 
         }else{
             add_filter( 'woocommerce_json_search_found_products', array( $this, 'filter_found_products_by_language' ) );
             add_filter( 'woocommerce_related_products_args', array( $this, 'filter_related_products_args' ) );
             add_filter( 'woocommerce_shortcode_products_query', array( $this, 'add_lang_to_shortcode_products_query' ) );
+
+            add_filter( 'woocommerce_product_file_download_path', array( $this, 'filter_file_download_path' ) );
         }
 
         add_filter( 'woocommerce_upsell_crosssell_search_products', array( $this, 'filter_woocommerce_upsell_crosssell_posts_by_language' ) );
@@ -55,7 +63,6 @@ class WCML_Products{
 
         add_filter( 'wpml_override_is_translator', array( $this, 'wcml_override_is_translator' ), 10, 3 );
         add_filter( 'wc_product_has_unique_sku', array( $this, 'check_product_sku' ), 10, 3 );
-
     }
 
     // Check if original product
@@ -118,6 +125,33 @@ class WCML_Products{
         wp_cache_set( $cache_key, $is_variable_product, $cache_group );
 
         return $is_variable_product;
+    }
+
+    public function is_downloadable_product( $product ) {
+
+        $cache_key   = 'is_downloadable_product_'.$product->get_id();
+
+        $found           = false;
+        $is_downloadable = $this->wpml_cache->get( $cache_key, $found );
+        if ( ! $found ) {
+            if ( $product->is_downloadable() ) {
+                $is_downloadable = true;
+            } elseif ( $this->is_variable_product( $product->get_id() ) ) {
+                $variations = $product->get_available_variations();
+                if ( ! empty( $variations ) ) {
+                    foreach ( $variations as $variation ) {
+                        if ( $variation['is_downloadable'] ) {
+                            $is_downloadable = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            $this->wpml_cache->set( $cache_key, $is_downloadable );
+        }
+
+        return $is_downloadable;
+
     }
 
     public function is_grouped_product($product_id){
@@ -473,8 +507,7 @@ class WCML_Products{
         foreach( $products as $product ){
             if( $product->language_code == $language ) continue;
 
-            $element_key        = array( 'trid' => $product->trid, 'language_code' => $language );
-            $translation_status = apply_filters( 'wpml_tm_translation_status', null, $element_key );
+            $translation_status = apply_filters( 'wpml_translation_status', null, $product->trid, $language );
 
             if( in_array( $translation_status, array( ICL_TM_NOT_TRANSLATED, ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS ) ) ){
                 $count++;
@@ -593,5 +626,33 @@ class WCML_Products{
 
         return $query_args;
     }
+
+
+    /**
+     * Get file download path in correct domain
+     *
+     * @param string $file_path file path URL
+     * @return string
+     */
+    public function filter_file_download_path( $file_path ) {
+
+        $is_per_domain = $this->sitepress->get_wp_api()->constant( 'WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN' ) === (int) $this->sitepress->get_setting( 'language_negotiation_type' );
+
+        if ( $is_per_domain ) {
+            $file_path = $this->sitepress->convert_url( $file_path );
+        }
+
+        return $file_path;
+
+    }
+
+
+	/**
+	 *
+	 * @return bool
+	 */
+	public function is_product_display_as_translated_post_type() {
+		return apply_filters( 'wpml_is_display_as_translated_post_type', false, 'product' );
+	}
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-if ( class_exists( 'ICWP_WPSF_Processor_UserManagement_Sessions', false ) ):
+if ( class_exists( 'ICWP_WPSF_Processor_UserManagement_Sessions', false ) ) {
 	return;
-endif;
+}
 
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'basedb.php' );
 
@@ -83,18 +83,21 @@ class ICWP_WPSF_Processor_UserManagement_Sessions extends ICWP_WPSF_BaseDbProces
 	 * Should be hooked to 'init' so we have is_user_logged_in()
 	 */
 	public function checkCurrentUser_Action() {
+		$oWp = $this->loadWp();
+		$oWpUsers = $this->loadWpUsers();
 
-		if ( is_user_logged_in() ) {
-			$oWp = $this->loadWpFunctions();
+		if ( $oWpUsers->isUserLoggedIn() ) {
 
-			if ( is_admin() ) {
-				$nCode = $this->doVerifyCurrentSession();
+			$nCode = $this->doVerifyCurrentSession();
+
+			if ( is_admin() ) { // prevent any admin access on invalid Shield sessions.
+
 				if ( $nCode > 0 ) {
 
 					if ( $nCode == 3 ) { // a session was used from the wrong IP. We just block it.
-						$this->loadWpUsers()->logoutUser( true ); // so as not to destroy the original, legitimate session
+//						$this->loadWpUsers()->logoutUser( true ); // so as not to destroy the original, legitimate session
 						$this->addToAuditEntry(
-							sprintf( 'Access to an established user session from a new IP address "%s". Redirecting request.', $this->human_ip() ),
+							sprintf( 'Access to an established user session from a new IP address "%s". Redirecting request.', $this->ip() ),
 							2,
 							'um_session_ip_lock_redirect'
 						);
@@ -106,23 +109,24 @@ class ICWP_WPSF_Processor_UserManagement_Sessions extends ICWP_WPSF_BaseDbProces
 							2,
 							'um_session_not_found_redirect'
 						);
-						$this->loadWpUsers()
-							 ->forceUserRelogin( array( 'wpsf-forcelogout' => $nCode ) );
+						$oWpUsers->forceUserRelogin( array( 'wpsf-forcelogout' => $nCode ) );
 					}
 				}
 			}
+			else if ( $nCode > 0 && !$oWp->isRestUrl() ) { // it's not admin, but the user looks logged into WordPress and not to Shield
+				wp_set_current_user( 0 ); // ensures that is_user_logged_in() is false going forward.
+			}
 
-			// At this point session is validated
-			if ( $oWp->getIsLoginUrl() && $this->loadWpUsers()->isUserAdmin() ) {
+			// Auto-redirect to admin: UNUSED
+			if ( $oWp->isRequestLoginUrl() && $this->loadWpUsers()->isUserAdmin() ) {
 				$sLoginAction = $this->loadDataProcessor()->FetchGet( 'action' );
 				if ( !in_array( $sLoginAction, array( 'logout', 'postpass' ) ) ) {
-//					$oWp->redirectToAdmin();
+					// $oWp->redirectToAdmin();
 				}
 			}
 
-			// always track activity
-			$oUser = $this->loadWpUsers()->getCurrentWpUser();
-			$this->updateSessionLastActivity( $oUser );
+			// always track last activity
+			$this->updateSessionLastActivity( $oWpUsers->getCurrentWpUser() );
 		}
 	}
 
@@ -173,7 +177,7 @@ class ICWP_WPSF_Processor_UserManagement_Sessions extends ICWP_WPSF_BaseDbProces
 			$nSessionTimeoutInterval = $this->getSessionTimeoutInterval();
 			$nSessionIdleTimeoutInterval = $this->getOption( 'session_idle_timeout_interval', 0 ) * HOUR_IN_SECONDS;
 			$bLockToIp = $this->getIsOption( 'session_lock_location', 'Y' );
-			$sVisitorIp = $this->loadDataProcessor()->getVisitorIpAddress( true );
+			$sVisitorIp = $this->ip();
 
 			$nForceLogOutCode = 0; // when it's == 0 it's a valid session
 
@@ -288,7 +292,7 @@ class ICWP_WPSF_Processor_UserManagement_Sessions extends ICWP_WPSF_BaseDbProces
 		// First set any other entries for the given user to be deleted.
 		$aNewData = array();
 		$aNewData[ 'session_id' ] = $this->getSessionId();
-		$aNewData[ 'ip' ] = $this->human_ip();
+		$aNewData[ 'ip' ] = $this->ip();
 		$aNewData[ 'wp_username' ] = $sUsername;
 		$aNewData[ 'login_attempts' ] = 0;
 		$aNewData[ 'pending' ] = 0;

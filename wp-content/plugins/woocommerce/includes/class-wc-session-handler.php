@@ -18,19 +18,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WC_Session_Handler extends WC_Session {
 
 	/** @var string cookie name */
-	private $_cookie;
+	protected $_cookie;
 
 	/** @var string session due to expire timestamp */
-	private $_session_expiring;
+	protected $_session_expiring;
 
 	/** @var string session expiration timestamp */
-	private $_session_expiration;
+	protected $_session_expiration;
 
 	/** $var bool Bool based on whether a cookie exists **/
-	private $_has_cookie = false;
+	protected $_has_cookie = false;
 
 	/** @var string Custom session table name */
-	private $_table;
+	protected $_table;
 
 	/**
 	 * Constructor for the session class.
@@ -38,7 +38,7 @@ class WC_Session_Handler extends WC_Session {
 	public function __construct() {
 		global $wpdb;
 
-		$this->_cookie = 'wp_woocommerce_session_' . COOKIEHASH;
+		$this->_cookie = apply_filters( 'woocommerce_cookie', 'wp_woocommerce_session_' . COOKIEHASH );
 		$this->_table  = $wpdb->prefix . 'woocommerce_sessions';
 
 		if ( $cookie = $this->get_session_cookie() ) {
@@ -75,6 +75,8 @@ class WC_Session_Handler extends WC_Session {
 	 * Since the cookie name (as of 2.1) is prepended with wp, cache systems like batcache will not cache pages when set.
 	 *
 	 * Warning: Cookies will only be set if this is called before the headers are sent.
+	 *
+	 * @param bool $set
 	 */
 	public function set_customer_session_cookie( $set ) {
 		if ( $set ) {
@@ -214,6 +216,8 @@ class WC_Session_Handler extends WC_Session {
 
 	/**
 	 * When a user is logged out, ensure they have a unique nonce by using the customer/session ID.
+	 *
+	 * @param int $uid
 	 *
 	 * @return string
 	 */

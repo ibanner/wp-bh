@@ -15,6 +15,7 @@ jQuery(document).ready(function($){
         'parent_id',
         'crosssell_ids',
         'upsell_ids',
+        'grouped_products',
         'product_shipping_class'
     ];
 
@@ -122,7 +123,7 @@ jQuery(document).ready(function($){
     });
 
 
-    $('#product_attributes input[type="checkbox"]').each(function(){
+    $('#product_attributes input[type="checkbox"],#_featured').each(function(){
         $(this).attr('disabled','disabled');
         $(this).after($('.wcml_lock_img').clone().removeClass('wcml_lock_img').show());
     });
@@ -184,7 +185,9 @@ var wcml_lock_variation_fields = function( file_path_sync ){
     for (i = 0; i < var_checkboxes.length; i++) {
         jQuery('input[name^="variable'+var_checkboxes[i]+'"]').each(function(){
             jQuery(this).attr('disabled','disabled');
-            jQuery(this).parent().append('<input type="hidden" name="'+jQuery(this).attr('name')+'" value="'+jQuery(this).val()+'" />');
+            if( jQuery(this).prop('checked') ){
+                jQuery(this).parent().append('<input type="hidden" name="'+jQuery(this).attr('name')+'" value="'+jQuery(this).val()+'" />');
+            }
             jQuery(this).after(jQuery('.wcml_lock_img').clone().removeClass('wcml_lock_img').show());
         });
     }

@@ -1,14 +1,14 @@
-=== Shield Security ===
-Contributors: paultgoodchild
+=== Shield Security for WordPress ===
+Contributors: onedollarplugin, paultgoodchild
 Donate link: http://icwp.io/q
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
-Tags: security, shield, firewall, rename wp login, two-factor authentication, audit trail, dos, brute force, whitelist, blacklist, GASP, spam, automatic updates, ithemes, wordfence, better wp security, all-in-one, lockdown, login, hack
+Tags: security, firewall, protect, spam, scan, recaptcha, two-factor authentication, login, 2FA, ithemes, wordfence, better wp security, all-in-one, lockdown, hack
 Requires at least: 3.5.0
-Tested up to: 4.8
-Stable tag: 5.9.0
+Tested up to: 4.9
+Stable tag: 6.1.1
 
-Protect your website, your reputation, and your customers for free with Shield Security, the most powerful security system for WordPress
+Protect your reputation, your customers' reputation, and your WordPress sites for free with Shield - the most powerful security system for WordPress
 
 == Description ==
 
@@ -21,6 +21,28 @@ Protect your website, your reputation, and your customers for free with Shield S
 >
 > <strong>Shield + iControlWP</strong><br />
 > If you have multiple sites, then Shield [combined with iControlWP](http://icwp.io/shld8), takes the pain out of managing your websites, and covers your security, daily backup (and restore), and updating plugins/themes
+
+= The New Shield Pro =
+
+As of 23rd November 2017, Shield Security now has a Pro version. But, it's important to know that anything we consider standard website security *will always be free* - no upgrade necessary.
+
+For the equivalent of just $1/month:
+
+1. Exclusive Pro customer email support.
+1. Support for working with 3rd party plugins e.g. Woocommerce and Easy Digital Downloads, BuddyPress.
+1. Exclusive early access to new security features
+1. Text customisations for visitors.
+1. No manual Pro plugin downloads - we handle this all for you automatically.
+1. Plugin Vulnerability Scanner.
+1. (coming soon) Import/Export of options across sites.
+1. (coming soon) Improved Audit Trail logging
+1. (coming soon) Improved performance 
+1. (coming soon) Statistics and Reporting
+1. (coming soon) Select individual automatic plugin updates
+
+Learn more and go Pro at [our One Dollar Plugin store](http://icwp.io/ab).
+
+= Our Mission =
 
 All the wonderful features of how we protect you and your site are set out below in detail, but there are a few things about us, that you should know first:
 
@@ -37,7 +59,7 @@ downloading and installing Shield now
 
 = What makes the Shield different? =
 
-* No "Pro" restrictions on security features - it's ALL there for you.
+* No "Pro" restrictions on security features - where possible, anything pertaining directly to site security is free.
 * Easy-To-Setup User Interface.
 * It won't break your website - you'll never get that horrible,
 	pit-of-your stomach feeling you get with other security plugins when your website doesn't load anymore.
@@ -308,7 +330,145 @@ Possible options are: network_admin, administrator, editor, author, contributor,
 
 == Changelog ==
 
-= 5.9.0 Latest Point Release =
+Our policy is to never restrict security features to Pro upgrades. **This has not changed**.
+
+We're now offering technical support and other features exclusively to premium customers.
+If you don't want to support the work, no problem! You can still continue to use Shield Security and its features in-full.
+Technical support, and some newer options and features will not be available to you, however.
+
+You can [go Pro for just $1/month](http://icwp.io/aa). Technical support is available to premium clients only.
+
+= 6.1.1 Latest Release =
+*Released: 17th January, 2018*
+
+* **(v.1)**  FIXED:			Verify link missing from the two-factor authentication verification email.
+
+= 6.1.0 Series =
+*Released: 15th January, 2018* - [Release Notes](http://icwp.io/ay)
+
+* **(v.0)**  ADDED:			3x more Shield Wizards: Multi-factor Authentication, Core File Scanning, Unrecognised File Scanning.
+* **(v.0)**  ADDED:			You can now use regular expressions for file exclusions in the 'Unrecognised File Scanner'.
+* **(v.0)**  CHANGED:		File Scanner email notifications now link to the appropriate scanner wizard directly.
+* **(v.0)**  IMPROVED:		Plugin options pages restyling.
+* **(v.0)**  IMPROVED:		Plugin refactoring and improvements.
+
+= 6.0.0 Series =
+*Released: 18th December, 2017*
+
+* **(v.0)**  ADDED:			All-new Shield Welcome and Setup Wizard - more helpful guided wizards to come.
+* **(v.0)**  ADDED:			[**PRO**] [Shield options import and export](http://icwp.io/at)
+* **(v.0)**  ADDED:			[**PRO**] In conjunction with import/export - Shield Security Network: automated options syncing.
+* **(v.0)**  CHANGED:		Going forward, new features and options will [support only PHP 5.4+](http://icwp.io/au). Existing features will remain unaffected.
+
+= 5.20.0 Series =
+*Released: 11th December, 2017*
+
+* **(v.0)**  IMPROVED:		[**PRO**] Audit Trail length are configurable. Length for free is 50 entries (the original unpaginated limit)
+* **(v.0)**  IMPROVED:		Large redesign of options sections to be more intuitive and cleaner
+* **(v.0)**  IMPROVED:		Added dedicated help section for each module.
+* **(v.0)**  IMPROVED:		Certain modules have an new *Actions* centre, such a Audit Trail viewer and User Sessions manager
+* **(v.0)**  IMPROVED:		Audit Trails are now ajax-paginated. You can browse through all your audit trail entries
+* **(v.0)**  IMPROVED:		User session tables are also ajax-paginated.
+
+= 5.19.0 Series =
+*Released: 4th December, 2017*
+
+* **(v.1)**  FIXED:			Plugin Vulnerabilities scan for premium plugins.
+* **(v.0)**  ADDED:			[**PRO**] Automated WordPress plugins vulnerability scanner with auto updates email notifications
+* **(v.0)**  ADDED:			Added Google reCAPTCHA support for register/forget password pages.
+* **(v.0)**  ADDED:			[**PRO**] Support for Multi-Factor Authentication for WooCommerce and other 3rd party plugins.
+* **(v.0)**  ADDED:			[**PRO**] Bot-protection/Google reCAPTCHA support for BuddyPress register pages.
+
+= 5.18.0 Series =
+*Released: 27th November, 2017*
+
+* **(v.0)**  ADDED:			[**PRO**] Invisible Google reCAPTCHA option.
+* **(v.0)**  ADDED:			[**PRO**] Support for Google reCAPTCHA themes - light and dark.
+* **(v.0)**  IMPROVEMENT:	Google reCAPTCHA is more reliable and configurable.
+
+= 5.17.0 Series =
+*Released: 23rd November, 2017*
+
+* **(v.0)**  ADDED:			Shield Security goes Pro! Added new options and extras to premium clients.
+* **(v.0)**  IMPROVEMENT:	Fix and improvement to Google reCAPTCHA.
+* **(v.0)**  ADDED:			[**PRO**] Support for Woocommerce and Easy Digital Downloads login/registration form protection.
+* **(v.0)**  ADDED:			[**PRO**] Ability to customise most user-facing texts.
+* **(v.0)**  ADDED:			[**PRO**] Extra IP Transgression signal.
+
+= 5.16 Series =
+*Released: 16th October, 2017*
+
+With this release, we fixed a clash of options for Google reCAPTCHA. Every attempt was made to ensure no interruption to your existing settings, but please check to ensure your reCAPTCHA settings are as you expect them to be.
+
+* **(v.4)**  FIX:			Error with incorrect/unprefixed database table name used in SQL query.
+* **(v.3)**  IMPROVEMENT:	Tweak to the Visitor IP Auto-detection to better ensure CloudFlare IP addresses are ignored.
+* **(v.3)**  IMPROVEMENT:	Plugin Badge will now stay closed when a visitor closes it.
+* **(v.2)**  FIX:			Removed some namespace parsing that broke on sites with PHP 5.2.
+* **(v.1)**  FIX:			404 page displayed for password reset request when Login URL is renamed.
+* **(v.0)**  IMPROVEMENT:	Much better auto-detection of valid request/visitor IP addresses.
+* **(v.0)**  FIX:			Clashing of reCAPTCHA options for Comments and Login Protection.
+* **(v.0)**  IMPROVEMENT:	Statistic Reporting database management and pruning.
+* **(v.0)**  FIX:			Various system fixes and improvements.
+
+= 5.15 Series =
+*Released: 21st September, 2017*
+
+* **(v.1)**  FIX:			Processing AJAX requests from the Network Admin side of WordPress.
+* **(v.1)**  IMPROVEMENTS:	Better handling of file exclusions in the hack protection module.
+* **(v.1)**  IMPROVEMENTS:	Better handling of fatal errors in loading Shield where some core files are missing.
+* **(v.0)**  ADDED:			New HTTP Security Header: Referrer Policy.
+* **(v.0)**  ADDED:			Supports paths for file exclusions in the Unrecognised File Scanner.
+* **(v.0)**  IMPROVEMENTS:	Better interception of unintentional redirects to the hidden Login URL (e.g. /wp-admin/customize.php).
+* **(v.0)**  IMPROVEMENTS:	Better handling of email sending entries in the Audit Trail.
+* **(v.0)**  IMPROVEMENTS:	Improved (tabbed) display of Audit Trail.
+* **(v.0)**  IMPROVEMENTS:	Better generation & handling of the One Time Password for email-based two-factor authentication.
+* **(v.0)**  IMPROVEMENTS:	Some code clean up and refactoring.
+
+= 5.14 Series =
+*Released: 9th September, 2017*
+
+* **(v.0)**  ADDED:			Option for administrators to manually override and set the source of the visitor IP address.
+* **(v.0)**  UPDATED:		In-plugin documentation links to updated and revised helpdesk articles/blogs.
+* **(v.0)**  IMPROVEMENTS:	Strip out any non-alphanumeric characters uses in the generation of Google Authenticator URLs.
+* **(v.0)**  FIX:			Shield now ignores any requests sent to Rest API URIs with respect to Shield user sessions.
+
+= 5.13 Series =
+*Released: 15th August, 2017*
+
+* **(v.2)**  IMPROVEMENTS:	Small adjustment to handling of Shield User sessions in conjunction with WordPress sessions.
+* **(v.2)**  FIX:			Restore display of help links for options.
+* **(v.1)**  FIX:			PHP 5.2 incompatibility.
+* **(v.0)**  ADDED:			New option for [Unrecognised File Scanner](http://icwp.io/94) to scan the Uploads folder for JS and PHP files.
+* **(v.0)**  ADDED:			Option to provide custom list of files to be excluded from the [Unrecognised File Scanner](http://icwp.io/94).
+
+= 5.12 Series =
+*Released: 3rd August, 2017*
+
+* **(v.2)**  IMPROVEMENTS:	Improved support for Windows IIS hosting for [Unrecognised File Scanner](http://icwp.io/94)
+* **(v.2)**  CHANGED:		Removed the email-based 2FA automatic login link.
+* **(v.2)**  FIX:			Potential bug with Shield not recognising plugin configuration updates and not rebuilding options accordingly.
+* **(v.1)**  ADDED:			A few more exclusions for the [Unrecognised File Scanner](http://icwp.io/94)
+* **(v.1)**  FIX:			Fix for Fatal error.
+* **(v.0)**  ADDED:			[Unrecognised File Scanner](http://icwp.io/94) release. Automatically detect and delete
+							any files present in core WordPress directories that aren't part of your core installation.
+* **(v.0)**  ADDED:			Updated Firewall rules for SQL under the 'Aggressive' rule set.
+
+= 5.11 Series =
+*Released: 26th July, 2017*
+
+* **(v.1)**  FIX:			JSON syntax
+* **(v.0)**  IMPROVEMENTS:	Final preparation for [Shield Central](http://icwp.io/83) release.
+
+= 5.10 Series =
+*Released: 19th June, 2017*
+
+* **(v.2)**  FIXED:			Fatal error with GASP + Password Reset.
+* **(v.2)**  FIXED:			Fatal error with failing reCAPTCHA HTTP requests.
+* **(v.1)**  IMPROVEMENTS:	Further preparation for [Shield Central](http://icwp.io/83) release.
+* **(v.0)**  ADDED:			More in-depth reporting and statistics gathering - options for reports will be made available
+ 							in a later release.
+
+= 5.9 Series =
 *Released: 31st May, 2017*
 
 * **(v.0)**  ADDED:			Help Videos for 1 or 2 modules. More to come and just testing format and uptake.
@@ -318,17 +478,7 @@ Possible options are: network_admin, administrator, editor, author, contributor,
 							Protects existing, legitimate sessions from being forcefully expired.
 * **(v.0)**  FIXED:			Danish string translation.
 
-= 5.9.0 Series =
-*Released: 31st May, 2017*
-
-* **(v.0)**  ADDED:			Help Videos for 1 or 2 modules. More to come and just testing format and uptake.
-* **(v.0)**  ADDED:			Special handling for WP Fastest Cache.
-* **(v.0)**  CHANGE:		Configuration for automatic self-update for the Shield plugin has been removed.
-* **(v.0)**  CHANGE:		No longer remove an existing user session when accessed from another IP address. Just redirect.
-							Protects existing, legitimate sessions from being forcefully expired.
-* **(v.0)**  FIXED:			Danish string translation.
-
-= 5.8.0 Series =
+= 5.8 Series =
 *Released: 7th April, 2017*
 
 * **(v.2)**  IMPROVEMENTS:	The core file scanner now works more reliably for international WordPress installations.

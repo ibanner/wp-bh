@@ -2,7 +2,7 @@
 	<custom-fields>
 		<custom-field action="copy">_backorders</custom-field>
 		<custom-field action="translate">_crosssell_ids</custom-field>
-		<custom-field action="copy">_default_attributes</custom-field>
+		<custom-field action="ignore">_default_attributes</custom-field>
 		<custom-field action="copy">_download_limit</custom-field>
 		<custom-field action="copy">_download_expiry</custom-field>
 		<custom-field action="copy">_download_type</custom-field>
@@ -62,6 +62,8 @@
 		<custom-field action="ignore">wcml_sync_hash</custom-field>
 		<custom-field action="ignore">wpml_language</custom-field>
 		<custom-field action="ignore">_product_attributes</custom-field>
+		<custom-field action="translate">_children</custom-field>
+		<custom-field action="copy">_subscription_limit</custom-field>
 	</custom-fields>
 	<custom-types>
 		<custom-type translate="1">product</custom-type>
@@ -74,6 +76,7 @@
 		<taxonomy translate="1">product_tag</taxonomy>
 		<taxonomy translate="0">product_type</taxonomy>
 		<taxonomy translate="0">shop_order_status</taxonomy>
+		<taxonomy translate="0">product_visibility</taxonomy>
 		<taxonomy translate="1">product_shipping_class</taxonomy>
 	</taxonomies>
 	<admin-texts>

@@ -2,14 +2,22 @@
 
 class WCML_Currency_Switcher_Templates {
 
-    const CONFIG_FILE    = 'config.json';
+	const CONFIG_FILE = 'config.json';
+	const OPTION_NAME = 'wcml_currency_switcher_template_objects';
 
-    /*
+    /**
     * @var  woocommerce_wpml
     */
     private $woocommerce_wpml;
 
-    /** @var string $uploads_path */
+    /**
+    * @var  WPML_WP_API $wp_api
+    */
+    private $wp_api;
+
+    /**
+     * @var string $uploads_path
+     */
     private $uploads_path;
 
     /**
@@ -17,15 +25,25 @@ class WCML_Currency_Switcher_Templates {
      */
     private $wpml_file;
 
-    /* @var array $templates Collection of WCML_CS_Template */
+    /**
+     * @var array $templates Collection of WCML_CS_Template
+     */
     private $templates = false;
 
-    /* @var string $ds */
+	/**
+	 * @var array $enqueued_templates
+	 */
+	private $enqueued_templates = array();
+
+    /**
+     * @var string $ds
+     */
     private $ds = DIRECTORY_SEPARATOR;
 
-    public function __construct( &$woocommerce_wpml, WCML_File $wpml_file = null ) {
+    public function __construct(  woocommerce_wpml $woocommerce_wpml, WPML_WP_API $wp_api, WCML_File $wpml_file = null ) {
 
         $this->woocommerce_wpml = $woocommerce_wpml;
+        $this->wp_api           = $wp_api;
 
         if ( ! $wpml_file ) {
             //TODO: use WPML_FILE class instead after changing requirements for WPML >= 3.6.0
@@ -36,9 +54,15 @@ class WCML_Currency_Switcher_Templates {
     }
 
     public function init_hooks() {
+
         add_action( 'after_setup_theme',  array( $this, 'after_setup_theme_action' ) );
-        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_template_resources' ) );
         add_action( 'admin_head', array( $this, 'admin_enqueue_template_resources' ) );
+
+        //enqueue front resources only when MC enabled
+        $wcml_settings = $this->woocommerce_wpml->get_settings();
+        if( $wcml_settings['enable_multi_currency'] === $this->wp_api->constant( 'WCML_MULTI_CURRENCIES_INDEPENDENT' ) ){
+            add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_template_resources' ) );
+        }
     }
 
     public function after_setup_theme_action() {
@@ -62,24 +86,26 @@ class WCML_Currency_Switcher_Templates {
     /**
      * @return array of active WCML_CS_Templates
      */
-    public function get_active_templates() {
+    public function get_active_templates( $load_default = false ) {
 
         $templates = array();
         $wcml_settings = $this->woocommerce_wpml->get_settings();
 
-        if( isset( $wcml_settings[ 'currency_switchers' ] ) ){
-            foreach( $wcml_settings[ 'currency_switchers' ] as $switcher_id => $switcher ){
-                if( 'product' === $switcher_id && 0 === $wcml_settings[ 'currency_switcher_product_visibility' ] ){
+        if ( isset( $wcml_settings['currency_switchers'] ) ) {
+            foreach ( $wcml_settings['currency_switchers'] as $switcher_id => $switcher ) {
+                if ( ! $this->woocommerce_wpml->cs_properties->is_currency_switcher_active( $switcher_id, $wcml_settings ) ) {
                     continue;
                 }
 
-                foreach( $this->templates as $key => $template ){
-                    if( $switcher['switcher_style'] == $key && !isset( $templates[$key] ) ){
-                        $templates[$key] = $template;
+                foreach ( $this->templates as $key => $template ) {
+                    if ( $switcher['switcher_style'] === $key && ! isset( $templates[ $key ] ) ) {
+                        $templates[ $key ] = $template;
                     }
                 }
             }
-        }else{
+        }
+
+        if( !$templates && $load_default ){
             //set default template to active
             $templates['wcml-dropdown'] = $this->templates['wcml-dropdown'];
         }
@@ -139,53 +165,84 @@ class WCML_Currency_Switcher_Templates {
         return $config;
     }
 
-    private function init_available_templates() {
+	private function init_available_templates() {
 
-        $templates = array();
-        $dirs_to_scan = array();
+		$is_admin_ui_page = isset( $_GET['page'] ) && 'wpml-wcml' === $_GET['page'] && isset( $_GET['tab'] ) && 'multi-currency' === $_GET['tab'];
 
-        $sub_dir          = $this->ds . 'templates' . $this->ds . 'currency-switchers';
+		if ( ! $is_admin_ui_page ) {
+			$this->templates = $this->get_templates_from_transient();
+		}
 
-        $wcml_core_path   = WCML_PLUGIN_PATH . $sub_dir;
-        $theme_path       = get_template_directory() . $this->ds . 'wpml' . $sub_dir;
-        $child_theme_path = get_stylesheet_directory() . $this->ds . 'wpml' . $sub_dir;
-        $uploads_path     = $this->get_uploads_path() . $this->ds . 'wpml' . $sub_dir;
+		if ( $this->templates === false ) {
+			$templates    = array();
+			$dirs_to_scan = array();
 
-        array_unshift( $dirs_to_scan, $wcml_core_path, $theme_path, $child_theme_path, $uploads_path );
+			$sub_dir = $this->ds . 'templates' . $this->ds . 'currency-switchers';
 
-        /**
-         * Filter the directories to scan
-         *
-         * @param array $dirs_to_scan
-         */
-        $dirs_to_scan = apply_filters( 'wcml_cs_directories_to_scan', $dirs_to_scan );
+			$wcml_core_path   = WCML_PLUGIN_PATH . $sub_dir;
+			$theme_path       = get_template_directory() . $this->ds . 'wpml' . $sub_dir;
+			$child_theme_path = get_stylesheet_directory() . $this->ds . 'wpml' . $sub_dir;
+			$uploads_path     = $this->get_uploads_path() . $this->ds . 'wpml' . $sub_dir;
 
-        $templates_paths = $this->scan_template_paths( $dirs_to_scan );
+			array_unshift( $dirs_to_scan, $wcml_core_path, $theme_path, $child_theme_path, $uploads_path );
 
-        foreach ( $templates_paths as $template_path ) {
-            $template_path = $this->wpml_file->fix_dir_separator( $template_path );
-            if ( file_exists( $template_path . $this->ds . WCML_Currency_Switcher_Template::FILENAME ) ) {
-                $tpl    = array();
-                $config = $this->parse_template_config( $template_path );
+			/**
+			 * Filter the directories to scan
+			 *
+			 * @param array $dirs_to_scan
+			 */
+			$dirs_to_scan = apply_filters( 'wcml_cs_directories_to_scan', $dirs_to_scan );
 
-                $tpl['path']     = $template_path;
-                $tpl['name']     = isset( $config['name'] ) ? $config['name'] : null;
-                $tpl['name']     = $this->get_unique_name( $tpl['name'], $template_path );
-                $tpl['slug']     = sanitize_title_with_dashes( $tpl['name'] );
-                $tpl['css']      = $this->get_files( 'css', $template_path, $config );
-                $tpl['js']       = $this->get_files( 'js', $template_path, $config );
+			$templates_paths = $this->scan_template_paths( $dirs_to_scan );
 
-                if ( $this->is_core_template( $template_path ) ) {
-                    $tpl['is_core'] = true;
-                    $tpl['slug']    = isset( $config['slug'] ) ? $config['slug'] : $tpl['slug'];
-                }
+			foreach ( $templates_paths as $template_path ) {
+				$template_path = $this->wpml_file->fix_dir_separator( $template_path );
+				if ( file_exists( $template_path . $this->ds . WCML_Currency_Switcher_Template::FILENAME ) ) {
+					$tpl    = array();
+					$config = $this->parse_template_config( $template_path );
 
-                $templates[ $tpl['slug'] ] = new WCML_Currency_Switcher_Template( $this->woocommerce_wpml, $tpl );
-            }
-        }
+					$tpl['path'] = $template_path;
+					$tpl['name'] = isset( $config['name'] ) ? $config['name'] : null;
+					$tpl['name'] = $this->get_unique_name( $tpl['name'], $template_path );
+					$tpl['slug'] = sanitize_title_with_dashes( $tpl['name'] );
+					$tpl['css']  = $this->get_files( 'css', $template_path, $config );
+					$tpl['js']   = $this->get_files( 'js', $template_path, $config );
 
-        $this->set_templates( $templates );
-    }
+					if ( $this->is_core_template( $template_path ) ) {
+						$tpl['is_core'] = true;
+						$tpl['slug']    = isset( $config['slug'] ) ? $config['slug'] : $tpl['slug'];
+					}
+
+					$templates[ $tpl['slug'] ] = new WCML_Currency_Switcher_Template( $this->woocommerce_wpml, $tpl );
+				}
+			}
+
+			update_option( self::OPTION_NAME, $templates );
+
+			$this->set_templates( $templates );
+		}
+
+	}
+
+	private function get_templates_from_transient() {
+		$templates = get_option( self::OPTION_NAME );
+		if ( $templates && $this->are_template_paths_valid( $templates ) ) {
+			return $templates;
+		}
+		return false;
+	}
+
+
+	private function are_template_paths_valid( $templates ) {
+		$paths_are_valid = true;
+		foreach ( $templates as $template ) {
+			if ( ! $template->is_path_valid() ) {
+				$paths_are_valid = false;
+				break;
+			}
+		}
+		return $paths_are_valid;
+	}
 
     /**
      * @param array $dirs_to_scan
@@ -300,21 +357,14 @@ class WCML_Currency_Switcher_Templates {
     public function enqueue_template_resources( $templates = false ) {
 
         if( !$templates ){
-            $templates =  $this->get_active_templates();
+            $templates =  $this->get_active_templates( true );
         }
 
         $wcml_settings = $this->woocommerce_wpml->get_settings();
 
-        foreach( $templates as $slug => $template ) {
+        foreach ( $templates as $slug => $template ) {
 
-            foreach ( $template->get_scripts() as $k => $url ) {
-                wp_enqueue_script( $template->get_resource_handler( $k ), $url, array(), WCML_VERSION );
-            }
-
-            foreach ( $template->get_styles() as $k => $url ) {
-                wp_enqueue_style( $template->get_resource_handler( $k ), $url, array(), WCML_VERSION );
-
-            }
+            $this->enqueue_template_assets( $slug, $template );
 
             if ( $template->has_styles() ) {
                 $style_handler = $template->get_inline_style_handler();
@@ -326,6 +376,11 @@ class WCML_Currency_Switcher_Templates {
                 foreach( $wcml_settings[ 'currency_switchers' ] as $key => $switcher_data ){
 
                     $switcher_template = $switcher_data['switcher_style'];
+
+                    if ( ! isset( $templates[ $switcher_template ] ) ) {
+                        continue;
+                    }
+
                     $css = $this->get_color_picket_css( $key, $switcher_data );
                     $template = $templates[ $switcher_template ];
 
@@ -340,7 +395,7 @@ class WCML_Currency_Switcher_Templates {
             if ( ! empty( $wcml_settings['currency_switcher_additional_css'] ) ) {
                 $additional_css = $this->sanitize_css( $wcml_settings['currency_switcher_additional_css'] );
 
-                if( $style_handler ){
+                if( !empty( $style_handler ) ){
                     wp_add_inline_style( $style_handler, $additional_css );
                 }else{
                     echo $this->get_inline_style( 'currency_switcher', 'additional_css', $additional_css );
@@ -348,6 +403,37 @@ class WCML_Currency_Switcher_Templates {
             }
         }
     }
+
+	/**
+	 * @param string $slug
+	 * @param WCML_Currency_Switcher_Template $template
+	 *
+	 */
+    public function enqueue_template_assets( $slug, $template ){
+
+	    $this->enqueued_templates[] = $slug;
+
+	    foreach ( $template->get_scripts() as $k => $url ) {
+		    wp_enqueue_script( $template->get_resource_handler( $k ), $url, array(), WCML_VERSION );
+	    }
+
+	    foreach ( $template->get_styles() as $k => $url ) {
+		    wp_enqueue_style( $template->get_resource_handler( $k ), $url, array(), WCML_VERSION );
+	    }
+
+    }
+
+
+	/**
+	 * @param $slug
+	 * @param $template
+	 */
+	public function maybe_late_enqueue_template( $slug, $template ) {
+		if ( ! in_array( $slug, $this->enqueued_templates ) ) {
+			$this->enqueue_template_assets( $slug, $template );
+		}
+	}
+
 
     /**
      * @param string $css
@@ -421,7 +507,7 @@ class WCML_Currency_Switcher_Templates {
     public function check_is_active( $template ){
         $is_active = false;
 
-        $active_templates = $this->get_active_templates();
+        $active_templates = $this->get_active_templates( true );
 
         foreach( $active_templates as $template_key => $active_template ){
             if ( $template === $template_key ){
@@ -435,8 +521,7 @@ class WCML_Currency_Switcher_Templates {
     }
 
     public function get_first_active( ){
-
-        return current( array_keys( $this->get_active_templates() ) );
+        return current( array_keys( $this->get_active_templates( true ) ) );
 
     }
 }

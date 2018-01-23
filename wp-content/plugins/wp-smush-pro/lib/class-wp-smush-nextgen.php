@@ -17,7 +17,12 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 		/**
 		 * @var array Contains the total Stats, for displaying it on bulk page
 		 */
-		var $stats = array();
+		var $stats = array(
+			'savings_bytes'   => 0,
+			'size_before'     => 0,
+			'size_after'      => 0,
+			'savings_percent' => 0
+		);
 
 		var $is_nextgen_active = false;
 
@@ -64,6 +69,7 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 		function register( $settings ) {
 			$settings['nextgen'] = array(
 				'label' => esc_html__( 'Enable NextGen Gallery integration', 'wp-smushit' ),
+                'short_label' => esc_html__( 'NextGen Gallery', 'wp-smushit' ),
 				'desc'  => esc_html__( 'Allow smushing images directly through NextGen Gallery settings.', 'wp-smushit' )
 			);
 
@@ -348,11 +354,14 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 		 *
 		 * @usedby: `manual_nextgen`, `auto_smush`, `smush_bulk`
 		 *
-		 * @param string $pid , NextGen Gallery Image id
-		 * @param string $image , Nextgen gallery image object
-		 * @param bool|true $echo , Whether to echo the stats or not, false for auto smush
+		 * @param string $pid NextGen Gallery Image id
+		 * @param string $image Nextgen gallery image object
+		 * @param bool $echo Whether to echo the stats or not, false for auto smush
+		 * @param bool $is_bulk Whether it's called by bulk smush or not
+		 *
+		 * @return mixed Stats / Status / Error
 		 */
-		function smush_image( $pid = '', $image = '', $echo = true ) {
+		function smush_image( $pid = '', $image = '', $echo = true, $is_bulk = false ) {
 			global $wpsmushnextgenstats, $WpSmush;
 
 			$WpSmush->initialise();
@@ -399,10 +408,14 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 					wp_send_json_success( $status );
 				}
 			} else {
-				if ( is_wp_error( $smush ) ) {
+				if( ! $is_bulk ) {
+					if ( is_wp_error( $smush ) ) {
+						return $smush;
+					} else {
+						return $status;
+					}
+				}else{
 					return $smush;
-				} else {
-					return $status;
 				}
 			}
 		}

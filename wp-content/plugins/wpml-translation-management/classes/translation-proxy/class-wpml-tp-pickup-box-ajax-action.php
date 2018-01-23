@@ -1,12 +1,19 @@
 <?php
 
-class WPML_TP_Pickup_Box_Ajax_Action extends WPML_SP_User {
+class WPML_TP_Pickup_Box_Ajax_Action {
+	/** @var  SitePress $sitepress */
+	protected $sitepress;
 
+	/**
+	 * @param SitePress $sitepress
+	 */
 	/** @var WPML_TP_Polling_Status_Factory $polling_pickup_factory */
 	private $polling_pickup_factory;
 
-	/** @var  TranslationProxy_Project $project */
-	private $project;
+	/**
+	 * @var WPML_TP_Client
+	 */
+	private $tp_client;
 
 	/**
 	 * WPML_TP_Pickup_Box_Ajax constructor.
@@ -16,12 +23,12 @@ class WPML_TP_Pickup_Box_Ajax_Action extends WPML_SP_User {
 	 * @param TranslationProxy_Project       $project
 	 */
 	public function __construct(
-		&$sitepress,
-		&$polling_pickup_factory,
+		SitePress $sitepress,
+		WPML_TP_Polling_Status_Factory $polling_pickup_factory,
 		$project
 	) {
-		parent::__construct( $sitepress );
-		$this->polling_pickup_factory = &$polling_pickup_factory;
+		$this->sitepress = &$sitepress;
+		$this->polling_pickup_factory = $polling_pickup_factory;
 		$this->project                = $project;
 	}
 
@@ -35,11 +42,11 @@ class WPML_TP_Pickup_Box_Ajax_Action extends WPML_SP_User {
 			$time_left          = floor( $translation_offset / 60 );
 			if ( $time_left == 0 ) {
 				$wait_text = '<p><i>' . sprintf( __( 'You can check again in %s seconds.',
-						'sitepress' ),
+						'wpml-translation-management' ),
 						'<span id="icl_sec_tic">' . $translation_offset . '</span>' ) . '</i></p>';
 			} else {
 				$wait_text = sprintf( __( 'You can check again in %s minutes.',
-						'sitepress' ),
+						'wpml-translation-management' ),
 						'<span id="icl_sec_tic">' . $time_left . '</span>' ) . '</i></p>';
 			}
 			$result = array(
@@ -53,7 +60,8 @@ class WPML_TP_Pickup_Box_Ajax_Action extends WPML_SP_User {
 			} catch ( Exception $e ) {
 				$result   = array(
 					'error' => __( 'The below exception has occurred while communicating with Translation Proxy, please try again later or contact support if the problem persists:',
-							'sitepress' ) . "\n" . $e->getMessage()
+					               'wpml-translation-management' ) . "\n" . $e->getMessage(),
+					'button_text' => __( 'An error occurred', 'wpml-translation-management' ),
 				);
 				$callback = 'wp_send_json_error';
 			}

@@ -127,7 +127,7 @@ if ( ! class_exists( 'WpSmushPngtoJpg' ) ) {
 			$should_convert = false;
 
 			//Get the Transparency conversion settings
-			$convert_png = $wpsmush_settings->get_setting( WP_SMUSH_PREFIX . 'png_to_jpg', false );
+			$convert_png = $wpsmush_settings->settings['png_to_jpg'];
 
 			if ( ! $convert_png ) {
 				return $should_convert;
@@ -300,11 +300,11 @@ if ( ! class_exists( 'WpSmushPngtoJpg' ) ) {
 
 			//Update In Post Content
 			global $wpdb;
-			$query = $wpdb->prepare( "UPDATE $wpdb->posts SET post_content = REPLACE(post_content, '%s', '%s');", $o_url, $n_url );
+			$query = $wpdb->prepare( "UPDATE $wpdb->posts SET post_content = REPLACE(post_content, '%s', '%s');", $o_url, $n_url );	 		  		  	 	  		 	 	
 			$wpdb->query( $query );
 
 			//Delete the Original files if backup not enabled
-			if ( 'conversion' == $o_type && ! $wpsmush_settings->get_setting( WP_SMUSH_PREFIX . 'backup' ) ) {
+			if ( 'conversion' == $o_type && ! $wpsmush_settings->settings['backup'] ) {
 				@unlink( $o_file );
 			}
 
@@ -453,10 +453,10 @@ if ( ! class_exists( 'WpSmushPngtoJpg' ) ) {
 		 * @todo: Save cummulative savings
 		 */
 		function png_to_jpg( $id = '', $meta = '' ) {
-			global $wpsmush_backup;
+			global $wpsmush_backup, $WpSmush;
 
-			//If we don't have meta or ID
-			if ( empty( $id ) || empty( $meta ) ) {
+			// If we don't have meta or ID, or if not a premium user.
+			if ( empty( $id ) || empty( $meta ) || ! $WpSmush->validate_install() ) {
 				return $meta;
 			}
 

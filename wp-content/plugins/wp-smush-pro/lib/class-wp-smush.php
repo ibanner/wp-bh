@@ -124,7 +124,6 @@ if ( ! class_exists( 'WpSmush' ) ) {
 			//Load NextGen Gallery, S3, if hooked too late or early, auto smush doesn't works, also Load after settings have been saved on init action
 			add_action( 'plugins_loaded', array( $this, 'load_modules' ), 90 );
 
-
 			//Send Smush Stats for pro members
 			add_filter( 'wpmudev_api_project_extra_data-912164', array( $this, 'send_smush_stats' ) );
 
@@ -140,8 +139,8 @@ if ( ! class_exists( 'WpSmush' ) ) {
 			//Handle the Async optimisation
 			add_action( 'wp_async_wp_save_image_editor_file', array( $this, 'wp_smush_handle_editor_async' ), '', 2 );
 
-			// Handle other file uploads optimisation
-			add_action( 'add_attachment', array( $this, 'wp_smush_handle_other_uploads' ) );
+			//Register Function for sending unsmushed image count to hub
+			add_filter( 'wdp_register_hub_action', array( $this, 'smush_stats' ) );
 
 		}
 
@@ -153,16 +152,13 @@ if ( ! class_exists( 'WpSmush' ) ) {
 			global $wpsmush_settings;
 
 			//Check if Lossy enabled
-			$opt_lossy           = WP_SMUSH_PREFIX . 'lossy';
-			$this->lossy_enabled = $this->validate_install() && $wpsmush_settings->get_setting( $opt_lossy, false );
+			$this->lossy_enabled = $this->validate_install() && $wpsmush_settings->settings['lossy'];
 
 			//Check if Smush Original enabled
-			$opt_original         = WP_SMUSH_PREFIX . 'original';
-			$this->smush_original = $this->validate_install() && $wpsmush_settings->get_setting( $opt_original, false );
+			$this->smush_original = $this->validate_install() && $wpsmush_settings->settings['original'];
 
 			//Check Whether to keep exif or not
-			$opt_keep_exif   = WP_SMUSH_PREFIX . 'keep_exif';
-			$this->keep_exif = $wpsmush_settings->get_setting( $opt_keep_exif, false );
+			$this->keep_exif = $wpsmush_settings->settings['keep_exif'];
 		}
 
 		function admin_init() {
@@ -329,8 +325,9 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			global $wpsmush_settings, $wpsmush_helper, $wpsmushit_admin;
 
+			$settings =  $wpsmush_settings->settings;
 			//Flag to check, if original size image should be smushed or not
-			$original   = $wpsmush_settings->get_setting( WP_SMUSH_PREFIX . 'original', false );
+			$original   = $settings['original'];
 			$smush_full = ( $this->validate_install() && $original == 1 ) ? true : false;
 
 			$errors = new WP_Error();
@@ -573,8 +570,11 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		 */
 		function smush_image( $meta, $ID = null ) {
 
-			//Check if Async is Enabled, Do not run
-			if ( defined( 'WP_SMUSH_ASYNC' ) && WP_SMUSH_ASYNC ) {
+			// Our async task runs when action is upload-attachment and post_id found. So do not run on these conditions.
+			if ( ( ( ! empty( $_POST['action'] ) && 'upload-attachment' == $_POST['action'] ) || isset( $_POST['post_id'] ) )
+			     // And, check if Async is enabled.
+			     && defined( 'WP_SMUSH_ASYNC' ) && WP_SMUSH_ASYNC
+			) {
 				return $meta;
 			}
 
@@ -606,6 +606,11 @@ if ( ! class_exists( 'WpSmush' ) ) {
 			set_transient( 'smush-in-progress-' . $ID, true, WP_SMUSH_TIMEOUT );
 
 			global $wpsmush_resize, $wpsmush_pngjpg, $wpsmush_settings;
+
+			// While uploading from Mobile App or other sources, admin_init action may not fire.
+			// So we need to manually initialize those.
+			$this->initialise();
+			$wpsmush_resize->initialize( true );
 
 			//Check if auto is enabled
 			$auto_smush = $this->is_auto_smush_enabled();
@@ -667,7 +672,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			//Check if premium member, add API key
 			$api_key = $this->_get_api_key();
-			if ( ! empty( $api_key ) ) {
+			if ( ! empty( $api_key ) && $this->validate_install() ) {
 				$headers['apikey'] = $api_key;
 			}
 
@@ -700,8 +705,13 @@ if ( ! class_exists( 'WpSmush' ) ) {
 					//Update DB for using http protocol
 					$wpsmush_settings->update_setting( WP_SMUSH_PREFIX . 'use_http', 1 );
 				}
-				//Handle error
-				$data['message'] = sprintf( __( 'Error posting to API: %s', 'wp-smushit' ), $result->get_error_message() );
+				//Check for timeout error and suggest to filter timeout
+				if ( strpos( $er_msg, 'timed out' ) ) {
+					$data['message'] = esc_html__( "Skipped due to a timeout error, You can increase the request timeout to make sure Smush has enough time to process larger files. `define('WP_SMUSH_API_TIMEOUT', 150);`.", "wp-smushit" );
+				}else {
+					//Handle error
+					$data['message'] = sprintf( __( 'Error posting to API: %s', 'wp-smushit' ), $result->get_error_message() );
+				}
 				$data['success'] = false;
 				unset( $result ); //free memory
 				return $data;
@@ -941,8 +951,14 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		 * @return string|void
 		 */
 		function set_status( $id, $echo = true, $text_only = false, $wrapper = true ) {
+			global $wpsmush_s3_compat;
 			$status_txt  = $button_txt = $stats = '';
 			$show_button = $show_resmush = false;
+
+			// If variables are not initialized properly, initialize it.
+			if ( ! has_action( 'admin_init', array( $this, 'admin_init' ) ) ) {
+				$this->initialise();
+			}
 
 			$wp_smush_data      = get_post_meta( $id, $this->smushed_meta_key, true );
 			$wp_resize_savings  = get_post_meta( $id, WP_SMUSH_PREFIX . 'resize_savings', true );
@@ -952,6 +968,8 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			$combined_stats = $this->combine_conversion_stats( $combined_stats, $conversion_savings );
 
+			//Remove Smush s3 hook, as it downloads the file again
+			remove_filter('as3cf_get_attached_file', array( $wpsmush_s3_compat, 'smush_download_file'), 11, 4 );
 			$attachment_data = wp_get_attachment_metadata( $id );
 
 			// if the image is smushed
@@ -1480,6 +1498,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 				add_action( 'aws_init', array( $this, 'load_s3' ), 120 );
 			}
 		}
+
 		/**
 		 * Check if NextGen is active or not
 		 * Include and instantiate classes
@@ -1495,11 +1514,12 @@ if ( ! class_exists( 'WpSmush' ) ) {
 			//Smush NextGen key
 			$opt_nextgen     = WP_SMUSH_PREFIX . 'nextgen';
 			$opt_nextgen_val = $wpsmush_settings->get_setting( $opt_nextgen, false );
-			if ( ! $opt_nextgen_val ) {
-				return;
-			}
 
 			require_once( WP_SMUSH_DIR . '/lib/class-wp-smush-nextgen.php' );
+			// Do not continue if integration not enabled or not a pro user.
+			if ( ! $opt_nextgen_val || ! $this->validate_install() ) {
+				return;
+			}
 			require_once( WP_SMUSH_DIR . '/lib/nextgen-integration/class-wp-smush-nextgen-admin.php' );
 			require_once( WP_SMUSH_DIR . '/lib/nextgen-integration/class-wp-smush-nextgen-stats.php' );
 			require_once( WP_SMUSH_DIR . '/lib/nextgen-integration/class-wp-smush-nextgen-bulk.php' );
@@ -1676,10 +1696,10 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			global $wpsmush_settings;
 
-			$auto_smush = $wpsmush_settings->get_setting( WP_SMUSH_PREFIX . 'auto', false );
+			$auto_smush = $wpsmush_settings->settings['auto'];
 
 			//Keep the auto smush on by default
-			if ( $auto_smush === false ) {
+			if ( $auto_smush === false || !isset( $auto_smush )  ) {
 				$auto_smush = 1;
 			}
 
@@ -1767,12 +1787,20 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		/**
 		 * Return Global stats
 		 *
+		 * Stats sent
+		 *
+		 *  array( 'total_images','bytes', 'human', 'percent')
+		 *
 		 * @return array|bool|mixed
 		 */
 		function send_smush_stats() {
 			global $wpsmushit_admin;
 
 			$stats = $wpsmushit_admin->global_stats();
+
+			$required_stats = array( 'total_images', 'bytes', 'human', 'percent' );
+
+			$stats = is_array( $stats ) ? array_intersect_key( $stats, array_flip( $required_stats ) ) : array();
 
 			return $stats;
 
@@ -1935,6 +1963,11 @@ if ( ! class_exists( 'WpSmush' ) ) {
 			}
 
 			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+				return true;
+			}
+
+			//Do not perform redirect if WP ClI is there, as it generates warning and causes issue
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				return true;
 			}
 
@@ -2266,28 +2299,45 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		}
 
 		/**
-		 * Support uploads/import through other methods.
+		 * Registers smush action for HUB API
 		 *
-		 * Handle image optimization for other upload sources, using
-		 * WP upload functions. For eg: WP RSS Aggregator importing images.
-		 * Note: This is not an async task.
+		 * @param $actions
 		 *
-		 * @param $id Attchment ID.
+		 * @return mixed
 		 */
-		function wp_smush_handle_other_uploads( $id ) {
+		function smush_stats( $actions ) {
+			$actions['smush_get_stats'] = array( $this, 'smush_attachment_count');
 
-			// Our async task runs when action is upload-attachment and post_id found. So do not run on these conditions.
-			if ( empty( $id ) || ( ! empty( $_POST['action'] ) && 'upload-attachment' == $_POST['action'] ) || ( ! empty( $_POST ) && isset( $_POST['post_id'] ) ) ) {
-				return;
+			return $actions; //always return at least the original array so we don't mess up other integrations
+		}
+
+		/**
+		 * Send stats to Hub
+		 *
+		 * @return array An array containing Total, Smushed, Unsmushed Images count and savings if images are alreay smushed
+		 */
+		function smush_attachment_count( $params, $action, $request ) {
+
+			$stats = array(
+				'count_total'     => 0,
+				'count_smushed'   => 0,
+				'count_unsmushed' => 0,
+				'savings'         => array()
+			);
+
+			global $wpsmushit_admin;
+			if ( ! isset( $wpsmushit_admin->stats ) ) {
+				//Setup stats, if not set already
+				$wpsmushit_admin->setup_global_stats();
 			}
+			// Total, Smushed, Unsmushed, Savings
+			$stats['count_total']   = $wpsmushit_admin->total_count;
+			$stats['count_smushed'] = $wpsmushit_admin->smushed_count;
+			//Considering the images to be resmushed
+			$stats['count_unsmushed'] = $wpsmushit_admin->remaining_count;
+			$stats['savings']         = $wpsmushit_admin->stats;
 
-			// Do not continue if attachment is not an image.
-			if ( ! wp_attachment_is_image( $id ) ) {
-				return;
-			}
-
-			// Run additional checks then smush.
-			$this->wp_smush_handle_async( $id );
+			$request->send_json_success( $stats );
 		}
 	}
 

@@ -39,7 +39,7 @@ if ( ! class_exists( 'WpSmushBackup' ) ) {
 			global $wpsmush_settings;
 
 			//Whether backup is enabled or not
-			$this->backup_enabled = $wpsmush_settings->get_setting( WP_SMUSH_PREFIX . 'backup' );
+			$this->backup_enabled = isset( $wpsmush_settings->settings['backup'] ) ? $wpsmush_settings->settings['backup'] : 0;
 		}
 
 		/**
@@ -113,6 +113,10 @@ if ( ! class_exists( 'WpSmushBackup' ) ) {
 				$backup_sizes = array();
 			}
 
+			//Return if backup file doesn't exists
+			if( !file_exists( $backup_path ) ) {
+				return;
+			}
 			list( $width, $height ) = getimagesize( $backup_path );
 			//Store our backup Path
 			$backup_key                  = empty( $backup_key ) ? $this->backup_key : $backup_key;
@@ -275,7 +279,7 @@ if ( ! class_exists( 'WpSmushBackup' ) ) {
 			//Remove the transient
 			delete_transient( "wp-smush-restore-$attachment_id" );
 			if ( $resp ) {
-				wp_send_json_error( array( 'message' => '<div class="wp-smush-error">' . __( "Unable to restore image", "wp-smushit" ) . '</div>' ) );	 		  		  	 	  		 	 	
+				wp_send_json_error( array( 'message' => '<div class="wp-smush-error">' . __( "Unable to restore image", "wp-smushit" ) . '</div>' ) );
 			}
 
 			return false;

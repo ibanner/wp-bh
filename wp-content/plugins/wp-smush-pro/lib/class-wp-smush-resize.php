@@ -42,17 +42,24 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 
 		/**
 		 * Get the settings for resizing
+		 *
+		 * @param bool $skip_check Added for Mobile APP uploads
 		 */
-		function initialize() {
+		function initialize( $skip_check = false ) {
+
 			//Do not initialize unless in the WP Backend Or On one of the smush pages
-			if ( ! is_user_logged_in() || ! is_admin() ) {
+			if ( ! is_user_logged_in() || ( ! is_admin() && ! $skip_check ) ) {
 				return;
 			}
 
 			global $wpsmush_settings, $wpsmushit_admin;
-			$current_screen = get_current_screen();
 
-			if( !empty( $current_screen ) ) {
+			$settings = $wpsmush_settings->settings;
+
+			// Make sure the screen function exists.
+			$current_screen = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
+
+			if ( ! empty( $current_screen ) && ! $skip_check ) {
 				//Do not Proceed if not on one of the required screens
 				$current_page = $current_screen->base;
 				if ( ! in_array( $current_page, $wpsmushit_admin->pages ) ) {
@@ -61,7 +68,7 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 			}
 
 			//If resizing is enabled
-			$this->resize_enabled = $wpsmush_settings->get_setting( WP_SMUSH_PREFIX . 'resize' );
+			$this->resize_enabled = $settings['resize'];
 
 			$resize_sizes = $wpsmush_settings->get_setting( WP_SMUSH_PREFIX . 'resize_sizes', array() );
 
@@ -96,8 +103,11 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 					return false;
 				}
 
+				$file_exists = $wpsmush_helper->file_exists( $id, $file_path );
+
 				//If file doesn't exists, return
-				if ( ! file_exists( $file_path ) ) {
+				if ( ! $file_exists ) {
+
 					return false;
 				}
 
@@ -355,7 +365,7 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 			}
 
 			//Unlink directly if meta value is not specified
-			if ( empty( $meta ) || empty( $meta['sizes'] ) ) {
+			if ( empty( $meta['sizes'] ) ) {
 				@unlink( $path );
 			}
 
@@ -363,11 +373,13 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 			//Check if the file name is similar to one of the image sizes
 			$path_parts = pathinfo( $path );
 			$filename   = ! empty( $path_parts['basename'] ) ? $path_parts['basename'] : $path_parts['filename'];
-			foreach ( $meta['sizes'] as $image_size ) {
-				if ( false === strpos( $image_size['file'], $filename ) ) {
-					continue;
+			if ( ! empty( $meta['sizes'] ) ) {
+				foreach ( $meta['sizes'] as $image_size ) {
+					if ( false === strpos( $image_size['file'], $filename ) ) {
+						continue;
+					}
+					$unlink = false;
 				}
-				$unlink = false;
 			}
 			if ( $unlink ) {
 				@unlink( $path );

@@ -4,10 +4,19 @@ class WCML_Orders{
     private $woocommerce_wpml;
     private $sitepress;
     
-    private $standart_order_notes = array('Order status changed from %s to %s.',
-        'Order item stock reduced successfully.','Item #%s stock reduced from %s to %s.','Item #%s stock increased from %s to %s.','Awaiting BACS payment','Awaiting cheque payment','Payment to be made upon delivery.',
-        'Validation error: PayPal amounts do not match (gross %s).','Validation error: PayPal IPN response from a different email address (%s).','Payment pending: %s',
-        'Payment %s via IPN.','Validation error: PayPal amounts do not match (amt %s).','IPN payment completed','PDT payment completed'
+    private $standard_order_notes = array(
+            'Order status changed from %s to %s.',
+            'Order item stock reduced successfully.',
+            'Item #%s stock reduced from %s to %s.',
+            'Item #%s stock increased from %s to %s.',
+            'Awaiting BACS payment','Awaiting cheque payment',
+            'Payment to be made upon delivery.',
+            'Validation error: PayPal amounts do not match (gross %s).',
+            'Validation error: PayPal IPN response from a different email address (%s).',
+            'Payment pending: %s',
+            'Payment %s via IPN.',
+            'Validation error: PayPal amounts do not match (amt %s).',
+            'IPN payment completed','PDT payment completed'
     );
 
     public function __construct( &$woocommerce_wpml, &$sitepress ){
@@ -31,7 +40,10 @@ class WCML_Orders{
         add_filter('icl_lang_sel_copy_parameters', array($this, 'append_query_parameters'));
 
         add_filter('the_comments', array($this, 'get_filtered_comments'));
-        add_filter('gettext',array($this, 'filtered_woocommerce_new_order_note_data'),10,3);
+
+	    if ( $this->should_attach_new_order_note_data_filter() ) {
+		    add_filter( 'gettext', array( $this, 'filtered_woocommerce_new_order_note_data' ), 10, 3 );
+	    }
 
         add_filter( 'woocommerce_order_get_items', array( $this, 'woocommerce_order_get_items' ), 10, 2 );
 
@@ -48,8 +60,15 @@ class WCML_Orders{
         add_filter( 'woocommerce_customer_get_downloadable_products', array( $this, 'filter_customer_get_downloadable_products' ), 10, 3 );
     }
 
+    public function should_attach_new_order_note_data_filter() {
+	    $admin_language = $this->sitepress->get_user_admin_language( get_current_user_id(), true );
+	    $all_strings_in_english = get_option( 'wpml-st-all-strings-are-in-english' );
+
+	    return 'en' !== $admin_language || ! $all_strings_in_english;
+    }
+
     function filtered_woocommerce_new_order_note_data($translations, $text, $domain ){
-        if(in_array($text,$this->standart_order_notes)){
+        if(in_array($text,$this->standard_order_notes)){
 
             $language = $this->woocommerce_wpml->strings->get_string_language( $text, 'woocommerce' );
 
@@ -69,30 +88,28 @@ class WCML_Orders{
         return $translations;
     }
 
-    function get_filtered_comments($comments){
+    function get_filtered_comments( $comments ){
 
         $user_id = get_current_user_id();
 
-        if( $user_id ){
-            
-            $user_language    = get_user_meta( $user_id, 'icl_admin_language', true );
+	    if ( $user_id ) {
+		    $user_language = get_user_meta( $user_id, 'icl_admin_language', true );
 
-            foreach($comments as $key=>$comment){
+		    foreach ( $comments as $key => $comment ) {
+			    $comment_string_id = icl_get_string_id( $comment->comment_content, 'woocommerce' );
 
-                $comment_string_id = icl_get_string_id( $comment->comment_content, 'woocommerce');
+			    if ( $comment_string_id ) {
+				    $comment_strings = icl_get_string_translations_by_id( $comment_string_id );
 
-                if($comment_string_id){
-                    $comment_strings = icl_get_string_translations_by_id( $comment_string_id );
-                    if($comment_strings){
-                        $comments[$key]->comment_content = $comment_strings[$user_language]['value'];
-                    }
-                }
-            }        
-            
-        }
+				    if ( $comment_strings && isset( $comment_strings[ $user_language ] ) ) {
+					    $comments[ $key ]->comment_content = $comment_strings[ $user_language ][ 'value' ];
+				    }
+			    }
+		    }
+
+	    }
 
         return $comments;
-
     }
     
     function woocommerce_order_get_items( $items, $order ){
@@ -155,35 +172,27 @@ class WCML_Orders{
                         }
 
                         $tr_product_id = apply_filters( 'translate_object_id', $item_product_id, 'product', false, $language_to_filter );
+
                         if( !is_null( $tr_product_id ) ){
                             $item->set_product_id( $tr_product_id );
                             $item->set_name( get_post( $tr_product_id )->post_title );
                         }
+
                         $tr_variation_id = apply_filters( 'translate_object_id', $item->get_variation_id(), 'product_variation', false, $language_to_filter );
-                        if( !is_null( $tr_variation_id ) ){
-                            $item->set_variation_id( $tr_variation_id );
-                        }
-
-                        $meta_data = array();
-                        foreach( $item->get_meta_data() as $data ){
-
-                            if( substr( $data->key, 0, 3) == 'pa_' ){
-                                $term_id = $this->woocommerce_wpml->terms->wcml_get_term_id_by_slug( $data->key, $data->value  );
-                                $tr_id = apply_filters( 'translate_object_id', $term_id, $data->key, false, $language_to_filter );
-
-                                if(!is_null($tr_id)){
-                                    $translated_term = $this->woocommerce_wpml->terms->wcml_get_term_by_id( $tr_id, $data->key);
-                                    $data->value = $translated_term->slug;
-                                }
-                            }
-
-                            $meta_data[] = $data;
-
-                        }
+	                    if ( ! is_null( $tr_variation_id ) ) {
+		                    $item->set_variation_id( $tr_variation_id );
+		                    $item->set_name( wc_get_product( $tr_variation_id )->get_name() );
+	                    }
                     }
                 }elseif( $item instanceof WC_Order_Item_Shipping ){
                     if( $item->get_method_id() ){
-                        $item->set_method_title( $this->woocommerce_wpml->shipping->translate_shipping_method_title( $item->get_method_title(), $item->get_method_id(), $language_to_filter ) );
+                        $item->set_method_title(
+                                $this->woocommerce_wpml->shipping->translate_shipping_method_title(
+                                    $item->get_method_title(),
+                                    $item->get_method_id(),
+                                    $language_to_filter
+                                )
+                        );
                     }
                 }
             }

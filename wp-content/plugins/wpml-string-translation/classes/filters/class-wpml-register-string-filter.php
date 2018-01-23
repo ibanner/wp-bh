@@ -49,27 +49,30 @@ class WPML_Register_String_Filter extends WPML_Displayed_String_Filter {
 	}
 
 	public function translate_by_name_and_context( $untranslated_text, $name, $context = '', &$has_translation = null ) {
-		if ( $untranslated_text ) {
-			list ($name_tmp, $domain, $gettext_content) = $this->transform_parameters( $name, $context );
-			$translation = $this->db_cache->get_translation( $name_tmp, $domain, $untranslated_text, $gettext_content );
-
-			if ( ! $translation instanceof WPML_ST_Page_Translation ) {
-				if ( ! in_array( $domain, $this->excluded_contexts ) ) {
-					$save_strings = $this->get_save_strings();
-					$save_strings->save( $untranslated_text, $name_tmp, $domain, $gettext_content );
-				}
-
-				$result = $untranslated_text;
-				$has_translation = false;
-			} else {
-				$result = $translation->get_value();
-				$has_translation = $translation->has_translation();
-			}
+		$translation = $this->get_translation( $untranslated_text, $name, $context );
+		if ( $translation ) {
+			$res             = $translation->get_value();
+			$has_translation = $translation->has_translation();
 		} else {
-			$result = parent::translate_by_name_and_context( $untranslated_text, $name, $context, $has_translation );
+			$res             = $untranslated_text;
+			$has_translation = false;
 		}
 
-		return $result;
+		if ( ! $translation && $this->can_register_string( $untranslated_text, $name, $context ) ) {
+			list ($name, $domain, $gettext_content) = $this->transform_parameters( $name, $context );
+			list( $name, $domain ) = array_map( array( $this, 'truncate_long_string' ), array( $name, $domain ) );
+
+			if ( ! in_array( $domain, $this->excluded_contexts ) ) {
+				$save_strings = $this->get_save_strings();
+				$save_strings->save( $untranslated_text, $name, $domain, $gettext_content );
+			}
+		}
+
+		return $res;
+	}
+
+	private function can_register_string( $original_value, $name, $context ) {
+		return $original_value || ( $name && md5( '' ) !== $name && $context );
 	}
 
 	public function force_saving_of_autoregistered_strings() {
@@ -152,9 +155,7 @@ class WPML_Register_String_Filter extends WPML_Displayed_String_Filter {
 			// preload all the strings for this domain.
 
 			$query = $this->wpdb->prepare( "SELECT id, value, gettext_context, name FROM {$this->wpdb->prefix}icl_strings WHERE context=%s",
-										   $domain,
-										   $context,
-										   $name );
+										   $domain );
 			$res   = $this->wpdb->get_results( $query );
 			$this->registered_string_cache[ $domain ] = array();
 			

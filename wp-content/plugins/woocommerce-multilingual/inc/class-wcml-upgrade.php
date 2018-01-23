@@ -18,7 +18,10 @@ class WCML_Upgrade{
         '3.9',
         '3.9.1',
         '4.0',
-        '4.1.0'
+        '4.1.0',
+        '4.2.0',
+	    '4.2.2',
+	    '4.2.7'
     );
     
     function __construct(){
@@ -41,10 +44,10 @@ class WCML_Upgrade{
             $wcml_settings['notifications'][$n] = 
                 array(
                     'show' => 1, 
-                    'text' => __('Looks like you are upgrading from a previous version of WooCommerce Multilingual. Would you like to automatically create translated variations and images?', 'wcml').
+                    'text' => __( 'Looks like you are upgrading from a previous version of WooCommerce Multilingual. Would you like to automatically create translated variations and images?', 'woocommerce-multilingual' ).
                             '<br /><strong>' .
-                            ' <a href="' .  admin_url('admin.php?page=wpml-wcml&tab=troubleshooting') . '">' . __('Yes, go to the troubleshooting page', 'wcml') . '</a> |' .
-                            ' <a href="#" onclick="jQuery.ajax({type:\'POST\',url: ajaxurl,data:\'action=wcml_hide_notice&notice='.$n.'\',success:function(){jQuery(\'#' . $n . '\').fadeOut()}});return false;">'  . __('No - dismiss', 'wcml') . '</a>' . 
+                            ' <a href="' .  admin_url('admin.php?page=wpml-wcml&tab=troubleshooting') . '">' . __( 'Yes, go to the troubleshooting page', 'woocommerce-multilingual' ) . '</a> |' .
+                            ' <a href="#" onclick="jQuery.ajax({type:\'POST\',url: ajaxurl,data:\'action=wcml_hide_notice&notice='.$n.'\',success:function(){jQuery(\'#' . $n . '\').fadeOut()}});return false;">'  . __( 'No - dismiss', 'woocommerce-multilingual' ) . '</a>' .
                             '</strong>'
                 );
             update_option('_wcml_settings', $wcml_settings);
@@ -85,7 +88,7 @@ class WCML_Upgrade{
     }
     
     function run(){
-        
+
         $version_in_db = get_option('_wcml_version');
         
         // exception - starting in 2.3.2
@@ -113,7 +116,7 @@ class WCML_Upgrade{
             }
             
         }
-        
+
         if($migration_ran || empty($version_in_db)){
             update_option('_wcml_version', WCML_VERSION);            
         }
@@ -540,10 +543,11 @@ class WCML_Upgrade{
         if( !class_exists( 'WooCommerce' ) ){
             update_option( '_wcml_4_1_0_migration_required', true );
         }else{
-            $results = $wpdb->get_results("
+
+            $results = $wpdb->get_results( "
                         SELECT *
                         FROM {$wpdb->postmeta}
-                        WHERE meta_key LIKE '_price_%' OR meta_key LIKE '_regular_price_%' OR ( meta_key LIKE '_sale_price_%' AND meta_key NOT LIKE '_sale_price_dates%' )
+                        WHERE meta_key LIKE '\\_price\\_%' OR meta_key LIKE '\\_regular_price\\_%' OR ( meta_key LIKE '\\_sale_price\\_%' AND meta_key NOT LIKE '\\_sale\\_price\\_dates%' )
                     ");
 
             foreach( $results as $price ){
@@ -592,5 +596,37 @@ class WCML_Upgrade{
             update_option('_wcml_settings', $wcml_settings );
         }
     }
-    
+
+    function upgrade_4_2_0(){
+
+        $wcml_settings = get_option( '_wcml_settings' );
+        $wcml_settings[ 'dismiss_cart_warning' ] = 0;
+
+        update_option( '_wcml_settings', $wcml_settings );
+    }
+
+	private function upgrade_4_2_2(){
+
+		// #wcml-2128
+		$user = new WP_User( 'admin' );
+		if( $user->exists() && ! is_super_admin( $user->ID ) ) {
+			$user->remove_cap( 'wpml_manage_woocommerce_multilingual' );
+			if( ! in_array( 'shop_manager', $user->roles, true ) ){
+				$user->remove_cap( 'wpml_operate_woocommerce_multilingual' );
+			}
+		}
+
+	}
+
+	private function upgrade_4_2_7(){
+
+		// #wcml-2242
+		$wcml_settings = get_option( '_wcml_settings' );
+		if( 'yahoo' === $wcml_settings['multi_currency']['exchange_rates']['service'] ){
+			$wcml_settings['multi_currency']['exchange_rates']['service'] = 'fixierio';
+			update_option( '_wcml_settings', $wcml_settings );
+        }
+
+	}
+
 }

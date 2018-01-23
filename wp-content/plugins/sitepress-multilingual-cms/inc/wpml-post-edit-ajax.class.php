@@ -1,6 +1,7 @@
 <?php
 
 class WPML_Post_Edit_Ajax {
+	const AJAX_ACTION_SWITCH_POST_LANGUAGE = 'wpml_switch_post_language';
 
 	/**
 	 * Ajax handler for adding a term via Ajax.
@@ -159,6 +160,11 @@ class WPML_Post_Edit_Ajax {
 	public static function wpml_switch_post_language() {
 		global $sitepress, $wpdb;
 
+		$nonce = $_POST['nonce'];
+		if ( ! wp_verify_nonce( $nonce, self::AJAX_ACTION_SWITCH_POST_LANGUAGE ) ) {
+			wp_send_json_error();
+		}
+
 		$to      = false;
 		$post_id = false;
 
@@ -211,6 +217,8 @@ class WPML_Post_Edit_Ajax {
 	}
 
 	private static function add_term_metadata( $term, $meta_data ) {
+		global $sitepress;
+
 		foreach ( $meta_data as $meta_key => $meta_value ) {
 			delete_term_meta( $term['term_id'], $meta_key );
 			$data = maybe_unserialize( stripslashes( $meta_value ) );
@@ -218,6 +226,9 @@ class WPML_Post_Edit_Ajax {
 				throw new RuntimeException( sprintf( 'Unable to add term meta form term: %d', $term['term_id'] ) );
 			}
 		}
+
+		$sync_meta_action = new WPML_Sync_Term_Meta_Action( $sitepress, $term[ 'term_taxonomy_id' ] );
+		$sync_meta_action->run();
 
 		return true;
 	}

@@ -39,7 +39,10 @@ class TranslationProxy_Translator {
 		}
 
 		$translator_status = array();
-		$website_details   = self::get_website_details( new TranslationProxy_Project( TranslationProxy::get_current_service() ), $force );
+		$website_details   = self::get_website_details(
+			new TranslationProxy_Project( TranslationProxy::get_current_service(), 'xmlrpc', TranslationProxy::get_tp_client() ),
+			$force
+		);
 
 		if ( false === (bool) $website_details ) {
 			return array();
@@ -211,7 +214,7 @@ class TranslationProxy_Translator {
 		}
 
 		$action_link_args = array(
-			'title'     => __( 'Contact translator', 'sitepress' ),
+			'title'     => __( 'Contact translator', 'wpml-translation-management' ),
 			'unload_cb' => 'icl_thickbox_refresh',
 			'ar'        => 1
 		);
@@ -235,7 +238,7 @@ class TranslationProxy_Translator {
 						$url                                          = $project->translator_contact_iframe_url( $translator['id'] );
 						$action_link                                  = '';
 						if ( $url ) {
-							$action_link = TranslationProxy_Popup::get_link( $url, $action_link_args ) . __( 'Contact translator', 'sitepress' ) . '</a>';
+							$action_link = TranslationProxy_Popup::get_link( $url, $action_link_args ) . __( 'Contact translator', 'wpml-translation-management' ) . '</a>';
 						}
 						$translator_item['action'] = $action_link;
 					}

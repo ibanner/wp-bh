@@ -120,21 +120,41 @@ class WCML_WC_Shipping{
         return $available_methods;
     }
 
-    function translate_shipping_method_title( $title, $shipping_id, $language = false ) {
+    /**
+     * @param string $title
+     * @param string $shipping_id
+     * @param string|bool $language
+     *
+     * @return string
+     */
+	public function translate_shipping_method_title( $title, $shipping_id, $language = false ) {
 
-        if( !is_admin() ){
-            
-            $shipping_id = str_replace( ':', '', $shipping_id );        
-            $translated_title = apply_filters( 'wpml_translate_single_string', $title, 'woocommerce', $shipping_id .'_shipping_method_title', $language ? $language : $this->current_language );
-    
-            if( $translated_title ){
-                $title = $translated_title;
-            }
-            
-        }
+		if ( is_admin() && did_action( 'admin_init' )  && did_action( 'current_screen' ) ) {
+			$screen        = get_current_screen();
+			$is_edit_order = $screen->id === 'shop_order';
+		} else {
+			$is_edit_order = false;
+		}
 
-        return $title;
-    }
+		if ( ! is_admin() || $is_edit_order ) {
+
+			$shipping_id      = str_replace( ':', '', $shipping_id );
+			$translated_title = apply_filters(
+				'wpml_translate_single_string',
+				$title,
+				'woocommerce',
+				$shipping_id . '_shipping_method_title',
+				$language ? $language : $this->current_language
+			);
+
+			if ( $translated_title ) {
+				$title = $translated_title;
+			}
+
+		}
+
+		return $title;
+	}
 
     function translate_woocommerce_rate_label( $label ){
 
@@ -168,8 +188,7 @@ class WCML_WC_Shipping{
         }
     }
 
-    function update_woocommerce_shipping_settings_for_class_costs( $settings ){
-
+    public function update_woocommerce_shipping_settings_for_class_costs( $settings ){
         remove_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1 );
         foreach( $settings as $setting_key => $value ){
 
@@ -182,7 +201,6 @@ class WCML_WC_Shipping{
                 }else{
                     $shipp_class = get_term_by( 'slug', $shipp_class_key, 'product_shipping_class' );
                 }
-
                 $trid = $this->sitepress->get_element_trid( $shipp_class->term_taxonomy_id, 'tax_product_shipping_class' );
 
                 $translations = $this->sitepress->get_element_translations( $trid, 'tax_product_shipping_class' );
@@ -220,12 +238,19 @@ class WCML_WC_Shipping{
         }
     }
 
-    function sync_flat_rate_class_cost( $data, $inst_settings ){
+	/**
+	 * @param array $data
+	 * @param array $inst_settings
+	 *
+	 * @return array|mixed
+	 */
+    public function sync_flat_rate_class_cost( $data, $inst_settings ){
 
         $settings = array();
         foreach ( $data as $key => $value ) {
-            if ( substr( $key, 0, 33) == 'woocommerce_flat_rate_class_cost_' ) {
-                $settings[ substr( $key, 22 ) ] = $value;
+            if ( 0 === strpos( $key, 'woocommerce_flat_rate_class_cost_') ) {
+            	$limit = strlen( 'woocommerce_flat_rate_' );
+                $settings[ substr( $key, $limit ) ] = stripslashes( $value );
             }
         }
 

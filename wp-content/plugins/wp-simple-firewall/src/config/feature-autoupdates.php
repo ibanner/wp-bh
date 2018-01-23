@@ -1,10 +1,15 @@
 {
   "slug": "autoupdates",
   "properties": {
+    "slug": "autoupdates",
     "name": "Automatic Updates",
     "show_feature_menu_item": true,
     "storage_key": "autoupdates",
-    "tagline": "Take back full control of WordPress automatic updates"
+    "tagline": "Take back full control of WordPress automatic updates",
+    "show_central": true,
+    "access_restricted": true,
+    "premium": false,
+    "order": 60
   },
   "sections": [
     {
@@ -24,15 +29,6 @@
       "summary": [
         "Purpose - If you never want WordPress to automatically update anything on your site, turn on this option.",
         "Recommendation - Do not turn on this option unless you really need to block updates."
-      ]
-    },
-    {
-      "slug": "section_automatic_plugin_self_update",
-      "title": "Automatic Plugin Self-Update",
-      "title_short": "Self-Update",
-      "summary": [
-        "Purpose - Allows the shield plugin to automatically update itself when an update is available. ",
-        "Recommendation - Keep this option turned on."
       ]
     },
     {
@@ -115,6 +111,18 @@
       "description": "Note: Automatic updates for plugins are disabled on WordPress by default."
     },
     {
+      "key": "enable_individual_autoupdate_plugins",
+      "section": "section_non_ui",
+      "default": "N",
+      "type": "checkbox",
+      "premium": true,
+      "link_info": "",
+      "link_blog": "",
+      "name": "Individually Select Plugins",
+      "summary": "Select Individual Plugins To Automatically Update",
+      "description": "Turning this on will provide an option on the plugins page to select whether a plugin is automatically updated."
+    },
+    {
       "key": "enable_autoupdate_themes",
       "section": "section_automatic_updates_for_wordpress_components",
       "default": "N",
@@ -170,6 +178,12 @@
       "name": "Report Email Address",
       "summary": "Where to send upgrade notification reports",
       "description": "If this is empty, it will default to the Site Admin email address"
+    },
+    {
+      "key": "selected_plugins",
+      "transferable": false,
+      "default": [],
+      "section": "section_non_ui"
     }
   ],
   "definitions": {

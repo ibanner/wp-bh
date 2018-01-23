@@ -1,10 +1,10 @@
 <?php
 
-if ( class_exists( 'ICWP_WPSF_Processor_LoginProtect_IntentBase', false ) ):
+if ( class_exists( 'ICWP_WPSF_Processor_LoginProtect_IntentBase', false ) ) {
 	return;
-endif;
+}
 
-require_once( dirname(__FILE__).DIRECTORY_SEPARATOR.'base_wpsf.php' );
+require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'base_wpsf.php' );
 
 abstract class ICWP_WPSF_Processor_LoginProtect_IntentBase extends ICWP_WPSF_Processor_BaseWpsf {
 
@@ -24,7 +24,7 @@ abstract class ICWP_WPSF_Processor_LoginProtect_IntentBase extends ICWP_WPSF_Pro
 			add_action( $oFO->prefix( 'login-intent-validation' ), array( $this, 'validateLoginIntent' ) );
 		}
 
-		if ( $this->loadWpFunctions()->getIsLoginRequest() ) {
+		if ( $this->loadWp()->isRequestUserLogin() || $oFO->getIfSupport3rdParty() ) {
 			add_filter( 'authenticate', array( $this, 'processLoginAttempt_Filter' ), 30, 2 );
 		}
 
@@ -83,7 +83,10 @@ abstract class ICWP_WPSF_Processor_LoginProtect_IntentBase extends ICWP_WPSF_Pro
 	 */
 	protected function getSecret( WP_User $oUser ) {
 		$oWpUser = $this->loadWpUsers();
-		$sSecret = $oWpUser->getUserMeta( $this->getFeature()->prefixOptionKey( $this->getStub().'_secret' ), $oUser->ID );
+		$sSecret = $oWpUser->getUserMeta(
+			$this->getFeature()->prefixOptionKey( $this->getStub().'_secret' ),
+			$oUser->ID
+		);
 		if ( empty( $sSecret ) ) {
 			$this->resetSecret( $oUser );
 		}
@@ -102,10 +105,10 @@ abstract class ICWP_WPSF_Processor_LoginProtect_IntentBase extends ICWP_WPSF_Pro
 
 	/**
 	 * @param WP_User $oUser
-	 * @param bool  $bValidated set true for validated, false for invalidated
+	 * @param bool    $bValidated set true for validated, false for invalidated
 	 * @return $this
 	 */
-	protected function setProfileValidated( $oUser, $bValidated = true ) {
+	public function setProfileValidated( $oUser, $bValidated = true ) {
 		$this->loadWpUsers()
 			 ->updateUserMeta(
 				 $this->getFeature()->prefixOptionKey( $this->getStub().'_validated' ),
@@ -117,7 +120,7 @@ abstract class ICWP_WPSF_Processor_LoginProtect_IntentBase extends ICWP_WPSF_Pro
 
 	/**
 	 * @param WP_User $oUser
-	 * @param $sNewSecret
+	 * @param         $sNewSecret
 	 * @return $this
 	 */
 	protected function setSecret( $oUser, $sNewSecret ) {
@@ -208,7 +211,7 @@ abstract class ICWP_WPSF_Processor_LoginProtect_IntentBase extends ICWP_WPSF_Pro
 	 * @return string
 	 */
 	protected function fetchCodeFromRequest() {
-		return esc_attr( trim( $this->loadDataProcessor()->FetchRequest( $this->getLoginFormParameter(), false, '' ) ) );
+		return esc_attr( trim( $this->loadDP()->FetchRequest( $this->getLoginFormParameter(), false, '' ) ) );
 	}
 
 	/**

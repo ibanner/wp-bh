@@ -25,80 +25,80 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 		}
 		ob_start();
 		?>
-		<div
-			class="wpml-section wpml-section-<?php echo $this->kind_shorthand(); ?>-translation" id="ml-content-setup-sec-<?php echo $this->kind_shorthand(); ?>">
+		<div class="wpml-section wpml-section-<?php echo esc_attr( $this->kind_shorthand() ); ?>-translation" id="ml-content-setup-sec-<?php echo esc_attr( $this->kind_shorthand() ); ?>">
 			<div class="wpml-section-header">
-				<h3><?php echo $this->get_title() ?></h3>
+				<h3><?php echo esc_html( $this->get_title() ) ?></h3>
 				<p>
-					<?php
-					$toggle_system_fields= array(
-						'url' => add_query_arg(array('show_system_fields' => !$this->settings_factory->show_system_fields)),
-						'text' => $this->settings_factory->show_system_fields ? __('Hide system fields', 'wpml-translation-management') : __('Show system fields', 'wpml-translation-management'),
-					);
-					?>
-					<a href="<?php echo $toggle_system_fields['url']?>"><?php echo $toggle_system_fields['text'];?></a>
+			<?php
+			$toggle_system_fields = array(
+				'url'  => add_query_arg( array( 'show_system_fields' => ! $this->settings_factory->show_system_fields ) ),
+				'text' => $this->settings_factory->show_system_fields ? __( 'Hide system fields', 'wpml-translation-management' ) : __( 'Show system fields', 'wpml-translation-management' ),
+			);
+			?>
+					<a href="<?php echo esc_url( $toggle_system_fields['url'] ); ?>"><?php echo esc_html( $toggle_system_fields['text'] ); ?></a>
 				</p>
 
 			</div>
-			<div class="wpml-section-content">
-				<form id="icl_<?php echo $this->kind_shorthand() ?>_translation"
-				      name="icl_<?php echo $this->kind_shorthand() ?>_translation"
-				      action="">
-					<?php wp_nonce_field( 'icl_' . $this->kind_shorthand() . '_translation_nonce', '_icl_nonce' ); ?>
+			<div class="wpml-section-content wpml-section-content-wide">
+				<form id="icl_<?php echo esc_attr( $this->kind_shorthand() ) ?>_translation" name="icl_<?php echo esc_attr( $this->kind_shorthand() ) ?>_translation" action="">
+			<?php wp_nonce_field( 'icl_' . $this->kind_shorthand() . '_translation_nonce', '_icl_nonce' ); ?>
+			<?php
+			if ( empty( $custom_fields_keys ) ) {
+				?>
+							<p class="no-data-found">
+				  <?php echo esc_html( $this->get_no_data_message() ); ?>
+							</p>
+				<?php
+			} else {
+				?>
+
+							<div class="wpml-flex-table wpml-translation-setup-table wpml-margin-top-sm">
+
+				  <?php echo $this->render_heading() ?>
+
+								<div class="wpml-flex-table-body">
 					<?php
-					if ( empty( $custom_fields_keys ) ) {
+					foreach ( $custom_fields_keys as $cf_key ) {
+						$setting = $this->get_setting( $cf_key );
+						if ( $setting->excluded() ) {
+							continue;
+						}
+						$status        = $setting->status();
+						$html_disabled = $setting->is_read_only() ? 'disabled="disabled"' : '';
 						?>
-						<p class="no-data-found">
-							<?php echo $this->get_no_data_message(); ?>
-						</p>
-						<?php
-					} else {
-						?>
-						<table class="widefat fixed">
-							<thead>
-							<?php echo $this->render_heading() ?>
-							</thead>
-							<tfoot>
-							<?php echo $this->render_heading() ?>
-							</tfoot>
-							<tbody>
-							<?php foreach ( $custom_fields_keys as $cf_key ): ?><?php
-								$setting = $this->get_setting( $cf_key );
-								if ( $setting->excluded() ) {
-									continue;
-								}
-								$status        = $setting->status();
-								$html_disabled = $setting->is_read_only() ? 'disabled="disabled"' : '';
-								?>
-								<tr>
-									<td><?php echo esc_html( $cf_key ); ?></td>
-									<?php
-									foreach (
-										array(
-											WPML_IGNORE_CUSTOM_FIELD    => __( "Don't translate", 'wpml-translation-management' ),
-											WPML_COPY_CUSTOM_FIELD      => __( "Copy from original to translation", 'wpml-translation-management' ),
-											WPML_COPY_ONCE_CUSTOM_FIELD => __( "Copy once", 'wpml-translation-management' ),
-											WPML_TRANSLATE_CUSTOM_FIELD => __( "Translate", 'wpml-translation-management' )
-										) as $ref_status => $title
-									) {
-										?>
-										<td title="<?php echo $title ?>">
-											<?php echo $this->render_radio( $cf_key, $html_disabled, $status, $ref_status ) ?>
-										</td>
-										<?php
-									}
-									?>
-								</tr>
-							<?php endforeach; ?>
-							</tbody>
-						</table>
-						<p class="buttons-wrap">
-								<span class="icl_ajx_response" id="icl_ajx_response_<?php echo $this->kind_shorthand() ?>"></span>
-							<input type="submit" class="button-primary" value="<?php _e( 'Save', 'wpml-translation-management' ) ?>"/>
-						</p>
+											<div class="wpml-flex-table-row">
+												<div class="wpml-flex-table-cell name">
+							<?php echo esc_html( $cf_key ); ?>
+												</div>
+						  <?php
+						  $custom_field_options = array(
+							  WPML_IGNORE_CUSTOM_FIELD    => __( "Don't translate", 'wpml-translation-management' ),
+							  WPML_COPY_CUSTOM_FIELD      => __( 'Copy from original to translation', 'wpml-translation-management' ),
+							  WPML_COPY_ONCE_CUSTOM_FIELD => __( 'Copy once', 'wpml-translation-management' ),
+							  WPML_TRANSLATE_CUSTOM_FIELD => __( 'Translate', 'wpml-translation-management' )
+						  );
+						  foreach (
+							  $custom_field_options as $ref_status => $title
+						  ) {
+							  ?>
+														<div class="wpml-flex-table-cell text-center">
+								<?php echo $this->render_radio( $cf_key, $html_disabled, $status, $ref_status ) ?>
+														</div>
+							  <?php
+						  }
+						  ?>
+											</div>
 						<?php
 					}
 					?>
+								</div>
+							</div>        <p class="buttons-wrap">
+								<span class="icl_ajx_response" id="icl_ajx_response_<?php echo esc_attr( $this->kind_shorthand() ) ?>"></span>
+								<input type="submit" class="button-primary" value="<?php echo esc_attr__( 'Save', 'wpml-translation-management' ) ?>"/>
+							</p>
+				<?php
+			}
+			?>
 				</form>
 			</div>
 			<!-- .wpml-section-content -->
@@ -133,10 +133,8 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 	private function render_radio( $cf_key, $html_disabled, $status, $ref_status ) {
 		ob_start();
 		?>
-		<input type="radio"
-		       name="cf[<?php echo base64_encode( $cf_key ) ?>]"
-		       value="<?php echo $ref_status ?>" <?php echo $html_disabled ?>
-		       <?php if ( $status == $ref_status ): ?>checked<?php endif; ?> />
+		<input type="radio" name="cf[<?php echo esc_attr( base64_encode( $cf_key ) ); ?>]" value="<?php echo esc_attr( $ref_status ) ?>" title="<?php echo esc_attr( $ref_status ) ?>" <?php echo $html_disabled ?>
+	       <?php if ( $status == $ref_status ): ?>checked<?php endif; ?> />
 		<?php
 
 		return ob_get_clean();
@@ -148,23 +146,25 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 	private function render_heading() {
 		ob_start();
 		?>
-		<tr>
-			<th>
-				<?php echo $this->get_column_header('name') ?>
-			</th>
-			<th>
-				<?php _e( "Don't translate", 'wpml-translation-management' ) ?>
-			</th>
-			<th>
-				<?php echo _x( "Copy", 'Verb', 'wpml-translation-management' ) ?>
-			</th>
-			<th>
-				<?php _e( "Copy once", 'wpml-translation-management' ) ?>
-			</th>
-			<th>
-				<?php _e( "Translate", 'wpml-translation-management' ) ?>
-			</th>
-		</tr>
+		<div class="wpml-flex-table-header wpml-flex-table-sticky">
+		<div class="wpml-flex-table-row">
+		<div class="wpml-flex-table-cell name">
+		<?php echo esc_html( $this->get_column_header( 'name' ) ) ?>
+		</div>
+		<div class="wpml-flex-table-cell text-center">
+		<?php echo esc_html__( "Don't translate", 'wpml-translation-management' ) ?>
+		</div>
+		<div class="wpml-flex-table-cell text-center">
+		<?php echo esc_html_x( "Copy", 'Verb', 'wpml-translation-management' ) ?>
+		</div>
+		<div class="wpml-flex-table-cell text-center">
+		<?php echo esc_html__( "Copy once", 'wpml-translation-management' ) ?>
+		</div>
+		<div class="wpml-flex-table-cell text-center">
+		<?php echo esc_html__( "Translate", 'wpml-translation-management' ) ?>
+			</div>
+		</div>
+		</div>
 		<?php
 
 		return ob_get_clean();

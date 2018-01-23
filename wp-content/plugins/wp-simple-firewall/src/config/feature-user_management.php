@@ -4,7 +4,12 @@
     "name": "User Management",
     "show_feature_menu_item": true,
     "storage_key": "user_management",
-    "tagline": "Get true user sessions and control account sharing, session duration and timeouts"
+    "tagline": "Control user sessions, duration, timeouts and account sharing",
+    "show_central": true,
+    "access_restricted": true,
+    "premium": false,
+    "has_custom_actions": true,
+    "order": 40
   },
   "sections": [
     {
@@ -24,24 +29,6 @@
       "summary": [
         "Purpose - Allows you to better control user sessions on your site and expire idle sessions and prevent account sharing.",
         "Recommendation - Use of this feature is highly recommend."
-      ]
-    },
-    {
-      "slug": "section_multifactor_authentication",
-      "title": "Multi-Factor User Authentication",
-      "title_short": "Enable / Disable",
-      "summary": [
-        "Purpose - Verifies the identity of users who log in to your site - i.e. they are who they say they are.",
-        "Recommendation - Use of this feature is highly recommend. However, if your host blocks email sending you may lock yourself out."
-      ]
-    },
-    {
-      "slug": "section_bypass_user_accounts_management",
-      "title": "By-Pass User Accounts Management",
-      "title_short": "By-Pass",
-      "summary": [
-        "Purpose - Compatibility with XML-RPC services such as the WordPress iPhone and Android Apps.",
-        "Recommendation - Keep this turned off unless you know you need it."
       ]
     },
     {
@@ -72,7 +59,7 @@
     },
     {
       "key": "enable_xmlrpc_compatibility",
-      "section": "section_bypass_user_accounts_management",
+      "section": "section_enable_plugin_feature_user_accounts_management",
       "default": "Y",
       "type": "checkbox",
       "link_info": "",
@@ -112,8 +99,8 @@
       "link_info": "",
       "link_blog": "",
       "name": "Idle Timeout",
-      "summary": "If the user is inactive for the number of hours specified, they will be forcefully logged out next time they return. Set this to '0' to turn off this option.",
-      "description": "asdf."
+      "summary": "Specify How Many Hours After Inactivity To Automatically Logout User",
+      "description": "If the user is inactive for the number of hours specified, they will be forcefully logged out next time they return. Set this to '0' to turn off this option."
     },
     {
       "key": "session_lock_location",

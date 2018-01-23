@@ -7,29 +7,31 @@
  */
 class WCML_Currency_Switcher{
 
+	/** @var woocommerce_wpml */
 	private $woocommerce_wpml;
+	/** @var Sitepress */
 	private $sitepress;
+	/** @var boolean */
 	private $is_touch_screen;
 
-	public function __construct( &$woocommerce_wpml, &$sitepress ) {
+	public function __construct( woocommerce_wpml $woocommerce_wpml, Sitepress $sitepress ) {
 
 		$this->woocommerce_wpml = $woocommerce_wpml;
-		$this->sitepress = $sitepress;
+		$this->sitepress        = $sitepress;
 
-		add_action( 'init', array($this, 'init'), 5 );
 	}
 
-	public function init() {
+	public function add_hooks() {
+		add_action( 'init', array( $this, 'on_init' ), 5 );
+	}
 
-		add_action( 'wcml_currency_switcher', array($this, 'wcml_currency_switcher') );
+	public function on_init() {
+		add_action( 'wcml_currency_switcher', array( $this, 'wcml_currency_switcher' ) );
 		//@deprecated 3.9
-		add_action( 'currency_switcher', array($this, 'currency_switcher') );
-
-		add_shortcode( 'currency_switcher', array($this, 'currency_switcher_shortcode') );
-
+		add_action( 'currency_switcher', array( $this, 'currency_switcher' ) );
+		add_shortcode( 'currency_switcher', array( $this, 'currency_switcher_shortcode' ) );
 		// Built in currency switcher
-		add_action( 'woocommerce_product_meta_start', array($this, 'show_currency_switcher') );
-
+		add_action( 'woocommerce_product_meta_start', array( $this, 'show_currency_switcher' ) );
 		add_action( 'pre_update_option_sidebars_widgets', array( $this, 'update_option_sidebars_widgets' ), 10, 2 );
 	}
 
@@ -77,17 +79,19 @@ class WCML_Currency_Switcher{
 
 		$args = $this->check_and_convert_switcher_style( $args );
 
-		$switcher_style_not_available = !isset( $args[ 'switcher_style' ] ) || !$this->woocommerce_wpml->cs_templates->check_is_active( $args[ 'switcher_style' ] );
 		if (
 			!isset( $args[ 'preview' ] ) &&
-			$switcher_style_not_available
+			!isset( $args[ 'switcher_style' ] )
 		) {
 			$args[ 'switcher_style' ] = isset( $currency_switcher_settings[ 'switcher_style' ] ) ? $currency_switcher_settings[ 'switcher_style' ] : $this->woocommerce_wpml->cs_templates->get_first_active();
 		}
 
 		if ( !isset( $args[ 'format' ] ) ) {
-			$args[ 'format' ] = isset( $currency_switcher_settings[ 'template' ] ) && '' !== $currency_switcher_settings[ 'template' ] ?
-				$currency_switcher_settings[ 'template' ] : '%name% (%symbol%) - %code%';
+
+			$args['format'] = '%name% (%symbol%) - %code%';
+			if( isset( $currency_switcher_settings[ 'template' ] ) && '' !== $currency_switcher_settings[ 'template' ] ){
+				$args[ 'format' ] = apply_filters( 'wpml_translate_single_string', $currency_switcher_settings[ 'template' ], 'woocommerce-multilingual', $args[ 'switcher_id' ] .'_switcher_format' ) ;
+			}
 		}
 
 		if ( !isset( $args[ 'color_scheme' ] ) ) {
@@ -132,8 +136,13 @@ class WCML_Currency_Switcher{
 				}
 
 				$template = $this->woocommerce_wpml->cs_templates->get_template( $args[ 'switcher_style' ] );
-				$template->set_model( $this->get_model_data( $args, $currencies ) );
-				$preview = $template->get_view();
+
+				if( $template ) {
+					$this->woocommerce_wpml->cs_templates->maybe_late_enqueue_template( $args['switcher_style'], $template );
+					$template->set_model( $this->get_model_data( $args, $currencies ) );
+					$preview = $template->get_view();
+				}
+
 			} else{
 
 				if( is_admin() ){
@@ -155,9 +164,11 @@ class WCML_Currency_Switcher{
 
 		$css_classes = $this->get_css_classes( array( $args[ 'switcher_style' ], $args[ 'switcher_id' ], 'wcml_currency_switcher' ) );
 
+		$format = isset( $args['format'] ) ? $args['format'] : '%name% (%symbol%) - %code%';
+
 		$model = array(
 			'css_classes' 	=> $css_classes,
-			'format'        => isset( $args['format'] ) ? $args['format'] : '%name% (%symbol%) - %code%',
+			'format'        => $format,
 			'currencies'    => $currencies,
 			'selected_currency' => $this->woocommerce_wpml->multi_currency->get_client_currency()
 		);
